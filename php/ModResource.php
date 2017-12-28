@@ -188,10 +188,12 @@ class ModResource extends HTTPFile
     
     public function setContents($content)
     {
-        $folder = dirname($this->getPath());
-        if (! file_exists($folder)) {
-            mkdir($folder, 0777, true);
-        }
+        $this->ensureDirectory();
         return parent::setContents($content);
     }
+	
+	public function ensureDirectory() {
+		$dir = dirname($this->getPath());
+		return (file_exists($dir) or mkdir($dir, 0777, true));
+	}
 }

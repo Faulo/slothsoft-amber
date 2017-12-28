@@ -320,13 +320,15 @@ class ModController
 					//$params['dictionaryURL'] = 'file://' . realpath($dictionaryResource->getPath());
 					$params['dictionaryURL'] = 'http://localhost' . $dictionaryResource->getUrl();
 				}
-				if ($this->dom->transform(
-					 $editorResource->getPath(),
-					$templateResource->getPath(),
-					$params,
-					$libResource->getPath()
-					)) {
-					$ret = true;
+				if ($libResource->ensureDirectory()) {
+					if ($this->dom->transform(
+						$editorResource->getPath(),
+						$templateResource->getPath(),
+						$params,
+						$libResource->getPath()
+						)) {
+						$ret = true;
+					}
 				}
 			}
         }
