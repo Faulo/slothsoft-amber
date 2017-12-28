@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<savegame.editor xmlns="http://schema.slothsoft.net/savegame/editor"
+	schemaVersion="0.3">
+	<global global-id="item">
+		<integer name="item-amount" position="0" />
+		<integer name="item-charge" position="1" />
+		<bit-field name="item-status" position="3" first-bit="0"
+			last-bit="1" dictionary-ref="item-status" />
+		<integer name="item-id" position="4" size="2" />
+	</global>
+	<global global-id="stat">
+		<signed-integer name="current" position="0" size="2"
+			min="0" max="999" />
+		<signed-integer name="maximum" position="2" size="2"
+			min="0" max="999" />
+		<signed-integer name="current-mod" position="4" size="2" />
+		<!--<signed-integer name="maximum-mod" position="6" size="2"/> -->
+	</global>
+	<global global-id="skill">
+		<signed-integer name="current" position="0" size="2"
+			min="0" max="99" />
+		<signed-integer name="maximum" position="2" size="2"
+			min="0" max="99" />
+		<signed-integer name="current-mod" position="4" size="2" />
+		<!--<signed-integer name="maximum-mod" position="6" size="2"/> -->
+	</global>
+	<global global-id="age">
+		<signed-integer name="current" position="0" size="2"
+			min="0" max="999" />
+		<signed-integer name="maximum" position="2" size="2"
+			min="0" max="999" />
+	</global>
+	<global global-id="hitpoint">
+		<signed-integer name="current" position="0" size="2"
+			min="0" max="9999" />
+		<signed-integer name="maximum" position="2" size="2"
+			min="0" max="9999" />
+		<signed-integer name="maximum-mod" position="4" size="2" />
+	</global>
+	<global global-id="event-bit-type">
+		<select position="0" name="event-type" dictionary-ref="event-types" />
+	</global>
+	<global global-id="event-bit-subtype">
+		<integer position="1" name="event-subtype" />
+	</global>
+	<global global-id="event-bit-trigger">
+		<select position="1" name="event-subtype" dictionary-ref="event-trigger-types" />
+	</global>
+	<global global-id="event-bit-if">
+		<select position="1" name="event-subtype" dictionary-ref="event-if-types" />
+	</global>
+	<global global-id="event-bit-set">
+		<select position="1" name="event-subtype" dictionary-ref="event-set-types" />
+	</global>
+	<global global-id="event-bit-create">
+		<select position="1" name="event-subtype" dictionary-ref="event-create-types" />
+	</global>
+	<global global-id="event-bit-award">
+		<select position="1" name="event-subtype" dictionary-ref="event-award-types" />
+	</global>
+	<global global-id="event-bit-goto">
+		<select position="10" name="event-goto" size="2"
+			dictionary-ref="gotos" />
+	</global>
+	<global global-id="event-unknown">
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-subtype" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-01">
+		<!-- teleport -->
+		<use-global ref="event-bit-type" />
+		<select name="event-payload" position="6" size="2"
+			dictionary-ref="map-ids" />
+		<integer name="event-payload" position="1" size="1" />
+		<integer name="event-payload" position="2" size="1" />
+		<select name="event-payload" position="3" size="1"
+			dictionary-ref="map-directions" />
+		<select name="event-payload" position="5" size="1"
+			dictionary-ref="event-teleport-types" />
+		<use-global ref="event-bit-goto" />
+		
+		<select position="8" size="2" name="event-payload"
+			dictionary-ref="gotos" />
+
+		<integer name="event-null" position="4" />
+	</global>
+	<global global-id="event-02">
+		<!-- door -->
+		<use-global ref="event-bit-type" />
+
+		<integer name="event-payload" position="1" size="1" />
+		<integer name="event-payload" position="2" size="1" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="items" />
+
+		<select position="8" size="2" name="event-payload"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-03">
+		<!-- chest -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-subtype" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="items" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-04">
+		<!-- popup text -->
+		<use-global ref="event-bit-type" />
+
+		<select name="event-payload" position="1" dictionary-ref="events" />
+		<select name="event-payload" position="2" size="2"
+			dictionary-ref="popup-bitmask" />
+		<select name="event-payload" position="5" dictionary-ref="map-texts" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-09">
+		<!-- award -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-award" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-09.00">
+		<!-- award attribute -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-award" />
+		<select position="2" size="1" name="event-payload"
+			dictionary-ref="award-operations" />
+		<select position="4" size="1" name="event-payload"
+			dictionary-ref="target" />
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="attributes" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-09.07">
+		<!-- award language -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-award" />
+		<select position="2" size="1" name="event-payload"
+			dictionary-ref="award-operations" />
+		<select position="4" size="1" name="event-payload"
+			dictionary-ref="target" />
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="languages" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-09.08">
+		<!-- award experience -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-award" />
+		<select position="2" size="1" name="event-payload"
+			dictionary-ref="award-operations" />
+		<select position="4" size="1" name="event-payload"
+			dictionary-ref="target" />
+		<integer position="8" size="2" name="event-payload" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+	</global>
+	<global global-id="event-10">
+		<!-- set tile -->
+		<use-global ref="event-bit-type" />
+
+		<integer name="event-payload" position="1" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="6" size="2" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="map-ids" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-11">
+		<!-- battle -->
+		<use-global ref="event-bit-type" />
+		<integer position="6" name="event-payload" size="2" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="1" />
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-12">
+		<!-- place -->
+		<use-global ref="event-bit-type" />
+		<integer name="event-payload" position="2" size="2" />
+		<integer name="event-payload" position="4" size="2" />
+		<select position="6" name="event-payload" size="2"
+			dictionary-ref="places" />
+		<select position="8" name="event-payload" size="2"
+			dictionary-ref="merchants" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-FFFF" position="1" />
+	</global>
+	<global global-id="event-13">
+		<!-- if -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-13.00">
+		<!-- global variable -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+
+		<integer name="event-payload" position="6" size="2" />
+		<select name="event-payload" position="2" size="2"
+			dictionary-ref="boolean-reverse" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.04">
+		<!-- map variable -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<select name="event-payload" position="2" size="2"
+			dictionary-ref="boolean-reverse" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.05">
+		<!-- partymember -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<select name="event-payload" position="6" size="2"
+			dictionary-ref="partymembers" />
+		<select name="event-payload" position="2" size="2"
+			dictionary-ref="boolean-reverse" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.06">
+		<!-- item owned -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="items" />
+		<select position="2" size="1" name="event-payload"
+			dictionary-ref="proportionality" />
+		<integer position="3" size="1" name="event-payload" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.07">
+		<!-- item used -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="items" />
+		<integer position="2" size="1" name="event-payload" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer position="3" size="1" name="event-null" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.09">
+		<!-- exit -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<integer position="2" size="2" name="event-payload" />
+		<integer position="6" size="2" name="event-payload" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+	</global>
+	<global global-id="event-14">
+		<!-- set -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-14.00">
+		<!-- global variable -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+
+		<integer name="event-payload" position="6" size="2" />
+		<select name="event-payload" position="2" dictionary-ref="boolean" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-14.04">
+		<!-- map variable -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<select name="event-payload" position="2" dictionary-ref="boolean" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-14.06">
+		<!-- inventory -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="items" />
+		<integer name="event-payload" position="3" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-14.08">
+		<!-- keyword -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="keywords" />
+		<select position="2" size="1" name="event-payload"
+			dictionary-ref="boolean" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-15">
+		<!-- if-1d100 -->
+		<use-global ref="event-bit-type" />
+		<integer name="event-payload" position="1" min="1" max="99" />
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-16">
+		<!-- start -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-16.00">
+		<!-- keyword -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="keywords" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.01">
+		<!-- show item -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="items" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.02">
+		<!-- give item -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<select position="6" size="2" name="event-payload"
+			dictionary-ref="items" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.03">
+		<!-- give gold -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<integer position="6" size="2" name="event-payload" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.04">
+		<!-- give food -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<integer position="6" size="2" name="event-payload" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.05">
+		<!-- join group -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.06">
+		<!-- leave group -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.07">
+		<!-- start conversation -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.08">
+		<!-- end conversation -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-17">
+		<!-- print text -->
+		<use-global ref="event-bit-type" />
+		<integer name="event-payload" position="1" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-18">
+		<!-- create -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-create" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-18.00">
+		<!-- item -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-create" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="items" />
+		<integer name="event-payload" position="6" size="2" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-18.01">
+		<!-- gold -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-create" />
+		<integer name="event-payload" position="6" size="2" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-18.02">
+		<!-- food -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-create" />
+		<integer name="event-payload" position="6" size="2" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-19">
+		<!-- prompt -->
+		<use-global ref="event-bit-type" />
+		<integer name="event-payload" position="1" min="1" max="99" />
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<select name="event-payload" position="8" size="2"
+			dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-20">
+		<!-- play music -->
+		<use-global ref="event-bit-type" />
+		<select name="event-payload" position="2" dictionary-ref="songs" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="1" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-21.00">
+		<!-- exit -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-22">
+		<!-- spawn -->
+		<use-global ref="event-bit-type" />
+		<select position="3" name="event-subtype" dictionary-ref="event-spawn-types" />
+		<select name="event-payload" position="6" size="2"
+			dictionary-ref="map-ids" />
+		<integer name="event-payload" position="1" size="1" />
+		<integer name="event-payload" position="2" size="1" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-23.00">
+		<!-- null -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="character-name">
+		<string name="name" position="274" size="15" encoding="CP850" />
+	</global>
+	<global global-id="character">
+		<!--
+			<group name="testing">
+
+			<bit-field position="214" size="2" name="ailments-immune" dictionary-ref="ailments"/>
+
+			<repeat-group position="13" group-size="1" group-count="4">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="18" group-size="1" group-count="2">
+			<integer name="unknown"/>
+			</repeat-group>
+
+			<repeat-group position="34" group-size="1" group-count="8">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="110" group-size="1" group-count="12">
+			<integer name="unknown"/>
+			</repeat-group>
+
+			<integer position="214" name="unknown"/>
+			<integer position="214" name="unknown"/>
+			<integer position="218" name="unknown"/>
+			<integer position="220" name="unknown"/>
+			<repeat-group position="222" group-size="1" group-count="1">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="224" group-size="1" group-count="1">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="258" group-size="1" group-count="13">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="289" group-size="1" group-count="1">
+			<integer name="unknown"/>
+			</repeat-group>
+			</group>
+		-->
+
+		<select name="character-type" position="0" dictionary-ref="character-types" />
+		<select name="gender" position="1" dictionary-ref="genders" />
+		<select name="race" position="2" dictionary-ref="races" />
+		<select name="class" position="3" dictionary-ref="classes" />
+		<select name="school" position="4" dictionary-ref="schools" />
+		<integer name="level" position="5" min="0" max="99" />
+		<select name="hand" position="6" dictionary-ref="hands" />
+		<select name="finger" position="7" dictionary-ref="fingers" />
+		<bit-field name="languages" position="8" dictionary-ref="languages" />
+
+		<!--
+			<integer name="portrait" position="9" size="2"/>
+			<integer name="combat-sprite" position="11" size="2"/>
+		-->
+
+		<integer name="attacks-per-round" position="17" max="99" />
+
+		<integer name="spelllearn-points" position="20" size="2" max="9999" />
+		<integer name="training-points" position="22" size="2" max="9999" />
+		<integer name="gold" position="24" size="2" />
+		<integer name="food" position="26" size="2" />
+		<integer name="fixed-FFFF" position="28" size="2" />
+		<bit-field position="30" size="2" name="ailments"
+			dictionary-ref="ailments" />
+		<integer name="combat-experience" position="32" size="2" />
+
+		<repeat-group name="attributes" position="42" group-size="8"
+			group-count="8" dictionary-ref="attributes">
+			<use-global ref="stat" />
+		</repeat-group>
+
+		<!-- 100-200 -->
+		<group name="age" position="106">
+			<use-global ref="age" />
+		</group>
+
+		<repeat-group name="skills" position="122" group-size="8"
+			group-count="10" dictionary-ref="skills">
+			<use-global ref="skill" />
+		</repeat-group>
+
+		<!-- 200-300 -->
+		<group name="hit-points" position="202">
+			<use-global ref="hitpoint" />
+		</group>
+		<group name="spell-points" position="208">
+			<use-global ref="hitpoint" />
+		</group>
+
+		<signed-integer name="combat-defense" position="215" />
+		<signed-integer name="defense" position="217" />
+
+		<signed-integer name="combat-attack" position="218"
+			size="2" />
+		<signed-integer name="attack" position="220" size="2" />
+
+		<integer name="magic-attack" position="223" max="99" />
+
+		<integer name="magic-defense" position="225" max="99" />
+		<integer name="apr-per-level" position="226" size="2" max="50" />
+		<integer name="hp-per-level" position="228" size="2" max="99" />
+		<integer name="sp-per-level" position="230" size="2" max="99" />
+		<integer name="slp-per-level" position="232" size="2" max="99" />
+		<integer name="tp-per-level" position="234" size="2" max="99" />
+		<integer name="experience" position="238" size="4" />
+		<group name="spells">
+			<bit-field name="spells-white" position="242" size="4"
+				first-bit="1" last-bit="30" dictionary-ref="spells-white" />
+			<bit-field name="spells-blue" position="246" size="4"
+				first-bit="1" last-bit="29" dictionary-ref="spells-blue" />
+			<bit-field name="spells-green" position="250" size="4"
+				first-bit="1" last-bit="17" dictionary-ref="spells-green" />
+			<bit-field name="spells-black" position="254" size="4"
+				first-bit="1" last-bit="30" dictionary-ref="spells-black" />
+		</group>
+
+		<integer name="weight" position="271" size="3" />
+		<use-global ref="character-name" />
+
+		<!--
+			<group name="unused">
+			<repeat-group position="13" group-size="1" group-count="4">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="18" group-size="1" group-count="2">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="28" group-size="1" group-count="14">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="110" group-size="1" group-count="12">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="214" group-size="1" group-count="3">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="218" group-size="1" group-count="3">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="222" group-size="1" group-count="1">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="224" group-size="1" group-count="1">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="258" group-size="1" group-count="13">
+			<integer name="unknown"/>
+			</repeat-group>
+			<repeat-group position="289" group-size="1" group-count="1">
+			<integer name="unknown"/>
+			</repeat-group>
+			</group>
+		-->
+	</global>
+	<global global-id="map-texts">
+		<string-dictionary type="size-first" encoding="CP850"
+			position="0" name="label" />
+	</global>
+	<global global-id="map-data">
+		<group name="data">
+			<select position="10" name="world" dictionary-ref="map-worlds" />
+			<select position="2" name="map-type" dictionary-ref="map-types" />
+			<integer position="4" name="width" />
+			<integer position="5" name="height" />
+			<integer position="6" name="tileset-id" />
+			<integer position="9" name="palette-id" />
+			<select position="3" name="bgm-id" dictionary-ref="songs" />
+			<!--
+			<integer position="$width * $height * $map-type * 2" name="event-count"/>
+			<binary position="$width * $height * $map-type * 2 + 8 + $event-count * 12" size="4" name="walkcoords"/>
+			-->
+		</group>
+		<group name="unknown">
+			<integer position="0" />
+			<integer position="1" />
+			<integer position="7" />
+			<integer position="8" />
+			<integer position="11" />
+		</group>
+		<repeat-group name="mobs" position="12" group-count="32" group-size="10">
+			<integer position="0" name="char-id"/>
+			<integer position="1" name="monster-maybe"/>
+			<bit position="2" bit="0" name="is-npc"/>
+			<bit position="2" bit="1" name="is-monstergroup"/>
+			<bit position="2" bit="4" name="is-popup"/>
+			<bit position="2" bit="2" name="random-movement"/>
+			<bit position="2" bit="3" name="uses-tileset"/>
+			<integer position="3" name="event-id"/>
+			<integer position="4" name="gfx-id" size="2"/>
+			<bit position="8" bit="0" name="is-intangible"/>
+			<!--
+			<bit position="6" bit="7" name="is-?"/>
+			<integer position="7" name="null"/>
+			<bit position="8" bit="0" name="is-intangible"/>
+			<bit position="8" bit="4" name="is-grandpa"/>
+			<bit position="9" bit="0" name="animation-delay"/>
+			<bit position="9" bit="4" name="is-?"/>
+			<binary position="6" size="4"/>
+			-->
+		</repeat-group>
+		<group position="0x14C">
+		
+			<repeat-group name="fields" group-count="$width * $height"
+				group-size="$map-type * 2">
+				<integer position="0" size="1"/>
+				<integer position="2" size="2 * ($map-type - 1)"/>
+				<integer position="1" size="1"/>
+			</repeat-group>
+		
+			<group position="$width * $height * $map-type * 2" name="events">
+				<event-dictionary />
+			</group>
+		</group>
+	</global>
+	<global global-id="icon-data">
+		<group name="data">
+			<integer position="0" size="2" name="entry-count" />
+			<binary position="2" size="4" name="unknown"/>
+		</group>
+		<group name="tiles">
+			<repeat-group position="2" group-count="$entry-count"
+				group-size="8">
+				<group name="testing">
+					<integer position="0" size="1" />
+					<integer position="1" size="1" />
+					<integer position="3" size="1" />
+				</group>
+				<bit-field position="2" size="1" name="mobility"
+					dictionary-ref="tile-icon-mobility" />
+				<integer position="4" size="2" name="image-id" />
+				<integer position="6" size="1" name="image-count" />
+				<select position="7" size="1" name="image-color"
+					dictionary-ref="colors" />
+			</repeat-group>
+		</group>
+	</global>
+	<global global-id="lab-data">
+		<group name="testing">
+			<integer position="2" />
+			<integer position="3" />
+			<integer position="4" />
+			<integer position="5" />
+		</group>
+		<group name="data">
+			<integer position="8" size="2" name="tile-count" />
+			<integer position="10 + $tile-count * 66" size="2" name="info-count" />
+			<binary position="0" size="10" />
+			<binary position="10 + $tile-count * 66" size="10" />
+			<binary position="10 + $tile-count * 66 + 2 + $info-count * 14" size="200" />
+		</group>
+		<group name="tiles-lab">
+			<repeat-group position="10" group-count="$tile-count"
+				group-size="66">
+				<binary position="0" size="2" />
+				<binary position="2" size="64" />
+			</repeat-group>
+		</group>
+		<group name="tiles-lab">
+			<repeat-group position="10 + $tile-count * 66 + 2" group-count="$info-count"
+				group-size="14"><!--0x84-->
+				<binary position="0" size="14" />
+			</repeat-group>
+		</group>
+	</global>
+	
+	<global global-id="place-inn">
+		<group>
+			<integer position="0" name="price" size="2" />
+			<integer position="2" name="map-x" size="2" />
+			<integer position="4" name="map-y" size="2" />
+			<select position="6" name="map-id" size="2" dictionary-ref="map-ids" />
+			<integer position="8" name="healing" size="2" />
+		</group>
+	</global>
+	<global global-id="place-trainer">
+		<group>
+			<select position="0" name="skill" size="2" dictionary-ref="skills" />
+			<integer position="2" name="price" size="2" />
+		</group>
+	</global>
+	<global global-id="place-healer">
+		<repeat-group group-size="2" group-count="13"
+			dictionary-ref="ailments-healer">
+			<integer size="2" />
+		</repeat-group>
+	</global>
+	<global global-id="place-shop">
+		<group>
+		</group>
+	</global>
+	<global global-id="place-food">
+		<group>
+			<integer name="price" size="2" />
+		</group>
+	</global>
+	<global global-id="place-sage">
+		<group>
+			<integer name="price" size="2" />
+		</group>
+	</global>
+	<global global-id="place-blacksmith">
+		<group>
+			<integer name="price" size="2" />
+		</group>
+	</global>
+	<global global-id="place-transport">
+		<group>
+			<integer position="0" name="price" size="2" />
+			<integer position="2" name="map-x" size="2" />
+			<integer position="4" name="map-y" size="2" />
+			<select position="6" name="map-id" size="2" dictionary-ref="map-ids" />
+			<select position="8" name="spawn" size="2" dictionary-ref="event-spawn-types" />
+		</group>
+	</global>
+	<global global-id="AM2-strings">
+		<string-dictionary type="null-delimited" encoding="8bit"
+			position="0x000" name="spell-types" string-count="7" />
+		<string-dictionary type="null-delimited" encoding="8bit"
+			position="0x02F" name="spells-white" string-count="30" />
+		<string-dictionary type="null-delimited" encoding="8bit"
+			position="0x20A" name="spells-blue" string-count="30" />
+		<string-dictionary type="null-delimited" encoding="8bit"
+			position="0x398" name="spells-green" string-count="30" />
+		<string-dictionary type="null-delimited" encoding="8bit"
+			position="0x4AD" name="spells-black" string-count="30" />
+		<string-dictionary type="null-delimited" encoding="8bit"
+			position="0x62E" name="spells-misc" string-count="30" />
+	</global>
+	<global global-id="AM2-items">
+		<repeat-group group-size="60" group-count="402">
+			<integer position="0" name="image-id" />
+			<select position="1" name="type" dictionary-ref="item-types" />
+			<select position="2" name="slot" dictionary-ref="item-slots" />
+			<integer position="5" name="hands" max="2" />
+			<integer position="6" name="fingers" max="2" />
+			<bit-field position="4" name="genders" first-bit="0"
+				last-bit="1" dictionary-ref="genders" />
+			<integer position="7" name="lp-max" />
+			<integer position="8" name="sp-max" />
+			<select position="9" name="attribute-type" dictionary-ref="attributes" />
+			<integer position="10" name="attribute-value" />
+			<select position="11" name="skill-type" dictionary-ref="skills" />
+			<integer position="12" name="skill-value" />
+
+			<integer position="13" name="armor" />
+			<integer position="14" name="damage" />
+			<select position="15" name="ammunition-type" dictionary-ref="ammunitions" />
+			<select position="16" name="ranged-type" dictionary-ref="ammunitions" />
+
+			<integer position="21" name="subtype" />
+			<integer position="22" name="subsubtype" />
+			<select position="23" name="spell-type" dictionary-ref="item-spell-types" />
+			<integer position="24" name="spell-id" />
+			<integer position="25" name="charges-default" />
+			<integer position="27" name="max-charges-by-shop" />
+			<integer position="28" name="max-charges-by-spell" />
+			<integer position="29" name="price-per-charge" />
+			<integer position="30" name="magic-armor" />
+			<integer position="31" name="magic-weapon" />
+			<bit-field position="32" name="properties" first-bit="0"
+				last-bit="6" dictionary-ref="item-properties" />
+			<bit-field position="33" name="default-status" first-bit="0"
+				last-bit="1" dictionary-ref="item-status" />
+			<bit-field position="34" name="classes" size="2" first-bit="0"
+				last-bit="8" dictionary-ref="classes" />
+			<integer position="36" name="price" size="2" />
+			<integer position="38" name="weight" size="2" />
+			<string position="40" name="name" size="19" encoding="CP850" />
+		</repeat-group>
+	</global>
+	<global global-id="AM2-integers">
+		<repeat-group name="class-experience" group-size="2"
+			group-count="10">
+			<integer size="2" />
+		</repeat-group>
+	</global>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<archive path="Amberfiles/Save.00/Party_char.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="character" />
+
+			<integer name="portrait" position="9" size="2" />
+
+			<repeat-group name="equipment" position="290"
+				group-size="6" group-count="9" dictionary-ref="equipment-slots">
+				<use-global ref="item" />
+			</repeat-group>
+
+			<!-- 300-400 -->
+			<repeat-group name="inventory" position="344"
+				group-size="6" group-count="24">
+				<use-global ref="item" />
+			</repeat-group>
+
+			<group name="events">
+				<event-dictionary position="488" />
+				<!-- <event-script position="488"/> -->
+			</group>
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/Save.00/Party_data.sav" type="JH">
+		<for-each-file>
+			<group name="party-composition">
+				<repeat-group position="0x002E" group-size="2"
+					group-count="6">
+					<select size="2" dictionary-ref="partymembers" />
+				</repeat-group>
+			</group>
+			<group name="party-data">
+				<integer name="member-count" position="0x002B" max="6" />
+				<select name="map-id" position="0x000A" size="2"
+					dictionary-ref="map-ids" />
+				<integer name="map-x" position="0x000C" size="2" />
+				<integer name="map-y" position="0x000E" size="2" />
+			</group>
+			<group name="party-variables">
+				<bit name="partybit-netsrak-absent" position="0x2904" bit="0" />
+				<bit name="partybit-mando-absent" position="0x2904" bit="1" />
+				<bit name="partybit-erik-absent" position="0x2904" bit="2" />
+				<bit name="partybit-chris-absent" position="0x2904" bit="3" />
+				<bit name="partybit-monika-absent" position="0x2904" bit="4" />
+				<bit name="partybit-tar-absent" position="0x292C" bit="1" />
+				<bit name="partybit-egil-absent" position="0x2930" bit="3" />
+				<bit name="partybit-selena-absent" position="0x292C" bit="2" />
+				<bit name="partybit-nelvin-absent" position="0x2968" bit="1" />
+				<bit name="partybit-sabine-absent" position="0x2978" bit="0" />
+				<bit name="partybit-valdyn-absent" position="0x2984" bit="0" />
+				<bit name="partybit-targor-absent" position="0x2B68" bit="0" />
+				<bit name="partybit-leonardia-absent" position="0x2B8C" bit="0" />
+				<bit name="partybit-gryban-absent" position="0x2BB8" bit="0" />
+			</group>
+			<repeat-group name="mob-existance" position="0x2504" group-count="455" group-size="4">
+				<bit-field name="01-08" position="0"/>
+				<bit-field name="09-16" position="1"/>
+				<bit-field name="17-24" position="2"/>
+				<bit-field name="25-32" position="3"/>
+			</repeat-group>
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/Save.00/Merchant_data.amb" type="AMBR">
+		<for-each-file>
+			<group name="inventory">
+				<repeat-group position="0" group-size="6" group-count="24">
+					<use-global ref="item" />
+				</repeat-group>
+			</group>
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/Save.00/Chest_data.amb" type="AMBR">
+		<for-each-file>
+			<group name="inventory">
+				<repeat-group position="0" group-size="6" group-count="24">
+					<use-global ref="item" />
+				</repeat-group>
+			</group>
+			<group name="valuables">
+				<signed-integer name="gold" position="144" size="2" />
+				<signed-integer name="food" position="146" size="2" />
+			</group>
+		</for-each-file>
+	</archive>
+
+
+
+
+	<archive path="Amberfiles/NPC_char.amb" type="AMBR">
+		<for-each-file>
+			<!--<use-global ref="character-name"/> -->
+			<use-global ref="character" />
+
+			<integer name="portrait" position="9" size="2" />
+
+			<group name="events">
+				<event-dictionary position="290" />
+				<!-- <event-script position="290"/> -->
+			</group>
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/Monster_char_data.amb" type="AMBR">
+		<for-each-file>
+			<!--<use-global ref="character"/> -->
+
+			<use-global ref="character" />
+
+			<bit-field position="18" name="monster-type" size="1"
+				first-bit="0" last-bit="3" dictionary-ref="monster-types" />
+
+			<group name="testing">
+				<binary position="13" size="4" />
+				<binary position="19" size="2" />
+				<binary position="34" size="8" />
+				<binary position="110" size="12" />
+				<binary position="258" size="13" />
+			</group>
+
+			<group name="gfx">
+				<select name="gfx-id" position="11" size="2" dictionary-ref="monster-images" />
+				<repeat-group position="488" group-size="32"
+					group-count="7" dictionary-ref="sprite-cycles">
+					<binary name="cycle" size="32" />
+				</repeat-group>
+				<repeat-group position="744" group-size="1"
+					group-count="7" dictionary-ref="sprite-cycles">
+					<integer name="length" max="32" />
+				</repeat-group>
+				<binary name="palette-index" position="752" size="48" />
+				<bit-field position="800" size="1" name="mirror"
+					dictionary-ref="sprite-cycles" />
+				<group name="width">
+					<integer name="target" position="806" size="2" />
+					<integer name="source" position="802" size="2" />
+				</group>
+				<group name="height">
+					<integer name="target" position="808" size="2" />
+					<integer name="source" position="804" size="2" />
+				</group>
+			</group>
+			<!--<binary position="810" size="0" name="combat-spritedata"/> -->
+
+			<repeat-group name="equipment" position="290"
+				group-size="6" group-count="9" dictionary-ref="equipment-slots">
+				<use-global ref="item" />
+			</repeat-group>
+
+			<!-- 300-400 -->
+			<repeat-group name="inventory" position="344"
+				group-size="6" group-count="24">
+				<use-global ref="item" />
+			</repeat-group>
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/Dictionary.german" type="JH">
+		<for-each-file>
+			<string-dictionary type="size-interspersed"
+				encoding="CP850" position="0" name="keywords" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/NPC_texts.amb" type="AMBR">
+		<for-each-file>
+			<string-dictionary type="size-first" encoding="CP850"
+				position="0" name="dialog" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/Party_texts.amb" type="AMBR">
+		<for-each-file>
+			<string-dictionary type="size-first" encoding="CP850"
+				position="0" name="dialog" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/1Map_texts.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="map-texts" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/2Map_texts.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="map-texts" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/3Map_texts.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="map-texts" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/1Map_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="map-data" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/2Map_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="map-data" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/3Map_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="map-data" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/Icon_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="icon-data" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/2Lab_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="lab-data" />
+		</for-each-file>
+	</archive>
+	<archive path="Amberfiles/3Lab_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="lab-data" />
+		</for-each-file>
+	</archive>
+
+	
+	
+	
+	<archive path="Amberfiles/Place_data" type="JH">
+		<for-each-file>
+			<!--
+				<repeat-group name="places" position="2" group-size="32" group-count="64">
+				<repeat-group group-size="2" group-count="16">
+				<integer name="unknown" size="2"/>
+				</repeat-group>
+				</repeat-group>
+			-->
+
+			<group position="0x002" name="places">
+				<use-global position="0x000" ref="place-inn" />
+				<use-global position="0x020" ref="place-trainer" />
+				<use-global position="0x040" ref="place-trainer" />
+				<use-global position="0x060" ref="place-trainer" />
+				<use-global position="0x080" ref="place-healer" />
+				<use-global position="0x0A0" ref="place-healer" />
+				<use-global position="0x0C0" ref="place-shop" />
+				<use-global position="0x0E0" ref="place-inn" />
+				<use-global position="0x100" ref="place-trainer" />
+				<use-global position="0x120" ref="place-trainer" />
+				<use-global position="0x140" ref="place-transport" />
+				<use-global position="0x160" ref="place-shop" />
+				<use-global position="0x180" ref="place-food" />
+				<use-global position="0x1A0" ref="place-sage" />
+				<use-global position="0x1C0" ref="place-transport" />
+				<use-global position="0x1E0" ref="place-shop" />
+				<use-global position="0x200" ref="place-trainer" />
+				<use-global position="0x220" ref="place-shop" />
+				<use-global position="0x240" ref="place-shop" />
+				<use-global position="0x260" ref="place-shop" />
+				<use-global position="0x280" ref="place-shop" />
+				<use-global position="0x2A0" ref="place-healer" />
+				<use-global position="0x2C0" ref="place-shop" />
+				<use-global position="0x2E0" ref="place-shop" />
+				<use-global position="0x300" ref="place-inn" />
+				<use-global position="0x320" ref="place-food" />
+				<use-global position="0x340" ref="place-shop" />
+				<use-global position="0x360" ref="place-trainer" />
+				<use-global position="0x380" ref="place-trainer" />
+				<use-global position="0x3A0" ref="place-shop" />
+				<use-global position="0x3C0" ref="place-trainer" />
+				<use-global position="0x3E0" ref="place-blacksmith" />
+				<use-global position="0x400" ref="place-sage" />
+				<use-global position="0x420" ref="place-inn" />
+				<use-global position="0x440" ref="place-shop" />
+				<use-global position="0x460" ref="place-healer" />
+				<use-global position="0x480" ref="place-food" />
+				<use-global position="0x4A0" ref="place-inn" />
+				<use-global position="0x4C0" ref="place-trainer" />
+				<use-global position="0x4E0" ref="place-shop" />
+				<use-global position="0x500" ref="place-inn" />
+				<use-global position="0x520" ref="place-shop" />
+				<use-global position="0x540" ref="place-food" />
+				<use-global position="0x560" ref="place-shop" />
+				<use-global position="0x580" ref="place-shop" />
+				<use-global position="0x5A0" ref="place-healer" />
+				<use-global position="0x5C0" ref="place-inn" />
+				<use-global position="0x5E0" ref="place-sage" />
+				<use-global position="0x600" ref="place-blacksmith" />
+				<use-global position="0x620" ref="place-food" />
+				<use-global position="0x640" ref="place-shop" />
+				<use-global position="0x660" ref="place-healer" />
+				<use-global position="0x680" ref="place-inn" />
+				<use-global position="0x6A0" ref="place-blacksmith" />
+				<use-global position="0x6C0" ref="place-healer" />
+				<use-global position="0x6E0" ref="place-food" />
+				<use-global position="0x700" ref="place-shop" />
+				<use-global position="0x720" ref="place-inn" />
+				<use-global position="0x740" ref="place-blacksmith" />
+				<use-global position="0x760" ref="place-blacksmith" />
+				<use-global position="0x780" ref="place-shop" />
+				<use-global position="0x7A0" ref="place-food" />
+				<use-global position="0x7C0" ref="place-shop" />
+				<use-global position="0x7E0" ref="place-blacksmith" />
+				<use-global position="0x800" ref="place-blacksmith" />
+			</group>
+			<string-dictionary position="0x822" name="names"
+				type="size-fixed" encoding="CP850" string-size="30" string-count="64" />
+		</for-each-file>
+	</archive>
+	<!--
+		<archive path="Amberfiles/AM2_CPU" type="AM2">
+
+		<string-dictionary type="null-delimited" encoding="8bit" position="0x049B0A"
+		name="spells-misc" string-count="30"/>
+		<string-dictionary type="null-delimited" encoding="8bit" position="0x04950B"
+		name="spells-white" string-count="30"/>
+		<string-dictionary type="null-delimited" encoding="8bit" position="0x0496E4"
+		name="spells-blue" string-count="30"/>
+		<string-dictionary type="null-delimited" encoding="8bit" position="0x049874"
+		name="spells-green" string-count="30"/>
+		<string-dictionary type="null-delimited" encoding="8bit" position="0x049989"
+		name="spells-black" string-count="30"/>
+
+		<repeat-group name="class-experience" position="0x451F0" group-size="2"
+		group-count="10">
+		<integer size="2"/>
+		</repeat-group>
+
+		</archive>
+	-->
+	<!--
+		<archive path="Amberfiles/AM2_CPU" type="AM2">
+
+		<group name="integers" position="0x453F0">
+		<use-global ref="AM2-integers"/>
+		</group>
+		<group name="strings" position="0x4970F">
+		<use-global ref="AM2-strings"/>
+		</group>
+		<group name="items" position="0x4D348">
+		<use-global ref="AM2-items"/>
+		</group>
+
+		</archive>
+	-->
+	<archive path="Amberfiles/AM2_BLIT" type="AM2">
+		<for-each-file>
+			<string name="version" position="0x3E" size="15" encoding="CP850" />
+			<string name="date" position="0x4E" size="19" encoding="CP850" />
+			<group name="integers" position="0x48140">
+				<use-global ref="AM2-integers" />
+			</group>
+			<group name="strings">
+				<string-dictionary type="null-delimited" encoding="8bit"
+					position="0x4C1E2" name="music" string-count="32" />
+			</group>
+			<group name="strings" position="0x4C430">
+				<use-global ref="AM2-strings" />
+			</group>
+			<group name="items" position="0x50098">
+				<use-global ref="AM2-items" />
+			</group>
+		</for-each-file>
+	</archive>
+
+
+	<archive path="Amberfiles/Object_texts.amb" type="AMBR">
+		<for-each-file>
+			<string-dictionary type="size-first" encoding="CP850"
+				position="0" name="label" />
+		</for-each-file>
+	</archive>
+
+
+
+	<!--
+		<archive path="Amberfiles/AM2_CPU" type="AM2">
+
+		<group>
+		<string-dictionary position="0x049B0A" name="spells-misc" string-count="30"/>
+		<string-dictionary position="0x04950B" name="spells-white" string-count="30"/>
+		<string-dictionary position="0x0496E4" name="spells-blue" string-count="30"/>
+		<string-dictionary position="0x049874" name="spells-green" string-count="30"/>
+		<string-dictionary position="0x049989" name="spells-black" string-count="30"/>
+
+		<repeat-group name="class-experience" position="0x451F0" group-size="2"
+		group-count="10">
+		<integer size="2"/>
+		</repeat-group>
+		</group>
+
+		</archive>
+	-->
+
+	<archive path="Extrafiles/Abstract_data.amb" type="Raw">
+		<for-each-file>
+			<group name="classes" position="0">
+				<repeat-group group-size="42" group-count="10">
+					<string position="0" name="name" size="12" />
+					<repeat-group position="12" name="skills" group-size="2"
+						group-count="10" dictionary-ref="skills">
+						<integer size="2" max="99" />
+					</repeat-group>
+					<integer position="32" name="apr-per-level" size="2" max="50" />
+					<integer position="34" name="hp-per-level" size="2" max="99" />
+					<integer position="36" name="sp-per-level" size="2" max="99" />
+					<integer position="38" name="slp-per-level" size="2" max="99" />
+					<integer position="40" name="tp-per-level" size="2" max="99" />
+				</repeat-group>
+			</group>
+		</for-each-file>
+	</archive>
+
+	<archive path="Extrafiles/2D_Map_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="map-data" />
+		</for-each-file>
+	</archive>
+	<archive path="Extrafiles/2D_Icon_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="icon-data" />
+		</for-each-file>
+	</archive>
+
+
+
+	<archive path="Extrafiles/3D_Map_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="map-data" />
+		</for-each-file>
+	</archive>
+	<archive path="Extrafiles/3D_Lab_data.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="lab-data" />
+		</for-each-file>
+	</archive>
+</savegame.editor>
