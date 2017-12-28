@@ -1,0 +1,31 @@
+{
+    "name": "slothsoft/amber",
+    "description": "",
+    "keywords": [],
+    "license": "WTFPL",
+    "authors": [
+        {
+            "name": "Daniel Schulz",
+            "email": "daniel.lio.schulz@gmail.com"
+        }
+    ],
+    "type": "library",
+    "require": {
+		"php": ">=7.0",
+		"slothsoft/core" : "*"
+    },
+	"require-dev": {
+		"phpunit/phpunit": "5.2.*"
+    },
+	"autoload": {
+        "psr-4": {
+            "Slothsoft\\Amber\\": "php/"
+        }
+    },
+	"repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/Faulo/slothsoft-core"
+        }
+    ]
+}
