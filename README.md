@@ -1,4 +1,4 @@
-Files and Resources and Hypertext
-=================================
+Amber Module
+============
 
-A Farah module.
+A Farah module for processing game files from the amber engine (i.e., Ambermoon and Amberstar).
