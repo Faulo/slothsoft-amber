@@ -8,6 +8,7 @@ use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Build\XmlBuilder;
 use Error;
 use Exception;
+use InvalidArgumentException;
 
 class ModController
 {
@@ -42,20 +43,21 @@ class ModController
         return $ret;
     }
 
-    public function resourceAction(HTTPRequest $req)
+    public function resourceAction(HTTPRequest $req) : ModResource
     {
         $ret = $this->defaultAction($req);
         
-        $file = null;
         if ($id = $req->getInputValue('id')) {
-            $file = $this->locator->getResourceById($id);
-        } elseif ($type = $req->getInputValue('type') and $name = $req->getInputValue('name')) {
-            $file = $this->locator->getResource($type, $name);
-        } elseif ($name = $req->getInputValue('lib')) {
-            $file = $this->locator->getResource(ModResource::TYPE_LIBRARY, $name);
+            return $this->locator->getResourceById($id);
+        }
+        if ($type = $req->getInputValue('type') and $name = $req->getInputValue('name')) {
+            return $this->locator->getResource($type, $name);
+        }
+        if ($lib = $req->getInputValue('lib')) {
+            return $this->locator->getResource(ModResource::TYPE_LIBRARY, $lib);
         }
         
-        return $file;
+        throw new InvalidArgumentException("missing parameter to identify resource");
     }
 
     public function editorAction(HTTPRequest $req)
@@ -321,11 +323,11 @@ class ModController
 					$params['dictionaryURL'] = 'http://localhost' . $dictionaryResource->getUrl();
 				}
 				if ($libResource->ensureDirectory()) {
-					if ($this->dom->transform(
-						$editorResource->getPath(),
-						$templateResource->getPath(),
+					if ($this->dom->transformToFile(
+						$editorResource,
+						$templateResource,
 						$params,
-						$libResource->getPath()
+						$libResource
 						)) {
 						$ret = true;
 					}
