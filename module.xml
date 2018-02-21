@@ -16,6 +16,31 @@ Llo
 -->
   <default-configuration/>
   <assets>
+    <resource-directory name="data" path="data" type="application/x-php"/>
+    <resource-directory name="css" path="stylesheet" type="text/css"/>
+    <resource-directory name="js" path="script" type="application/javascript"/>
+    <resource-directory name="xsl" path="template" type="application/xslt+xml"/>
+    <resource-directory name="dictionary" path="dictionary" type="application/xml"/>
+    <resource-directory name="pages" path="pages" type="application/xml"/>
+    <directory name="static">
+      <resource name="sites.mod" path="sites.mod.xml" type="application/xml"/>
+      <resource name="editor" path="editor.xml" type="application/xml"/>
+      <resource name="config" path="config.json" type="application/json"/>
+      <resource name="charStruc" path="charStruc.xml" type="application/xml"/>
+      <resource name="partyStruc" path="partyStruc.xml" type="application/xml"/>
+      <resource name="AmbermoonSavegame" path="ambermoon/structure.xml" type="application/xml"/>
+      <resource name="items-map" path="AmbermoonItems.png" type="image/png"/>
+      <resource name="portraits-map" path="AmbermoonPortraits.png" type="image/png"/>
+      <resource name="AmbermoonItems" path="ambermoon\Thalion-v1.05-DE\lib\items.xml" type="application/xml"/>
+      <resource name="AmbermoonPortraits" path="AmbermoonPortraits.xml" type="application/xml"/>
+      <resource-directory name="saves" path="save" type="application/octet-stream"/>
+      <resource-directory name="portraits" path="portraits" type="image/png"/>
+      <resource-directory name="items" path="items" type="image/png"/>
+      <resource-directory name="tilesets" path="tilesets" type="image/png"/>
+      <resource-directory name="monster-gfx" path="monster-gfx" type="image/png"/>
+      <resource-directory name="AmbermoonPatch" path="save/patch" type="*/*"/>
+      <resource-directory name="patch" path="patches" type="*/*"/>
+    </directory>
     <fragment name="description">
       <include-fragment ref="//slothsoft/default"/>
       <fragment name="content">

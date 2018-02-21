@@ -12,13 +12,13 @@ xmlns:sfm="http://schema.slothsoft.net/farah/module">
 		<page name="Thalion-v1.06-DE" title="Thalion-v1.06-DE" ref="description"
 			status-active="" status-public="">
 			<sfm:param name="mod" value="Thalion-v1.06-DE" />
-			<include-pages ref="/sites-mod"/>
+			<include-pages ref="pages/sites.mod"/>
 		</page>
 		
 		<page name="Thalion-v1.05-DE" title="Thalion-v1.05-DE" ref="description"
 			status-active="" status-public="">
 			<sfm:param name="mod" value="Thalion-v1.05-DE" />
-			<include-pages ref="/sites-mod"/>
+			<include-pages ref="pages/sites.mod"/>
 		</page>
 		
 		
