@@ -2,11 +2,10 @@
 namespace Slothsoft\Farah;
 
 use Slothsoft\Amber\ModController;
+use Slothsoft\Farah\Module\FarahUrl\FarahUrl;
 
-return function(array $args) {
+return function(FarahUrl $url) {
     $controller = new ModController(__DIR__ . '/..');
     
-    $request = Kernel::getInstance()->getRequest();
-    
-    return $controller->resourceAction($request);
+    return $controller->resourceAction($url->getArguments());
 };

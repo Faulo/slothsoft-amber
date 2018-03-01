@@ -2,16 +2,18 @@
 namespace Slothsoft\Farah;
 
 use Slothsoft\Amber\ModController;
-use DOMDocument;
+use Slothsoft\Farah\Module\FarahUrl\FarahUrl;
 
-return function() {
+return function(FarahUrl $url) {
+    $args = $url->getArguments();
+    
     $kernel = Kernel::getInstance();
     $httpRequest = $kernel->getRequest();
     $httpResponse = $kernel->getResponse();
     
     $controller = new ModController(__DIR__ . '/..');
     
-    $editor = $controller->editorAction($httpRequest);
+    $editor = $controller->editorAction($args);
     
     $saveAll = $httpRequest->hasInputValue('SaveAll');
     $downloadAll = $httpRequest->hasInputValue('DownloadAll');
@@ -39,5 +41,5 @@ return function() {
         }
     }
     
-    return $editor->asNode(new DOMDocument());
+    return $editor->asDocument();
 };

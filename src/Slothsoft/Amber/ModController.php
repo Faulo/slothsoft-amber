@@ -1,9 +1,9 @@
 <?php
 namespace Slothsoft\Amber;
 
-use Slothsoft\Farah\HTTPRequest;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\FileSystem;
+use Slothsoft\Farah\Module\FarahUrl\FarahUrlArguments;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Build\XmlBuilder;
 use Error;
@@ -26,63 +26,63 @@ class ModController
         $this->moduleDir = realpath($moduleDir);
     }
 
-    public function defaultAction(HTTPRequest $req)
+    public function defaultAction(FarahUrlArguments $args)
     {
         $ret = null;
         
-        //assert($req->hasInputValue('game'));
-        //assert($req->hasInputValue('mod'));
+        //assert($args->has('game'));
+        //assert($args->has('mod'));
         
         $this->locator = new ModResourceLocator(
 			$this->moduleDir,
-			$req->getInputValue('game', 'ambermoon'),
-			$req->getInputValue('mod', 'Thalion-v1.05-DE')
+            $args->get('game', 'ambermoon'),
+            $args->get('mod', 'Thalion-v1.05-DE')
 		);
         $this->dom = new DOMHelper();
         
         return $ret;
     }
 
-    public function resourceAction(HTTPRequest $req) : ModResource
+    public function resourceAction(FarahUrlArguments $args) : ModResource
     {
-        $ret = $this->defaultAction($req);
+        $ret = $this->defaultAction($args);
         
-        if ($id = $req->getInputValue('id')) {
+        if ($id = $args->get('id')) {
             return $this->locator->getResourceById($id);
         }
-        if ($type = $req->getInputValue('type') and $name = $req->getInputValue('name')) {
+        if ($type = $args->get('type') and $name = $args->get('name')) {
             return $this->locator->getResource($type, $name);
         }
-        if ($lib = $req->getInputValue('lib')) {
+        if ($lib = $args->get('lib')) {
             return $this->locator->getResource(ModResource::TYPE_LIBRARY, $lib);
         }
         
         throw new InvalidArgumentException("missing parameter to identify resource");
     }
 
-    public function editorAction(HTTPRequest $req)
+    public function editorAction(FarahUrlArguments $args)
     {
-        $ret = $this->defaultAction($req);
+        $ret = $this->defaultAction($args);
         
-        //assert($req->hasInputValue('struc'));
+        //assert($args->has('struc'));
         
-        $mode = $req->getInputValue('SaveDefault', 'thalion');
+        $mode = $args->get('SaveDefault', 'thalion');
         $mode = preg_replace('~[^\w]~', '', $mode);
-        $name = $req->getInputValue('SaveName', null);
+        $name = $args->get('SaveName', null);
         $name = preg_replace('~[^\w]~', '', $name);
         
-        $loadAll = $req->hasInputValue('LoadAll');
-        $saveAll = $req->hasInputValue('SaveAll');
-        $downloadAll = $req->hasInputValue('DownloadAll');
+        $loadAll = $args->has('LoadAll');
+        $saveAll = $args->has('SaveAll');
+        $downloadAll = $args->has('DownloadAll');
         
-        $loadFile = $req->getInputValue('LoadFile', null);
-        $saveFile = $req->getInputValue('SaveFile', null);
-        $downloadFile = $req->getInputValue('DownloadFile', null);
+        $loadFile = $args->get('LoadFile', null);
+        $saveFile = $args->get('SaveFile', null);
+        $downloadFile = $args->get('DownloadFile', null);
         
-        $request = (array) $req->getInputValue('save', []);
+        $request = (array) $args->get('save', []);
         
         $editorConfig = [];
-        $editorConfig['structureFile'] = $this->locator->getResource(ModResource::TYPE_STRUCTURE, $req->getInputValue('struc', 'structure'))
+        $editorConfig['structureFile'] = $this->locator->getResource(ModResource::TYPE_STRUCTURE, $args->get('struc', 'structure'))
             ->getPath();
         $editorConfig['defaultDir'] = $this->locator->getResource(ModResource::TYPE_MODFOLDER, 'src')->getPath();
         $editorConfig['tempDir'] = $this->locator->getResource(ModResource::TYPE_MODFOLDER, 'user')->getPath();
@@ -238,14 +238,14 @@ class ModController
         ],
     ];
     
-    public function createEditorAction(HTTPRequest $req)
+    public function createEditorAction(FarahUrlArguments $args)
     {
         $ret = false;
         
-        $this->defaultAction($req);
+        $this->defaultAction($args);
         
-        assert($req->hasInputValue('lib'));
-        $lib = $req->getInputValue('lib');
+        assert($args->has('lib'));
+        $lib = $args->get('lib');
         
         assert(isset($this->editorConfig[$lib]));
         $config = $this->editorConfig[$lib];
@@ -256,8 +256,8 @@ class ModController
 		
 		$libResource = $this->locator->getResource(ModResource::TYPE_EDITOR, $lib);
         
-        $req->setInputValue('struc', $struc);
-        $req->setInputValue('save', [
+        $args->set('struc', $struc);
+        $args->set('save', [
             'editor' => [
                 'archives' => $config['archives']
             ]
@@ -266,7 +266,7 @@ class ModController
         if ($libResource->exists() and $libResource->getChangeTime() > $strucResource->getChangeTime()) {
 			$ret = true;
 		} else {
-			$editor = $this->editorAction($req);
+			$editor = $this->editorAction($args);
 			
 			$builder = new XmlBuilder();
 			$builder->registerTagBlacklist([
@@ -297,14 +297,14 @@ class ModController
         return $ret ? $libResource : null;
     }
 
-    public function createLibraryAction(HTTPRequest $req)
+    public function createLibraryAction(FarahUrlArguments $args)
     {
         $ret = false;
         
-        $this->defaultAction($req);
+        $this->defaultAction($args);
         
-        assert($req->hasInputValue('lib'));
-        $lib = $req->getInputValue('lib');
+        assert($args->has('lib'));
+        $lib = $args->get('lib');
         
         $libResource = $this->locator->getResource(ModResource::TYPE_LIBRARY, $lib);
         
@@ -338,14 +338,14 @@ class ModController
         return $ret ? $libResource : null;
     }
 
-    public function createStyleAction(HTTPRequest $req)
+    public function createStyleAction(FarahUrlArguments $args)
     {
         $ret = false;
         
-        $this->defaultAction($req);
+        $this->defaultAction($args);
         
-        assert($req->hasInputValue('lib'));
-        $lib = $req->getInputValue('lib');
+        assert($args->has('lib'));
+        $lib = $args->get('lib');
         
         $libResource = $this->locator->getResource(ModResource::TYPE_LIBRARY, $lib);
         $libDoc = $libResource->getDocument();
@@ -514,7 +514,7 @@ content: " ";
         return $styleResource;
     }
 
-    public function installAction(HTTPRequest $req)
+    public function installAction(FarahUrlArguments $args)
     {
         $gameList = [];
         $gameList[] = 'ambermoon';
@@ -579,12 +579,12 @@ content: " ";
         $graphicsList[] = 'graphics';
         
         foreach ($gameList as $game) {
-            $req->setInputValue('game', $game);
+            $args->set('game', $game);
             echo $game . PHP_EOL;
             foreach ($modList as $mod) {
-                $req->setInputValue('mod', $mod);
+                $args->set('mod', $mod);
                 
-                $this->defaultAction($req);
+                $this->defaultAction($args);
                 
                 $archiveManager = new ArchiveManager($this->locator->getResourceById('ambtool')->getPath());
                 $graphicsManager = new GraphicsManager($this->locator->getResourceById('ambgfx')->getPath());
@@ -593,11 +593,11 @@ content: " ";
                 
                 echo "\t\teditor" . PHP_EOL;
                 foreach ($editorList as $lib) {
-                    $req->setInputValue('lib', $lib);
+                    $args->set('lib', $lib);
                     
                     echo "\t\t\t" . $lib . PHP_EOL;
                     try {
-                        $libResource = $this->createEditorAction($req);
+                        $libResource = $this->createEditorAction($args);
                         $res = $libResource ? sprintf('Created resource "%s"!', $libResource->getName()) : sprintf('Failed to create resource "%s"!', $lib);
                     } catch (Exception $e) {
                         $res = 'EXCEPTION: ' . $e->getMessage();
@@ -611,11 +611,11 @@ content: " ";
                 echo "\t\tlib" . PHP_EOL;
                 $libs = [];
                 foreach ($libList as $lib) {
-                    $req->setInputValue('lib', $lib);
+                    $args->set('lib', $lib);
                     
                     echo "\t\t\t" . $lib . PHP_EOL;
                     try {
-                        $libResource = $this->createLibraryAction($req);
+                        $libResource = $this->createLibraryAction($args);
                         if ($libResource and in_array($lib, $globalList, true)) {
                             if ($libDoc = $libResource->getDocument()) {
                                 foreach ($libDoc->documentElement->childNodes as $node) {
@@ -641,11 +641,11 @@ content: " ";
                 echo "\t\tstyle" . PHP_EOL;
                 $styles = [];
                 foreach ($styleList as $lib) {
-                    $req->setInputValue('lib', $lib);
+                    $args->set('lib', $lib);
                     
                     echo "\t\t\t" . $lib . PHP_EOL;
                     try {
-                        $libResource = $this->createStyleAction($req);
+                        $libResource = $this->createStyleAction($args);
                         if ($libResource) {
                             $styles[] = $libResource->getContents();
                         }
@@ -667,8 +667,8 @@ content: " ";
                 echo "\t\tgfx" . PHP_EOL;
                 
                 foreach ($graphicsList as $lib) {
-                    $req->setInputValue('lib', $lib);
-                    $graphicsResource = $this->createLibraryAction($req);
+                    $args->set('lib', $lib);
+                    $graphicsResource = $this->createLibraryAction($args);
                     // $graphicsResource = $this->locator->getResourceById($lib);
                     $graphicsDoc = $graphicsResource->getDocument();
                     foreach ($graphicsDoc->getElementsByTagNameNS('http://schema.slothsoft.net/amber/amberdata', 'gfx-archive') as $archiveNode) {

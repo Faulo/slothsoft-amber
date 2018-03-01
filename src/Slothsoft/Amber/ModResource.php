@@ -35,7 +35,7 @@ class ModResource extends HTTPFile
 
     const DIR_CLI = 'cli';
 
-    const DIR_RESOURCES = 'res';
+    const DIR_RESOURCES = 'static';
 
     const DIR_LIBRARY = 'lib';
 
@@ -158,7 +158,7 @@ class ModResource extends HTTPFile
         }
         $filePath = implode(DIRECTORY_SEPARATOR, $fileArgs);
         $fileName = basename($filePath);
-        $url = '/getData.php/amber/mod.resource?' . http_build_query([
+        $url = '/getAsset.php/amber/data/mod.resource?' . http_build_query([
             'game' => $game,
             'mod' => $mod,
             'type' => $type,
@@ -178,15 +178,11 @@ class ModResource extends HTTPFile
         return $this->url;
     }
 	
-	public function exists() {
-		return file_exists($this->getPath());
-	}
-	
 	public function getChangeTime() {
 		return filemtime($this->getPath());
 	}
     
-    public function setContents($content)
+    public function setContents(string $content)
     {
         $this->ensureDirectory();
         return parent::setContents($content);

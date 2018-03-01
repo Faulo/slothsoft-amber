@@ -42,39 +42,39 @@ Llo
       <resource-directory name="patch" path="patches" type="*/*"/>
     </directory>
     <fragment name="description">
-      <include-fragment ref="//slothsoft/default"/>
+      <import ref="//slothsoft/default"/>
       <fragment name="content">
         <use-template ref="xsl/description"/>
         <use-document ref="//farah/sites"/>
-        <include-fragment ref="default"/>
+        <import ref="default"/>
       </fragment>
       <use-document ref="chat"/>
     </fragment>
     <fragment name="mod.editor">
-      <include-fragment ref="//slothsoft/default"/>
+      <import ref="//slothsoft/default"/>
       <fragment name="content">
         <use-document ref="data/mod.editor"/>
         <use-template ref="xsl/editor"/>
-        <include-fragment ref="default"/>
-        <include-fragment ref="SavegameEditor"/>
+        <import ref="default"/>
+        <import ref="SavegameEditor"/>
         <use-document ref="data/mod.resource-document" as="amberdata">
           <param name="id" value="libs"/>
         </use-document>
       </fragment>
     </fragment>
     <fragment name="mod.resource">
-      <include-fragment ref="//slothsoft@slothsoft/default"/>
+      <import ref="//slothsoft@slothsoft/default"/>
       <fragment name="content">
         <use-document as="list" ref="data/mod.resource-document"/>
         <use-document as="amberdata" ref="data/mod.resource-document">
           <param name="id" value="libs"/>
         </use-document>
         <use-template ref="xsl/editor.data-list"/>
-        <include-fragment ref="default"/>
-        <include-fragment ref="SavegameEditor"/>
-        <include-fragment ref="//slothsoft@lib/pixijs"/>
+        <import ref="default"/>
+        <import ref="SavegameEditor"/>
+        <import ref="//slothsoft@lib/pixijs"/>
         <use-script ref="js/MapViewer"/>
-        <include-fragment ref="//slothsoft@lib/babylonjs"/>
+        <import ref="//slothsoft@lib/babylonjs"/>
         <use-script ref="js/DungeonViewer"/>
       </fragment>
     </fragment>
