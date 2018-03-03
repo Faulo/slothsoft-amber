@@ -1,7 +1,7 @@
 <?php
 namespace Slothsoft\Amber;
 
-use Slothsoft\Farah\HTTPFile;
+use Slothsoft\Core\IO\HTTPFile;
 use DomainException;
 
 class ModResource extends HTTPFile
@@ -16,7 +16,7 @@ class ModResource extends HTTPFile
     const TYPE_STYLESHEET = 4;
 
     const TYPE_USERFILE = 5;
-    
+
     const TYPE_EDITOR = 6;
 
     const TYPE_MODFILE = 8;
@@ -30,7 +30,7 @@ class ModResource extends HTTPFile
     const TYPE_GAMEFILE = 18;
 
     const TYPE_GAMEFOLDER = 19;
-    
+
     const TYPE_CLI = 21;
 
     const DIR_CLI = 'cli';
@@ -42,9 +42,9 @@ class ModResource extends HTTPFile
     const DIR_SOURCE = 'src';
 
     const DIR_GRAPHIC = 'gfx';
-    
+
     const DIR_STYLESHEET = 'style';
-    
+
     const DIR_EDITOR = 'editor';
 
     protected $url;
@@ -105,23 +105,23 @@ class ModResource extends HTTPFile
                 break;
             case self::TYPE_EDITOR:
                 $fileArgs = [
-                $baseDir,
-                self::DIR_RESOURCES,
-                $game,
-                $mod,
-                self::DIR_EDITOR,
-                $name . '.xml'
-                    ];
+                    $baseDir,
+                    self::DIR_RESOURCES,
+                    $game,
+                    $mod,
+                    self::DIR_EDITOR,
+                    $name . '.xml'
+                ];
                 break;
             case self::TYPE_LIBRARY:
                 $fileArgs = [
-                $baseDir,
-                self::DIR_RESOURCES,
-                $game,
-                $mod,
-                self::DIR_LIBRARY,
-                $name . '.xml'
-                    ];
+                    $baseDir,
+                    self::DIR_RESOURCES,
+                    $game,
+                    $mod,
+                    self::DIR_LIBRARY,
+                    $name . '.xml'
+                ];
                 break;
             case self::TYPE_SOURCE:
                 $fileArgs = [
@@ -177,19 +177,21 @@ class ModResource extends HTTPFile
     {
         return $this->url;
     }
-	
-	public function getChangeTime() {
-		return filemtime($this->getPath());
-	}
-    
+
+    public function getChangeTime()
+    {
+        return filemtime($this->getPath());
+    }
+
     public function setContents(string $content)
     {
         $this->ensureDirectory();
         return parent::setContents($content);
     }
-	
-	public function ensureDirectory() {
-		$dir = dirname($this->getPath());
-		return (file_exists($dir) or mkdir($dir, 0777, true));
-	}
+
+    public function ensureDirectory()
+    {
+        $dir = dirname($this->getPath());
+        return (file_exists($dir) or mkdir($dir, 0777, true));
+    }
 }

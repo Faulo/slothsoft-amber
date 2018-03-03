@@ -30,20 +30,16 @@ class ModController
     {
         $ret = null;
         
-        //assert($args->has('game'));
-        //assert($args->has('mod'));
+        // assert($args->has('game'));
+        // assert($args->has('mod'));
         
-        $this->locator = new ModResourceLocator(
-			$this->moduleDir,
-            $args->get('game', 'ambermoon'),
-            $args->get('mod', 'Thalion-v1.05-DE')
-		);
+        $this->locator = new ModResourceLocator($this->moduleDir, $args->get('game', 'ambermoon'), $args->get('mod', 'Thalion-v1.05-DE'));
         $this->dom = new DOMHelper();
         
         return $ret;
     }
 
-    public function resourceAction(FarahUrlArguments $args) : ModResource
+    public function resourceAction(FarahUrlArguments $args): ModResource
     {
         $ret = $this->defaultAction($args);
         
@@ -64,7 +60,7 @@ class ModController
     {
         $ret = $this->defaultAction($args);
         
-        //assert($args->has('struc'));
+        // assert($args->has('struc'));
         
         $mode = $args->get('SaveDefault', 'thalion');
         $mode = preg_replace('~[^\w]~', '', $mode);
@@ -130,25 +126,27 @@ class ModController
     }
 
     private $editorConfig = [
-		/*
-		'structure.savegame' => [
-			'archives' => [
-				'Party_char.amb',
-				'Party_data.sav',
-				'Merchant_data.amb',
-				'Chest_data.amb',
-			]
-		],
-		//*/
+        /*
+         * 'structure.savegame' => [
+         * 'archives' => [
+         * 'Party_char.amb',
+         * 'Party_data.sav',
+         * 'Merchant_data.amb',
+         * 'Chest_data.amb',
+         * ]
+         * ],
+         * //
+         */
         'dictionaries' => [
-            'structure' => 'structure', //.dictionaries
+            'structure' => 'structure', // .dictionaries
             'archives' => [
-                'AM2_BLIT',
-				/*
-                'Party_char.amb',
-                'NPC_char.amb',
-                'Monster_char_data.amb',
-				//*/
+                'AM2_BLIT'
+                /*
+             * 'Party_char.amb',
+             * 'NPC_char.amb',
+             * 'Monster_char_data.amb',
+             * //
+             */
             ]
         ],
         'graphics' => [
@@ -205,39 +203,39 @@ class ModController
         'worldmap.morag' => [
             'archives' => [
                 '2Map_data.amb',
-				'2Map_texts.amb',
+                '2Map_texts.amb'
             ]
         ],
         'worldmap.kire' => [
             'archives' => [
                 '3Map_data.amb',
-				'3Map_texts.amb',
+                '3Map_texts.amb'
             ]
         ],
         'worldmap.lyramion' => [
             'archives' => [
                 '1Map_data.amb',
-				'1Map_texts.amb',
+                '1Map_texts.amb'
             ]
         ],
         'maps.2d' => [
             'archives' => [
                 '2Map_data.amb',
-				'2Map_texts.amb',
+                '2Map_texts.amb',
                 '3Map_data.amb',
-				'3Map_texts.amb',
+                '3Map_texts.amb'
             ]
         ],
         'maps.3d' => [
             'archives' => [
                 '2Map_data.amb',
-				'2Map_texts.amb',
+                '2Map_texts.amb',
                 '3Map_data.amb',
-				'3Map_texts.amb',
+                '3Map_texts.amb'
             ]
-        ],
+        ]
     ];
-    
+
     public function createEditorAction(FarahUrlArguments $args)
     {
         $ret = false;
@@ -249,12 +247,12 @@ class ModController
         
         assert(isset($this->editorConfig[$lib]));
         $config = $this->editorConfig[$lib];
-		
-		$struc = $config['structure'] ?? 'structure';
+        
+        $struc = $config['structure'] ?? 'structure';
         
         $strucResource = $this->locator->getResource(ModResource::TYPE_STRUCTURE, $struc);
-		
-		$libResource = $this->locator->getResource(ModResource::TYPE_EDITOR, $lib);
+        
+        $libResource = $this->locator->getResource(ModResource::TYPE_EDITOR, $lib);
         
         $args->set('struc', $struc);
         $args->set('save', [
@@ -262,38 +260,38 @@ class ModController
                 'archives' => $config['archives']
             ]
         ]);
-		
-        if ($libResource->exists() and $libResource->getChangeTime() > $strucResource->getChangeTime()) {
-			$ret = true;
-		} else {
-			$editor = $this->editorAction($args);
-			
-			$builder = new XmlBuilder();
-			$builder->registerTagBlacklist([
-				'archive',
-			]);
-			if ($lib === 'structure.savegame') {
-				$builder->registerAttributeBlacklist([
-					'value',
-					'value-id',
-				]);
-			} else {
-				$builder->registerAttributeBlacklist([
-					'value-id',
-					'position',
-					'min',
-					'max',
-					'bit',
-					'encoding',
-				]);
-			}
-			$stream = $builder->buildStream($editor->getSavegame());
         
-			$ret = $libResource->setContents($stream);
-			
-			fclose($stream);
+        if ($libResource->exists() and $libResource->getChangeTime() > $strucResource->getChangeTime()) {
+            $ret = true;
+        } else {
+            $editor = $this->editorAction($args);
+            
+            $builder = new XmlBuilder();
+            $builder->registerTagBlacklist([
+                'archive'
+            ]);
+            if ($lib === 'structure.savegame') {
+                $builder->registerAttributeBlacklist([
+                    'value',
+                    'value-id'
+                ]);
+            } else {
+                $builder->registerAttributeBlacklist([
+                    'value-id',
+                    'position',
+                    'min',
+                    'max',
+                    'bit',
+                    'encoding'
+                ]);
+            }
+            $stream = $builder->buildStream($editor->getSavegame());
+            
+            $ret = $libResource->setContents($stream);
+            
+            fclose($stream);
         }
-		
+        
         return $ret ? $libResource : null;
     }
 
@@ -312,27 +310,22 @@ class ModController
         $templateResource = $this->locator->getResource(ModResource::TYPE_TEMPLATE, 'extract');
         
         if ($editorResource->exists() and $templateResource->exists()) {
-			if ($libResource->exists() and $libResource->getChangeTime() > $editorResource->getChangeTime() and $libResource->getChangeTime() > $templateResource->getChangeTime()) {
-				$ret = true;
-			} else {
-				$params = [];
-				$params['lib'] = $lib;
-				if ($lib !== 'dictionaries') {
-					$dictionaryResource = $this->locator->getResource(ModResource::TYPE_LIBRARY, 'dictionaries');
-					//$params['dictionaryURL'] = 'file://' . realpath($dictionaryResource->getPath());
-					$params['dictionaryURL'] = 'http://localhost' . $dictionaryResource->getUrl();
-				}
-				if ($libResource->ensureDirectory()) {
-					if ($this->dom->transformToFile(
-						$editorResource,
-						$templateResource,
-						$params,
-						$libResource
-						)) {
-						$ret = true;
-					}
-				}
-			}
+            if ($libResource->exists() and $libResource->getChangeTime() > $editorResource->getChangeTime() and $libResource->getChangeTime() > $templateResource->getChangeTime()) {
+                $ret = true;
+            } else {
+                $params = [];
+                $params['lib'] = $lib;
+                if ($lib !== 'dictionaries') {
+                    $dictionaryResource = $this->locator->getResource(ModResource::TYPE_LIBRARY, 'dictionaries');
+                    // $params['dictionaryURL'] = 'file://' . realpath($dictionaryResource->getPath());
+                    $params['dictionaryURL'] = 'http://localhost' . $dictionaryResource->getUrl();
+                }
+                if ($libResource->ensureDirectory()) {
+                    if ($this->dom->transformToFile($editorResource, $templateResource, $params, $libResource)) {
+                        $ret = true;
+                    }
+                }
+            }
         }
         
         return $ret ? $libResource : null;
@@ -526,7 +519,7 @@ content: " ";
         // $modList[] = 'Slothsoft-v1.00-DE';
         
         $editorList = [];
-        //$editorList[] = 'structure.savegame';
+        // $editorList[] = 'structure.savegame';
         $editorList[] = 'dictionaries';
         $editorList[] = 'portraits';
         $editorList[] = 'items';
@@ -537,12 +530,12 @@ content: " ";
         $editorList[] = 'tileset.icons';
         $editorList[] = 'tileset.labs';
         $editorList[] = 'maps.2d';
-		$editorList[] = 'maps.3d';
+        $editorList[] = 'maps.3d';
         $editorList[] = 'worldmap.morag';
         $editorList[] = 'worldmap.kire';
         $editorList[] = 'worldmap.lyramion';
         $editorList[] = 'graphics';
-		
+        
         $libList = [];
         $libList[] = 'dictionaries';
         $libList[] = 'portraits';
@@ -556,11 +549,11 @@ content: " ";
         $libList[] = 'maps.2d';
         $libList[] = 'maps.3d';
         $libList[] = 'worldmap.morag';
-		$libList[] = 'worldmap.kire';
+        $libList[] = 'worldmap.kire';
         $libList[] = 'worldmap.lyramion';
         $libList[] = 'graphics';
-		
-		$globalList = [];
+        
+        $globalList = [];
         $globalList[] = 'dictionaries';
         $globalList[] = 'items';
         $globalList[] = 'portraits';
@@ -706,10 +699,10 @@ content: " ";
                                     $sourceFile = $filePathList[$fileId];
                                     $targetFile = $this->locator->getResource(ModResource::TYPE_GRAPHIC, $archiveName . DIRECTORY_SEPARATOR . sprintf('%03d-%02d', $fileId, $options['palette']))->getPath();
                                     
-									if (!file_exists($targetFile)) {
-										$res = $graphicsManager->convertGraphic($sourceFile, $targetFile, $options);
-										echo "\t\t\t\t" . ($res ? 'OK: ' : 'ERROR: ') . $targetFile . PHP_EOL;
-									}
+                                    if (! file_exists($targetFile)) {
+                                        $res = $graphicsManager->convertGraphic($sourceFile, $targetFile, $options);
+                                        echo "\t\t\t\t" . ($res ? 'OK: ' : 'ERROR: ') . $targetFile . PHP_EOL;
+                                    }
                                 }
                             }
                         }

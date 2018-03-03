@@ -57,15 +57,15 @@ class ModResourceLocator
             'type' => ModResource::TYPE_LIBRARY,
             'name' => 'maps.3d'
         ],
-		'worldmap.lyramion' => [
+        'worldmap.lyramion' => [
             'type' => ModResource::TYPE_LIBRARY,
             'name' => 'worldmap.lyramion'
         ],
-		'worldmap.kire' => [
+        'worldmap.kire' => [
             'type' => ModResource::TYPE_LIBRARY,
             'name' => 'worldmap.kire'
         ],
-		'worldmap.morag' => [
+        'worldmap.morag' => [
             'type' => ModResource::TYPE_LIBRARY,
             'name' => 'worldmap.morag'
         ],
