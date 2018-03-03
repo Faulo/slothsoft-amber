@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Slothsoft\\Amber\\": "src\/Slothsoft\/Amber\/"
+            "Slothsoft\\Amber\\": "src\/"
         }
     }
 }
