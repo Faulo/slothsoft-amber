@@ -1,6 +1,10 @@
 <?php
 namespace Slothsoft\Amber;
 
+use Slothsoft\Amber\CLI\AmbGfx;
+use Slothsoft\Amber\CLI\AmbTool;
+use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
+use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Farah\Module\FarahUrl\FarahUrlArguments;
@@ -18,6 +22,10 @@ class ModController
     private $locator;
 
     private $dom;
+    
+    private $ambtool;
+    
+    private $ambgfx;
 
     public function __construct(string $moduleDir)
     {
@@ -35,6 +43,9 @@ class ModController
         
         $this->locator = new ModResourceLocator($this->moduleDir, $args->get('game', 'ambermoon'), $args->get('mod', 'Thalion-v1.05-DE'));
         $this->dom = new DOMHelper();
+        
+        $this->ambtool = new AmbTool($this->locator->getResourceById('ambtool')->getPath());
+        $this->ambgfx = new AmbGfx($this->locator->getResourceById('ambgfx')->getPath());
         
         return $ret;
     }
@@ -82,14 +93,15 @@ class ModController
             ->getPath();
         $editorConfig['defaultDir'] = $this->locator->getResource(ModResource::TYPE_MODFOLDER, 'src')->getPath();
         $editorConfig['tempDir'] = $this->locator->getResource(ModResource::TYPE_MODFOLDER, 'user')->getPath();
-        $editorConfig['ambtoolPath'] = $this->locator->getResourceById('ambtool')->getPath();
-        $editorConfig['ambgfxPath'] = $this->locator->getResourceById('ambgfx')->getPath();
         
         $editorConfig['mode'] = $mode;
         $editorConfig['id'] = $name;
         $editorConfig['loadAllArchives'] = ($loadAll or $saveAll or $downloadAll);
         $editorConfig['selectedArchives'] = [];
         $editorConfig['uploadedArchives'] = [];
+        $editorConfig['archiveExtractors'] = $this->createArchiveExtractors();
+        $editorConfig['archiveBuilders'] = $this->createArchiveBuilders();
+        $editorConfig['archiveExtractors'][AmbTool::TYPE_RAW] = new Copy
         
         if (isset($request['editor'])) {
             if (isset($request['editor']['archives'])) {
@@ -712,5 +724,33 @@ content: " ";
             }
             echo PHP_EOL;
         }
+    }
+    
+    
+    public function createArchiveExtractors() : array {
+        $ret = [];
+        
+        $amberExtractor = new AmberArchiveExtractor($this->ambtool);
+        $ret[AmbTool::TYPE_AMBR] = $amberExtractor;
+        $ret[AmbTool::TYPE_JH] = $amberExtractor;
+        
+        $copyExtractor = new CopyArchiveExtractor();
+        $ret[AmbTool::TYPE_RAW] = $copyExtractor;
+        $ret[AmbTool::TYPE_AM2] = $copyExtractor;
+        
+        return $ret;
+    }
+    public function createArchiveBuilder() : array {
+        $ret = [];
+        
+        $amberBuilder = new AmberArchiveBuilder();
+        $ret[AmbTool::TYPE_AMBR] = $amberBuilder;
+        
+        $copyBuilder = new CopyArchiveBuilder();
+        $ret[AmbTool::TYPE_JH] = $copyBuilder;
+        $ret[AmbTool::TYPE_RAW] = $copyBuilder;
+        $ret[AmbTool::TYPE_AM2] = $copyBuilder;
+        
+        return $ret;
     }
 }
