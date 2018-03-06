@@ -34,7 +34,7 @@ class AmbTool
             if (isset($inspectCache[$archivePath])) {
                 $ret = $inspectCache[$archivePath];
             } else {
-                $output = $this->ambtool($archivePath);
+                $output = $this->exec($archivePath);
                 if (isset($output[1])) {
                     $ret = $output[1];
                 }

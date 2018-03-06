@@ -3,13 +3,14 @@ namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Core\FileSystem;
+use Slothsoft\Savegame\Node\ArchiveParser\ArchiveExtractorInterface;
 use DomainException;
 
 class AmberArchiveExtractor implements ArchiveExtractorInterface
 {
     private $ambtool;
     public function __construct(AmbTool $ambtool) {
-        $ambtool = $ambtool;
+        $this->ambtool = $ambtool;
     }
     public function extractArchive(string $archivePath, string $targetDir): bool
     {
@@ -17,7 +18,7 @@ class AmberArchiveExtractor implements ArchiveExtractorInterface
         $archivePath = realpath($archivePath);
         $targetDir = realpath($targetDir);
         if ($archivePath and $targetDir) {
-            $format = $this->inspectArchive($archivePath);
+            $format = $this->ambtool->inspectArchive($archivePath);
             switch ($format) {
                 case 'Format: JH (encrypted)':
                     // double-pass!

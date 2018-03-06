@@ -1,6 +1,8 @@
 <?php
 namespace Slothsoft\Amber\SavegameImplementations;
 
+use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
+
 class AmberArchiveBuilder implements ArchiveBuilderInterface
 {
     public function buildArchive(array $buildChilren) : string {

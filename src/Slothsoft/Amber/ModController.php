@@ -10,6 +10,8 @@ use Slothsoft\Core\FileSystem;
 use Slothsoft\Farah\Module\FarahUrl\FarahUrlArguments;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Build\XmlBuilder;
+use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
+use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 use Error;
 use Exception;
 use InvalidArgumentException;
@@ -101,7 +103,6 @@ class ModController
         $editorConfig['uploadedArchives'] = [];
         $editorConfig['archiveExtractors'] = $this->createArchiveExtractors();
         $editorConfig['archiveBuilders'] = $this->createArchiveBuilders();
-        $editorConfig['archiveExtractors'][AmbTool::TYPE_RAW] = new Copy
         
         if (isset($request['editor'])) {
             if (isset($request['editor']['archives'])) {
@@ -740,7 +741,7 @@ content: " ";
         
         return $ret;
     }
-    public function createArchiveBuilder() : array {
+    public function createArchiveBuilders() : array {
         $ret = [];
         
         $amberBuilder = new AmberArchiveBuilder();

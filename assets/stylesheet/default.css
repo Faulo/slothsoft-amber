@@ -41,7 +41,7 @@
 	text-transform: uppercase;
 }
 
-.Amber.Instructions {
+.Amber.Instructions, .Amber .errorMessage * {
 	font-family: myParagraph, serif;
 	text-transform: none;
 }
