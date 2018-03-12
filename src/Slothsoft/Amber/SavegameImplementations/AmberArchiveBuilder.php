@@ -5,8 +5,9 @@ use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
 
 class AmberArchiveBuilder implements ArchiveBuilderInterface
 {
-    public function buildArchive(array $buildChilren) : string {
-        
+
+    public function buildArchive(array $buildChilren): string
+    {
         $header = [];
         $body = [];
         $maxId = 0;

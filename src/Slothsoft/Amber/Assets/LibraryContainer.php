@@ -1,7 +1,6 @@
 <?php
 namespace Slothsoft\Amber\Assets;
 
-
 use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\Mod\ParameterFilter;
 use Slothsoft\Farah\Module\FarahUrl\FarahUrl;
@@ -14,6 +13,7 @@ use Slothsoft\Farah\Module\Results\ResultInterface;
 
 class LibraryContainer extends AssetImplementation
 {
+
     private $selfAssetList = [
         'dictionaries',
         'portraits',
@@ -29,8 +29,9 @@ class LibraryContainer extends AssetImplementation
         'worldmap.morag',
         'worldmap.kire',
         'worldmap.lyramion',
-        'graphics',
+        'graphics'
     ];
+
     private $childAssetList = [
         'dictionaries',
         'portraits',
@@ -46,13 +47,14 @@ class LibraryContainer extends AssetImplementation
         'worldmap.morag',
         'worldmap.kire',
         'worldmap.lyramion',
-        'graphics',
+        'graphics'
     ];
-    
-    protected function loadParameterFilter() : ParameterFilterInterface{
+
+    protected function loadParameterFilter(): ParameterFilterInterface
+    {
         return new ParameterFilter([]);
     }
-    
+
     protected function loadResult(FarahUrl $url): ResultInterface
     {
         my_dump($this->getElementAttribute('path'));
@@ -67,11 +69,17 @@ class LibraryContainer extends AssetImplementation
         
         return new DOMWriterResult($url, $editor);
     }
-    
-    protected function loadPathResolver() : PathResolverInterface {
-        $map = ['/' => $this];
+
+    protected function loadPathResolver(): PathResolverInterface
+    {
+        $map = [
+            '/' => $this
+        ];
         foreach ($this->childAssetList as $assetName) {
-            $element = $this->getElement()->withAttributes(['name' => $assetName, 'class' => Library::class]);
+            $element = $this->getElement()->withAttributes([
+                'name' => $assetName,
+                'class' => Library::class
+            ]);
             $map["/$assetName"] = $this->createChildNode($element);
         }
         return PathResolverCatalog::createMapPathResolver($this, $map);

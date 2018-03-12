@@ -8,22 +8,22 @@ use DOMElement;
 
 class EditorResult extends ResultImplementation
 {
-    public function toElement(DOMDocument $targetDoc) : DOMElement
-    {}
-    
-    public function toDocument() : DOMDocument
+
+    public function toElement(DOMDocument $targetDoc): DOMElement
     {}
 
-    public function toFile() : HTTPFile
+    public function toDocument(): DOMDocument
     {}
 
-    public function toString() : string
+    public function toFile(): HTTPFile
     {}
-    
-    public function exists() : bool
+
+    public function toString(): string
+    {}
+
+    public function exists(): bool
     {
         return true;
     }
-
 }
 

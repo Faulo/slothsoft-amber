@@ -12,6 +12,7 @@ use Slothsoft\Savegame\Build\XmlBuilder;
 
 class Raw extends EditorResourceAsset
 {
+
     protected function loadResult(FarahUrl $url): ResultInterface
     {
         $args = $url->getArguments();
@@ -26,8 +27,9 @@ class Raw extends EditorResourceAsset
         
         return new FileWriterResult($url, $this->createEditorFile($editor));
     }
-    
-    private function createEditorFile(Editor $editor) : HTTPFile {
+
+    private function createEditorFile(Editor $editor): HTTPFile
+    {
         $stream = $this->createEditorStream($editor);
         
         $file = HTTPFile::createFromStream($stream, $this->getName() . '.xml');
@@ -36,8 +38,9 @@ class Raw extends EditorResourceAsset
         
         return $file;
     }
-    
-    private function createEditorStream(Editor $editor) {
+
+    private function createEditorStream(Editor $editor)
+    {
         $builder = new XmlBuilder();
         $builder->registerTagBlacklist([
             'archive'

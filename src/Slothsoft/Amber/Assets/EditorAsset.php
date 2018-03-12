@@ -18,22 +18,26 @@ use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 
 class EditorAsset extends AssetImplementation
 {
+
     const PARAM_LOAD_FILE = 'LoadFile';
+
     const PARAM_SAVE_FILE = 'SaveFile';
+
     const PARAM_DOWNLOAD_FILE = 'DownloadFile';
-    
+
     const PARAM_EDITOR_DATA = 'save';
-    
-    
-    protected function loadParameterFilter() : ParameterFilterInterface{
+
+    protected function loadParameterFilter(): ParameterFilterInterface
+    {
         return new ParameterFilter([
             self::PARAM_LOAD_FILE => '',
             self::PARAM_SAVE_FILE => '',
             self::PARAM_DOWNLOAD_FILE => '',
             
-            self::PARAM_EDITOR_DATA => [],
+            self::PARAM_EDITOR_DATA => []
         ]);
     }
+
     protected function loadResult(FarahUrl $url): ResultInterface
     {
         $args = $url->getArguments();
@@ -79,18 +83,19 @@ class EditorAsset extends AssetImplementation
         
         return new DOMWriterResult($url, $editor);
     }
-    
-    private function getAmberAsset(string $path) : AssetInterface {
-        return $this->getOwnerModule()->lookupAssetByPath(
-            FarahUrlPath::createFromString($path)
-        );
+
+    private function getAmberAsset(string $path): AssetInterface
+    {
+        return $this->getOwnerModule()->lookupAssetByPath(FarahUrlPath::createFromString($path));
     }
-    private function createAmbTool() : AmbTool {
-        return new AmbTool(
-            $this->getAmberAsset('/cli/ambtool')->getRealPath()
-        );
+
+    private function createAmbTool(): AmbTool
+    {
+        return new AmbTool($this->getAmberAsset('/cli/ambtool')->getRealPath());
     }
-    private function createArchiveExtractors() : array {
+
+    private function createArchiveExtractors(): array
+    {
         $ret = [];
         
         $amberExtractor = new AmberArchiveExtractor($this->createAmbTool());
@@ -103,7 +108,9 @@ class EditorAsset extends AssetImplementation
         
         return $ret;
     }
-    private function createArchiveBuilders() : array {
+
+    private function createArchiveBuilders(): array
+    {
         $ret = [];
         
         $amberBuilder = new AmberArchiveBuilder();

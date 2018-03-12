@@ -3,12 +3,16 @@ namespace Slothsoft\Amber\CLI;
 
 class AmbGfx
 {
+
     private $ambgfxPath;
-    public function __construct(string $ambgfxPath) {
+
+    public function __construct(string $ambgfxPath)
+    {
         assert(file_exists($ambgfxPath), "ambgfx not found at $ambgfxPath");
         
         $this->ambgfxPath = $ambgfxPath;
     }
+
     public function exec(string $file, array $args)
     {
         $command = escapeshellarg($this->ambgfxPath) . ' ' . escapeshellarg($file);

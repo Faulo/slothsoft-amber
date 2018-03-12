@@ -24,9 +24,9 @@ class ModController
     private $locator;
 
     private $dom;
-    
+
     private $ambtool;
-    
+
     private $ambgfx;
 
     public function __construct(string $moduleDir)
@@ -726,9 +726,9 @@ content: " ";
             echo PHP_EOL;
         }
     }
-    
-    
-    public function createArchiveExtractors() : array {
+
+    public function createArchiveExtractors(): array
+    {
         $ret = [];
         
         $amberExtractor = new AmberArchiveExtractor($this->ambtool);
@@ -741,7 +741,9 @@ content: " ";
         
         return $ret;
     }
-    public function createArchiveBuilders() : array {
+
+    public function createArchiveBuilders(): array
+    {
         $ret = [];
         
         $amberBuilder = new AmberArchiveBuilder();

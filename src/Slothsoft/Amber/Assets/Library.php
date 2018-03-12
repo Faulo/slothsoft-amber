@@ -9,13 +9,14 @@ use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
 use Slothsoft\Farah\Module\Results\DOMWriterResult;
 use Slothsoft\Farah\Module\Results\ResultInterface;
 
-
 class Library extends AssetImplementation
 {
-    protected function loadParameterFilter() : ParameterFilterInterface{
+
+    protected function loadParameterFilter(): ParameterFilterInterface
+    {
         return new ParameterFilter([]);
     }
-    
+
     protected function loadResult(FarahUrl $url): ResultInterface
     {
         my_dump($this->getElementAttribute('path'));

@@ -15,26 +15,22 @@ use Slothsoft\Farah\Module\Node\Asset\AssetInterface;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
-use PHPUnit\Util\Filesystem;
-use Slothsoft\Core\IO\HTTPFile;
 
 class EditorController
 {
+
     private $editorPresetMap = [
         'saveEditor' => [
             'structure' => 'structure.savegame',
-            'archives' => [
-            ]
+            'archives' => []
         ],
         'gameEditor' => [
             'structure' => 'structure',
-            'archives' => [
-            ]
+            'archives' => []
         ],
         'default' => [
             'structure' => 'structure.savegame',
-            'archives' => [
-            ]
+            'archives' => []
         ],
         'raw' => [
             'structure' => 'structure.savegame',
@@ -42,21 +38,22 @@ class EditorController
                 'Party_char.amb',
                 'Party_data.sav',
                 'Merchant_data.amb',
-                'Chest_data.amb',
+                'Chest_data.amb'
                 /*
-                'NPC_char.amb',
-                'Monster_char_data.amb',
-                'Dictionary.german',
-                'NPC_texts.amb',
-                'Party_texts.amb',
-                'Icon_data.amb',
-                '2Lab_data.amb',
-                '3Lab_data.amb',
-                'Place_data',
-                'AM2_BLIT',
-                'Object_texts.amb',
-                'Abstract_data.amb',
-                //*/
+             * 'NPC_char.amb',
+             * 'Monster_char_data.amb',
+             * 'Dictionary.german',
+             * 'NPC_texts.amb',
+             * 'Party_texts.amb',
+             * 'Icon_data.amb',
+             * '2Lab_data.amb',
+             * '3Lab_data.amb',
+             * 'Place_data',
+             * 'AM2_BLIT',
+             * 'Object_texts.amb',
+             * 'Abstract_data.amb',
+             * //
+             */
             ]
         ],
         'dictionaries' => [
@@ -64,11 +61,11 @@ class EditorController
             'archives' => [
                 'AM2_BLIT'
                 /*
-                 * 'Party_char.amb',
-                 * 'NPC_char.amb',
-                 * 'Monster_char_data.amb',
-                 * //
-                 */
+             * 'Party_char.amb',
+             * 'NPC_char.amb',
+             * 'Monster_char_data.amb',
+             * //
+             */
             ]
         ],
         'graphics' => [
@@ -172,7 +169,9 @@ class EditorController
             ]
         ]
     ];
-    public function createEditorConfig(FarahUrlArguments $args) : array {
+
+    public function createEditorConfig(FarahUrlArguments $args): array
+    {
         $game = $args->get(ParameterFilter::PARAM_GAME);
         $mod = $args->get(ParameterFilter::PARAM_MOD);
         $preset = $args->get(ParameterFilter::PARAM_PRESET);
@@ -203,31 +202,31 @@ class EditorController
         
         return $editorConfig;
     }
-    public function createEditor(array $editorConfig) : Editor {
+
+    public function createEditor(array $editorConfig): Editor
+    {
         $editor = new Editor($editorConfig);
         $editor->load();
         return $editor;
     }
-    private function getAmberAsset(string $path) : AssetInterface {
-        return FarahUrlResolver::resolveToAsset(
-            FarahUrl::createFromComponents(
-                FarahUrlAuthority::createFromVendorAndModule('slothsoft', 'amber'),
-                FarahUrlPath::createFromString($path),
-                FarahUrlArguments::createEmpty()
-            )
-        );
+
+    private function getAmberAsset(string $path): AssetInterface
+    {
+        return FarahUrlResolver::resolveToAsset(FarahUrl::createFromComponents(FarahUrlAuthority::createFromVendorAndModule('slothsoft', 'amber'), FarahUrlPath::createFromString($path), FarahUrlArguments::createEmpty()));
     }
-    private function createAmbTool() : AmbTool {
-        return new AmbTool(
-            $this->getAmberAsset('/cli/ambtool')->getRealPath()
-        );
+
+    private function createAmbTool(): AmbTool
+    {
+        return new AmbTool($this->getAmberAsset('/cli/ambtool')->getRealPath());
     }
-    private function createAmbGfx() : AmbGfx {
-        return new AmbGfx(
-            $this->getAmberAsset('/cli/ambgfx')->getRealPath()
-        );
+
+    private function createAmbGfx(): AmbGfx
+    {
+        return new AmbGfx($this->getAmberAsset('/cli/ambgfx')->getRealPath());
     }
-    private function createArchiveExtractors() : array {
+
+    private function createArchiveExtractors(): array
+    {
         $ret = [];
         
         $amberExtractor = new AmberArchiveExtractor($this->createAmbTool());
@@ -240,7 +239,9 @@ class EditorController
         
         return $ret;
     }
-    private function createArchiveBuilders() : array {
+
+    private function createArchiveBuilders(): array
+    {
         $ret = [];
         
         $amberBuilder = new AmberArchiveBuilder();

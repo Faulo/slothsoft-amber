@@ -8,10 +8,14 @@ use DomainException;
 
 class AmberArchiveExtractor implements ArchiveExtractorInterface
 {
+
     private $ambtool;
-    public function __construct(AmbTool $ambtool) {
+
+    public function __construct(AmbTool $ambtool)
+    {
         $this->ambtool = $ambtool;
     }
+
     public function extractArchive(string $archivePath, string $targetDir): bool
     {
         $ret = false;
@@ -37,7 +41,7 @@ class AmberArchiveExtractor implements ArchiveExtractorInterface
                         $ret = true;
                         break;
                     }
-                    // didn't need double-pass after all...
+                // didn't need double-pass after all...
                 case 'Format: AMBR (raw archive)':
                 case 'Format: AMNP (compressed/encrypted archive)':
                 case 'Format: AMNC (encrypted archive)':
