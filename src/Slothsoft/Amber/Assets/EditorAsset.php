@@ -2,6 +2,7 @@
 namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\CLI\AmbTool;
+use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\Mod\ParameterFilter;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
@@ -12,10 +13,8 @@ use Slothsoft\Farah\Module\Node\Asset\AssetInterface;
 use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
 use Slothsoft\Farah\Module\Results\DOMWriterResult;
 use Slothsoft\Farah\Module\Results\ResultInterface;
-use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
-use Slothsoft\Amber\Controller\EditorController;
 
 class EditorAsset extends AssetImplementation
 {

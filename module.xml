@@ -18,10 +18,10 @@ Llo
   <assets>
   	<container name="editor">
 		<custom-asset name="main" class="Slothsoft\Amber\Assets\EditorAsset"/>
-		<container name="resources">
+		<container name="resource">
 		  	<custom-asset name="styles" class="Slothsoft\Amber\Assets\Stylesheet"/>
-		  	<custom-asset name="libs" class="Slothsoft\Amber\Assets\Library"/>
-		  	<custom-asset name="raw" class="Slothsoft\Amber\Assets\Raw"/>
+		  	<custom-asset name="libs" class="Slothsoft\Amber\Assets\LibraryContainer"/>
+		  	<custom-asset name="raw" class="Slothsoft\Amber\Assets\RawContainer"/>
 		  	<custom-asset name="gfx" class="Slothsoft\Amber\Assets\Gfx"/>
 	  	</container>
   	</container>
@@ -31,27 +31,8 @@ Llo
 	  		<resource name="structure.savegame" type="application/xml"/>
 	  		<resource name="structure" type="application/xml"/>
 	  		<resource name="template.extract" type="application/application/xslt+xml"/>
-	  		<resource-directory name="patch" path="patches" type="*/*"/>
-	  		<directory name="mods">
-		  		<directory name="Thalion-v1.05-DE">
-		  			<resource-directory name="src" type="*/*"/>
-		  			<resource-directory name="gfx" type="image/png"/>
-		  			<resource-directory name="tmp" type="*/*"/>
-		  			<resource name="libs" type="application/xml"/>
-		  		</directory>
-		  		<directory name="Thalion-v1.06-DE">
-		  			<resource-directory name="src" type="*/*"/>
-		  			<resource-directory name="gfx" type="image/png"/>
-		  			<resource-directory name="tmp" type="*/*"/>
-		  			<resource name="libs" type="application/xml"/>
-		  		</directory>
-		  		<directory name="Thalion-v1.07-DE">
-		  			<resource-directory name="src" type="*/*"/>
-		  			<resource-directory name="gfx" type="image/png"/>
-		  			<resource-directory name="tmp" type="*/*"/>
-		  			<resource name="libs" type="application/xml"/>
-		  		</directory>
-		  	</directory>
+	  		<resource-directory name="patches" type="*/*"/>
+	  		<resource-directory name="mods" type="*/*"/>
 	  	</directory>
 	</directory>
 	
@@ -81,7 +62,7 @@ Llo
         <import ref="default"/>
         <import ref="SavegameEditor"/>
         <use-document ref="editor/main" as="editor"/>
-        <use-document ref="editor/resources/libs" as="amberdata"/>
+        <use-document ref="editor/resource/libs" as="amberdata"/>
       </fragment>
     </fragment>
     
@@ -97,9 +78,9 @@ Llo
         <import ref="default"/>
         <import ref="SavegameEditor"/>
         <import ref="//slothsoft@lib/pixijs"/>
-        <use-script ref="js/MapViewer"/>
+        <link-script ref="js/MapViewer"/>
         <import ref="//slothsoft@lib/babylonjs"/>
-        <use-script ref="js/DungeonViewer"/>
+        <link-script ref="js/DungeonViewer"/>
       </fragment>
     </fragment>
     <fragment name="chat">
@@ -110,13 +91,13 @@ Llo
     
     
     <container name="default">
-      <use-stylesheet ref="css/default"/>
-      <use-stylesheet ref="css/amber-picker"/>
+      <link-stylesheet ref="css/default"/>
+      <link-stylesheet ref="css/amber-picker"/>
     </container>
     <container name="SavegameEditor">
-      <use-script ref="//core/js/XSLT"/>
-      <use-script ref="//core/js/NS"/>
-      <use-script ref="js/SavegameEditor"/>
+      <link-script ref="//core/js/XSLT"/>
+      <link-script ref="//core/js/NS"/>
+      <link-script ref="js/SavegameEditor"/>
     </container>
     
     

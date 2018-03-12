@@ -2,11 +2,11 @@
 <pages xmlns="http://schema.slothsoft.net/farah/sites" xmlns:sfm="http://schema.slothsoft.net/farah/module">
 	<page name="SaveEditor" title="SavegameEditor" ref="mod.editor"
 		status-active="" status-public="">
-		<sfm:param name="struc" value="structure.savegame" />
+		<sfm:param name="preset" value="saveEditor" />
 	</page>
 	<page name="GameEditor" title="GameEditor" ref="mod.editor"
 		status-active="" >
-		<sfm:param name="struc" value="structure" />
+		<sfm:param name="preset" value="gameEditor" />
 	</page>
 	<page name="GameData" title="GameData" ref="description" status-active="" status-public="">
 	
