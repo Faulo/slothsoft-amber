@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;

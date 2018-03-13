@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace Slothsoft\Amber;
 
 use Slothsoft\Amber\CLI\AmbGfx;
