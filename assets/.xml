@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <assets xmlns="http://schema.slothsoft.net/farah/module">
-  	<container name="editor">
+  	<fragment name="editor">
 		<custom-asset name="main" class="Slothsoft\Amber\Assets\EditorAsset"/>
-		<container name="resource">
+		<fragment name="resource">
 		  	<custom-asset name="styles" class="Slothsoft\Amber\Assets\Stylesheet"/>
 		  	<custom-asset name="libs" class="Slothsoft\Amber\Assets\LibraryContainer"/>
 		  	<custom-asset name="raw" class="Slothsoft\Amber\Assets\RawContainer"/>
 		  	<custom-asset name="gfx" class="Slothsoft\Amber\Assets\Gfx"/>
-	  	</container>
-  	</container>
+	  	</fragment>
+  	</fragment>
   	
   	<directory name="games">
 	  	<directory name="ambermoon">
@@ -74,15 +74,15 @@
     </fragment>
     
     
-    <container name="default">
+    <fragment name="default">
       <link-stylesheet ref="css/default"/>
       <link-stylesheet ref="css/amber-picker"/>
-    </container>
-    <container name="SavegameEditor">
+    </fragment>
+    <fragment name="SavegameEditor">
       <link-script ref="//core/js/XSLT"/>
       <link-script ref="//core/js/NS"/>
       <link-script ref="js/SavegameEditor"/>
-    </container>
+    </fragment>
     
     
     
