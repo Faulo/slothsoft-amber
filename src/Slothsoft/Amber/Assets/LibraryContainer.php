@@ -58,8 +58,6 @@ class LibraryContainer extends AssetImplementation
 
     protected function loadResult(FarahUrl $url): ResultInterface
     {
-        my_dump($this->getElementAttribute('path'));
-        my_dump($url);
         $args = $url->getArguments();
         
         $controller = new EditorController();
