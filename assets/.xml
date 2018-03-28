@@ -10,7 +10,7 @@
 	  	<directory name="ambermoon">
 	  		<resource name="structure.savegame" type="application/xml"/>
 	  		<resource name="structure" type="application/xml"/>
-	  		<resource name="template.extract" type="application/application/xslt+xml"/>
+	  		<resource name="template.extract" type="application/xslt+xml"/>
 	  		<resource-directory name="patches" type="*/*"/>
 	  		<resource-directory name="mods" type="*/*"/>
 	  	</directory>
