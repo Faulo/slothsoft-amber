@@ -1,105 +1,95 @@
 <?xml version="1.0"?>
 <assets xmlns="http://schema.slothsoft.net/farah/module">
-	<resource-directory name="cli" type="application/vnd.microsoft.portable-executable"/>
-	<resource-directory name="css" type="text/css"/>
-	<resource-directory name="js" type="application/javascript"/>
-	<resource-directory name="xsl" type="application/xslt+xml"/>
-	<resource-directory name="dictionary" type="application/xml"/>
-	
-	<directory name="games">
-	  	<directory name="ambermoon">
-	  		<resource name="structure.savegame" type="application/xml"/>
-	  		<resource name="structure" type="application/xml"/>
-	  		<resource name="template.extract" type="application/xslt+xml"/>
-	  		<resource-directory name="patches" type="*/*"/>
-	  		<resource-directory name="mods" type="*/*"/>
-	  	</directory>
-	  	<resource name="index" type="application/xml"/>
+	<resource-directory name="cli" type="application/vnd.microsoft.portable-executable" />
+	<resource-directory name="css" type="text/css" />
+	<resource-directory name="js" type="application/javascript" />
+	<resource-directory name="xsl" type="application/xslt+xml" />
+
+	<resource-directory name="dictionary" type="application/xml" />
+	<directory name="schema">
+		<directory name="amberdata">
+			<resource-directory name="20171117" path="20171117" type="application/x-xsd+xml" />
+			<resource-directory name="latest" path="20171117" type="application/x-xsd+xml" />
+		</directory>
 	</directory>
-	
-  	<fragment name="editor">
-		<custom-asset name="main" class="Slothsoft\Amber\Assets\EditorAsset"/>
+	<directory name="games">
+		<directory name="ambermoon">
+			<resource name="structure.savegame" type="application/xml" />
+			<resource name="structure" type="application/xml" />
+			<resource name="template.extract" type="application/xslt+xml" />
+			<resource-directory name="patches" type="*/*" />
+			<resource-directory name="mods" type="*/*" />
+		</directory>
+		<resource name="index" type="application/xml" />
+	</directory>
+
+	<fragment name="editor">
+		<custom-asset name="main" class="Slothsoft\Amber\Assets\EditorAsset" />
 		<fragment name="resource">
-		  	<custom-asset name="styles" class="Slothsoft\Amber\Assets\Stylesheet"/>
-		  	<custom-asset name="libs" class="Slothsoft\Amber\Assets\LibraryContainer"/>
-		  	<custom-asset name="raw" class="Slothsoft\Amber\Assets\RawContainer"/>
-		  	<custom-asset name="gfx" class="Slothsoft\Amber\Assets\Gfx"/>
-	  	</fragment>
-  	</fragment>
-	
-	<fragment name="html">
-      <fragment name="description">
-        <use-template ref="xsl/description"/>
-        <use-document ref="//farah/sites"/>
-        <import ref="imports/default"/>
-        <import ref="imports/pixijs"/>
-        <import ref="imports/babylonjs"/>
-      </fragment>
-      <fragment name="editor">
-        <use-template ref="xsl/editor"/>
-        <import ref="imports/default"/>
-        <import ref="imports/SavegameEditor"/>
-        <use-document ref="editor/main" as="editor"/>
-        <use-document ref="editor/resource/libs" as="amberdata"/>
-      </fragment>
-      <fragment name="resource">
-      	<!-- 
-        <use-document as="list" ref="data/mod.resource-document"/>
-        <use-document as="amberdata" ref="data/mod.resource-document">
-          <param name="id" value="libs"/>
-        </use-document>
-         -->
-        <use-template ref="xsl/editor.data-list"/>
-        <import ref="imports/default"/>
-        <import ref="imports/SavegameEditor"/>
-        <import ref="imports/pixijs"/>
-        <link-script ref="js/MapViewer"/>
-        <import ref="imports/babylonjs"/>
-        <link-script ref="js/DungeonViewer"/>
-      </fragment>
-    </fragment>
-    
-    <fragment name="imports">
-	    <fragment name="default">
-	      <link-stylesheet ref="css/default"/>
-	      <link-stylesheet ref="css/amber-picker"/>
-	    </fragment>
-	    <fragment name="SavegameEditor">
-	      <import ref="//core/imports/XSLT"/>
-	      <link-script ref="js/SavegameEditor"/>
-	    </fragment>	    
-	    <fragment name="pixijs">
-	    	<link-script ref="js/pixijs/pixi.min"/>
-		</fragment>	
-		<fragment name="babylonjs">
-			<link-script ref="js/babylonjs/babylon.custom"/>
+			<custom-asset name="styles" class="Slothsoft\Amber\Assets\Stylesheet" />
+			<custom-asset name="libs" class="Slothsoft\Amber\Assets\LibraryContainer" />
+			<custom-asset name="raw" class="Slothsoft\Amber\Assets\RawContainer" />
+			<custom-asset name="gfx" class="Slothsoft\Amber\Assets\Gfx" />
 		</fragment>
-    </fragment>
-	
-	
-	
-	
-    <!-- 
-    <resource-directory name="pages" path="pages" type="application/xml"/>
-	<resource-directory name="data" path="data" type="application/x-php"/>
-    <directory name="static">
-		<resource name="sites.mod" path="sites.mod.xml" type="application/xml"/>
-		<resource name="editor" path="editor.xml" type="application/xml"/>
-		<resource name="config" path="config.json" type="application/json"/>
-		<resource name="charStruc" path="charStruc.xml" type="application/xml"/>
-		<resource name="partyStruc" path="partyStruc.xml" type="application/xml"/>
-		<resource name="AmbermoonSavegame" path="ambermoon/structure.xml" type="application/xml"/>
-		<resource name="items-map" path="AmbermoonItems.png" type="image/png"/>
-		<resource name="portraits-map" path="AmbermoonPortraits.png" type="image/png"/>
-		<resource name="AmbermoonItems" path="ambermoon\Thalion-v1.05-DE\lib\items.xml" type="application/xml"/>
-		<resource name="AmbermoonPortraits" path="AmbermoonPortraits.xml" type="application/xml"/>
-		<resource-directory name="saves" path="save" type="application/octet-stream"/>
-		<resource-directory name="portraits" path="portraits" type="image/png"/>
-		<resource-directory name="items" path="items" type="image/png"/>
-		<resource-directory name="tilesets" path="tilesets" type="image/png"/>
-		<resource-directory name="monster-gfx" path="monster-gfx" type="image/png"/>
-		<resource-directory name="patch" path="patches" type="*/*"/>
-		 
-    </directory>
-    -->
-  </assets>
+	</fragment>
+
+	<fragment name="html">
+		<fragment name="description">
+			<use-template ref="xsl/description" />
+			<use-document ref="//farah/sites" />
+			<import ref="imports/default" />
+			<import ref="imports/pixijs" />
+			<import ref="imports/babylonjs" />
+		</fragment>
+		<fragment name="editor">
+			<use-template ref="xsl/editor" />
+			<import ref="imports/default" />
+			<import ref="imports/SavegameEditor" />
+			<use-document ref="editor/main" as="editor" />
+			<use-document ref="editor/resource/libs" as="amberdata" />
+		</fragment>
+		<fragment name="resource">
+			<!-- <use-document as="list" ref="data/mod.resource-document"/> <use-document as="amberdata" ref="data/mod.resource-document"> 
+				<param name="id" value="libs"/> </use-document> -->
+			<use-template ref="xsl/editor.data-list" />
+			<import ref="imports/default" />
+			<import ref="imports/SavegameEditor" />
+			<import ref="imports/pixijs" />
+			<link-script ref="js/MapViewer" />
+			<import ref="imports/babylonjs" />
+			<link-script ref="js/DungeonViewer" />
+		</fragment>
+	</fragment>
+
+	<fragment name="imports">
+		<fragment name="default">
+			<link-stylesheet ref="css/default" />
+			<link-stylesheet ref="css/amber-picker" />
+		</fragment>
+		<fragment name="SavegameEditor">
+			<import ref="//core/imports/XSLT" />
+			<link-script ref="js/SavegameEditor" />
+		</fragment>
+		<fragment name="pixijs">
+			<link-script ref="js/pixijs/pixi.min" />
+		</fragment>
+		<fragment name="babylonjs">
+			<link-script ref="js/babylonjs/babylon.custom" />
+		</fragment>
+	</fragment>
+
+
+
+
+	<!-- <resource-directory name="pages" path="pages" type="application/xml"/> <resource-directory name="data" path="data" 
+		type="application/x-php"/> <directory name="static"> <resource name="sites.mod" path="sites.mod.xml" type="application/xml"/> 
+		<resource name="editor" path="editor.xml" type="application/xml"/> <resource name="config" path="config.json" type="application/json"/> 
+		<resource name="charStruc" path="charStruc.xml" type="application/xml"/> <resource name="partyStruc" path="partyStruc.xml" 
+		type="application/xml"/> <resource name="AmbermoonSavegame" path="ambermoon/structure.xml" type="application/xml"/> <resource 
+		name="items-map" path="AmbermoonItems.png" type="image/png"/> <resource name="portraits-map" path="AmbermoonPortraits.png" 
+		type="image/png"/> <resource name="AmbermoonItems" path="ambermoon\Thalion-v1.05-DE\lib\items.xml" type="application/xml"/> 
+		<resource name="AmbermoonPortraits" path="AmbermoonPortraits.xml" type="application/xml"/> <resource-directory name="saves" 
+		path="save" type="application/octet-stream"/> <resource-directory name="portraits" path="portraits" type="image/png"/> <resource-directory 
+		name="items" path="items" type="image/png"/> <resource-directory name="tilesets" path="tilesets" type="image/png"/> <resource-directory 
+		name="monster-gfx" path="monster-gfx" type="image/png"/> <resource-directory name="patch" path="patches" type="*/*"/> </directory> -->
+</assets>
