@@ -25,7 +25,7 @@
     },
     "autoload": {
         "files": [
-            "src\/registerModule.php"
+            "C:\\Webserver\\workspace\\slothsoft-amber\\src\\registerModule.php"
         ],
         "psr-0": {
             "Slothsoft\\Amber\\": "src\/"
