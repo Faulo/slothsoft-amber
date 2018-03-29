@@ -65,8 +65,7 @@
 	      <link-stylesheet ref="css/amber-picker"/>
 	    </fragment>
 	    <fragment name="SavegameEditor">
-	      <link-script ref="//core/js/XSLT"/>
-	      <link-script ref="//core/js/NS"/>
+	      <import ref="//core/imports/XSLT"/>
 	      <link-script ref="js/SavegameEditor"/>
 	    </fragment>	    
 	    <fragment name="pixijs">
