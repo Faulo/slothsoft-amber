@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <assets xmlns="http://schema.slothsoft.net/farah/module">
-	<resource-directory name="cli" path="cli" type="application/vnd.microsoft.portable-executable"/>
-	<resource-directory name="css" path="stylesheet" type="text/css"/>
-	<resource-directory name="js" path="script" type="application/javascript"/>
-	<resource-directory name="xsl" path="template" type="application/xslt+xml"/>
-	<resource-directory name="dictionary" path="dictionary" type="application/xml"/>
+	<resource-directory name="cli" type="application/vnd.microsoft.portable-executable"/>
+	<resource-directory name="css" type="text/css"/>
+	<resource-directory name="js" type="application/javascript"/>
+	<resource-directory name="xsl" type="application/xslt+xml"/>
+	<resource-directory name="dictionary" type="application/xml"/>
 	
 	<directory name="games">
 	  	<directory name="ambermoon">
