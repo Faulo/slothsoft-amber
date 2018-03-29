@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>slothsoft-amber</name>
-	<comment/>
-	<projects/>
+	<comment></comment>
+	<projects>
+		<project>slothsoft-core</project>
+		<project>slothsoft-farah</project>
+		<project>slothsoft-savegame</project>
+	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.php.composer.core.builder.buildPathManagementBuilder</name>
@@ -29,4 +33,11 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.php.core.PHPNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>vendor/slothsoft</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

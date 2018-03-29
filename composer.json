@@ -12,16 +12,12 @@
     "require": {
         "php": ">=7.0",
         "slothsoft\/core": "*",
-        "slothsoft\/dbms": "*",
         "slothsoft\/farah": "*",
-        "slothsoft\/lang": "*",
-        "slothsoft\/savegame": "*",
-        "slothsoft\/w3c": "*"
+        "slothsoft\/savegame": "*"
     },
     "require-dev": {
         "phpunit\/phpunit": ">=6.0",
         "slothsoft\/core": "dev-master",
-        "slothsoft\/dbms": "dev-master",
         "slothsoft\/farah": "dev-master",
         "slothsoft\/lang": "dev-master",
         "slothsoft\/savegame": "dev-master",
