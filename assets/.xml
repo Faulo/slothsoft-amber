@@ -37,14 +37,14 @@
 		<fragment name="description">
 			<use-template ref="xsl/description" />
 			<use-document ref="//farah/sites" />
-			<import ref="imports/default" />
-			<import ref="imports/pixijs" />
-			<import ref="imports/babylonjs" />
+			<import ref="api/default" />
+			<import ref="api/pixijs" />
+			<import ref="api/babylonjs" />
 		</fragment>
 		<fragment name="editor">
 			<use-template ref="xsl/editor" />
-			<import ref="imports/default" />
-			<import ref="imports/SavegameEditor" />
+			<import ref="api/default" />
+			<import ref="api/SavegameEditor" />
 			<use-document ref="editor/main" as="editor" />
 			<use-document ref="editor/resource/libs" as="amberdata" />
 		</fragment>
@@ -52,22 +52,22 @@
 			<!-- <use-document as="list" ref="data/mod.resource-document"/> <use-document as="amberdata" ref="data/mod.resource-document"> 
 				<param name="id" value="libs"/> </use-document> -->
 			<use-template ref="xsl/editor.data-list" />
-			<import ref="imports/default" />
-			<import ref="imports/SavegameEditor" />
-			<import ref="imports/pixijs" />
+			<import ref="api/default" />
+			<import ref="api/SavegameEditor" />
+			<import ref="api/pixijs" />
 			<link-script ref="js/MapViewer" />
-			<import ref="imports/babylonjs" />
+			<import ref="api/babylonjs" />
 			<link-script ref="js/DungeonViewer" />
 		</fragment>
 	</fragment>
 
-	<fragment name="imports">
+	<fragment name="api">
 		<fragment name="default">
 			<link-stylesheet ref="css/default" />
 			<link-stylesheet ref="css/amber-picker" />
 		</fragment>
 		<fragment name="SavegameEditor">
-			<import ref="//core/imports/XSLT" />
+			<import ref="//core/api/XSLT" />
 			<link-script ref="js/SavegameEditor" />
 		</fragment>
 		<fragment name="pixijs">
