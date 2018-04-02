@@ -4,8 +4,37 @@
 	xmlns="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:amber="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:ssv="http://schema.slothsoft.net/schema/versioning"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 	
+	<xsd:annotation>
+		<xsd:appinfo>
+			<ssv:manifest version="1.0">
+				<ssv:name>Amber Engine Data</ssv:name>
+				<ssv:version>0.1</ssv:version>
+				<ssv:revision>R20171117</ssv:revision>
+				<ssv:prefix>saa</ssv:prefix>
+				<ssv:namespace>http://schema.slothsoft.net/amber/amberdata</ssv:namespace>
+				<ssv:author email="daniel.lio.schulz@gmail.com">Daniel Schulz</ssv:author>
+				<ssv:description><![CDATA[
+This namespace defines elements to describe the game data of games using the Amber engine, that is, Ambermoon and Amberstar.
+				]]></ssv:description>
+				<ssv:changelog><![CDATA[
+*** Version 0.1 ***
+	R20171117
+		- initial release
+				]]></ssv:changelog>
+			</ssv:manifest>
+		</xsd:appinfo>
+	</xsd:annotation>
+	
+	<xsd:attributeGroup name="schemaVersion">
+		<xsd:attribute name="version" type="xsd:token" use="required" fixed="0.1">
+			<xsd:annotation>
+				<xsd:documentation>The schema version used by the instance document.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
 	
 	<xsd:element name="amberdata">
 		<xsd:complexType>
@@ -22,6 +51,7 @@
 						<xsd:element ref="gfx-archive-list" />
 						<xsd:element ref="dictionary-list" />
 					</xsd:choice>
+					<xsd:attributeGroup ref="schemaVersion"/>
 				</xsd:restriction>
 			</xsd:complexContent>
 		</xsd:complexType>

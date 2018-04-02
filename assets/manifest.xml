@@ -7,10 +7,7 @@
 
 	<resource-directory name="dictionary" type="application/xml" />
 	<directory name="schema">
-		<directory name="amberdata">
-			<resource-directory name="20171117" path="20171117" type="application/x-xsd+xml" />
-			<resource-directory name="latest" path="20171117" type="application/x-xsd+xml" />
-		</directory>
+		<resource-directory name="amberdata" type="application/x-xsd+xml" />
 	</directory>
 	<directory name="games">
 		<directory name="ambermoon">
