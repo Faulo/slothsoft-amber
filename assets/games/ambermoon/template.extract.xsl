@@ -56,8 +56,7 @@
 	</func:function>
 
 	<xsl:template match="/">
-		<xsl:element name="amberdata"
-			namespace="http://schema.slothsoft.net/amber/amberdata">
+		<amberdata version="0.1">
 			<xsl:for-each select=".//save:savegame.editor">
 				<xsl:choose>
 					<xsl:when test="$lib = 'graphics'">
@@ -125,7 +124,7 @@
 					</xsl:otherwise>
 				</xsl:choose>
 			</xsl:for-each>
-		</xsl:element>
+		</amberdata>
 	</xsl:template>
 
 	<xsl:template name="extract-graphics">
