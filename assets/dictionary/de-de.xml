@@ -763,8 +763,8 @@
 					<dt>Download:</dt>
 					<dd>
 						<ul>
-							<li><a href="/getResource.php/amber/patch/Ambermoon.v1.06.zip">Ambermoon.v1.06.zip</a></li>
-							<li><a href="/getResource.php/amber/patch/Ambermoon.v1.06.lha">Ambermoon.v1.06.lha</a></li>
+							<li><a href="/getAsset.php/amber/games/ambermoon/patches/Ambermoon.v1.06.zip">Ambermoon.v1.06.zip</a></li>
+							<li><a href="/getAsset.php/amber/games/ambermoon/patches/Ambermoon.v1.06.lha">Ambermoon.v1.06.lha</a></li>
 						</ul>
 					</dd>
 					<dt>Behobene Bugs:</dt>
