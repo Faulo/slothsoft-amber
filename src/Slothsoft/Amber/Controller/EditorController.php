@@ -16,6 +16,7 @@ use Slothsoft\Farah\Module\Node\Asset\AssetInterface;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
+use Slothsoft\Farah\Module\FarahUrl\FarahUrlStreamIdentifier;
 
 class EditorController
 {
@@ -213,7 +214,7 @@ class EditorController
 
     private function getAmberAsset(string $path): AssetInterface
     {
-        return FarahUrlResolver::resolveToAsset(FarahUrl::createFromComponents(FarahUrlAuthority::createFromVendorAndModule('slothsoft', 'amber'), FarahUrlPath::createFromString($path), FarahUrlArguments::createEmpty()));
+        return FarahUrlResolver::resolveToAsset(FarahUrl::createFromComponents(FarahUrlAuthority::createFromVendorAndModule('slothsoft', 'amber'), FarahUrlPath::createFromString($path), FarahUrlArguments::createEmpty(), FarahUrlStreamIdentifier::createEmpty()));
     }
 
     private function createAmbTool(): AmbTool
