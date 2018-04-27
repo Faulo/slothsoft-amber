@@ -3,21 +3,25 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\Executables\AmberExecutableCreator;
 use Slothsoft\Amber\Mod\ParameterFilter;
 use Slothsoft\Core\IO\HTTPFile;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrl;
-use Slothsoft\Farah\Module\Results\FileWriterResult;
-use Slothsoft\Farah\Module\Results\ResultInterface;
+use Slothsoft\Farah\Module\Executables\ExecutableInterface;
+use Slothsoft\Farah\Module\FarahUrl\FarahUrlArguments;
+use Slothsoft\Farah\Module\Node\Asset\AssetBase;
+use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Build\XmlBuilder;
 
-class Raw extends EditorResourceAsset
+class Raw extends AssetBase
 {
-
-    protected function loadResult(FarahUrl $url): ResultInterface
+    protected function loadParameterFilter(): ParameterFilterInterface
     {
-        $args = $url->getArguments();
-        
+        return new ParameterFilter([]);
+    }
+
+    protected function loadExecutable(FarahUrlArguments $args): ExecutableInterface
+    {        
         $args->set(ParameterFilter::PARAM_PRESET, $this->getName());
         
         $controller = new EditorController();
@@ -26,7 +30,10 @@ class Raw extends EditorResourceAsset
         
         $editor = $controller->createEditor($editorConfig);
         
-        return new FileWriterResult($url, $this->createEditorFile($editor));
+        $file = $this->createEditorFile($editor);
+        
+        $creator = new AmberExecutableCreator($this, $args);
+        return $creator->createBinaryFile($file->getPath());
     }
 
     private function createEditorFile(Editor $editor): HTTPFile

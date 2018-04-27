@@ -6,7 +6,7 @@ use Slothsoft\Amber\Mod\ParameterFilter;
 use Slothsoft\Farah\Module\Node\Asset\AssetBase;
 use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
 
-class Gfx extends AssetBase
+class GfxContainer extends AssetBase
 {
     protected function loadParameterFilter(): ParameterFilterInterface
     {

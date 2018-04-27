@@ -366,8 +366,8 @@ class ModController
                 foreach ([
                     49
                 ] as $paletteId) {
-                    $graphicResouce = $this->locator->getResource(ModResource::TYPE_GRAPHIC, sprintf('%s/%03d-%02d', $lib, $fileId, $paletteId));
-                    $palettes[$paletteId] = $graphicResouce->getUrl();
+                    $graphicResource = $this->locator->getResource(ModResource::TYPE_GRAPHIC, sprintf('%s/%03d-%02d', $lib, $fileId, $paletteId));
+                    $palettes[$paletteId] = $graphicResource->getUrl();
                 }
                 $list = [];
                 foreach ($libDoc->getElementsByTagName('portrait') as $itemNode) {
@@ -386,8 +386,8 @@ class ModController
                 foreach ([
                     49
                 ] as $paletteId) {
-                    $graphicResouce = $this->locator->getResource(ModResource::TYPE_GRAPHIC, sprintf('%s/%03d-%02d', $lib, $fileId, $paletteId));
-                    $palettes[$paletteId] = $graphicResouce->getUrl();
+                    $graphicResource = $this->locator->getResource(ModResource::TYPE_GRAPHIC, sprintf('%s/%03d-%02d', $lib, $fileId, $paletteId));
+                    $palettes[$paletteId] = $graphicResource->getUrl();
                 }
                 $list = [];
                 $labels = [];
@@ -408,8 +408,8 @@ class ModController
                     $fileId = $tilesetNode->getAttribute('id');
                     $palettes = [];
                     foreach (range(1, 49) as $paletteId) {
-                        $graphicResouce = $this->locator->getResource(ModResource::TYPE_GRAPHIC, sprintf('%s/%03d-%02d', $lib, $fileId, $paletteId - 1));
-                        $palettes[$paletteId] = $graphicResouce->getUrl();
+                        $graphicResource = $this->locator->getResource(ModResource::TYPE_GRAPHIC, sprintf('%s/%03d-%02d', $lib, $fileId, $paletteId - 1));
+                        $palettes[$paletteId] = $graphicResource->getUrl();
                     }
                     $list = [];
                     foreach ($tilesetNode->getElementsByTagName('tile') as $tileNode) {

@@ -4,20 +4,20 @@ namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\Executables\AmberExecutableCreator;
 use Slothsoft\Amber\Mod\ParameterFilter;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrl;
+use Slothsoft\Farah\Module\Executables\ExecutableInterface;
+use Slothsoft\Farah\Module\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\FarahUrl\FarahUrlPath;
-use Slothsoft\Farah\Module\Node\Asset\AssetImplementation;
+use Slothsoft\Farah\Module\Node\Asset\AssetBase;
 use Slothsoft\Farah\Module\Node\Asset\AssetInterface;
 use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
-use Slothsoft\Farah\Module\Results\DOMWriterResult;
-use Slothsoft\Farah\Module\Results\ResultInterface;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 
-class EditorAsset extends AssetImplementation
+class EditorAsset extends AssetBase
 {
 
     const PARAM_LOAD_FILE = 'LoadFile';
@@ -39,10 +39,8 @@ class EditorAsset extends AssetImplementation
         ]);
     }
 
-    protected function loadResult(FarahUrl $url): ResultInterface
+    protected function loadExecutable(FarahUrlArguments $args): ExecutableInterface
     {
-        $args = $url->getArguments();
-        
         $controller = new EditorController();
         
         $editorConfig = $controller->createEditorConfig($args);
@@ -78,11 +76,14 @@ class EditorAsset extends AssetImplementation
             }
         }
         
+        
         $editor = $controller->createEditor($editorConfig);
         
         $editor->parseRequest($request);
         
-        return new DOMWriterResult($url, $editor);
+        
+        $creator = new AmberExecutableCreator($this, $args);
+        return $creator->createEditorExecutable($editor);
     }
 
     private function getAmberAsset(string $path): AssetInterface

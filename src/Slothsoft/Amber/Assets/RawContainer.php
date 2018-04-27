@@ -2,11 +2,15 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\Mod\ParameterFilter;
+use Slothsoft\Farah\Module\Node\Asset\AssetBase;
+use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
 use Slothsoft\Farah\Module\PathResolvers\PathResolverCatalog;
 use Slothsoft\Farah\Module\PathResolvers\PathResolverInterface;
 
-class RawContainer extends Raw
+class RawContainer extends AssetBase
 {
+    
 
     private $childAssetList = [
         'dictionaries',
@@ -25,6 +29,11 @@ class RawContainer extends Raw
         'worldmap.lyramion',
         'graphics'
     ];
+    
+    protected function loadParameterFilter(): ParameterFilterInterface
+    {
+        return new ParameterFilter([]);
+    }
 
     protected function loadPathResolver(): PathResolverInterface
     {
