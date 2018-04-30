@@ -10,7 +10,7 @@ use Slothsoft\Farah\Module\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Node\Asset\AssetBase;
 use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
 
-class Library extends AssetBase
+class Amberdata extends AssetBase
 {
 
     protected function loadParameterFilter(): ParameterFilterInterface

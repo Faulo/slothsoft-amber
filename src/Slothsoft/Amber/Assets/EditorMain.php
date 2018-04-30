@@ -17,7 +17,7 @@ use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 
-class EditorAsset extends AssetBase
+class EditorMain extends AssetBase
 {
 
     const PARAM_LOAD_FILE = 'LoadFile';
@@ -76,11 +76,9 @@ class EditorAsset extends AssetBase
             }
         }
         
-        
         $editor = $controller->createEditor($editorConfig);
         
         $editor->parseRequest($request);
-        
         
         $creator = new AmberExecutableCreator($this, $args);
         return $creator->createEditorExecutable($editor);

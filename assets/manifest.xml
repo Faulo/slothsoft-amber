@@ -21,11 +21,11 @@
 	</directory>
 
 	<fragment name="editor">
-		<custom-asset name="main" class="Slothsoft\Amber\Assets\EditorAsset" />
+		<custom-asset name="main" class="Slothsoft\Amber\Assets\EditorMain" />
 		<fragment name="resource">
-			<custom-asset name="styles" class="Slothsoft\Amber\Assets\StylesheetContainer" />
-			<custom-asset name="libs" class="Slothsoft\Amber\Assets\LibraryContainer" />
 			<custom-asset name="raw" class="Slothsoft\Amber\Assets\RawContainer" />
+			<custom-asset name="amberdata" class="Slothsoft\Amber\Assets\AmberdataContainer" />
+			<custom-asset name="styles" class="Slothsoft\Amber\Assets\StylesheetContainer" />
 			<custom-asset name="gfx" class="Slothsoft\Amber\Assets\GfxContainer" />
 		</fragment>
 	</fragment>
@@ -35,26 +35,23 @@
 			<use-template ref="xsl/description" />
 			<use-document ref="//farah/sites" />
 			<import ref="api/default" />
-			<import ref="api/pixijs" />
-			<import ref="api/babylonjs" />
+			<import ref="api/MapViewer" />
+			<import ref="api/DungeonViewer" />
 		</fragment>
 		<fragment name="editor">
 			<use-template ref="xsl/editor" />
 			<import ref="api/default" />
 			<import ref="api/SavegameEditor" />
 			<use-document ref="editor/main" as="editor" />
-			<use-document ref="editor/resource/libs" as="amberdata" />
+			<use-document ref="editor/resource/amberdata"/>
 		</fragment>
 		<fragment name="resource">
-			<!-- <use-document as="list" ref="data/mod.resource-document"/> <use-document as="amberdata" ref="data/mod.resource-document"> 
-				<param name="id" value="libs"/> </use-document> -->
 			<use-template ref="xsl/editor.data-list" />
+			<use-document ref="editor/resource/amberdata" as="list" />
 			<import ref="api/default" />
 			<import ref="api/SavegameEditor" />
-			<import ref="api/pixijs" />
-			<link-script ref="js/MapViewer" />
-			<import ref="api/babylonjs" />
-			<link-script ref="js/DungeonViewer" />
+			<import ref="api/MapViewer" />
+			<import ref="api/DungeonViewer" />
 		</fragment>
 	</fragment>
 
@@ -67,10 +64,12 @@
 			<import ref="//core/api/XSLT" />
 			<link-script ref="js/SavegameEditor" />
 		</fragment>
-		<fragment name="pixijs">
+		<fragment name="MapViewer">
+			<link-script ref="js/MapViewer" />
 			<link-script ref="js/pixijs/pixi.min" />
 		</fragment>
-		<fragment name="babylonjs">
+		<fragment name="DungeonViewer">
+			<link-script ref="js/DungeonViewer" />
 			<link-script ref="js/babylonjs/babylon.custom" />
 		</fragment>
 	</fragment>

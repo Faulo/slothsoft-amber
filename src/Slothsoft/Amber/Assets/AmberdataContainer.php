@@ -4,13 +4,27 @@ namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Farah\Module\Node\Asset\AssetInterface;
 
-class RawContainer extends EditorResourceContainerBase
+class AmberdataContainer extends EditorResourceContainerBase
 {
 
     protected function getSelfAssetList(): array
     {
         return [
-            'dictionaries'
+            'dictionaries',
+            'portraits',
+            'items',
+            'classes',
+            'pcs',
+            'npcs',
+            'monsters',
+            'tileset.icons',
+            'tileset.labs',
+            // 'maps.2d',
+            // 'maps.3d',
+            // 'worldmap.morag',
+            // 'worldmap.kire',
+            // 'worldmap.lyramion',
+            'graphics'
         ];
     }
 
@@ -26,11 +40,11 @@ class RawContainer extends EditorResourceContainerBase
             'monsters',
             'tileset.icons',
             'tileset.labs',
-            'maps.2d',
-            'maps.3d',
-            'worldmap.morag',
-            'worldmap.kire',
-            'worldmap.lyramion',
+            // 'maps.2d',
+            // 'maps.3d',
+            // 'worldmap.morag',
+            // 'worldmap.kire',
+            // 'worldmap.lyramion',
             'graphics'
         ];
     }
@@ -39,9 +53,8 @@ class RawContainer extends EditorResourceContainerBase
     {
         $element = $this->getElement()->withAttributes([
             'name' => $assetName,
-            'class' => Raw::class
+            'class' => Amberdata::class
         ]);
         return $this->createChildNode($element);
     }
 }
-

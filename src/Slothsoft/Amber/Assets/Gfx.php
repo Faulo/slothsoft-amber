@@ -8,6 +8,7 @@ use Slothsoft\Farah\Module\ParameterFilters\ParameterFilterInterface;
 
 class Gfx extends AssetBase
 {
+
     protected function loadParameterFilter(): ParameterFilterInterface
     {
         return new ParameterFilter([]);

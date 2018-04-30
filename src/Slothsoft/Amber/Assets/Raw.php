@@ -15,13 +15,14 @@ use Slothsoft\Savegame\Build\XmlBuilder;
 
 class Raw extends AssetBase
 {
+
     protected function loadParameterFilter(): ParameterFilterInterface
     {
         return new ParameterFilter([]);
     }
 
     protected function loadExecutable(FarahUrlArguments $args): ExecutableInterface
-    {        
+    {
         $args->set(ParameterFilter::PARAM_PRESET, $this->getName());
         
         $controller = new EditorController();
@@ -30,10 +31,8 @@ class Raw extends AssetBase
         
         $editor = $controller->createEditor($editorConfig);
         
-        $file = $this->createEditorFile($editor);
-        
         $creator = new AmberExecutableCreator($this, $args);
-        return $creator->createBinaryFile($file->getPath());
+        return $creator->createEditorExecutable($editor);
     }
 
     private function createEditorFile(Editor $editor): HTTPFile
