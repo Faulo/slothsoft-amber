@@ -9,6 +9,9 @@ var AngularAmber = angular.module(
 		$scope.name = "Faulo";
 	}
 );
+
+
+
 /*
 angular.element(
 	document.querySelector(".Amber")

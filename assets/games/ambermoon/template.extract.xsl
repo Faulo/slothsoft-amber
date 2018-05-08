@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
-	xmlns="http://schema.slothsoft.net/amber/amberdata" xmlns:amber="http://schema.slothsoft.net/amber/amberdata"
+	xmlns="http://schema.slothsoft.net/amber/amberdata" 
+	xmlns:amber="http://schema.slothsoft.net/amber/amberdata"
+	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common"
 	xmlns:func="http://exslt.org/functions" xmlns:str="http://exslt.org/strings"
 	xmlns:set="http://exslt.org/sets" xmlns:math="http://exslt.org/math"
-	xmlns:php="http://php.net/xsl" xmlns:save="http://schema.slothsoft.net/savegame/editor"
+	xmlns:php="http://php.net/xsl" 
+	xmlns:save="http://schema.slothsoft.net/savegame/editor"
+	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
 
-	<xsl:param name="lib" select="''" />
-	<xsl:param name="dictionaryURL" select="''" />
-
-	<xsl:variable name="dictionaryDocument" select="document($dictionaryURL)" />
+	<xsl:variable name="dataDocument" select="/*/*/sse:savegame.editor" />
+	<xsl:variable name="dictionaryDocument" select="/*/*[@name = 'dictionaries']/saa:amberdata" />
+	
+	<xsl:variable name="lib" select="string($dataDocument/../@name)"/>
 
 	<xsl:key name="dictionary-option"
-		match="/amber:amberdata/amber:dictionary-list/amber:dictionary/amber:option"
-		use="../@dictionary-id" />	<xsl:key name="string-dictionary"		match="save:instruction[@type='string-dictionary']/save:string" use="../@name" />
+		match="saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option"
+		use="../@dictionary-id" />	<xsl:key name="string-dictionary"		match="sse:instruction[@type='string-dictionary']/sse:string" use="../@name" />
 
-	<func:function name="amber:getName">
+	<func:function name="saa:getName">
 		<xsl:param name="context" select="." />
 
 		<xsl:choose>
@@ -26,21 +30,21 @@
 			<xsl:otherwise>
 				<xsl:if test="../@dictionary-ref">
 					<xsl:variable name="option"
-						select="amber:getDictionaryOption(../@dictionary-ref, count(preceding-sibling::*))" />
+						select="saa:getDictionaryOption(../@dictionary-ref, count(preceding-sibling::*))" />
 					<func:result select="string($option/@val)" />
 				</xsl:if>
 			</xsl:otherwise>
 		</xsl:choose>
 	</func:function>
 
-	<func:function name="amber:getDictionaryOption">
+	<func:function name="saa:getDictionaryOption">
 		<xsl:param name="id" />
 		<xsl:param name="key" />
 
-		<func:result select="amber:getDictionary($id)[@key = $key]" />
+		<func:result select="saa:getDictionary($id)[@key = $key]" />
 	</func:function>
 
-	<func:function name="amber:getDictionary">
+	<func:function name="saa:getDictionary">
 		<xsl:param name="id" />
 
 		<xsl:choose>
@@ -55,9 +59,9 @@
 		</xsl:choose>
 	</func:function>
 
-	<xsl:template match="/">
+	<xsl:template match="/*">
 		<amberdata version="0.1">
-			<xsl:for-each select=".//save:savegame.editor">
+			<xsl:for-each select=".//sse:savegame.editor">
 				<xsl:choose>
 					<xsl:when test="$lib = 'graphics'">
 						<xsl:call-template name="extract-graphics" />
@@ -92,7 +96,7 @@
 					<xsl:when test="$lib = 'maps.3d'">
 						<xsl:call-template name="extract-maps">
 							<xsl:with-param name="maps"
-								select="save:archive[contains(@name, 'Map_data.amb')]/*
+								select="sse:archive[contains(@name, 'Map_data.amb')]/*
 							[.//*[@name='unknown']/*[1]/@value != 13]
 							[.//*[@name='map-type']/@value = 1]" />
 						</xsl:call-template>
@@ -100,7 +104,7 @@
 					<xsl:when test="$lib = 'maps.2d'">
 						<xsl:call-template name="extract-maps">
 							<xsl:with-param name="maps"
-								select="save:archive[contains(@name, 'Map_data.amb')]/*
+								select="sse:archive[contains(@name, 'Map_data.amb')]/*
 							[.//*[@name='unknown']/*[1]/@value != 13]
 							[.//*[@name='map-type']/@value = 2]" />
 						</xsl:call-template>
@@ -108,13 +112,13 @@
 					<xsl:when test="$lib = 'worldmap.lyramion'">
 						<xsl:call-template name="extract-worldmap">
 							<xsl:with-param name="maps"
-								select="save:archive[contains(@name, 'Map_data.amb')]/*[position() &lt;= 16]" />
+								select="sse:archive[contains(@name, 'Map_data.amb')]/*[position() &lt;= 16]" />
 						</xsl:call-template>
 					</xsl:when>
 					<xsl:when test="$lib = 'worldmap.morag' or $lib = 'worldmap.kire'">
 						<xsl:call-template name="extract-worldmap">
 							<xsl:with-param name="maps"
-								select="save:archive[contains(@name, 'Map_data.amb')]/*
+								select="sse:archive[contains(@name, 'Map_data.amb')]/*
 							[.//*[@name='unknown']/*[1]/@value = 13]" />
 						</xsl:call-template>
 					</xsl:when>
@@ -300,7 +304,7 @@
 			-->
 
 			<xsl:variable name="monsters"
-				select="save:archive[@name='Monster_char_data.amb']/*" />
+				select="sse:archive[@name='Monster_char_data.amb']/*" />
 			<xsl:if test="count($monsters)">
 				<gfx-archive file-name="monsters" file-path="Amberfiles/Monster_gfx.amb">
 					<xsl:for-each select="$monsters">
@@ -446,10 +450,10 @@
 
 	<xsl:template name="extract-monsters">
 		<xsl:variable name="monsters"
-			select="save:archive[@name='Monster_char_data.amb']/*" />
+			select="sse:archive[@name='Monster_char_data.amb']/*" />
 		<xsl:if test="count($monsters)">
 			<xsl:variable name="categories"
-				select="amber:getDictionary('monster-images')" />
+				select="saa:getDictionary('monster-images')" />
 			<monster-list>
 				<xsl:for-each select="$categories">
 					<xsl:variable name="category" select="." />
@@ -468,10 +472,10 @@
 	</xsl:template>
 
 	<xsl:template name="extract-classes">
-		<xsl:variable name="classes" select="save:archive//*[@name='classes']/*/*" />
+		<xsl:variable name="classes" select="sse:archive//*[@name='classes']/*/*" />
 		<xsl:if test="count($classes)">
 			<xsl:variable name="expList"
-				select="save:archive//*[@name='class-experience']/*" />
+				select="sse:archive//*[@name='class-experience']/*" />
 			<class-list>
 				<xsl:for-each select="$classes">
 					<xsl:variable name="id" select="position()" />
@@ -486,9 +490,9 @@
 
 	<xsl:template name="extract-items">
 		<xsl:variable name="items"
-			select="(save:archive[@name='AM2_CPU'] | save:archive[@name='AM2_BLIT'])//*[@name = 'items']/*/*" />
+			select="(sse:archive[@name='AM2_CPU'] | sse:archive[@name='AM2_BLIT'])//*[@name = 'items']/*/*" />
 		<xsl:variable name="texts"
-			select="save:archive[@name='Object_texts.amb']" />
+			select="sse:archive[@name='Object_texts.amb']" />
 
 		<xsl:if test="count($items)">
 			<xsl:variable name="categories"
@@ -497,7 +501,7 @@
 				<xsl:for-each select="$categories">
 					<xsl:variable name="category" select="." />
 					<item-category
-						name="{amber:getDictionaryOption('item-types', $category)/@val}">
+						name="{saa:getDictionaryOption('item-types', $category)/@val}">
 						<xsl:for-each select="$items">
 							<xsl:if test=".//*[@name = 'type']/@value = $category">
 								<xsl:call-template name="extract-item">
@@ -516,7 +520,7 @@
 		<xsl:param name="maps" select="/.." />
 		<xsl:if test="count($maps)">
 			<xsl:variable name="texts"
-				select="save:archive[contains(@name, 'Map_texts.amb')]/*" />
+				select="sse:archive[contains(@name, 'Map_texts.amb')]/*" />
 			<map-list>
 				<xsl:for-each select="$maps">
 					<xsl:sort select="@file-name" />
@@ -536,7 +540,7 @@
 		<xsl:if test="count($maps)">
 			<xsl:variable name="root" select="$maps[1]" />
 			<xsl:variable name="texts"
-				select="save:archive[contains(@name, 'Map_texts.amb')]/*" />
+				select="sse:archive[contains(@name, 'Map_texts.amb')]/*" />
 			<map-list>
 				<xsl:variable name="size" select="math:sqrt(count($maps))" />
 				<xsl:variable name="field-maps" select="$maps//*[@name='fields']" />
@@ -631,7 +635,7 @@
 						select="'MORAG'" /></xsl:attribute>
 				</xsl:when>
 				<xsl:when test="$id &gt; 256">
-					<xsl:apply-templates select="($root//save:string)[1]"
+					<xsl:apply-templates select="($root//sse:string)[1]"
 						mode="attr">
 						<xsl:with-param name="name" select="'name'" />
 					</xsl:apply-templates>
@@ -696,7 +700,7 @@
 
 	<xsl:template name="extract-tileset.icons">
 		<xsl:variable name="tilesets"
-			select="save:archive[contains(@name, 'Icon_data.amb')]/*" />
+			select="sse:archive[contains(@name, 'Icon_data.amb')]/*" />
 		<xsl:if test="count($tilesets)">
 			<tileset-icon-list>
 				<xsl:for-each select="$tilesets">
@@ -729,7 +733,7 @@
 
 	<xsl:template name="extract-tileset.labs">
 		<xsl:variable name="tilesets"
-			select="save:archive[contains(@name, 'Lab_data.amb')]/*" />
+			select="sse:archive[contains(@name, 'Lab_data.amb')]/*" />
 		<xsl:if test="count($tilesets)">
 			<tileset-lab-list>
 				<xsl:for-each select="$tilesets">
@@ -785,7 +789,7 @@
 			<xsl:apply-templates select=".//*[@name = 'magic-defense']"
 				mode="attr" />
 			<xsl:for-each select=".//*[@name = 'monster-type']/*[@value]">
-				<xsl:attribute name="is-{amber:getName()}" />
+				<xsl:attribute name="is-{saa:getName()}" />
 			</xsl:for-each>
 			<race>
 				<xsl:apply-templates select=".//*[@name = 'race']"
@@ -801,7 +805,7 @@
 					<xsl:with-param name="name" select="'maximum-age'" />
 				</xsl:apply-templates>
 				<xsl:for-each select=".//*[@name = 'attributes']/*">
-					<attribute name="{amber:getName()}"
+					<attribute name="{saa:getName()}"
 						current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}"
 						maximum="{*[@name = 'current']/@value}" />
 				</xsl:for-each>
@@ -824,7 +828,7 @@
 				<xsl:apply-templates select=".//*[@name = 'slp-per-level']"
 					mode="attr" />
 				<xsl:for-each select=".//*[@name = 'skills']/*">
-					<skill name="{amber:getName()}"
+					<skill name="{saa:getName()}"
 						current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}"
 						maximum="{*[@name = 'current']/@value}" />
 				</xsl:for-each>
@@ -843,7 +847,7 @@
 		<xsl:for-each select=".//*[@name = 'spells']">
 			<spellbook>
 				<xsl:for-each select=".//*[string-length(@value) &gt; 0]">
-					<spell-instance name="{amber:getName()}" />
+					<spell-instance name="{saa:getName()}" />
 				</xsl:for-each>
 			</spellbook>
 		</xsl:for-each>
@@ -894,7 +898,7 @@
 				mode="attr" />
 
 			<xsl:for-each select=".//*[@name = 'item-status']/*[@value != '']">
-				<xsl:attribute name="is-{amber:getName()}" />
+				<xsl:attribute name="is-{saa:getName()}" />
 			</xsl:for-each>
 		</item-instance>
 	</xsl:template>
@@ -947,12 +951,12 @@
 				mode="attr" />
 
 			<xsl:apply-templates
-				select="$root[../@name = 'class-experience']//save:integer" mode="attr">
+				select="$root[../@name = 'class-experience']//sse:integer" mode="attr">
 				<xsl:with-param name="name" select="'base-experience'" />
 			</xsl:apply-templates>
 
 			<xsl:for-each select="$root//*[@name = 'skills']/*">
-				<skill name="{amber:getName()}" maximum="{*/@value}" />
+				<skill name="{saa:getName()}" maximum="{*/@value}" />
 			</xsl:for-each>		</class>
 	</xsl:template>
 
@@ -987,7 +991,7 @@
 				</xsl:choose>
 			</xsl:variable>
 
-			<xsl:apply-templates select=".//save:integer[@name != ''] | .//save:string"
+			<xsl:apply-templates select=".//sse:integer[@name != ''] | .//sse:string"
 				mode="attr" />
 
 			<xsl:apply-templates select=".//*[@name = 'type']"
@@ -1032,10 +1036,10 @@
 				</xsl:choose>
 			</xsl:attribute>
 			<xsl:for-each select=".//*[@name = 'properties']/*[@value != '']">
-				<xsl:attribute name="is-{amber:getName()}" />
+				<xsl:attribute name="is-{saa:getName()}" />
 			</xsl:for-each>
 			<xsl:for-each select=".//*[@name = 'classes']/*[@value != '']">
-				<class name="{amber:getName()}" />
+				<class name="{saa:getName()}" />
 			</xsl:for-each>
 			<xsl:if test="$type = 8">
 				<xsl:call-template name="extract-text">
@@ -1056,14 +1060,14 @@
 				<br xmlns="http://www.w3.org/1999/xhtml" />
 			</xsl:for-each>
 		</text>
-	</xsl:template>	<xsl:template match="save:integer | save:signed-integer | save:string"		mode="attr">
+	</xsl:template>	<xsl:template match="sse:integer | sse:signed-integer | sse:string"		mode="attr">
 		<xsl:param name="name" select="@name" />
-		<xsl:param name="value" select="@value" />		<xsl:attribute name="{$name}"><xsl:value-of			select="normalize-space($value)" /></xsl:attribute>	</xsl:template>	<xsl:template match="save:select" mode="attr">
-		<xsl:param name="name" select="@name" />		<xsl:variable name="option"			select="amber:getDictionaryOption(@dictionary-ref, @value)" />		<xsl:attribute name="{$name}">
+		<xsl:param name="value" select="@value" />		<xsl:attribute name="{$name}"><xsl:value-of			select="normalize-space($value)" /></xsl:attribute>	</xsl:template>	<xsl:template match="sse:select" mode="attr">
+		<xsl:param name="name" select="@name" />		<xsl:variable name="option"			select="saa:getDictionaryOption(@dictionary-ref, @value)" />		<xsl:attribute name="{$name}">
 			<xsl:value-of select="$option/@title | $option/@val[not($option/@title)]" />
 		</xsl:attribute>	</xsl:template>
 
-	<xsl:template match="save:group" mode="unknown">
+	<xsl:template match="sse:group" mode="unknown">
 		<unknown>
 			<xsl:for-each select="*">
 				<xsl:if test="position() &gt; 1">
@@ -1100,7 +1104,7 @@
 
 	<xsl:template name="extract-dictionaries">
 		<xsl:variable name="AM2"
-			select="save:archive[@name='AM2_BLIT' or @name='AM2_CPU']" />
+			select="sse:archive[@name='AM2_BLIT' or @name='AM2_CPU']" />
 		<dictionary-list>
 			<dictionary dictionary-id="events">
 				<option key="0" val="valdyn" />
@@ -1210,7 +1214,7 @@
 				<option key="6" val="Funktion" />
 			</dictionary>
 			
-			<xsl:for-each select="$AM2//save:instruction[@name = 'spell-types']">
+			<xsl:for-each select="$AM2//sse:instruction[@name = 'spell-types']">
 				<dictionary dictionary-id="spell-types">
 					<xsl:for-each select="*">
 						<option key="{position() - 1}" val="{@value}" />

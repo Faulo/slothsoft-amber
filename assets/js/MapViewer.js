@@ -3,7 +3,6 @@
 // © 2017 Daniel Schulz
 function MapViewer(mapNode, tilesetNode) {
 	PIXI.utils.sayHello("Amber MapViewer 0.1");
-	
 	this.mapNode = mapNode;
 	this.tilesetNode = tilesetNode;
 	

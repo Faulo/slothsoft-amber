@@ -3,9 +3,11 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Farah\Module\Node\Asset\AssetInterface;
+use Slothsoft\Farah\Module\Node\Enhancements\AssetBuilderTrait;
 
 class AmberdataContainer extends EditorResourceContainerBase
 {
+    use AssetBuilderTrait;
 
     protected function getSelfAssetList(): array
     {
@@ -51,10 +53,15 @@ class AmberdataContainer extends EditorResourceContainerBase
 
     protected function inventChildAsset(string $assetName): AssetInterface
     {
-        $element = $this->getElement()->withAttributes([
-            'name' => $assetName,
-            'class' => Amberdata::class
-        ]);
-        return $this->createChildNode($element);
+        $data = [];
+        $data[] = "/editor/resource/raw/$assetName";
+        if ($assetName !== 'dictionaries') {
+            $data[] = "/editor/resource/amberdata/dictionaries";
+        }
+        return $this->buildFragment(
+            $assetName,
+            $data,
+            "/games/ambermoon/template.extract"
+        );
     }
 }
