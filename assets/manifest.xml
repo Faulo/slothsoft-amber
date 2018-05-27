@@ -1,76 +1,76 @@
 <?xml version="1.0"?>
 <assets xmlns="http://schema.slothsoft.net/farah/module">
-	<resource-directory name="cli" type="application/vnd.microsoft.portable-executable" />
-	<resource-directory name="css" type="text/css" />
-	<resource-directory name="js" type="application/javascript" />
-	<resource-directory name="xsl" type="application/xslt+xml" />
+	<resource-directory name="cli" type="application/vnd.microsoft.portable-executable"/>
+	<resource-directory name="css" type="text/css"/>
+	<resource-directory name="js" type="application/javascript"/>
+	<resource-directory name="xsl" type="application/xslt+xml"/>
 
-	<resource-directory name="dictionary" type="application/xml" />
+	<resource-directory name="dictionary" type="application/xml"/>
 	<directory name="schema">
-		<resource-directory name="amberdata" type="application/x-xsd+xml" />
+		<resource-directory name="amberdata" type="application/x-xsd+xml"/>
 	</directory>
 	<directory name="games">
 		<directory name="ambermoon">
-			<resource name="structure.savegame" type="application/xml" />
-			<resource name="structure" type="application/xml" />
-			<resource name="template.extract" type="application/xslt+xml" />
-			<resource-directory name="patches" type="*/*" />
-			<resource-directory name="mods" type="*/*" />
+			<resource name="structure.savegame" type="application/xml"/>
+			<resource name="structure" type="application/xml"/>
+			<resource name="template.extract" type="application/xslt+xml"/>
+			<resource-directory name="patches" type="*/*"/>
+			<resource-directory name="mods" type="*/*"/>
 		</directory>
-		<resource name="index" type="application/xml" />
+		<resource name="index" type="application/xml"/>
 	</directory>
 
 	<fragment name="editor">
-		<custom-asset name="main" class="Slothsoft\Amber\Assets\EditorMain" />
+		<custom-asset name="main" class="Slothsoft\Amber\Assets\EditorMain"/>
 		<fragment name="resource">
-			<custom-asset name="raw" class="Slothsoft\Amber\Assets\RawContainer" />
-			<custom-asset name="amberdata" class="Slothsoft\Amber\Assets\AmberdataContainer" />
-			<custom-asset name="styles" class="Slothsoft\Amber\Assets\StylesheetContainer" />
-			<custom-asset name="gfx" class="Slothsoft\Amber\Assets\GfxContainer" />
+			<custom-asset name="raw" class="Slothsoft\Amber\Assets\RawContainer"/>
+			<custom-asset name="amberdata" class="Slothsoft\Amber\Assets\AmberdataContainer"/>
+			<custom-asset name="styles" class="Slothsoft\Amber\Assets\StylesheetContainer"/>
+			<custom-asset name="gfx" class="Slothsoft\Amber\Assets\GfxContainer"/>
 		</fragment>
 	</fragment>
 
 	<fragment name="html">
 		<fragment name="description">
-			<use-template ref="xsl/description" />
-			<use-document ref="//farah/sites" />
-			<import ref="api/default" />
-			<import ref="api/MapViewer" />
-			<import ref="api/DungeonViewer" />
+			<use-template ref="/xsl/description"/>
+			<use-document ref="//farah/sites"/>
+			<import ref="/api/default"/>
+			<import ref="/api/MapViewer"/>
+			<import ref="/api/DungeonViewer"/>
 		</fragment>
 		<fragment name="editor">
-			<use-template ref="xsl/editor" />
-			<import ref="api/default" />
-			<import ref="api/SavegameEditor" />
-			<use-document ref="editor/main" as="editor" />
-			<use-document ref="editor/resource/amberdata"/>
+			<use-template ref="/xsl/editor"/>
+			<import ref="/api/default"/>
+			<import ref="/api/SavegameEditor"/>
+			<use-document ref="/editor/main" as="editor"/>
+			<use-document ref="/editor/resource/amberdata"/>
 		</fragment>
 		<fragment name="resource">
-			<use-template ref="xsl/editor.data-list" />
-			<use-document ref="editor/resource/amberdata" as="list" />
-			<import ref="api/default" />
-			<import ref="api/SavegameEditor" />
-			<import ref="api/MapViewer" />
-			<import ref="api/DungeonViewer" />
+			<use-template ref="/xsl/editor.data-list"/>
+			<use-document ref="/editor/resource/amberdata" as="list"/>
+			<import ref="/api/default"/>
+			<import ref="/api/SavegameEditor"/>
+			<import ref="/api/MapViewer"/>
+			<import ref="/api/DungeonViewer"/>
 		</fragment>
 	</fragment>
 
 	<fragment name="api">
 		<fragment name="default">
-			<link-stylesheet ref="css/default" />
-			<link-stylesheet ref="css/amber-picker" />
+			<link-stylesheet ref="/css/default"/>
+			<link-stylesheet ref="/css/amber-picker"/>
 		</fragment>
 		<fragment name="SavegameEditor">
-			<import ref="//core/api/XSLT" />
-			<link-script ref="js/SavegameEditor" />
+			<import ref="//core/api/XSLT"/>
+			<link-script ref="/js/SavegameEditor"/>
 		</fragment>
 		<fragment name="MapViewer">
-			<link-script ref="js/MapViewer" />
-			<link-script ref="js/pixijs/pixi.min" />
+			<link-script ref="/js/MapViewer"/>
+			<link-script ref="/js/pixijs/pixi.min"/>
 		</fragment>
 		<fragment name="DungeonViewer">
-			<link-script ref="js/DungeonViewer" />
-			<link-script ref="js/babylonjs/babylon.custom" />
+			<link-script ref="/js/DungeonViewer"/>
+			<link-script ref="/js/babylonjs/babylon.custom"/>
 		</fragment>
 	</fragment>
 
