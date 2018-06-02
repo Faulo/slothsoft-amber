@@ -32,45 +32,45 @@
 
 	<fragment name="html">
 		<fragment name="description">
-			<use-template ref="/xsl/description"/>
-			<use-document ref="//farah/sites"/>
-			<import ref="/api/default"/>
-			<import ref="/api/MapViewer"/>
-			<import ref="/api/DungeonViewer"/>
+			<use-template ref="/xsl/description" name="description"/>
+			<use-document ref="//farah/sites" name="sites"/>
+			<import ref="/api/default" name="default"/>
+			<import ref="/api/MapViewer" name="MapViewer"/>
+			<import ref="/api/DungeonViewer" name="DungeonViewer"/>
 		</fragment>
 		<fragment name="editor">
-			<use-template ref="/xsl/editor"/>
-			<import ref="/api/default"/>
-			<import ref="/api/SavegameEditor"/>
-			<use-document ref="/editor/main" as="editor"/>
-			<use-document ref="/editor/resource/amberdata"/>
+			<use-template ref="/xsl/editor" name="editor"/>
+			<import ref="/api/default" name="default"/>
+			<import ref="/api/SavegameEditor" name="SavegameEditor"/>
+			<use-document ref="/editor/main" name="editor"/>
+			<use-document ref="/editor/resource/amberdata" name="amberdata"/>
 		</fragment>
 		<fragment name="resource">
-			<use-template ref="/xsl/editor.data-list"/>
-			<use-document ref="/editor/resource/amberdata" as="list"/>
-			<import ref="/api/default"/>
-			<import ref="/api/SavegameEditor"/>
-			<import ref="/api/MapViewer"/>
-			<import ref="/api/DungeonViewer"/>
+			<use-template ref="/xsl/editor.data-list" name="editor.data-list"/>
+			<use-document ref="/editor/resource/amberdata" name="list"/>
+			<import ref="/api/default" name="default"/>
+			<import ref="/api/SavegameEditor" name="SavegameEditor"/>
+			<import ref="/api/MapViewer" name="MapViewer"/>
+			<import ref="/api/DungeonViewer" name="DungeonViewer"/>
 		</fragment>
 	</fragment>
 
 	<fragment name="api">
 		<fragment name="default">
-			<link-stylesheet ref="/css/default"/>
-			<link-stylesheet ref="/css/amber-picker"/>
+			<link-stylesheet ref="/css/default" name="default"/>
+			<link-stylesheet ref="/css/amber-picker" name="amber-picker"/>
 		</fragment>
 		<fragment name="SavegameEditor">
-			<import ref="//core/api/XSLT"/>
-			<link-script ref="/js/SavegameEditor"/>
+			<import ref="//core/api/XSLT" name="XSLT"/>
+			<link-script ref="/js/SavegameEditor" name="SavegameEditor"/>
 		</fragment>
 		<fragment name="MapViewer">
-			<link-script ref="/js/MapViewer"/>
-			<link-script ref="/js/pixijs/pixi.min"/>
+			<link-script ref="/js/MapViewer" name="MapViewer"/>
+			<link-script ref="/js/pixijs/pixi.min" name="pixi.min"/>
 		</fragment>
 		<fragment name="DungeonViewer">
-			<link-script ref="/js/DungeonViewer"/>
-			<link-script ref="/js/babylonjs/babylon.custom"/>
+			<link-script ref="/js/DungeonViewer" name="DungeonViewer"/>
+			<link-script ref="/js/babylonjs/babylon.custom" name="babylon.custom"/>
 		</fragment>
 	</fragment>
 
