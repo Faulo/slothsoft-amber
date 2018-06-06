@@ -25,25 +25,25 @@
 <path fill="none" stroke="gray" d="M604.344,-1162C604.344,-1162 1180.22,-1162 1180.22,-1162 1186.22,-1162 1192.22,-1168 1192.22,-1174 1192.22,-1174 1192.22,-1654 1192.22,-1654 1192.22,-1660 1186.22,-1666 1180.22,-1666 1180.22,-1666 604.344,-1666 604.344,-1666 598.344,-1666 592.344,-1660 592.344,-1654 592.344,-1654 592.344,-1174 592.344,-1174 592.344,-1168 598.344,-1162 604.344,-1162"/>
 <text text-anchor="middle" x="892.283" y="-1653.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">Assets</text>
 </g>
-<g id="clust6" class="cluster"><title>cluster_\Slothsoft\Amber\Mod</title>
-<path fill="none" stroke="gray" d="M1056.72,-1082C1056.72,-1082 1166.72,-1082 1166.72,-1082 1172.72,-1082 1178.72,-1088 1178.72,-1094 1178.72,-1094 1178.72,-1142 1178.72,-1142 1178.72,-1148 1172.72,-1154 1166.72,-1154 1166.72,-1154 1056.72,-1154 1056.72,-1154 1050.72,-1154 1044.72,-1148 1044.72,-1142 1044.72,-1142 1044.72,-1094 1044.72,-1094 1044.72,-1088 1050.72,-1082 1056.72,-1082"/>
-<text text-anchor="middle" x="1111.72" y="-1141.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">Mod</text>
+<g id="clust5" class="cluster"><title>cluster_\Slothsoft\Amber\CLI</title>
+<path fill="none" stroke="gray" d="M1083.72,-1028C1083.72,-1028 1139.72,-1028 1139.72,-1028 1145.72,-1028 1151.72,-1034 1151.72,-1040 1151.72,-1040 1151.72,-1142 1151.72,-1142 1151.72,-1148 1145.72,-1154 1139.72,-1154 1139.72,-1154 1083.72,-1154 1083.72,-1154 1077.72,-1154 1071.72,-1148 1071.72,-1142 1071.72,-1142 1071.72,-1040 1071.72,-1040 1071.72,-1034 1077.72,-1028 1083.72,-1028"/>
+<text text-anchor="middle" x="1111.72" y="-1141.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">CLI</text>
 </g>
-<g id="clust5" class="cluster"><title>cluster_\Slothsoft\Amber\Controller</title>
-<path fill="none" stroke="gray" d="M1053.22,-1002C1053.22,-1002 1170.22,-1002 1170.22,-1002 1176.22,-1002 1182.22,-1008 1182.22,-1014 1182.22,-1014 1182.22,-1062 1182.22,-1062 1182.22,-1068 1176.22,-1074 1170.22,-1074 1170.22,-1074 1053.22,-1074 1053.22,-1074 1047.22,-1074 1041.22,-1068 1041.22,-1062 1041.22,-1062 1041.22,-1014 1041.22,-1014 1041.22,-1008 1047.22,-1002 1053.22,-1002"/>
-<text text-anchor="middle" x="1111.72" y="-1061.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">Controller</text>
+<g id="clust6" class="cluster"><title>cluster_\Slothsoft\Amber\Controller</title>
+<path fill="none" stroke="gray" d="M1053.22,-948C1053.22,-948 1170.22,-948 1170.22,-948 1176.22,-948 1182.22,-954 1182.22,-960 1182.22,-960 1182.22,-1008 1182.22,-1008 1182.22,-1014 1176.22,-1020 1170.22,-1020 1170.22,-1020 1053.22,-1020 1053.22,-1020 1047.22,-1020 1041.22,-1014 1041.22,-1008 1041.22,-1008 1041.22,-960 1041.22,-960 1041.22,-954 1047.22,-948 1053.22,-948"/>
+<text text-anchor="middle" x="1111.72" y="-1007.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">Controller</text>
 </g>
-<g id="clust8" class="cluster"><title>cluster_\Slothsoft\Amber\Executables</title>
-<path fill="none" stroke="gray" d="M1033.22,-734C1033.22,-734 1190.22,-734 1190.22,-734 1196.22,-734 1202.22,-740 1202.22,-746 1202.22,-746 1202.22,-848 1202.22,-848 1202.22,-854 1196.22,-860 1190.22,-860 1190.22,-860 1033.22,-860 1033.22,-860 1027.22,-860 1021.22,-854 1021.22,-848 1021.22,-848 1021.22,-746 1021.22,-746 1021.22,-740 1027.22,-734 1033.22,-734"/>
-<text text-anchor="middle" x="1111.72" y="-847.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">Executables</text>
+<g id="clust7" class="cluster"><title>cluster_\Slothsoft\Amber\Executables</title>
+<path fill="none" stroke="gray" d="M1033.22,-814C1033.22,-814 1190.22,-814 1190.22,-814 1196.22,-814 1202.22,-820 1202.22,-826 1202.22,-826 1202.22,-928 1202.22,-928 1202.22,-934 1196.22,-940 1190.22,-940 1190.22,-940 1033.22,-940 1033.22,-940 1027.22,-940 1021.22,-934 1021.22,-928 1021.22,-928 1021.22,-826 1021.22,-826 1021.22,-820 1027.22,-814 1033.22,-814"/>
+<text text-anchor="middle" x="1111.72" y="-927.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">Executables</text>
 </g>
-<g id="clust7" class="cluster"><title>cluster_\Slothsoft\Amber\SavegameImplementations</title>
-<path fill="none" stroke="gray" d="M1036.72,-868C1036.72,-868 1186.72,-868 1186.72,-868 1192.72,-868 1198.72,-874 1198.72,-880 1198.72,-880 1198.72,-982 1198.72,-982 1198.72,-988 1192.72,-994 1186.72,-994 1186.72,-994 1036.72,-994 1036.72,-994 1030.72,-994 1024.72,-988 1024.72,-982 1024.72,-982 1024.72,-880 1024.72,-880 1024.72,-874 1030.72,-868 1036.72,-868"/>
-<text text-anchor="middle" x="1111.72" y="-981.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">SavegameImplementations</text>
+<g id="clust8" class="cluster"><title>cluster_\Slothsoft\Amber\Mod</title>
+<path fill="none" stroke="gray" d="M1056.72,-734C1056.72,-734 1166.72,-734 1166.72,-734 1172.72,-734 1178.72,-740 1178.72,-746 1178.72,-746 1178.72,-794 1178.72,-794 1178.72,-800 1172.72,-806 1166.72,-806 1166.72,-806 1056.72,-806 1056.72,-806 1050.72,-806 1044.72,-800 1044.72,-794 1044.72,-794 1044.72,-746 1044.72,-746 1044.72,-740 1050.72,-734 1056.72,-734"/>
+<text text-anchor="middle" x="1111.72" y="-793.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">Mod</text>
 </g>
-<g id="clust9" class="cluster"><title>cluster_\Slothsoft\Amber\CLI</title>
-<path fill="none" stroke="gray" d="M1083.72,-600C1083.72,-600 1139.72,-600 1139.72,-600 1145.72,-600 1151.72,-606 1151.72,-612 1151.72,-612 1151.72,-714 1151.72,-714 1151.72,-720 1145.72,-726 1139.72,-726 1139.72,-726 1083.72,-726 1083.72,-726 1077.72,-726 1071.72,-720 1071.72,-714 1071.72,-714 1071.72,-612 1071.72,-612 1071.72,-606 1077.72,-600 1083.72,-600"/>
-<text text-anchor="middle" x="1111.72" y="-713.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">CLI</text>
+<g id="clust9" class="cluster"><title>cluster_\Slothsoft\Amber\SavegameImplementations</title>
+<path fill="none" stroke="gray" d="M1036.72,-600C1036.72,-600 1186.72,-600 1186.72,-600 1192.72,-600 1198.72,-606 1198.72,-612 1198.72,-612 1198.72,-714 1198.72,-714 1198.72,-720 1192.72,-726 1186.72,-726 1186.72,-726 1036.72,-726 1036.72,-726 1030.72,-726 1024.72,-720 1024.72,-714 1024.72,-714 1024.72,-612 1024.72,-612 1024.72,-606 1030.72,-600 1036.72,-600"/>
+<text text-anchor="middle" x="1111.72" y="-713.2" font-family="Times New Roman,serif" font-size="11.00" fill="gray">SavegameImplementations</text>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\Amberdata -->
 <g id="node1" class="node"><title>\\Slothsoft\\Amber\\Assets\\Amberdata</title>
@@ -59,197 +59,197 @@
 <g id="edge1" class="edge"><title>\\Slothsoft\\Amber\\Assets\\Amberdata&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
 <path fill="none" stroke="black" d="M1073.19,-1500.97C1057.14,-1496.18 1038.23,-1490.43 1021.22,-1485 878.079,-1439.29 849.971,-1358.55 700.844,-1377"/>
 </g>
-<!-- \\Slothsoft\\Amber\\Assets\\EditorMain -->
-<g id="node2" class="node"><title>\\Slothsoft\\Amber\\Assets\\EditorMain</title>
-<polygon fill="none" stroke="black" points="1153.72,-1476 1069.72,-1476 1069.72,-1440 1153.72,-1440 1153.72,-1476"/>
-<text text-anchor="middle" x="1111.72" y="-1455.2" font-family="Courier,monospace" font-size="11.00">EditorMain</text>
-</g>
-<!-- \\Slothsoft\\Amber\\Assets\\EditorMain&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
-<g id="edge2" class="edge"><title>\\Slothsoft\\Amber\\Assets\\EditorMain&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
-<path fill="none" stroke="black" d="M1069.46,-1446.42C980.414,-1422 772.471,-1368.14 700.844,-1377"/>
+<!-- \\Slothsoft\\Amber\\Assets\\AmberdataContainer -->
+<g id="node2" class="node"><title>\\Slothsoft\\Amber\\Assets\\AmberdataContainer</title>
+<polygon fill="none" stroke="black" points="1180.72,-1638 1042.72,-1638 1042.72,-1602 1180.72,-1602 1180.72,-1638"/>
+<text text-anchor="middle" x="1111.72" y="-1617.2" font-family="Courier,monospace" font-size="11.00">AmberdataContainer</text>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase -->
-<g id="node3" class="node"><title>\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase</title>
+<g id="node4" class="node"><title>\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase</title>
 <polygon fill="none" stroke="black" points="799.344,-1584 600.344,-1584 600.344,-1548 799.344,-1548 799.344,-1584"/>
 <text text-anchor="start" x="665.844" y="-1569.2" font-family="Courier,monospace" font-size="11.00">«abstract»</text>
 <text text-anchor="start" x="608.344" y="-1557.2" font-family="Courier,monospace" font-size="11.00">EditorResourceContainerBase</text>
 </g>
+<!-- \\Slothsoft\\Amber\\Assets\\AmberdataContainer&#45;&gt;\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase -->
+<g id="edge2" class="edge"><title>\\Slothsoft\\Amber\\Assets\\AmberdataContainer&#45;&gt;\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase</title>
+<path fill="none" stroke="black" d="M1042.58,-1611.02C979.203,-1602.67 883.707,-1590.09 809.761,-1580.35"/>
+<polygon fill="none" stroke="black" points="809.847,-1576.83 799.476,-1578.99 808.933,-1583.77 809.847,-1576.83"/>
+</g>
+<!-- \\Slothsoft\\Amber\\Assets\\EditorMain -->
+<g id="node3" class="node"><title>\\Slothsoft\\Amber\\Assets\\EditorMain</title>
+<polygon fill="none" stroke="black" points="1153.72,-1476 1069.72,-1476 1069.72,-1440 1153.72,-1440 1153.72,-1476"/>
+<text text-anchor="middle" x="1111.72" y="-1455.2" font-family="Courier,monospace" font-size="11.00">EditorMain</text>
+</g>
+<!-- \\Slothsoft\\Amber\\Assets\\EditorMain&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
+<g id="edge3" class="edge"><title>\\Slothsoft\\Amber\\Assets\\EditorMain&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
+<path fill="none" stroke="black" d="M1069.46,-1446.42C980.414,-1422 772.471,-1368.14 700.844,-1377"/>
+</g>
 <!-- \\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
-<g id="edge3" class="edge"><title>\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
+<g id="edge4" class="edge"><title>\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
 <path fill="none" stroke="black" d="M601.522,-1547.96C509.861,-1530.98 373.367,-1505.68 282.163,-1488.78"/>
 <polygon fill="none" stroke="black" points="282.573,-1485.29 272.102,-1486.91 281.297,-1492.18 282.573,-1485.29"/>
 </g>
-<!-- \\Slothsoft\\Amber\\Assets\\RawContainer -->
-<g id="node4" class="node"><title>\\Slothsoft\\Amber\\Assets\\RawContainer</title>
-<polygon fill="none" stroke="black" points="1160.72,-1638 1062.72,-1638 1062.72,-1602 1160.72,-1602 1160.72,-1638"/>
-<text text-anchor="middle" x="1111.72" y="-1617.2" font-family="Courier,monospace" font-size="11.00">RawContainer</text>
-</g>
-<!-- \\Slothsoft\\Amber\\Assets\\RawContainer&#45;&gt;\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase -->
-<g id="edge4" class="edge"><title>\\Slothsoft\\Amber\\Assets\\RawContainer&#45;&gt;\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase</title>
-<path fill="none" stroke="black" d="M1062.5,-1613.65C1000.74,-1605.51 891.894,-1591.17 809.698,-1580.34"/>
-<polygon fill="none" stroke="black" points="809.93,-1576.84 799.558,-1579.01 809.015,-1583.78 809.93,-1576.84"/>
-</g>
-<!-- \\Slothsoft\\Amber\\Assets\\StylesheetContainer -->
-<g id="node5" class="node"><title>\\Slothsoft\\Amber\\Assets\\StylesheetContainer</title>
-<polygon fill="none" stroke="black" points="1184.22,-1422 1039.22,-1422 1039.22,-1386 1184.22,-1386 1184.22,-1422"/>
-<text text-anchor="middle" x="1111.72" y="-1401.2" font-family="Courier,monospace" font-size="11.00">StylesheetContainer</text>
-</g>
-<!-- \\Slothsoft\\Amber\\Assets\\StylesheetContainer&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
-<g id="edge5" class="edge"><title>\\Slothsoft\\Amber\\Assets\\StylesheetContainer&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
-<path fill="none" stroke="black" d="M1039.04,-1391.12C957.035,-1378.28 818.86,-1362.4 700.844,-1377"/>
-</g>
 <!-- \\Slothsoft\\Amber\\Assets\\Gfx -->
-<g id="node6" class="node"><title>\\Slothsoft\\Amber\\Assets\\Gfx</title>
-<polygon fill="none" stroke="black" points="1138.72,-1368 1084.72,-1368 1084.72,-1332 1138.72,-1332 1138.72,-1368"/>
-<text text-anchor="middle" x="1111.72" y="-1347.2" font-family="Courier,monospace" font-size="11.00">Gfx</text>
+<g id="node5" class="node"><title>\\Slothsoft\\Amber\\Assets\\Gfx</title>
+<polygon fill="none" stroke="black" points="1138.72,-1422 1084.72,-1422 1084.72,-1386 1138.72,-1386 1138.72,-1422"/>
+<text text-anchor="middle" x="1111.72" y="-1401.2" font-family="Courier,monospace" font-size="11.00">Gfx</text>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\Gfx&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
-<g id="edge6" class="edge"><title>\\Slothsoft\\Amber\\Assets\\Gfx&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
-<path fill="none" stroke="black" d="M1084.25,-1350.69C1018.92,-1352.63 844.87,-1359.19 700.844,-1377"/>
+<g id="edge5" class="edge"><title>\\Slothsoft\\Amber\\Assets\\Gfx&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
+<path fill="none" stroke="black" d="M1084.25,-1398.81C1018.92,-1386.75 844.87,-1359.19 700.844,-1377"/>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\GfxContainer -->
-<g id="node7" class="node"><title>\\Slothsoft\\Amber\\Assets\\GfxContainer</title>
-<polygon fill="none" stroke="black" points="1160.72,-1314 1062.72,-1314 1062.72,-1278 1160.72,-1278 1160.72,-1314"/>
-<text text-anchor="middle" x="1111.72" y="-1293.2" font-family="Courier,monospace" font-size="11.00">GfxContainer</text>
+<g id="node6" class="node"><title>\\Slothsoft\\Amber\\Assets\\GfxContainer</title>
+<polygon fill="none" stroke="black" points="1160.72,-1368 1062.72,-1368 1062.72,-1332 1160.72,-1332 1160.72,-1368"/>
+<text text-anchor="middle" x="1111.72" y="-1347.2" font-family="Courier,monospace" font-size="11.00">GfxContainer</text>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\GfxContainer&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
-<g id="edge8" class="edge"><title>\\Slothsoft\\Amber\\Assets\\GfxContainer&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
-<path fill="none" stroke="black" d="M1062.5,-1307.88C986.258,-1326.13 832.94,-1360.66 700.844,-1377"/>
+<g id="edge6" class="edge"><title>\\Slothsoft\\Amber\\Assets\\GfxContainer&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
+<path fill="none" stroke="black" d="M1062.6,-1351.38C985.839,-1353.99 831.069,-1360.89 700.844,-1377"/>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\Raw -->
-<g id="node8" class="node"><title>\\Slothsoft\\Amber\\Assets\\Raw</title>
-<polygon fill="none" stroke="black" points="1138.72,-1260 1084.72,-1260 1084.72,-1224 1138.72,-1224 1138.72,-1260"/>
-<text text-anchor="middle" x="1111.72" y="-1239.2" font-family="Courier,monospace" font-size="11.00">Raw</text>
+<g id="node7" class="node"><title>\\Slothsoft\\Amber\\Assets\\Raw</title>
+<polygon fill="none" stroke="black" points="1138.72,-1314 1084.72,-1314 1084.72,-1278 1138.72,-1278 1138.72,-1314"/>
+<text text-anchor="middle" x="1111.72" y="-1293.2" font-family="Courier,monospace" font-size="11.00">Raw</text>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\Raw&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
-<g id="edge13" class="edge"><title>\\Slothsoft\\Amber\\Assets\\Raw&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
-<path fill="none" stroke="black" d="M1084.41,-1249.69C1066.55,-1254.98 1042.4,-1262.24 1021.22,-1269 878.079,-1314.71 849.971,-1358.55 700.844,-1377"/>
+<g id="edge7" class="edge"><title>\\Slothsoft\\Amber\\Assets\\Raw&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
+<path fill="none" stroke="black" d="M1084.56,-1302.54C1019.93,-1318.38 847.338,-1358.88 700.844,-1377"/>
+</g>
+<!-- \\Slothsoft\\Amber\\Assets\\RawContainer -->
+<g id="node8" class="node"><title>\\Slothsoft\\Amber\\Assets\\RawContainer</title>
+<polygon fill="none" stroke="black" points="1160.72,-1584 1062.72,-1584 1062.72,-1548 1160.72,-1548 1160.72,-1584"/>
+<text text-anchor="middle" x="1111.72" y="-1563.2" font-family="Courier,monospace" font-size="11.00">RawContainer</text>
+</g>
+<!-- \\Slothsoft\\Amber\\Assets\\RawContainer&#45;&gt;\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase -->
+<g id="edge8" class="edge"><title>\\Slothsoft\\Amber\\Assets\\RawContainer&#45;&gt;\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase</title>
+<path fill="none" stroke="black" d="M1062.5,-1566C1000.74,-1566 891.894,-1566 809.698,-1566"/>
+<polygon fill="none" stroke="black" points="809.558,-1562.5 799.558,-1566 809.558,-1569.5 809.558,-1562.5"/>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\Stylesheet -->
 <g id="node9" class="node"><title>\\Slothsoft\\Amber\\Assets\\Stylesheet</title>
-<polygon fill="none" stroke="black" points="1153.72,-1206 1069.72,-1206 1069.72,-1170 1153.72,-1170 1153.72,-1206"/>
-<text text-anchor="middle" x="1111.72" y="-1185.2" font-family="Courier,monospace" font-size="11.00">Stylesheet</text>
+<polygon fill="none" stroke="black" points="1153.72,-1260 1069.72,-1260 1069.72,-1224 1153.72,-1224 1153.72,-1260"/>
+<text text-anchor="middle" x="1111.72" y="-1239.2" font-family="Courier,monospace" font-size="11.00">Stylesheet</text>
 </g>
 <!-- \\Slothsoft\\Amber\\Assets\\Stylesheet&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
-<g id="edge14" class="edge"><title>\\Slothsoft\\Amber\\Assets\\Stylesheet&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
+<g id="edge9" class="edge"><title>\\Slothsoft\\Amber\\Assets\\Stylesheet&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
+<path fill="none" stroke="black" d="M1069.64,-1254.09C1054.4,-1258.66 1036.99,-1263.96 1021.22,-1269 878.079,-1314.71 849.971,-1358.55 700.844,-1377"/>
+</g>
+<!-- \\Slothsoft\\Amber\\Assets\\StylesheetContainer -->
+<g id="node10" class="node"><title>\\Slothsoft\\Amber\\Assets\\StylesheetContainer</title>
+<polygon fill="none" stroke="black" points="1184.22,-1206 1039.22,-1206 1039.22,-1170 1184.22,-1170 1184.22,-1206"/>
+<text text-anchor="middle" x="1111.72" y="-1185.2" font-family="Courier,monospace" font-size="11.00">StylesheetContainer</text>
+</g>
+<!-- \\Slothsoft\\Amber\\Assets\\StylesheetContainer&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase -->
+<g id="edge10" class="edge"><title>\\Slothsoft\\Amber\\Assets\\StylesheetContainer&#45;&gt;\\Slothsoft\\Farah\\Module\\Node\\Asset\\AssetBase</title>
 <path fill="none" stroke="black" d="M698.844,-1377C546.985,-1395.78 372.056,-1430.77 270.812,-1452.36"/>
 <polygon fill="none" stroke="black" points="269.992,-1448.95 260.946,-1454.47 271.457,-1455.8 269.992,-1448.95"/>
-<path fill="none" stroke="black" d="M1069.66,-1198.75C1054.26,-1203.21 1036.74,-1208.79 1021.22,-1215 873.079,-1274.27 859.196,-1357.41 700.844,-1377"/>
+<path fill="none" stroke="black" d="M1045.73,-1206.14C1037.4,-1208.89 1029.06,-1211.87 1021.22,-1215 873.079,-1274.27 859.196,-1357.41 700.844,-1377"/>
 </g>
-<!-- \\Slothsoft\\Amber\\Assets\\AmberdataContainer -->
-<g id="node10" class="node"><title>\\Slothsoft\\Amber\\Assets\\AmberdataContainer</title>
-<polygon fill="none" stroke="black" points="1180.72,-1584 1042.72,-1584 1042.72,-1548 1180.72,-1548 1180.72,-1584"/>
-<text text-anchor="middle" x="1111.72" y="-1563.2" font-family="Courier,monospace" font-size="11.00">AmberdataContainer</text>
+<!-- \\Slothsoft\\Amber\\CLI\\AmbGfx -->
+<g id="node11" class="node"><title>\\Slothsoft\\Amber\\CLI\\AmbGfx</title>
+<polygon fill="none" stroke="black" points="1140.22,-1126 1083.22,-1126 1083.22,-1090 1140.22,-1090 1140.22,-1126"/>
+<text text-anchor="middle" x="1111.72" y="-1105.2" font-family="Courier,monospace" font-size="11.00">AmbGfx</text>
 </g>
-<!-- \\Slothsoft\\Amber\\Assets\\AmberdataContainer&#45;&gt;\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase -->
-<g id="edge16" class="edge"><title>\\Slothsoft\\Amber\\Assets\\AmberdataContainer&#45;&gt;\\Slothsoft\\Amber\\Assets\\EditorResourceContainerBase</title>
-<path fill="none" stroke="black" d="M1042.58,-1566C979.203,-1566 883.707,-1566 809.761,-1566"/>
-<polygon fill="none" stroke="black" points="809.476,-1562.5 799.476,-1566 809.476,-1569.5 809.476,-1562.5"/>
+<!-- \\Slothsoft\\Amber\\CLI\\AmbTool -->
+<g id="node12" class="node"><title>\\Slothsoft\\Amber\\CLI\\AmbTool</title>
+<polygon fill="none" stroke="black" points="1143.72,-1072 1079.72,-1072 1079.72,-1036 1143.72,-1036 1143.72,-1072"/>
+<text text-anchor="middle" x="1111.72" y="-1051.2" font-family="Courier,monospace" font-size="11.00">AmbTool</text>
 </g>
 <!-- \\Slothsoft\\Amber\\Controller\\EditorController -->
-<g id="node11" class="node"><title>\\Slothsoft\\Amber\\Controller\\EditorController</title>
-<polygon fill="none" stroke="black" points="1174.22,-1046 1049.22,-1046 1049.22,-1010 1174.22,-1010 1174.22,-1046"/>
-<text text-anchor="middle" x="1111.72" y="-1025.2" font-family="Courier,monospace" font-size="11.00">EditorController</text>
+<g id="node13" class="node"><title>\\Slothsoft\\Amber\\Controller\\EditorController</title>
+<polygon fill="none" stroke="black" points="1174.22,-992 1049.22,-992 1049.22,-956 1174.22,-956 1174.22,-992"/>
+<text text-anchor="middle" x="1111.72" y="-971.2" font-family="Courier,monospace" font-size="11.00">EditorController</text>
 </g>
-<!-- \\Slothsoft\\Amber\\Mod\\ParameterFilter -->
-<g id="node12" class="node"><title>\\Slothsoft\\Amber\\Mod\\ParameterFilter</title>
-<polygon fill="none" stroke="black" points="1170.72,-1126 1052.72,-1126 1052.72,-1090 1170.72,-1090 1170.72,-1126"/>
-<text text-anchor="middle" x="1111.72" y="-1105.2" font-family="Courier,monospace" font-size="11.00">ParameterFilter</text>
+<!-- \\Slothsoft\\Amber\\Executables\\AmberExecutableCreator -->
+<g id="node14" class="node"><title>\\Slothsoft\\Amber\\Executables\\AmberExecutableCreator</title>
+<polygon fill="none" stroke="black" points="1194.22,-912 1029.22,-912 1029.22,-876 1194.22,-876 1194.22,-912"/>
+<text text-anchor="middle" x="1111.72" y="-891.2" font-family="Courier,monospace" font-size="11.00">AmberExecutableCreator</text>
 </g>
-<!-- \\Slothsoft\\Farah\\Module\\ParameterFilters\\MapFilter -->
-<g id="node25" class="node"><title>\\Slothsoft\\Farah\\Module\\ParameterFilters\\MapFilter</title>
-<ellipse fill="none" stroke="black" cx="699.844" cy="-288" rx="198.465" ry="18"/>
-<text text-anchor="middle" x="699.844" y="-284.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Farah\Module\ParameterFilters\MapFilter</text>
+<!-- \\Slothsoft\\Savegame\\Executables\\SavegameExecutableCreator -->
+<g id="node25" class="node"><title>\\Slothsoft\\Savegame\\Executables\\SavegameExecutableCreator</title>
+<ellipse fill="none" stroke="black" cx="699.844" cy="-288" rx="237.458" ry="18"/>
+<text text-anchor="middle" x="699.844" y="-284.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Savegame\Executables\SavegameExecutableCreator</text>
 </g>
-<!-- \\Slothsoft\\Amber\\Mod\\ParameterFilter&#45;&gt;\\Slothsoft\\Farah\\Module\\ParameterFilters\\MapFilter -->
-<g id="edge7" class="edge"><title>\\Slothsoft\\Amber\\Mod\\ParameterFilter&#45;&gt;\\Slothsoft\\Farah\\Module\\ParameterFilters\\MapFilter</title>
-<path fill="none" stroke="black" d="M1052.27,-1096.49C1040.96,-1092.15 1029.94,-1086.19 1021.22,-1078 783.293,-854.35 717.511,-429.408 703.876,-316.262"/>
-<polygon fill="none" stroke="black" points="707.349,-315.831 702.715,-306.303 700.396,-316.641 707.349,-315.831"/>
-</g>
-<!-- \\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveExtractor -->
-<g id="node13" class="node"><title>\\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveExtractor</title>
-<polygon fill="none" stroke="black" points="1190.72,-966 1032.72,-966 1032.72,-930 1190.72,-930 1190.72,-966"/>
-<text text-anchor="middle" x="1111.72" y="-945.2" font-family="Courier,monospace" font-size="11.00">AmberArchiveExtractor</text>
-</g>
-<!-- \\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveExtractorInterface -->
-<g id="node26" class="node"><title>\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveExtractorInterface</title>
-<ellipse fill="none" stroke="black" cx="699.844" cy="-234" rx="257.254" ry="18"/>
-<text text-anchor="middle" x="699.844" y="-230.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Savegame\Node\ArchiveParser\ArchiveExtractorInterface</text>
-</g>
-<!-- \\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveExtractor&#45;&gt;\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveExtractorInterface -->
-<g id="edge9" class="edge"><title>\\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveExtractor&#45;&gt;\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveExtractorInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1032.63,-931.381C1028.39,-928.447 1024.52,-925.015 1021.22,-921 927.739,-807.094 1060.99,-365.625 957.221,-261 918.435,-221.892 857.69,-214.145 805.063,-216.645"/>
-<polygon fill="none" stroke="black" points="804.769,-213.156 794.997,-217.25 805.189,-220.143 804.769,-213.156"/>
-</g>
-<!-- \\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveBuilder -->
-<g id="node14" class="node"><title>\\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveBuilder</title>
-<polygon fill="none" stroke="black" points="1184.22,-912 1039.22,-912 1039.22,-876 1184.22,-876 1184.22,-912"/>
-<text text-anchor="middle" x="1111.72" y="-891.2" font-family="Courier,monospace" font-size="11.00">AmberArchiveBuilder</text>
-</g>
-<!-- \\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveBuilderInterface -->
-<g id="node28" class="node"><title>\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveBuilderInterface</title>
-<ellipse fill="none" stroke="black" cx="699.844" cy="-180" rx="249.656" ry="18"/>
-<text text-anchor="middle" x="699.844" y="-176.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface</text>
-</g>
-<!-- \\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveBuilder&#45;&gt;\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveBuilderInterface -->
-<g id="edge11" class="edge"><title>\\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveBuilder&#45;&gt;\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveBuilderInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1039.18,-878.958C1032.33,-875.056 1026.12,-870.155 1021.22,-864 929.871,-749.225 1060.54,-311.131 957.221,-207 918.204,-167.676 856.985,-160.066 804.153,-162.696"/>
-<polygon fill="none" stroke="black" points="803.813,-159.21 794.051,-163.326 804.249,-166.196 803.813,-159.21"/>
+<!-- \\Slothsoft\\Amber\\Executables\\AmberExecutableCreator&#45;&gt;\\Slothsoft\\Savegame\\Executables\\SavegameExecutableCreator -->
+<g id="edge11" class="edge"><title>\\Slothsoft\\Amber\\Executables\\AmberExecutableCreator&#45;&gt;\\Slothsoft\\Savegame\\Executables\\SavegameExecutableCreator</title>
+<path fill="none" stroke="black" d="M1034.79,-875.889C1029.97,-873.31 1025.39,-870.364 1021.22,-867 829.068,-711.868 733.719,-409.009 708.089,-315.903"/>
+<polygon fill="none" stroke="black" points="711.425,-314.832 705.435,-306.093 704.668,-316.66 711.425,-314.832"/>
 </g>
 <!-- \\Slothsoft\\Amber\\Executables\\ExecutableMerger -->
 <g id="node15" class="node"><title>\\Slothsoft\\Amber\\Executables\\ExecutableMerger</title>
-<polygon fill="none" stroke="black" points="1174.22,-832 1049.22,-832 1049.22,-796 1174.22,-796 1174.22,-832"/>
-<text text-anchor="middle" x="1111.72" y="-811.2" font-family="Courier,monospace" font-size="11.00">ExecutableMerger</text>
+<polygon fill="none" stroke="black" points="1174.22,-858 1049.22,-858 1049.22,-822 1174.22,-822 1174.22,-858"/>
+<text text-anchor="middle" x="1111.72" y="-837.2" font-family="Courier,monospace" font-size="11.00">ExecutableMerger</text>
 </g>
 <!-- \\Slothsoft\\Farah\\Module\\Executables\\ExecutableDOMWriterBase -->
-<g id="node29" class="node"><title>\\Slothsoft\\Farah\\Module\\Executables\\ExecutableDOMWriterBase</title>
-<ellipse fill="none" stroke="black" cx="699.844" cy="-126" rx="248.856" ry="18"/>
-<text text-anchor="middle" x="699.844" y="-122.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Farah\Module\Executables\ExecutableDOMWriterBase</text>
+<g id="node26" class="node"><title>\\Slothsoft\\Farah\\Module\\Executables\\ExecutableDOMWriterBase</title>
+<ellipse fill="none" stroke="black" cx="699.844" cy="-234" rx="248.856" ry="18"/>
+<text text-anchor="middle" x="699.844" y="-230.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Farah\Module\Executables\ExecutableDOMWriterBase</text>
 </g>
 <!-- \\Slothsoft\\Amber\\Executables\\ExecutableMerger&#45;&gt;\\Slothsoft\\Farah\\Module\\Executables\\ExecutableDOMWriterBase -->
 <g id="edge12" class="edge"><title>\\Slothsoft\\Amber\\Executables\\ExecutableMerger&#45;&gt;\\Slothsoft\\Farah\\Module\\Executables\\ExecutableDOMWriterBase</title>
-<path fill="none" stroke="black" d="M1049.08,-805.838C1038.41,-801.759 1028.45,-795.768 1021.22,-787 931.172,-677.716 1057.13,-253.346 957.221,-153 918.284,-113.894 857.378,-106.195 804.699,-108.721"/>
-<polygon fill="none" stroke="black" points="804.395,-105.233 794.625,-109.331 804.818,-112.22 804.395,-105.233"/>
+<path fill="none" stroke="black" d="M1049.08,-829.609C1038.42,-825.187 1028.45,-818.908 1021.22,-810 866.43,-619.252 1131.89,-433.734 957.221,-261 918.587,-222.792 858.935,-214.752 806.891,-216.858"/>
+<polygon fill="none" stroke="black" points="806.391,-213.38 796.592,-217.409 806.764,-220.37 806.391,-213.38"/>
 </g>
-<!-- \\Slothsoft\\Amber\\Executables\\AmberExecutableCreator -->
-<g id="node16" class="node"><title>\\Slothsoft\\Amber\\Executables\\AmberExecutableCreator</title>
-<polygon fill="none" stroke="black" points="1194.22,-778 1029.22,-778 1029.22,-742 1194.22,-742 1194.22,-778"/>
-<text text-anchor="middle" x="1111.72" y="-757.2" font-family="Courier,monospace" font-size="11.00">AmberExecutableCreator</text>
+<!-- \\Slothsoft\\Amber\\Mod\\ParameterFilter -->
+<g id="node16" class="node"><title>\\Slothsoft\\Amber\\Mod\\ParameterFilter</title>
+<polygon fill="none" stroke="black" points="1170.72,-778 1052.72,-778 1052.72,-742 1170.72,-742 1170.72,-778"/>
+<text text-anchor="middle" x="1111.72" y="-757.2" font-family="Courier,monospace" font-size="11.00">ParameterFilter</text>
 </g>
-<!-- \\Slothsoft\\Savegame\\Executables\\SavegameExecutableCreator -->
-<g id="node30" class="node"><title>\\Slothsoft\\Savegame\\Executables\\SavegameExecutableCreator</title>
-<ellipse fill="none" stroke="black" cx="699.844" cy="-72" rx="237.458" ry="18"/>
-<text text-anchor="middle" x="699.844" y="-68.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Savegame\Executables\SavegameExecutableCreator</text>
+<!-- \\Slothsoft\\Farah\\Module\\ParameterFilters\\MapFilter -->
+<g id="node27" class="node"><title>\\Slothsoft\\Farah\\Module\\ParameterFilters\\MapFilter</title>
+<ellipse fill="none" stroke="black" cx="699.844" cy="-180" rx="198.465" ry="18"/>
+<text text-anchor="middle" x="699.844" y="-176.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Farah\Module\ParameterFilters\MapFilter</text>
 </g>
-<!-- \\Slothsoft\\Amber\\Executables\\AmberExecutableCreator&#45;&gt;\\Slothsoft\\Savegame\\Executables\\SavegameExecutableCreator -->
-<g id="edge15" class="edge"><title>\\Slothsoft\\Amber\\Executables\\AmberExecutableCreator&#45;&gt;\\Slothsoft\\Savegame\\Executables\\SavegameExecutableCreator</title>
-<path fill="none" stroke="black" d="M1034.19,-741.824C1029.32,-738.515 1024.9,-734.609 1021.22,-730 933.233,-619.898 1056.69,-198.852 957.221,-99 917.978,-59.605 856.439,-52.089 803.489,-54.7879"/>
-<polygon fill="none" stroke="black" points="803.125,-51.3039 793.367,-55.4312 803.569,-58.2898 803.125,-51.3039"/>
+<!-- \\Slothsoft\\Amber\\Mod\\ParameterFilter&#45;&gt;\\Slothsoft\\Farah\\Module\\ParameterFilters\\MapFilter -->
+<g id="edge13" class="edge"><title>\\Slothsoft\\Amber\\Mod\\ParameterFilter&#45;&gt;\\Slothsoft\\Farah\\Module\\ParameterFilters\\MapFilter</title>
+<path fill="none" stroke="black" d="M1052.34,-750.848C1040.48,-746.385 1029.2,-739.776 1021.22,-730 873.141,-548.584 1124.2,-371.189 957.221,-207 916.898,-167.35 853.921,-160.263 800.477,-163.254"/>
+<polygon fill="none" stroke="black" points="800.009,-159.777 790.271,-163.952 800.487,-166.761 800.009,-159.777"/>
 </g>
-<!-- \\Slothsoft\\Amber\\CLI\\AmbGfx -->
-<g id="node17" class="node"><title>\\Slothsoft\\Amber\\CLI\\AmbGfx</title>
-<polygon fill="none" stroke="black" points="1140.22,-698 1083.22,-698 1083.22,-662 1140.22,-662 1140.22,-698"/>
-<text text-anchor="middle" x="1111.72" y="-677.2" font-family="Courier,monospace" font-size="11.00">AmbGfx</text>
+<!-- \\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveBuilder -->
+<g id="node17" class="node"><title>\\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveBuilder</title>
+<polygon fill="none" stroke="black" points="1184.22,-698 1039.22,-698 1039.22,-662 1184.22,-662 1184.22,-698"/>
+<text text-anchor="middle" x="1111.72" y="-677.2" font-family="Courier,monospace" font-size="11.00">AmberArchiveBuilder</text>
 </g>
-<!-- \\Slothsoft\\Amber\\CLI\\AmbTool -->
-<g id="node18" class="node"><title>\\Slothsoft\\Amber\\CLI\\AmbTool</title>
-<polygon fill="none" stroke="black" points="1143.72,-644 1079.72,-644 1079.72,-608 1143.72,-608 1143.72,-644"/>
-<text text-anchor="middle" x="1111.72" y="-623.2" font-family="Courier,monospace" font-size="11.00">AmbTool</text>
+<!-- \\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveBuilderInterface -->
+<g id="node29" class="node"><title>\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveBuilderInterface</title>
+<ellipse fill="none" stroke="black" cx="699.844" cy="-126" rx="249.656" ry="18"/>
+<text text-anchor="middle" x="699.844" y="-122.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface</text>
 </g>
-<!-- \\Slothsoft\\Amber\\ModResourceLocator -->
-<g id="node19" class="node"><title>\\Slothsoft\\Amber\\ModResourceLocator</title>
-<polygon fill="none" stroke="black" points="1180.72,-590 1042.72,-590 1042.72,-554 1180.72,-554 1180.72,-590"/>
-<text text-anchor="middle" x="1111.72" y="-569.2" font-family="Courier,monospace" font-size="11.00">ModResourceLocator</text>
+<!-- \\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveBuilder&#45;&gt;\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveBuilderInterface -->
+<g id="edge15" class="edge"><title>\\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveBuilder&#45;&gt;\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveBuilderInterface</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1039.02,-667.037C1032.29,-663.416 1026.15,-658.822 1021.22,-653 876.457,-482.018 1117.4,-309.634 957.221,-153 951.667,-147.568 945.686,-142.749 939.363,-138.484"/>
+<polygon fill="none" stroke="black" points="940.88,-135.305 930.537,-133.006 937.188,-141.253 940.88,-135.305"/>
 </g>
-<!-- \\Slothsoft\\Amber\\ModController -->
-<g id="node20" class="node"><title>\\Slothsoft\\Amber\\ModController</title>
-<polygon fill="none" stroke="black" points="1163.72,-536 1059.72,-536 1059.72,-500 1163.72,-500 1163.72,-536"/>
-<text text-anchor="middle" x="1111.72" y="-515.2" font-family="Courier,monospace" font-size="11.00">ModController</text>
+<!-- \\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveExtractor -->
+<g id="node18" class="node"><title>\\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveExtractor</title>
+<polygon fill="none" stroke="black" points="1190.72,-644 1032.72,-644 1032.72,-608 1190.72,-608 1190.72,-644"/>
+<text text-anchor="middle" x="1111.72" y="-623.2" font-family="Courier,monospace" font-size="11.00">AmberArchiveExtractor</text>
+</g>
+<!-- \\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveExtractorInterface -->
+<g id="node30" class="node"><title>\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveExtractorInterface</title>
+<ellipse fill="none" stroke="black" cx="699.844" cy="-72" rx="257.254" ry="18"/>
+<text text-anchor="middle" x="699.844" y="-68.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Savegame\Node\ArchiveParser\ArchiveExtractorInterface</text>
+</g>
+<!-- \\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveExtractor&#45;&gt;\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveExtractorInterface -->
+<g id="edge16" class="edge"><title>\\Slothsoft\\Amber\\SavegameImplementations\\AmberArchiveExtractor&#45;&gt;\\Slothsoft\\Savegame\\Node\\ArchiveParser\\ArchiveExtractorInterface</title>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M1032.49,-613.471C1028.33,-610.832 1024.52,-607.703 1021.22,-604 870.701,-435.097 1118.88,-257.276 957.221,-99 952.065,-93.9511 946.54,-89.4311 940.715,-85.3934"/>
+<polygon fill="none" stroke="black" points="942.287,-82.2443 931.973,-79.8174 938.522,-88.1459 942.287,-82.2443"/>
+</g>
+<!-- \\Slothsoft\\Amber\\ArchiveManager -->
+<g id="node19" class="node"><title>\\Slothsoft\\Amber\\ArchiveManager</title>
+<polygon fill="none" stroke="black" points="1167.22,-590 1056.22,-590 1056.22,-554 1167.22,-554 1167.22,-590"/>
+<text text-anchor="middle" x="1111.72" y="-569.2" font-family="Courier,monospace" font-size="11.00">ArchiveManager</text>
 </g>
 <!-- \\Slothsoft\\Amber\\GraphicsManager -->
-<g id="node21" class="node"><title>\\Slothsoft\\Amber\\GraphicsManager</title>
-<polygon fill="none" stroke="black" points="1170.72,-482 1052.72,-482 1052.72,-446 1170.72,-446 1170.72,-482"/>
-<text text-anchor="middle" x="1111.72" y="-461.2" font-family="Courier,monospace" font-size="11.00">GraphicsManager</text>
+<g id="node20" class="node"><title>\\Slothsoft\\Amber\\GraphicsManager</title>
+<polygon fill="none" stroke="black" points="1170.72,-536 1052.72,-536 1052.72,-500 1170.72,-500 1170.72,-536"/>
+<text text-anchor="middle" x="1111.72" y="-515.2" font-family="Courier,monospace" font-size="11.00">GraphicsManager</text>
+</g>
+<!-- \\Slothsoft\\Amber\\ModController -->
+<g id="node21" class="node"><title>\\Slothsoft\\Amber\\ModController</title>
+<polygon fill="none" stroke="black" points="1163.72,-482 1059.72,-482 1059.72,-446 1163.72,-446 1163.72,-482"/>
+<text text-anchor="middle" x="1111.72" y="-461.2" font-family="Courier,monospace" font-size="11.00">ModController</text>
 </g>
 <!-- \\Slothsoft\\Amber\\ModResource -->
 <g id="node22" class="node"><title>\\Slothsoft\\Amber\\ModResource</title>
@@ -257,19 +257,19 @@
 <text text-anchor="middle" x="1111.72" y="-407.2" font-family="Courier,monospace" font-size="11.00">ModResource</text>
 </g>
 <!-- \\Slothsoft\\Core\\IO\\HTTPFile -->
-<g id="node27" class="node"><title>\\Slothsoft\\Core\\IO\\HTTPFile</title>
+<g id="node28" class="node"><title>\\Slothsoft\\Core\\IO\\HTTPFile</title>
 <ellipse fill="none" stroke="black" cx="699.844" cy="-18" rx="118.079" ry="18"/>
 <text text-anchor="middle" x="699.844" y="-14.3" font-family="Times New Roman,serif" font-size="14.00" fill="gray">\Slothsoft\Core\IO\HTTPFile</text>
 </g>
 <!-- \\Slothsoft\\Amber\\ModResource&#45;&gt;\\Slothsoft\\Core\\IO\\HTTPFile -->
-<g id="edge10" class="edge"><title>\\Slothsoft\\Amber\\ModResource&#45;&gt;\\Slothsoft\\Core\\IO\\HTTPFile</title>
+<g id="edge14" class="edge"><title>\\Slothsoft\\Amber\\ModResource&#45;&gt;\\Slothsoft\\Core\\IO\\HTTPFile</title>
 <path fill="none" stroke="black" d="M1065.93,-406.125C1049.72,-402.49 1032.62,-395.671 1021.22,-383 918.982,-269.321 1069.68,-148.577 957.221,-45 911.973,-3.32638 841.409,1.3814 785.757,-3.19577"/>
 <polygon fill="none" stroke="black" points="785.179,0.265473 775.549,-4.15166 785.831,-6.70404 785.179,0.265473"/>
 </g>
-<!-- \\Slothsoft\\Amber\\ArchiveManager -->
-<g id="node23" class="node"><title>\\Slothsoft\\Amber\\ArchiveManager</title>
-<polygon fill="none" stroke="black" points="1167.22,-374 1056.22,-374 1056.22,-338 1167.22,-338 1167.22,-374"/>
-<text text-anchor="middle" x="1111.72" y="-353.2" font-family="Courier,monospace" font-size="11.00">ArchiveManager</text>
+<!-- \\Slothsoft\\Amber\\ModResourceLocator -->
+<g id="node23" class="node"><title>\\Slothsoft\\Amber\\ModResourceLocator</title>
+<polygon fill="none" stroke="black" points="1180.72,-374 1042.72,-374 1042.72,-338 1180.72,-338 1180.72,-374"/>
+<text text-anchor="middle" x="1111.72" y="-353.2" font-family="Courier,monospace" font-size="11.00">ModResourceLocator</text>
 </g>
 </g>
 </svg>
