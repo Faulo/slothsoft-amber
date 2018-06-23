@@ -8,7 +8,7 @@ use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\FileSystem;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrlArguments;
+use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Build\XmlBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
