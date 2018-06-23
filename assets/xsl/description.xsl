@@ -5,7 +5,7 @@
 
 	<xsl:template match="/sfm:fragment">
 		<div data-dict="">
-			description:
+			<xsl:text>description:</xsl:text>
 			<xsl:value-of select="*[@name = 'sites']//sfs:page[@current]/@name" />
 		</div>
 	</xsl:template>
