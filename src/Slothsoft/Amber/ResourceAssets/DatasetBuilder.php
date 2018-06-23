@@ -11,7 +11,8 @@ use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\DOMWriterResultBuild
 
 class DatasetBuilder implements ExecutableBuilderStrategyInterface
 {
-    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args) : ExecutableStrategies
+
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
     {
         $game = $args->get(DatasetParameterFilter::PARAM_GAME);
         $version = $args->get(DatasetParameterFilter::PARAM_VERSION);

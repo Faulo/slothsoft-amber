@@ -14,6 +14,7 @@ use Slothsoft\Farah\FarahUrl\FarahUrlPath;
 
 class AmberdataBuilder implements ExecutableBuilderStrategyInterface
 {
+
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
     {
         $game = $args->get(DatasetParameterFilter::PARAM_GAME);
@@ -21,17 +22,17 @@ class AmberdataBuilder implements ExecutableBuilderStrategyInterface
         $infoset = $args->get(DatasetParameterFilter::PARAM_INFOSET);
         $user = $args->get(DatasetParameterFilter::PARAM_USER);
         
-        $convertUrl = $context->createUrl($args)->withAssetPath(FarahUrlPath::createFromString("/games/$game/convert/libs"));
+        $convertUrl = $context->createUrl($args)->withAssetPath(FarahUrlPath::createFromString("/games/$game/convert/$infoset"));
         $datasetUrl = $context->createUrl($args)->withAssetPath(FarahUrlPath::createFromString("/game-resources/dataset"));
         
-        $getUseInstructions = function() use ($context, $convertUrl, $datasetUrl) : UseInstructionCollection {
+        $getUseInstructions = function () use ($context, $convertUrl, $datasetUrl): UseInstructionCollection {
             $instructions = new UseInstructionCollection();
             $instructions->rootAsset = $context;
             $instructions->templateAsset = Module::resolveToAsset($convertUrl);
             $instructions->documentAssets[] = Module::resolveToAsset($datasetUrl);
             return $instructions;
         };
-        $getLinkInstructions = function() use ($context) : LinkInstructionCollection {
+        $getLinkInstructions = function () use ($context): LinkInstructionCollection {
             return new LinkInstructionCollection();
         };
         $resultBuilder = new TransformationResultBuilder($getUseInstructions, $getLinkInstructions);

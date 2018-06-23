@@ -12,10 +12,12 @@
      1px 1px 0 black;
 	 */
 }
+
 .Amber canvas {
 	image-rendering: pixelated;
 	image-rendering: -moz-crisp-edges;
 }
+
 .Amber .DungeonViewer {
 	
 }
@@ -63,7 +65,8 @@
 	margin: 0;
 }
 
-.Amber input[type="submit"], .Amber button, .Amber details, .Amber article {
+.Amber input[type="submit"], .Amber button, .Amber details, .Amber article
+	{
 	background-color: rgb(102, 102, 85);
 	border-color: rgb(102, 102, 85);
 	border-width: 2px;
@@ -72,8 +75,8 @@
 	border-radius: 2px;
 }
 
-.Amber textarea, .Amber input[type="text"], .Amber input[type="number"], .Amber select,
-	.Amber *[role="button"] {
+.Amber textarea, .Amber input[type="text"], .Amber input[type="number"],
+	.Amber select, .Amber *[role="button"] {
 	max-width: 100%;
 	background-color: rgb(68, 68, 51);
 	border-color: rgb(68, 68, 51);
@@ -103,6 +106,7 @@
 .Amber .command {
 	border-style: groove;
 }
+
 .Amber .textbox {
 	white-space: pre-wrap;
 	border-style: ridge;
@@ -120,6 +124,7 @@
 .Amber article {
 	border-style: ridge;
 }
+
 .Amber p.pre {
 	margin: auto;
 }
@@ -143,11 +148,13 @@
 	color: rgb(255, 204, 0);
 }
 
-.Amber .green, .Amber .section>.name, .Amber caption, .Amber h3, .Amber a:link {
+.Amber .green, .Amber .section>.name, .Amber caption, .Amber h3, .Amber a:link
+	{
 	color: rgb(170, 170, 68);
 }
 
-.Amber .gray, .Amber a:visited, .Amber *[data-type="string-dictionary"] li {
+.Amber .gray, .Amber a:visited, .Amber *[data-type="string-dictionary"] li
+	{
 	color: rgb(170, 170, 153);
 }
 
@@ -190,8 +197,8 @@
 	width: 1.5em;
 }
 
-.Amber input[size="1"], .Amber input[size="2"], .Amber input[max="99"], .Amber input[max="250"]
-	{
+.Amber input[size="1"], .Amber input[size="2"], .Amber input[max="99"],
+	.Amber input[max="250"] {
 	width: 3.5em;
 }
 
@@ -199,7 +206,8 @@
 	width: 3.5em;
 }
 
-.Amber input[max="65536"], .Amber input[size="3"], .Amber input[size="4"] {
+.Amber input[max="65536"], .Amber input[size="3"], .Amber input[size="4"]
+	{
 	width: 6em;
 }
 
@@ -312,8 +320,7 @@
 	position: relative;
 }
 /* , .Amber form:invalid button[type="submit"]:hover::after */
-.Amber *[data-hover-text]:hover::after
-	{
+.Amber *[data-hover-text]:hover::after {
 	display: block;
 	content: attr(data-hover-text);
 	pointer-events: none;
@@ -343,10 +350,6 @@
 .Amber .ailments ul {
 	column-count: 2;
 }
-
-
-
-
 
 *[data-template="tabs"]>label {
 	display: block;
@@ -409,8 +412,8 @@
 *[data-template="flex"].spells>ul>li {
 	width: 17em;
 }
-.spells,
-.events {
+
+.spells, .events {
 	font-size: smaller;
 }
 

@@ -11,13 +11,12 @@ amber-picker {
 amber-picker.item-picker {
 	margin: auto;
 }
-amber-item-id,
-amber-item-amount,
-amber-item-charge,
-amber-broken,
-amber-identified {
+
+amber-item-id, amber-item-amount, amber-item-charge, amber-broken,
+	amber-identified {
 	display: block;
 }
+
 amber-item-id:hover::before {
 	display: block;
 	pointer-events: none;
@@ -40,8 +39,7 @@ amber-item-id::after {
 	border: 2px solid transparent;
 }
 
-amber-item-id[value=""]::after,
-amber-item-id[value="0"]::after {
+amber-item-id[value=""]::after, amber-item-id[value="0"]::after {
 	background-image: none;
 }
 
@@ -51,8 +49,8 @@ amber-item-amount::after {
 	text-align: center;
 }
 
-amber-item-amount[value=""]::after,
-amber-item-amount[value="0"]::after {
+amber-item-amount[value=""]::after, amber-item-amount[value="0"]::after
+	{
 	content: " ";
 }
 
@@ -104,8 +102,8 @@ amber-item-charge::after {
 	content: attr(value);
 }
 
-amber-item-charge[value=""]::after,
-amber-item-charge[value="0"]::after {
+amber-item-charge[value=""]::after, amber-item-charge[value="0"]::after
+	{
 	display: none;
 }
 
@@ -117,6 +115,7 @@ amber-item-charge[value="255"]::after {
 amber-picker.portrait-picker {
 	border-style: ridge !important;
 }
+
 amber-portrait {
 	display: block;
 }
@@ -137,6 +136,7 @@ amber-portrait::after {
 amer-picker.monster-sprite-picker {
 	border-style: ridge;
 }
+
 amber-gfx-id {
 	display: block;
 }
@@ -147,8 +147,8 @@ amber-picker.tile-picker {
 	width: 34px;
 	height: 34px;
 }
-amber-tile-id,
-amber-event-id {
+
+amber-tile-id, amber-event-id {
 	display: block;
 }
 
@@ -161,8 +161,8 @@ amber-event-id {
 	left: 0;
 }
 
-*[data-tileset-icon] amber-tile-id[value=""]::after,
-*[data-tileset-icon] amber-tile-id[value="0"]::after {
+*[data-tileset-icon] amber-tile-id[value=""]::after, *[data-tileset-icon] amber-tile-id[value="0"]::after
+	{
 	display: none;
 }
 
@@ -175,8 +175,8 @@ amber-event-id {
 	content: attr(value);
 }
 
-*[data-tileset-lab] amber-tile-id[value=""]::after,
-*[data-tileset-lab] amber-tile-id[value="0"]::after {
+*[data-tileset-lab] amber-tile-id[value=""]::after, *[data-tileset-lab] amber-tile-id[value="0"]::after
+	{
 	display: none;
 }
 
@@ -191,7 +191,6 @@ amber-event-id::after {
 	text-align: center;
 }
 
-amber-event-id[value=""]::after,
-amber-event-id[value="0"]::after {
+amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 	display: none;
 }

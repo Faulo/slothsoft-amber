@@ -58,10 +58,6 @@ class AmberdataContainer extends EditorResourceContainerBase
         if ($assetName !== 'dictionaries') {
             $data[] = "/editor/resource/amberdata/dictionaries";
         }
-        return $this->buildFragment(
-            $assetName,
-            $data,
-            "/games/ambermoon/template.extract"
-        );
+        return $this->buildFragment($assetName, $data, "/games/ambermoon/template.extract");
     }
 }

@@ -21,10 +21,10 @@ class AmberArchiveExtractor implements ArchiveExtractorInterface
     public function extractArchive(string $archivePath, string $targetDir): bool
     {
         $ret = false;
-        if (!realpath($archivePath)) {
+        if (! realpath($archivePath)) {
             throw new Exception("'$archivePath' is not a valid archive file.");
         }
-        if (!realpath($targetDir)) {
+        if (! realpath($targetDir)) {
             throw new Exception("'$targetDir' is not a valid extract directory.");
         }
         $archivePath = realpath($archivePath);

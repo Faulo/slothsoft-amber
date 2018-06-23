@@ -7,7 +7,9 @@ use Slothsoft\Savegame\Executables\SavegameExecutableCreator;
 
 class AmberExecutableCreator extends SavegameExecutableCreator
 {
-    public function createExecutableMerger(array $executables) : ExecutableInterface {
+
+    public function createExecutableMerger(array $executables): ExecutableInterface
+    {
         return $this->initExecutable(new ExecutableMerger($executables));
     }
 }

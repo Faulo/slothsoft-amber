@@ -9,13 +9,16 @@ use DOMDocument;
 class ExecutableMerger extends ExecutableDOMWriterBase
 {
     use DOMWriterElementFromDocumentTrait;
-    
+
     private $executables;
-    public function __construct(array $executables) {
+
+    public function __construct(array $executables)
+    {
         $this->executables = $executables;
     }
-    
-    public function toDocument() : DOMDocument {
+
+    public function toDocument(): DOMDocument
+    {
         if ($this->executables) {
             $resultDoc = null;
             foreach ($this->executables as $executable) {
@@ -26,9 +29,7 @@ class ExecutableMerger extends ExecutableDOMWriterBase
                     $parentNode = $tempDoc->documentElement;
                     foreach ($parentNode->childNodes as $node) {
                         if ($node->nodeType === XML_ELEMENT_NODE) {
-                            $resultDoc->documentElement->appendChild(
-                                $resultDoc->importNode($node, true)
-                            );
+                            $resultDoc->documentElement->appendChild($resultDoc->importNode($node, true));
                         }
                     }
                 }

@@ -15,8 +15,13 @@ use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 
 class EditorController
 {
+
     public function createEditorConfig(string $game, string $version, string $infoset, string $user): array
     {
+        if ($infoset === '') {
+            throw new \InvalidArgumentException("Required parameter 'infoset' is missing.");
+        }
+        
         $user = preg_replace('~[^\w]~', '', $user);
         
         $editorConfig = [];
@@ -185,8 +190,6 @@ class EditorController
             ]
         ]
     ];
-    
-    
 
     public function createEditorConfigOLD(string $game, string $mod, string $preset, string $saveMode, string $saveId): array
     {
@@ -221,24 +224,26 @@ class EditorController
         $editor->load();
         return $editor;
     }
-    
-    private function getAmberAssetUrl(string $url): FarahUrl {
+
+    private function getAmberAssetUrl(string $url): FarahUrl
+    {
         return FarahUrl::createFromReference($url, FarahUrl::createFromReference('farah://slothsoft@amber'));
     }
-    
-    private function getAmberAssetPath(string $url): string {
+
+    private function getAmberAssetPath(string $url): string
+    {
         $url = $this->getAmberAssetUrl($url);
-        return Module::resolveToAsset($url)->getManifestElement()->getAttribute('realpath');
+        return (string) Module::resolveToAsset($url)->getFileInfo();
     }
 
     private function createAmbTool(): AmbTool
     {
-        return new AmbTool((string) $this->getAmberAssetUrl('/cli/ambtool'));
+        return new AmbTool($this->getAmberAssetPath('/cli/ambtool'));
     }
 
     private function createAmbGfx(): AmbGfx
     {
-        return new AmbGfx((string) $this->getAmberAssetUrl('/cli/ambgfx'));
+        return new AmbGfx($this->getAmberAssetPath('/cli/ambgfx'));
     }
 
     private function createArchiveExtractors(): array

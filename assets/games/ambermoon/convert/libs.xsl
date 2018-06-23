@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
-	xmlns="http://schema.slothsoft.net/amber/amberdata" 
-	xmlns:amber="http://schema.slothsoft.net/amber/amberdata"
-	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
+<xsl:stylesheet version="1.0" xmlns="http://schema.slothsoft.net/amber/amberdata"
+	xmlns:amber="http://schema.slothsoft.net/amber/amberdata" xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common"
-	xmlns:func="http://exslt.org/functions" xmlns:str="http://exslt.org/strings"
-	xmlns:set="http://exslt.org/sets" xmlns:math="http://exslt.org/math"
-	xmlns:php="http://php.net/xsl" 
-	xmlns:save="http://schema.slothsoft.net/savegame/editor"
-	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
+	xmlns:func="http://exslt.org/functions" xmlns:str="http://exslt.org/strings" xmlns:set="http://exslt.org/sets"
+	xmlns:math="http://exslt.org/math" xmlns:php="http://php.net/xsl"
+	xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
 
 	<xsl:variable name="dataDocument" select="/*/*/sse:savegame.editor" />
 	<xsl:variable name="dictionaryDocument" select="/*/*[@name = 'dictionaries']/saa:amberdata" />
-	
-	<xsl:variable name="lib" select="string($dataDocument/../@name)"/>
 
-	<xsl:key name="dictionary-option"
-		match="saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option"
-		use="../@dictionary-id" />	<xsl:key name="string-dictionary"		match="sse:instruction[@type='string-dictionary']/sse:string" use="../@name" />
+	<xsl:variable name="lib" select="string($dataDocument/../@name)" />
+
+	<xsl:key name="dictionary-option" match="saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option"
+		use="../@dictionary-id" />	<xsl:key name="string-dictionary" match="sse:instruction[@type='string-dictionary']/sse:string" use="../@name" />
 
 	<func:function name="saa:getName">
 		<xsl:param name="context" select="." />
@@ -61,6 +56,7 @@
 
 	<xsl:template match="/*">
 		<amberdata version="0.1">
+			<xsl:copy-of select="." />
 			<xsl:for-each select=".//sse:savegame.editor">
 				<xsl:choose>
 					<xsl:when test="$lib = 'graphics'">
@@ -133,184 +129,73 @@
 
 	<xsl:template name="extract-graphics">
 		<gfx-archive-list>
-			<!--
-				'Static_data.amb' => [
-				'width' => [16, 32],
-				'bitplanes' => [3, 5],
-				'palette' => 0,
-				'color' => 24,
-				],
-				'Palettes.amb' => [
-				'width' => 256,
-				'bitplanes' => 2,
-				'palette' => 0,
-				],
-				'Lab_background.amb' => [
-				'width' => 144,
-				'bitplanes' => 4,
-				'palette' => 0,
-				],
-				'Floors.amb' => [
-				'width' => 64,
-				'bitplanes' => 4,
-				'palette' => 0,
-				],
-				'1Icon_gfx.amb' => [
-				'width' => 16,
-				'bitplanes' => 5,
-				'palette' => null,
-				],
-				'2Icon_gfx.amb' => [
-				'width' => 16,
-				'bitplanes' => 5,
-				'palette' => null,
-				],
-				'3Icon_gfx.amb' => [
-				'width' => 16,
-				'bitplanes' => 5,
-				'palette' => null,
-				],
-				'Automap_graphics' => [
-				'width' => null,
-				'bitplanes' => null,
-				'palette' => 0,
-				],
-				'Combat_background.amb' => [
-				'width' => 320,
-				'bitplanes' => 5,
-				'palette' => 5,
-				],
-				'Combat_graphics' => [
-				'width' => null,
-				'bitplanes' => null,
-				'palette' => 0,
-				],
-				'Event_pix.amb' => [
-				'width' => 320,
-				'bitplanes' => 5,
-				'palette' => 31,
-				],
-				'Layouts.amb' => [
-				'width' => 320,
-				'bitplanes' => 3,
-				'palette' => 10,
-				],
-				'Monster_gfx.amb' => [
-				'width' => 80, //[64, 48, 80, 96], //[48, 64, 96, 128],
-				'bitplanes' => 5,
-				'palette' => null,
-				],
-				'NPC_gfx.amb' => [
-				'width' => 16,
-				'bitplanes' => 5,
-				'palette' => null,
-				],
-				'Object_icons' => [
-				'width' => 16,
-				'bitplanes' => 5,
-				'palette' => 49,
-				],
-				'Party_gfx.amb' => [
-				'width' => 16,
-				'bitplanes' => 5,
-				'palette' => 0,
-				],
-				'Pics_80x80.amb' => [
-				'width' => 80,
-				'bitplanes' => 5,
-				'palette' => 49,
-				],
-				'PICS80.AMB' => [
-				'width' => 80,
-				'bitplanes' => null,
-				'palette' => 49,
-				],
-				'Portraits.amb' => [
-				'width' => 32,
-				'bitplanes' => 5,
-				'palette' => 49,
-				//'createSprite' => true,
-				],
-				'Stationary' => [
-				'width' => [32, 48],
-				'bitplanes' => 5,
-				'palette' => 0,
-				],
-				'Travel_gfx.amb' => [
-				'width' => 16,
-				'bitplanes' => 4,
-				'palette' => null,
-				],
-			-->
+			<!-- 'Static_data.amb' => [ 'width' => [16, 32], 'bitplanes' => [3, 5], 'palette' => 0, 'color' => 24, ], 'Palettes.amb' 
+				=> [ 'width' => 256, 'bitplanes' => 2, 'palette' => 0, ], 'Lab_background.amb' => [ 'width' => 144, 'bitplanes' => 4, 'palette' 
+				=> 0, ], 'Floors.amb' => [ 'width' => 64, 'bitplanes' => 4, 'palette' => 0, ], '1Icon_gfx.amb' => [ 'width' => 16, 'bitplanes' 
+				=> 5, 'palette' => null, ], '2Icon_gfx.amb' => [ 'width' => 16, 'bitplanes' => 5, 'palette' => null, ], '3Icon_gfx.amb' => 
+				[ 'width' => 16, 'bitplanes' => 5, 'palette' => null, ], 'Automap_graphics' => [ 'width' => null, 'bitplanes' => null, 'palette' 
+				=> 0, ], 'Combat_background.amb' => [ 'width' => 320, 'bitplanes' => 5, 'palette' => 5, ], 'Combat_graphics' => [ 'width' 
+				=> null, 'bitplanes' => null, 'palette' => 0, ], 'Event_pix.amb' => [ 'width' => 320, 'bitplanes' => 5, 'palette' => 31, 
+				], 'Layouts.amb' => [ 'width' => 320, 'bitplanes' => 3, 'palette' => 10, ], 'Monster_gfx.amb' => [ 'width' => 80, //[64, 
+				48, 80, 96], //[48, 64, 96, 128], 'bitplanes' => 5, 'palette' => null, ], 'NPC_gfx.amb' => [ 'width' => 16, 'bitplanes' => 
+				5, 'palette' => null, ], 'Object_icons' => [ 'width' => 16, 'bitplanes' => 5, 'palette' => 49, ], 'Party_gfx.amb' => [ 'width' 
+				=> 16, 'bitplanes' => 5, 'palette' => 0, ], 'Pics_80x80.amb' => [ 'width' => 80, 'bitplanes' => 5, 'palette' => 49, ], 'PICS80.AMB' 
+				=> [ 'width' => 80, 'bitplanes' => null, 'palette' => 49, ], 'Portraits.amb' => [ 'width' => 32, 'bitplanes' => 5, 'palette' 
+				=> 49, //'createSprite' => true, ], 'Stationary' => [ 'width' => [32, 48], 'bitplanes' => 5, 'palette' => 0, ], 'Travel_gfx.amb' 
+				=> [ 'width' => 16, 'bitplanes' => 4, 'palette' => null, ], -->
 			<gfx-archive file-name="items" file-path="Amberfiles/Object_icons">
-				<for-each-file width="16" bitplanes="5" palette="49"
-					transparent="1" />
+				<for-each-file width="16" bitplanes="5" palette="49" transparent="1" />
 			</gfx-archive>
 
 			<gfx-archive file-name="portraits" file-path="Amberfiles/Portraits.amb">
-				<for-each-file width="32" bitplanes="5" palette="49"
-					transparent="0" />
+				<for-each-file width="32" bitplanes="5" palette="49" transparent="0" />
 			</gfx-archive>
 
 			<gfx-archive file-name="events" file-path="Amberfiles/Event_pix.amb">
-				<for-each-file width="320" bitplanes="5" palette="31"
-					transparent="0" />
+				<for-each-file width="320" bitplanes="5" palette="31" transparent="0" />
 			</gfx-archive>
 
 			<gfx-archive file-name="combat-backgrounds" file-path="Amberfiles/Combat_background.amb">
-				<for-each-file width="320" bitplanes="5" palette="5"
-					transparent="0" />
+				<for-each-file width="320" bitplanes="5" palette="5" transparent="0" />
 			</gfx-archive>
 
 			<gfx-archive file-name="places" file-path="Amberfiles/Pics_80x80.amb">
-				<for-each-file width="80" bitplanes="5" palette="49"
-					transparent="0" />
+				<for-each-file width="80" bitplanes="5" palette="49" transparent="0" />
 			</gfx-archive>
 
 			<gfx-archive file-name="palettes" file-path="Amberfiles/Palettes.amb">
-				<for-each-file width="256" bitplanes="2" palette="0"
-					transparent="0" />
+				<for-each-file width="256" bitplanes="2" palette="0" transparent="0" />
 			</gfx-archive>
 
 			<gfx-archive file-name="tileset.icons" file-path="Amberfiles/1Icon_gfx.amb">
 				<xsl:for-each select="str:split(str:padding(50, '-'), '')">
 
-					<for-each-file width="16" bitplanes="5"
-						palette="{position() - 1}" transparent="1" />
+					<for-each-file width="16" bitplanes="5" palette="{position() - 1}" transparent="1" />
 				</xsl:for-each>
 			</gfx-archive>
 			<gfx-archive file-name="tileset.icons" file-path="Amberfiles/2Icon_gfx.amb">
 				<xsl:for-each select="str:split(str:padding(50, '-'), '')">
 
-					<for-each-file width="16" bitplanes="5"
-						palette="{position() - 1}" transparent="1" />
+					<for-each-file width="16" bitplanes="5" palette="{position() - 1}" transparent="1" />
 				</xsl:for-each>
 			</gfx-archive>
 			<gfx-archive file-name="tileset.icons" file-path="Amberfiles/3Icon_gfx.amb">
 				<xsl:for-each select="str:split(str:padding(50, '-'), '')">
 
-					<for-each-file width="16" bitplanes="5"
-						palette="{position() - 1}" transparent="1" />
+					<for-each-file width="16" bitplanes="5" palette="{position() - 1}" transparent="1" />
 				</xsl:for-each>
 			</gfx-archive>
 
-			<!--
-				<gfx-archive file-name="transports" file-path="Amberfiles/Travel_gfx.amb">
-				<for-each-file width="16" bitplanes="4" palette="0" transparent="0"/>
-				</gfx-archive>
-				<gfx-archive file-name="tilesets.floor" file-path="Amberfiles/Floors.amb">
-				<for-each-file width="64" bitplanes="4" palette="0" transparent="0"/>
-				</gfx-archive>
-			-->
+			<!-- <gfx-archive file-name="transports" file-path="Amberfiles/Travel_gfx.amb"> <for-each-file width="16" bitplanes="4" 
+				palette="0" transparent="0"/> </gfx-archive> <gfx-archive file-name="tilesets.floor" file-path="Amberfiles/Floors.amb"> <for-each-file 
+				width="64" bitplanes="4" palette="0" transparent="0"/> </gfx-archive> -->
 
-			<xsl:variable name="monsters"
-				select="sse:archive[@name='Monster_char_data.amb']/*" />
+			<xsl:variable name="monsters" select="sse:archive[@name='Monster_char_data.amb']/*" />
 			<xsl:if test="count($monsters)">
 				<gfx-archive file-name="monsters" file-path="Amberfiles/Monster_gfx.amb">
 					<xsl:for-each select="$monsters">
 						<file id="{.//*[@name='gfx-id']/@value}" width="{.//*[@name='width']/*[@name='source']/@value}"
-							height="{.//*[@name='height']/*[@name='source']/@value}"
-							bitplanes="5" palette="15" transparent="1" />
+							height="{.//*[@name='height']/*[@name='source']/@value}" bitplanes="5" palette="15" transparent="1" />
 					</xsl:for-each>
 				</gfx-archive>
 			</xsl:if>
@@ -449,11 +334,9 @@
 	</xsl:template>
 
 	<xsl:template name="extract-monsters">
-		<xsl:variable name="monsters"
-			select="sse:archive[@name='Monster_char_data.amb']/*" />
+		<xsl:variable name="monsters" select="sse:archive[@name='Monster_char_data.amb']/*" />
 		<xsl:if test="count($monsters)">
-			<xsl:variable name="categories"
-				select="saa:getDictionary('monster-images')" />
+			<xsl:variable name="categories" select="saa:getDictionary('monster-images')" />
 			<monster-list>
 				<xsl:for-each select="$categories">
 					<xsl:variable name="category" select="." />
@@ -474,8 +357,7 @@
 	<xsl:template name="extract-classes">
 		<xsl:variable name="classes" select="sse:archive//*[@name='classes']/*/*" />
 		<xsl:if test="count($classes)">
-			<xsl:variable name="expList"
-				select="sse:archive//*[@name='class-experience']/*" />
+			<xsl:variable name="expList" select="sse:archive//*[@name='class-experience']/*" />
 			<class-list>
 				<xsl:for-each select="$classes">
 					<xsl:variable name="id" select="position()" />
@@ -491,17 +373,14 @@
 	<xsl:template name="extract-items">
 		<xsl:variable name="items"
 			select="(sse:archive[@name='AM2_CPU'] | sse:archive[@name='AM2_BLIT'])//*[@name = 'items']/*/*" />
-		<xsl:variable name="texts"
-			select="sse:archive[@name='Object_texts.amb']" />
+		<xsl:variable name="texts" select="sse:archive[@name='Object_texts.amb']" />
 
 		<xsl:if test="count($items)">
-			<xsl:variable name="categories"
-				select="set:distinct($items//*[@name = 'type']/@value)" />
+			<xsl:variable name="categories" select="set:distinct($items//*[@name = 'type']/@value)" />
 			<item-list>
 				<xsl:for-each select="$categories">
 					<xsl:variable name="category" select="." />
-					<item-category
-						name="{saa:getDictionaryOption('item-types', $category)/@val}">
+					<item-category name="{saa:getDictionaryOption('item-types', $category)/@val}">
 						<xsl:for-each select="$items">
 							<xsl:if test=".//*[@name = 'type']/@value = $category">
 								<xsl:call-template name="extract-item">
@@ -519,15 +398,13 @@
 	<xsl:template name="extract-maps">
 		<xsl:param name="maps" select="/.." />
 		<xsl:if test="count($maps)">
-			<xsl:variable name="texts"
-				select="sse:archive[contains(@name, 'Map_texts.amb')]/*" />
+			<xsl:variable name="texts" select="sse:archive[contains(@name, 'Map_texts.amb')]/*" />
 			<map-list>
 				<xsl:for-each select="$maps">
 					<xsl:sort select="@file-name" />
 					<xsl:variable name="id" select="@file-name" />
 					<xsl:call-template name="extract-map">
-						<xsl:with-param name="root"
-							select=". | $texts[@file-name = current()/@file-name]" />
+						<xsl:with-param name="root" select=". | $texts[@file-name = current()/@file-name]" />
 						<xsl:with-param name="id" select="$id" />
 					</xsl:call-template>
 				</xsl:for-each>
@@ -539,47 +416,36 @@
 		<xsl:param name="maps" select="/.." />
 		<xsl:if test="count($maps)">
 			<xsl:variable name="root" select="$maps[1]" />
-			<xsl:variable name="texts"
-				select="sse:archive[contains(@name, 'Map_texts.amb')]/*" />
+			<xsl:variable name="texts" select="sse:archive[contains(@name, 'Map_texts.amb')]/*" />
 			<map-list>
 				<xsl:variable name="size" select="math:sqrt(count($maps))" />
 				<xsl:variable name="field-maps" select="$maps//*[@name='fields']" />
 
 				<xsl:variable name="width" select="$root//*[@name='width']/@value" />
 				<xsl:variable name="height" select="$root//*[@name='height']/@value" />
-				<xsl:variable name="tileset"
-					select="$root//*[@name='tileset-id']/@value" />
-				<xsl:variable name="palette"
-					select="$root//*[@name='palette-id']/@value" />
+				<xsl:variable name="tileset" select="$root//*[@name='tileset-id']/@value" />
+				<xsl:variable name="palette" select="$root//*[@name='palette-id']/@value" />
 				<xsl:variable name="map-type" select="$root//*[@name='map-type']/@value" />
 				<xsl:variable name="world" select="$root//*[@name='world']/@value" />
 
-				<map id="{$lib}" width="{$size * $width}" height="{$size * $height}"
-					tileset-id="{$tileset}" palette-id="{$palette}" map-type="{$map-type}"
-					world="{$world}">
+				<map id="{$lib}" width="{$size * $width}" height="{$size * $height}" tileset-id="{$tileset}"
+					palette-id="{$palette}" map-type="{$map-type}" world="{$world}">
 					<xsl:choose>
 						<xsl:when test="$world = 0">
-							<xsl:attribute name="name"><xsl:value-of
-								select="'LYRAMIONISCHE INSELN'" /></xsl:attribute>
+							<xsl:attribute name="name"><xsl:value-of select="'LYRAMIONISCHE INSELN'" /></xsl:attribute>
 						</xsl:when>
 						<xsl:when test="$world = 1">
-							<xsl:attribute name="name"><xsl:value-of
-								select="'WALDMOND'" /></xsl:attribute>
+							<xsl:attribute name="name"><xsl:value-of select="'WALDMOND'" /></xsl:attribute>
 						</xsl:when>
 						<xsl:when test="$world = 2">
-							<xsl:attribute name="name"><xsl:value-of
-								select="'WÜSTENMOND'" /></xsl:attribute>
+							<xsl:attribute name="name"><xsl:value-of select="'WÜSTENMOND'" /></xsl:attribute>
 						</xsl:when>
 					</xsl:choose>
 					<field-map>
-						<xsl:variable name="mapYList"
-							select="str:split(str:padding($size, '-'), '')" />
-						<xsl:variable name="mapXList"
-							select="str:split(str:padding($size, '-'), '')" />
-						<xsl:variable name="fieldYList"
-							select="str:split(str:padding($height, '-'), '')" />
-						<xsl:variable name="fieldXList"
-							select="str:split(str:padding($width, '-'), '')" />
+						<xsl:variable name="mapYList" select="str:split(str:padding($size, '-'), '')" />
+						<xsl:variable name="mapXList" select="str:split(str:padding($size, '-'), '')" />
+						<xsl:variable name="fieldYList" select="str:split(str:padding($height, '-'), '')" />
+						<xsl:variable name="fieldXList" select="str:split(str:padding($width, '-'), '')" />
 
 						<xsl:for-each select="$mapYList">
 							<xsl:variable name="mapY" select="position()" />
@@ -595,16 +461,13 @@
 											<xsl:variable name="field"
 												select="$field-maps[($mapY - 1) * $size + $mapX]/*[($fieldY - 1) * $width + $fieldX]" />
 											<field>
-												<xsl:apply-templates select="$field/*[1][@value &gt; 0]"
-													mode="attr">
+												<xsl:apply-templates select="$field/*[1][@value &gt; 0]" mode="attr">
 													<xsl:with-param name="name" select="'low'" />
 												</xsl:apply-templates>
-												<xsl:apply-templates select="$field/*[2][@value &gt; 0]"
-													mode="attr">
+												<xsl:apply-templates select="$field/*[2][@value &gt; 0]" mode="attr">
 													<xsl:with-param name="name" select="'high'" />
 												</xsl:apply-templates>
-												<xsl:apply-templates select="$field/*[3][@value &gt; 0]"
-													mode="attr">
+												<xsl:apply-templates select="$field/*[3][@value &gt; 0]" mode="attr">
 													<xsl:with-param name="name" select="'event'" />
 												</xsl:apply-templates>
 											</field>
@@ -631,26 +494,21 @@
 		<map id="{$id}">
 			<xsl:choose>
 				<xsl:when test="$id &gt; 512">
-					<xsl:attribute name="name"><xsl:value-of
-						select="'MORAG'" /></xsl:attribute>
+					<xsl:attribute name="name"><xsl:value-of select="'MORAG'" /></xsl:attribute>
 				</xsl:when>
 				<xsl:when test="$id &gt; 256">
-					<xsl:apply-templates select="($root//sse:string)[1]"
-						mode="attr">
+					<xsl:apply-templates select="($root//sse:string)[1]" mode="attr">
 						<xsl:with-param name="name" select="'name'" />
 					</xsl:apply-templates>
 				</xsl:when>
 				<xsl:otherwise>
-					<xsl:attribute name="name"><xsl:value-of
-						select="'LYRAMIONISCHE INSELN'" /></xsl:attribute>
+					<xsl:attribute name="name"><xsl:value-of select="'LYRAMIONISCHE INSELN'" /></xsl:attribute>
 				</xsl:otherwise>
 			</xsl:choose>
 
-			<xsl:apply-templates select="$root//*[@name='data']/*"
-				mode="attr" />
+			<xsl:apply-templates select="$root//*[@name='data']/*" mode="attr" />
 
-			<xsl:apply-templates select="$root//*[@name='unknown']"
-				mode="unknown" />
+			<xsl:apply-templates select="$root//*[@name='unknown']" mode="unknown" />
 
 
 			<xsl:for-each select="$root//*[@name = 'label']/*">
@@ -663,10 +521,8 @@
 
 
 			<xsl:for-each select="$root//*[@name='fields']">
-				<xsl:variable name="fieldYList"
-					select="str:split(str:padding($height, '-'), '')" />
-				<xsl:variable name="fieldXList"
-					select="str:split(str:padding($width, '-'), '')" />
+				<xsl:variable name="fieldYList" select="str:split(str:padding($height, '-'), '')" />
+				<xsl:variable name="fieldXList" select="str:split(str:padding($width, '-'), '')" />
 				<xsl:variable name="fields" select="*" />
 				<field-map>
 					<xsl:for-each select="$fieldYList">
@@ -674,19 +530,15 @@
 						<field-row>
 							<xsl:for-each select="$fieldXList">
 								<xsl:variable name="fieldX" select="position()" />
-								<xsl:variable name="field"
-									select="$fields[($fieldY - 1) * $width + $fieldX]" />
+								<xsl:variable name="field" select="$fields[($fieldY - 1) * $width + $fieldX]" />
 								<field>
-									<xsl:apply-templates select="$field/*[1][@value &gt; 0]"
-										mode="attr">
+									<xsl:apply-templates select="$field/*[1][@value &gt; 0]" mode="attr">
 										<xsl:with-param name="name" select="'low'" />
 									</xsl:apply-templates>
-									<xsl:apply-templates select="$field/*[2][@value &gt; 0]"
-										mode="attr">
+									<xsl:apply-templates select="$field/*[2][@value &gt; 0]" mode="attr">
 										<xsl:with-param name="name" select="'high'" />
 									</xsl:apply-templates>
-									<xsl:apply-templates select="$field/*[3][@value &gt; 0]"
-										mode="attr">
+									<xsl:apply-templates select="$field/*[3][@value &gt; 0]" mode="attr">
 										<xsl:with-param name="name" select="'event'" />
 									</xsl:apply-templates>
 								</field>
@@ -699,8 +551,7 @@
 	</xsl:template>
 
 	<xsl:template name="extract-tileset.icons">
-		<xsl:variable name="tilesets"
-			select="sse:archive[contains(@name, 'Icon_data.amb')]/*" />
+		<xsl:variable name="tilesets" select="sse:archive[contains(@name, 'Icon_data.amb')]/*" />
 		<xsl:if test="count($tilesets)">
 			<tileset-icon-list>
 				<xsl:for-each select="$tilesets">
@@ -719,8 +570,7 @@
 		<xsl:param name="root" select="." />
 		<xsl:param name="id" />
 		<tileset-icon id="{$id}">
-			<xsl:apply-templates select="$root//*[@name='data']//*[@value]"
-				mode="attr" />
+			<xsl:apply-templates select="$root//*[@name='data']//*[@value]" mode="attr" />
 			<xsl:for-each select=".//*[@name = 'tiles']/*/*">
 				<xsl:if test="*[@name='image-count']/@value &gt; 0">
 					<tile id="{position()}">
@@ -732,8 +582,7 @@
 	</xsl:template>
 
 	<xsl:template name="extract-tileset.labs">
-		<xsl:variable name="tilesets"
-			select="sse:archive[contains(@name, 'Lab_data.amb')]/*" />
+		<xsl:variable name="tilesets" select="sse:archive[contains(@name, 'Lab_data.amb')]/*" />
 		<xsl:if test="count($tilesets)">
 			<tileset-lab-list>
 				<xsl:for-each select="$tilesets">
@@ -752,8 +601,7 @@
 		<xsl:param name="root" select="." />
 		<xsl:param name="id" />
 		<tileset-lab id="{$id}">
-			<xsl:apply-templates select="$root//*[@name='data']//*[@value]"
-				mode="attr" />
+			<xsl:apply-templates select="$root//*[@name='data']//*[@value]" mode="attr" />
 			<xsl:for-each select=".//*[@name = 'tiles']/*/*">
 				<xsl:if test="*[@name='image-count']/@value &gt; 0">
 					<tile id="{position()}">
@@ -769,67 +617,46 @@
 	<xsl:template name="extract-monster">
 		<xsl:param name="root" select="." />
 		<xsl:param name="id" />
-		<monster id="{$id}"
-			attack="{*[@name = 'attack']/@value + *[@name = 'combat-attack']/@value}"
+		<monster id="{$id}" attack="{*[@name = 'attack']/@value + *[@name = 'combat-attack']/@value}"
 			defense="{*[@name = 'defense']/@value + *[@name = 'combat-defense']/@value}">
-			<xsl:apply-templates select=".//*[@name = 'name']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'level']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'attacks-per-round']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'gold']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'food']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'combat-experience']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'magic-attack']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'magic-defense']"
-				mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'name']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'level']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'attacks-per-round']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'gold']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'food']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'combat-experience']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'magic-attack']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'magic-defense']" mode="attr" />
 			<xsl:for-each select=".//*[@name = 'monster-type']/*[@value]">
 				<xsl:attribute name="is-{saa:getName()}" />
 			</xsl:for-each>
 			<race>
-				<xsl:apply-templates select=".//*[@name = 'race']"
-					mode="attr">
+				<xsl:apply-templates select=".//*[@name = 'race']" mode="attr">
 					<xsl:with-param name="name" select="'name'" />
 				</xsl:apply-templates>
-				<xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'current']"
-					mode="attr">
+				<xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'current']" mode="attr">
 					<xsl:with-param name="name" select="'current-age'" />
 				</xsl:apply-templates>
-				<xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'maximum']"
-					mode="attr">
+				<xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'maximum']" mode="attr">
 					<xsl:with-param name="name" select="'maximum-age'" />
 				</xsl:apply-templates>
 				<xsl:for-each select=".//*[@name = 'attributes']/*">
 					<attribute name="{saa:getName()}"
-						current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}"
-						maximum="{*[@name = 'current']/@value}" />
+						current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}" maximum="{*[@name = 'current']/@value}" />
 				</xsl:for-each>
 			</race>
 			<class>
-				<xsl:apply-templates select=".//*[@name = 'name']"
-					mode="attr">
+				<xsl:apply-templates select=".//*[@name = 'name']" mode="attr">
 					<xsl:with-param name="name" select="'name'" />
 				</xsl:apply-templates>
-				<xsl:apply-templates select=".//*[@name = 'school']"
-					mode="attr" />
-				<xsl:apply-templates select=".//*[@name = 'apr-per-level']"
-					mode="attr" />
-				<xsl:apply-templates select=".//*[@name = 'hp-per-level']"
-					mode="attr" />
-				<xsl:apply-templates select=".//*[@name = 'sp-per-level']"
-					mode="attr" />
-				<xsl:apply-templates select=".//*[@name = 'tp-per-level']"
-					mode="attr" />
-				<xsl:apply-templates select=".//*[@name = 'slp-per-level']"
-					mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'school']" mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'apr-per-level']" mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'hp-per-level']" mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'sp-per-level']" mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'tp-per-level']" mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'slp-per-level']" mode="attr" />
 				<xsl:for-each select=".//*[@name = 'skills']/*">
-					<skill name="{saa:getName()}"
-						current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}"
+					<skill name="{saa:getName()}" current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}"
 						maximum="{*[@name = 'current']/@value}" />
 				</xsl:for-each>
 			</class>
@@ -890,12 +717,9 @@
 	<xsl:template name="extract-item-instance">
 		<xsl:param name="root" select="." />
 		<item-instance>
-			<xsl:apply-templates select="$root//*[@name = 'item-id']"
-				mode="attr" />
-			<xsl:apply-templates select="$root//*[@name = 'item-amount']"
-				mode="attr" />
-			<xsl:apply-templates select="$root//*[@name = 'item-charge']"
-				mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'item-id']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'item-amount']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'item-charge']" mode="attr" />
 
 			<xsl:for-each select=".//*[@name = 'item-status']/*[@value != '']">
 				<xsl:attribute name="is-{saa:getName()}" />
@@ -935,23 +759,15 @@
 
 	<xsl:template name="extract-class">
 		<xsl:param name="root" />		<xsl:param name="id" />		<class id="{$id}">
-			<xsl:apply-templates select="$root//*[@name = 'name']"
-				mode="attr" />
-			<xsl:apply-templates select="$root//*[@name = 'school']"
-				mode="attr" />
-			<xsl:apply-templates select="$root//*[@name = 'apr-per-level']"
-				mode="attr" />
-			<xsl:apply-templates select="$root//*[@name = 'hp-per-level']"
-				mode="attr" />
-			<xsl:apply-templates select="$root//*[@name = 'sp-per-level']"
-				mode="attr" />
-			<xsl:apply-templates select="$root//*[@name = 'tp-per-level']"
-				mode="attr" />
-			<xsl:apply-templates select="$root//*[@name = 'slp-per-level']"
-				mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'name']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'school']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'apr-per-level']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'hp-per-level']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'sp-per-level']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'tp-per-level']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'slp-per-level']" mode="attr" />
 
-			<xsl:apply-templates
-				select="$root[../@name = 'class-experience']//sse:integer" mode="attr">
+			<xsl:apply-templates select="$root[../@name = 'class-experience']//sse:integer" mode="attr">
 				<xsl:with-param name="name" select="'base-experience'" />
 			</xsl:apply-templates>
 
@@ -991,47 +807,34 @@
 				</xsl:choose>
 			</xsl:variable>
 
-			<xsl:apply-templates select=".//sse:integer[@name != ''] | .//sse:string"
-				mode="attr" />
+			<xsl:apply-templates select=".//sse:integer[@name != ''] | .//sse:string" mode="attr" />
 
-			<xsl:apply-templates select=".//*[@name = 'type']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'hands']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'fingers']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'slot']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'ammunition-type']"
-				mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'ranged-type']"
-				mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'type']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'hands']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'fingers']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'slot']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'ammunition-type']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'ranged-type']" mode="attr" />
 
 			<xsl:if test=".//*[@name = 'attribute-value']/@value &gt; 0">
-				<xsl:apply-templates select=".//*[@name = 'attribute-type']"
-					mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'attribute-type']" mode="attr" />
 			</xsl:if>
 			<xsl:if test=".//*[@name = 'skill-value']/@value &gt; 0">
-				<xsl:apply-templates select=".//*[@name = 'skill-type']"
-					mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'skill-type']" mode="attr" />
 			</xsl:if>
 
 			<xsl:if test="$spell-id &gt; 0">
 				<xsl:attribute name="spell-type">
-					<xsl:value-of
-					select="key('string-dictionary', 'spell-types')[position() = $spell-type + 1]/@value" />
+					<xsl:value-of select="key('string-dictionary', 'spell-types')[position() = $spell-type + 1]/@value" />
 				</xsl:attribute>
 				<xsl:attribute name="spell-name">
-					<xsl:value-of
-					select="key('string-dictionary', $spell-dictionary)[position() = $spell-id]/@value" />
+					<xsl:value-of select="key('string-dictionary', $spell-dictionary)[position() = $spell-id]/@value" />
 				</xsl:attribute>
 			</xsl:if>
 			<xsl:attribute name="gender">
 				<xsl:choose>
-					<xsl:when
-				test=".//*[@name = 'male']/@value &gt; .//*[@name = 'female']/@value">männlich</xsl:when>
-					<xsl:when
-				test=".//*[@name = 'male']/@value &lt; .//*[@name = 'female']/@value">weiblich</xsl:when>
+					<xsl:when test=".//*[@name = 'male']/@value &gt; .//*[@name = 'female']/@value">männlich</xsl:when>
+					<xsl:when test=".//*[@name = 'male']/@value &lt; .//*[@name = 'female']/@value">weiblich</xsl:when>
 					<xsl:otherwise>beide</xsl:otherwise>
 				</xsl:choose>
 			</xsl:attribute>
@@ -1060,10 +863,10 @@
 				<br xmlns="http://www.w3.org/1999/xhtml" />
 			</xsl:for-each>
 		</text>
-	</xsl:template>	<xsl:template match="sse:integer | sse:signed-integer | sse:string"		mode="attr">
+	</xsl:template>	<xsl:template match="sse:integer | sse:signed-integer | sse:string" mode="attr">
 		<xsl:param name="name" select="@name" />
-		<xsl:param name="value" select="@value" />		<xsl:attribute name="{$name}"><xsl:value-of			select="normalize-space($value)" /></xsl:attribute>	</xsl:template>	<xsl:template match="sse:select" mode="attr">
-		<xsl:param name="name" select="@name" />		<xsl:variable name="option"			select="saa:getDictionaryOption(@dictionary-ref, @value)" />		<xsl:attribute name="{$name}">
+		<xsl:param name="value" select="@value" />		<xsl:attribute name="{$name}"><xsl:value-of select="normalize-space($value)" /></xsl:attribute>	</xsl:template>	<xsl:template match="sse:select" mode="attr">
+		<xsl:param name="name" select="@name" />		<xsl:variable name="option" select="saa:getDictionaryOption(@dictionary-ref, @value)" />		<xsl:attribute name="{$name}">
 			<xsl:value-of select="$option/@title | $option/@val[not($option/@title)]" />
 		</xsl:attribute>	</xsl:template>
 
@@ -1103,8 +906,7 @@
 
 
 	<xsl:template name="extract-dictionaries">
-		<xsl:variable name="AM2"
-			select="sse:archive[@name='AM2_BLIT' or @name='AM2_CPU']" />
+		<xsl:variable name="AM2" select="sse:archive[@name='AM2_BLIT' or @name='AM2_CPU']" />
 		<dictionary-list>
 			<dictionary dictionary-id="events">
 				<option key="0" val="valdyn" />
@@ -1213,7 +1015,7 @@
 				<option key="5" />
 				<option key="6" val="Funktion" />
 			</dictionary>
-			
+
 			<xsl:for-each select="$AM2//sse:instruction[@name = 'spell-types']">
 				<dictionary dictionary-id="spell-types">
 					<xsl:for-each select="*">

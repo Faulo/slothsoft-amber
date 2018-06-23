@@ -6,20 +6,22 @@ use Slothsoft\Farah\Module\Asset\ParameterFilterStrategy\AbstractMapParameterFil
 
 abstract class AbstractParameterFilter extends AbstractMapParameterFilter
 {
+
     const PARAM_GAME = 'game';
-    
+
     const PARAM_VERSION = 'version';
-    
+
     const PARAM_INFOSET = 'id';
-    
+
     const PARAM_USER = 'user';
-    
-    protected function loadMap() : array {
+
+    protected function loadMap(): array
+    {
         return [
             self::PARAM_GAME => 'ambermoon',
             self::PARAM_VERSION => 'Thalion-v1.05-DE',
             self::PARAM_INFOSET => '',
-            self::PARAM_USER => '',
+            self::PARAM_USER => ''
         ];
     }
 }

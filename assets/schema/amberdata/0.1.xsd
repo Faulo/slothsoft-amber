@@ -1,12 +1,9 @@
 <?xml version="1.0"?>
-<xsd:schema
-	targetNamespace="http://schema.slothsoft.net/amber/amberdata"
-	xmlns="http://schema.slothsoft.net/amber/amberdata"
-	xmlns:amber="http://schema.slothsoft.net/amber/amberdata"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:ssv="http://schema.slothsoft.net/schema/versioning"
+<xsd:schema targetNamespace="http://schema.slothsoft.net/amber/amberdata"
+	xmlns="http://schema.slothsoft.net/amber/amberdata" xmlns:amber="http://schema.slothsoft.net/amber/amberdata"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ssv="http://schema.slothsoft.net/schema/versioning"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
-	
+
 	<xsd:annotation>
 		<xsd:appinfo>
 			<ssv:info version="1.0">
@@ -27,7 +24,7 @@ This namespace defines elements to describe the game data of games using the Amb
 			</ssv:info>
 		</xsd:appinfo>
 	</xsd:annotation>
-	
+
 	<xsd:attributeGroup name="schemaVersion">
 		<xsd:attribute name="version" type="xsd:token" use="required" fixed="0.1">
 			<xsd:annotation>
@@ -35,7 +32,7 @@ This namespace defines elements to describe the game data of games using the Amb
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:attributeGroup>
-	
+
 	<xsd:element name="amberdata">
 		<xsd:complexType>
 			<xsd:complexContent>
@@ -51,36 +48,36 @@ This namespace defines elements to describe the game data of games using the Amb
 						<xsd:element ref="gfx-archive-list" />
 						<xsd:element ref="dictionary-list" />
 					</xsd:choice>
-					<xsd:attributeGroup ref="schemaVersion"/>
+					<xsd:attributeGroup ref="schemaVersion" />
 				</xsd:restriction>
 			</xsd:complexContent>
 		</xsd:complexType>
 	</xsd:element>
-	
+
 	<xsd:element name="item-list">
 	</xsd:element>
-	
+
 	<xsd:element name="portrait-list">
 	</xsd:element>
-	
+
 	<xsd:element name="monster-list">
 	</xsd:element>
-	
+
 	<xsd:element name="class-list">
 	</xsd:element>
-	
+
 	<xsd:element name="map-list">
 	</xsd:element>
-	
+
 	<xsd:element name="tileset-icon-list">
 	</xsd:element>
-	
+
 	<xsd:element name="tileset-lab-list">
 	</xsd:element>
-	
+
 	<xsd:element name="gfx-archive-list">
 	</xsd:element>
-	
+
 	<xsd:element name="dictionary-list">
 	</xsd:element>
 </xsd:schema>

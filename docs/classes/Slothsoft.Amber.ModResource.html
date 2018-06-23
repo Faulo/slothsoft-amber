@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-    <meta charset="utf-8"/>
-    <title>API Documentation</title>
-    <meta name="author" content=""/>
-    <meta name="description" content=""/>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta charset="utf-8" />
+<title>API Documentation</title>
+<meta name="author" content="" />
+<meta name="description" content="" />
 
-    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-    <link href="../css/font-awesome.min.css" rel="stylesheet">
-    <link href="../css/prism.css" rel="stylesheet" media="all"/>
-    <link href="../css/template.css" rel="stylesheet" media="all"/>
-    
-    <!--[if lt IE 9]>
+<link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+<link href="../css/font-awesome.min.css" rel="stylesheet">
+<link href="../css/prism.css" rel="stylesheet" media="all" />
+<link href="../css/template.css" rel="stylesheet" media="all" />
+
+<!--[if lt IE 9]>
     <script src="../js/html5.js"></script>
     <![endif]-->
-    <script src="../js/jquery-1.11.0.min.js"></script>
-    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.smooth-scroll.js"></script>
-    <script src="../js/prism.min.js"></script>
-    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    <script type="text/javascript">
+<script src="../js/jquery-1.11.0.min.js"></script>
+<script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.smooth-scroll.js"></script>
+<script src="../js/prism.min.js"></script>
+<!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+<script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
             var src = pre.getAttribute('data-src');
@@ -70,1104 +71,1354 @@
     })
 </script>
 
-    <link rel="shortcut icon" href="../images/favicon.ico"/>
-    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
-    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
-    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+<link rel="shortcut icon" href="../images/favicon.ico" />
+<link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="72x72"
+	href="../images/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="114x114"
+	href="../images/apple-touch-icon-114x114.png" />
 </head>
 <body>
 
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <i class="icon-ellipsis-vertical"></i>
-            </a>
-            <a class="brand" href="../index.html">API Documentation</a>
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <i class="icon-ellipsis-vertical"></i>
+				</a> <a class="brand" href="../index.html">API Documentation</a>
 
-            <div class="nav-collapse">
-                <ul class="nav pull-right">
-                                        <li class="dropdown">
-                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
-                            API Documentation <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                                                        <li><a href="../namespaces/Slothsoft.html">\Slothsoft</a></li>
-                                                    </ul>
-                    </li>
-                                        <li class="dropdown" id="charts-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Charts <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="../graphs/class.html">
-                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown" id="reports-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            Reports <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">156</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="../reports/deprecated.html">
-                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--<div class="go_to_top">-->
-    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
-    <!--</div>-->
-</div>
+				<div class="nav-collapse">
+					<ul class="nav pull-right">
+						<li class="dropdown"><a href="../index.html"
+							class="dropdown-toggle" data-toggle="dropdown"> API
+								Documentation <b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="../namespaces/Slothsoft.html">\Slothsoft</a></li>
+							</ul></li>
+						<li class="dropdown" id="charts-menu"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> Charts <b
+								class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="../graphs/class.html"> <i
+										class="icon-list-alt"></i>&#160;Class hierarchy diagram
+								</a></li>
+							</ul></li>
+						<li class="dropdown" id="reports-menu"><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> Reports <b
+								class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="../reports/errors.html"> <i
+										class="icon-list-alt"></i>&#160;Errors <span
+										class="label label-info pull-right">121</span>
+								</a></li>
+								<li><a href="../reports/markers.html"> <i
+										class="icon-list-alt"></i>&#160;Markers <span
+										class="label label-info pull-right">0</span>
+								</a></li>
+								<li><a href="../reports/deprecated.html"> <i
+										class="icon-list-alt"></i>&#160;Deprecated <span
+										class="label label-info pull-right">0</span>
+								</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!--<div class="go_to_top">-->
+		<!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+		<!--</div>-->
+	</div>
 
-<div id="___" class="container-fluid">
-        <section class="row-fluid">
-        <div class="span2 sidebar">
-                                <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-514110132"></a>
-                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
-            </div>
-            <div id="namespace-514110132" class="accordion-body collapse in">
-                <div class="accordion-inner">
+	<div id="___" class="container-fluid">
+		<section class="row-fluid">
+			<div class="span2 sidebar">
+				<div class="accordion" style="margin-bottom: 0">
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<a class="accordion-toggle " data-toggle="collapse"
+								data-target="#namespace-116713648"></a> <a
+								href="../namespaces/default.html"
+								style="margin-left: 30px; padding-left: 0">\</a>
+						</div>
+						<div id="namespace-116713648" class="accordion-body collapse in">
+							<div class="accordion-inner">
 
-                                                    <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1367801602"></a>
-                                <a href="../namespaces/Slothsoft.html" style="margin-left: 30px; padding-left: 0">Slothsoft</a>
-            </div>
-            <div id="namespace-1367801602" class="accordion-body collapse ">
-                <div class="accordion-inner">
+								<div class="accordion" style="margin-bottom: 0">
+									<div class="accordion-group">
+										<div class="accordion-heading">
+											<a class="accordion-toggle collapsed" data-toggle="collapse"
+												data-target="#namespace-1449870873"></a> <a
+												href="../namespaces/Slothsoft.html"
+												style="margin-left: 30px; padding-left: 0">Slothsoft</a>
+										</div>
+										<div id="namespace-1449870873"
+											class="accordion-body collapse ">
+											<div class="accordion-inner">
 
-                                                    <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-101569606"></a>
-                                <a href="../namespaces/Slothsoft.Amber.html" style="margin-left: 30px; padding-left: 0">Amber</a>
-            </div>
-            <div id="namespace-101569606" class="accordion-body collapse ">
-                <div class="accordion-inner">
+												<div class="accordion" style="margin-bottom: 0">
+													<div class="accordion-group">
+														<div class="accordion-heading">
+															<a class="accordion-toggle collapsed"
+																data-toggle="collapse"
+																data-target="#namespace-1350188230"></a> <a
+																href="../namespaces/Slothsoft.Amber.html"
+																style="margin-left: 30px; padding-left: 0">Amber</a>
+														</div>
+														<div id="namespace-1350188230"
+															class="accordion-body collapse ">
+															<div class="accordion-inner">
 
-                                                    <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1487739137"></a>
-                                <a href="../namespaces/Slothsoft.Amber.Assets.html" style="margin-left: 30px; padding-left: 0">Assets</a>
-            </div>
-            <div id="namespace-1487739137" class="accordion-body collapse ">
-                <div class="accordion-inner">
+																<div class="accordion" style="margin-bottom: 0">
+																	<div class="accordion-group">
+																		<div class="accordion-heading">
+																			<a class="accordion-toggle collapsed"
+																				data-toggle="collapse"
+																				data-target="#namespace-2082197340"></a> <a
+																				href="../namespaces/Slothsoft.Amber.CLI.html"
+																				style="margin-left: 30px; padding-left: 0">CLI</a>
+																		</div>
+																		<div id="namespace-2082197340"
+																			class="accordion-body collapse ">
+																			<div class="accordion-inner">
 
-                    
-                    <ul>
-                                                                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.Amberdata.html">Amberdata</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.AmberdataContainer.html">AmberdataContainer</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.EditorMain.html">EditorMain</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.EditorResourceContainerBase.html">EditorResourceContainerBase</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.Gfx.html">Gfx</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.GfxContainer.html">GfxContainer</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.Raw.html">Raw</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.RawContainer.html">RawContainer</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.Stylesheet.html">Stylesheet</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Assets.StylesheetContainer.html">StylesheetContainer</a></li>
-                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
-                                                    <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-588131399"></a>
-                                <a href="../namespaces/Slothsoft.Amber.CLI.html" style="margin-left: 30px; padding-left: 0">CLI</a>
-            </div>
-            <div id="namespace-588131399" class="accordion-body collapse ">
-                <div class="accordion-inner">
+																				<ul>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.CLI.AmbGfx.html">AmbGfx</a></li>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.CLI.AmbTool.html">AmbTool</a></li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
 
-                    
-                    <ul>
-                                                                                                    <li class="class"><a href="../classes/Slothsoft.Amber.CLI.AmbGfx.html">AmbGfx</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.CLI.AmbTool.html">AmbTool</a></li>
-                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+																<div class="accordion" style="margin-bottom: 0">
+																	<div class="accordion-group">
+																		<div class="accordion-heading">
+																			<a class="accordion-toggle collapsed"
+																				data-toggle="collapse"
+																				data-target="#namespace-1439215244"></a> <a
+																				href="../namespaces/Slothsoft.Amber.Controller.html"
+																				style="margin-left: 30px; padding-left: 0">Controller</a>
+																		</div>
+																		<div id="namespace-1439215244"
+																			class="accordion-body collapse ">
+																			<div class="accordion-inner">
 
-                                                    <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1736770579"></a>
-                                <a href="../namespaces/Slothsoft.Amber.Controller.html" style="margin-left: 30px; padding-left: 0">Controller</a>
-            </div>
-            <div id="namespace-1736770579" class="accordion-body collapse ">
-                <div class="accordion-inner">
 
-                    
-                    <ul>
-                                                                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Controller.EditorController.html">EditorController</a></li>
-                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+																				<ul>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.Controller.EditorController.html">EditorController</a></li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
 
-                                                    <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1296993177"></a>
-                                <a href="../namespaces/Slothsoft.Amber.Executables.html" style="margin-left: 30px; padding-left: 0">Executables</a>
-            </div>
-            <div id="namespace-1296993177" class="accordion-body collapse ">
-                <div class="accordion-inner">
+																<div class="accordion" style="margin-bottom: 0">
+																	<div class="accordion-group">
+																		<div class="accordion-heading">
+																			<a class="accordion-toggle collapsed"
+																				data-toggle="collapse"
+																				data-target="#namespace-17129859"></a> <a
+																				href="../namespaces/Slothsoft.Amber.ResourceAssets.html"
+																				style="margin-left: 30px; padding-left: 0">ResourceAssets</a>
+																		</div>
+																		<div id="namespace-17129859"
+																			class="accordion-body collapse ">
+																			<div class="accordion-inner">
 
-                    
-                    <ul>
-                                                                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Executables.AmberExecutableCreator.html">AmberExecutableCreator</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Executables.ExecutableMerger.html">ExecutableMerger</a></li>
-                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
-                                                    <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-705965832"></a>
-                                <a href="../namespaces/Slothsoft.Amber.Mod.html" style="margin-left: 30px; padding-left: 0">Mod</a>
-            </div>
-            <div id="namespace-705965832" class="accordion-body collapse ">
-                <div class="accordion-inner">
+																				<ul>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.ResourceAssets.AbstractParameterFilter.html">AbstractParameterFilter</a></li>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.ResourceAssets.AmberdataBuilder.html">AmberdataBuilder</a></li>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.ResourceAssets.AmberdataParameterFilter.html">AmberdataParameterFilter</a></li>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.ResourceAssets.DatasetBuilder.html">DatasetBuilder</a></li>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.ResourceAssets.DatasetParameterFilter.html">DatasetParameterFilter</a></li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
 
-                    
-                    <ul>
-                                                                                                    <li class="class"><a href="../classes/Slothsoft.Amber.Mod.ParameterFilter.html">ParameterFilter</a></li>
-                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+																<div class="accordion" style="margin-bottom: 0">
+																	<div class="accordion-group">
+																		<div class="accordion-heading">
+																			<a class="accordion-toggle collapsed"
+																				data-toggle="collapse"
+																				data-target="#namespace-1667169256"></a> <a
+																				href="../namespaces/Slothsoft.Amber.SavegameImplementations.html"
+																				style="margin-left: 30px; padding-left: 0">SavegameImplementations</a>
+																		</div>
+																		<div id="namespace-1667169256"
+																			class="accordion-body collapse ">
+																			<div class="accordion-inner">
 
-                                                    <div class="accordion" style="margin-bottom: 0">
-        <div class="accordion-group">
-            <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-537082092"></a>
-                                <a href="../namespaces/Slothsoft.Amber.SavegameImplementations.html" style="margin-left: 30px; padding-left: 0">SavegameImplementations</a>
-            </div>
-            <div id="namespace-537082092" class="accordion-body collapse ">
-                <div class="accordion-inner">
 
-                    
-                    <ul>
-                                                                                                    <li class="class"><a href="../classes/Slothsoft.Amber.SavegameImplementations.AmberArchiveBuilder.html">AmberArchiveBuilder</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.SavegameImplementations.AmberArchiveExtractor.html">AmberArchiveExtractor</a></li>
-                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+																				<ul>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.SavegameImplementations.AmberArchiveBuilder.html">AmberArchiveBuilder</a></li>
+																					<li class="class"><a
+																						href="../classes/Slothsoft.Amber.SavegameImplementations.AmberArchiveExtractor.html">AmberArchiveExtractor</a></li>
+																				</ul>
+																			</div>
+																		</div>
+																	</div>
+																</div>
 
-                    
-                    <ul>
-                                                                                                    <li class="class"><a href="../classes/Slothsoft.Amber.ArchiveManager.html">ArchiveManager</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.GraphicsManager.html">GraphicsManager</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.ModController.html">ModController</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.ModResource.html">ModResource</a></li>
-                                                    <li class="class"><a href="../classes/Slothsoft.Amber.ModResourceLocator.html">ModResourceLocator</a></li>
-                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
-                    
-                    <ul>
-                                                                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+																<ul>
+																	<li class="class"><a
+																		href="../classes/Slothsoft.Amber.ArchiveManager.html">ArchiveManager</a></li>
+																	<li class="class"><a
+																		href="../classes/Slothsoft.Amber.GraphicsManager.html">GraphicsManager</a></li>
+																	<li class="class"><a
+																		href="../classes/Slothsoft.Amber.ModController.html">ModController</a></li>
+																	<li class="class"><a
+																		href="../classes/Slothsoft.Amber.ModResource.html">ModResource</a></li>
+																	<li class="class"><a
+																		href="../classes/Slothsoft.Amber.ModResourceLocator.html">ModResourceLocator</a></li>
+																</ul>
+															</div>
+														</div>
+													</div>
+												</div>
 
-                    
-                    <ul>
-                                                                                            </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
-        </div>
-    </section>
-    <section class="row-fluid">
-        <div class="span10 offset2">
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <nav>
-                                                <a href="../namespaces/Slothsoft.Amber.html">\Slothsoft\Amber</a> <i class="icon-level-up"></i>
-                                            </nav>
-                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+												<ul>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
 
-                    <h1><small>\Slothsoft\Amber</small>ModResource</h1>
-                    <p><em></em></p>
-                    
-                    
-                                        
-                    <section id="summary">
-                        <h2>Summary</h2>
-                        <section class="row-fluid heading">
-                            <section class="span4">
-                                <a href="#methods">Methods</a>
-                            </section>
-                            <section class="span4">
-                                <a href="#properties">Properties</a>
-                            </section>
-                            <section class="span4">
-                                <a href="#constants">Constants</a>
-                            </section>
-                        </section>
-                        <section class="row-fluid public">
-                            <section class="span4">
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#method_createFromMod" class="">createFromMod()</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#method_getUrl" class="">getUrl()</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#method_getChangeTime" class="">getChangeTime()</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#method_setContents" class="">setContents()</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#method_ensureDirectory" class="">ensureDirectory()</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No public properties found</em>
-                                                            </section>
-                            <section class="span4">
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_SOURCE" class="">TYPE_SOURCE</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_LIBRARY" class="">TYPE_LIBRARY</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_GRAPHIC" class="">TYPE_GRAPHIC</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_STYLESHEET" class="">TYPE_STYLESHEET</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_USERFILE" class="">TYPE_USERFILE</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_EDITOR" class="">TYPE_EDITOR</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_MODFILE" class="">TYPE_MODFILE</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_MODFOLDER" class="">TYPE_MODFOLDER</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_STRUCTURE" class="">TYPE_STRUCTURE</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_TEMPLATE" class="">TYPE_TEMPLATE</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_GAMEFILE" class="">TYPE_GAMEFILE</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_GAMEFOLDER" class="">TYPE_GAMEFOLDER</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_CLI" class="">TYPE_CLI</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_CLI" class="">DIR_CLI</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_RESOURCES" class="">DIR_RESOURCES</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_LIBRARY" class="">DIR_LIBRARY</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_SOURCE" class="">DIR_SOURCE</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_GRAPHIC" class="">DIR_GRAPHIC</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_STYLESHEET" class="">DIR_STYLESHEET</a><br />
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_EDITOR" class="">DIR_EDITOR</a><br />
-                                                            </section>
-                        </section>
-                        <section class="row-fluid protected">
-                            <section class="span4">
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#method___construct" class="">__construct()</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <a href="../classes/Slothsoft.Amber.ModResource.html#property_url" class="">$url</a><br />
-                                                            </section>
-                            <section class="span4">
-                                <em>N/A</em>
-                            </section>
-                        </section>
-                        <section class="row-fluid private">
-                            <section class="span4">
-                                                                    <em>No private methods found</em>
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No private properties found</em>
-                                                            </section>
-                            <section class="span4">
-                                <em>N/A</em>
-                            </section>
-                        </section>
-                    </section>
-                </div>
-                <aside class="span4 detailsbar">
-                                        
-                    
-                    <dl>
-                        <dt>File</dt>
-                            <dd><a href="../files/Slothsoft.Amber.ModResource.html"><div class="path-wrapper">Slothsoft\Amber\ModResource.php</div></a></dd>
-                                                <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Default</div></dd>
-                                                <dt>Class hierarchy</dt>
-                            <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                
-                                        <div class="namespace-wrapper">\Slothsoft\Core\IO\HTTPFile</div>
-                                                                                                    <div class="namespace-wrapper">\Slothsoft\Amber\ModResource</div>
-                            </dd>
 
-                        
-                        
-                        
-                        
-                                                                        </dl>
-                    <h2>Tags</h2>
-                    <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
-                                        </table>
-                </aside>
-            </div>
+								<ul>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                                    <a id="constants" name="constants"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Constants</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
+			</div>
+		</section>
+		<section class="row-fluid">
+			<div class="span10 offset2">
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<nav>
+							<a href="../namespaces/Slothsoft.Amber.html">\Slothsoft\Amber</a>
+							<i class="icon-level-up"></i>
+						</nav>
+						<a href="#source-view" role="button" class="pull-right btn"
+							data-toggle="modal"><i class="icon-code"></i></a>
 
-                                <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_SOURCE" name="constant_TYPE_SOURCE" class="anchor"></a>
-            <article id="constant_TYPE_SOURCE" class="constant">
-                <h3 class="">TYPE_SOURCE</h3>
-                <pre class="signature">TYPE_SOURCE</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+						<h1>
+							<small>\Slothsoft\Amber</small>ModResource
+						</h1>
+						<p>
+							<em></em>
+						</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_LIBRARY" name="constant_TYPE_LIBRARY" class="anchor"></a>
-            <article id="constant_TYPE_LIBRARY" class="constant">
-                <h3 class="">TYPE_LIBRARY</h3>
-                <pre class="signature">TYPE_LIBRARY</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_GRAPHIC" name="constant_TYPE_GRAPHIC" class="anchor"></a>
-            <article id="constant_TYPE_GRAPHIC" class="constant">
-                <h3 class="">TYPE_GRAPHIC</h3>
-                <pre class="signature">TYPE_GRAPHIC</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_STYLESHEET" name="constant_TYPE_STYLESHEET" class="anchor"></a>
-            <article id="constant_TYPE_STYLESHEET" class="constant">
-                <h3 class="">TYPE_STYLESHEET</h3>
-                <pre class="signature">TYPE_STYLESHEET</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+						<section id="summary">
+							<h2>Summary</h2>
+							<section class="row-fluid heading">
+								<section class="span4">
+									<a href="#methods">Methods</a>
+								</section>
+								<section class="span4">
+									<a href="#properties">Properties</a>
+								</section>
+								<section class="span4">
+									<a href="#constants">Constants</a>
+								</section>
+							</section>
+							<section class="row-fluid public">
+								<section class="span4">
+									<a
+										href="../classes/Slothsoft.Amber.ModResource.html#method_createFromMod"
+										class="">createFromMod()</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#method_getUrl"
+										class="">getUrl()</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#method_getChangeTime"
+										class="">getChangeTime()</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#method_setContents"
+										class="">setContents()</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#method_ensureDirectory"
+										class="">ensureDirectory()</a><br />
+								</section>
+								<section class="span4">
+									<em>No public properties found</em>
+								</section>
+								<section class="span4">
+									<a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_SOURCE"
+										class="">TYPE_SOURCE</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_LIBRARY"
+										class="">TYPE_LIBRARY</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_GRAPHIC"
+										class="">TYPE_GRAPHIC</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_STYLESHEET"
+										class="">TYPE_STYLESHEET</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_USERFILE"
+										class="">TYPE_USERFILE</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_EDITOR"
+										class="">TYPE_EDITOR</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_MODFILE"
+										class="">TYPE_MODFILE</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_MODFOLDER"
+										class="">TYPE_MODFOLDER</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_STRUCTURE"
+										class="">TYPE_STRUCTURE</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_TEMPLATE"
+										class="">TYPE_TEMPLATE</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_GAMEFILE"
+										class="">TYPE_GAMEFILE</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_GAMEFOLDER"
+										class="">TYPE_GAMEFOLDER</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_TYPE_CLI"
+										class="">TYPE_CLI</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_CLI"
+										class="">DIR_CLI</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_RESOURCES"
+										class="">DIR_RESOURCES</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_LIBRARY"
+										class="">DIR_LIBRARY</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_SOURCE"
+										class="">DIR_SOURCE</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_GRAPHIC"
+										class="">DIR_GRAPHIC</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_STYLESHEET"
+										class="">DIR_STYLESHEET</a><br /> <a
+										href="../classes/Slothsoft.Amber.ModResource.html#constant_DIR_EDITOR"
+										class="">DIR_EDITOR</a><br />
+								</section>
+							</section>
+							<section class="row-fluid protected">
+								<section class="span4">
+									<a
+										href="../classes/Slothsoft.Amber.ModResource.html#method___construct"
+										class="">__construct()</a><br />
+								</section>
+								<section class="span4">
+									<a
+										href="../classes/Slothsoft.Amber.ModResource.html#property_url"
+										class="">$url</a><br />
+								</section>
+								<section class="span4">
+									<em>N/A</em>
+								</section>
+							</section>
+							<section class="row-fluid private">
+								<section class="span4">
+									<em>No private methods found</em>
+								</section>
+								<section class="span4">
+									<em>No private properties found</em>
+								</section>
+								<section class="span4">
+									<em>N/A</em>
+								</section>
+							</section>
+						</section>
+					</div>
+					<aside class="span4 detailsbar">
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_USERFILE" name="constant_TYPE_USERFILE" class="anchor"></a>
-            <article id="constant_TYPE_USERFILE" class="constant">
-                <h3 class="">TYPE_USERFILE</h3>
-                <pre class="signature">TYPE_USERFILE</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_EDITOR" name="constant_TYPE_EDITOR" class="anchor"></a>
-            <article id="constant_TYPE_EDITOR" class="constant">
-                <h3 class="">TYPE_EDITOR</h3>
-                <pre class="signature">TYPE_EDITOR</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+						<dl>
+							<dt>File</dt>
+							<dd>
+								<a href="../files/Slothsoft.Amber.ModResource.html"><div
+										class="path-wrapper">Slothsoft\Amber\ModResource.php</div></a>
+							</dd>
+							<dt>Package</dt>
+							<dd>
+								<div class="namespace-wrapper">Default</div>
+							</dd>
+							<dt>Class hierarchy</dt>
+							<dd class="hierarchy">
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_MODFILE" name="constant_TYPE_MODFILE" class="anchor"></a>
-            <article id="constant_TYPE_MODFILE" class="constant">
-                <h3 class="">TYPE_MODFILE</h3>
-                <pre class="signature">TYPE_MODFILE</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+								<div class="namespace-wrapper">\Slothsoft\Core\IO\HTTPFile</div>
+								<div class="namespace-wrapper">\Slothsoft\Amber\ModResource</div>
+							</dd>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_MODFOLDER" name="constant_TYPE_MODFOLDER" class="anchor"></a>
-            <article id="constant_TYPE_MODFOLDER" class="constant">
-                <h3 class="">TYPE_MODFOLDER</h3>
-                <pre class="signature">TYPE_MODFOLDER</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_STRUCTURE" name="constant_TYPE_STRUCTURE" class="anchor"></a>
-            <article id="constant_TYPE_STRUCTURE" class="constant">
-                <h3 class="">TYPE_STRUCTURE</h3>
-                <pre class="signature">TYPE_STRUCTURE</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_TEMPLATE" name="constant_TYPE_TEMPLATE" class="anchor"></a>
-            <article id="constant_TYPE_TEMPLATE" class="constant">
-                <h3 class="">TYPE_TEMPLATE</h3>
-                <pre class="signature">TYPE_TEMPLATE</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_GAMEFILE" name="constant_TYPE_GAMEFILE" class="anchor"></a>
-            <article id="constant_TYPE_GAMEFILE" class="constant">
-                <h3 class="">TYPE_GAMEFILE</h3>
-                <pre class="signature">TYPE_GAMEFILE</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_GAMEFOLDER" name="constant_TYPE_GAMEFOLDER" class="anchor"></a>
-            <article id="constant_TYPE_GAMEFOLDER" class="constant">
-                <h3 class="">TYPE_GAMEFOLDER</h3>
-                <pre class="signature">TYPE_GAMEFOLDER</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_TYPE_CLI" name="constant_TYPE_CLI" class="anchor"></a>
-            <article id="constant_TYPE_CLI" class="constant">
-                <h3 class="">TYPE_CLI</h3>
-                <pre class="signature">TYPE_CLI</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<a id="constants" name="constants"></a>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<h2>Constants</h2>
+					</div>
+					<aside class="span4 detailsbar"></aside>
+				</div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_DIR_CLI" name="constant_DIR_CLI" class="anchor"></a>
-            <article id="constant_DIR_CLI" class="constant">
-                <h3 class="">DIR_CLI</h3>
-                <pre class="signature">DIR_CLI</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_SOURCE" name="constant_TYPE_SOURCE"
+							class="anchor"></a>
+						<article id="constant_TYPE_SOURCE" class="constant">
+							<h3 class="">TYPE_SOURCE</h3>
+							<pre class="signature">TYPE_SOURCE</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_DIR_RESOURCES" name="constant_DIR_RESOURCES" class="anchor"></a>
-            <article id="constant_DIR_RESOURCES" class="constant">
-                <h3 class="">DIR_RESOURCES</h3>
-                <pre class="signature">DIR_RESOURCES</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_DIR_LIBRARY" name="constant_DIR_LIBRARY" class="anchor"></a>
-            <article id="constant_DIR_LIBRARY" class="constant">
-                <h3 class="">DIR_LIBRARY</h3>
-                <pre class="signature">DIR_LIBRARY</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_LIBRARY" name="constant_TYPE_LIBRARY"
+							class="anchor"></a>
+						<article id="constant_TYPE_LIBRARY" class="constant">
+							<h3 class="">TYPE_LIBRARY</h3>
+							<pre class="signature">TYPE_LIBRARY</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_DIR_SOURCE" name="constant_DIR_SOURCE" class="anchor"></a>
-            <article id="constant_DIR_SOURCE" class="constant">
-                <h3 class="">DIR_SOURCE</h3>
-                <pre class="signature">DIR_SOURCE</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_DIR_GRAPHIC" name="constant_DIR_GRAPHIC" class="anchor"></a>
-            <article id="constant_DIR_GRAPHIC" class="constant">
-                <h3 class="">DIR_GRAPHIC</h3>
-                <pre class="signature">DIR_GRAPHIC</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_GRAPHIC" name="constant_TYPE_GRAPHIC"
+							class="anchor"></a>
+						<article id="constant_TYPE_GRAPHIC" class="constant">
+							<h3 class="">TYPE_GRAPHIC</h3>
+							<pre class="signature">TYPE_GRAPHIC</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_DIR_STYLESHEET" name="constant_DIR_STYLESHEET" class="anchor"></a>
-            <article id="constant_DIR_STYLESHEET" class="constant">
-                <h3 class="">DIR_STYLESHEET</h3>
-                <pre class="signature">DIR_STYLESHEET</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_DIR_EDITOR" name="constant_DIR_EDITOR" class="anchor"></a>
-            <article id="constant_DIR_EDITOR" class="constant">
-                <h3 class="">DIR_EDITOR</h3>
-                <pre class="signature">DIR_EDITOR</pre>
-                <p><em></em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_STYLESHEET" name="constant_TYPE_STYLESHEET"
+							class="anchor"></a>
+						<article id="constant_TYPE_STYLESHEET" class="constant">
+							<h3 class="">TYPE_STYLESHEET</h3>
+							<pre class="signature">TYPE_STYLESHEET</pre>
+							<p>
+								<em></em>
+							</p>
 
-                            
-                                    <a id="properties" name="properties"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Properties</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_url" name="property_url" class="anchor"></a>
-            <article class="property">
-                <h3 class="protected ">$url</h3>
-                <pre class="signature">$url : </pre>
-                <p><em></em></p>
-                
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_USERFILE" name="constant_TYPE_USERFILE"
+							class="anchor"></a>
+						<article id="constant_TYPE_USERFILE" class="constant">
+							<h3 class="">TYPE_USERFILE</h3>
+							<pre class="signature">TYPE_USERFILE</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                <h4>Type</h4>
-                
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                            
-                                    <a id="methods" name="methods"></a>
-            <div class="row-fluid">
-                <div class="span8 content class"><h2>Methods</h2></div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_EDITOR" name="constant_TYPE_EDITOR"
+							class="anchor"></a>
+						<article id="constant_TYPE_EDITOR" class="constant">
+							<h3 class="">TYPE_EDITOR</h3>
+							<pre class="signature">TYPE_EDITOR</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_createFromMod" name="method_createFromMod" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">createFromMod()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">createFromMod(string  <span class="argument">$baseDir</span>, string  <span class="argument">$game</span>, string  <span class="argument">$mod</span>, string  <span class="argument">$type</span>, string  <span class="argument">$name</span>) : \Slothsoft\Amber\ModResource</pre>
-                <p><em></em></p>
-                
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$baseDir </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$game </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$mod </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$type </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$name </td>
-                                <td></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/Slothsoft.Amber.ModResource.html">\Slothsoft\Amber\ModResource</a>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_MODFILE" name="constant_TYPE_MODFILE"
+							class="anchor"></a>
+						<article id="constant_TYPE_MODFILE" class="constant">
+							<h3 class="">TYPE_MODFILE</h3>
+							<pre class="signature">TYPE_MODFILE</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_getUrl" name="method_getUrl" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">getUrl()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getUrl() </pre>
-                <p><em></em></p>
-                
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_MODFOLDER" name="constant_TYPE_MODFOLDER"
+							class="anchor"></a>
+						<article id="constant_TYPE_MODFOLDER" class="constant">
+							<h3 class="">TYPE_MODFOLDER</h3>
+							<pre class="signature">TYPE_MODFOLDER</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_getChangeTime" name="method_getChangeTime" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">getChangeTime()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getChangeTime() </pre>
-                <p><em></em></p>
-                
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_STRUCTURE" name="constant_TYPE_STRUCTURE"
+							class="anchor"></a>
+						<article id="constant_TYPE_STRUCTURE" class="constant">
+							<h3 class="">TYPE_STRUCTURE</h3>
+							<pre class="signature">TYPE_STRUCTURE</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setContents" name="method_setContents" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setContents()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setContents(\Slothsoft\Amber\string  <span class="argument">$content</span>) </pre>
-                <p><em></em></p>
-                
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Slothsoft\Amber\string</td>
-                                <td>$content </td>
-                                <td></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_TEMPLATE" name="constant_TYPE_TEMPLATE"
+							class="anchor"></a>
+						<article id="constant_TYPE_TEMPLATE" class="constant">
+							<h3 class="">TYPE_TEMPLATE</h3>
+							<pre class="signature">TYPE_TEMPLATE</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_ensureDirectory" name="method_ensureDirectory" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">ensureDirectory()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">ensureDirectory() </pre>
-                <p><em></em></p>
-                
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_GAMEFILE" name="constant_TYPE_GAMEFILE"
+							class="anchor"></a>
+						<article id="constant_TYPE_GAMEFILE" class="constant">
+							<h3 class="">TYPE_GAMEFILE</h3>
+							<pre class="signature">TYPE_GAMEFILE</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___construct" name="method___construct" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">__construct()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(  <span class="argument">$filePath</span>,   <span class="argument">$fileName = null</span>,   <span class="argument">$url = null</span>) </pre>
-                <p><em></em></p>
-                
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td></td>
-                                <td>$filePath </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td></td>
-                                <td>$fileName </td>
-                                <td></td>
-                            </tr>
-                                                    <tr>
-                                <td></td>
-                                <td>$url </td>
-                                <td></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_GAMEFOLDER" name="constant_TYPE_GAMEFOLDER"
+							class="anchor"></a>
+						<article id="constant_TYPE_GAMEFOLDER" class="constant">
+							<h3 class="">TYPE_GAMEFOLDER</h3>
+							<pre class="signature">TYPE_GAMEFOLDER</pre>
+							<p>
+								<em></em>
+							</p>
 
-                                                    </div>
-    </section>
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
 
-    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">ModResource.php</h3>
-        </div>
-        <div class="modal-body">
-            <pre data-src="../files/Slothsoft\Amber\ModResource.php.txt" class="language-php line-numbers"></pre>
-        </div>
-    </div>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_TYPE_CLI" name="constant_TYPE_CLI" class="anchor"></a>
+						<article id="constant_TYPE_CLI" class="constant">
+							<h3 class="">TYPE_CLI</h3>
+							<pre class="signature">TYPE_CLI</pre>
+							<p>
+								<em></em>
+							</p>
 
-    <footer class="row-fluid">
-        <section class="span10 offset2">
-            <section class="row-fluid">
-                <section class="span10 offset1">
-                    <section class="row-fluid footer-sections">
-                        <section class="span4">
-                                                        <h1><i class="icon-code"></i></h1>
-                            <div>
-                                <ul>
-                                                                            <li><a href="../namespaces/Slothsoft.html">\Slothsoft</a></li>
-                                                                    </ul>
-                            </div>
-                        </section>
-                        <section class="span4">
-                                                        <h1><i class="icon-bar-chart"></i></h1>
-                            <div>
-                                <ul>
-                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
-                                </ul>
-                            </div>
-                        </section>
-                        <section class="span4">
-                                                        <h1><i class="icon-pushpin"></i></h1>
-                            <div>
-                                <ul>
-                                    <li><a href="../reports/errors.html">Errors</a></li>
-                                    <li><a href="../reports/markers.html">Markers</a></li>
-                                </ul>
-                            </div>
-                        </section>
-                    </section>
-                </section>
-            </section>
-            <section class="row-fluid">
-                <section class="span10 offset1">
-                    <hr />
-                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 6th, 2018 at 20:04.
-                </section>
-            </section>
-        </section>
-    </footer>
-</div>
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_DIR_CLI" name="constant_DIR_CLI" class="anchor"></a>
+						<article id="constant_DIR_CLI" class="constant">
+							<h3 class="">DIR_CLI</h3>
+							<pre class="signature">DIR_CLI</pre>
+							<p>
+								<em></em>
+							</p>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_DIR_RESOURCES" name="constant_DIR_RESOURCES"
+							class="anchor"></a>
+						<article id="constant_DIR_RESOURCES" class="constant">
+							<h3 class="">DIR_RESOURCES</h3>
+							<pre class="signature">DIR_RESOURCES</pre>
+							<p>
+								<em></em>
+							</p>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_DIR_LIBRARY" name="constant_DIR_LIBRARY"
+							class="anchor"></a>
+						<article id="constant_DIR_LIBRARY" class="constant">
+							<h3 class="">DIR_LIBRARY</h3>
+							<pre class="signature">DIR_LIBRARY</pre>
+							<p>
+								<em></em>
+							</p>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_DIR_SOURCE" name="constant_DIR_SOURCE"
+							class="anchor"></a>
+						<article id="constant_DIR_SOURCE" class="constant">
+							<h3 class="">DIR_SOURCE</h3>
+							<pre class="signature">DIR_SOURCE</pre>
+							<p>
+								<em></em>
+							</p>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_DIR_GRAPHIC" name="constant_DIR_GRAPHIC"
+							class="anchor"></a>
+						<article id="constant_DIR_GRAPHIC" class="constant">
+							<h3 class="">DIR_GRAPHIC</h3>
+							<pre class="signature">DIR_GRAPHIC</pre>
+							<p>
+								<em></em>
+							</p>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_DIR_STYLESHEET" name="constant_DIR_STYLESHEET"
+							class="anchor"></a>
+						<article id="constant_DIR_STYLESHEET" class="constant">
+							<h3 class="">DIR_STYLESHEET</h3>
+							<pre class="signature">DIR_STYLESHEET</pre>
+							<p>
+								<em></em>
+							</p>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="constant_DIR_EDITOR" name="constant_DIR_EDITOR"
+							class="anchor"></a>
+						<article id="constant_DIR_EDITOR" class="constant">
+							<h3 class="">DIR_EDITOR</h3>
+							<pre class="signature">DIR_EDITOR</pre>
+							<p>
+								<em></em>
+							</p>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+
+				<a id="properties" name="properties"></a>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<h2>Properties</h2>
+					</div>
+					<aside class="span4 detailsbar"></aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="property_url" name="property_url" class="anchor"></a>
+						<article class="property">
+							<h3 class="protected ">$url</h3>
+							<pre class="signature">$url : </pre>
+							<p>
+								<em></em>
+							</p>
+
+
+							<h4>Type</h4>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+
+				<a id="methods" name="methods"></a>
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<h2>Methods</h2>
+					</div>
+					<aside class="span4 detailsbar"></aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="method_createFromMod" name="method_createFromMod"
+							class="anchor"></a>
+						<article class="method">
+							<h3 class="public ">createFromMod()</h3>
+							<a href="#source-view" role="button" class="pull-right btn"
+								data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i
+								class="icon-code"></i></a>
+							<pre class="signature" style="margin-right: 54px;">createFromMod(string  <span
+									class="argument">$baseDir</span>, string  <span
+									class="argument">$game</span>, string  <span class="argument">$mod</span>, string  <span
+									class="argument">$type</span>, string  <span class="argument">$name</span>) : \Slothsoft\Amber\ModResource</pre>
+							<p>
+								<em></em>
+							</p>
+
+
+							<h4>Parameters</h4>
+							<table class="table table-condensed table-hover">
+								<tr>
+									<td>string</td>
+									<td>$baseDir</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>string</td>
+									<td>$game</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>string</td>
+									<td>$mod</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>string</td>
+									<td>$type</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>string</td>
+									<td>$name</td>
+									<td></td>
+								</tr>
+							</table>
+
+
+							<h4>Returns</h4>
+							<a href="../classes/Slothsoft.Amber.ModResource.html">\Slothsoft\Amber\ModResource</a>
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<span class="label label-info">static</span>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="method_getUrl" name="method_getUrl" class="anchor"></a>
+						<article class="method">
+							<h3 class="public ">getUrl()</h3>
+							<a href="#source-view" role="button" class="pull-right btn"
+								data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i
+								class="icon-code"></i></a>
+							<pre class="signature" style="margin-right: 54px;">getUrl() </pre>
+							<p>
+								<em></em>
+							</p>
+
+
+
+
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="method_getChangeTime" name="method_getChangeTime"
+							class="anchor"></a>
+						<article class="method">
+							<h3 class="public ">getChangeTime()</h3>
+							<a href="#source-view" role="button" class="pull-right btn"
+								data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i
+								class="icon-code"></i></a>
+							<pre class="signature" style="margin-right: 54px;">getChangeTime() </pre>
+							<p>
+								<em></em>
+							</p>
+
+
+
+
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="method_setContents" name="method_setContents"
+							class="anchor"></a>
+						<article class="method">
+							<h3 class="public ">setContents()</h3>
+							<a href="#source-view" role="button" class="pull-right btn"
+								data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i
+								class="icon-code"></i></a>
+							<pre class="signature" style="margin-right: 54px;">setContents(\Slothsoft\Amber\string  <span
+									class="argument">$content</span>) </pre>
+							<p>
+								<em></em>
+							</p>
+
+
+							<h4>Parameters</h4>
+							<table class="table table-condensed table-hover">
+								<tr>
+									<td>\Slothsoft\Amber\string</td>
+									<td>$content</td>
+									<td></td>
+								</tr>
+							</table>
+
+
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="method_ensureDirectory" name="method_ensureDirectory"
+							class="anchor"></a>
+						<article class="method">
+							<h3 class="public ">ensureDirectory()</h3>
+							<a href="#source-view" role="button" class="pull-right btn"
+								data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i
+								class="icon-code"></i></a>
+							<pre class="signature" style="margin-right: 54px;">ensureDirectory() </pre>
+							<p>
+								<em></em>
+							</p>
+
+
+
+
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+				<div class="row-fluid">
+					<div class="span8 content class">
+						<a id="method___construct" name="method___construct"
+							class="anchor"></a>
+						<article class="method">
+							<h3 class="protected ">__construct()</h3>
+							<a href="#source-view" role="button" class="pull-right btn"
+								data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i
+								class="icon-code"></i></a>
+							<pre class="signature" style="margin-right: 54px;">__construct(  <span
+									class="argument">$filePath</span>,   <span class="argument">$fileName = null</span>,   <span
+									class="argument">$url = null</span>) </pre>
+							<p>
+								<em></em>
+							</p>
+
+
+							<h4>Parameters</h4>
+							<table class="table table-condensed table-hover">
+								<tr>
+									<td></td>
+									<td>$filePath</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>$fileName</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>$url</td>
+									<td></td>
+								</tr>
+							</table>
+
+
+
+						</article>
+					</div>
+					<aside class="span4 detailsbar">
+						<h1>
+							<i class="icon-arrow-down"></i>
+						</h1>
+						<dl>
+						</dl>
+						<h2>Tags</h2>
+						<table class="table table-condensed">
+							<tr>
+								<td colspan="2"><em>None found</em></td>
+							</tr>
+						</table>
+					</aside>
+				</div>
+
+			</div>
+		</section>
+
+		<div id="source-view" class="modal hide fade" tabindex="-1"
+			role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-hidden="true">×</button>
+				<h3 id="source-view-label">ModResource.php</h3>
+			</div>
+			<div class="modal-body">
+				<pre data-src="../files/Slothsoft\Amber\ModResource.php.txt"
+					class="language-php line-numbers"></pre>
+			</div>
+		</div>
+
+		<footer class="row-fluid">
+			<section class="span10 offset2">
+				<section class="row-fluid">
+					<section class="span10 offset1">
+						<section class="row-fluid footer-sections">
+							<section class="span4">
+								<h1>
+									<i class="icon-code"></i>
+								</h1>
+								<div>
+									<ul>
+										<li><a href="../namespaces/Slothsoft.html">\Slothsoft</a></li>
+									</ul>
+								</div>
+							</section>
+							<section class="span4">
+								<h1>
+									<i class="icon-bar-chart"></i>
+								</h1>
+								<div>
+									<ul>
+										<li><a href="../graphs/class.html">Class Hierarchy
+												Diagram</a></li>
+									</ul>
+								</div>
+							</section>
+							<section class="span4">
+								<h1>
+									<i class="icon-pushpin"></i>
+								</h1>
+								<div>
+									<ul>
+										<li><a href="../reports/errors.html">Errors</a></li>
+										<li><a href="../reports/markers.html">Markers</a></li>
+									</ul>
+								</div>
+							</section>
+						</section>
+					</section>
+				</section>
+				<section class="row-fluid">
+					<section class="span10 offset1">
+						<hr />
+						Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor
+						</a> and authored on June 23rd, 2018 at 18:10.
+					</section>
+				</section>
+			</section>
+		</footer>
+	</div>
 
 </body>
 </html>

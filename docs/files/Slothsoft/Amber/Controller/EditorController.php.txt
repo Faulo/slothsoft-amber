@@ -4,22 +4,36 @@ namespace Slothsoft\Amber\Controller;
 
 use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\CLI\AmbTool;
-use Slothsoft\Amber\Mod\ParameterFilter;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrl;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrlArguments;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrlAuthority;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrlPath;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrlResolver;
-use Slothsoft\Farah\Module\Node\Asset\AssetInterface;
+use Slothsoft\Core\ServerEnvironment;
+use Slothsoft\Farah\FarahUrl\FarahUrl;
+use Slothsoft\Farah\Module\Module;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
-use Slothsoft\Farah\Module\FarahUrl\FarahUrlStreamIdentifier;
 
 class EditorController
 {
+    public function createEditorConfig(string $game, string $version, string $infoset, string $user): array
+    {
+        $user = preg_replace('~[^\w]~', '', $user);
+        
+        $editorConfig = [];
+        $editorConfig['structureFile'] = (string) $this->getAmberAssetUrl("/games/$game/infoset/$infoset");
+        $editorConfig['defaultDir'] = (string) $this->getAmberAssetPath("/games/$game/source/$version");
+        $editorConfig['tempDir'] = ServerEnvironment::getCacheDirectory();
+        
+        $editorConfig['mode'] = 'thalion';
+        $editorConfig['id'] = $user;
+        $editorConfig['loadAllArchives'] = true;
+        $editorConfig['selectedArchives'] = [];
+        $editorConfig['uploadedArchives'] = [];
+        $editorConfig['archiveExtractors'] = $this->createArchiveExtractors();
+        $editorConfig['archiveBuilders'] = $this->createArchiveBuilders();
+        
+        return $editorConfig;
+    }
 
     private $editorPresetMap = [
         'saveEditor' => [
@@ -171,28 +185,24 @@ class EditorController
             ]
         ]
     ];
+    
+    
 
-    public function createEditorConfig(FarahUrlArguments $args): array
+    public function createEditorConfigOLD(string $game, string $mod, string $preset, string $saveMode, string $saveId): array
     {
-        $game = $args->get(ParameterFilter::PARAM_GAME);
-        $mod = $args->get(ParameterFilter::PARAM_MOD);
-        $preset = $args->get(ParameterFilter::PARAM_PRESET);
-        
-        $mode = $args->get(ParameterFilter::PARAM_SAVE_MODE);
-        $mode = preg_replace('~[^\w]~', '', $mode);
-        $name = $args->get(ParameterFilter::PARAM_SAVE_ID);
-        $name = preg_replace('~[^\w]~', '', $name);
+        $saveMode = preg_replace('~[^\w]~', '', $saveMode);
+        $saveId = preg_replace('~[^\w]~', '', $saveId);
         
         $editorPreset = $this->editorPresetMap[$preset];
         
         $editorConfig = [];
-        $editorConfig['structureFile'] = $this->getAmberAsset("/games/$game/$editorPreset[structure]")->getRealPath();
-        $editorConfig['defaultDir'] = $this->getAmberAsset("/games/$game/source/$mod")->getRealPath();
+        $editorConfig['structureFile'] = (string) $this->getAmberAssetUrl("/games/$game/$editorPreset[structure]");
+        $editorConfig['defaultDir'] = (string) $this->getAmberAssetPath("/games/$game/source/$mod");
         $editorConfig['tempDir'] = temp_dir(__NAMESPACE__);
         
-        $editorConfig['mode'] = $mode;
-        $editorConfig['id'] = $name;
-        $editorConfig['loadAllArchives'] = false;
+        $editorConfig['mode'] = $saveMode;
+        $editorConfig['id'] = $saveId;
+        $editorConfig['loadAllArchives'] = true;
         $editorConfig['selectedArchives'] = [];
         $editorConfig['uploadedArchives'] = [];
         $editorConfig['archiveExtractors'] = $this->createArchiveExtractors();
@@ -211,20 +221,24 @@ class EditorController
         $editor->load();
         return $editor;
     }
-
-    private function getAmberAsset(string $path): AssetInterface
-    {
-        return FarahUrlResolver::resolveToAsset(FarahUrl::createFromComponents(FarahUrlAuthority::createFromVendorAndModule('slothsoft', 'amber'), FarahUrlPath::createFromString($path), FarahUrlArguments::createEmpty(), FarahUrlStreamIdentifier::createEmpty()));
+    
+    private function getAmberAssetUrl(string $url): FarahUrl {
+        return FarahUrl::createFromReference($url, FarahUrl::createFromReference('farah://slothsoft@amber'));
+    }
+    
+    private function getAmberAssetPath(string $url): string {
+        $url = $this->getAmberAssetUrl($url);
+        return Module::resolveToAsset($url)->getManifestElement()->getAttribute('realpath');
     }
 
     private function createAmbTool(): AmbTool
     {
-        return new AmbTool($this->getAmberAsset('/cli/ambtool')->getRealPath());
+        return new AmbTool((string) $this->getAmberAssetUrl('/cli/ambtool'));
     }
 
     private function createAmbGfx(): AmbGfx
     {
-        return new AmbGfx($this->getAmberAsset('/cli/ambgfx')->getRealPath());
+        return new AmbGfx((string) $this->getAmberAssetUrl('/cli/ambgfx'));
     }
 
     private function createArchiveExtractors(): array
