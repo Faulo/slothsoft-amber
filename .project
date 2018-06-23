@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>slothsoft-amber</name>
-	<comment></comment>
-	<projects>
-		<project>slothsoft-core</project>
-		<project>slothsoft-farah</project>
-		<project>slothsoft-savegame</project>
-	</projects>
+	<comment/>
+	<projects><project>/slothsoft-core</project><project>/slothsoft-farah</project><project>/slothsoft-savegame</project></projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.php.composer.core.builder.buildPathManagementBuilder</name>
