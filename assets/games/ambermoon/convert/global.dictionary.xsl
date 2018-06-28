@@ -5,12 +5,12 @@
 	xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
 
-	<xsl:variable name="dataDocument" select="/*/*/sse:savegame.editor" />
-	<xsl:variable name="dictionaryDocument" select="/*/*/saa:amberdata" />
+	<xsl:variable name="dataDocument" select="/*/*[@name='dataset']/sse:savegame.editor" />
+	<xsl:variable name="dictionaryDocument" select="/*/*[@name='dictionaries']/saa:amberdata" />
 
-	<xsl:template match="/">
+	<xsl:template match="/*/*[@name='dataset']">
 		<amberdata version="0.1">
-			<xsl:apply-templates select="$dataDocument" />
+			<xsl:apply-templates select="sse:savegame.editor" />
 		</amberdata>
 	</xsl:template>
 

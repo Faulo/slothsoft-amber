@@ -2,65 +2,90 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
-use Slothsoft\Amber\Controller\EditorController;
-use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
-use Slothsoft\Farah\Module\Asset\AssetInterface;
-use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
+use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Farah\Exception\HttpDownloadAssetException;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\DOMWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface;
 
-class EditorBuilder implements ExecutableBuilderStrategyInterface
+class EditorBuilder extends AbstractResourceBuilder
 {
 
-    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
+    protected function processInfoset($infosetId) : ResultBuilderStrategyInterface
     {
-        $game = $args->get(EditorParameterFilter::PARAM_GAME);
-        $mod = $args->get(EditorParameterFilter::PARAM_MOD);
-        $preset = $args->get(EditorParameterFilter::PARAM_PRESET);
+        $request = (array) $this->args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
         
-        $saveMode = $args->get(EditorParameterFilter::PARAM_SAVE_MODE);
-        $saveId = $args->get(EditorParameterFilter::PARAM_SAVE_ID);
+        $action = $request['action'] ?? 'view';
         
-        $controller = new EditorController();
-        $editorConfig = $controller->createEditorConfig($game, $mod, $preset, $saveMode, $saveId);
-        
-        $loadFile = $args->get(EditorParameterFilter::PARAM_LOAD_FILE);
-        $saveFile = $args->get(EditorParameterFilter::PARAM_SAVE_FILE);
-        $downloadFile = $args->get(EditorParameterFilter::PARAM_DOWNLOAD_FILE);
-        
-        $request = (array) $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
-        
-        if (isset($request['editor'])) {
-            if (isset($request['editor']['archives'])) {
-                foreach ($request['editor']['archives'] as $val) {
-                    $editorConfig['selectedArchives'][$val] = true;
-                }
-            }
-        }
-        if ($loadFile) {
-            $editorConfig['selectedArchives'][$loadFile] = true;
-        }
-        if ($saveFile) {
-            $editorConfig['selectedArchives'][$saveFile] = true;
-        }
-        if ($downloadFile) {
-            $editorConfig['selectedArchives'][$downloadFile] = true;
-        }
-        
-        if (isset($_FILES['save'])) {
-            foreach ($_FILES['save']['tmp_name'] as $file => $filepath) {
-                if (strlen($filepath) and file_exists($filepath)) {
-                    $editorConfig['uploadedArchives'][$file] = $filepath;
+        if ($action === 'upload') {
+            $errors = $_FILES['save']['error'] ?? [];
+            foreach ($errors as $archiveId => $error) {
+                if ($error === UPLOAD_ERR_OK) {
+                    $path = $_FILES['save']['tmp_name'][$archiveId] ?? '';
+                    $this->editor->writeGameFile($archiveId, FileInfoFactory::createFromUpload($path));
                 }
             }
         }
         
-        $editor = $controller->createEditor($editorConfig);
-        
-        $editor->parseRequest($request);
-        
-        $resultBuilder = new DOMWriterResultBuilder($editor);
-        return new ExecutableStrategies($resultBuilder);
+        if (isset($request['archiveId'])) {
+            $archiveId = $request['archiveId'];
+            $this->editor->loadArchive($archiveId);
+            $this->editor->applyValues($request['data'] ?? []);
+            
+            $archive = $this->editor->getArchiveNode($archiveId);
+            
+            if ($action === 'save') {
+                $this->editor->writeGameFile($archiveId, $archive);
+            }
+            
+            if ($action === 'download') {
+                $resultBuilder = new FileWriterResultBuilder($archive);
+                $strategies = new ExecutableStrategies($resultBuilder);
+                throw new HttpDownloadAssetException($strategies);
+            }
+            
+        } else {
+            $this->editor->loadNoArchives();
+        }
+        return new DOMWriterResultBuilder($this->editor);
     }
+    
+    protected function processArchive($infosetId, $archiveId) : ResultBuilderStrategyInterface
+    {
+        return $this->processInfoset($infosetId);
+    }
+
+    protected function processFile($infosetId, $archiveId, $fileId) : ResultBuilderStrategyInterface
+    {
+        return $this->processArchive($infosetId, $archiveId);
+    }
+    
+    
+    //         if ($uploadedArchives = $editor->getConfigValue('uploadedArchives')) {
+    //             if (isset($uploadedArchives[$this->name])) {
+    //                 move_uploaded_file($uploadedArchives[$this->name], $tempFile);
+    //             }
+    //         }
+    //         if (isset($request['editor'])) {
+    //             if (isset($request['editor']['action'])) {
+    //                 switch ($request['editor']['action']) {
+    //                     case 'download':
+    //                         $resultBuilder = new NullResultBuilder();
+    //                         foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
+    //                             if ($file = $editor->getArchiveFile($fileName)) {
+    //                                 $resultBuilder = new FileWriterResultBuilder($file);
+    //                                 break;
+    //                             }
+    //                         }
+    //                         break;
+    //                     case 'save':
+    //                         foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
+    //                             $editor->writeArchiveFile($fileName);
+    //                         }
+    //                         break;
+    //                 }
+    //             }
+    //         }
 }
 

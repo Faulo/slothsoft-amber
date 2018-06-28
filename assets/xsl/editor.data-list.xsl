@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:amber="http://schema.slothsoft.net/amber/amberdata" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="1.0" 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:str="http://exslt.org/strings" extension-element-prefixes="str">
 
-	<xsl:variable name="amberdata" select="/*/*[@name='amberdata']/amber:amberdata" />
+	<xsl:variable name="amberdata" select="/*/*[@name='amberdata']/saa:amberdata" />
 
 	<xsl:template match="/*">
 		<div class="Amber Editor">
@@ -27,11 +28,11 @@ window.addEventListener(
 		</div>
 	</xsl:template>
 
-	<xsl:template match="amber:*">
+	<xsl:template match="saa:*">
 		<xsl:apply-templates select="." mode="itemlist" />
 	</xsl:template>
 
-	<xsl:template match="amber:portrait-list | amber:item-list | amber:monster-list" mode="itemlist">
+	<xsl:template match="saa:portrait-list | saa:item-list | saa:monster-list" mode="itemlist">
 		<xsl:for-each select="*">
 			<details data-template="flex">
 				<summary>
@@ -53,7 +54,7 @@ window.addEventListener(
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template match="amber:class-list" mode="itemlist">
+	<xsl:template match="saa:class-list" mode="itemlist">
 		<xsl:for-each select="*">
 			<details data-template="flex">
 				<summary>
@@ -69,7 +70,7 @@ window.addEventListener(
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template match="amber:map-list" mode="itemlist">
+	<xsl:template match="saa:map-list" mode="itemlist">
 		<xsl:choose>
 			<xsl:when test="count(*) = 1">
 				<xsl:for-each select="*">
@@ -104,17 +105,17 @@ window.addEventListener(
 		</xsl:choose>
 	</xsl:template>
 
-	<xsl:template match="amber:class" mode="itemlist">
+	<xsl:template match="saa:class" mode="itemlist">
 		<article data-class-id="{@id}" data-template="flex" class="Class">
 			<xsl:value-of select="@name" />
 			<xsl:apply-templates select="." mode="itemlist-inline" />
 		</article>
 	</xsl:template>
 
-	<xsl:template match="amber:class" mode="itemlist-inline">
+	<xsl:template match="saa:class" mode="itemlist-inline">
 		<table class="ClassData">
 			<tbody>
-				<xsl:for-each select="amber:skill">
+				<xsl:for-each select="saa:skill">
 					<tr class="right-aligned">
 						<td>
 							<xsl:value-of select="@name" />
@@ -135,17 +136,17 @@ window.addEventListener(
 		</table>
 	</xsl:template>
 
-	<xsl:template match="amber:race" mode="itemlist">
+	<xsl:template match="saa:race" mode="itemlist">
 		<article data-race-id="{@id}" data-template="flex" class="Race">
 			<xsl:value-of select="@name" />
 			<xsl:apply-templates select="." mode="itemlist-inline" />
 		</article>
 	</xsl:template>
 
-	<xsl:template match="amber:race" mode="itemlist-inline">
+	<xsl:template match="saa:race" mode="itemlist-inline">
 		<table class="RaceData">
 			<tbody>
-				<xsl:for-each select="amber:attribute">
+				<xsl:for-each select="saa:attribute">
 					<tr class="right-aligned">
 						<td>
 							<xsl:value-of select="@name" />
@@ -166,7 +167,7 @@ window.addEventListener(
 		</table>
 	</xsl:template>
 
-	<xsl:template match="amber:portrait" mode="itemlist">
+	<xsl:template match="saa:portrait" mode="itemlist">
 		<article data-portrait-id="{@id}" data-template="flex" class="Portrait">
 			<amber-picker type="portrait" class="portrait-picker" role="button" tabindex="0">
 				<amber-portrait value="{@id}" />
@@ -175,7 +176,7 @@ window.addEventListener(
 		</article>
 	</xsl:template>
 
-	<xsl:template match="amber:monster" mode="itemlist">
+	<xsl:template match="saa:monster" mode="itemlist">
 		<!--<item xmlns="" id="361" image="9" name="MAGIERSTIEFEL" type="Schuhe" hands="0" fingers="0" damage="0" armor="6" weight="850" 
 			gender="beide" class="Magier Mystik. Alchem. Heiler"/> -->
 		<article data-monster-id="{@id}" data-template="flex" class="Monster">
@@ -185,31 +186,31 @@ window.addEventListener(
 			<ul>
 				<li>
 					<h3>race</h3>
-					<xsl:apply-templates select="amber:race" mode="itemlist-inline" />
+					<xsl:apply-templates select="saa:race" mode="itemlist-inline" />
 				</li>
 				<li>
 					<h3>class</h3>
-					<xsl:apply-templates select="amber:class" mode="itemlist-inline" />
+					<xsl:apply-templates select="saa:class" mode="itemlist-inline" />
 				</li>
 				<li>
 					<h3>equipment</h3>
-					<xsl:apply-templates select="amber:equipment" mode="itemlist-inline" />
+					<xsl:apply-templates select="saa:equipment" mode="itemlist-inline" />
 				</li>
 				<li>
 					<h3>inventory</h3>
-					<xsl:apply-templates select="amber:inventory" mode="itemlist-inline" />
+					<xsl:apply-templates select="saa:inventory" mode="itemlist-inline" />
 				</li>
 				<li>
 					<h3>spells</h3>
-					<xsl:apply-templates select="amber:spellbook" mode="itemlist-inline" />
+					<xsl:apply-templates select="saa:spellbook" mode="itemlist-inline" />
 				</li>
 			</ul>
 		</article>
 	</xsl:template>
-	<xsl:template match="amber:spellbook" mode="itemlist-inline">
+	<xsl:template match="saa:spellbook" mode="itemlist-inline">
 		<div class="spells">
 			<ul>
-				<xsl:for-each select="amber:spell-instance">
+				<xsl:for-each select="saa:spell-instance">
 					<li>
 						<xsl:value-of select="@name" />
 					</li>
@@ -218,10 +219,10 @@ window.addEventListener(
 		</div>
 	</xsl:template>
 
-	<xsl:template match="amber:equipment" mode="itemlist-inline">
+	<xsl:template match="saa:equipment" mode="itemlist-inline">
 		<div class="equipment" data-template="flex">
 			<ul>
-				<xsl:for-each select="amber:slot">
+				<xsl:for-each select="saa:slot">
 					<li>
 						<xsl:apply-templates select="." mode="itemlist-inline" />
 					</li>
@@ -230,10 +231,10 @@ window.addEventListener(
 		</div>
 	</xsl:template>
 
-	<xsl:template match="amber:inventory" mode="itemlist-inline">
+	<xsl:template match="saa:inventory" mode="itemlist-inline">
 		<div class="inventory" data-template="flex">
 			<ul>
-				<xsl:for-each select="amber:slot">
+				<xsl:for-each select="saa:slot">
 					<li>
 						<xsl:apply-templates select="." mode="itemlist-inline" />
 					</li>
@@ -242,12 +243,12 @@ window.addEventListener(
 		</div>
 	</xsl:template>
 
-	<xsl:template match="amber:slot" mode="itemlist-inline">
+	<xsl:template match="saa:slot" mode="itemlist-inline">
 		<amber-picker type="item" class="item-picker" role="button" tabindex="0"
 			onclick="savegameEditor.openPopup(arguments[0])">
-			<amber-item-id value="{amber:item-instance/@item-id}" />
-			<amber-item-amount value="{amber:item-instance/@item-amount}" />
-			<amber-item-charge value="{amber:item-instance/@item-charge}" />
+			<amber-item-id value="{saa:item-instance/@item-id}" />
+			<amber-item-amount value="{saa:item-instance/@item-amount}" />
+			<amber-item-charge value="{saa:item-instance/@item-charge}" />
 		</amber-picker>
 		<xsl:if test="@name">
 			<span class="name">
@@ -256,7 +257,7 @@ window.addEventListener(
 		</xsl:if>
 	</xsl:template>
 
-	<xsl:template match="amber:item" mode="itemlist">
+	<xsl:template match="saa:item" mode="itemlist">
 		<!--<item xmlns="" id="361" image="9" name="MAGIERSTIEFEL" type="Schuhe" hands="0" fingers="0" damage="0" armor="6" weight="850" 
 			gender="beide" class="Magier Mystik. Alchem. Heiler"/> -->
 		<article data-item-id="{@id}" data-template="flex" class="Item">
@@ -327,10 +328,10 @@ window.addEventListener(
 					</table>
 				</li>
 				<xsl:choose>
-					<xsl:when test="amber:text">
+					<xsl:when test="saa:text">
 						<li>
 							<div class="textbox">
-								<xsl:copy-of select="amber:text/node()" />
+								<xsl:copy-of select="saa:text/node()" />
 							</div>
 						</li>
 					</xsl:when>
@@ -344,7 +345,7 @@ window.addEventListener(
 									<tr>
 										<td>
 											<ul>
-												<xsl:for-each select="amber:class/@name">
+												<xsl:for-each select="saa:class/@name">
 													<li>
 														<xsl:value-of select="." />
 													</li>

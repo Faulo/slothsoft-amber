@@ -12,33 +12,96 @@ use Slothsoft\Farah\Module\Module;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
+use SplFileInfo;
+use Slothsoft\Savegame\EditorConfig;
 
 class EditorController
 {
 
-    public function createEditorConfig(string $game, string $version, string $infoset, string $user): array
+    public function createEditorConfig(string $game, string $version, string $user, string $infoset): EditorConfig
     {
-        if ($infoset === '') {
-            throw new \InvalidArgumentException("Required parameter 'infoset' is missing.");
-        }
-        
         $user = preg_replace('~[^\w]~', '', $user);
-        
-        $editorConfig = [];
-        $editorConfig['structureFile'] = (string) $this->getAmberAssetUrl("/games/$game/infoset/$infoset");
-        $editorConfig['defaultDir'] = (string) $this->getAmberAssetPath("/games/$game/source/$version");
-        $editorConfig['tempDir'] = ServerEnvironment::getCacheDirectory();
-        
-        $editorConfig['mode'] = 'thalion';
-        $editorConfig['id'] = $user;
-        $editorConfig['loadAllArchives'] = true;
-        $editorConfig['selectedArchives'] = [];
-        $editorConfig['uploadedArchives'] = [];
-        $editorConfig['archiveExtractors'] = $this->createArchiveExtractors();
-        $editorConfig['archiveBuilders'] = $this->createArchiveBuilders();
-        
-        return $editorConfig;
+        if ($user === '') {
+            $user = uniqid();
+        }
+        return new EditorConfig(
+            $this->getAmberAssetPath("/games/$game/source/$version"),
+            new SplFileInfo(ServerEnvironment::getDataDirectory() . "/slothsoft/amber/$game/$version/$user"),
+            new SplFileInfo((string) $this->getAmberAssetUrl("/games/$game/infoset/$infoset")),
+            $this->createArchiveExtractors(),
+            $this->createArchiveBuilders()
+        );
     }
+    public function createEditor(EditorConfig $config): Editor
+    {
+        return new Editor($config);
+    }
+    
+    private function getAmberAssetUrl(string $url): FarahUrl
+    {
+        return FarahUrl::createFromReference($url, FarahUrl::createFromReference('farah://slothsoft@amber'));
+    }
+    
+    private function getAmberAssetPath(string $url): SplFileInfo
+    {
+        $url = $this->getAmberAssetUrl($url);
+        return Module::resolveToAsset($url)->getFileInfo();
+    }
+    
+    public function createAmbTool(): AmbTool
+    {
+        return new AmbTool((string) $this->getAmberAssetPath('/cli/ambtool'));
+    }
+    
+    public function createAmbGfx(): AmbGfx
+    {
+        return new AmbGfx((string) $this->getAmberAssetPath('/cli/amgfx'));
+    }
+    
+    private function createArchiveExtractors(): array
+    {
+        $ret = [];
+        
+        $amberExtractor = new AmberArchiveExtractor($this->createAmbTool());
+        $ret[AmbTool::TYPE_AMBR] = $amberExtractor;
+        $ret[AmbTool::TYPE_JH] = $amberExtractor;
+        
+        $copyExtractor = new CopyArchiveExtractor();
+        $ret[AmbTool::TYPE_RAW] = $copyExtractor;
+        $ret[AmbTool::TYPE_AM2] = $copyExtractor;
+        
+        return $ret;
+    }
+    
+    private function createArchiveBuilders(): array
+    {
+        $ret = [];
+        
+        $amberBuilder = new AmberArchiveBuilder();
+        $ret[AmbTool::TYPE_AMBR] = $amberBuilder;
+        
+        $copyBuilder = new CopyArchiveBuilder();
+        $ret[AmbTool::TYPE_JH] = $copyBuilder;
+        $ret[AmbTool::TYPE_RAW] = $copyBuilder;
+        $ret[AmbTool::TYPE_AM2] = $copyBuilder;
+        
+        return $ret;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     private $editorPresetMap = [
         'saveEditor' => [
@@ -191,89 +254,6 @@ class EditorController
         ]
     ];
 
-    public function createEditorConfigOLD(string $game, string $mod, string $preset, string $saveMode, string $saveId): array
-    {
-        $saveMode = preg_replace('~[^\w]~', '', $saveMode);
-        $saveId = preg_replace('~[^\w]~', '', $saveId);
-        
-        $editorPreset = $this->editorPresetMap[$preset];
-        
-        $editorConfig = [];
-        $editorConfig['structureFile'] = (string) $this->getAmberAssetUrl("/games/$game/$editorPreset[structure]");
-        $editorConfig['defaultDir'] = (string) $this->getAmberAssetPath("/games/$game/source/$mod");
-        $editorConfig['tempDir'] = temp_dir(__NAMESPACE__);
-        
-        $editorConfig['mode'] = $saveMode;
-        $editorConfig['id'] = $saveId;
-        $editorConfig['loadAllArchives'] = true;
-        $editorConfig['selectedArchives'] = [];
-        $editorConfig['uploadedArchives'] = [];
-        $editorConfig['archiveExtractors'] = $this->createArchiveExtractors();
-        $editorConfig['archiveBuilders'] = $this->createArchiveBuilders();
-        
-        foreach ($editorPreset['archives'] as $archive) {
-            $editorConfig['selectedArchives'][$archive] = true;
-        }
-        
-        return $editorConfig;
-    }
-
-    public function createEditor(array $editorConfig): Editor
-    {
-        $editor = new Editor($editorConfig);
-        $editor->load();
-        return $editor;
-    }
-
-    private function getAmberAssetUrl(string $url): FarahUrl
-    {
-        return FarahUrl::createFromReference($url, FarahUrl::createFromReference('farah://slothsoft@amber'));
-    }
-
-    private function getAmberAssetPath(string $url): string
-    {
-        $url = $this->getAmberAssetUrl($url);
-        return (string) Module::resolveToAsset($url)->getFileInfo();
-    }
-
-    private function createAmbTool(): AmbTool
-    {
-        return new AmbTool($this->getAmberAssetPath('/cli/ambtool'));
-    }
-
-    private function createAmbGfx(): AmbGfx
-    {
-        return new AmbGfx($this->getAmberAssetPath('/cli/ambgfx'));
-    }
-
-    private function createArchiveExtractors(): array
-    {
-        $ret = [];
-        
-        $amberExtractor = new AmberArchiveExtractor($this->createAmbTool());
-        $ret[AmbTool::TYPE_AMBR] = $amberExtractor;
-        $ret[AmbTool::TYPE_JH] = $amberExtractor;
-        
-        $copyExtractor = new CopyArchiveExtractor();
-        $ret[AmbTool::TYPE_RAW] = $copyExtractor;
-        $ret[AmbTool::TYPE_AM2] = $copyExtractor;
-        
-        return $ret;
-    }
-
-    private function createArchiveBuilders(): array
-    {
-        $ret = [];
-        
-        $amberBuilder = new AmberArchiveBuilder();
-        $ret[AmbTool::TYPE_AMBR] = $amberBuilder;
-        
-        $copyBuilder = new CopyArchiveBuilder();
-        $ret[AmbTool::TYPE_JH] = $copyBuilder;
-        $ret[AmbTool::TYPE_RAW] = $copyBuilder;
-        $ret[AmbTool::TYPE_AM2] = $copyBuilder;
-        
-        return $ret;
-    }
+    
 }
 

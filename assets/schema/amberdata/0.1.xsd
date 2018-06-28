@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xsd:schema targetNamespace="http://schema.slothsoft.net/amber/amberdata"
-	xmlns="http://schema.slothsoft.net/amber/amberdata" xmlns:amber="http://schema.slothsoft.net/amber/amberdata"
+	xmlns="http://schema.slothsoft.net/amber/amberdata" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ssv="http://schema.slothsoft.net/schema/versioning"
 	elementFormDefault="qualified" attributeFormDefault="unqualified">
 

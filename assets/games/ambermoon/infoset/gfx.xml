@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<savegame.editor xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3">
+	<archive path="Amberfiles/Portraits.amb" type="JH" >
+		<for-each-file/>
+	</archive>
+</savegame.editor>

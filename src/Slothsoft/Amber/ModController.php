@@ -95,7 +95,7 @@ class ModController
         $editorConfig['structureFile'] = $this->locator->getResource(ModResource::TYPE_STRUCTURE, $args->get('struc', 'structure'))
             ->getPath();
         $editorConfig['defaultDir'] = $this->locator->getResource(ModResource::TYPE_MODFOLDER, 'src')->getPath();
-        $editorConfig['tempDir'] = $this->locator->getResource(ModResource::TYPE_MODFOLDER, 'user')->getPath();
+        $editorConfig['userDir'] = $this->locator->getResource(ModResource::TYPE_MODFOLDER, 'user')->getPath();
         
         $editorConfig['mode'] = $mode;
         $editorConfig['id'] = $name;

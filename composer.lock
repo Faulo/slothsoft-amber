@@ -425,7 +425,7 @@
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-blob",
-                "reference": "9aa347120cbd358a59223547c24fa23e13dd8e2e",
+                "reference": "9182a9244f359248be62df458acd42bd5fb80774",
                 "shasum": null
             },
             "require": {
@@ -474,7 +474,7 @@
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-core",
-                "reference": "689d8a1296fa7297ed4fbbe85e8b07bf08842ad2",
+                "reference": "ebdc59dfa0b0a1281d115aef81df1dd311ecc16e",
                 "shasum": null
             },
             "require": {
@@ -524,7 +524,7 @@
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-farah",
-                "reference": "83d9f8ae0bbf7d14a95275155eb4c21ad63dc300",
+                "reference": "f15711532533d341f5b59f1bb4853b5700230f0c",
                 "shasum": null
             },
             "require": {
@@ -585,7 +585,7 @@
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-savegame",
-                "reference": "d8d83d08223bb11d21da7d403211ed0ccfc9512b",
+                "reference": "e8fca13baf3933e66251d988697c7f628ead5887",
                 "shasum": null
             },
             "require": {
@@ -639,7 +639,7 @@
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-w3c",
-                "reference": "bc60417e0e622d134f3954e67635c366d0286d2c",
+                "reference": "3a122fea890ffaa9c74420a9edf15fe088cde17b",
                 "shasum": null
             },
             "require": {

@@ -7,6 +7,7 @@ use Slothsoft\Core\FileSystem;
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveExtractorInterface;
 use DomainException;
 use Exception;
+use SplFileInfo;
 
 class AmberArchiveExtractor implements ArchiveExtractorInterface
 {
@@ -18,17 +19,17 @@ class AmberArchiveExtractor implements ArchiveExtractorInterface
         $this->ambtool = $ambtool;
     }
 
-    public function extractArchive(string $archivePath, string $targetDir): bool
+    public function extractArchive(SplFileInfo $archivePath, SplFileInfo $targetDir): bool
     {
         $ret = false;
-        if (! realpath($archivePath)) {
+        if (! $archivePath->isFile()) {
             throw new Exception("'$archivePath' is not a valid archive file.");
         }
-        if (! realpath($targetDir)) {
+        if (! $targetDir->isDir()) {
             throw new Exception("'$targetDir' is not a valid extract directory.");
         }
-        $archivePath = realpath($archivePath);
-        $targetDir = realpath($targetDir);
+        $archivePath = $archivePath->getRealPath();
+        $targetDir = $targetDir->getRealPath();
         if ($archivePath and $targetDir) {
             $format = $this->ambtool->inspectArchive($archivePath);
             switch ($format) {

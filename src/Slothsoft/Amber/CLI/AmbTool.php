@@ -26,7 +26,7 @@ class AmbTool
     {
         $command = escapeshellarg($this->ambtoolPath);
         foreach ($args as $arg) {
-            $command .= ' ' . escapeshellarg($arg);
+            $command .= ' ' . escapeshellarg((string) $arg);
         }
         exec($command, $output);
         return $output;

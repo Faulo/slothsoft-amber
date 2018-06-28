@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:amber="http://schema.slothsoft.net/amber/amberdata" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+<xsl:stylesheet version="1.0" 
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:exsl="http://exslt.org/common" xmlns:func="http://exslt.org/functions" xmlns:str="http://exslt.org/strings"
 	xmlns:php="http://php.net/xsl" xmlns:save="http://schema.slothsoft.net/savegame/editor"
 	extension-element-prefixes="exsl func str php">
@@ -8,10 +9,10 @@
 	<!-- <xsl:key name="dictionary-option" match="save:savegame.editor/save:dictionary/save:option" use="../@dictionary-id" 
 		/> -->
 
-	<xsl:key name="dictionary-option" match="amber:amberdata/amber:dictionary-list/amber:dictionary/amber:option"
+	<xsl:key name="dictionary-option" match="saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option"
 		use="../@dictionary-id" />
 
-	<func:function name="amber:getName">
+	<func:function name="saa:getName">
 		<xsl:param name="context" select="." />
 
 		<xsl:choose>
@@ -21,21 +22,21 @@
 			<xsl:otherwise>
 				<xsl:if test="../@dictionary-ref">
 					<xsl:variable name="option"
-						select="amber:getDictionaryOption(../@dictionary-ref, count(preceding-sibling::*))" />
+						select="saa:getDictionaryOption(../@dictionary-ref, count(preceding-sibling::*))" />
 					<func:result select="string($option/@val)" />
 				</xsl:if>
 			</xsl:otherwise>
 		</xsl:choose>
 	</func:function>
 
-	<func:function name="amber:getDictionaryOption">
+	<func:function name="saa:getDictionaryOption">
 		<xsl:param name="id" />
 		<xsl:param name="key" />
 
-		<func:result select="amber:getDictionary($id)[@key = $key]" />
+		<func:result select="saa:getDictionary($id)[@key = $key]" />
 	</func:function>
 
-	<func:function name="amber:getDictionary">
+	<func:function name="saa:getDictionary">
 		<xsl:param name="id" />
 
 		<func:result select="key('dictionary-option', $id)" />
@@ -52,11 +53,10 @@
 
 	<!-- form -->
 	<xsl:template match="save:archive" mode="form">
-		<form action="./?SaveName={../@save-id}" method="POST">
-			<!-- <input value="{../@save-id}" name="SaveName" type="hidden" /> <input value="{../@save-mode}" name="SaveDefault" type="hidden" 
-				/> -->
-			<button name="SaveFile" type="submit" class="yellow" value="{@name}">Zwischenspeichern</button>
-			<button name="DownloadFile" type="submit" class="yellow" value="{@name}">Download</button>
+		<form action="./?user={../@save-id}" method="POST">
+			<input name="save[archiveId]" type="hidden"  value="{@name}"/>
+			<button name="save[action]" type="submit" class="yellow" value="save">Speichern</button>
+			<button name="save[action]" type="submit" class="yellow" value="download">Download</button>
 
 			<xsl:apply-templates select="." mode="form-content" />
 		</form>
@@ -102,8 +102,8 @@
 	</xsl:template>
 
 	<xsl:template match="save:archive[@name='Party_char.amb']" mode="form-content">
-		<xsl:apply-templates select="$amberdata/amber:item-list" mode="picker" />
-		<xsl:apply-templates select="$amberdata/amber:portrait-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:item-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:portrait-list" mode="picker" />
 
 		<xsl:call-template name="savegame.tabs">
 			<xsl:with-param name="label" select="'Aktiver Charakter:'" />
@@ -148,8 +148,8 @@
 	</xsl:template>
 
 	<xsl:template match="save:archive[@name='NPC_char.amb']" mode="form-content">
-		<xsl:apply-templates select="$amberdata/amber:item-list" mode="picker" />
-		<xsl:apply-templates select="$amberdata/amber:portrait-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:item-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:portrait-list" mode="picker" />
 
 		<xsl:call-template name="savegame.tabs">
 			<xsl:with-param name="label" select="'Aktiver NPC:'" />
@@ -181,8 +181,8 @@
 	</xsl:template>
 
 	<xsl:template match="save:archive[@name='Monster_char_data.amb']" mode="form-content">
-		<xsl:apply-templates select="$amberdata/amber:item-list" mode="picker" />
-		<xsl:apply-templates select="$amberdata/amber:portrait-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:item-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:portrait-list" mode="picker" />
 
 		<xsl:call-template name="savegame.tabs">
 			<xsl:with-param name="label" select="'Aktives Monster:'" />
@@ -227,7 +227,7 @@
 	</xsl:template>
 
 	<xsl:template match="save:archive[contains(@name, 'Map_data.amb')]" mode="form-content">
-		<xsl:apply-templates select="$amberdata/amber:tileset-icon-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:tileset-icon-list" mode="picker" />
 
 		<xsl:variable name="fileList" select="save:file" />
 		<xsl:variable name="nameList"
@@ -476,7 +476,7 @@
 	</xsl:template>
 
 	<xsl:template match="save:archive[@name='Merchant_data.amb']" mode="form-content">
-		<xsl:apply-templates select="$amberdata/amber:item-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:item-list" mode="picker" />
 
 		<xsl:variable name="fileList" select="save:file" />
 		<xsl:call-template name="savegame.tabs">
@@ -495,7 +495,7 @@
 	</xsl:template>
 
 	<xsl:template match="save:archive[@name='Chest_data.amb']" mode="form-content">
-		<xsl:apply-templates select="$amberdata/amber:item-list" mode="picker" />
+		<xsl:apply-templates select="$amberdata/saa:item-list" mode="picker" />
 
 		<xsl:variable name="fileList" select="save:file" />
 		<xsl:call-template name="savegame.tabs">
@@ -1197,7 +1197,7 @@
 		<amber-picker type="item" class="item-picker" contextmenu="amber-picker-item" role="button" tabindex="0"
 			onclick="savegameEditor.openPopup(arguments[0])">
 			<xsl:if test="../@name = 'equipment'">
-				<xsl:attribute name="data-picker-filter-amber-item-id"><xsl:value-of select="amber:getName()" /></xsl:attribute>
+				<xsl:attribute name="data-picker-filter-amber-item-id"><xsl:value-of select="saa:getName()" /></xsl:attribute>
 			</xsl:if>
 			<xsl:apply-templates select=".//*[@name = 'item-id']" mode="form-picker" />
 			<xsl:apply-templates select=".//*[@name = 'item-amount']" mode="form-picker" />
