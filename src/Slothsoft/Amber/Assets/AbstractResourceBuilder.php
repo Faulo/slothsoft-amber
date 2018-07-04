@@ -27,15 +27,15 @@ abstract class AbstractResourceBuilder implements ExecutableBuilderStrategyInter
      */
     protected $editor;
 
-    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
+    final public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
     {
         $game = $args->get(AbstractParameterFilter::PARAM_GAME);
         $version = $args->get(AbstractParameterFilter::PARAM_VERSION);
         $user = $args->get(AbstractParameterFilter::PARAM_USER);
         
-        $infosetId = $args->get(AbstractParameterFilter::PARAM_INFOSET_ID);
-        $archiveId = $args->get(AbstractParameterFilter::PARAM_ARCHIVE_ID);
-        $fileId = $args->get(AbstractParameterFilter::PARAM_FILE_ID);
+        $infosetId = (string) $args->get(AbstractParameterFilter::PARAM_INFOSET_ID);
+        $archiveId = (string) $args->get(AbstractParameterFilter::PARAM_ARCHIVE_ID);
+        $fileId = (string) $args->get(AbstractParameterFilter::PARAM_FILE_ID);
         
         $controller = new EditorController();
         

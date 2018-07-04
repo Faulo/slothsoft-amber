@@ -6,7 +6,8 @@
 	xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
 
-	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/functions" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.stable" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.extract" />
 
 	<xsl:template match="sse:savegame.editor">
 		<xsl:variable name="items"
@@ -39,6 +40,7 @@
 		<xsl:param name="id" />
 
 		<item id="{$id}">
+			<xsl:variable name="gfxId" select=".//*[@name = 'image-id']/@value"/>
 			<xsl:variable name="type" select=".//*[@name = 'type']/@value" />
 			<xsl:variable name="subtype" select=".//*[@name = 'subtype']/@value" />
 			<xsl:variable name="subsubtype" select=".//*[@name = 'subsubtype']/@value" />
@@ -108,19 +110,9 @@
 					<xsl:with-param name="id" select="0" />
 				</xsl:call-template>
 			</xsl:if>
+			<gfx archive="Object_icons" group="item-id" id="{$id}" position="{$gfxId}" label="{.//*[@name = 'name']/@value}"/>
+			<gfx archive="Object_icons" group="item-gfx" id="{$gfxId}" position="{$gfxId}"/>
 		</item>
 	</xsl:template>
-
-	<xsl:template name="extract-text">
-		<xsl:param name="root" select="." />
-		<xsl:param name="id" />
-		<text id="{$id}">
-			<xsl:for-each select="str:split($root, '^')">
-				<xsl:value-of select="translate(., '$', '&#160;')" />
-				<br xmlns="http://www.w3.org/1999/xhtml" />
-			</xsl:for-each>
-		</text>
-	</xsl:template>
-
 
 </xsl:stylesheet>

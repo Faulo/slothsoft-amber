@@ -9,7 +9,7 @@
 	<!-- <xsl:key name="dictionary-option" match="save:savegame.editor/save:dictionary/save:option" use="../@dictionary-id" 
 		/> -->
 
-	<xsl:key name="dictionary-option" match="saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option"
+	<xsl:key name="dictionary-option" match="/*/*[@name='dictionaries']/saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option"
 		use="../@dictionary-id" />
 
 	<func:function name="saa:getName">
@@ -484,7 +484,7 @@
 			<xsl:with-param name="options" select="key('dictionary-option', 'shops')/@val" />
 			<xsl:with-param name="list">
 				<xsl:for-each select="key('dictionary-option', 'shops')/@key">
-					<xsl:for-each select="$fileList[@file-name = current()]">
+					<xsl:for-each select="$fileList[number(@file-name) = current()]">
 						<li>
 							<xsl:call-template name="savegame.amber.shop" />
 						</li>

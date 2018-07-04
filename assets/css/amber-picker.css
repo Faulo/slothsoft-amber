@@ -13,7 +13,7 @@ amber-picker.item-picker {
 }
 
 amber-item-id, amber-item-amount, amber-item-charge, amber-broken,
-	amber-identified {
+	amber-identified, amber-item-gfx {
 	display: block;
 }
 
@@ -32,11 +32,19 @@ amber-item-id:hover::before {
 	z-index: 20;
 }
 
-amber-item-id::after {
-	font-size: 32px;
-	width: 1em;
-	height: 1em;
+amber-item-id::after,
+amber-item-gfx::after {
+	font-size: 2px;
+	width: 16em;
+	height: 16em;
 	border: 2px solid transparent;
+	
+	background-image: url("/getAsset.php/slothsoft@amber/games/ambermoon/gfx/items");
+	background-clip: content-box;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: block;
+	content: " ";
 }
 
 amber-item-id[value=""]::after, amber-item-id[value="0"]::after {
@@ -121,9 +129,16 @@ amber-portrait {
 }
 
 amber-portrait::after {
-	width: 64px;
-	height: 68px;
-	font-size: 68px;
+	width: 32em;
+	height: 34em;
+	font-size: 2px;
+	
+	background-image: url("/getAsset.php/slothsoft@amber/games/ambermoon/gfx/portraits");
+	background-clip: content-box;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display: block;
+	content: " ";
 }
 
 .popup amber-portrait::after {
@@ -139,6 +154,21 @@ amer-picker.monster-sprite-picker {
 
 amber-gfx-id {
 	display: block;
+}
+
+amber-monster-id::after {
+	/*
+	width: 96em;
+	height: 96em;
+	background-size: cover;
+	background-image: url("/getAsset.php/slothsoft@amber/games/ambermoon/gfx/monsters");
+	*/
+	font-size: 2px;
+	
+	background-clip: content-box;
+	background-repeat: no-repeat;
+	display: block;
+	content: " ";
 }
 
 /* tilesets */

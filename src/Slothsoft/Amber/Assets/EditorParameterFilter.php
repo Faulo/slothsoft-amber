@@ -8,7 +8,12 @@ class EditorParameterFilter extends AbstractParameterFilter
     
     protected function loadMap(): array
     {
-        return parent::loadMap() + [
+        return [
+            self::PARAM_GAME => 'ambermoon',
+            self::PARAM_VERSION => 'Thalion-v1.05-DE',
+            self::PARAM_INFOSET_ID => 'null',
+            self::PARAM_USER => '',
+            
             self::PARAM_EDITOR_DATA => [],
         ];
     }

@@ -2,19 +2,32 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Core\IO\Writable\Decorators\ChunkWriterFileCache;
 use Slothsoft\Farah\Exception\HttpDownloadAssetException;
+use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
+use Slothsoft\Farah\Module\Asset\AssetInterface;
+use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\DOMWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface;
+use SplFileInfo;
 
-class EditorBuilder extends AbstractResourceBuilder
+class EditorBuilder implements ExecutableBuilderStrategyInterface
 {
-
-    protected function processInfoset($infosetId) : ResultBuilderStrategyInterface
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
     {
-        $request = (array) $this->args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
+        $game = $args->get(EditorParameterFilter::PARAM_GAME);
+        $version = $args->get(EditorParameterFilter::PARAM_VERSION);
+        $user = $args->get(EditorParameterFilter::PARAM_USER);
+        
+        $infosetId = (string) $args->get(EditorParameterFilter::PARAM_INFOSET_ID);
+        $request = (array) $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
+        
+        $controller = new EditorController();        
+        $config = $controller->createEditorConfig($game, $version, $user, $infosetId);        
+        $editor = $controller->createEditor($config);
         
         $action = $request['action'] ?? 'view';
         
@@ -23,20 +36,20 @@ class EditorBuilder extends AbstractResourceBuilder
             foreach ($errors as $archiveId => $error) {
                 if ($error === UPLOAD_ERR_OK) {
                     $path = $_FILES['save']['tmp_name'][$archiveId] ?? '';
-                    $this->editor->writeGameFile($archiveId, FileInfoFactory::createFromUpload($path));
+                    $editor->writeGameFile($archiveId, FileInfoFactory::createFromUpload($path));
                 }
             }
         }
         
         if (isset($request['archiveId'])) {
             $archiveId = $request['archiveId'];
-            $this->editor->loadArchive($archiveId);
-            $this->editor->applyValues($request['data'] ?? []);
+            $editor->loadArchive($archiveId);
+            $editor->applyValues($request['data'] ?? []);
             
-            $archive = $this->editor->getArchiveNode($archiveId);
+            $archive = $editor->getArchiveNode($archiveId);
             
             if ($action === 'save') {
-                $this->editor->writeGameFile($archiveId, $archive);
+                $editor->writeGameFile($archiveId, $archive);
             }
             
             if ($action === 'download') {
@@ -44,21 +57,21 @@ class EditorBuilder extends AbstractResourceBuilder
                 $strategies = new ExecutableStrategies($resultBuilder);
                 throw new HttpDownloadAssetException($strategies);
             }
-            
         } else {
-            $this->editor->loadNoArchives();
+            $editor->load();
         }
-        return new DOMWriterResultBuilder($this->editor);
-    }
-    
-    protected function processArchive($infosetId, $archiveId) : ResultBuilderStrategyInterface
-    {
-        return $this->processInfoset($infosetId);
-    }
-
-    protected function processFile($infosetId, $archiveId, $fileId) : ResultBuilderStrategyInterface
-    {
-        return $this->processArchive($infosetId, $archiveId);
+        
+        $savegame = $editor->getSavegameNode();
+        
+        $shouldRefreshCacheDelegate = function(SplFileInfo $cacheFile) {
+            return true;
+        };
+        
+        $writer = new ChunkWriterFileCache($savegame->getChunkWriter(), FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
+        
+        $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.editor.xml');
+        
+        return new ExecutableStrategies($resultBuilder);
     }
     
     

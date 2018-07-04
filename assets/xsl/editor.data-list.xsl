@@ -5,7 +5,10 @@
 	xmlns:str="http://exslt.org/strings" extension-element-prefixes="str">
 
 	<xsl:variable name="amberdata" select="/*/*[@name='amberdata']/saa:amberdata" />
-
+	
+	<xsl:key name="dictionary-option" match="/*/*[@name='dictionaries']/saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option"
+		use="../@dictionary-id" />
+		
 	<xsl:template match="/*">
 		<div class="Amber Editor">
 			<script type="application/javascript"><![CDATA[
@@ -180,19 +183,20 @@ window.addEventListener(
 		<!--<item xmlns="" id="361" image="9" name="MAGIERSTIEFEL" type="Schuhe" hands="0" fingers="0" damage="0" armor="6" weight="850" 
 			gender="beide" class="Magier Mystik. Alchem. Heiler"/> -->
 		<article data-monster-id="{@id}" data-template="flex" class="Monster">
-			<h3>
-				<xsl:value-of select="@name" />
-			</h3>
 			<ul>
 				<li>
 					<h3>race</h3>
 					<xsl:apply-templates select="saa:race" mode="itemlist-inline" />
-				</li>
-				<li>
 					<h3>class</h3>
 					<xsl:apply-templates select="saa:class" mode="itemlist-inline" />
 				</li>
 				<li>
+					<h3 class="yellow">
+						<xsl:value-of select="@name" />
+					</h3>
+					<amber-picker type="monster" class="item-picker" role="button" tabindex="0">
+						<amber-monster-id value="{@id}" />
+					</amber-picker>
 					<h3>equipment</h3>
 					<xsl:apply-templates select="saa:equipment" mode="itemlist-inline" />
 				</li>
@@ -220,11 +224,14 @@ window.addEventListener(
 	</xsl:template>
 
 	<xsl:template match="saa:equipment" mode="itemlist-inline">
+		<xsl:variable name="options" select="key('dictionary-option', 'equipment-slots')" />
 		<div class="equipment" data-template="flex">
 			<ul>
 				<xsl:for-each select="saa:slot">
+					<xsl:variable name="pos" select="position()"/>
 					<li>
 						<xsl:apply-templates select="." mode="itemlist-inline" />
+						<span class="name"><xsl:value-of select="$options[$pos]/@val"/></span>
 					</li>
 				</xsl:for-each>
 			</ul>
@@ -267,7 +274,7 @@ window.addEventListener(
 						<tr>
 							<td>
 								<amber-picker type="item" class="item-picker" role="button" tabindex="0">
-									<amber-item-id value="{@id}" />
+									<amber-item-gfx value="{@image-id}" />
 								</amber-picker>
 							</td>
 							<td>

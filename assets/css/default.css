@@ -413,8 +413,12 @@
 	width: 17em;
 }
 
-.spells, .events {
+.events {
 	font-size: smaller;
+}
+.spells {
+	font-size: 0.75em;
+	min-width: 12em;
 }
 
 *[data-template="columns"] {

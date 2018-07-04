@@ -22,7 +22,7 @@ class ExecutableMerger extends ExecutableDOMWriterBase
         if ($this->executables) {
             $resultDoc = null;
             foreach ($this->executables as $executable) {
-                $tempDoc = $executable->lookupXmlResult()->toDocument();
+                $tempDoc = $executable->lookupXmlResult()->lookupDOMWriter()->toDocument();
                 if ($resultDoc === null) {
                     $resultDoc = $tempDoc;
                 } else {

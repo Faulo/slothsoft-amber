@@ -16,9 +16,38 @@
 			<resource-directory name="source" type="*/*" />
 			<resource-directory name="infoset" type="application/xml" />
 			<resource-directory name="convert" type="application/xslt+xml" />
-			<fragment name="dictionaries">
-				<use-template ref="../../convert/dictionaries"/>
-				<use-document ref="/game-resources/dataset?infosetId=dictionaries"/>
+			
+			<fragment name="gfx">
+				<use-document name="icons-4-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004&amp;paletteId=6"/>
+				<use-document name="icons-5-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005&amp;paletteId=6"/>
+				<use-document name="items" ref="/game-resources/gfx?archiveId=Object_icons&amp;paletteId=49&amp;fileId"/>
+				<use-document name="portraits" ref="/game-resources/gfx?archiveId=Portraits.amb&amp;paletteId=49&amp;fileId"/>
+				<use-document name="monsters" ref="/game-resources/gfx?archiveId=Monster_gfx.amb"/>
+				<use-document name="backgrounds" ref="/game-resources/gfx?archiveId=Combat_background.amb"/>
+				<use-document name="events" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=31&amp;gfxId"/>
+				<fragment name="icons">
+					<use-document name="1" ref="/game-resources/gfx?archiveId=1Icon_gfx.amb&amp;fileId=001"/>
+					<use-document name="2" ref="/game-resources/gfx?archiveId=3Icon_gfx.amb&amp;fileId=002"/>
+					<use-document name="3" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=003"/>
+					<use-document name="4" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004"/>
+					<use-document name="5" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005"/>
+					<use-document name="6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=006"/>
+					<use-document name="7" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=007"/>
+					<use-document name="8" ref="/game-resources/gfx?archiveId=3Icon_gfx.amb&amp;fileId=008"/>
+				</fragment>
+				<fragment name="layouts">
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=001&amp;paletteId=10" name="main-1"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=002&amp;paletteId=10" name="inventory"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=003&amp;paletteId=10" name="place"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=004&amp;paletteId=10" name="combat"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=005&amp;paletteId=10" name="main-2"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=006&amp;paletteId=10" name="stats"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=007&amp;paletteId=10" name="event"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=008&amp;paletteId=10" name="dialog"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=009&amp;paletteId=10" name="main-3"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=010&amp;paletteId=10" name="debug"/>
+					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=011&amp;paletteId=10" name="error"/>
+				</fragment>
 			</fragment>
 		</directory>
 		<resource name="index" type="application/xml" />
@@ -42,12 +71,12 @@
 	<fragment name="game-editor">
 		<use-template ref="/xsl/editor" />
 		<use-document name="editor" ref="/game-resources/editor" />
-		<use-document name="amberdata" ref="/games/ambermoon/dictionaries" />
-<!-- 		<use-document name="amberdata" ref="/game-resources/amberdata?infosetId=dictionaries&amp;archiveId" /> -->
+		<use-document name="dictionaries" ref="/game-resources/amberdata?infosetId=lib.dictionaries" />
 		
 		<link-stylesheet ref="/css/default"/>
 		<link-stylesheet ref="/css/amber-picker"/>
-		<link-stylesheet ref="/game-resources/stylesheet"/>
+		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.items"/>
+		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.portraits"/>
 		
 		<import ref="//core/api/XSLT"/>
 		<link-script ref="/js/SavegameEditor"/>
@@ -55,10 +84,12 @@
 	
 	<fragment name="game-list">
 		<use-template ref="/xsl/editor.data-list" />
+		<use-document name="dictionaries" ref="/game-resources/amberdata?infosetId=lib.dictionaries" />
 		<use-document name="list" ref="/game-resources/amberdata?archiveId" />
 		
 		<link-stylesheet ref="/css/default"/>
 		<link-stylesheet ref="/css/amber-picker"/>
+		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.items"/>
 		<link-stylesheet ref="/game-resources/stylesheet"/>
 		
 		<import ref="//core/api/XSLT"/>

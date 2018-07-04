@@ -1,6 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <savegame.editor xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3">
+	<archive path="Amberfiles/1Icon_gfx.amb" type="JH" >
+		<file file-name="001">
+			<image-map width="16" height="24720" image-count="1545" bitplanes="5"/>
+		</file>
+	</archive>
+	<archive path="Amberfiles/2Icon_gfx.amb" type="JH" >
+		<file file-name="003">
+			<image-map width="16" height="11776" image-count="736" bitplanes="5"/>
+		</file>
+		<file file-name="004">
+			<image-map width="16" height="19072" image-count="1192" bitplanes="5"/>
+		</file>
+		<file file-name="005">
+			<image-map width="16" height="7824" image-count="489" bitplanes="5"/>
+		</file>
+		<file file-name="006">
+			<image-map width="16" height="6320" image-count="395" bitplanes="5"/>
+		</file>
+		<file file-name="007">
+			<image-map width="16" height="11360" image-count="710" bitplanes="5"/>
+		</file>
+	</archive>
+	<archive path="Amberfiles/3Icon_gfx.amb" type="JH" >
+		<file file-name="002">
+			<image width="16" height="9536" bitplanes="5"/>
+		</file>
+		<file file-name="008">
+			<image width="16" height="13568" bitplanes="5"/>
+		</file>
+	</archive>
+	
+	<archive path="Amberfiles/Object_icons" type="JH" >
+		<for-each-file>
+			<image-map width="16" height="3008" image-count="188" bitplanes="5"/>
+		</for-each-file>
+	</archive>
+	
+	<archive path="Amberfiles/Combat_background.amb" type="JH" >
+		<for-each-file file-range="001 002 003 004 005 006 007 008 009 010 011 012 013 014 015">
+			<image width="320" height="95" bitplanes="5"/>
+		</for-each-file>
+		<file file-name="016">
+			<image width="320" height="95" bitplanes="5" position="4"/>
+		</file>
+	</archive>
+	
 	<archive path="Amberfiles/Portraits.amb" type="JH" >
-		<for-each-file/>
+		<for-each-file>
+			<image width="32" height="34" bitplanes="5"/>
+		</for-each-file>
+	</archive>
+	
+	<archive path="Amberfiles/Pics_80x80.amb" type="JH" >
+		<for-each-file>
+			<image width="80" height="80" bitplanes="5"/>
+		</for-each-file>
+	</archive>
+	
+	<archive path="Amberfiles/Event_pix.amb" type="JH" >
+		<for-each-file>
+			<image width="320" height="92" bitplanes="5"/>
+		</for-each-file>
+	</archive>
+	
+	<archive path="Amberfiles/Layouts.amb" type="JH" >
+		<for-each-file>
+			<image width="320" height="163" bitplanes="3"/>
+		</for-each-file>
+	</archive>
+	
+	<archive path="Amberfiles/Monster_gfx.amb" type="JH" >
+		<file file-name="001">
+			<image-map width="96" height="1005" image-count="15" bitplanes="5"/>
+		</file>
+		<file file-name="002">
+			<image-map width="64" height="402" image-count="6" bitplanes="5"/>
+		</file>
+		<file file-name="003">
+			<image-map width="96" height="640" image-count="8" bitplanes="5"/>
+		</file>
+		<file file-name="004">
+			<image-map width="64" height="780" image-count="10" bitplanes="5"/>
+		</file>
+		<file file-name="005">
+			<image-map width="80" height="1008" image-count="12" bitplanes="5"/>
+		</file>
+		<file file-name="006">
+			<image-map width="64" height="832" image-count="13" bitplanes="5"/>
+		</file>
+		<file file-name="007">
+			<image-map width="64" height="975" image-count="15" bitplanes="5"/>
+		</file>
+		<file file-name="008">
+			<image-map width="64" height="588" image-count="7" bitplanes="5"/>
+		</file>
+		<file file-name="009">
+			<image-map width="64" height="480" image-count="6" bitplanes="5"/>
+		</file>
+		<file file-name="010">
+			<image-map width="96" height="768" image-count="8" bitplanes="5"/>
+		</file>
+		<file file-name="011">
+			<image-map width="64" height="952" image-count="14" bitplanes="5"/>
+		</file>
+		<file file-name="012">
+			<image-map width="64" height="710" image-count="10" bitplanes="5"/>
+		</file>
+		<file file-name="013">
+			<image-map width="64" height="2352" image-count="28" bitplanes="5"/>
+		</file>
+		<file file-name="014">
+			<image-map width="64" height="960" image-count="15" bitplanes="5"/>
+		</file>
+		<file file-name="015">
+			<image-map width="64" height="588" image-count="7" bitplanes="5"/>
+		</file>
+		<file file-name="016">
+			<image-map width="80" height="648" image-count="12" bitplanes="5"/>
+		</file>
+		<file file-name="017">
+			<image-map width="48" height="1040" image-count="16" bitplanes="5"/>
+		</file>
+		<file file-name="018">
+			<image-map width="80" height="468" image-count="6" bitplanes="5"/>
+		</file>
+		<file file-name="019">
+			<image-map width="48" height="312" image-count="6" bitplanes="5"/>
+		</file>
+		<file file-name="020">
+			<image-map width="64" height="544" image-count="8" bitplanes="5"/>
+		</file>
+		<file file-name="021">
+			<image-map width="64" height="1440" image-count="18" bitplanes="5"/>
+		</file>
+		<file file-name="022">
+			<image-map width="64" height="336" image-count="7" bitplanes="5"/>
+		</file>
+		<file file-name="023">
+			<image-map width="96" height="792" image-count="9" bitplanes="5"/>
+		</file>
+		<file file-name="024">
+			<image-map width="96" height="600" image-count="8" bitplanes="5"/>
+		</file>
+		<file file-name="025">
+			<image-map width="80" height="924" image-count="14" bitplanes="5"/>
+		</file>
 	</archive>
 </savegame.editor>

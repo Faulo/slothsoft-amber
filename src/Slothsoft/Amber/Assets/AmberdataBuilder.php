@@ -2,38 +2,60 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
-use Slothsoft\Farah\Module\Asset\LinkInstructionCollection;
-use Slothsoft\Farah\Module\Asset\UseInstructionCollection;
+use Slothsoft\Core\ServerEnvironment;
+use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Core\IO\Writable\Decorators\DOMWriterFileCache;
+use Slothsoft\Core\IO\Writable\Delegates\DOMWriterFromDOMWriterDelegate;
+use Slothsoft\Farah\Module\Module;
+use Slothsoft\Farah\Module\DOMWriter\AssetDocumentDOMWriter;
+use Slothsoft\Farah\Module\DOMWriter\AssetFragmentDOMWriter;
+use Slothsoft\Farah\Module\DOMWriter\TransformationDOMWriter;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\TransformationResultBuilder;
+use SplFileInfo;
 
 class AmberdataBuilder extends AbstractResourceBuilder
 {
     protected function processInfoset(string $infosetId): ResultBuilderStrategyInterface
     {
-        $game = $this->args->get(AmberdataParameterFilter::PARAM_GAME);
+        $game = $this->args->get(DatasetParameterFilter::PARAM_GAME);
+        $version = $this->args->get(DatasetParameterFilter::PARAM_VERSION);
         
-        $contextUrl = $this->asset->createUrl($this->args);
-        $convertUrl = $contextUrl->withPath("/games/$game/convert/$infosetId");
-        $datasetUrl = $contextUrl->withPath("/game-resources/dataset");
-        $dictionaryUrl = $infosetId === 'dictionaries'
-            ? null
-            : $contextUrl->withPath("/games/$game/dictionaries");
+        $cacheFile = [];
+        $cacheFile[] = ServerEnvironment::getCacheDirectory();
+        $cacheFile[] = 'slothsoft/amber';
+        $cacheFile[] = $game;
+        $cacheFile[] = $version;
+        $cacheFile[] = 'amberdata';
+        $cacheFile[] = "$infosetId.xml";
+        $cacheFile = implode(DIRECTORY_SEPARATOR, $cacheFile);
+        $cacheFile = FileInfoFactory::createFromPath($cacheFile);
         
-        $getUseInstructions = function () use ($contextUrl, $convertUrl, $datasetUrl, $dictionaryUrl): UseInstructionCollection {
-            $instructions = new UseInstructionCollection();
-            $instructions->rootUrl = $contextUrl;
-            $instructions->templateUrl = $convertUrl;
-            $instructions->documentUrls[] = $datasetUrl;
+        $editor = $this->editor;
+        $asset = $this->asset;
+        $args = $this->args;
+        
+        $delegate = function() use($editor, $asset, $args, $game, $infosetId) {
+            $contextUrl = $this->asset->createUrl($this->args);
+            $convertUrl = $contextUrl->withPath("/games/$game/convert/$infosetId");
+            $datasetUrl = $contextUrl->withPath("/game-resources/dataset");
+            $dictionaryUrl = $infosetId === 'lib.dictionaries'
+                ? null
+                : $contextUrl->withQuery('infosetId=lib.dictionaries');
+                
+            
+            $writer = new AssetFragmentDOMWriter($contextUrl);
+            $writer->appendChild(new AssetDocumentDOMWriter($datasetUrl));
             if ($dictionaryUrl) {
-                $instructions->documentUrls[] = $dictionaryUrl;
+                $writer->appendChild(new AssetDocumentDOMWriter($dictionaryUrl));
             }
-            return $instructions;
+            $template = Module::resolveToDOMWriter($convertUrl);
+            return new TransformationDOMWriter($writer, $template);
         };
-        $getLinkInstructions = function () : LinkInstructionCollection {
-            return new LinkInstructionCollection();
-        };
-        return new TransformationResultBuilder($getUseInstructions, $getLinkInstructions);
+        
+        $writer = new DOMWriterFromDOMWriterDelegate($delegate);
+        $writer = new DOMWriterFileCache($writer, $cacheFile, function(SplFileInfo $cacheFile) { return false; });
+        return new FileWriterResultBuilder($writer, $cacheFile->getFilename());
     }
 
     protected function processFile(string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface
