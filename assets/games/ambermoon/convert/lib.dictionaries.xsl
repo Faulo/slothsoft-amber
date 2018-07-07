@@ -6,10 +6,15 @@
 	xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
 
-	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.stable" />
-
+	<xsl:template match="/*">
+		<amberdata version="0.1">
+			<xsl:apply-templates select="*/sse:savegame.editor" />
+		</amberdata>
+	</xsl:template>
+	
 	<xsl:template match="sse:savegame.editor">
 		<xsl:variable name="AM2" select="sse:archive[@name='AM2_BLIT' or @name='AM2_CPU']" />
+		
 		<dictionary-list>
 			<dictionary dictionary-id="events">
 				<option key="0" val="valdyn" />
@@ -1752,7 +1757,14 @@
 				<option key="6" />
 				<option key="7" />
 			</dictionary>
-
+			
+<!-- 			<xsl:for-each select="$npcs/*"> -->
+<!-- 				<dictionary dictionary-id="npc-{@file-name}"> -->
+<!-- 					<xsl:for-each select=".//sse:string"> -->
+<!-- 						<option key="{position() - 1}" val="{@value}"/> -->
+<!-- 					</xsl:for-each> -->
+<!-- 				</dictionary> -->
+<!-- 			</xsl:for-each> -->
 		</dictionary-list>
 	</xsl:template>
 

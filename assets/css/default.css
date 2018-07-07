@@ -120,6 +120,16 @@
 	background-color: rgb(68, 68, 51);
 	border-color: rgb(68, 68, 51);
 }
+.Amber .textlabel {
+	white-space: pre-wrap;
+	border-style: solid;
+	border-width: 2px;
+	padding: 0 0.5ch;
+	margin: 0.5ch;
+	width: 57ch;
+	font-size: smaller;
+	border-color: transparent;
+}
 
 .Amber article {
 	border-style: ridge;
@@ -273,6 +283,13 @@
 
 .Amber .Item .ItemMagic td {
 	min-width: 5ch;
+}
+
+.Amber .RaceData .number {
+	width: 3ch;
+}
+.Amber .ClassData .number {
+	width: 4ch;
 }
 
 .Amber .popup {

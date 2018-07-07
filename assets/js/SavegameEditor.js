@@ -11,11 +11,12 @@ SavegameEditor.prototype = Object.create(
 		templateDoc : {
 			writable : true,
 		},
-		repositoryDoc : {
+		repositoryDocs : {
 			writable : true,
 		},
 		init : {
 			value : function() {
+				this.repositoryDocs = {};
 				try {
 					let nodeList = this.rootNode.querySelectorAll("*[data-template='tabs'] > label > select");
 					for (let i = 0; i < nodeList.length; i++) {
@@ -31,22 +32,22 @@ SavegameEditor.prototype = Object.create(
 				} catch(e) {
 					this.rootNode.textContent = e.message;
 				}
-				try {
-					this.getDocument(
-						"/getTemplate.php/amber/editor.data-list",
-						(doc) => {
-							this.templateDoc = doc;
-						}
-					)
-					this.getDocument(
-						"/getData.php/amber/mod.resource?game=ambermoon&mod=Thalion-v1.05-DE&id=libs",
-						(doc) => {
-							this.repositoryDoc = doc;
-						}
-					)
-				} catch(e) {
-					this.rootNode.textContent = e.message;
-				}
+//				try {
+//					this.getDocument(
+//						"/getAsset.php/slothsoft@amber/xsl/editor.data-list",
+//						(doc) => {
+//							this.templateDoc = doc;
+//						}
+//					)
+//					this.getDocument(
+//						"/getAsset.php/slothsoft@amber/game-resources/amberdata?infosetId=lib.portraits",
+//						(doc) => {
+//							this.repositoryDoc = doc;
+//						}
+//					)
+//				} catch(e) {
+//					this.rootNode.textContent = e.message;
+//				}
 			}
 		},
 		getDocument : {
@@ -100,17 +101,20 @@ SavegameEditor.prototype = Object.create(
 					let popupNode = document.querySelector(".Amber .popup");
 					if (popupNode) {
 						let entryId = buttonNode.querySelector("*[value]").getAttribute("value");
+						let entryInfoset = buttonNode.getAttribute("infoset");
 						let entryType = buttonNode.getAttribute("type");
-						if (entryId && entryType) {
-							if (this.templateDoc && this.repositoryDoc) {
-								let entryNode = this.getRepositoryElement(entryType, entryId);
-								if (entryNode) {
-									let articleNode = XSLT.transformToFragment(entryNode, this.templateDoc, document);
-									if (articleNode) {
-										popupNode.appendChild(articleNode);
-									}
-								}
-							}
+						
+						if (entryId && entryInfoset && entryType) {
+							this.loadTemplateDocument()
+								.then((templateDocument) => {
+									this.getRepositoryElement(entryInfoset, entryType, entryId)
+										.then((entryNode) => {
+											return DOMHelper.transformToFragment(entryNode, templateDocument, document);
+										})
+										.then((articleNode) => {
+											popupNode.appendChild(articleNode);
+										});
+								});
 						}
 						/*
 						if (entryType && entryId) {
@@ -325,12 +329,18 @@ SavegameEditor.prototype = Object.create(
 						data[key] = 0;
 					}
 					
+					let items = [];
 					for (let i = 0; i < itemList.length; i++) {
 						let itemId = itemList[i].querySelector("amber-item-id input").value;
 						if (itemId) {
-							let itemNode = this.getItemById(itemId);
-							if (itemNode) {
-								if (itemNode) {
+							items.push(itemId);
+						}
+					}
+					
+					this.getItems(items)
+						.then((itemNodes) => {
+							itemNodes.forEach(
+								(itemNode) => {
 									for (let key in data) {
 										if (itemNode.hasAttribute(key)) {
 											data[key] += parseInt(itemNode.getAttribute(key));
@@ -343,37 +353,69 @@ SavegameEditor.prototype = Object.create(
 										data[itemNode.getAttribute("skill-type")] += parseInt(itemNode.getAttribute("skill-value"));
 									}
 								}
+							)
+							
+							for (let key in mappings) {
+								//alert(key + "\n" + mappings[key]);
+								if (mappings[key]) {
+									mappings[key].value = data[key];
+								}
 							}
-						}
-					}
-					
-					for (let key in mappings) {
-						//alert(key + "\n" + mappings[key]);
-						if (mappings[key]) {
-							mappings[key].value = data[key];
-						}
-					}
+						});
 				} catch(e) {
 					alert(e);
 				}
 			}
 		},
-		getItemById : {
-			value : function(itemId) {
-				return this.getRepositoryElement("item", itemId);
+		getItems : {
+			value : function(itemIds) {
+				return Promise.all(
+					itemIds.map(
+						(itemId) => {
+							return this.getRepositoryElement("lib.items", "item", itemId);
+						}
+					)
+				).then((itemNodes) => {
+					return itemNodes.filter(
+						(itemNode) => {
+							return !!itemNode;
+						}
+					);
+				});
 			}
 		},
 		getRepositoryElement : {
-			value : function(entryType, entryId) {
-				let ret = null;
-				try {
-					if (this.repositoryDoc) {
-						ret = this.repositoryDoc.querySelector(entryType + "[id='" + entryId + "']")
-					}
-				} catch(e) {
-					alert(e);
+			value : function(entryInfoset, entryType, entryId) {
+				return this.loadRepositoryDocument(entryInfoset)
+					.then((repositoryDocument) => {
+						return repositoryDocument.querySelector(entryType + "[id='" + entryId + "']");
+					});
+			}
+		},
+		loadRepositoryDocument : {
+			value : function(entryInfoset) {
+				if (this.repositoryDocs[entryInfoset]) {
+					return Promise.resolve(this.repositoryDocs[entryInfoset]);
+				} else {
+					return DOMHelper.loadDocument("/getAsset.php/slothsoft@amber/game-resources/amberdata?infosetId=" + entryInfoset)
+						.then((document) => {
+							this.repositoryDocs[entryInfoset] = document;
+							return document;
+						});
 				}
-				return ret;
+			}
+		},
+		loadTemplateDocument : {
+			value : function() {
+				if (this.templateDoc) {
+					return Promise.resolve(this.templateDoc);
+				} else {
+					return DOMHelper.loadDocument("/getAsset.php/slothsoft@amber/xsl/editor.data-list")
+						.then((document) => {
+							this.templateDoc = document;
+							return document;
+						});
+				}
 			}
 		},
 		viewMap : {
@@ -382,24 +424,27 @@ SavegameEditor.prototype = Object.create(
 					if (!detailsNode._mapViewer) {
 						let mapNode = detailsNode.querySelector("template").content.querySelector("map");
 						if (mapNode) {
-							let tilesetId, tilesetNode, viewer;
+							let tilesetInfoset, tilesetType, tilesetId, tilesetViewer;
 							tilesetId = mapNode.getAttribute("tileset-id");
 							switch (mapNode.getAttribute("map-type")) {
 								case "2":
 								case "2D":
-									tilesetNode = this.getRepositoryElement("tileset-icon", tilesetId);
-									viewer = "MapViewer";
+									tilesetInfoset = "lib.tileset.icons";
+									tilesetType = "tileset-icon";
+									tilesetViewer = "MapViewer";
 									break;
 								case "1":
 								case "3D":
-									tilesetNode = this.getRepositoryElement("tileset-lab", tilesetId);
-									viewer = "DungeonViewer";
+									tilesetInfoset = "lib.tileset.labs";
+									tilesetType = "tileset-lab";
+									tilesetViewer = "DungeonViewer";
 									break;
 							}
-							if (tilesetNode) {
-								detailsNode._mapViewer = new window[viewer](mapNode, tilesetNode);
-								detailsNode.appendChild(detailsNode._mapViewer.getViewNode());
-							}
+							this.getRepositoryElement(tilesetInfoset, tilesetType, tilesetId)
+								.then((tilesetNode) => {
+									detailsNode._mapViewer = new window[tilesetViewer](mapNode, tilesetNode);
+									detailsNode.appendChild(detailsNode._mapViewer.getViewNode());
+								});
 						}
 					}
 				} catch(e) {

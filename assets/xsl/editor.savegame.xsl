@@ -1186,7 +1186,7 @@
 	</xsl:template>
 
 	<xsl:template match="*" mode="portrait-picker">
-		<amber-picker type="portrait" class="portrait-picker" contextmenu="amber-picker-portrait" role="button"
+		<amber-picker infoset="lib.portraits" type="portrait" class="portrait-picker" contextmenu="amber-picker-portrait" role="button"
 			tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
 			<xsl:apply-templates select="." mode="form-picker" />
 		</amber-picker>
@@ -1194,7 +1194,7 @@
 	<xsl:template match="*" mode="item-picker">
 		<xsl:variable name="itemId" select=".//*[@name = 'item-id']/@value" />
 		<!--<xsl:variable name="item" select="key('item', $itemId)" /> data-hover-text="{$item/@name}" -->
-		<amber-picker type="item" class="item-picker" contextmenu="amber-picker-item" role="button" tabindex="0"
+		<amber-picker infoset="lib.items" type="item" class="item-picker" contextmenu="amber-picker-item" role="button" tabindex="0"
 			onclick="savegameEditor.openPopup(arguments[0])">
 			<xsl:if test="../@name = 'equipment'">
 				<xsl:attribute name="data-picker-filter-amber-item-id"><xsl:value-of select="saa:getName()" /></xsl:attribute>
@@ -1207,7 +1207,7 @@
 		</amber-picker>
 	</xsl:template>
 	<xsl:template match="*" mode="tile-picker">
-		<amber-picker type="tileset-icon" class="tile-picker" contextmenu="amber-picker-tileset-icon"
+		<amber-picker infoset="lib.tileset.icons" type="tileset-icon" class="tile-picker" contextmenu="amber-picker-tileset-icon"
 			role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
 			<xsl:apply-templates select="*[1]" mode="form-picker">
 				<xsl:with-param name="name" select="'tile-id'" />
@@ -1221,7 +1221,7 @@
 		</amber-picker>
 	</xsl:template>
 	<xsl:template match="*" mode="monster-sprite-picker">
-		<amber-picker type="monster-sprite" class="monster-sprite-picker"
+		<amber-picker infoset="lib.monsters" type="monster-sprite" class="monster-sprite-picker"
 			contextmenu="amber-picker-monster-sprite" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
 			<xsl:apply-templates select=".//*[@name = 'gfx-id']" mode="form-picker" />
 		</amber-picker>

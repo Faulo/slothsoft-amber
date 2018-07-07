@@ -3,28 +3,28 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\DOMHelper;
+use Slothsoft\Core\IO\Writable\Adapter\FileWriterFromStringWriter;
 use Slothsoft\Core\IO\Writable\Delegates\StringWriterFromStringDelegate;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
-use Slothsoft\Core\IO\Writable\Adapter\FileWriterFromStringWriter;
 
 class StylesheetBuilder implements ExecutableBuilderStrategyInterface
 {
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
     {
-        $infosetId = (string) $args->get(StylesheetParameterFilter::PARAM_INFOSET_ID);
+        $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
         
         $writer = new StringWriterFromStringDelegate(
             function() use($context, $args) : string {
-                $game = $args->get(StylesheetParameterFilter::PARAM_GAME);
-                $version = $args->get(StylesheetParameterFilter::PARAM_VERSION);
-                $user = $args->get(StylesheetParameterFilter::PARAM_USER);
-                
-                $infosetId = (string) $args->get(StylesheetParameterFilter::PARAM_INFOSET_ID);
+                $game = $args->get(ResourceParameterFilter::PARAM_GAME);
+                $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
+                $user = $args->get(ResourceParameterFilter::PARAM_USER);
+                $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
                 
                 $controller = new EditorController();
                 

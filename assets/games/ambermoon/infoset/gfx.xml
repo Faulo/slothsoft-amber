@@ -70,6 +70,26 @@
 		</for-each-file>
 	</archive>
 	
+	
+	
+	<archive path="Amberfiles/2Wall3D.amb" type="JH" >
+		<for-each-file>
+			<image-map width="128" height="80" image-count="1" bitplanes="4"/>
+		</for-each-file>
+	</archive>
+	
+	<archive path="Amberfiles/Automap_graphics" type="JH" >
+		<for-each-file>
+			<image width="16" height="3416" bitplanes="4"/>
+		</for-each-file>
+	</archive>
+	
+	<archive path="Amberfiles/Stationary" type="JH" >
+		<for-each-file>
+			<image-pile image-dimensions="32x22 32x11 48x34 48x21 48x39" bitplanes="5"/>
+		</for-each-file>
+	</archive>
+	
 	<archive path="Amberfiles/Monster_gfx.amb" type="JH" >
 		<file file-name="001">
 			<image-map width="96" height="1005" image-count="15" bitplanes="5"/>

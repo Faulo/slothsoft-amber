@@ -68,6 +68,7 @@ class AmbTool
             case 'Format: AMBR (raw archive)':                  return self::TYPE_AMBR;
             case 'Format: AMNP (compressed/encrypted archive)': return self::TYPE_AMBR;
             case 'Format: AMNC (encrypted archive)':            return self::TYPE_AMBR;
+            case 'Format: LOB (compressed)':                    return self::TYPE_AMBR;
             default:
                 throw new DomainException("Unknown ambtool.exe format '$output'!");
         }

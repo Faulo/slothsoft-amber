@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<savegame.editor version="0.3"
+	xmlns="http://schema.slothsoft.net/savegame/editor"
+	xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/global.dev" xpointer="xpointer(/*/*)" />
+	
+	<archive path="Amberfiles/NPC_char.amb" type="AMBR">
+		<for-each-file>
+			<use-global ref="character" />
+
+			<integer name="portrait-id" position="9" size="2" />
+
+			<group name="events">
+				<event-dictionary position="290" />
+				<!-- <event-script position="290"/> -->
+			</group>
+		</for-each-file>
+	</archive>
+	
+	<archive path="Amberfiles/NPC_texts.amb" type="AMBR">
+		<for-each-file>
+			<string-dictionary type="size-first" encoding="CP850" position="0" name="dialog" />
+		</for-each-file>
+	</archive>
+</savegame.editor>

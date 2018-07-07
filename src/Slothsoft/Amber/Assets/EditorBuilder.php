@@ -3,8 +3,8 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
 use Slothsoft\Core\IO\FileInfoFactory;
-use Slothsoft\Core\IO\Writable\Decorators\ChunkWriterFileCache;
 use Slothsoft\Farah\Exception\HttpDownloadAssetException;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
@@ -21,8 +21,8 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface
         $game = $args->get(EditorParameterFilter::PARAM_GAME);
         $version = $args->get(EditorParameterFilter::PARAM_VERSION);
         $user = $args->get(EditorParameterFilter::PARAM_USER);
+        $infosetId = $args->get(EditorParameterFilter::PARAM_INFOSET_ID);
         
-        $infosetId = (string) $args->get(EditorParameterFilter::PARAM_INFOSET_ID);
         $request = (array) $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
         
         $controller = new EditorController();        
@@ -67,10 +67,10 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface
             return true;
         };
         
-        $writer = new ChunkWriterFileCache($savegame->getChunkWriter(), FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
+        $writer = $savegame->getChunkWriter();
+//         $writer = new ChunkWriterFileCache($writer, FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
         
         $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.editor.xml');
-        
         return new ExecutableStrategies($resultBuilder);
     }
     

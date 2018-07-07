@@ -738,8 +738,8 @@
 			<use-global ref="hitpoint" />
 		</group>
 
-		<signed-integer name="combat-defense" position="215" />
-		<signed-integer name="defense" position="217" />
+		<signed-integer name="combat-defense" position="214" size="2"/>
+		<signed-integer name="defense" position="216" size="2"/>
 
 		<signed-integer name="combat-attack" position="218" size="2" />
 		<signed-integer name="attack" position="220" size="2" />

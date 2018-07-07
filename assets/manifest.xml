@@ -54,18 +54,17 @@
 	</directory>
 
 	<fragment name="game-resources">
-		<custom-asset name="source" executable-builder="Slothsoft\Amber\Assets\SourceBuilder"
-			parameter-filter="Slothsoft\Amber\Assets\SourceParameterFilter" />
 		<custom-asset name="dataset" executable-builder="Slothsoft\Amber\Assets\DatasetBuilder"
-			parameter-filter="Slothsoft\Amber\Assets\DatasetParameterFilter" />
+			parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
 		<custom-asset name="amberdata" executable-builder="Slothsoft\Amber\Assets\AmberdataBuilder"
-			parameter-filter="Slothsoft\Amber\Assets\AmberdataParameterFilter" />
-		<custom-asset name="gfx" executable-builder="Slothsoft\Amber\Assets\GfxBuilder"
-			parameter-filter="Slothsoft\Amber\Assets\GfxParameterFilter" />
+			parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
 		<custom-asset name="stylesheet" executable-builder="Slothsoft\Amber\Assets\StylesheetBuilder"
-			parameter-filter="Slothsoft\Amber\Assets\StylesheetParameterFilter" />
+			parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
+			
+		<custom-asset name="gfx" executable-builder="Slothsoft\Amber\Assets\GfxBuilder"
+			parameter-filter="Slothsoft\Amber\ParameterFilters\GfxParameterFilter" />
 		<custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder"
-			parameter-filter="Slothsoft\Amber\Assets\EditorParameterFilter" />
+			parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter" />
 	</fragment>
 	
 	<fragment name="game-editor">
@@ -78,8 +77,7 @@
 		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.items"/>
 		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.portraits"/>
 		
-		<import ref="//core/api/XSLT"/>
-		<link-script ref="/js/SavegameEditor"/>
+		<import ref="/api/SavegameEditor"/>
 	</fragment>
 	
 	<fragment name="game-list">
@@ -90,10 +88,10 @@
 		<link-stylesheet ref="/css/default"/>
 		<link-stylesheet ref="/css/amber-picker"/>
 		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.items"/>
+		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.portraits"/>
 		<link-stylesheet ref="/game-resources/stylesheet"/>
 		
-		<import ref="//core/api/XSLT"/>
-		<link-script ref="/js/SavegameEditor"/>
+		<import ref="/api/SavegameEditor"/>
 	</fragment>
 	
 	<fragment name="game-client">
@@ -138,19 +136,16 @@
 			<link-stylesheet ref="/css/amber-picker" name="amber-picker" />
 		</fragment>
 		<fragment name="SavegameEditor">
-			<!-- <custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder" parameter-filter="Slothsoft\Amber\Assets\EditorParameterFilter"/> -->
-			<use-document name="editor" ref="/game-resources/dataset?infosetId=save-editor" />
-			<use-document name="amberdata" ref="/game-resources/amberdata?infosetId=dictionaries" />
-			<import ref="//core/api/XSLT" name="XSLT" />
-			<link-script ref="/js/SavegameEditor" name="SavegameEditor" />
+			<link-script ref="/js/SavegameEditor"/>
+			<import ref="//core/api/DOMHelper"/>
 		</fragment>
 		<fragment name="MapViewer">
-			<link-script ref="/js/MapViewer" name="MapViewer" />
-			<link-script ref="/js/pixijs/pixi.min" name="pixi.min" />
+			<link-script ref="/js/MapViewer"/>
+			<link-script ref="/js/pixijs/pixi.min"/>
 		</fragment>
 		<fragment name="DungeonViewer">
-			<link-script ref="/js/DungeonViewer" name="DungeonViewer" />
-			<link-script ref="/js/babylonjs/babylon.custom" name="babylon.custom" />
+			<link-script ref="/js/DungeonViewer"/>
+			<link-script ref="/js/babylonjs/babylon.custom"/>
 		</fragment>
 	</fragment>
 

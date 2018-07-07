@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" 
 	xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:sfm="http://schema.slothsoft.net/farah/module"
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:str="http://exslt.org/strings" extension-element-prefixes="str">
 
@@ -35,8 +36,8 @@ window.addEventListener(
 		<xsl:apply-templates select="." mode="itemlist" />
 	</xsl:template>
 
-	<xsl:template match="saa:portrait-list | saa:item-list | saa:monster-list" mode="itemlist">
-		<xsl:for-each select="*">
+	<xsl:template match="saa:portrait-category | saa:item-category | saa:monster-category | saa:npc-category | saa:pc-category" mode="itemlist">
+		<xsl:if test="*">
 			<details data-template="flex">
 				<summary>
 					<h2>
@@ -48,13 +49,15 @@ window.addEventListener(
 				</summary>
 				<ul>
 					<xsl:for-each select="*">
+						<xsl:sort select="saa:class/@experience" data-type="number"/>
+						<xsl:sort select="@level" data-type="number"/>
 						<li>
 							<xsl:apply-templates select="." mode="itemlist" />
 						</li>
 					</xsl:for-each>
 				</ul>
 			</details>
-		</xsl:for-each>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template match="saa:class-list" mode="itemlist">
@@ -122,13 +125,15 @@ window.addEventListener(
 					<tr class="right-aligned">
 						<td>
 							<xsl:value-of select="@name" />
-							:
+							<xsl:text>:</xsl:text>
 						</td>
 						<xsl:if test="@current">
 							<td class="number">
 								<xsl:value-of select="concat(@current, '%')" />
 							</td>
-							<td>/</td>
+							<td>
+								<xsl:text>/</xsl:text>
+							</td>
 						</xsl:if>
 						<td class="number">
 							<xsl:value-of select="concat(@maximum, '%')" />
@@ -153,13 +158,15 @@ window.addEventListener(
 					<tr class="right-aligned">
 						<td>
 							<xsl:value-of select="@name" />
-							:
+							<xsl:text>:</xsl:text>
 						</td>
 						<xsl:if test="@current">
 							<td class="number">
 								<xsl:value-of select="concat(format-number(@current, '###'), '')" />
 							</td>
-							<td>/</td>
+							<td>
+								<xsl:text>/</xsl:text>
+							</td>
 						</xsl:if>
 						<td class="number">
 							<xsl:value-of select="concat(@maximum, '')" />
@@ -172,41 +179,180 @@ window.addEventListener(
 
 	<xsl:template match="saa:portrait" mode="itemlist">
 		<article data-portrait-id="{@id}" data-template="flex" class="Portrait">
-			<amber-picker type="portrait" class="portrait-picker" role="button" tabindex="0">
+			<amber-picker infoset="lib.portraits" type="portrait" class="portrait-picker" role="button" tabindex="0">
 				<amber-portrait value="{@id}" />
 			</amber-picker>
 			<xsl:value-of select="@name" />
 		</article>
 	</xsl:template>
 
-	<xsl:template match="saa:monster" mode="itemlist">
+	<xsl:template match="saa:monster | saa:npc | saa:pc" mode="itemlist">
+		<xsl:variable name="isMage" select="saa:class/saa:sp/@maximum &gt; 0"/>
+		<article data-monster-id="{@id}" class="Character">
+			<table>
+				<tr>
+					<td class="attributes">
+						<h3>attributes</h3>
+						<xsl:apply-templates select="saa:race" mode="itemlist-inline" />
+					</td>
+					<td class="languages">
+						<h3>languages</h3>
+						<xsl:variable name="languages" select="saa:language/@name"/>
+						<table >
+							<xsl:for-each select="key('dictionary-option', 'languages')">
+								<tr>
+									<td>
+										<xsl:if test="@val = $languages">
+											<xsl:value-of select="@val" />
+										</xsl:if>
+										<xsl:text>&#160;</xsl:text>
+									</td>
+								</tr>
+							</xsl:for-each>
+						</table>
+					</td>
+					<td class="skills">
+						<h3>skills</h3>
+						<xsl:apply-templates select="saa:class" mode="itemlist-inline" />
+					</td>
+					<td class="character-sheet">
+						<table>
+							<tr>
+								<td rowspan="5">
+									<xsl:apply-templates select="." mode="itemlist-picture"/>
+								</td>
+								<td><xsl:value-of select="saa:race/@name"/></td>
+							</tr>
+							<tr><td><xsl:value-of select="concat(@gender, ' ')"/></td></tr>
+							<tr><td>age: <xsl:value-of select="saa:race/saa:age/@current"/></td></tr>
+							<tr><td><xsl:value-of select="saa:class/@name"/><xsl:text> </xsl:text><xsl:value-of select="@level"/></td></tr>
+							<tr><td>ep: <xsl:value-of select="saa:class/@experience"/></td></tr>
+						</table>
+						<table>
+							<tr>
+								<td colspan="2" class="yellow">
+									<xsl:value-of select="@name" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">hp: <xsl:value-of select="concat(saa:class/saa:hp/@current, '/', saa:class/saa:hp/@maximum)"/></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<xsl:if test="$isMage">
+										sp: <xsl:value-of select="concat(saa:class/saa:sp/@current, '/', saa:class/saa:sp/@maximum)"/>
+									</xsl:if>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<xsl:if test="$isMage">
+										slp: <xsl:value-of select="@spelllearn-points"/>
+									</xsl:if>
+								</td>
+								<td>
+									tp: <xsl:value-of select="@training-points"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									gold: <xsl:value-of select="@gold"/>
+								</td>
+								<td>
+									food: <xsl:value-of select="@food"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									attack: <xsl:value-of select="@attack"/>
+								</td>
+								<td>
+									defense: <xsl:value-of select="@defense"/>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<xsl:if test="saa:equipment and saa:inventory">
+				<table>
+					<tr>
+						<td>
+							<h3>equipment</h3>
+							<xsl:apply-templates select="saa:equipment" mode="itemlist-inline" />
+						</td>
+						<td>
+							<h3>inventory</h3>
+							<xsl:apply-templates select="saa:inventory" mode="itemlist-inline" />
+							<xsl:if test="saa:spellbook/*">
+								<h3>spells</h3>
+								<xsl:apply-templates select="saa:spellbook" mode="itemlist-inline" />
+							</xsl:if>
+						</td>
+					</tr>
+				</table>
+			</xsl:if>
+			<xsl:if test="saa:event">
+				<div>
+					<h3>dialog</h3>
+					<xsl:for-each select="saa:event">
+						<details>
+							<summary class="textlabel">
+								<xsl:for-each select="saa:trigger">
+									<xsl:value-of select="@name"/>
+									<xsl:if test="@value">
+										<xsl:text>: </xsl:text>
+										<span class="yellow"><xsl:value-of select="@value"/></span>
+									</xsl:if>
+								</xsl:for-each>
+							</summary>
+							<xsl:for-each select="saa:text">
+								<div class="textbox">
+									<xsl:copy-of select="node()" />
+								</div>
+							</xsl:for-each>
+						</details>
+					</xsl:for-each>
+				</div>
+			</xsl:if>
+		</article>
+	</xsl:template>
+	
+	<xsl:template match="saa:monster" mode="itemlist-picture">
+		<amber-picker infoset="lib.monsters" type="monster" class="item-picker" role="button" tabindex="0">
+			<amber-monster-id value="{@id}" />
+		</amber-picker>
+	</xsl:template>
+	
+	<xsl:template match="saa:pc | saa:npc" mode="itemlist-picture">
+		<amber-picker infoset="lib.portraits" type="portrait" class="item-picker" role="button" tabindex="0">
+			<amber-portrait value="{@portrait-id}" />
+		</amber-picker>
+	</xsl:template>
+	
+	<xsl:template match="saa:npc2 | saa:p2c" mode="itemlist">
 		<!--<item xmlns="" id="361" image="9" name="MAGIERSTIEFEL" type="Schuhe" hands="0" fingers="0" damage="0" armor="6" weight="850" 
 			gender="beide" class="Magier Mystik. Alchem. Heiler"/> -->
-		<article data-monster-id="{@id}" data-template="flex" class="Monster">
+		<article data-npc-id="{@id}" data-template="flex">
 			<ul>
-				<li>
-					<h3>race</h3>
-					<xsl:apply-templates select="saa:race" mode="itemlist-inline" />
-					<h3>class</h3>
-					<xsl:apply-templates select="saa:class" mode="itemlist-inline" />
-				</li>
 				<li>
 					<h3 class="yellow">
 						<xsl:value-of select="@name" />
 					</h3>
-					<amber-picker type="monster" class="item-picker" role="button" tabindex="0">
-						<amber-monster-id value="{@id}" />
+					<amber-picker infoset="lib.portraits" type="portrait" class="item-picker" role="button" tabindex="0">
+						<amber-portrait value="{@portrait-id}" />
 					</amber-picker>
-					<h3>equipment</h3>
-					<xsl:apply-templates select="saa:equipment" mode="itemlist-inline" />
 				</li>
 				<li>
-					<h3>inventory</h3>
-					<xsl:apply-templates select="saa:inventory" mode="itemlist-inline" />
+					<h3>race: <xsl:value-of select="saa:race/@name"/></h3>
+					<xsl:apply-templates select="saa:race" mode="itemlist-inline" />
 				</li>
 				<li>
-					<h3>spells</h3>
-					<xsl:apply-templates select="saa:spellbook" mode="itemlist-inline" />
+					<h3>class: <xsl:value-of select="saa:class/@name"/></h3>
+					<xsl:apply-templates select="saa:class" mode="itemlist-inline" />
+				</li>
+				<li>
+					
 				</li>
 			</ul>
 		</article>
@@ -251,7 +397,7 @@ window.addEventListener(
 	</xsl:template>
 
 	<xsl:template match="saa:slot" mode="itemlist-inline">
-		<amber-picker type="item" class="item-picker" role="button" tabindex="0"
+		<amber-picker infoset="lib.items" type="item" class="item-picker" role="button" tabindex="0"
 			onclick="savegameEditor.openPopup(arguments[0])">
 			<amber-item-id value="{saa:item-instance/@item-id}" />
 			<amber-item-amount value="{saa:item-instance/@item-amount}" />
@@ -273,7 +419,7 @@ window.addEventListener(
 					<table class="ItemName">
 						<tr>
 							<td>
-								<amber-picker type="item" class="item-picker" role="button" tabindex="0">
+								<amber-picker infoset="lib.items" type="item" class="item-picker" role="button" tabindex="0">
 									<amber-item-gfx value="{@image-id}" />
 								</amber-picker>
 							</td>

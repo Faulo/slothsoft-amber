@@ -2,24 +2,31 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\ServerEnvironment;
 use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Core\IO\Writable\DOMWriterInterface;
 use Slothsoft\Core\IO\Writable\Decorators\DOMWriterFileCache;
 use Slothsoft\Core\IO\Writable\Delegates\DOMWriterFromDOMWriterDelegate;
+use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Module;
+use Slothsoft\Farah\Module\Asset\AssetInterface;
+use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\DOMWriter\AssetDocumentDOMWriter;
 use Slothsoft\Farah\Module\DOMWriter\AssetFragmentDOMWriter;
 use Slothsoft\Farah\Module\DOMWriter\TransformationDOMWriter;
+use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface;
 use SplFileInfo;
 
-class AmberdataBuilder extends AbstractResourceBuilder
+class AmberdataBuilder implements ExecutableBuilderStrategyInterface
 {
-    protected function processInfoset(string $infosetId): ResultBuilderStrategyInterface
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
     {
-        $game = $this->args->get(DatasetParameterFilter::PARAM_GAME);
-        $version = $this->args->get(DatasetParameterFilter::PARAM_VERSION);
+        $game = $args->get(ResourceParameterFilter::PARAM_GAME);
+        $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
+        $user = $args->get(ResourceParameterFilter::PARAM_USER);
+        $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
         
         $cacheFile = [];
         $cacheFile[] = ServerEnvironment::getCacheDirectory();
@@ -31,19 +38,15 @@ class AmberdataBuilder extends AbstractResourceBuilder
         $cacheFile = implode(DIRECTORY_SEPARATOR, $cacheFile);
         $cacheFile = FileInfoFactory::createFromPath($cacheFile);
         
-        $editor = $this->editor;
-        $asset = $this->asset;
-        $args = $this->args;
-        
-        $delegate = function() use($editor, $asset, $args, $game, $infosetId) {
-            $contextUrl = $this->asset->createUrl($this->args);
+        $domDelegate = function() use($context, $args, $game, $infosetId) : DOMWriterInterface {
+            $contextUrl = $context->createUrl($args);
             $convertUrl = $contextUrl->withPath("/games/$game/convert/$infosetId");
             $datasetUrl = $contextUrl->withPath("/game-resources/dataset");
             $dictionaryUrl = $infosetId === 'lib.dictionaries'
                 ? null
                 : $contextUrl->withQuery('infosetId=lib.dictionaries');
                 
-            
+                
             $writer = new AssetFragmentDOMWriter($contextUrl);
             $writer->appendChild(new AssetDocumentDOMWriter($datasetUrl));
             if ($dictionaryUrl) {
@@ -53,20 +56,14 @@ class AmberdataBuilder extends AbstractResourceBuilder
             return new TransformationDOMWriter($writer, $template);
         };
         
-        $writer = new DOMWriterFromDOMWriterDelegate($delegate);
-        $writer = new DOMWriterFileCache($writer, $cacheFile, function(SplFileInfo $cacheFile) { return false; });
-        return new FileWriterResultBuilder($writer, $cacheFile->getFilename());
+        $shouldRefreshDelegate = function(SplFileInfo $cacheFile) : bool {
+            return false;
+        };
+        
+        $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);
+        $writer = new DOMWriterFileCache($writer, $cacheFile, $shouldRefreshDelegate);
+        $resultBuilder = new FileWriterResultBuilder($writer, $cacheFile->getFilename());
+        return new ExecutableStrategies($resultBuilder);
     }
-
-    protected function processFile(string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface
-    {
-        return $this->processInfoset($infosetId);
-    }
-
-    protected function processArchive(string $infosetId, string $archiveId): ResultBuilderStrategyInterface
-    {
-        return $this->processInfoset($infosetId);
-    }
-
 }
 

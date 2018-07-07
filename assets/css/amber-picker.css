@@ -142,9 +142,53 @@ amber-portrait::after {
 }
 
 .popup amber-portrait::after {
-	width: 128px;
-	height: 136px;
-	font-size: 136px;
+	font-size: 6px;
+}
+article.Portrait amber-portrait::after {
+	font-size: 4px;
+}
+.Character amber-portrait::after {
+	font-size: 3px;
+}
+
+.Character {
+	width: 80ch;
+}
+.Character .textbox {
+	width: auto;
+}
+.Character .textlabel {
+	width: auto;
+}
+.Character td {
+}
+.Character .inventory {
+	width: 30em;
+}
+.Character .spells ul {
+	column-gap: 1ch;
+	column-count: 3;
+	width: 63ch;
+}
+
+.Character .attributes,
+.Character .languages,
+.Character .skills {
+	vertical-align: top;
+}
+.Character .attributes,
+.Character .languages {
+	width: 12ch;
+}
+.Character .skills {
+	width: 15ch;
+}
+.Character .character-sheet {
+	width: 36ch;
+}
+	
+.Character .character-sheet td {
+	padding: 0 1ch 0 0;
 }
 
 /* monsters */

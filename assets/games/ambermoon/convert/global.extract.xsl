@@ -3,12 +3,16 @@
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:str="http://exslt.org/strings"
-	
 	extension-element-prefixes="str">
-
 	
-
-	
+	<xsl:template name="extract-languages">
+		<xsl:param name="root" select="." />
+		<xsl:for-each select=".//*[@name = 'languages']">
+			<xsl:for-each select=".//*[string-length(@value) &gt; 0]">
+				<saa:language name="{saa:getName()}" />
+			</xsl:for-each>
+		</xsl:for-each>
+	</xsl:template>
 
 	<xsl:template name="extract-spellbook">
 		<xsl:param name="root" select="." />
@@ -67,27 +71,109 @@
 			</xsl:for-each>
 		</saa:item-instance>
 	</xsl:template>
+	
+	<xsl:template name="extract-character">
+		<xsl:param name="root" select="." />
+		<xsl:param name="id" />
+		<xsl:param name="dialog" select="/.." />
+		
+		<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
+		<xsl:attribute name="attack"><xsl:value-of select="*[@name = 'attack']/@value + *[@name = 'combat-attack']/@value"/></xsl:attribute>
+		<xsl:attribute name="defense"><xsl:value-of select="*[@name = 'defense']/@value + *[@name = 'combat-defense']/@value"/></xsl:attribute>
+		
+		<xsl:apply-templates select=".//*[@name = 'name']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'portrait-id']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'level']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'gender']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'attacks-per-round']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'gold']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'food']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'magic-attack']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'magic-defense']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'spelllearn-points']" mode="attr" />
+		<xsl:apply-templates select=".//*[@name = 'training-points']" mode="attr" />
+		
+		<xsl:for-each select=".//*[@name = 'monster-type']/*[@value]">
+			<xsl:attribute name="is-{saa:getName()}" />
+		</xsl:for-each>
+		
+		<xsl:call-template name="extract-languages" />
+		<xsl:call-template name="extract-equipment" />
+		<xsl:call-template name="extract-inventory" />
+		<xsl:call-template name="extract-spellbook" />
+		
+		<xsl:for-each select=".//*[@type='event-dictionary']/*">
+			<saa:event>
+				<xsl:for-each select=".//*[@dictionary-ref='event-trigger-types']">
+					<saa:trigger id="{@value}" name="{saa:getDictionaryOption(@dictionary-ref, @value)/@val}">
+						<xsl:apply-templates select="following-sibling::*[@name = 'event-payload']" mode="attr">
+							<xsl:with-param name="name" select="'value'"/>
+						</xsl:apply-templates>
+					</saa:trigger>
+				</xsl:for-each>
+				<xsl:for-each select=".//*[@dictionary-ref='event-types'][@value=17]/following-sibling::*[@name = 'event-payload']">
+					<xsl:variable name="id" select="@value"/>
+					<xsl:variable name="text" select="($dialog//sse:string)[(position() - 1) = $id]"/>
+					<xsl:call-template name="extract-text">
+						<xsl:with-param name="id" select="$id"/>
+						<xsl:with-param name="root" select="$text/@value"/>
+					</xsl:call-template>
+				</xsl:for-each>
+			</saa:event>
+		</xsl:for-each>
+	</xsl:template>
 
 	<xsl:template name="extract-class">
 		<xsl:param name="root" />
-		<xsl:param name="id" />
-		<saa:class id="{$id}">
-			<xsl:apply-templates select="$root//*[@name = 'name']" mode="attr" />
+		<saa:class>
+			<xsl:apply-templates select=".//*[@name = 'class']" mode="attr">
+				<xsl:with-param name="name" select="'name'" />
+			</xsl:apply-templates>
+			
 			<xsl:apply-templates select="$root//*[@name = 'school']" mode="attr" />
 			<xsl:apply-templates select="$root//*[@name = 'apr-per-level']" mode="attr" />
 			<xsl:apply-templates select="$root//*[@name = 'hp-per-level']" mode="attr" />
 			<xsl:apply-templates select="$root//*[@name = 'sp-per-level']" mode="attr" />
 			<xsl:apply-templates select="$root//*[@name = 'tp-per-level']" mode="attr" />
 			<xsl:apply-templates select="$root//*[@name = 'slp-per-level']" mode="attr" />
+			<xsl:apply-templates select=".//*[@name = 'experience']" mode="attr" />
 
 			<xsl:apply-templates select="$root[../@name = 'class-experience']//sse:integer" mode="attr">
 				<xsl:with-param name="name" select="'base-experience'" />
 			</xsl:apply-templates>
 
 			<xsl:for-each select="$root//*[@name = 'skills']/*">
-				<saa:skill name="{saa:getName()}" maximum="{*/@value}" />
+				<saa:skill name="{saa:getName()}" current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}" maximum="{*[@name = 'maximum']/@value}" />
 			</xsl:for-each>
+		
+			<xsl:variable name="hp" select="*[@name = 'hit-points']/*"/>
+			<saa:hp current="{$hp[@name='current']/@value}" maximum="{$hp[@name='maximum']/@value + $hp[@name='maximum-mod']/@value}"/>
+			
+			<xsl:variable name="sp" select="*[@name = 'spell-points']/*"/>
+			<saa:sp current="{$sp[@name='current']/@value}" maximum="{$sp[@name='maximum']/@value + $sp[@name='maximum-mod']/@value}"/>
 		</saa:class>
+	</xsl:template>
+	
+	<xsl:template name="extract-race">
+		<xsl:param name="root" />
+		<saa:race>
+			<xsl:apply-templates select=".//*[@name = 'race']" mode="attr">
+				<xsl:with-param name="name" select="'name'" />
+			</xsl:apply-templates>
+			<xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'current']" mode="attr">
+				<xsl:with-param name="name" select="'age-current'" />
+			</xsl:apply-templates>
+			<xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'maximum']" mode="attr">
+				<xsl:with-param name="name" select="'age-maximum'" />
+			</xsl:apply-templates>
+			<xsl:for-each select=".//*[@name = 'attributes']/*">
+				<saa:attribute name="{saa:getName()}"
+					current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}" maximum="{*[@name = 'maximum']/@value}" />
+			</xsl:for-each>
+			
+			<xsl:variable name="age" select=".//*[@name = 'age']/*"/>
+			<saa:age current="{$age[@name='current']/@value}" maximum="{$age[@name='maximum']/@value}"/>
+		</saa:race>
 	</xsl:template>
 
 	<xsl:template name="extract-item">
@@ -173,13 +259,39 @@
 		<xsl:param name="id" />
 		<saa:text id="{$id}">
 			<xsl:for-each select="str:split($root, '^')">
-				<xsl:value-of select="translate(., '$', '&#160;')" />
-				<saa:br xmlns="http://www.w3.org/1999/xhtml" />
+				<xsl:value-of select="translate(., '$×', '&#160;ß')" />
+				<br xmlns="http://www.w3.org/1999/xhtml" />
 			</xsl:for-each>
 		</saa:text>
 	</xsl:template>
 
 
 
+
+	<xsl:template match="sse:integer | sse:signed-integer | sse:string" mode="attr">
+		<xsl:param name="name" select="@name" />
+		<xsl:param name="value" select="@value" />
+		<xsl:attribute name="{$name}"><xsl:value-of select="normalize-space($value)" /></xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="sse:select" mode="attr">
+		<xsl:param name="name" select="@name" />
+		<xsl:variable name="option" select="saa:getDictionaryOption(@dictionary-ref, @value)" />
+		<xsl:attribute name="{$name}">
+			<xsl:value-of select="$option/@title | $option/@val[not($option/@title)]" />
+		</xsl:attribute>
+	</xsl:template>
+
+	<xsl:template match="sse:group" mode="unknown">
+		<unknown>
+			<xsl:for-each select="*">
+				<xsl:if test="position() &gt; 1">
+					<xsl:text> </xsl:text>
+				</xsl:if>
+				<xsl:value-of select="@value" />
+				<!-- <xsl:value-of select="str:align(@value, '000', 'right')"/> -->
+			</xsl:for-each>
+		</unknown>
+	</xsl:template>
 
 </xsl:stylesheet>

@@ -4,19 +4,18 @@ namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Farah\Module\Asset\ParameterFilterStrategy\AbstractMapParameterFilter;
 
-abstract class AbstractParameterFilter extends AbstractMapParameterFilter
+class SourceParameterFilter extends AbstractMapParameterFilter
 {
-
     const PARAM_GAME = 'game';
-
+    
     const PARAM_VERSION = 'version';
     
     const PARAM_INFOSET_ID = 'infosetId';
     const PARAM_ARCHIVE_ID = 'archiveId';
     const PARAM_FILE_ID = 'fileId';
-
+    
     const PARAM_USER = 'user';
-
+    
     protected function loadMap(): array
     {
         return [

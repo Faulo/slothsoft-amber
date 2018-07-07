@@ -20,9 +20,18 @@ class EditorController
 
     public function createEditorConfig(string $game, string $version, string $user, string $infoset): EditorConfig
     {
-        $user = preg_replace('~[^\w]~', '', $user);
+//         $user = preg_replace('~[^\w]~', '', $user);
+        if ($game === '') {
+            throw new \InvalidArgumentException('$game must not be empty.');
+        }
+        if ($version === '') {
+            throw new \InvalidArgumentException('$version must not be empty.');
+        }
         if ($user === '') {
-            $user = uniqid();
+            throw new \InvalidArgumentException('$user must not be empty.');
+        }
+        if ($infoset === '') {
+            throw new \InvalidArgumentException('$infoset must not be empty.');
         }
         return new EditorConfig(
             $this->getAmberAssetPath("/games/$game/source/$version"),

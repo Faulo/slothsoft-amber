@@ -6,9 +6,15 @@
 	xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
 
-	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.stable" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.dictionary" />
 	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.extract" />
-
+	
+	<xsl:template match="/*">
+		<amberdata version="0.1">
+			<xsl:apply-templates select="*/sse:savegame.editor" />
+		</amberdata>
+	</xsl:template>
+	
 	<xsl:template match="sse:savegame.editor">
 		<xsl:variable name="items"
 			select="(sse:archive[@name='AM2_CPU'] | sse:archive[@name='AM2_BLIT'])//*[@name = 'items']/*/*" />

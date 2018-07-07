@@ -5,18 +5,24 @@
 	xmlns:str="http://exslt.org/strings"
 	extension-element-prefixes="str">
 
-	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.stable" />
 	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.extract" />
-
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.dictionary" />
+	
+	<xsl:template match="/*">
+		<amberdata version="0.1">
+			<xsl:apply-templates select="*/sse:savegame.editor" />
+		</amberdata>
+	</xsl:template>
+	
 	<xsl:template match="sse:savegame.editor">
-		<xsl:variable name="monsters" select="sse:archive[@name='Monster_char_data.amb']/*" />
-		<xsl:if test="count($monsters)">
-			<xsl:variable name="categories" select="saa:getDictionary('monster-images')" />
+		<xsl:variable name="characters" select="sse:archive[@name='Monster_char_data.amb']/*" />
+		<xsl:if test="count($characters)">
 			<saa:monster-list>
+				<xsl:variable name="categories" select="saa:getDictionary('monster-images')" />
 				<xsl:for-each select="$categories">
 					<xsl:variable name="category" select="." />
 					<saa:monster-category name="{@val}">
-						<xsl:for-each select="$monsters">
+						<xsl:for-each select="$characters">
 							<xsl:if test=".//*[@name = 'gfx-id']/@value = $category/@key">
 								<xsl:call-template name="extract-monster">
 									<xsl:with-param name="id" select="position()" />
@@ -32,33 +38,24 @@
 	<xsl:template name="extract-monster">
 		<xsl:param name="root" select="." />
 		<xsl:param name="id" />
-		<saa:monster id="{$id}" image-id="{.//*[@name='gfx-id']/@value}" attack="{*[@name = 'attack']/@value + *[@name = 'combat-attack']/@value}"
-			defense="{*[@name = 'defense']/@value + *[@name = 'combat-defense']/@value}">
-			<xsl:apply-templates select=".//*[@name = 'name']" mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'level']" mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'attacks-per-round']" mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'gold']" mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'food']" mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'combat-experience']" mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'magic-attack']" mode="attr" />
-			<xsl:apply-templates select=".//*[@name = 'magic-defense']" mode="attr" />
-			<xsl:for-each select=".//*[@name = 'monster-type']/*[@value]">
-				<xsl:attribute name="is-{saa:getName()}" />
-			</xsl:for-each>
+		<saa:monster image-id="{.//*[@name='gfx-id']/@value}">
+			<xsl:call-template name="extract-character">
+				<xsl:with-param name="root" select="$root" />
+				<xsl:with-param name="id" select="$id" />
+				<xsl:with-param name="dialog" select="/.." />
+			</xsl:call-template>
+			
 			<saa:race>
 				<xsl:apply-templates select=".//*[@name = 'race']" mode="attr">
 					<xsl:with-param name="name" select="'name'" />
-				</xsl:apply-templates>
-				<xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'current']" mode="attr">
-					<xsl:with-param name="name" select="'current-age'" />
-				</xsl:apply-templates>
-				<xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'maximum']" mode="attr">
-					<xsl:with-param name="name" select="'maximum-age'" />
 				</xsl:apply-templates>
 				<xsl:for-each select=".//*[@name = 'attributes']/*">
 					<saa:attribute name="{saa:getName()}"
 						current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}" maximum="{*[@name = 'current']/@value}" />
 				</xsl:for-each>
+			
+				<xsl:variable name="age" select=".//*[@name = 'age']/*"/>
+				<saa:age current="{$age[@name='current']/@value}" maximum="{$age[@name='current']/@value}"/>
 			</saa:race>
 			<saa:class>
 				<xsl:apply-templates select=".//*[@name = 'name']" mode="attr">
@@ -70,14 +67,21 @@
 				<xsl:apply-templates select=".//*[@name = 'sp-per-level']" mode="attr" />
 				<xsl:apply-templates select=".//*[@name = 'tp-per-level']" mode="attr" />
 				<xsl:apply-templates select=".//*[@name = 'slp-per-level']" mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'combat-experience']" mode="attr">
+					<xsl:with-param name="name" select="'experience'" />
+				</xsl:apply-templates>
 				<xsl:for-each select=".//*[@name = 'skills']/*">
 					<saa:skill name="{saa:getName()}" current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}"
 						maximum="{*[@name = 'current']/@value}" />
 				</xsl:for-each>
+		
+				<xsl:variable name="hp" select="*[@name = 'hit-points']/*"/>
+				<saa:hp current="{$hp[@name='current']/@value}" maximum="{$hp[@name='current']/@value + $hp[@name='maximum-mod']/@value}"/>
+				
+				<xsl:variable name="sp" select="*[@name = 'spell-points']/*"/>
+				<saa:sp current="{$sp[@name='current']/@value}" maximum="{$sp[@name='current']/@value + $sp[@name='maximum-mod']/@value}"/>
 			</saa:class>
-			<xsl:call-template name="extract-equipment" />
-			<xsl:call-template name="extract-inventory" />
-			<xsl:call-template name="extract-spellbook" />
+			
 			<xsl:for-each select="(.//*[@name = 'gfx'])[1]">
 				<xsl:call-template name="extract-gfx" >
 					<xsl:with-param name="id" select="$id" />

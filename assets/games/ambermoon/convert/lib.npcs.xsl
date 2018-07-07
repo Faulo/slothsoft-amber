@@ -1,0 +1,58 @@
+<xsl:stylesheet version="1.0" 
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
+	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
+	xmlns:str="http://exslt.org/strings"
+	extension-element-prefixes="str">
+
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.dictionary" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.extract" />
+	
+	<xsl:template match="/*">
+		<amberdata version="0.1">
+			<xsl:apply-templates select="*/sse:savegame.editor" />
+		</amberdata>
+	</xsl:template>
+	
+	<xsl:template match="sse:savegame.editor">
+		<xsl:variable name="characters" select="sse:archive[@name='NPC_char.amb']/*" />
+		<xsl:variable name="dialog" select="sse:archive[@name='NPC_texts.amb']/*" />
+		<xsl:if test="count($characters)">
+			<saa:npc-list>
+				<xsl:variable name="categories" select="saa:getDictionary('classes')" />
+				<xsl:for-each select="$categories">
+					<xsl:variable name="category" select="." />
+					<saa:npc-category name="{@val}">
+						<xsl:for-each select="$characters">
+							<xsl:if test=".//*[@name='class']/@value = $category/@key">
+								<xsl:call-template name="extract-npc">
+									<xsl:with-param name="id" select="position()" />
+									<xsl:with-param name="dialog" select="$dialog[@file-name = current()/@file-name]" />
+								</xsl:call-template>
+							</xsl:if>
+						</xsl:for-each>
+					</saa:npc-category>
+				</xsl:for-each>
+			</saa:npc-list>
+		</xsl:if>
+	</xsl:template>
+	
+	<xsl:template name="extract-npc">
+		<xsl:param name="root" select="." />
+		<xsl:param name="id" />
+		<xsl:param name="dialog" select="/.." />
+		<saa:npc>
+			<xsl:call-template name="extract-character">
+				<xsl:with-param name="root" select="$root" />
+				<xsl:with-param name="id" select="$id" />
+				<xsl:with-param name="dialog" select="$dialog" />
+			</xsl:call-template>
+			<xsl:call-template name="extract-race">
+				<xsl:with-param name="root" select="$root" />
+			</xsl:call-template>
+			<xsl:call-template name="extract-class">
+				<xsl:with-param name="root" select="$root" />
+			</xsl:call-template>
+		</saa:npc>
+	</xsl:template>
+</xsl:stylesheet>

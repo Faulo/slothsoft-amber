@@ -5,14 +5,7 @@
 	xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
 
-	<xsl:variable name="dataDocument" select="/*/*/sse:savegame.editor" />
 	<xsl:variable name="dictionaryDocument" select="/*/*/saa:amberdata" />
-
-	<xsl:template match="/">
-		<amberdata version="0.1">
-			<xsl:apply-templates select="$dataDocument" />
-		</amberdata>
-	</xsl:template>
 
 	<xsl:key name="dictionary-option" match="saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option"
 		use="../@dictionary-id" />
@@ -56,31 +49,5 @@
 			</xsl:otherwise>
 		</xsl:choose>
 	</func:function>
-
-	<xsl:template match="sse:integer | sse:signed-integer | sse:string" mode="attr">
-		<xsl:param name="name" select="@name" />
-		<xsl:param name="value" select="@value" />
-		<xsl:attribute name="{$name}"><xsl:value-of select="normalize-space($value)" /></xsl:attribute>
-	</xsl:template>
-
-	<xsl:template match="sse:select" mode="attr">
-		<xsl:param name="name" select="@name" />
-		<xsl:variable name="option" select="saa:getDictionaryOption(@dictionary-ref, @value)" />
-		<xsl:attribute name="{$name}">
-			<xsl:value-of select="$option/@title | $option/@val[not($option/@title)]" />
-		</xsl:attribute>
-	</xsl:template>
-
-	<xsl:template match="sse:group" mode="unknown">
-		<unknown>
-			<xsl:for-each select="*">
-				<xsl:if test="position() &gt; 1">
-					<xsl:text> </xsl:text>
-				</xsl:if>
-				<xsl:value-of select="@value" />
-				<!-- <xsl:value-of select="str:align(@value, '000', 'right')"/> -->
-			</xsl:for-each>
-		</unknown>
-	</xsl:template>
 
 </xsl:stylesheet>

@@ -2,22 +2,29 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\ServerEnvironment;
 use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Slothsoft\Core\IO\Writable\Decorators\ChunkWriterFileCache;
 use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunkWriterDelegate;
+use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
+use Slothsoft\Farah\Module\Asset\AssetInterface;
+use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
+use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface;
+use Slothsoft\Savegame\Editor;
 use SplFileInfo;
 
-class DatasetBuilder extends AbstractResourceBuilder
+class DatasetBuilder implements ExecutableBuilderStrategyInterface
 {
-    protected function processInfoset(string $infosetId): ResultBuilderStrategyInterface
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
     {
-        
-        
-        $game = $this->args->get(DatasetParameterFilter::PARAM_GAME);
-        $version = $this->args->get(DatasetParameterFilter::PARAM_VERSION);
+        $game = $args->get(ResourceParameterFilter::PARAM_GAME);
+        $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
+        $user = $args->get(ResourceParameterFilter::PARAM_USER);
+        $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
         
         $cacheFile = [];
         $cacheFile[] = ServerEnvironment::getCacheDirectory();
@@ -29,26 +36,24 @@ class DatasetBuilder extends AbstractResourceBuilder
         $cacheFile = implode(DIRECTORY_SEPARATOR, $cacheFile);
         $cacheFile = FileInfoFactory::createFromPath($cacheFile);
         
-        $editor = $this->editor;
+        $controller = new EditorController();
+        $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
         
-        $delegate = function() use($editor) {
+        $chunkDelegate = function() use($config) : ChunkWriterInterface {
+            $editor = new Editor($config);
             $editor->loadAllArchives();
             $node = $editor->getSavegameNode();
             return $node->getChunkWriter();
         };
         
-        $writer = new ChunkWriterFromChunkWriterDelegate($delegate);
-        $writer = new ChunkWriterFileCache($writer, $cacheFile, function(SplFileInfo $cacheFile) { return false; });
-        return new ChunkWriterResultBuilder($writer, $cacheFile->getFilename());
+        $shouldRefreshDelegate = function(SplFileInfo $cacheFile) use($config) : bool {
+            return $config->infosetFile->getMTime() > $cacheFile->getMTime();
+        };
+        
+        $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);
+        $writer = new ChunkWriterFileCache($writer, $cacheFile, $shouldRefreshDelegate);
+        $resultBuilder = new ChunkWriterResultBuilder($writer, $cacheFile->getFilename());
+        return new ExecutableStrategies($resultBuilder);
     }
-    protected function processArchive(string $infosetId, string $archiveId): ResultBuilderStrategyInterface
-    {
-        return $this->processInfoset($infosetId);
-    }
-    protected function processFile(string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface
-    {
-        return $this->processArchive($infosetId, $archiveId);
-    }
-
 }
 
