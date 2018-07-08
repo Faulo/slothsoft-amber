@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "39234cad332c8897f5b27784716fbf84",
@@ -421,11 +421,11 @@
         },
         {
             "name": "slothsoft/blob",
-            "version": "9999999-dev",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-blob",
-                "reference": "9182a9244f359248be62df458acd42bd5fb80774",
+                "reference": "ad94b27702921e2b586425d1e83b0c68260e11df",
                 "shasum": null
             },
             "require": {
@@ -470,15 +470,16 @@
         },
         {
             "name": "slothsoft/core",
-            "version": "9999999-dev",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-core",
-                "reference": "ebdc59dfa0b0a1281d115aef81df1dd311ecc16e",
+                "reference": "ebba8ef6ce877ef627ba97b2aa16eef06c247aad",
                 "shasum": null
             },
             "require": {
                 "ext-curl": "*",
+                "guzzlehttp/psr7": "^1.4",
                 "php": "^7.2",
                 "psr/http-message": "^1.0",
                 "slothsoft/w3c": "dev-master"
@@ -520,11 +521,11 @@
         },
         {
             "name": "slothsoft/farah",
-            "version": "9999999-dev",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-farah",
-                "reference": "f15711532533d341f5b59f1bb4853b5700230f0c",
+                "reference": "992b86ebbd0ff04b1d21b2d78c9b7f8f1e0e993b",
                 "shasum": null
             },
             "require": {
@@ -581,11 +582,11 @@
         },
         {
             "name": "slothsoft/savegame",
-            "version": "9999999-dev",
+            "version": "dev-master",
             "dist": {
                 "type": "path",
                 "url": "C:/Webserver/htdocs/workspace/slothsoft-savegame",
-                "reference": "e8fca13baf3933e66251d988697c7f628ead5887",
+                "reference": "5de8376d6eb9cc1e279bf4a9a09687af1066d7c3",
                 "shasum": null
             },
             "require": {
@@ -1349,16 +1350,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.5.8",
+            "version": "6.5.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "4f21a3c6b97c42952fd5c2837bb354ec0199b97b"
+                "reference": "093ca5508174cd8ab8efe44fd1dde447adfdec8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/4f21a3c6b97c42952fd5c2837bb354ec0199b97b",
-                "reference": "4f21a3c6b97c42952fd5c2837bb354ec0199b97b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/093ca5508174cd8ab8efe44fd1dde447adfdec8f",
+                "reference": "093ca5508174cd8ab8efe44fd1dde447adfdec8f",
                 "shasum": ""
             },
             "require": {
@@ -1429,7 +1430,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-04-10T11:38:34+00:00"
+            "time": "2018-07-03T06:40:40+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
