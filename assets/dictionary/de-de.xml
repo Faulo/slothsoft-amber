@@ -765,15 +765,35 @@
 
 	<p key="description:Ambermoon">
 		<article>
-			<h2>Introduction</h2>
-			<p>Ambermoon is German RRG which was developed by Thalion Software
-				and released in 1993 for the Amiga.</p>
-			<p>It was one of the first video games Daniel encountered as a child
-				(and the first RPG for a long time), and the fond memories he still
-				holds of it is what compelled him to create the savegame editor
-				you'll find here.</p>
-			<p>It's not finished yet (and might never be) and not very thoroughly
-				tested, so don't expect much. :'&gt;</p>
+			<h2>Ambermoon Editor</h2>
+			<p>
+				Ambermoon (1993, Thalion Software) ist ein deutsches Rollenspiel für den Amiga.
+				Es war eines der ersten Spiele die ich in meinem Leben gespielt habe, und es hat seitdem einen Platz in meinem Herzen.
+			</p>
+			<p>
+				Dieser Editor erlaubt es, Spielstände (d.h. Charaktere und Spielfortschritt) 
+				und Spieldaten (Level, Gegner, NPCs, Gegenstände) zu bearbeiten und damit Ambermoon fast vollständig zu modden.
+				Er befindet sich in aktiver Entwicklung und hat als nächsten Meilenstein, einen Browser-Client
+				bereit zu stellen der die Daten so auswertet und anzeigt wie das Originalspiel es tut, d.h., eine Portierung des Spiels
+				von Assembler zu JavaScript (natürlich ohne den originalen Quellcode zu besitzen).
+			</p>
+			<p>
+				Entwickelt wurde er, in dem die Spieldateien von Ambermoon in einem Hex-Editor geöffnet und schlichtweg geraten wurde,
+				welches Byte wohl welche Funktion haben könnte. Die Verarbeitung erfolgt in PHP über mehrere selbstentwickelte XML-Formate,
+				der Editor basiert auf HTML/JavaScript.
+			</p>
+			<p >
+				<figure>
+					<img src="/getAsset.php/slothsoft@amber/static/screenshots/character-editor" alt="Screenshot"/>
+					<figcaption>Ein Ausschnitt aus dem Spielstand-Editor, für eines der möglichen Partymitglieder.</figcaption>
+				</figure>
+			</p>
+			<p >
+				<figure>
+					<img src="/getAsset.php/slothsoft@amber/static/screenshots/map-editor" alt="Screenshot"/>
+					<figcaption>Ein Ausschnitt aus dem Level-Editor, für eine der 2D-Karten.</figcaption>
+				</figure>
+			</p>
 		</article>
 	</p>
 	<p key="description:Thalion-v1.05-DE">

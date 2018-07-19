@@ -3,7 +3,7 @@
 	xmlns="http://schema.slothsoft.net/savegame/editor"
 	xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/global.dev" xpointer="xpointer(/*/*)" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/global.stable" xpointer="xpointer(/*/*)" />
 	
 	<archive path="Amberfiles/NPC_char.amb" type="AMBR">
 		<for-each-file>

@@ -60,7 +60,7 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface
         $editor->load();
         $editor->parseRequest($request);
         
-        $resultBuilder = new DOMWriterResultBuilder($editor);
+        $resultBuilder = new DOMWriterResultBuilder($editor, 'editor.xml');
         return new ExecutableStrategies($resultBuilder);
     }
 }

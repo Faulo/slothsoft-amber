@@ -149,6 +149,9 @@
 		</fragment>
 	</fragment>
 
+	<directory name="static">
+		<resource-directory name="screenshots" type="image/png"/>
+	</directory>
 
 
 
