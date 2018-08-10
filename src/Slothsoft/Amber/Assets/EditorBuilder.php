@@ -53,7 +53,7 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface
             }
             
             if ($action === 'download') {
-                $resultBuilder = new FileWriterResultBuilder($archive);
+                $resultBuilder = new FileWriterResultBuilder($archive, $archive->getArchiveId());
                 $strategies = new ExecutableStrategies($resultBuilder);
                 throw new HttpDownloadAssetException($strategies);
             }

@@ -1,1214 +1,958 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-<meta charset="utf-8" />
-<title>&raquo; Compilation errors</title>
-<meta name="author" content="" />
-<meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>     &raquo; Compilation errors
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
 
-<link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-<link href="../css/font-awesome.min.css" rel="stylesheet">
-<link href="../css/prism.css" rel="stylesheet" media="all" />
-<link href="../css/template.css" rel="stylesheet" media="all" />
-
-<!--[if lt IE 9]>
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
     <script src="../js/html5.js"></script>
     <![endif]-->
-<script src="../js/jquery-1.11.0.min.js"></script>
-<script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/jquery.smooth-scroll.js"></script>
-<script src="../js/prism.min.js"></script>
-<!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-
-<link rel="shortcut icon" href="../images/favicon.ico" />
-<link rel="apple-touch-icon" href="../images/apple-touch-icon.png" />
-<link rel="apple-touch-icon" sizes="72x72"
-	href="../images/apple-touch-icon-72x72.png" />
-<link rel="apple-touch-icon" sizes="114x114"
-	href="../images/apple-touch-icon-114x114.png" />
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
 </head>
 <body>
 
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<div class="container">
-				<a class="btn btn-navbar" data-toggle="collapse"
-					data-target=".nav-collapse"> <i class="icon-ellipsis-vertical"></i>
-				</a> <a class="brand" href="../index.html">API Documentation</a>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
 
-				<div class="nav-collapse">
-					<ul class="nav pull-right">
-						<li class="dropdown"><a href="../index.html"
-							class="dropdown-toggle" data-toggle="dropdown"> API
-								Documentation <b class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="../namespaces/Slothsoft.html">\Slothsoft</a></li>
-							</ul></li>
-						<li class="dropdown" id="charts-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> Charts <b
-								class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="../graphs/class.html"> <i
-										class="icon-list-alt"></i>&#160;Class hierarchy diagram
-								</a></li>
-							</ul></li>
-						<li class="dropdown" id="reports-menu"><a href="#"
-							class="dropdown-toggle" data-toggle="dropdown"> Reports <b
-								class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="../reports/errors.html"> <i
-										class="icon-list-alt"></i>&#160;Errors <span
-										class="label label-info pull-right">121</span>
-								</a></li>
-								<li><a href="../reports/markers.html"> <i
-										class="icon-list-alt"></i>&#160;Markers <span
-										class="label label-info pull-right">0</span>
-								</a></li>
-								<li><a href="../reports/deprecated.html"> <i
-										class="icon-list-alt"></i>&#160;Deprecated <span
-										class="label label-info pull-right">0</span>
-								</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!--<div class="go_to_top">-->
-		<!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
-		<!--</div>-->
-	</div>
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/Slothsoft.html">\Slothsoft</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">94</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
 
-	<div id="___" class="container-fluid">
-		<section class="row-fluid">
-			<div class="span2 sidebar">
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
 
-				<ul class="side-nav nav nav-list">
-					<li class="nav-header">Navigation</li>
-					<li><a href="#Slothsoft\Amber\Controller\EditorController.php"><i
-							class="icon-file"></i>
-							Slothsoft\Amber\Controller\EditorController.php</a></li>
-					<li><a
-						href="#Slothsoft\Amber\ResourceAssets\AmberdataParameterFilter.php"><i
-							class="icon-file"></i>
-							Slothsoft\Amber\ResourceAssets\AmberdataParameterFilter.php</a></li>
-					<li><a
-						href="#Slothsoft\Amber\ResourceAssets\DatasetBuilder.php"><i
-							class="icon-file"></i>
-							Slothsoft\Amber\ResourceAssets\DatasetBuilder.php</a></li>
-					<li><a href="#Slothsoft\Amber\ModResourceLocator.php"><i
-							class="icon-file"></i> Slothsoft\Amber\ModResourceLocator.php</a></li>
-					<li><a href="#Slothsoft\Amber\ModController.php"><i
-							class="icon-file"></i> Slothsoft\Amber\ModController.php</a></li>
-					<li><a
-						href="#Slothsoft\Amber\ResourceAssets\AmberdataBuilder.php"><i
-							class="icon-file"></i>
-							Slothsoft\Amber\ResourceAssets\AmberdataBuilder.php</a></li>
-					<li><a href="#Slothsoft\Amber\GraphicsManager.php"><i
-							class="icon-file"></i> Slothsoft\Amber\GraphicsManager.php</a></li>
-					<li><a
-						href="#Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php"><i
-							class="icon-file"></i>
-							Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php</a></li>
-					<li><a
-						href="#Slothsoft\Amber\ResourceAssets\DatasetParameterFilter.php"><i
-							class="icon-file"></i>
-							Slothsoft\Amber\ResourceAssets\DatasetParameterFilter.php</a></li>
-					<li><a href="#Slothsoft\Amber\ModResource.php"><i
-							class="icon-file"></i> Slothsoft\Amber\ModResource.php</a></li>
-					<li><a
-						href="#Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php"><i
-							class="icon-file"></i>
-							Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php</a></li>
-					<li><a href="#Slothsoft\Amber\ArchiveManager.php"><i
-							class="icon-file"></i> Slothsoft\Amber\ArchiveManager.php</a></li>
-					<li><a href="#Slothsoft\Amber\CLI\AmbGfx.php"><i
-							class="icon-file"></i> Slothsoft\Amber\CLI\AmbGfx.php</a></li>
-					<li><a href="#Slothsoft\Amber\CLI\AmbTool.php"><i
-							class="icon-file"></i> Slothsoft\Amber\CLI\AmbTool.php</a></li>
-					<li><a
-						href="#Slothsoft\Amber\ResourceAssets\AbstractParameterFilter.php"><i
-							class="icon-file"></i>
-							Slothsoft\Amber\ResourceAssets\AbstractParameterFilter.php</a></li>
-					<li><a href="#registerModule.php"><i class="icon-file"></i>
-							registerModule.php</a></li>
-				</ul>
-			</div>
+            <ul class="side-nav nav nav-list">
+                <li class="nav-header">Navigation</li>
+                                                                            <li><a href="#Slothsoft\Amber\Controller\EditorController.php"><i class="icon-file"></i> Slothsoft\Amber\Controller\EditorController.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php"><i class="icon-file"></i> Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php"><i class="icon-file"></i> Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\CLI\AmbGfx.php"><i class="icon-file"></i> Slothsoft\Amber\CLI\AmbGfx.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\CLI\AmbTool.php"><i class="icon-file"></i> Slothsoft\Amber\CLI\AmbTool.php</a></li>
+                                                                                                    <li><a href="#registerModule.php"><i class="icon-file"></i> registerModule.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\AmberUser.php"><i class="icon-file"></i> Slothsoft\Amber\AmberUser.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\Assets\AmberdataBuilder.php"><i class="icon-file"></i> Slothsoft\Amber\Assets\AmberdataBuilder.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\Assets\DatasetBuilder.php"><i class="icon-file"></i> Slothsoft\Amber\Assets\DatasetBuilder.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\Assets\EditorBuilder.php"><i class="icon-file"></i> Slothsoft\Amber\Assets\EditorBuilder.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\Assets\GfxBuilder.php"><i class="icon-file"></i> Slothsoft\Amber\Assets\GfxBuilder.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\Assets\StylesheetBuilder.php"><i class="icon-file"></i> Slothsoft\Amber\Assets\StylesheetBuilder.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\ParameterFilters\EditorParameterFilter.php"><i class="icon-file"></i> Slothsoft\Amber\ParameterFilters\EditorParameterFilter.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\ParameterFilters\GfxParameterFilter.php"><i class="icon-file"></i> Slothsoft\Amber\ParameterFilters\GfxParameterFilter.php</a></li>
+                                                                                                    <li><a href="#Slothsoft\Amber\ParameterFilters\ResourceParameterFilter.php"><i class="icon-file"></i> Slothsoft\Amber\ParameterFilters\ResourceParameterFilter.php</a></li>
+                                                                    </ul>
+        </div>
 
-			<div class="span10 offset2">
-				<ul class="breadcrumb">
-					<li><a href="../"><i class="icon-remove-sign"></i></a><span
-						class="divider">\</span></li>
-					<li>Compilation Errors</li>
-				</ul>
+        <div class="span10 offset2">
+            <ul class="breadcrumb">
+                <li><a href="../"><i class="icon-remove-sign"></i></a><span class="divider">\</span></li>
+                <li>Compilation Errors</li>
+            </ul>
 
+            
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\Controller\EditorController.php" id="Slothsoft\Amber\Controller\EditorController.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\Controller\EditorController.php
+                            <small style="float: right;padding-right: 10px;">11</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>18</td>
+                                        <td>No summary for class \Slothsoft\Amber\Controller\EditorController</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>21</td>
+                                        <td>Argument $game is missing from the Docblock of createEditorConfig</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>21</td>
+                                        <td>Argument $version is missing from the Docblock of createEditorConfig</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>21</td>
+                                        <td>Argument $user is missing from the Docblock of createEditorConfig</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>21</td>
+                                        <td>Argument $infoset is missing from the Docblock of createEditorConfig</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>21</td>
+                                        <td>No summary for method createEditorConfig()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>44</td>
+                                        <td>Argument $config is missing from the Docblock of createEditor</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>44</td>
+                                        <td>No summary for method createEditor()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>60</td>
+                                        <td>No summary for method createAmbTool()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>65</td>
+                                        <td>No summary for method createAmbGfx()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php" id="Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php
+                            <small style="float: right;padding-right: 10px;">7</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>13</td>
+                                        <td>No summary for class \Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>18</td>
+                                        <td>Argument $ambtool is missing from the Docblock of __construct</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>18</td>
+                                        <td>No summary for method __construct()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>23</td>
+                                        <td>Argument $archivePath is missing from the Docblock of extractArchive</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>23</td>
+                                        <td>Argument $targetDir is missing from the Docblock of extractArchive</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>23</td>
+                                        <td>No summary for method extractArchive()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php" id="Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php
+                            <small style="float: right;padding-right: 10px;">4</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>7</td>
+                                        <td>No summary for class \Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>10</td>
+                                        <td>Argument $buildChildren is missing from the Docblock of buildArchive</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>10</td>
+                                        <td>No summary for method buildArchive()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\CLI\AmbGfx.php" id="Slothsoft\Amber\CLI\AmbGfx.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\CLI\AmbGfx.php
+                            <small style="float: right;padding-right: 10px;">13</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>9</td>
+                                        <td>No summary for class \Slothsoft\Amber\CLI\AmbGfx</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>14</td>
+                                        <td>Argument $ambgfxPath is missing from the Docblock of __construct</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>14</td>
+                                        <td>No summary for method __construct()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>Argument $inFile is missing from the Docblock of extractTga</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>Argument $outFile is missing from the Docblock of extractTga</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>Argument $width is missing from the Docblock of extractTga</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>Argument $bitplanes is missing from the Docblock of extractTga</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>Argument $offset is missing from the Docblock of extractTga</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>Argument $size is missing from the Docblock of extractTga</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>Argument $palette is missing from the Docblock of extractTga</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>Argument $firstColor is missing from the Docblock of extractTga</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>30</td>
+                                        <td>No summary for method extractTga()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\CLI\AmbTool.php" id="Slothsoft\Amber\CLI\AmbTool.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\CLI\AmbTool.php
+                            <small style="float: right;padding-right: 10px;">9</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>9</td>
+                                        <td>No summary for class \Slothsoft\Amber\CLI\AmbTool</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>22</td>
+                                        <td>Argument $ambtoolPath is missing from the Docblock of __construct</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>22</td>
+                                        <td>No summary for method __construct()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>38</td>
+                                        <td>Argument $archivePath is missing from the Docblock of inspectArchive</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>38</td>
+                                        <td>No summary for method inspectArchive()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>55</td>
+                                        <td>Argument $archivePath is missing from the Docblock of extractArchive</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>55</td>
+                                        <td>Argument $targetDir is missing from the Docblock of extractArchive</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>55</td>
+                                        <td>No summary for method extractArchive()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="registerModule.php" id="registerModule.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            registerModule.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\AmberUser.php" id="Slothsoft\Amber\AmberUser.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\AmberUser.php
+                            <small style="float: right;padding-right: 10px;">3</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>4</td>
+                                        <td>No summary for class \Slothsoft\Amber\AmberUser</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>10</td>
+                                        <td>No summary for method getId()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\Assets\AmberdataBuilder.php" id="Slothsoft\Amber\Assets\AmberdataBuilder.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\Assets\AmberdataBuilder.php
+                            <small style="float: right;padding-right: 10px;">5</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>22</td>
+                                        <td>No summary for class \Slothsoft\Amber\Assets\AmberdataBuilder</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>24</td>
+                                        <td>Argument $context is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>24</td>
+                                        <td>Argument $args is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>24</td>
+                                        <td>No summary for method buildExecutableStrategies()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\Assets\DatasetBuilder.php" id="Slothsoft\Amber\Assets\DatasetBuilder.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\Assets\DatasetBuilder.php
+                            <small style="float: right;padding-right: 10px;">5</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>20</td>
+                                        <td>No summary for class \Slothsoft\Amber\Assets\DatasetBuilder</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>22</td>
+                                        <td>Argument $context is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>22</td>
+                                        <td>Argument $args is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>22</td>
+                                        <td>No summary for method buildExecutableStrategies()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\Assets\EditorBuilder.php" id="Slothsoft\Amber\Assets\EditorBuilder.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\Assets\EditorBuilder.php
+                            <small style="float: right;padding-right: 10px;">5</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>17</td>
+                                        <td>No summary for class \Slothsoft\Amber\Assets\EditorBuilder</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>19</td>
+                                        <td>Argument $context is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>19</td>
+                                        <td>Argument $args is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>19</td>
+                                        <td>No summary for method buildExecutableStrategies()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\Assets\GfxBuilder.php" id="Slothsoft\Amber\Assets\GfxBuilder.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\Assets\GfxBuilder.php
+                            <small style="float: right;padding-right: 10px;">17</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>21</td>
+                                        <td>No summary for class \Slothsoft\Amber\Assets\GfxBuilder</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>38</td>
+                                        <td>Argument $context is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>38</td>
+                                        <td>Argument $args is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>38</td>
+                                        <td>No summary for method buildExecutableStrategies()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>69</td>
+                                        <td>Argument $infosetId is missing from the Docblock of processInfoset</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>69</td>
+                                        <td>No summary for method processInfoset()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>73</td>
+                                        <td>Argument $infosetId is missing from the Docblock of processArchive</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>73</td>
+                                        <td>Argument $archiveId is missing from the Docblock of processArchive</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>73</td>
+                                        <td>No summary for method processArchive()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>86</td>
+                                        <td>Argument $infosetId is missing from the Docblock of processFile</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>86</td>
+                                        <td>Argument $archiveId is missing from the Docblock of processFile</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>86</td>
+                                        <td>Argument $fileId is missing from the Docblock of processFile</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>86</td>
+                                        <td>No summary for method processFile()</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>26</td>
+                                        <td>No summary for property $asset</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>31</td>
+                                        <td>No summary for property $args</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>36</td>
+                                        <td>No summary for property $editor</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\Assets\StylesheetBuilder.php" id="Slothsoft\Amber\Assets\StylesheetBuilder.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\Assets\StylesheetBuilder.php
+                            <small style="float: right;padding-right: 10px;">5</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>16</td>
+                                        <td>No summary for class \Slothsoft\Amber\Assets\StylesheetBuilder</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>18</td>
+                                        <td>Argument $context is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>18</td>
+                                        <td>Argument $args is missing from the Docblock of buildExecutableStrategies</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>18</td>
+                                        <td>No summary for method buildExecutableStrategies()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\ParameterFilters\EditorParameterFilter.php" id="Slothsoft\Amber\ParameterFilters\EditorParameterFilter.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\ParameterFilters\EditorParameterFilter.php
+                            <small style="float: right;padding-right: 10px;">3</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>7</td>
+                                        <td>No summary for class \Slothsoft\Amber\ParameterFilters\EditorParameterFilter</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>11</td>
+                                        <td>No summary for method createValueSanitizers()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\ParameterFilters\GfxParameterFilter.php" id="Slothsoft\Amber\ParameterFilters\GfxParameterFilter.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\ParameterFilters\GfxParameterFilter.php
+                            <small style="float: right;padding-right: 10px;">3</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>8</td>
+                                        <td>No summary for class \Slothsoft\Amber\ParameterFilters\GfxParameterFilter</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>18</td>
+                                        <td>No summary for method createValueSanitizers()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter.php" id="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            Slothsoft\Amber\ParameterFilters\ResourceParameterFilter.php
+                            <small style="float: right;padding-right: 10px;">3</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>9</td>
+                                        <td>No summary for class \Slothsoft\Amber\ParameterFilters\ResourceParameterFilter</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>19</td>
+                                        <td>No summary for method createValueSanitizers()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                    </div>
+    </section>
 
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\Controller\EditorController.php"
-						id="Slothsoft\Amber\Controller\EditorController.php"></a>
-					<h3>
-						<i class="icon-file"></i>
-						Slothsoft\Amber\Controller\EditorController.php <small
-							style="float: right; padding-right: 10px;">15</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>16</td>
-									<td>No summary for class
-										\Slothsoft\Amber\Controller\EditorController</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>18</td>
-									<td>Argument $game is missing from the Docblock of
-										createEditorConfig</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>18</td>
-									<td>Argument $version is missing from the Docblock of
-										createEditorConfig</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>18</td>
-									<td>Argument $infoset is missing from the Docblock of
-										createEditorConfig</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>18</td>
-									<td>Argument $user is missing from the Docblock of
-										createEditorConfig</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>18</td>
-									<td>No summary for method createEditorConfig()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>191</td>
-									<td>Argument $game is missing from the Docblock of
-										createEditorConfigOLD</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>191</td>
-									<td>Argument $mod is missing from the Docblock of
-										createEditorConfigOLD</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>191</td>
-									<td>Argument $preset is missing from the Docblock of
-										createEditorConfigOLD</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>191</td>
-									<td>Argument $saveMode is missing from the Docblock of
-										createEditorConfigOLD</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>191</td>
-									<td>Argument $saveId is missing from the Docblock of
-										createEditorConfigOLD</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>191</td>
-									<td>No summary for method createEditorConfigOLD()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>218</td>
-									<td>Argument $editorConfig is missing from the Docblock of
-										createEditor</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>218</td>
-									<td>No summary for method createEditor()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a
-						name="Slothsoft\Amber\ResourceAssets\AmberdataParameterFilter.php"
-						id="Slothsoft\Amber\ResourceAssets\AmberdataParameterFilter.php"></a>
-					<h3>
-						<i class="icon-file"></i>
-						Slothsoft\Amber\ResourceAssets\AmberdataParameterFilter.php <small
-							style="float: right; padding-right: 10px;">2</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>5</td>
-									<td>No summary for class
-										\Slothsoft\Amber\ResourceAssets\AmberdataParameterFilter</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\ResourceAssets\DatasetBuilder.php"
-						id="Slothsoft\Amber\ResourceAssets\DatasetBuilder.php"></a>
-					<h3>
-						<i class="icon-file"></i>
-						Slothsoft\Amber\ResourceAssets\DatasetBuilder.php <small
-							style="float: right; padding-right: 10px;">5</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>12</td>
-									<td>No summary for class
-										\Slothsoft\Amber\ResourceAssets\DatasetBuilder</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>14</td>
-									<td>Argument $context is missing from the Docblock of
-										buildExecutableStrategies</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>14</td>
-									<td>Argument $args is missing from the Docblock of
-										buildExecutableStrategies</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>14</td>
-									<td>No summary for method buildExecutableStrategies()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\ModResourceLocator.php"
-						id="Slothsoft\Amber\ModResourceLocator.php"></a>
-					<h3>
-						<i class="icon-file"></i> Slothsoft\Amber\ModResourceLocator.php <small
-							style="float: right; padding-right: 10px;">12</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>5</td>
-									<td>No summary for class
-										\Slothsoft\Amber\ModResourceLocator</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>89</td>
-									<td>Argument $moduleDir is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>89</td>
-									<td>Argument $game is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>89</td>
-									<td>Argument $mod is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>89</td>
-									<td>No summary for method __construct()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>106</td>
-									<td>No summary for method getResource()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>111</td>
-									<td>Argument $id is missing from the Docblock of
-										getResourceById</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>111</td>
-									<td>No summary for method getResourceById()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>118</td>
-									<td>Argument $id is missing from the Docblock of
-										setResourceContentsById</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>118</td>
-									<td>Argument $contents is missing from the Docblock of
-										setResourceContentsById</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>118</td>
-									<td>No summary for method setResourceContentsById()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\ModController.php"
-						id="Slothsoft\Amber\ModController.php"></a>
-					<h3>
-						<i class="icon-file"></i> Slothsoft\Amber\ModController.php <small
-							style="float: right; padding-right: 10px;">20</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>20</td>
-									<td>No summary for class \Slothsoft\Amber\ModController</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>33</td>
-									<td>Argument $moduleDir is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>33</td>
-									<td>No summary for method __construct()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>40</td>
-									<td>Argument $args is missing from the Docblock of
-										defaultAction</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>40</td>
-									<td>No summary for method defaultAction()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>56</td>
-									<td>Argument $args is missing from the Docblock of
-										resourceAction</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>56</td>
-									<td>No summary for method resourceAction()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>73</td>
-									<td>Argument $args is missing from the Docblock of
-										editorAction</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>73</td>
-									<td>No summary for method editorAction()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>253</td>
-									<td>Argument $args is missing from the Docblock of
-										createEditorAction</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>253</td>
-									<td>No summary for method createEditorAction()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>312</td>
-									<td>Argument $args is missing from the Docblock of
-										createLibraryAction</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>312</td>
-									<td>No summary for method createLibraryAction()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>348</td>
-									<td>Argument $args is missing from the Docblock of
-										createStyleAction</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>348</td>
-									<td>No summary for method createStyleAction()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>524</td>
-									<td>Argument $args is missing from the Docblock of
-										installAction</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>524</td>
-									<td>No summary for method installAction()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>731</td>
-									<td>No summary for method createArchiveExtractors()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>746</td>
-									<td>No summary for method createArchiveBuilders()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\ResourceAssets\AmberdataBuilder.php"
-						id="Slothsoft\Amber\ResourceAssets\AmberdataBuilder.php"></a>
-					<h3>
-						<i class="icon-file"></i>
-						Slothsoft\Amber\ResourceAssets\AmberdataBuilder.php <small
-							style="float: right; padding-right: 10px;">5</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>15</td>
-									<td>No summary for class
-										\Slothsoft\Amber\ResourceAssets\AmberdataBuilder</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>17</td>
-									<td>Argument $context is missing from the Docblock of
-										buildExecutableStrategies</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>17</td>
-									<td>Argument $args is missing from the Docblock of
-										buildExecutableStrategies</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>17</td>
-									<td>No summary for method buildExecutableStrategies()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\GraphicsManager.php"
-						id="Slothsoft\Amber\GraphicsManager.php"></a>
-					<h3>
-						<i class="icon-file"></i> Slothsoft\Amber\GraphicsManager.php <small
-							style="float: right; padding-right: 10px;">8</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>7</td>
-									<td>No summary for class \Slothsoft\Amber\GraphicsManager</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>12</td>
-									<td>Argument $ambgfxPath is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>12</td>
-									<td>No summary for method __construct()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>19</td>
-									<td>Argument $sourceFile is missing from the Docblock of
-										convertGraphic</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>19</td>
-									<td>Argument $targetFile is missing from the Docblock of
-										convertGraphic</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>19</td>
-									<td>Argument $options is missing from the Docblock of
-										convertGraphic</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>19</td>
-									<td>No summary for method convertGraphic()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a
-						name="Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php"
-						id="Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php"></a>
-					<h3>
-						<i class="icon-file"></i>
-						Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor.php
-						<small style="float: right; padding-right: 10px;">7</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>11</td>
-									<td>No summary for class
-										\Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>16</td>
-									<td>Argument $ambtool is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>16</td>
-									<td>No summary for method __construct()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>21</td>
-									<td>Argument $archivePath is missing from the Docblock of
-										extractArchive</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>21</td>
-									<td>Argument $targetDir is missing from the Docblock of
-										extractArchive</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>21</td>
-									<td>No summary for method extractArchive()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\ResourceAssets\DatasetParameterFilter.php"
-						id="Slothsoft\Amber\ResourceAssets\DatasetParameterFilter.php"></a>
-					<h3>
-						<i class="icon-file"></i>
-						Slothsoft\Amber\ResourceAssets\DatasetParameterFilter.php <small
-							style="float: right; padding-right: 10px;">2</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>5</td>
-									<td>No summary for class
-										\Slothsoft\Amber\ResourceAssets\DatasetParameterFilter</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\ModResource.php"
-						id="Slothsoft\Amber\ModResource.php"></a>
-					<h3>
-						<i class="icon-file"></i> Slothsoft\Amber\ModResource.php <small
-							style="float: right; padding-right: 10px;">13</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>8</td>
-									<td>No summary for class \Slothsoft\Amber\ModResource</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>62</td>
-									<td>No summary for method createFromMod()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>171</td>
-									<td>Argument $filePath is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>171</td>
-									<td>Argument $fileName is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>171</td>
-									<td>Argument $url is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>171</td>
-									<td>No summary for method __construct()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>177</td>
-									<td>No summary for method getUrl()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>182</td>
-									<td>No summary for method getChangeTime()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>187</td>
-									<td>Argument $content is missing from the Docblock of
-										setContents</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>187</td>
-									<td>No summary for method setContents()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>193</td>
-									<td>No summary for method ensureDirectory()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>51</td>
-									<td>No summary for property $url</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a
-						name="Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php"
-						id="Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php"></a>
-					<h3>
-						<i class="icon-file"></i>
-						Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder.php <small
-							style="float: right; padding-right: 10px;">4</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>7</td>
-									<td>No summary for class
-										\Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>10</td>
-									<td>Argument $buildChilren is missing from the Docblock of
-										buildArchive</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>10</td>
-									<td>No summary for method buildArchive()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\ArchiveManager.php"
-						id="Slothsoft\Amber\ArchiveManager.php"></a>
-					<h3>
-						<i class="icon-file"></i> Slothsoft\Amber\ArchiveManager.php <small
-							style="float: right; padding-right: 10px;">9</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>8</td>
-									<td>No summary for class \Slothsoft\Amber\ArchiveManager</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>15</td>
-									<td>Argument $ambtoolPath is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>15</td>
-									<td>No summary for method __construct()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>22</td>
-									<td>Argument $archivePath is missing from the Docblock of
-										inspectArchive</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>22</td>
-									<td>No summary for method inspectArchive()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>40</td>
-									<td>Argument $archivePath is missing from the Docblock of
-										extractArchive</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>40</td>
-									<td>Argument $targetDir is missing from the Docblock of
-										extractArchive</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>40</td>
-									<td>No summary for method extractArchive()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\CLI\AmbGfx.php"
-						id="Slothsoft\Amber\CLI\AmbGfx.php"></a>
-					<h3>
-						<i class="icon-file"></i> Slothsoft\Amber\CLI\AmbGfx.php <small
-							style="float: right; padding-right: 10px;">7</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>5</td>
-									<td>No summary for class \Slothsoft\Amber\CLI\AmbGfx</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>10</td>
-									<td>Argument $ambgfxPath is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>10</td>
-									<td>No summary for method __construct()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>17</td>
-									<td>Argument $file is missing from the Docblock of exec</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>17</td>
-									<td>Argument $args is missing from the Docblock of exec</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>17</td>
-									<td>No summary for method exec()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="Slothsoft\Amber\CLI\AmbTool.php"
-						id="Slothsoft\Amber\CLI\AmbTool.php"></a>
-					<h3>
-						<i class="icon-file"></i> Slothsoft\Amber\CLI\AmbTool.php <small
-							style="float: right; padding-right: 10px;">8</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>5</td>
-									<td>No summary for class \Slothsoft\Amber\CLI\AmbTool</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>18</td>
-									<td>Argument $ambtoolPath is missing from the Docblock of
-										__construct</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>18</td>
-									<td>No summary for method __construct()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>25</td>
-									<td>Argument $args is missing from the Docblock of exec</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>25</td>
-									<td>No summary for method exec()</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>35</td>
-									<td>Argument $archivePath is missing from the Docblock of
-										inspectArchive</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>35</td>
-									<td>No summary for method inspectArchive()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a
-						name="Slothsoft\Amber\ResourceAssets\AbstractParameterFilter.php"
-						id="Slothsoft\Amber\ResourceAssets\AbstractParameterFilter.php"></a>
-					<h3>
-						<i class="icon-file"></i>
-						Slothsoft\Amber\ResourceAssets\AbstractParameterFilter.php <small
-							style="float: right; padding-right: 10px;">3</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>7</td>
-									<td>No summary for class
-										\Slothsoft\Amber\ResourceAssets\AbstractParameterFilter</td>
-								</tr>
-								<tr>
-									<td>error</td>
-									<td>17</td>
-									<td>No summary for method loadMap()</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="package-contents">
-					<a name="registerModule.php" id="registerModule.php"></a>
-					<h3>
-						<i class="icon-file"></i> registerModule.php <small
-							style="float: right; padding-right: 10px;">1</small>
-					</h3>
-					<div>
-						<table class="table markers table-bordered">
-							<thead>
-								<tr>
-									<th>Type</th>
-									<th>Line</th>
-									<th>Description</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>error</td>
-									<td>0</td>
-									<td>No summary was found for this file</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<footer class="row-fluid">
-			<section class="span10 offset2">
-				<section class="row-fluid">
-					<section class="span10 offset1">
-						<section class="row-fluid footer-sections">
-							<section class="span4">
-								<h1>
-									<i class="icon-code"></i>
-								</h1>
-								<div>
-									<ul>
-										<li><a href="../namespaces/Slothsoft.html">\Slothsoft</a></li>
-									</ul>
-								</div>
-							</section>
-							<section class="span4">
-								<h1>
-									<i class="icon-bar-chart"></i>
-								</h1>
-								<div>
-									<ul>
-										<li><a href="../graphs/class.html">Class Hierarchy
-												Diagram</a></li>
-									</ul>
-								</div>
-							</section>
-							<section class="span4">
-								<h1>
-									<i class="icon-pushpin"></i>
-								</h1>
-								<div>
-									<ul>
-										<li><a href="../reports/errors.html">Errors</a></li>
-										<li><a href="../reports/markers.html">Markers</a></li>
-									</ul>
-								</div>
-							</section>
-						</section>
-					</section>
-				</section>
-				<section class="row-fluid">
-					<section class="span10 offset1">
-						<hr />
-						Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor
-						</a> and authored on June 23rd, 2018 at 18:10.
-					</section>
-				</section>
-			</section>
-		</footer>
-	</div>
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/Slothsoft.html">\Slothsoft</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on August 10th, 2018 at 12:37.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
 
 </body>
 </html>

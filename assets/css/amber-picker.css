@@ -124,11 +124,11 @@ amber-picker.portrait-picker {
 	border-style: ridge !important;
 }
 
-amber-portrait {
+amber-portrait-id {
 	display: block;
 }
 
-amber-portrait::after {
+amber-portrait-id::after {
 	width: 32em;
 	height: 34em;
 	font-size: 2px;
@@ -141,13 +141,13 @@ amber-portrait::after {
 	content: " ";
 }
 
-.popup amber-portrait::after {
+.popup amber-portrait-id::after {
 	font-size: 6px;
 }
-article.Portrait amber-portrait::after {
+article.Portrait amber-portrait-id::after {
 	font-size: 4px;
 }
-.Character amber-portrait::after {
+.Character amber-portrait-id::after {
 	font-size: 3px;
 }
 

@@ -3,25 +3,7 @@
 	xmlns="http://schema.slothsoft.net/savegame/editor"
 	xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/global.stable" xpointer="xpointer(/*/*)" />
+	<xi:include href="globals/AM2"/>
 	
-	<archive path="Amberfiles/AM2_BLIT" type="AM2">
-		<for-each-file>
-			<string name="version" position="0x3E" size="15" encoding="CP850" />
-			<string name="date" position="0x4E" size="19" encoding="CP850" />
-			<group name="integers" position="0x48140">
-				<use-global ref="AM2-integers" />
-			</group>
-			<group name="strings">
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x4C1E2" name="music"
-					string-count="32" />
-			</group>
-			<group name="strings" position="0x4C430">
-				<use-global ref="AM2-strings" />
-			</group>
-			<group name="items" position="0x50098">
-				<use-global ref="AM2-items" />
-			</group>
-		</for-each-file>
-	</archive>
+	<xi:include href="archives/Amberfiles/AM2_BLIT"/>
 </savegame.editor>

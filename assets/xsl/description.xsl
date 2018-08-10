@@ -4,9 +4,26 @@
 	xmlns:sfm="http://schema.slothsoft.net/farah/module" xmlns:sfs="http://schema.slothsoft.net/farah/sitemap">
 
 	<xsl:template match="/*">
-		<div data-dict="">
-			<xsl:text>description:</xsl:text>
-			<xsl:value-of select="*[@name = 'sites']//sfs:page[@current]/@name" />
+		<div>
+			<script type="module"><![CDATA[
+import * as Module from "/getAsset.php/slothsoft@farah/js/Module";
+
+Module.resolveToDocument("./Downloads")
+	.then(document => alert(document.documentElement.namespaceURI));
+
+			]]></script>
+			<script><![CDATA[
+/*
+import("/getAsset.php/slothsoft@farah/js/Farah/Module")
+	.then(module => module.resolveToDocument("/getAsset.php/slothsoft@amber"))
+	.then(document => alert(document));
+//*/
+			]]></script>
+			<span data-dict=".">
+				<xsl:text>description:</xsl:text>
+				<xsl:value-of select="*[@name = 'sites']//sfs:page[@current]/@name" />
+			</span>
+<!-- 			<div ng-app="slothsoft@amber/Editor.App" /> -->
 		</div>
 	</xsl:template>
 </xsl:stylesheet>

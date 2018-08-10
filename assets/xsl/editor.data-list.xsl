@@ -180,7 +180,7 @@ window.addEventListener(
 	<xsl:template match="saa:portrait" mode="itemlist">
 		<article data-portrait-id="{@id}" data-template="flex" class="Portrait">
 			<amber-picker infoset="lib.portraits" type="portrait" class="portrait-picker" role="button" tabindex="0">
-				<amber-portrait value="{@id}" />
+				<amber-portrait-id value="{@id}" />
 			</amber-picker>
 			<xsl:value-of select="@name" />
 		</article>
@@ -326,7 +326,7 @@ window.addEventListener(
 	
 	<xsl:template match="saa:pc | saa:npc" mode="itemlist-picture">
 		<amber-picker infoset="lib.portraits" type="portrait" class="item-picker" role="button" tabindex="0">
-			<amber-portrait value="{@portrait-id}" />
+			<amber-portrait-id value="{@portrait-id}" />
 		</amber-picker>
 	</xsl:template>
 	
@@ -340,7 +340,7 @@ window.addEventListener(
 						<xsl:value-of select="@name" />
 					</h3>
 					<amber-picker infoset="lib.portraits" type="portrait" class="item-picker" role="button" tabindex="0">
-						<amber-portrait value="{@portrait-id}" />
+						<amber-portrait-id value="{@portrait-id}" />
 					</amber-picker>
 				</li>
 				<li>

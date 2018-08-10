@@ -3,307 +3,36 @@
 	xmlns="http://schema.slothsoft.net/savegame/editor"
 	xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/global.stable" xpointer="xpointer(/*/*)" />
-
-	<archive path="Amberfiles/Save.00/Party_char.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="character" />
-
-			<integer name="portrait" position="9" size="2" />
-
-			<repeat-group name="equipment" position="290" group-size="6" group-count="9"
-				dictionary-ref="equipment-slots">
-				<use-global ref="item" />
-			</repeat-group>
-
-			<!-- 300-400 -->
-			<repeat-group name="inventory" position="344" group-size="6" group-count="24">
-				<use-global ref="item" />
-			</repeat-group>
-			
-			<use-global ref="events" position="488"/>
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Save.00/Party_data.sav" type="JH">
-		<for-each-file>
-			<group name="party-composition">
-				<repeat-group position="0x002E" group-size="2" group-count="6">
-					<select size="2" dictionary-ref="partymembers" />
-				</repeat-group>
-			</group>
-			<group name="party-data">
-				<integer name="member-count" position="0x002B" max="6" />
-				<select name="map-id" position="0x000A" size="2" dictionary-ref="map-ids" />
-				<integer name="map-x" position="0x000C" size="2" />
-				<integer name="map-y" position="0x000E" size="2" />
-			</group>
-			<group name="party-variables">
-				<bit name="partybit-netsrak-absent" position="0x2904" bit="0" />
-				<bit name="partybit-mando-absent" position="0x2904" bit="1" />
-				<bit name="partybit-erik-absent" position="0x2904" bit="2" />
-				<bit name="partybit-chris-absent" position="0x2904" bit="3" />
-				<bit name="partybit-monika-absent" position="0x2904" bit="4" />
-				<bit name="partybit-tar-absent" position="0x292C" bit="1" />
-				<bit name="partybit-egil-absent" position="0x2930" bit="3" />
-				<bit name="partybit-selena-absent" position="0x292C" bit="2" />
-				<bit name="partybit-nelvin-absent" position="0x2968" bit="1" />
-				<bit name="partybit-sabine-absent" position="0x2978" bit="0" />
-				<bit name="partybit-valdyn-absent" position="0x2984" bit="0" />
-				<bit name="partybit-targor-absent" position="0x2B68" bit="0" />
-				<bit name="partybit-leonardia-absent" position="0x2B8C" bit="0" />
-				<bit name="partybit-gryban-absent" position="0x2BB8" bit="0" />
-			</group>
-			<repeat-group name="mob-existance" position="0x2504" group-count="455" group-size="4">
-				<bit-field name="01-08" position="0" />
-				<bit-field name="09-16" position="1" />
-				<bit-field name="17-24" position="2" />
-				<bit-field name="25-32" position="3" />
-			</repeat-group>
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Save.00/Merchant_data.amb" type="AMBR">
-		<for-each-file>
-			<group name="inventory">
-				<repeat-group position="0" group-size="6" group-count="24">
-					<use-global ref="item" />
-				</repeat-group>
-			</group>
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Save.00/Chest_data.amb" type="AMBR">
-		<for-each-file>
-			<group name="inventory">
-				<repeat-group position="0" group-size="6" group-count="24">
-					<use-global ref="item" />
-				</repeat-group>
-			</group>
-			<group name="valuables">
-				<signed-integer name="gold" position="144" size="2" />
-				<signed-integer name="food" position="146" size="2" />
-			</group>
-		</for-each-file>
-	</archive>
-
-
-
-
-	<archive path="Amberfiles/NPC_char.amb" type="AMBR">
-		<for-each-file>
-			<!--<use-global ref="character-name"/> -->
-			<use-global ref="character" />
-
-			<integer name="portrait" position="9" size="2" />
-
-			<group name="events">
-				<event-dictionary position="290" />
-				<!-- <event-script position="290"/> -->
-			</group>
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Monster_char_data.amb" type="AMBR">
-		<for-each-file>
-			<!--<use-global ref="character"/> -->
-
-			<use-global ref="character" />
-
-			<bit-field position="18" name="monster-type" size="1" first-bit="0" last-bit="3"
-				dictionary-ref="monster-types" />
-
-			<group name="testing">
-				<binary position="13" size="4" />
-				<binary position="19" size="2" />
-				<binary position="34" size="8" />
-				<binary position="110" size="12" />
-				<binary position="258" size="13" />
-			</group>
-
-			<group name="gfx">
-				<select name="gfx-id" position="11" size="2" dictionary-ref="monster-images" />
-				<repeat-group position="488" group-size="32" group-count="7" dictionary-ref="sprite-cycles">
-					<binary name="cycle" size="32" />
-				</repeat-group>
-				<repeat-group position="744" group-size="1" group-count="7" dictionary-ref="sprite-cycles">
-					<integer name="length" max="32" />
-				</repeat-group>
-				<binary name="palette-index" position="752" size="48" />
-				<bit-field position="800" size="1" name="mirror" dictionary-ref="sprite-cycles" />
-				<group name="width">
-					<integer name="target" position="806" size="2" />
-					<integer name="source" position="802" size="2" />
-				</group>
-				<group name="height">
-					<integer name="target" position="808" size="2" />
-					<integer name="source" position="804" size="2" />
-				</group>
-			</group>
-			<!--<binary position="810" size="0" name="combat-spritedata"/> -->
-
-			<repeat-group name="equipment" position="290" group-size="6" group-count="9"
-				dictionary-ref="equipment-slots">
-				<use-global ref="item" />
-			</repeat-group>
-
-			<!-- 300-400 -->
-			<repeat-group name="inventory" position="344" group-size="6" group-count="24">
-				<use-global ref="item" />
-			</repeat-group>
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Dictionary.german" type="JH">
-		<for-each-file>
-			<string-dictionary type="size-interspersed" encoding="CP850" position="0" name="keywords" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/NPC_texts.amb" type="AMBR">
-		<for-each-file>
-			<string-dictionary type="size-first" encoding="CP850" position="0" name="dialog" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Party_texts.amb" type="AMBR">
-		<for-each-file>
-			<string-dictionary type="size-first" encoding="CP850" position="0" name="dialog" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/1Map_texts.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="map-texts" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/2Map_texts.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="map-texts" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/3Map_texts.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="map-texts" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/1Map_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="map-data" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/2Map_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="map-data" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/3Map_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="map-data" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Icon_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="icon-data" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/2Lab_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="lab-data" />
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/3Lab_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="lab-data" />
-		</for-each-file>
-	</archive>
-
-
-
-
-	<archive path="Amberfiles/Place_data" type="JH">
-		<for-each-file>
-			<use-global ref="places" position="0x002"/>
-		</for-each-file>
-	</archive>
+	<xi:include href="globals/AM2"/>
+	<xi:include href="globals/characters"/>
+	<xi:include href="globals/events"/>
+	<xi:include href="globals/maps"/>
+	<xi:include href="globals/places"/>
 	
+	<xi:include href="archives/Amberfiles/Save.00/Party_char.amb" />
+	<xi:include href="archives/Amberfiles/Save.00/Party_data.sav" />
+	<xi:include href="archives/Amberfiles/Save.00/Merchant_data.amb" />
+	<xi:include href="archives/Amberfiles/Save.00/Chest_data.amb" />
 	
+	<xi:include href="archives/Amberfiles/Party_texts.amb" />
+	<xi:include href="archives/Amberfiles/NPC_char.amb" />
+	<xi:include href="archives/Amberfiles/NPC_texts.amb" />
+	<xi:include href="archives/Amberfiles/Monster_char_data.amb" />
+	<xi:include href="archives/Amberfiles/Dictionary.german" />
 	
-	<!-- <archive path="Amberfiles/AM2_CPU" type="AM2"> <string-dictionary type="null-delimited" encoding="8bit" position="0x049B0A" 
-		name="spells-misc" string-count="30"/> <string-dictionary type="null-delimited" encoding="8bit" position="0x04950B" name="spells-white" 
-		string-count="30"/> <string-dictionary type="null-delimited" encoding="8bit" position="0x0496E4" name="spells-blue" string-count="30"/> 
-		<string-dictionary type="null-delimited" encoding="8bit" position="0x049874" name="spells-green" string-count="30"/> <string-dictionary 
-		type="null-delimited" encoding="8bit" position="0x049989" name="spells-black" string-count="30"/> <repeat-group name="class-experience" 
-		position="0x451F0" group-size="2" group-count="10"> <integer size="2"/> </repeat-group> </archive> -->
-	<!-- <archive path="Amberfiles/AM2_CPU" type="AM2"> <group name="integers" position="0x453F0"> <use-global ref="AM2-integers"/> 
-		</group> <group name="strings" position="0x4970F"> <use-global ref="AM2-strings"/> </group> <group name="items" position="0x4D348"> 
-		<use-global ref="AM2-items"/> </group> </archive> -->
-	<archive path="Amberfiles/AM2_BLIT" type="AM2">
-		<for-each-file>
-			<string name="version" position="0x3E" size="15" encoding="CP850" />
-			<string name="date" position="0x4E" size="19" encoding="CP850" />
-			<group name="integers" position="0x48140">
-				<use-global ref="AM2-integers" />
-			</group>
-			<group name="strings">
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x4C1E2" name="music"
-					string-count="32" />
-			</group>
-			<group name="strings" position="0x4C430">
-				<use-global ref="AM2-strings" />
-			</group>
-			<group name="items" position="0x50098">
-				<use-global ref="AM2-items" />
-			</group>
-		</for-each-file>
-	</archive>
-
-
-	<archive path="Amberfiles/Object_texts.amb" type="AMBR">
-		<for-each-file>
-			<string-dictionary type="size-first" encoding="CP850" position="0" name="label" />
-		</for-each-file>
-	</archive>
-
-
-
-	<!-- <archive path="Amberfiles/AM2_CPU" type="AM2"> <group> <string-dictionary position="0x049B0A" name="spells-misc" string-count="30"/> 
-		<string-dictionary position="0x04950B" name="spells-white" string-count="30"/> <string-dictionary position="0x0496E4" name="spells-blue" 
-		string-count="30"/> <string-dictionary position="0x049874" name="spells-green" string-count="30"/> <string-dictionary position="0x049989" 
-		name="spells-black" string-count="30"/> <repeat-group name="class-experience" position="0x451F0" group-size="2" group-count="10"> 
-		<integer size="2"/> </repeat-group> </group> </archive> -->
-
-	<archive path="Extrafiles/Abstract_data.amb" type="Raw">
-		<for-each-file>
-			<group name="classes" position="0">
-				<repeat-group group-size="42" group-count="10">
-					<string position="0" name="name" size="12" />
-					<repeat-group position="12" name="skills" group-size="2" group-count="10" dictionary-ref="skills">
-						<integer size="2" max="99" />
-					</repeat-group>
-					<integer position="32" name="apr-per-level" size="2" max="50" />
-					<integer position="34" name="hp-per-level" size="2" max="99" />
-					<integer position="36" name="sp-per-level" size="2" max="99" />
-					<integer position="38" name="slp-per-level" size="2" max="99" />
-					<integer position="40" name="tp-per-level" size="2" max="99" />
-				</repeat-group>
-			</group>
-		</for-each-file>
-	</archive>
-
-	<archive path="Extrafiles/2D_Map_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="map-data" />
-		</for-each-file>
-	</archive>
-	<archive path="Extrafiles/2D_Icon_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="icon-data" />
-		</for-each-file>
-	</archive>
-
-
-
-	<archive path="Extrafiles/3D_Map_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="map-data" />
-		</for-each-file>
-	</archive>
-	<archive path="Extrafiles/3D_Lab_data.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="lab-data" />
-		</for-each-file>
-	</archive>
+	<xi:include href="archives/Amberfiles/1Map_data.amb" />
+	<xi:include href="archives/Amberfiles/1Map_texts.amb" />
+	
+	<xi:include href="archives/Amberfiles/2Map_data.amb" />
+	<xi:include href="archives/Amberfiles/2Lab_data.amb" />
+	<xi:include href="archives/Amberfiles/2Map_texts.amb" />
+	
+	<xi:include href="archives/Amberfiles/3Map_data.amb" />
+	<xi:include href="archives/Amberfiles/3Lab_data.amb" />
+	<xi:include href="archives/Amberfiles/3Map_texts.amb" />
+	
+	<xi:include href="archives/Amberfiles/Icon_data.amb" />
+	<xi:include href="archives/Amberfiles/Place_data" />
+	<xi:include href="archives/Amberfiles/AM2_BLIT" />
+	<xi:include href="archives/Amberfiles/Object_texts.amb" />
 </savegame.editor>

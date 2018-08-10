@@ -6,8 +6,8 @@
 	xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
 
-	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.dictionary" />
-	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.extract" />
+	<xsl:import href="globals/dictionary" />
+	<xsl:import href="globals/extract" />
 	
 	<xsl:template match="/*">
 		<amberdata version="0.1">

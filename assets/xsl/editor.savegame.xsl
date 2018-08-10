@@ -513,118 +513,150 @@
 
 	<xsl:template match="save:archive[@name='AM2_CPU'] | save:archive[@name='AM2_BLIT']" mode="form-content">
 		<xsl:for-each select="save:file">
-			<div>
-				<xsl:call-template name="savegame.table">
-					<xsl:with-param name="label" select="'credits'" />
-					<xsl:with-param name="items">
-						<xsl:apply-templates select=".//*[@name = 'version']" mode="item" />
-						<xsl:apply-templates select=".//*[@name = 'date']" mode="item" />
-					</xsl:with-param>
-				</xsl:call-template>
-				<xsl:call-template name="savegame.table">
-					<xsl:with-param name="label" select="'integers'" />
-					<xsl:with-param name="items">
-						<xsl:apply-templates select=".//*[@name = 'integers']/*" mode="item" />
-					</xsl:with-param>
-				</xsl:call-template>
-				<xsl:call-template name="savegame.table">
-					<xsl:with-param name="label" select="'strings'" />
-					<xsl:with-param name="items">
-						<xsl:apply-templates select=".//*[@name = 'strings']/*" mode="item" />
-					</xsl:with-param>
-				</xsl:call-template>
-			</div>
-			<xsl:for-each select="*[@name = 'items']/*">
-				<xsl:variable name="categories" select="key('dictionary-option', 'item-types')" />
-				<xsl:variable name="items" select="*" />
-				<xsl:call-template name="savegame.tabs">
-					<xsl:with-param name="label" select="'Aktive Item-Kategorie:'" />
-					<xsl:with-param name="options" select="$categories/@val" />
-					<xsl:with-param name="list">
-						<xsl:for-each select="$categories">
-							<xsl:variable name="list" select="$items[.//*[@name = 'type']/@value = current()/@key]" />
-							<li>
-								<xsl:call-template name="savegame.tabs">
-									<xsl:with-param name="label" select="'Aktives Item:'" />
-									<xsl:with-param name="options" select="$list//*[@name = 'name']/@value" />
-									<xsl:with-param name="list">
-										<xsl:for-each select="$list">
-											<li>
-												<xsl:call-template name="savegame.flex">
-													<xsl:with-param name="items">
-														<div>
-															<xsl:call-template name="savegame.table">
-																<xsl:with-param name="label" select="'basic data'" />
-																<xsl:with-param name="items">
-																	<xsl:apply-templates select=".//*[@name = 'name']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'image-id']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'price']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'weight']" mode="item" />
-																</xsl:with-param>
-															</xsl:call-template>
-															<xsl:apply-templates select=".//*[@name = 'classes']" mode="item" />
-															<xsl:apply-templates select=".//*[@name = 'default-status']" mode="item" />
-														</div>
-														<div>
-															<xsl:call-template name="savegame.table">
-																<xsl:with-param name="label" select="'equipment'" />
-																<xsl:with-param name="items">
-																	<xsl:apply-templates select=".//*[@name = 'slot']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'hands']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'fingers']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'ranged-type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'ammunition-type']" mode="item" />
-																</xsl:with-param>
-															</xsl:call-template>
-															<xsl:call-template name="savegame.table">
-																<xsl:with-param name="label" select="'stats'" />
-																<xsl:with-param name="items">
-																	<xsl:apply-templates select=".//*[@name = 'damage']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'armor']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'magic-weapon']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'magic-armor']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'lp-max']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'sp-max']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'attribute-type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'attribute-value']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'skill-type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'skill-value']" mode="item" />
-																</xsl:with-param>
-															</xsl:call-template>
-														</div>
-														<div>
-															<xsl:call-template name="savegame.table">
-																<xsl:with-param name="label" select="'enchantment'" />
-																<xsl:with-param name="items">
-																	<xsl:apply-templates select=".//*[@name = 'spell-type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'spell-id']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'charges-default']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'max-charges-by-spell']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'max-charges-by-shop']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'price-per-charge']" mode="item" />
-																</xsl:with-param>
-															</xsl:call-template>
-															<xsl:call-template name="savegame.table">
-																<xsl:with-param name="label" select="'special'" />
-																<xsl:with-param name="items">
-																	<xsl:apply-templates select=".//*[@name = 'subtype']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'subsubtype']" mode="item" />
-																</xsl:with-param>
-															</xsl:call-template>
-															<xsl:apply-templates select=".//*[@name = 'properties']" mode="item" />
-														</div>
-													</xsl:with-param>
-												</xsl:call-template>
-											</li>
-										</xsl:for-each>
-									</xsl:with-param>
-								</xsl:call-template>
-							</li>
+<!-- 			<div> -->
+<!-- 				<xsl:call-template name="savegame.table"> -->
+<!-- 					<xsl:with-param name="label" select="'credits'" /> -->
+<!-- 					<xsl:with-param name="items"> -->
+<!-- 						<xsl:apply-templates select=".//*[@name = 'version']" mode="item" /> -->
+<!-- 						<xsl:apply-templates select=".//*[@name = 'date']" mode="item" /> -->
+<!-- 					</xsl:with-param> -->
+<!-- 				</xsl:call-template> -->
+<!-- 				<xsl:call-template name="savegame.table"> -->
+<!-- 					<xsl:with-param name="label" select="'integers'" /> -->
+<!-- 					<xsl:with-param name="items"> -->
+<!-- 						<xsl:apply-templates select=".//*[@name = 'integers']/*" mode="item" /> -->
+<!-- 					</xsl:with-param> -->
+<!-- 				</xsl:call-template> -->
+<!-- 				<xsl:call-template name="savegame.table"> -->
+<!-- 					<xsl:with-param name="label" select="'strings'" /> -->
+<!-- 					<xsl:with-param name="items"> -->
+<!-- 						<xsl:apply-templates select=".//*[@name = 'strings']/*" mode="item" /> -->
+<!-- 					</xsl:with-param> -->
+<!-- 				</xsl:call-template> -->
+<!-- 			</div> -->
+			<xsl:call-template name="savegame.flex">
+				<xsl:with-param name="items">
+					
+						<xsl:for-each select="*[@name = 'spells']/*">
+							<xsl:variable name="list" select="*" />
+							<div>
+							<xsl:call-template name="savegame.tabs">
+								<xsl:with-param name="label" select="@name" />
+								<xsl:with-param name="options" select="key('dictionary-option', @name)/@val" />
+								<xsl:with-param name="list">
+									<xsl:for-each select="$list">
+										<li>
+											<xsl:call-template name="savegame.flex">
+												<xsl:with-param name="items">
+													<div>
+														<xsl:call-template name="savegame.table">
+															<xsl:with-param name="label" select="'basic data'" />
+															<xsl:with-param name="items">
+																<xsl:apply-templates select="*" mode="item" />
+															</xsl:with-param>
+														</xsl:call-template>
+													</div>
+												</xsl:with-param>
+											</xsl:call-template>
+										</li>
+									</xsl:for-each>
+								</xsl:with-param>
+							</xsl:call-template>
+					</div>
 						</xsl:for-each>
-					</xsl:with-param>
-				</xsl:call-template>
-			</xsl:for-each>
+				</xsl:with-param>
+			</xsl:call-template>
+<!-- 			<xsl:for-each select="*[@name = 'items']/*"> -->
+<!-- 				<xsl:variable name="categories" select="key('dictionary-option', 'item-types')" /> -->
+<!-- 				<xsl:variable name="items" select="*" /> -->
+<!-- 				<xsl:call-template name="savegame.tabs"> -->
+<!-- 					<xsl:with-param name="label" select="'Aktive Item-Kategorie:'" /> -->
+<!-- 					<xsl:with-param name="options" select="$categories/@val" /> -->
+<!-- 					<xsl:with-param name="list"> -->
+<!-- 						<xsl:for-each select="$categories"> -->
+<!-- 							<xsl:variable name="list" select="$items[.//*[@name = 'type']/@value = current()/@key]" /> -->
+<!-- 							<li> -->
+<!-- 								<xsl:call-template name="savegame.tabs"> -->
+<!-- 									<xsl:with-param name="label" select="'Aktives Item:'" /> -->
+<!-- 									<xsl:with-param name="options" select="$list//*[@name = 'name']/@value" /> -->
+<!-- 									<xsl:with-param name="list"> -->
+<!-- 										<xsl:for-each select="$list"> -->
+<!-- 											<li> -->
+<!-- 												<xsl:call-template name="savegame.flex"> -->
+<!-- 													<xsl:with-param name="items"> -->
+<!-- 														<div> -->
+<!-- 															<xsl:call-template name="savegame.table"> -->
+<!-- 																<xsl:with-param name="label" select="'basic data'" /> -->
+<!-- 																<xsl:with-param name="items"> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'name']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'type']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'image-id']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'price']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'weight']" mode="item" /> -->
+<!-- 																</xsl:with-param> -->
+<!-- 															</xsl:call-template> -->
+<!-- 															<xsl:apply-templates select=".//*[@name = 'classes']" mode="item" /> -->
+<!-- 															<xsl:apply-templates select=".//*[@name = 'default-status']" mode="item" /> -->
+<!-- 														</div> -->
+<!-- 														<div> -->
+<!-- 															<xsl:call-template name="savegame.table"> -->
+<!-- 																<xsl:with-param name="label" select="'equipment'" /> -->
+<!-- 																<xsl:with-param name="items"> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'slot']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'hands']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'fingers']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'ranged-type']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'ammunition-type']" mode="item" /> -->
+<!-- 																</xsl:with-param> -->
+<!-- 															</xsl:call-template> -->
+<!-- 															<xsl:call-template name="savegame.table"> -->
+<!-- 																<xsl:with-param name="label" select="'stats'" /> -->
+<!-- 																<xsl:with-param name="items"> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'damage']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'armor']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'magic-weapon']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'magic-armor']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'lp-max']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'sp-max']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'attribute-type']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'attribute-value']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'skill-type']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'skill-value']" mode="item" /> -->
+<!-- 																</xsl:with-param> -->
+<!-- 															</xsl:call-template> -->
+<!-- 														</div> -->
+<!-- 														<div> -->
+<!-- 															<xsl:call-template name="savegame.table"> -->
+<!-- 																<xsl:with-param name="label" select="'enchantment'" /> -->
+<!-- 																<xsl:with-param name="items"> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'spell-type']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'spell-id']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'charges-default']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'max-charges-by-spell']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'max-charges-by-shop']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'price-per-charge']" mode="item" /> -->
+<!-- 																</xsl:with-param> -->
+<!-- 															</xsl:call-template> -->
+<!-- 															<xsl:call-template name="savegame.table"> -->
+<!-- 																<xsl:with-param name="label" select="'special'" /> -->
+<!-- 																<xsl:with-param name="items"> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'subtype']" mode="item" /> -->
+<!-- 																	<xsl:apply-templates select=".//*[@name = 'subsubtype']" mode="item" /> -->
+<!-- 																</xsl:with-param> -->
+<!-- 															</xsl:call-template> -->
+<!-- 															<xsl:apply-templates select=".//*[@name = 'properties']" mode="item" /> -->
+<!-- 														</div> -->
+<!-- 													</xsl:with-param> -->
+<!-- 												</xsl:call-template> -->
+<!-- 											</li> -->
+<!-- 										</xsl:for-each> -->
+<!-- 									</xsl:with-param> -->
+<!-- 								</xsl:call-template> -->
+<!-- 							</li> -->
+<!-- 						</xsl:for-each> -->
+<!-- 					</xsl:with-param> -->
+<!-- 				</xsl:call-template> -->
+<!-- 			</xsl:for-each> -->
 		</xsl:for-each>
 	</xsl:template>
 
@@ -824,7 +856,7 @@
 			<xsl:with-param name="label" select="'Allgemein'" />
 			<xsl:with-param name="items">
 				<xsl:apply-templates select=".//*[@name = 'character-type']" mode="item" />
-				<xsl:for-each select=".//*[@name = 'portrait']">
+				<xsl:for-each select=".//*[@name = 'portrait-id']">
 					<div>
 						<xsl:apply-templates select="." mode="form-name" />
 						<xsl:apply-templates select="." mode="portrait-picker" />

@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor"	path="Amberfiles/Pics_80x80.amb"	type="JH" >	<for-each-file>		<image width="80" height="80" bitplanes="5"/>	</for-each-file>	</archive>
