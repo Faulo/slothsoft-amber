@@ -42,5 +42,6 @@
     "classmap-authoritative": false,
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "homepage": "http://farah.slothsoft.net/"
+    "homepage": "http://farah.slothsoft.net/",
+    "version": "1.0.0"
 }
