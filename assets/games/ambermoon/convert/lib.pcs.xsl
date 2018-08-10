@@ -5,8 +5,8 @@
 	xmlns:str="http://exslt.org/strings"
 	extension-element-prefixes="str">
 
-	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.dictionary" />
-	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/global.extract" />
+	<xsl:import href="globals/dictionary" />
+	<xsl:import href="globals/extract" />
 	
 	<xsl:template match="/*">
 		<amberdata version="0.1">

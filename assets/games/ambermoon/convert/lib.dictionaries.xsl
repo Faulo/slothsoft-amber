@@ -16,6 +16,37 @@
 		<xsl:variable name="AM2" select="sse:archive[@name='AM2_BLIT' or @name='AM2_CPU']" />
 		
 		<dictionary-list>
+			<dictionary dictionary-id="spell-targets">
+				<option key="0" val="-" />
+				<option key="1" val="single friend" />
+				<option key="2" val="row of friends" />
+				<option key="4" val="all friends" />
+				<option key="8" val="single enemy" />
+				<option key="16" val="row of enemies" />
+				<option key="32" val="all enemies" />
+				<option key="64" val="single item" />
+				<option key="128" val="friend and spot" />
+			</dictionary>
+			<dictionary dictionary-id="spell-places">
+				<option key="0" val="outside" />
+				<option key="1" val="in buildings" />
+				<option key="2" val="in dungeons" />
+				<option key="3" val="while resting" />
+				<option key="4" val="in combat" />
+				<option key="5" val="lyramion" />
+				<option key="6" val="forest moon" />
+				<option key="7" val="desert moon" />
+			</dictionary>
+			<dictionary dictionary-id="spell-modifiers">
+				<option key="0" val="0" />
+				<option key="1" val="1" />
+				<option key="2" val="2" />
+				<option key="3" val="3" />
+				<option key="4" val="4" />
+				<option key="5" val="5" />
+				<option key="6" val="6" />
+				<option key="7" val="7" />
+			</dictionary>
 			<dictionary dictionary-id="events">
 				<option key="0" val="valdyn" />
 				<option key="1" val="grandfather" />
@@ -612,6 +643,7 @@
 				<option key="26" val="VERDOPPELE GEGENSTAND" />
 				<option key="27" val="LP-STEHLER" />
 				<option key="28" val="SP-SAUGER" />
+				<option key="29" val="?" />
 			</dictionary>
 
 			<dictionary dictionary-id="spells-green">
@@ -632,6 +664,7 @@
 				<option key="14" val="MYSTISCHE KARTE III" />
 				<option key="15" val="MYSTISCHE GLOBUS" />
 				<option key="16" val="ZEIGE MONSTER-LP" />
+				<option key="17" val="?" />
 			</dictionary>
 
 			<dictionary dictionary-id="spells-black">
@@ -665,9 +698,32 @@
 				<option key="27" val="EISBALL" />
 				<option key="28" val="EISSTURM" />
 				<option key="29" val="EISSCHAUER" />
-				<option key="30" val="EISSCHAUER" />
 			</dictionary>
-
+			
+			<dictionary dictionary-id="spells-misc">
+				<option key="0" val="Schloss öffnen" />
+				<option key="1" val="Adlerruf" />
+				<option key="2" val="Jugend" />
+				<option key="3" val="Magische Musik" />
+				<option key="4" val="Spruchpunkte I" />
+				<option key="5" val="Spruchpunkte II" />
+				<option key="6" val="Spruchpunkte III" />
+				<option key="7" val="Spruchpunkte IV" />
+				<option key="8" val="Spruchpunkte V" />
+				<option key="9" val="Allheilung" />
+				<option key="10" val="Magische Karte" />
+				<option key="11" val="Stärke erhöhen" />
+				<option key="12" val="Intelligenz erhöhen" />
+				<option key="13" val="Geschicklich. erhöhen" />
+				<option key="14" val="Schnelligkeit erhöhen" />
+				<option key="15" val="Konstitution erhöhen" />
+				<option key="16" val="Karisma erhöhen" />
+				<option key="17" val="Glück erhöhen" />
+				<option key="18" val="Anti-magie erhöhen" />
+				<option key="19" val="Klettern" />
+				<option key="20" val="Drogen" />
+			</dictionary>
+			
 			<dictionary dictionary-id="items">
 				<option key="0" val="-" />
 				<option key="1" val="GELÄHMT" />

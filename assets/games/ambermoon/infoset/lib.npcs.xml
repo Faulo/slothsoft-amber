@@ -3,24 +3,9 @@
 	xmlns="http://schema.slothsoft.net/savegame/editor"
 	xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/global.stable" xpointer="xpointer(/*/*)" />
+	<xi:include href="globals/characters"/>
+	<xi:include href="globals/events"/>
 	
-	<archive path="Amberfiles/NPC_char.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="character" />
-
-			<integer name="portrait-id" position="9" size="2" />
-
-			<group name="events">
-				<event-dictionary position="290" />
-				<!-- <event-script position="290"/> -->
-			</group>
-		</for-each-file>
-	</archive>
-	
-	<archive path="Amberfiles/NPC_texts.amb" type="AMBR">
-		<for-each-file>
-			<string-dictionary type="size-first" encoding="CP850" position="0" name="dialog" />
-		</for-each-file>
-	</archive>
+	<xi:include href="archives/Amberfiles/NPC_char.amb"/>
+	<xi:include href="archives/Amberfiles/NPC_texts.amb"/>
 </savegame.editor>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<savegame.editor version="0.3"
+	xmlns="http://schema.slothsoft.net/savegame/editor"
+	xmlns:xi="http://www.w3.org/2001/XInclude">
+	
+	<xi:include href="globals/maps"/>
+	
+	<xi:include href="archives/Extrafiles/2D_Map_data.amb"/>
+	<xi:include href="archives/Extrafiles/2D_Icon_data.amb"/>
+	
+	<xi:include href="archives/Extrafiles/3D_Map_data.amb"/>
+	<xi:include href="archives/Extrafiles/3D_Lab_data.amb"/>
+</savegame.editor>

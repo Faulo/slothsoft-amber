@@ -7,12 +7,12 @@ use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
 class AmberArchiveBuilder implements ArchiveBuilderInterface
 {
 
-    public function buildArchive(array $buildChilren): string
+    public function buildArchive(iterable $buildChildren): string
     {
         $header = [];
         $body = [];
         $maxId = 0;
-        foreach ($childList as $child) {
+        foreach ($buildChildren as $child) {
             $id = (int) $child->getFileName();
             if ($id > $maxId) {
                 $maxId = $id;

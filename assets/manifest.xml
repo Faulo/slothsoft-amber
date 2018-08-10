@@ -5,6 +5,7 @@
 	<resource-directory name="js" type="application/javascript" />
 	<resource-directory name="xsl" type="application/xslt+xml" />
 	<resource-directory name="dictionary" type="application/xml" />
+	<resource-directory name="webpack" type="*/*" />
 	
 	<directory name="schema">
 		<resource-directory name="amberdata" type="application/x-xsd+xml" />
@@ -132,6 +133,7 @@
 
 	<fragment name="api">
 		<fragment name="default">
+			<link-script ref="/webpack/main.js"/>
 			<link-stylesheet ref="/css/default" name="default" />
 			<link-stylesheet ref="/css/amber-picker" name="amber-picker" />
 		</fragment>

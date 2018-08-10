@@ -4,11 +4,13 @@ namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Core\FileSystem;
-use Slothsoft\Savegame\Node\ArchiveParser\ArchiveExtractorInterface;
+use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 use DomainException;
-use Exception;
+use LogicException;
+use SplFileInfo;
 
-class AmberArchiveExtractor implements ArchiveExtractorInterface
+class AmberArchiveExtractor extends CopyArchiveExtractor
 {
 
     private $ambtool;
@@ -18,52 +20,31 @@ class AmberArchiveExtractor implements ArchiveExtractorInterface
         $this->ambtool = $ambtool;
     }
 
-    public function extractArchive(string $archivePath, string $targetDir): bool
+    public function extractArchive(SplFileInfo $archivePath, SplFileInfo $targetDir): bool
     {
-        $ret = false;
-        if (!realpath($archivePath)) {
-            throw new Exception("'$archivePath' is not a valid archive file.");
+        $type = $this->ambtool->inspectArchive($archivePath);
+        switch ($type) {
+            case AmbTool::TYPE_JH:
+                // double-pass!
+                $tempDir = FileInfoFactory::createTempFile();
+                
+                $this->ambtool->extractArchive($archivePath, $tempDir);
+                
+                $fileList = FileSystem::scanDir($tempDir, FileSystem::SCANDIR_FILEINFO);
+                
+                if (count($fileList) !== 1) {
+                    throw new LogicException("JH archive '$archivePath' must contain exactly 1 file");
+                }
+                
+                return $this->extractArchive($fileList[0], $targetDir);
+            case AmbTool::TYPE_AMBR:
+                $this->ambtool->extractArchive($archivePath, $targetDir);
+                return true;
+            case '':
+                return parent::extractArchive($archivePath, $targetDir);
+            default:
+                throw new DomainException("Unknown AmbTool type '$type'!");
         }
-        if (!realpath($targetDir)) {
-            throw new Exception("'$targetDir' is not a valid extract directory.");
-        }
-        $archivePath = realpath($archivePath);
-        $targetDir = realpath($targetDir);
-        if ($archivePath and $targetDir) {
-            $format = $this->ambtool->inspectArchive($archivePath);
-            switch ($format) {
-                case 'Format: JH (encrypted)':
-                    // double-pass!
-                    
-                    $tempDir = temp_dir(__CLASS__); // . DIRECTORY_SEPARATOR . '_JH'
-                    
-                    $this->ambtool->exec($archivePath, $tempDir);
-                    
-                    $fileList = FileSystem::scanDir($tempDir, FileSystem::SCANDIR_REALPATH);
-                    
-                    assert(count($fileList) === 1, 'JH archive must contain 1 file');
-                    
-                    $output = $this->ambtool->exec($fileList[0], $targetDir);
-                    
-                    if (isset($output[1])) {
-                        $ret = true;
-                        break;
-                    }
-                // didn't need double-pass after all...
-                case 'Format: AMBR (raw archive)':
-                case 'Format: AMNP (compressed/encrypted archive)':
-                case 'Format: AMNC (encrypted archive)':
-                    $this->ambtool->exec($archivePath, $targetDir);
-                    $ret = true;
-                    break;
-                case '':
-                    $ret = copy($archivePath, $targetDir . DIRECTORY_SEPARATOR . '1');
-                    break;
-                default:
-                    throw new DomainException(sprintf('unknown ambtool format "%s"!', $format));
-            }
-        }
-        return $ret;
     }
 }
 

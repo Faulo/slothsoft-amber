@@ -3,78 +3,10 @@
 	xmlns="http://schema.slothsoft.net/savegame/editor"
 	xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/global.stable" xpointer="xpointer(/*/*)" />
+	<xi:include href="globals/characters"/>
 	
-	<archive path="Amberfiles/Save.00/Party_char.amb" type="AMBR">
-		<for-each-file>
-			<use-global ref="character" />
-
-			<integer name="portrait" position="9" size="2" />
-
-			<repeat-group name="equipment" position="290" group-size="6" group-count="9"
-				dictionary-ref="equipment-slots">
-				<use-global ref="item" />
-			</repeat-group>
-
-			<!-- 300-400 -->
-			<repeat-group name="inventory" position="344" group-size="6" group-count="24">
-				<use-global ref="item" />
-			</repeat-group>
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Save.00/Party_data.sav" type="JH">
-		<for-each-file>
-			<group name="party-composition">
-				<repeat-group position="0x002E" group-size="2" group-count="6">
-					<select size="2" dictionary-ref="partymembers" />
-				</repeat-group>
-			</group>
-			<group name="party-data">
-				<integer name="member-count" position="0x002B" max="6" />
-				<select name="map-id" position="0x000A" size="2" dictionary-ref="map-ids" />
-				<integer name="map-x" position="0x000C" size="2" />
-				<integer name="map-y" position="0x000E" size="2" />
-			</group>
-			<group name="party-variables">
-				<bit name="partybit-netsrak-absent" position="0x2904" bit="0" />
-				<bit name="partybit-mando-absent" position="0x2904" bit="1" />
-				<bit name="partybit-erik-absent" position="0x2904" bit="2" />
-				<bit name="partybit-chris-absent" position="0x2904" bit="3" />
-				<bit name="partybit-monika-absent" position="0x2904" bit="4" />
-				<bit name="partybit-tar-absent" position="0x292C" bit="1" />
-				<bit name="partybit-egil-absent" position="0x2930" bit="3" />
-				<bit name="partybit-selena-absent" position="0x292C" bit="2" />
-				<bit name="partybit-nelvin-absent" position="0x2968" bit="1" />
-				<bit name="partybit-sabine-absent" position="0x2978" bit="0" />
-				<bit name="partybit-valdyn-absent" position="0x2984" bit="0" />
-				<bit name="partybit-targor-absent" position="0x2B68" bit="0" />
-				<bit name="partybit-leonardia-absent" position="0x2B8C" bit="0" />
-				<bit name="partybit-gryban-absent" position="0x2BB8" bit="0" />
-			</group>
-			<!-- <repeat-group name="mob-existance" position="0x2504" group-count="1024" group-size="4"> <bit-field name="01-08" position="0"/> 
-				<bit-field name="09-16" position="1"/> <bit-field name="17-24" position="2"/> <bit-field name="25-32" position="3"/> </repeat-group> -->
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Save.00/Merchant_data.amb" type="AMBR">
-		<for-each-file>
-			<group name="inventory">
-				<repeat-group position="0" group-size="6" group-count="24">
-					<use-global ref="item" />
-				</repeat-group>
-			</group>
-		</for-each-file>
-	</archive>
-	<archive path="Amberfiles/Save.00/Chest_data.amb" type="AMBR">
-		<for-each-file>
-			<group name="inventory">
-				<repeat-group position="0" group-size="6" group-count="24">
-					<use-global ref="item" />
-				</repeat-group>
-			</group>
-			<group name="valuables">
-				<signed-integer name="gold" position="144" size="2" />
-				<signed-integer name="food" position="146" size="2" />
-			</group>
-		</for-each-file>
-	</archive>
+	<xi:include href="archives/Amberfiles/Save.00/Party_char.amb" />
+	<xi:include href="archives/Amberfiles/Save.00/Party_data.sav" />
+	<xi:include href="archives/Amberfiles/Save.00/Merchant_data.amb" />
+	<xi:include href="archives/Amberfiles/Save.00/Chest_data.amb" />
 </savegame.editor>
