@@ -536,15 +536,18 @@
 <!-- 			</div> -->
 			<xsl:call-template name="savegame.flex">
 				<xsl:with-param name="items">
-					
-						<xsl:for-each select="*[@name = 'spells']/*">
+					<xsl:variable name="spell-effects" select=".//*[@name = 'spell-effects']/*"/>
+					<xsl:variable name="spell-data" select=".//*[@name = 'spell-data']/*"/>
+						<xsl:for-each select="$spell-data">
+							<xsl:variable name="spellbook-pos" select="position()"/>
 							<xsl:variable name="list" select="*" />
 							<div>
 							<xsl:call-template name="savegame.tabs">
 								<xsl:with-param name="label" select="@name" />
-								<xsl:with-param name="options" select="key('dictionary-option', @name)/@val" />
+								<xsl:with-param name="options" select="key('dictionary-option', concat('spells-', position() - 1))/@val" />
 								<xsl:with-param name="list">
 									<xsl:for-each select="$list">
+										<xsl:variable name="spell-pos" select="position()"/>
 										<li>
 											<xsl:call-template name="savegame.flex">
 												<xsl:with-param name="items">
@@ -553,6 +556,7 @@
 															<xsl:with-param name="label" select="'basic data'" />
 															<xsl:with-param name="items">
 																<xsl:apply-templates select="*" mode="item" />
+																<xsl:apply-templates select="$spell-effects[$spellbook-pos]/*[$spell-pos]/*" mode="item" />
 															</xsl:with-param>
 														</xsl:call-template>
 													</div>
@@ -960,7 +964,7 @@
 			<xsl:with-param name="label" select="'Klasse'" />
 			<xsl:with-param name="items">
 				<xsl:apply-templates select=".//*[@name = 'class']" mode="item" />
-				<xsl:apply-templates select=".//*[@name = 'school']" mode="item" />
+				<xsl:apply-templates select=".//*[@name = 'spellbooks']" mode="item" />
 			</xsl:with-param>
 		</xsl:call-template>
 		<xsl:for-each select=".//*[@name = 'skills']">
@@ -1407,6 +1411,7 @@
 		</xsl:if>
 	</xsl:template>
 	<xsl:template match="save:instruction[@type = 'bit-field']" mode="form-name">
+			<xsl:copy-of select="."/>
 		<xsl:if test="string-length(@name)">
 			<h3 class="name">
 				<xsl:if test="string-length(@title)">
@@ -1414,6 +1419,26 @@
 				</xsl:if>
 				<xsl:value-of select="@name" />
 			</h3>
+		</xsl:if>
+		<xsl:if test="../@dictionary-ref">
+			<xsl:variable name="options" select="key('dictionary-option', ../@dictionary-ref)" />
+			<xsl:variable name="key" select="count(preceding-sibling::*)" />
+			<xsl:for-each select="$options[@key = $key]">
+				<xsl:choose>
+					<xsl:when test="@description">
+						<h3>
+							<abbr class="name" title="{@description}">
+								<xsl:value-of select="@val" />
+							</abbr>
+						</h3>
+					</xsl:when>
+					<xsl:otherwise>
+						<h3 class="name">
+							<xsl:value-of select="@val" />
+						</h3>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:for-each>
 		</xsl:if>
 	</xsl:template>
 

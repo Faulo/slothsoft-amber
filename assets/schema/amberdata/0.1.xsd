@@ -40,6 +40,8 @@ This namespace defines elements to describe the game data of games using the Amb
 					<xsd:choice minOccurs="0" maxOccurs="unbounded">
 						<xsd:element ref="item-list" />
 						<xsd:element ref="portrait-list" />
+						<xsd:element ref="pc-list" />
+						<xsd:element ref="npc-list" />
 						<xsd:element ref="monster-list" />
 						<xsd:element ref="class-list" />
 						<xsd:element ref="map-list" />
@@ -55,17 +57,178 @@ This namespace defines elements to describe the game data of games using the Amb
 	</xsd:element>
 
 	<xsd:element name="item-list">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="item" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
 	</xsd:element>
+	
+	<xsd:element name="item">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="class-reference" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="item-instance">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="item-reference">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
 
 	<xsd:element name="portrait-list">
 	</xsd:element>
+	
+	<xsd:complexType name="character">
+		<xsd:attribute name="id" type="xsd:token"/>
+		<xsd:attribute name="name" type="xsd:token"/>
+	</xsd:complexType>
+
+	<xsd:element name="pc-list">
+	</xsd:element>
+	
+	<xsd:element name="pc" >
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="character">
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="pc-instance">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="pc-reference">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="npc-list">
+	</xsd:element>
+	
+	<xsd:element name="npc">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="character">
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="npc-instance">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="npc-reference">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
 
 	<xsd:element name="monster-list">
+	</xsd:element>
+	
+	<xsd:element name="monster">
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="character">
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="monster-instance">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="monster-reference">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
 	</xsd:element>
 
 	<xsd:element name="class-list">
 	</xsd:element>
 
+	<xsd:element name="class">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+			<xsd:attribute name="name" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="class-instance">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="class-reference">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="spellbook-list">
+	</xsd:element>
+
+	<xsd:element name="spellbook">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="spell" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:token"/>
+			<xsd:attribute name="name" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="spellbook-instance">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="spell-reference" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="spellbook-reference">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="spell">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+			<xsd:attribute name="name" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:element name="spell-reference">
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:token"/>
+		</xsd:complexType>
+	</xsd:element>
+	
+	
 	<xsd:element name="map-list">
 	</xsd:element>
 
@@ -79,5 +242,27 @@ This namespace defines elements to describe the game data of games using the Amb
 	</xsd:element>
 
 	<xsd:element name="dictionary-list">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="dictionary" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="dictionary">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="option" minOccurs="0" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute name="dictionary-id" type="xsd:normalizedString" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="option">
+		<xsd:complexType>
+			<xsd:attribute name="key" type="xsd:normalizedString" />
+			<xsd:attribute name="val" type="xsd:normalizedString" />
+			<xsd:attribute name="title" type="xsd:normalizedString" use="optional" />
+		</xsd:complexType>
 	</xsd:element>
 </xsd:schema>

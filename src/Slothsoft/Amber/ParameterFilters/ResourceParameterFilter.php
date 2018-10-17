@@ -15,6 +15,10 @@ class ResourceParameterFilter extends AbstractMapParameterFilter
     const PARAM_USER = 'user';
     
     const PARAM_INFOSET_ID = 'infosetId';
+    
+    const PARAM_ARCHIVE_ID = 'archiveId';
+    
+    const PARAM_FILE_ID = 'fileId';
 
     protected function createValueSanitizers(): array
     {
@@ -23,6 +27,8 @@ class ResourceParameterFilter extends AbstractMapParameterFilter
             self::PARAM_VERSION => new FileNameSanitizer('Thalion-v1.05-DE'),
             self::PARAM_USER => new FileNameSanitizer((string) AmberUser::getId()),
             self::PARAM_INFOSET_ID => new FileNameSanitizer('null'),
+            self::PARAM_ARCHIVE_ID => new FileNameSanitizer(''),
+            self::PARAM_FILE_ID => new FileNameSanitizer(''),
             ];
     }
 

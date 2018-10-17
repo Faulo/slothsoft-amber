@@ -916,6 +916,21 @@
 		</article>
 
 	</p>
+	<p key="description:GameEditor">
+		<article>
+			<h2>Über</h2>
+			<p>Hier stelle ich zusätzliche Editoren zur Verfügung, die spielinterne Daten verändern können.</p>
+			<p>
+				<strong>ACHTUNG!</strong>
+				<br />
+				Das bedeutet, das man mit den Tools hier Ambermoon komplett zerlegen kann.
+				Bei vielen Feldern weiß ich selbst noch nicht, wofür die Engine sie benötigt.
+				Benutzung daher auf eigene Gefahr. :3
+			</p>
+		</article>
+
+	</p>
+	
 	<p key="language:de-de">language:de-de</p>
 	<p key="language:en-us">language:en-us</p>
 </html>

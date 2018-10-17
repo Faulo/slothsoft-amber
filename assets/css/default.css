@@ -48,6 +48,10 @@
 	text-transform: none;
 }
 
+.Amber .settings td {
+	padding: 0 0.75em;
+}
+
 .Amber * {
 	font-weight: inherit;
 	font-family: inherit;

@@ -36,6 +36,7 @@ class EditorController
         return new EditorConfig(
             $this->getAmberAssetPath("/games/$game/source/$version"),
             new SplFileInfo(ServerEnvironment::getDataDirectory() . "/slothsoft/amber/$game/$version/$user"),
+            new SplFileInfo(ServerEnvironment::getCacheDirectory() . "/slothsoft/amber/$game/$version/savegame/$infoset"),
             new SplFileInfo((string) $this->getAmberAssetUrl("/games/$game/infoset/$infoset")),
             $this->createArchiveExtractors(),
             $this->createArchiveBuilders()

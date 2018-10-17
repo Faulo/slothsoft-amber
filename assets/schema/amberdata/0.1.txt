@@ -1,0 +1,44 @@
+character | monster
+	class-instance
+	race-instance
+	spellbook-instance
+		spell-reference
+	inventory
+		item-slot
+			item-instance
+	equipment
+		item-slot
+			item-instance
+	
+class
+	spellbook-reference
+
+item
+	class-reference
+
+spellbook
+	spell
+	
+monster-group
+	monster-reference
+	
+chest
+	item-slot
+		item-instance
+
+merchant
+	item-slot
+		item-instance
+
+map-2d
+	icon-set-reference
+	icon-instance
+		icon-gfx-instance
+	events
+
+map-3d
+	lab-set-reference
+	
+		
+icon-set
+	

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns="http://schema.slothsoft.net/amber/amberdata"
-	xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:exsl="http://exslt.org/common" xmlns:func="http://exslt.org/functions" xmlns:str="http://exslt.org/strings"
-	xmlns:set="http://exslt.org/sets" xmlns:math="http://exslt.org/math" xmlns:php="http://php.net/xsl"
-	xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor"
-	xmlns:html="http://www.w3.org/1999/xhtml" extension-element-prefixes="exsl func str set math php">
+<xsl:stylesheet version="1.0" 
+	xmlns="http://schema.slothsoft.net/amber/amberdata"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
+	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
+	xmlns:set="http://exslt.org/sets">
 
 	<xsl:import href="globals/dictionary" />
 	<xsl:import href="globals/extract" />
@@ -17,7 +17,7 @@
 	
 	<xsl:template match="sse:savegame.editor">
 		<xsl:variable name="items"
-			select="(sse:archive[@name='AM2_CPU'] | sse:archive[@name='AM2_BLIT'])//*[@name = 'items']/*/*" />
+			select="(sse:archive[@name='AM2_CPU'] | sse:archive[@name='AM2_BLIT'])//*[@name = 'items']/*" />
 		<xsl:variable name="texts" select="sse:archive[@name='Object_texts.amb']" />
 
 		<xsl:if test="count($items)">
@@ -106,9 +106,11 @@
 			<xsl:for-each select=".//*[@name = 'properties']/*[@value != '']">
 				<xsl:attribute name="is-{saa:getName()}" />
 			</xsl:for-each>
-			<xsl:for-each select=".//*[@name = 'classes']/*[@value != '']">
-				<class name="{saa:getName()}" />
-			</xsl:for-each>
+			
+			<xsl:apply-templates select="$root//*[@name='classes']" mode="reference">
+				<xsl:with-param name="name" select="'class-reference'" />
+			</xsl:apply-templates>
+			
 			<xsl:if test="$type = 8">
 				<xsl:call-template name="extract-text">
 					<xsl:with-param name="root"

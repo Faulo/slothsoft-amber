@@ -1,8 +1,8 @@
 <xsl:stylesheet version="1.0"
 	xmlns="http://schema.slothsoft.net/amber/amberdata"
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
-	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
-	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+	xmlns:sse="http://schema.slothsoft.net/savegame/editor">
 	
 	<xsl:import href="globals/static" />
 	

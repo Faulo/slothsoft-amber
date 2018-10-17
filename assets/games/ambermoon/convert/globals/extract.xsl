@@ -1,9 +1,9 @@
 <xsl:stylesheet version="1.0" 
+	xmlns="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
-	xmlns:str="http://exslt.org/strings"
-	extension-element-prefixes="str">
+	xmlns:str="http://exslt.org/strings">
 	
 	<xsl:template name="extract-languages">
 		<xsl:param name="root" select="." />
@@ -14,14 +14,22 @@
 		</xsl:for-each>
 	</xsl:template>
 
-	<xsl:template name="extract-spellbook">
+	<xsl:template name="extract-spellbook-instance">
 		<xsl:param name="root" select="." />
-		<xsl:for-each select=".//*[@name = 'spells']">
-			<saa:spellbook>
-				<xsl:for-each select=".//*[string-length(@value) &gt; 0]">
-					<saa:spell-instance name="{saa:getName()}" />
-				</xsl:for-each>
-			</saa:spellbook>
+		
+		<xsl:for-each select="$root//*[@name = 'spellbooks']/*">
+			<xsl:variable name="pos" select="position()"/>
+			<xsl:variable name="spellbook-id" select="$pos - 1"/>
+			<xsl:variable name="spellbook-dict" select="concat('spells-', $spellbook-id)"/>
+			<xsl:variable name="spellbook-spells" select="$root//*[@name = 'spells']/*[$pos]"/>
+			<xsl:if test="@value">
+				<saa:spellbook-instance id="{$spellbook-id}" name="{saa:getDictionaryOption(../@dictionary-ref, $spellbook-id)/@val}">
+					<xsl:apply-templates select="$spellbook-spells" mode="reference">
+						<xsl:with-param name="name" select="'spell-reference'"/>
+						<xsl:with-param name="dictionary-ref" select="$spellbook-dict"/>
+					</xsl:apply-templates>
+				</saa:spellbook-instance>
+			</xsl:if>
 		</xsl:for-each>
 	</xsl:template>
 
@@ -100,7 +108,6 @@
 		<xsl:call-template name="extract-languages" />
 		<xsl:call-template name="extract-equipment" />
 		<xsl:call-template name="extract-inventory" />
-		<xsl:call-template name="extract-spellbook" />
 		
 		<xsl:for-each select=".//*[@type='event-dictionary']/*">
 			<saa:event>
@@ -124,13 +131,41 @@
 	</xsl:template>
 
 	<xsl:template name="extract-class">
+		<xsl:param name="id" />
 		<xsl:param name="root" />
+		<xsl:param name="base-experience" />
 		<saa:class>
 			<xsl:apply-templates select=".//*[@name = 'class']" mode="attr">
 				<xsl:with-param name="name" select="'name'" />
 			</xsl:apply-templates>
 			
-			<xsl:apply-templates select="$root//*[@name = 'school']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'apr-per-level']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'hp-per-level']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'sp-per-level']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'tp-per-level']" mode="attr" />
+			<xsl:apply-templates select="$root//*[@name = 'slp-per-level']" mode="attr" />
+
+			<xsl:apply-templates select="$base-experience" mode="attr">
+				<xsl:with-param name="name" select="'base-experience'" />
+			</xsl:apply-templates>
+
+			<xsl:for-each select="$root//*[@name = 'skills']/*">
+				<saa:skill name="{saa:getName()}" maximum="{*[@name = 'maximum']/@value}" />
+			</xsl:for-each>
+			
+			<xsl:apply-templates select="$root//*[@name='spellbooks']" mode="reference">
+				<xsl:with-param name="name" select="'spellbook-reference'" />
+			</xsl:apply-templates>
+		</saa:class>
+	</xsl:template>
+
+	<xsl:template name="extract-class-instance">
+		<xsl:param name="root" />
+		<saa:class-instance>
+			<xsl:apply-templates select=".//*[@name = 'class']" mode="attr">
+				<xsl:with-param name="name" select="'name'" />
+			</xsl:apply-templates>
+			
 			<xsl:apply-templates select="$root//*[@name = 'apr-per-level']" mode="attr" />
 			<xsl:apply-templates select="$root//*[@name = 'hp-per-level']" mode="attr" />
 			<xsl:apply-templates select="$root//*[@name = 'sp-per-level']" mode="attr" />
@@ -151,7 +186,11 @@
 			
 			<xsl:variable name="sp" select="*[@name = 'spell-points']/*"/>
 			<saa:sp current="{$sp[@name='current']/@value}" maximum="{$sp[@name='maximum']/@value + $sp[@name='maximum-mod']/@value}"/>
-		</saa:class>
+			
+			<xsl:call-template name="extract-spellbook-instance" >
+				<xsl:with-param name="root" select="$root"/>
+			</xsl:call-template>
+		</saa:class-instance>
 	</xsl:template>
 	
 	<xsl:template name="extract-race">
@@ -242,7 +281,7 @@
 				<xsl:attribute name="is-{saa:getName()}" />
 			</xsl:for-each>
 			<xsl:for-each select=".//*[@name = 'classes']/*[@value != '']">
-				<saa:class name="{saa:getName()}" />
+				<saa:class-reference name="{saa:getName()}" />
 			</xsl:for-each>
 			<xsl:if test="$type = 8">
 				<xsl:call-template name="extract-text">
@@ -292,6 +331,24 @@
 				<!-- <xsl:value-of select="str:align(@value, '000', 'right')"/> -->
 			</xsl:for-each>
 		</unknown>
+	</xsl:template>
+	
+	<xsl:template match="sse:instruction[@type='bit-field']" mode="reference">
+		<xsl:param name="name" select="@name"/>
+		<xsl:param name="dictionary-ref" select="@dictionary-ref"/>
+		
+		<xsl:variable name="options" select="saa:getDictionary($dictionary-ref)"/>		
+		<xsl:for-each select="*">
+			<xsl:variable name="id" select="position() - 1"/>
+			<xsl:if test="@value">
+				<xsl:element name="saa:{$name}" namespace="http://schema.slothsoft.net/amber/amberdata">
+					<xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
+					<xsl:if test="$options">
+						<xsl:attribute name="name"><xsl:value-of select="$options[@key = $id]/@val"/></xsl:attribute>
+					</xsl:if>
+				</xsl:element>
+			</xsl:if>
+		</xsl:for-each>
 	</xsl:template>
 
 </xsl:stylesheet>

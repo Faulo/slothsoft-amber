@@ -51,6 +51,7 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface
                         $archiveNode = $editor->getArchiveNode($archiveId);
                         $archiveNode->load();
                         foreach ($archiveNode->getFileNodes() as $x => $fileNode) {
+                            $fileNode->load();
                             foreach ($fileNode->getImageNodes() as $y => $imageNode) {
                                 $imageData[$archiveId]['width'] = max($imageData[$archiveId]['width'], $imageNode->getWidth());
                                 $imageData[$archiveId]['height'] = max($imageData[$archiveId]['height'], $imageNode->getHeight());

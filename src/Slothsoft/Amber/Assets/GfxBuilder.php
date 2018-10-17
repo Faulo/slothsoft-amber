@@ -23,17 +23,17 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface
     /**
      * @var AssetInterface
      */
-    protected $asset;
+    private $asset;
     
     /**
      * @var FarahUrlArguments
      */
-    protected $args;
+    private $args;
     
     /**
      * @var Editor
      */
-    protected $editor;
+    private $editor;
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
     {
@@ -66,11 +66,11 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface
         return new ExecutableStrategies($resultBuilder);
     }
     
-    protected function processInfoset(string $infosetId): ResultBuilderStrategyInterface
+    private function processInfoset(string $infosetId): ResultBuilderStrategyInterface
     {
         throw new \InvalidArgumentException('Must provide archiveId.');
     }
-    protected function processArchive(string $infosetId, string $archiveId): ResultBuilderStrategyInterface
+    private function processArchive(string $infosetId, string $archiveId): ResultBuilderStrategyInterface
     {
         $gfxId = $this->args->get(GfxParameterFilter::PARAM_GFX_ID);
         $paletteId = $this->args->get(GfxParameterFilter::PARAM_PALETTE_ID);
@@ -83,7 +83,7 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface
         
         return new FileInfoResultBuilder($this->createArchiveImage($archiveNode, $gfxId, $paletteId));
     }
-    protected function processFile(string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface
+    private function processFile(string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface
     {
         $gfxId = $this->args->get(GfxParameterFilter::PARAM_GFX_ID);
         $paletteId = $this->args->get(GfxParameterFilter::PARAM_PALETTE_ID);
@@ -108,6 +108,8 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface
     private $imageHeight;
     
     private function createArchiveImage(ArchiveNode $archiveNode, int $gfxId, int $paletteId): SplFileInfo {
+        $archiveNode->load();
+        
         $imageFiles = [];
         
         $this->archiveWidth = 0;
@@ -141,6 +143,8 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface
         return $destFile;
     }
     private function createFileImage(FileContainer $fileNode, int $gfxId, int $paletteId): SplFileInfo {
+        $fileNode->load();
+        
         $imageFiles = [];
         
         $this->fileWidth = 0;

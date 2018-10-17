@@ -57,12 +57,13 @@ class AmberdataBuilder implements ExecutableBuilderStrategyInterface
         };
         
         $shouldRefreshDelegate = function(SplFileInfo $cacheFile) : bool {
+            //return $config->infosetFile->getMTime() > $cacheFile->getMTime();
             return false;
         };
         
         $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);
         $writer = new DOMWriterFileCache($writer, $cacheFile, $shouldRefreshDelegate);
-        $resultBuilder = new FileWriterResultBuilder($writer, $cacheFile->getFilename());
+        $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }
 }

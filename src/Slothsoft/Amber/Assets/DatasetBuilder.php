@@ -4,18 +4,20 @@ namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
-use Slothsoft\Core\ServerEnvironment;
-use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
-use Slothsoft\Core\IO\Writable\Decorators\ChunkWriterFileCache;
 use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunkWriterDelegate;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface;
 use Slothsoft\Savegame\Editor;
-use SplFileInfo;
+use Slothsoft\Savegame\EditorConfig;
+use Slothsoft\Savegame\Build\BuildableInterface;
+use Slothsoft\Savegame\Build\BuilderInterface;
+use Slothsoft\Savegame\Build\XmlBuilder;
+use Slothsoft\Savegame\Node\NodeFactory;
 
 class DatasetBuilder implements ExecutableBuilderStrategyInterface
 {
@@ -24,36 +26,75 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface
         $game = $args->get(ResourceParameterFilter::PARAM_GAME);
         $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
         $user = $args->get(ResourceParameterFilter::PARAM_USER);
-        $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
         
-        $cacheFile = [];
-        $cacheFile[] = ServerEnvironment::getCacheDirectory();
-        $cacheFile[] = 'slothsoft/amber';
-        $cacheFile[] = $game;
-        $cacheFile[] = $version;
-        $cacheFile[] = 'dataset';
-        $cacheFile[] = "$infosetId.xml";
-        $cacheFile = implode(DIRECTORY_SEPARATOR, $cacheFile);
-        $cacheFile = FileInfoFactory::createFromPath($cacheFile);
+        $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
+        $archiveId = $args->get(ResourceParameterFilter::PARAM_ARCHIVE_ID);
+        $fileId = $args->get(ResourceParameterFilter::PARAM_FILE_ID);
         
         $controller = new EditorController();
+        
         $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
         
-        $chunkDelegate = function() use($config) : ChunkWriterInterface {
-            $editor = new Editor($config);
-            $editor->loadAllArchives();
-            $node = $editor->getSavegameNode();
-            return $node->getChunkWriter();
-        };
+        if ($fileId === '') {
+            if ($archiveId === '') {
+                $resultBuilder = $this->processInfoset($config, $infosetId);
+            } else {
+                $resultBuilder = $this->processArchive($config, $infosetId, $archiveId);
+            }
+        } else {
+            $resultBuilder = $this->processFile($config, $infosetId, $archiveId, $fileId);
+        }
         
-        $shouldRefreshDelegate = function(SplFileInfo $cacheFile) use($config) : bool {
-            return $config->infosetFile->getMTime() > $cacheFile->getMTime();
-        };
-        
-        $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);
-        $writer = new ChunkWriterFileCache($writer, $cacheFile, $shouldRefreshDelegate);
-        $resultBuilder = new ChunkWriterResultBuilder($writer, $cacheFile->getFilename());
         return new ExecutableStrategies($resultBuilder);
+    }
+    
+    private function processInfoset(EditorConfig $config, string $infosetId): ResultBuilderStrategyInterface
+    {
+        $chunkDelegate = function() use($config, $infosetId) : ChunkWriterInterface {
+            $editor = new Editor($config);
+            $editor->load();
+            $savegameNode = $editor->getSavegameNode();
+            return $this->createXmlBuilder((string) $config->cacheDirectory, $savegameNode);
+        };
+        $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);
+        return new ChunkWriterResultBuilder($writer, "$infosetId.xml");
+    }
+    private function processArchive(EditorConfig $config, string $infosetId, string $archiveId): ResultBuilderStrategyInterface
+    {
+        $chunkDelegate = function() use($config, $infosetId, $archiveId) : ChunkWriterInterface {
+            $editor = new Editor($config);
+            $editor->loadArchive($archiveId);
+            $savegameNode = $editor->getSavegameNode();
+            $archiveNode = $savegameNode->getArchiveById($archiveId);
+            return $this->createXmlBuilder((string) $config->cacheDirectory, $archiveNode);
+        };
+        $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);        
+        return new ChunkWriterResultBuilder($writer, "$infosetId.$archiveId.xml");
+    }
+    private function processFile(EditorConfig $config, string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface
+    {
+        $chunkDelegate = function() use($config, $infosetId, $archiveId, $fileId) : ChunkWriterInterface {
+            $editor = new Editor($config);
+            $editor->loadArchive($archiveId);
+            $savegameNode = $editor->getSavegameNode();
+            $archiveNode = $savegameNode->getArchiveById($archiveId);
+            $fileNode = $archiveNode->getFileNodeByName($fileId);
+            $fileNode->load();
+            return $this->createXmlBuilder((string) $config->cacheDirectory, $fileNode);
+        };        
+        $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);        
+        return new ChunkWriterResultBuilder($writer, "$infosetId.$archiveId.$fileId.xml");
+    }
+    
+    private function createXmlBuilder(string $cacheDirectory, BuildableInterface $node) : BuilderInterface {
+        $builder = new XmlBuilder($node);
+        $builder->registerTagBlacklist([]);
+        $builder->registerAttributeBlacklist(['position', 'bit', 'encoding']);
+        
+        $builder->registerTagCachelist([$node->getBuildTag()]);
+        $builder->setCacheDirectory($cacheDirectory);
+        
+        return $builder;
     }
 }
 

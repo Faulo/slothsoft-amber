@@ -1965,24 +1965,6 @@
 				<option key="402" val="SCHATZSCHLÜSSEL 2" />
 			</dictionary>
 
-			<dictionary dictionary-id="partymembers">
-				<option key="1" val="THALION" />
-				<option key="2" val="NETSRAK" />
-				<option key="3" val="MANDO" />
-				<option key="4" val="ERIK" />
-				<option key="5" val="CHRIS" />
-				<option key="6" val="MONIKA" />
-				<option key="7" val="TAR DER DUNKLE" />
-				<option key="8" val="EGIL" />
-				<option key="9" val="SELENA" />
-				<option key="10" val="NELVIN" />
-				<option key="11" val="SABINE" />
-				<option key="12" val="VALDYN" />
-				<option key="13" val="TARGOR" />
-				<option key="14" val="LEONARIA" />
-				<option key="15" val="GRYBAN" />
-			</dictionary>
-
 			<dictionary dictionary-id="map-directions">
 				<option key="0" val="north" />
 				<option key="1" val="east" />
