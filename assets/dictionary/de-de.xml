@@ -784,13 +784,13 @@
 			</p>
 			<p >
 				<figure>
-					<img src="/getAsset.php/slothsoft@amber/static/screenshots/character-editor" alt="Screenshot"/>
+					<img src="/slothsoft@amber/static/screenshots/character-editor" alt="Screenshot"/>
 					<figcaption>Ein Ausschnitt aus dem Spielstand-Editor, für eines der möglichen Partymitglieder.</figcaption>
 				</figure>
 			</p>
 			<p >
 				<figure>
-					<img src="/getAsset.php/slothsoft@amber/static/screenshots/map-editor" alt="Screenshot"/>
+					<img src="/slothsoft@amber/static/screenshots/map-editor" alt="Screenshot"/>
 					<figcaption>Ein Ausschnitt aus dem Level-Editor, für eine der 2D-Karten.</figcaption>
 				</figure>
 			</p>
@@ -873,10 +873,10 @@
 						<dd>
 							<ul>
 								<li>
-									<a href="/getAsset.php/amber/games/ambermoon/release/Ambermoon.v1.06.zip">Ambermoon.v1.06.zip</a>
+									<a href="/slothsoft@amber/games/ambermoon/release/Ambermoon.v1.06.zip">Ambermoon.v1.06.zip</a>
 								</li>
 								<li>
-									<a href="/getAsset.php/amber/games/ambermoon/release/Ambermoon.v1.06.lha">Ambermoon.v1.06.lha</a>
+									<a href="/slothsoft@amber/games/ambermoon/release/Ambermoon.v1.06.lha">Ambermoon.v1.06.lha</a>
 								</li>
 							</ul>
 						</dd>

@@ -6,7 +6,7 @@
 	<xsl:template match="/*">
 		<div>
 			<script type="module"><![CDATA[
-import * as Module from "/getAsset.php/slothsoft@farah/js/Module";
+import * as Module from "/slothsoft@farah/js/Module";
 
 Module.resolveToDocument("./Downloads")
 	.then(document => alert(document.documentElement.namespaceURI));
@@ -14,8 +14,8 @@ Module.resolveToDocument("./Downloads")
 			]]></script>
 			<script><![CDATA[
 /*
-import("/getAsset.php/slothsoft@farah/js/Farah/Module")
-	.then(module => module.resolveToDocument("/getAsset.php/slothsoft@amber"))
+import("/slothsoft@farah/js/Farah/Module")
+	.then(module => module.resolveToDocument("/slothsoft@amber"))
 	.then(document => alert(document));
 //*/
 			]]></script>
