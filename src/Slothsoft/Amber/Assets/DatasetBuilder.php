@@ -6,18 +6,23 @@ use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunkWriterDelegate;
+use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunksDelegate;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface;
+use Slothsoft\Farah\Module\Result\StreamBuilderStrategy\ProxyStreamBuilder;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\EditorConfig;
 use Slothsoft\Savegame\Build\BuildableInterface;
 use Slothsoft\Savegame\Build\BuilderInterface;
 use Slothsoft\Savegame\Build\XmlBuilder;
-use Slothsoft\Savegame\Node\NodeFactory;
+use Generator;
+use Slothsoft\Farah\Module\Module;
+use Slothsoft\Farah\FarahUrl\FarahUrl;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ProxyResultBuilder;
 
 class DatasetBuilder implements ExecutableBuilderStrategyInterface
 {
@@ -33,11 +38,17 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface
         
         $controller = new EditorController();
         
-        $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
+        //$config = $controller->createEditorConfig($game, $version, $user, $infosetId);
         
         if ($fileId === '') {
             if ($archiveId === '') {
-                $resultBuilder = $this->processInfoset($config, $infosetId);
+                if ($infosetId === '') {
+                    $url = "farah://slothsoft@amber/games/$game/infoset";
+                    $url = FarahUrl::createFromReference($url);
+                    $resultBuilder = new ProxyResultBuilder(Module::resolveToExecutable($url));
+                }else {
+                    $resultBuilder = $this->processInfoset($config, $infosetId);
+                }
             } else {
                 $resultBuilder = $this->processArchive($config, $infosetId, $archiveId);
             }
@@ -46,6 +57,16 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface
         }
         
         return new ExecutableStrategies($resultBuilder);
+    }
+    
+    private function processInfosets(): ResultBuilderStrategyInterface
+    {
+        $chunkDelegate = function() : Generator {
+            yield '<xml>';
+            yield '</xml>';
+        };
+        $writer = new ChunkWriterFromChunksDelegate($chunkDelegate);
+        return new ChunkWriterResultBuilder($writer, "infosets.xml");
     }
     
     private function processInfoset(EditorConfig $config, string $infosetId): ResultBuilderStrategyInterface

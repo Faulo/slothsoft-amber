@@ -56,7 +56,9 @@
 	</directory>
 
 	<fragment name="game-resources">
-		<custom-asset name="dataset" executable-builder="Slothsoft\Amber\Assets\DatasetBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter"/>
+		<custom-asset name="dataset" 
+			executable-builder="Slothsoft\Amber\Assets\DatasetBuilder" 
+			parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter"/>
 		<custom-asset name="amberdata" executable-builder="Slothsoft\Amber\Assets\AmberdataBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter"/>
 		<custom-asset name="stylesheet" executable-builder="Slothsoft\Amber\Assets\StylesheetBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter"/>
 			
