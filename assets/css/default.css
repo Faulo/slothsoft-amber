@@ -1,7 +1,7 @@
 .Amber {
 	font-size: 1em;
 	font-weight: bold;
-	color: rgb(255, 255, 238);
+	color: #FFFFEE;
 	image-rendering: pixelated;
 	image-rendering: -moz-crisp-edges;
 	/*
@@ -71,8 +71,8 @@
 
 .Amber input[type="submit"], .Amber button, .Amber details, .Amber article
 	{
-	background-color: rgb(102, 102, 85);
-	border-color: rgb(102, 102, 85);
+	background-color: #666655;
+	border-color: #666655;
 	border-width: 2px;
 	border-style: outset;
 	box-sizing: border-box;
@@ -82,8 +82,8 @@
 .Amber textarea, .Amber input[type="text"], .Amber input[type="number"],
 	.Amber select, .Amber *[role="button"] {
 	max-width: 100%;
-	background-color: rgb(68, 68, 51);
-	border-color: rgb(68, 68, 51);
+	background-color: #444433;
+	border-color: #444433;
 	border-width: 2px;
 	border-style: inset;
 	box-sizing: border-box;
@@ -121,8 +121,8 @@
 	max-height: 20ch;
 	overflow: auto;
 	font-size: smaller;
-	background-color: rgb(68, 68, 51);
-	border-color: rgb(68, 68, 51);
+	background-color: #444433;
+	border-color: #444433;
 }
 .Amber .textlabel {
 	white-space: pre-wrap;
@@ -150,26 +150,26 @@
 
 .Amber input:focus, .Amber select:focus, .Amber button:focus, .Amber *[role="button"]:focus
 	{
-	border-color: rgb(255, 204, 0);
+	border-color: #FFCC00;
 }
 
 .Amber .orange, .Amber form:invalid button[type="submit"] {
-	color: rgb(255, 153, 0);
+	color: #FF9900;
 }
 
 .Amber .yellow, .Amber .command, .Amber input[type="text"], .Amber *[data-type="string-dictionary"] li::before
 	{
-	color: rgb(255, 204, 0);
+	color: #FFCC00;
 }
 
 .Amber .green, .Amber .section>.name, .Amber caption, .Amber h3, .Amber a:link
 	{
-	color: rgb(170, 170, 68);
+	color: #AAAA44;
 }
 
 .Amber .gray, .Amber a:visited, .Amber *[data-type="string-dictionary"] li
 	{
-	color: rgb(170, 170, 153);
+	color: #AAAA99;
 }
 
 .Amber details {
@@ -359,7 +359,7 @@
 
 .Amber form:invalid button[type="submit"]:hover::after {
 	content: "Formvalidierung fehlgeschlagen!";
-	color: rgb(255, 255, 238);
+	color: #FFFFEE;
 }
 
 .Amber *[data-template="equip"] .name, .Amber .equipment .name, .Amber article.Portrait
