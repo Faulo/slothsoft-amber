@@ -3,9 +3,6 @@
 	<name>slothsoft-amber</name>
 	<comment></comment>
 	<projects>
-		<project>slothsoft-core</project>
-		<project>slothsoft-farah</project>
-		<project>slothsoft-savegame</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -33,11 +30,4 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.php.core.PHPNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>vendor/slothsoft</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
