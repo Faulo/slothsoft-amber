@@ -25,7 +25,7 @@
 			"Slothsoft\\Amber\\" : "src"
 		},
 		"files" : [
-			"sripts/registerModule.php"
+			"scripts/registerModule.php"
 		]
 	},
 	"keywords" : [
