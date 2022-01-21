@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f2810ff3a0e1024b8ec27a87ab924209",
+    "content-hash": "7cced075370dbde69ccc30034ca36a05",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1306,16 +1306,16 @@
         },
         {
             "name": "slothsoft/farah",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Faulo/slothsoft-farah.git",
-                "reference": "3e010aa100e7b1c18e025b102dfb405e8f6e45e9"
+                "reference": "ce1ba035235295b28a098fd63070baf30d1109d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Faulo/slothsoft-farah/zipball/3e010aa100e7b1c18e025b102dfb405e8f6e45e9",
-                "reference": "3e010aa100e7b1c18e025b102dfb405e8f6e45e9",
+                "url": "https://api.github.com/repos/Faulo/slothsoft-farah/zipball/ce1ba035235295b28a098fd63070baf30d1109d3",
+                "reference": "ce1ba035235295b28a098fd63070baf30d1109d3",
                 "shasum": ""
             },
             "require": {
@@ -1377,32 +1377,32 @@
             ],
             "support": {
                 "issues": "https://github.com/Faulo/slothsoft-farah/issues",
-                "source": "https://github.com/Faulo/slothsoft-farah/tree/1.6.0"
+                "source": "https://github.com/Faulo/slothsoft-farah/tree/1.6.1"
             },
-            "time": "2022-01-21T17:19:51+00:00"
+            "time": "2022-01-21T20:00:26+00:00"
         },
         {
             "name": "slothsoft/savegame",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Faulo/slothsoft-savegame.git",
-                "reference": "cd4cbd0e3acde0aa9077681fb2f84aadfcd508d8"
+                "reference": "0d6fa6deb1fc9e31b9cea4b8aa29768bf100f167"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Faulo/slothsoft-savegame/zipball/cd4cbd0e3acde0aa9077681fb2f84aadfcd508d8",
-                "reference": "cd4cbd0e3acde0aa9077681fb2f84aadfcd508d8",
+                "url": "https://api.github.com/repos/Faulo/slothsoft-savegame/zipball/0d6fa6deb1fc9e31b9cea4b8aa29768bf100f167",
+                "reference": "0d6fa6deb1fc9e31b9cea4b8aa29768bf100f167",
                 "shasum": ""
             },
             "require": {
-                "php": "7.2 - 8.0",
+                "php": "7.4 - 8.0",
                 "php-ds/php-ds": "^1.2",
                 "slothsoft/core": "^1.5",
-                "slothsoft/farah": "^1.5"
+                "slothsoft/farah": "^1.6"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.5"
+                "phpunit/phpunit": "8.5.*"
             },
             "suggest": {
                 "ext-ds": "*"
@@ -1415,10 +1415,10 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Slothsoft\\Savegame\\": "src/"
+                    "Slothsoft\\Savegame\\": "src"
                 },
                 "files": [
-                    "src/registerModule.php"
+                    "scripts/registerModule.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1440,9 +1440,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Faulo/slothsoft-savegame/issues",
-                "source": "https://github.com/Faulo/slothsoft-savegame/tree/1.0.1"
+                "source": "https://github.com/Faulo/slothsoft-savegame/tree/1.0.2"
             },
-            "time": "2022-01-21T16:20:04+00:00"
+            "time": "2022-01-21T19:58:43+00:00"
         },
         {
             "name": "slothsoft/w3c",
