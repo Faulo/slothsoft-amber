@@ -1,9 +1,8 @@
 <xsl:stylesheet version="1.0" 
+	xmlns="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
-	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
-	xmlns:str="http://exslt.org/strings"
-	extension-element-prefixes="str">
+	xmlns:sse="http://schema.slothsoft.net/savegame/editor">
 
 	<xsl:import href="globals/dictionary" />
 	<xsl:import href="globals/extract" />
@@ -50,7 +49,7 @@
 			<xsl:call-template name="extract-race">
 				<xsl:with-param name="root" select="$root" />
 			</xsl:call-template>
-			<xsl:call-template name="extract-class">
+			<xsl:call-template name="extract-class-instance">
 				<xsl:with-param name="root" select="$root" />
 			</xsl:call-template>
 		</saa:pc>

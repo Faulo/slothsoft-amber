@@ -7,39 +7,62 @@
 		<bit-field position="0" name="spell-places" dictionary-ref="spell-places" />
 		<integer position="4" name="spell-modifiers"/>
 	</global>
-	<global global-id="AM2-spells">
-		<repeat-group group-size="5" group-count="30" name="spells-white" position="0">
-			<use-global ref="AM2-spell"/>
-		</repeat-group>
-		<repeat-group group-size="5" group-count="30" name="spells-blue" position="150">
-			<use-global ref="AM2-spell"/>
-		</repeat-group>
-		<repeat-group group-size="5" group-count="30" name="spells-green" position="300">
-			<use-global ref="AM2-spell"/>
-		</repeat-group>
-		<repeat-group group-size="5" group-count="30" name="spells-black" position="450">
-			<use-global ref="AM2-spell"/>
-		</repeat-group>
-		<repeat-group group-size="5" group-count="30" name="spells-misc" position="900">
-			<use-global ref="AM2-spell"/>
-		</repeat-group>
+	<global global-id="AM2-spell-effects">
+		<group name="spell-effects">
+			<repeat-group group-size="1" group-count="30" name="spells-white" position="0">
+				<select name="spell-effect" dictionary-ref="spell-effects" />
+			</repeat-group>
+		</group>
+	</global>
+	<global global-id="AM2-spell-data">
+		<group name="spell-data">
+			<repeat-group group-size="5" group-count="30" name="spells-white" position="0">
+				<use-global ref="AM2-spell"/>
+			</repeat-group>
+			<repeat-group group-size="5" group-count="30" name="spells-blue" position="150">
+				<use-global ref="AM2-spell"/>
+			</repeat-group>
+			<repeat-group group-size="5" group-count="30" name="spells-green" position="300">
+				<use-global ref="AM2-spell"/>
+			</repeat-group>
+			<repeat-group group-size="5" group-count="30" name="spells-black" position="450">
+				<use-global ref="AM2-spell"/>
+			</repeat-group>
+			<repeat-group group-size="5" group-count="30" name="spells-unused" position="600">
+				<use-global ref="AM2-spell"/>
+			</repeat-group>
+			<repeat-group group-size="5" group-count="30" name="spells-unused" position="750">
+				<use-global ref="AM2-spell"/>
+			</repeat-group>
+			<repeat-group group-size="5" group-count="30" name="spells-misc" position="900">
+				<use-global ref="AM2-spell"/>
+			</repeat-group>
+		</group>
 	</global>
 	<global global-id="AM2-strings">
-		<string-dictionary type="null-delimited" encoding="8bit" position="0x000" name="spell-types"
-			string-count="7" />
-		<string-dictionary type="null-delimited" encoding="8bit" position="0x02F" name="spells-white"
-			string-count="30" />
-		<string-dictionary type="null-delimited" encoding="8bit" position="0x20A" name="spells-blue"
-			string-count="30" />
-		<string-dictionary type="null-delimited" encoding="8bit" position="0x398" name="spells-green"
-			string-count="30" />
-		<string-dictionary type="null-delimited" encoding="8bit" position="0x4AD" name="spells-black"
-			string-count="30" />
-		<string-dictionary type="null-delimited" encoding="8bit" position="0x62E" name="spells-misc"
-			string-count="30" />
+		<group name="strings">
+			<string-dictionary type="null-delimited" encoding="8bit" position="0x000" name="spell-types"
+				string-count="7" />
+			<group name="spell-names">
+				<string-dictionary type="null-delimited" encoding="8bit" position="0x02F" name="spells-white"
+					string-count="30" />
+				<string-dictionary type="null-delimited" encoding="8bit" position="0x20A" name="spells-blue"
+					string-count="30" />
+				<string-dictionary type="null-delimited" encoding="8bit" position="0x398" name="spells-green"
+					string-count="30" />
+				<string-dictionary type="null-delimited" encoding="8bit" position="0x4AD" name="spells-black"
+					string-count="30" />
+				<string-dictionary type="null-delimited" encoding="8bit" position="0x5F2" name="spells-unused"
+					string-count="30" />
+				<string-dictionary type="null-delimited" encoding="8bit" position="0x610" name="spells-unused"
+					string-count="30" />
+				<string-dictionary type="null-delimited" encoding="8bit" position="0x62E" name="spells-misc"
+					string-count="30" />
+			</group>
+		</group>
 	</global>
 	<global global-id="AM2-items">
-		<repeat-group group-size="60" group-count="402">
+		<repeat-group name="items" group-size="60" group-count="402">
 			<integer position="0" name="image-id" />
 			<select position="1" name="type" dictionary-ref="item-types" />
 			<select position="2" name="slot" dictionary-ref="item-slots" />
@@ -60,7 +83,7 @@
 
 			<integer position="21" name="subtype" />
 			<integer position="22" name="subsubtype" />
-			<select position="23" name="spell-type" dictionary-ref="item-spell-types" />
+			<select position="23" name="spell-type" dictionary-ref="spell-types" />
 			<integer position="24" name="spell-id" />
 			<integer position="25" name="charges-default" />
 			<integer position="27" name="max-charges-by-shop" />

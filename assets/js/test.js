@@ -1,3 +1,3 @@
-import { DOMHelper } from "/getAsset.php/slothsoft@farah/js/DOMHelper";
+import { DOMHelper } from "/slothsoft@farah/js/DOMHelper";
 
 new DOMHelper();

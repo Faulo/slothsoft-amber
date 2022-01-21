@@ -34,13 +34,13 @@ SavegameEditor.prototype = Object.create(
 				}
 //				try {
 //					this.getDocument(
-//						"/getAsset.php/slothsoft@amber/xsl/editor.data-list",
+//						"/slothsoft@amber/xsl/editor.data-list",
 //						(doc) => {
 //							this.templateDoc = doc;
 //						}
 //					)
 //					this.getDocument(
-//						"/getAsset.php/slothsoft@amber/game-resources/amberdata?infosetId=lib.portraits",
+//						"/slothsoft@amber/game-resources/amberdata?infosetId=lib.portraits",
 //						(doc) => {
 //							this.repositoryDoc = doc;
 //						}
@@ -397,7 +397,7 @@ SavegameEditor.prototype = Object.create(
 				if (this.repositoryDocs[entryInfoset]) {
 					return Promise.resolve(this.repositoryDocs[entryInfoset]);
 				} else {
-					return DOMHelper.loadDocument("/getAsset.php/slothsoft@amber/game-resources/amberdata?infosetId=" + entryInfoset)
+					return DOMHelper.loadDocument("/slothsoft@amber/game-resources/amberdata?infosetId=" + entryInfoset)
 						.then((document) => {
 							this.repositoryDocs[entryInfoset] = document;
 							return document;
@@ -410,7 +410,7 @@ SavegameEditor.prototype = Object.create(
 				if (this.templateDoc) {
 					return Promise.resolve(this.templateDoc);
 				} else {
-					return DOMHelper.loadDocument("/getAsset.php/slothsoft@amber/xsl/editor.data-list")
+					return DOMHelper.loadDocument("/slothsoft@amber/xsl/editor.data-list")
 						.then((document) => {
 							this.templateDoc = document;
 							return document;

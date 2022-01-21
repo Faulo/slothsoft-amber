@@ -1,9 +1,10 @@
 <xsl:stylesheet version="1.0" 
+	xmlns="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:str="http://exslt.org/strings"
-	extension-element-prefixes="str">
+	xmlns:php="http://php.net/xsl">
 
 	<xsl:import href="globals/dictionary" />
 	<xsl:import href="globals/extract" />
@@ -57,11 +58,11 @@
 				<xsl:variable name="age" select=".//*[@name = 'age']/*"/>
 				<saa:age current="{$age[@name='current']/@value}" maximum="{$age[@name='current']/@value}"/>
 			</saa:race>
-			<saa:class>
+			<saa:class-instance>
 				<xsl:apply-templates select=".//*[@name = 'name']" mode="attr">
 					<xsl:with-param name="name" select="'name'" />
 				</xsl:apply-templates>
-				<xsl:apply-templates select=".//*[@name = 'school']" mode="attr" />
+				<xsl:apply-templates select=".//*[@name = 'spellbooks']" mode="attr" />
 				<xsl:apply-templates select=".//*[@name = 'apr-per-level']" mode="attr" />
 				<xsl:apply-templates select=".//*[@name = 'hp-per-level']" mode="attr" />
 				<xsl:apply-templates select=".//*[@name = 'sp-per-level']" mode="attr" />
@@ -80,7 +81,9 @@
 				
 				<xsl:variable name="sp" select="*[@name = 'spell-points']/*"/>
 				<saa:sp current="{$sp[@name='current']/@value}" maximum="{$sp[@name='current']/@value + $sp[@name='maximum-mod']/@value}"/>
-			</saa:class>
+				
+				<xsl:call-template name="extract-spellbook-instance" />
+			</saa:class-instance>
 			
 			<xsl:for-each select="(.//*[@name = 'gfx'])[1]">
 				<xsl:call-template name="extract-gfx" >

@@ -3,7 +3,10 @@
 	xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml"
 	xmlns:sfm="http://schema.slothsoft.net/farah/module"
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:str="http://exslt.org/strings" extension-element-prefixes="str">
+	xmlns:str="http://exslt.org/strings" xmlns:sfx="http://schema.slothsoft.net/farah/xslt"
+	extension-element-prefixes="str">
+	
+	<xsl:import href="farah://slothsoft@farah/xsl/xslt" />
 
 	<xsl:variable name="amberdata" select="/*/*[@name='amberdata']/saa:amberdata" />
 	
@@ -49,7 +52,7 @@ window.addEventListener(
 				</summary>
 				<ul>
 					<xsl:for-each select="*">
-						<xsl:sort select="saa:class/@experience" data-type="number"/>
+						<xsl:sort select="saa:class-instance/@experience" data-type="number"/>
 						<xsl:sort select="@level" data-type="number"/>
 						<li>
 							<xsl:apply-templates select="." mode="itemlist" />
@@ -61,19 +64,38 @@ window.addEventListener(
 	</xsl:template>
 
 	<xsl:template match="saa:class-list" mode="itemlist">
-		<xsl:for-each select="*">
-			<details data-template="flex">
-				<summary>
-					<h2>
-						Klasse:
-						<span class="green">
-							<xsl:value-of select="@name" />
-						</span>
-					</h2>
-				</summary>
-				<xsl:apply-templates select="." mode="itemlist" />
-			</details>
-		</xsl:for-each>
+		<details data-template="flex">
+			<summary>
+				<h2>
+					Fähigkeiten
+				</h2>
+			</summary>
+			<ul>
+				<xsl:for-each select="*">
+					<li>
+						<xsl:apply-templates select="." mode="itemlist" />
+					</li>
+				</xsl:for-each>
+			</ul>
+		</details>
+		<details data-template="flex">
+			<summary>
+				<h2>
+					Erfahrungstabelle
+				</h2>
+			</summary>
+			<ul>
+				<xsl:for-each select="*">
+					<li>
+						<xsl:apply-templates select="." mode="experience" />
+					</li>
+				</xsl:for-each>
+			</ul>
+		</details>
+	</xsl:template>
+	
+	<xsl:template match="saa:spellbook-list" mode="itemlist">
+		spellbook-list
 	</xsl:template>
 
 	<xsl:template match="saa:map-list" mode="itemlist">
@@ -112,13 +134,83 @@ window.addEventListener(
 	</xsl:template>
 
 	<xsl:template match="saa:class" mode="itemlist">
-		<article data-class-id="{@id}" data-template="flex" class="Class">
-			<xsl:value-of select="@name" />
-			<xsl:apply-templates select="." mode="itemlist-inline" />
-		</article>
+		<table class="ClassData">
+			<caption><xsl:value-of select="@name"/></caption>
+			<tbody>
+				<xsl:for-each select="saa:skill">
+					<tr class="right-aligned">
+						<td>
+							<xsl:value-of select="@name" />
+							<xsl:text>:</xsl:text>
+						</td>
+						<td class="number">
+							<xsl:value-of select="concat(@maximum, '%')" />
+						</td>
+					</tr>
+				</xsl:for-each>
+			</tbody>
+			<tbody>
+				<tr>
+					<th class="yellow smaller" colspan="2">
+						<xsl:choose>
+							<xsl:when test="saa:spellbook-reference">
+								<xsl:for-each select="saa:spellbook-reference">
+									<p><xsl:value-of select="@name"/></p>
+								</xsl:for-each>
+							</xsl:when>
+							<xsl:otherwise>
+								<p>-</p>
+							</xsl:otherwise>
+						</xsl:choose>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+	</xsl:template>
+	
+	<xsl:template match="saa:class" mode="experience">
+		<xsl:variable name="class" select="."/>
+		<table class="ClassData">
+			<caption><xsl:value-of select="@name"/></caption>
+			<thead>
+				<tr>
+					<th>level</th>
+					<th>experience</th>
+					<th>hp</th>
+					<th>sp</th>
+					<th>tp</th>
+					<th>slp</th>
+				</tr>
+			</thead>
+			<tbody>
+				<xsl:for-each select="sfx:range(1, 50)">
+					<xsl:variable name="lvl" select="."/>
+					<tr class="right-aligned">
+						<td class="number green">
+							<xsl:value-of select="$lvl" />
+						</td>
+						<td class="number yellow">
+							<xsl:value-of select="$class/@base-experience * $lvl * ($lvl + 1) div 2" />
+						</td>
+						<td class="number">
+							<xsl:value-of select="$class/@hp-per-level * $lvl" />
+						</td>
+						<td class="number">
+							<xsl:value-of select="$class/@sp-per-level * $lvl" />
+						</td>
+						<td class="number">
+							<xsl:value-of select="$class/@tp-per-level * $lvl" />
+						</td>
+						<td class="number">
+							<xsl:value-of select="$class/@slp-per-level * $lvl" />
+						</td>
+					</tr>
+				</xsl:for-each>
+			</tbody>
+		</table>
 	</xsl:template>
 
-	<xsl:template match="saa:class" mode="itemlist-inline">
+	<xsl:template match="saa:class-instance" mode="itemlist-inline">
 		<table class="ClassData">
 			<tbody>
 				<xsl:for-each select="saa:skill">
@@ -127,14 +219,12 @@ window.addEventListener(
 							<xsl:value-of select="@name" />
 							<xsl:text>:</xsl:text>
 						</td>
-						<xsl:if test="@current">
-							<td class="number">
-								<xsl:value-of select="concat(@current, '%')" />
-							</td>
-							<td>
-								<xsl:text>/</xsl:text>
-							</td>
-						</xsl:if>
+						<td class="number">
+							<xsl:value-of select="concat(@current, '%')" />
+						</td>
+						<td>
+							<xsl:text>/</xsl:text>
+						</td>
 						<td class="number">
 							<xsl:value-of select="concat(@maximum, '%')" />
 						</td>
@@ -187,7 +277,7 @@ window.addEventListener(
 	</xsl:template>
 
 	<xsl:template match="saa:monster | saa:npc | saa:pc" mode="itemlist">
-		<xsl:variable name="isMage" select="saa:class/saa:sp/@maximum &gt; 0"/>
+		<xsl:variable name="isMage" select="saa:class-instance/saa:sp/@maximum &gt; 0"/>
 		<article data-monster-id="{@id}" class="Character">
 			<table>
 				<tr>
@@ -213,7 +303,7 @@ window.addEventListener(
 					</td>
 					<td class="skills">
 						<h3>skills</h3>
-						<xsl:apply-templates select="saa:class" mode="itemlist-inline" />
+						<xsl:apply-templates select="saa:class-instance" mode="itemlist-inline" />
 					</td>
 					<td class="character-sheet">
 						<table>
@@ -225,8 +315,8 @@ window.addEventListener(
 							</tr>
 							<tr><td><xsl:value-of select="concat(@gender, ' ')"/></td></tr>
 							<tr><td>age: <xsl:value-of select="saa:race/saa:age/@current"/></td></tr>
-							<tr><td><xsl:value-of select="saa:class/@name"/><xsl:text> </xsl:text><xsl:value-of select="@level"/></td></tr>
-							<tr><td>ep: <xsl:value-of select="saa:class/@experience"/></td></tr>
+							<tr><td><xsl:value-of select="saa:class-instance/@name"/><xsl:text> </xsl:text><xsl:value-of select="@level"/></td></tr>
+							<tr><td>ep: <xsl:value-of select="saa:class-instance/@experience"/></td></tr>
 						</table>
 						<table>
 							<tr>
@@ -235,12 +325,12 @@ window.addEventListener(
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2">hp: <xsl:value-of select="concat(saa:class/saa:hp/@current, '/', saa:class/saa:hp/@maximum)"/></td>
+								<td colspan="2">hp: <xsl:value-of select="concat(saa:class-instance/saa:hp/@current, '/', saa:class-instance/saa:hp/@maximum)"/></td>
 							</tr>
 							<tr>
 								<td colspan="2">
 									<xsl:if test="$isMage">
-										sp: <xsl:value-of select="concat(saa:class/saa:sp/@current, '/', saa:class/saa:sp/@maximum)"/>
+										sp: <xsl:value-of select="concat(saa:class-instance/saa:sp/@current, '/', saa:class-instance/saa:sp/@maximum)"/>
 									</xsl:if>
 								</td>
 							</tr>
@@ -284,9 +374,9 @@ window.addEventListener(
 						<td>
 							<h3>inventory</h3>
 							<xsl:apply-templates select="saa:inventory" mode="itemlist-inline" />
-							<xsl:if test="saa:spellbook/*">
+							<xsl:if test="saa:class-instance/saa:spellbook-instance/*">
 								<h3>spells</h3>
-								<xsl:apply-templates select="saa:spellbook" mode="itemlist-inline" />
+								<xsl:apply-templates select="saa:class-instance/saa:spellbook-instance[*]" mode="itemlist-inline" />
 							</xsl:if>
 						</td>
 					</tr>
@@ -348,8 +438,8 @@ window.addEventListener(
 					<xsl:apply-templates select="saa:race" mode="itemlist-inline" />
 				</li>
 				<li>
-					<h3>class: <xsl:value-of select="saa:class/@name"/></h3>
-					<xsl:apply-templates select="saa:class" mode="itemlist-inline" />
+					<h3>class: <xsl:value-of select="saa:class-instance/@name"/></h3>
+					<xsl:apply-templates select="saa:class-instance" mode="itemlist-inline" />
 				</li>
 				<li>
 					
@@ -357,10 +447,11 @@ window.addEventListener(
 			</ul>
 		</article>
 	</xsl:template>
-	<xsl:template match="saa:spellbook" mode="itemlist-inline">
+	<xsl:template match="saa:spellbook-instance" mode="itemlist-inline">
 		<div class="spells">
+			<h3 class="yellow"><xsl:value-of select="@name"/></h3>
 			<ul>
-				<xsl:for-each select="saa:spell-instance">
+				<xsl:for-each select="saa:spell-reference">
 					<li>
 						<xsl:value-of select="@name" />
 					</li>
@@ -498,7 +589,7 @@ window.addEventListener(
 									<tr>
 										<td>
 											<ul>
-												<xsl:for-each select="saa:class/@name">
+												<xsl:for-each select="saa:class-reference/@name">
 													<li>
 														<xsl:value-of select="." />
 													</li>

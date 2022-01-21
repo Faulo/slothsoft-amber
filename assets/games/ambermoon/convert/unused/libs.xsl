@@ -1111,27 +1111,27 @@
 			</dictionary>
 
 			<dictionary dictionary-id="attributes">
-				<option key="0" val="STÄ" description="Stärke" />
-				<option key="1" val="INT" description="Intelligenz" />
-				<option key="2" val="GES" description="Geschicklichkeit" />
-				<option key="3" val="SCH" description="Schnelligkeit" />
-				<option key="4" val="KON" description="Konstitution" />
-				<option key="5" val="KAR" description="Karisma" />
-				<option key="6" val="GLÜ" description="Glück" />
-				<option key="7" val="A-M" description="Anti-Magie" />
+				<option key="0" val="STÄ" title="Stärke" />
+				<option key="1" val="INT" title="Intelligenz" />
+				<option key="2" val="GES" title="Geschicklichkeit" />
+				<option key="3" val="SCH" title="Schnelligkeit" />
+				<option key="4" val="KON" title="Konstitution" />
+				<option key="5" val="KAR" title="Karisma" />
+				<option key="6" val="GLÜ" title="Glück" />
+				<option key="7" val="A-M" title="Anti-Magie" />
 			</dictionary>
 
 			<dictionary dictionary-id="skills">
-				<option key="0" val="ATT" description="Attacke" />
-				<option key="1" val="PAR" description="Parade" />
-				<option key="2" val="SCH" description="Schwimmen" />
-				<option key="3" val="KRI" description="Kritische Treffer" />
-				<option key="4" val="F-F" description="Fallen Finden" />
-				<option key="5" val="F-E" description="Fallen Entschärfen" />
-				<option key="6" val="S-Ö" description="Schlösser Knacken" />
-				<option key="7" val="SUC" description="Suchen" />
-				<option key="8" val="SRL" description="Spruchrollen Lesen" />
-				<option key="9" val="M-B" description="Magie Benutzen" />
+				<option key="0" val="ATT" title="Attacke" />
+				<option key="1" val="PAR" title="Parade" />
+				<option key="2" val="SCH" title="Schwimmen" />
+				<option key="3" val="KRI" title="Kritische Treffer" />
+				<option key="4" val="F-F" title="Fallen Finden" />
+				<option key="5" val="F-E" title="Fallen Entschärfen" />
+				<option key="6" val="S-Ö" title="Schlösser Knacken" />
+				<option key="7" val="SUC" title="Suchen" />
+				<option key="8" val="SRL" title="Spruchrollen Lesen" />
+				<option key="9" val="M-B" title="Magie Benutzen" />
 			</dictionary>
 
 			<dictionary dictionary-id="equipment-slots">
@@ -1963,24 +1963,6 @@
 				<option key="400" val="GRUFTSCHLÜSSEL" />
 				<option key="401" val="SCHATZSCHLÜSSEL 1" />
 				<option key="402" val="SCHATZSCHLÜSSEL 2" />
-			</dictionary>
-
-			<dictionary dictionary-id="partymembers">
-				<option key="1" val="THALION" />
-				<option key="2" val="NETSRAK" />
-				<option key="3" val="MANDO" />
-				<option key="4" val="ERIK" />
-				<option key="5" val="CHRIS" />
-				<option key="6" val="MONIKA" />
-				<option key="7" val="TAR DER DUNKLE" />
-				<option key="8" val="EGIL" />
-				<option key="9" val="SELENA" />
-				<option key="10" val="NELVIN" />
-				<option key="11" val="SABINE" />
-				<option key="12" val="VALDYN" />
-				<option key="13" val="TARGOR" />
-				<option key="14" val="LEONARIA" />
-				<option key="15" val="GRYBAN" />
 			</dictionary>
 
 			<dictionary dictionary-id="map-directions">

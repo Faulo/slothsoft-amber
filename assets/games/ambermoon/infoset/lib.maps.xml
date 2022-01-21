@@ -4,10 +4,19 @@
 	xmlns:xi="http://www.w3.org/2001/XInclude">
 	
 	<xi:include href="globals/maps"/>
+	<xi:include href="globals/events"/>
 	
-	<xi:include href="archives/Extrafiles/2D_Map_data.amb"/>
-	<xi:include href="archives/Extrafiles/2D_Icon_data.amb"/>
 	
-	<xi:include href="archives/Extrafiles/3D_Map_data.amb"/>
-	<xi:include href="archives/Extrafiles/3D_Lab_data.amb"/>
+	<xi:include href="archives/Amberfiles/1Map_data.amb" />
+	<xi:include href="archives/Amberfiles/1Map_texts.amb" />
+	
+	<xi:include href="archives/Amberfiles/2Map_data.amb" />
+	<xi:include href="archives/Amberfiles/2Lab_data.amb" />
+	<xi:include href="archives/Amberfiles/2Map_texts.amb" />
+	
+	<xi:include href="archives/Amberfiles/3Map_data.amb" />
+	<xi:include href="archives/Amberfiles/3Lab_data.amb" />
+	<xi:include href="archives/Amberfiles/3Map_texts.amb" />
+	
+	<xi:include href="archives/Amberfiles/Icon_data.amb" />
 </savegame.editor>

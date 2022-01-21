@@ -68,7 +68,7 @@
 		<integer name="event-payload" position="4" />
 		<integer name="event-payload" position="5" />
 
-		<select position="6" size="2" name="event-payload" dictionary-ref="items" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
 
 		<select position="8" size="2" name="event-payload" dictionary-ref="gotos" />
 
@@ -82,7 +82,7 @@
 		<integer name="event-payload" position="3" />
 		<integer name="event-payload" position="4" />
 		<integer name="event-payload" position="5" />
-		<select position="6" size="2" name="event-payload" dictionary-ref="items" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
 		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
 		<use-global ref="event-bit-goto" />
 	</global>
@@ -246,7 +246,7 @@
 		<use-global ref="event-bit-type" />
 		<use-global ref="event-bit-if" />
 
-		<select name="event-payload" position="6" size="2" dictionary-ref="partymembers" />
+		<select name="event-payload" position="6" size="2" dictionary-ref="pc-ids" />
 		<select name="event-payload" position="2" size="2" dictionary-ref="boolean-reverse" />
 		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
 
@@ -260,7 +260,7 @@
 		<use-global ref="event-bit-type" />
 		<use-global ref="event-bit-if" />
 
-		<select position="6" size="2" name="event-payload" dictionary-ref="items" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
 		<select position="2" size="1" name="event-payload" dictionary-ref="proportionality" />
 		<integer position="3" size="1" name="event-payload" />
 		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
@@ -275,7 +275,7 @@
 		<use-global ref="event-bit-type" />
 		<use-global ref="event-bit-if" />
 
-		<select position="6" size="2" name="event-payload" dictionary-ref="items" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
 		<integer position="2" size="1" name="event-payload" />
 		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
 
@@ -350,7 +350,7 @@
 		<!-- inventory -->
 		<use-global ref="event-bit-type" />
 		<use-global ref="event-bit-set" />
-		<select position="6" size="2" name="event-payload" dictionary-ref="items" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
 		<integer name="event-payload" position="3" />
 		<use-global ref="event-bit-goto" />
 
@@ -423,7 +423,7 @@
 		<use-global ref="event-bit-type" />
 		<use-global ref="event-bit-trigger" />
 
-		<select position="6" size="2" name="event-payload" dictionary-ref="items" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
 
 		<use-global ref="event-bit-goto" />
 
@@ -439,7 +439,7 @@
 		<use-global ref="event-bit-type" />
 		<use-global ref="event-bit-trigger" />
 
-		<select position="6" size="2" name="event-payload" dictionary-ref="items" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
 
 		<use-global ref="event-bit-goto" />
 
@@ -575,7 +575,7 @@
 		<!-- item -->
 		<use-global ref="event-bit-type" />
 		<use-global ref="event-bit-create" />
-		<select name="event-payload" position="8" size="2" dictionary-ref="items" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="item-ids" />
 		<integer name="event-payload" position="6" size="2" />
 		<use-global ref="event-bit-goto" />
 

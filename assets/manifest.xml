@@ -1,22 +1,25 @@
 <?xml version="1.0"?>
-<assets xmlns="http://schema.slothsoft.net/farah/module">
-	<resource-directory name="cli" type="application/vnd.microsoft.portable-executable" />
-	<resource-directory name="css" type="text/css" />
-	<resource-directory name="js" type="application/javascript" />
-	<resource-directory name="xsl" type="application/xslt+xml" />
-	<resource-directory name="dictionary" type="application/xml" />
-	<resource-directory name="webpack" type="*/*" />
+<assets xmlns="http://schema.slothsoft.net/farah/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schema.slothsoft.net/farah/module http://schema.slothsoft.net/farah/module/1.1.xsd"
+    version="1.1">
+	<resource-directory name="cli" type="application/vnd.microsoft.portable-executable"/>
+	<resource-directory name="css" type="text/css"/>
+	<resource-directory name="js" type="application/javascript"/>
+	<resource-directory name="xsl" type="application/xslt+xml"/>
+	<resource-directory name="dictionary" type="application/xml"/>
+	<resource-directory name="webpack" type="*/*"/>
 	
 	<directory name="schema">
-		<resource-directory name="amberdata" type="application/x-xsd+xml" />
+		<resource-directory name="amberdata" type="application/x-xsd+xml"/>
 	</directory>
 	
 	<directory name="games">
 		<directory name="ambermoon">
-			<resource-directory name="release" type="*/*" />
-			<resource-directory name="source" type="*/*" />
-			<resource-directory name="infoset" type="application/xml" />
-			<resource-directory name="convert" type="application/xslt+xml" />
+			<resource-directory name="release" type="*/*"/>
+			<resource-directory name="source" type="*/*"/>
+			<resource-directory name="infoset" type="application/xml"/>
+			<resource-directory name="convert" type="application/xslt+xml"/>
+			<resource-directory name="editor" type="application/xslt+xml"/>
 			
 			<fragment name="gfx">
 				<use-document name="icons-4-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004&amp;paletteId=6"/>
@@ -51,40 +54,29 @@
 				</fragment>
 			</fragment>
 		</directory>
-		<resource name="index" type="application/xml" />
+		<resource name="index" type="application/xml"/>
 	</directory>
 
 	<fragment name="game-resources">
-		<custom-asset name="dataset" executable-builder="Slothsoft\Amber\Assets\DatasetBuilder"
-			parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
-		<custom-asset name="amberdata" executable-builder="Slothsoft\Amber\Assets\AmberdataBuilder"
-			parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
-		<custom-asset name="stylesheet" executable-builder="Slothsoft\Amber\Assets\StylesheetBuilder"
-			parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
+		<custom-asset name="dataset" 
+			executable-builder="Slothsoft\Amber\Assets\DatasetBuilder" 
+			parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter"/>
+		<custom-asset name="amberdata" executable-builder="Slothsoft\Amber\Assets\AmberdataBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter"/>
+		<custom-asset name="stylesheet" executable-builder="Slothsoft\Amber\Assets\StylesheetBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter"/>
 			
-		<custom-asset name="gfx" executable-builder="Slothsoft\Amber\Assets\GfxBuilder"
-			parameter-filter="Slothsoft\Amber\ParameterFilters\GfxParameterFilter" />
-		<custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder"
-			parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter" />
+		<custom-asset name="gfx" executable-builder="Slothsoft\Amber\Assets\GfxBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\GfxParameterFilter"/>
+		
+		<custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter"/>
+		<custom-asset name="editor-template" executable-builder="Slothsoft\Amber\Assets\EditorTemplateBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter"/>
 	</fragment>
 	
 	<fragment name="game-editor">
-		<use-template ref="/xsl/editor" />
-		<use-document name="editor" ref="/game-resources/editor" />
-		<use-document name="dictionaries" ref="/game-resources/amberdata?infosetId=lib.dictionaries" />
-		
-		<link-stylesheet ref="/css/default"/>
-		<link-stylesheet ref="/css/amber-picker"/>
-		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.items"/>
-		<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.portraits"/>
-		
-		<import ref="/api/SavegameEditor"/>
 	</fragment>
 	
 	<fragment name="game-list">
-		<use-template ref="/xsl/editor.data-list" />
-		<use-document name="dictionaries" ref="/game-resources/amberdata?infosetId=lib.dictionaries" />
-		<use-document name="list" ref="/game-resources/amberdata?archiveId" />
+		<use-template ref="/xsl/editor.data-list"/>
+		<use-document name="dictionaries" ref="/game-resources/amberdata?infosetId=lib.dictionaries"/>
+		<use-document name="list" ref="/game-resources/amberdata?archiveId"/>
 		
 		<link-stylesheet ref="/css/default"/>
 		<link-stylesheet ref="/css/amber-picker"/>
@@ -95,9 +87,10 @@
 		<import ref="/api/SavegameEditor"/>
 	</fragment>
 	
+	<!-- 
 	<fragment name="game-client">
-		<use-template ref="/xsl/game.client" />
-		<use-document name="client" ref="/game-resources/amberdata?infosetId=client" />
+		<use-template ref="/xsl/game.client"/>
+		<use-document name="client" ref="/game-resources/amberdata?infosetId=client"/>
 		
 		<link-stylesheet ref="/css/default"/>
 		<link-stylesheet ref="/css/amber-picker"/>
@@ -111,20 +104,27 @@
 		<link-script ref="/js/DungeonViewer"/>
 		<link-script ref="/js/babylonjs/babylon.custom"/>
 	</fragment>
-
+    -->
+ 
 	<fragment name="html">
 		<fragment name="description">
-			<use-template ref="/xsl/description" name="description" />
-			<use-document ref="//farah/sites" name="sites" />
-			<import ref="/api/default" name="default" />
-			<import ref="/api/MapViewer" name="MapViewer" />
-			<import ref="/api/DungeonViewer" name="DungeonViewer" />
+			<use-template ref="/xsl/description"/>
+			<use-document ref="//farah/sites" name="sites"/>
+			<import ref="/api/default"/>
+			<import ref="/api/MapViewer"/>
+			<import ref="/api/DungeonViewer"/>
 		</fragment>
 		<fragment name="editor">
-			<import ref="/game-editor"/>
-<!-- 			<use-template ref="/xsl/editor" /> -->
-<!-- 			<import ref="/api/default" name="default" /> -->
-<!-- 			<import ref="/api/SavegameEditor" name="SavegameEditor" /> -->
+			<use-template ref="/game-resources/editor-template"/>
+			<use-document name="editor" ref="/game-resources/editor"/>
+			<use-document name="dictionaries" ref="/game-resources/amberdata?infosetId=lib.dictionaries"/>
+			
+			<link-stylesheet ref="/css/default"/>
+			<link-stylesheet ref="/css/amber-picker"/>
+			<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.items"/>
+			<link-stylesheet ref="/game-resources/stylesheet?infosetId=lib.portraits"/>
+			
+			<import ref="/api/SavegameEditor"/>
 		</fragment>
 		<fragment name="resource">
 			<import ref="/game-list"/>
@@ -134,8 +134,8 @@
 	<fragment name="api">
 		<fragment name="default">
 			<link-script ref="/webpack/main.js"/>
-			<link-stylesheet ref="/css/default" name="default" />
-			<link-stylesheet ref="/css/amber-picker" name="amber-picker" />
+			<link-stylesheet ref="/css/default"/>
+			<link-stylesheet ref="/css/amber-picker"/>
 		</fragment>
 		<fragment name="SavegameEditor">
 			<link-script ref="/js/SavegameEditor"/>

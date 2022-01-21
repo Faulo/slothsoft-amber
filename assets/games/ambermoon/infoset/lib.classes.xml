@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<savegame.editor version="0.3"
+	xmlns="http://schema.slothsoft.net/savegame/editor"
+	xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<xi:include href="globals/characters"/>
+	<xi:include href="globals/AM2"/>
+	
+	<xi:include href="archives/Amberfiles/Save.00/Party_char.amb"/>
+	<xi:include href="archives/Amberfiles/NPC_char.amb"/>
+	<xi:include href="archives/Amberfiles/AM2_BLIT"/>
+</savegame.editor>

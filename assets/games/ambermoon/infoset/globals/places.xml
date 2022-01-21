@@ -68,7 +68,7 @@
 			<use-global position="0x7E0" ref="place-blacksmith" />
 			<use-global position="0x800" ref="place-blacksmith" />
 		</group>
-		<string-dictionary position="0x822" name="names" type="size-fixed" encoding="CP850"
+		<string-dictionary position="0x820" name="names" type="size-fixed" encoding="CP850"
 			string-size="30" string-count="64" />
 	</global>
 	
