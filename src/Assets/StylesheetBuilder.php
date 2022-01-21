@@ -12,10 +12,15 @@ use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
 
 class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
 
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
+        if (PHP_OS_FAMILY !== 'Windows') {
+            return new ExecutableStrategies(new NullResultBuilder());
+        }
+
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
 
         $writer = new StringWriterFromStringDelegate(function () use ($context, $args): string {
