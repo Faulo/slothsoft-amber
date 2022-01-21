@@ -5,8 +5,8 @@
     xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
     xmlns:sse="http://schema.slothsoft.net/savegame/editor">
     
-    <xsl:template match="sse:archive">
-        <h1><xsl:value-of select="@name"/></h1>
+    <xsl:template match="/">
+        <html/>
     </xsl:template>
 
 </xsl:stylesheet>
