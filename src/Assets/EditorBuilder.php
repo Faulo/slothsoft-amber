@@ -12,7 +12,6 @@ use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStra
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
-use SplFileInfo;
 
 class EditorBuilder implements ExecutableBuilderStrategyInterface {
 
@@ -62,11 +61,11 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface {
 
         $savegame = $editor->getSavegameNode();
 
-        $shouldRefreshCacheDelegate = function (SplFileInfo $cacheFile) {
-            return true;
-        };
-
         $writer = $savegame->getChunkWriter();
+
+        // $shouldRefreshCacheDelegate = function (SplFileInfo $cacheFile) {
+        // return true;
+        // };
         // $writer = new ChunkWriterFileCache($writer, FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
 
         $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.editor.xml');

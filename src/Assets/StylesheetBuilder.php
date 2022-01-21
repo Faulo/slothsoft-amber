@@ -22,7 +22,7 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
             $game = $args->get(ResourceParameterFilter::PARAM_GAME);
             $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
             $user = $args->get(ResourceParameterFilter::PARAM_USER);
-            $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
+            // $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
 
             $controller = new EditorController();
 
@@ -45,7 +45,7 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                         'width' => 0,
                         'height' => 0
                     ];
-                    $imageIds[$archiveId] = [];
+                    $imageData[$archiveId] = [];
                     $archiveNode = $editor->getArchiveNode($archiveId);
                     $archiveNode->load();
                     foreach ($archiveNode->getFileNodes() as $x => $fileNode) {

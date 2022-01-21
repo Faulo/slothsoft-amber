@@ -24,7 +24,7 @@ class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         $game = $args->get(ResourceParameterFilter::PARAM_GAME);
         $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
-        $user = $args->get(ResourceParameterFilter::PARAM_USER);
+        // $user = $args->get(ResourceParameterFilter::PARAM_USER);
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
 
         $cacheFile = [];

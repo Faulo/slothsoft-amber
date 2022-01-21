@@ -29,6 +29,7 @@ class AmbTool {
         foreach ($args as $arg) {
             $command .= ' ' . escapeshellarg((string) $arg);
         }
+        $output = null;
         exec($command, $output);
         return $output;
     }
