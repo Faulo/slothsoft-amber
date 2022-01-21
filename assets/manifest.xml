@@ -87,6 +87,7 @@
 		<import ref="/api/SavegameEditor"/>
 	</fragment>
 	
+	<!-- 
 	<fragment name="game-client">
 		<use-template ref="/xsl/game.client"/>
 		<use-document name="client" ref="/game-resources/amberdata?infosetId=client"/>
@@ -103,7 +104,8 @@
 		<link-script ref="/js/DungeonViewer"/>
 		<link-script ref="/js/babylonjs/babylon.custom"/>
 	</fragment>
-
+    -->
+ 
 	<fragment name="html">
 		<fragment name="description">
 			<use-template ref="/xsl/description"/>
