@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b09ea56dd9c7018f8bb5850aa49af9d9",
+    "content-hash": "f2810ff3a0e1024b8ec27a87ab924209",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -1240,16 +1240,16 @@
         },
         {
             "name": "slothsoft/core",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Faulo/slothsoft-core.git",
-                "reference": "96c6dc60f2767561e2aeb6de9927a0070a96f524"
+                "reference": "de99d5bc58da29c961f604ad4beb98a29e3251a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Faulo/slothsoft-core/zipball/96c6dc60f2767561e2aeb6de9927a0070a96f524",
-                "reference": "96c6dc60f2767561e2aeb6de9927a0070a96f524",
+                "url": "https://api.github.com/repos/Faulo/slothsoft-core/zipball/de99d5bc58da29c961f604ad4beb98a29e3251a8",
+                "reference": "de99d5bc58da29c961f604ad4beb98a29e3251a8",
                 "shasum": ""
             },
             "require": {
@@ -1300,9 +1300,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Faulo/slothsoft-core/issues",
-                "source": "https://github.com/Faulo/slothsoft-core/tree/1.5.0"
+                "source": "https://github.com/Faulo/slothsoft-core/tree/1.5.1"
             },
-            "time": "2022-01-18T17:09:40+00:00"
+            "time": "2022-01-21T19:55:43+00:00"
         },
         {
             "name": "slothsoft/farah",
