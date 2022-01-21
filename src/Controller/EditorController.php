@@ -15,12 +15,10 @@ use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 use SplFileInfo;
 use Slothsoft\Savegame\EditorConfig;
 
-class EditorController
-{
+class EditorController {
 
-    public function createEditorConfig(string $game, string $version, string $user, string $infoset): EditorConfig
-    {
-//         $user = preg_replace('~[^\w]~', '', $user);
+    public function createEditorConfig(string $game, string $version, string $user, string $infoset): EditorConfig {
+        // $user = preg_replace('~[^\w]~', '', $user);
         if ($game === '') {
             throw new \InvalidArgumentException('$game must not be empty.');
         }
@@ -33,85 +31,57 @@ class EditorController
         if ($infoset === '') {
             throw new \InvalidArgumentException('$infoset must not be empty.');
         }
-        return new EditorConfig(
-            $this->getAmberAssetPath("/games/$game/source/$version"),
-            new SplFileInfo(ServerEnvironment::getDataDirectory() . "/slothsoft/amber/$game/$version/$user"),
-            new SplFileInfo(ServerEnvironment::getCacheDirectory() . "/slothsoft/amber/$game/$version/savegame/$infoset"),
-            new SplFileInfo((string) $this->getAmberAssetUrl("/games/$game/infoset/$infoset")),
-            $this->createArchiveExtractors(),
-            $this->createArchiveBuilders()
-        );
+        return new EditorConfig($this->getAmberAssetPath("/games/$game/source/$version"), new SplFileInfo(ServerEnvironment::getDataDirectory() . "/slothsoft/amber/$game/$version/$user"), new SplFileInfo(ServerEnvironment::getCacheDirectory() . "/slothsoft/amber/$game/$version/savegame/$infoset"), new SplFileInfo((string) $this->getAmberAssetUrl("/games/$game/infoset/$infoset")), $this->createArchiveExtractors(), $this->createArchiveBuilders());
     }
-    public function createEditor(EditorConfig $config): Editor
-    {
+
+    public function createEditor(EditorConfig $config): Editor {
         return new Editor($config);
     }
-    
-    private function getAmberAssetUrl(string $url): FarahUrl
-    {
+
+    private function getAmberAssetUrl(string $url): FarahUrl {
         return FarahUrl::createFromReference($url, FarahUrl::createFromReference('farah://slothsoft@amber'));
     }
-    
-    private function getAmberAssetPath(string $url): SplFileInfo
-    {
+
+    private function getAmberAssetPath(string $url): SplFileInfo {
         $url = $this->getAmberAssetUrl($url);
         return Module::resolveToAsset($url)->getFileInfo();
     }
-    
-    public function createAmbTool(): AmbTool
-    {
+
+    public function createAmbTool(): AmbTool {
         return new AmbTool((string) $this->getAmberAssetPath('/cli/ambtool'));
     }
-    
-    public function createAmbGfx(): AmbGfx
-    {
+
+    public function createAmbGfx(): AmbGfx {
         return new AmbGfx((string) $this->getAmberAssetPath('/cli/amgfx'));
     }
-    
-    private function createArchiveExtractors(): array
-    {
+
+    private function createArchiveExtractors(): array {
         $ret = [];
-        
+
         $amberExtractor = new AmberArchiveExtractor($this->createAmbTool());
         $ret[AmbTool::TYPE_AMBR] = $amberExtractor;
         $ret[AmbTool::TYPE_JH] = $amberExtractor;
-        
+
         $copyExtractor = new CopyArchiveExtractor();
         $ret[AmbTool::TYPE_RAW] = $copyExtractor;
         $ret[AmbTool::TYPE_AM2] = $copyExtractor;
-        
+
         return $ret;
     }
-    
-    private function createArchiveBuilders(): array
-    {
+
+    private function createArchiveBuilders(): array {
         $ret = [];
-        
+
         $amberBuilder = new AmberArchiveBuilder();
         $ret[AmbTool::TYPE_AMBR] = $amberBuilder;
-        
+
         $copyBuilder = new CopyArchiveBuilder();
         $ret[AmbTool::TYPE_JH] = $copyBuilder;
         $ret[AmbTool::TYPE_RAW] = $copyBuilder;
         $ret[AmbTool::TYPE_AM2] = $copyBuilder;
-        
+
         return $ret;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     private $editorPresetMap = [
         'saveEditor' => [
@@ -263,7 +233,5 @@ class EditorController
             ]
         ]
     ];
-
-    
 }
 

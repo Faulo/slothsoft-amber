@@ -6,51 +6,45 @@ use RuntimeException;
 use SplFileInfo;
 use Slothsoft\Core\IO\FileInfoFactory;
 
-class AmbGfx
-{
+class AmbGfx {
 
     private $ambgfxPath;
 
-    public function __construct(string $ambgfxPath)
-    {
+    public function __construct(string $ambgfxPath) {
         assert(file_exists($ambgfxPath), "ambgfx not found at $ambgfxPath");
-        
+
         $this->ambgfxPath = $ambgfxPath;
     }
 
-    private function exec(string $file, array $args) : string
-    {
+    private function exec(string $file, array $args): string {
         $command = escapeshellarg($this->ambgfxPath) . ' ' . escapeshellarg($file);
         foreach ($args as $key => $val) {
             $command .= sprintf(' -%s %s', $key, escapeshellarg((string) $val));
         }
         return `$command`;
     }
-    
-    public function extractTga(SplFileInfo $inFile, SplFileInfo $outFile, int $width = 32, int $bitplanes = 5, int $offset = 0, int $size = 0, int $palette = 49, int $firstColor = 0) : void {
+
+    public function extractTga(SplFileInfo $inFile, SplFileInfo $outFile, int $width = 32, int $bitplanes = 5, int $offset = 0, int $size = 0, int $palette = 49, int $firstColor = 0): void {
         $outDirectory = FileInfoFactory::createFromPath($outFile->getPath());
-        if (!$outDirectory->isDir()) {
+        if (! $outDirectory->isDir()) {
             mkdir((string) $outDirectory, 0777, true);
         }
-        
+
         $options = [
             'out' => (string) $outFile,
             'width' => $width,
             'bpl' => $bitplanes,
             'off' => $offset,
             'pal' => $palette,
-            'col' => $firstColor,
+            'col' => $firstColor
         ];
         if ($size > 0) {
             $options['size'] = $size;
         }
-        
-        $result = $this->exec(
-            $inFile->getRealPath(),
-            $options
-        );
-        
-        if (!$outFile->isFile()) {
+
+        $result = $this->exec($inFile->getRealPath(), $options);
+
+        if (! $outFile->isFile()) {
             throw new RuntimeException($result);
         }
     }

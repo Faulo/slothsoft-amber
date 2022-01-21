@@ -4,14 +4,13 @@ namespace Slothsoft\Amber\ParameterFilters;
 
 use Slothsoft\Core\IO\Sanitizer\ArraySanitizer;
 
-class EditorParameterFilter extends ResourceParameterFilter
-{
+class EditorParameterFilter extends ResourceParameterFilter {
+
     const PARAM_EDITOR_DATA = 'save';
-    
-    protected function createValueSanitizers(): array
-    {
+
+    protected function createValueSanitizers(): array {
         return [
-            self::PARAM_EDITOR_DATA => new ArraySanitizer(),
+            self::PARAM_EDITOR_DATA => new ArraySanitizer()
         ] + parent::createValueSanitizers();
     }
 }

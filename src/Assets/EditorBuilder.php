@@ -14,23 +14,22 @@ use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBui
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
 use SplFileInfo;
 
-class EditorBuilder implements ExecutableBuilderStrategyInterface
-{
-    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
-    {
+class EditorBuilder implements ExecutableBuilderStrategyInterface {
+
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         $game = $args->get(EditorParameterFilter::PARAM_GAME);
         $version = $args->get(EditorParameterFilter::PARAM_VERSION);
         $user = $args->get(EditorParameterFilter::PARAM_USER);
         $infosetId = $args->get(EditorParameterFilter::PARAM_INFOSET_ID);
-        
+
         $request = (array) $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
-        
-        $controller = new EditorController();        
-        $config = $controller->createEditorConfig($game, $version, $user, $infosetId);        
+
+        $controller = new EditorController();
+        $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
         $editor = $controller->createEditor($config);
-        
+
         $action = $request['action'] ?? 'view';
-        
+
         if ($action === 'upload') {
             $errors = $_FILES['save']['error'] ?? [];
             foreach ($errors as $archiveId => $error) {
@@ -40,18 +39,18 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface
                 }
             }
         }
-        
+
         if (isset($request['archiveId'])) {
             $archiveId = $request['archiveId'];
             $editor->loadArchive($archiveId);
             $editor->applyValues($request['data'] ?? []);
-            
+
             $archive = $editor->getArchiveNode($archiveId);
-            
+
             if ($action === 'save') {
                 $editor->writeGameFile($archiveId, $archive);
             }
-            
+
             if ($action === 'download') {
                 $resultBuilder = new FileWriterResultBuilder($archive, $archive->getArchiveId());
                 $strategies = new ExecutableStrategies($resultBuilder);
@@ -60,45 +59,44 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface
         } else {
             $editor->load();
         }
-        
+
         $savegame = $editor->getSavegameNode();
-        
-        $shouldRefreshCacheDelegate = function(SplFileInfo $cacheFile) {
+
+        $shouldRefreshCacheDelegate = function (SplFileInfo $cacheFile) {
             return true;
         };
-        
+
         $writer = $savegame->getChunkWriter();
-//         $writer = new ChunkWriterFileCache($writer, FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
-        
+        // $writer = new ChunkWriterFileCache($writer, FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
+
         $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.editor.xml');
         return new ExecutableStrategies($resultBuilder);
     }
-    
-    
-    //         if ($uploadedArchives = $editor->getConfigValue('uploadedArchives')) {
-    //             if (isset($uploadedArchives[$this->name])) {
-    //                 move_uploaded_file($uploadedArchives[$this->name], $tempFile);
-    //             }
-    //         }
-    //         if (isset($request['editor'])) {
-    //             if (isset($request['editor']['action'])) {
-    //                 switch ($request['editor']['action']) {
-    //                     case 'download':
-    //                         $resultBuilder = new NullResultBuilder();
-    //                         foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
-    //                             if ($file = $editor->getArchiveFile($fileName)) {
-    //                                 $resultBuilder = new FileWriterResultBuilder($file);
-    //                                 break;
-    //                             }
-    //                         }
-    //                         break;
-    //                     case 'save':
-    //                         foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
-    //                             $editor->writeArchiveFile($fileName);
-    //                         }
-    //                         break;
-    //                 }
-    //             }
-    //         }
+
+    // if ($uploadedArchives = $editor->getConfigValue('uploadedArchives')) {
+    // if (isset($uploadedArchives[$this->name])) {
+    // move_uploaded_file($uploadedArchives[$this->name], $tempFile);
+    // }
+    // }
+    // if (isset($request['editor'])) {
+    // if (isset($request['editor']['action'])) {
+    // switch ($request['editor']['action']) {
+    // case 'download':
+    // $resultBuilder = new NullResultBuilder();
+    // foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
+    // if ($file = $editor->getArchiveFile($fileName)) {
+    // $resultBuilder = new FileWriterResultBuilder($file);
+    // break;
+    // }
+    // }
+    // break;
+    // case 'save':
+    // foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
+    // $editor->writeArchiveFile($fileName);
+    // }
+    // break;
+    // }
+    // }
+    // }
 }
 

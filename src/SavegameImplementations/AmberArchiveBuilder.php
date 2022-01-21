@@ -4,11 +4,9 @@ namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
 
-class AmberArchiveBuilder implements ArchiveBuilderInterface
-{
+class AmberArchiveBuilder implements ArchiveBuilderInterface {
 
-    public function buildArchive(iterable $buildChildren): string
-    {
+    public function buildArchive(iterable $buildChildren): string {
         $header = [];
         $body = [];
         $maxId = 0;
@@ -29,9 +27,9 @@ class AmberArchiveBuilder implements ArchiveBuilderInterface
         }
         ksort($header);
         ksort($body);
-        
+
         array_unshift($header, 'AMBR' . pack('n', count($body)));
-        
+
         return implode('', $header) . implode('', $body);
     }
 }

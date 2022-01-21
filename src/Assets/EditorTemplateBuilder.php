@@ -10,15 +10,14 @@ use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStra
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ProxyResultBuilder;
 
-class EditorTemplateBuilder implements ExecutableBuilderStrategyInterface
-{
-    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies
-    {
+class EditorTemplateBuilder implements ExecutableBuilderStrategyInterface {
+
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         $game = $args->get(ResourceParameterFilter::PARAM_GAME);
         $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
         $user = $args->get(ResourceParameterFilter::PARAM_USER);
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
-        
+
         $url = $context->createUrl($args)->withPath("/games/$game/editor/$infosetId");
         $resultBuilder = new ProxyResultBuilder(Module::resolveToExecutable($url));
         return new ExecutableStrategies($resultBuilder);

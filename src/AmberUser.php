@@ -2,13 +2,14 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber;
 
-class AmberUser
-{
+class AmberUser {
+
     /**
-     * @TODO    put this somewhere elese maybe
+     *
+     * @todo put this somewhere else maybe
      * @return string
      */
-    public static function getId() : string {
+    public static function getId(): string {
         static $instance;
         if ($instance === null) {
             $instance = uniqid();
