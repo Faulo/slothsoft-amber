@@ -1,7 +1,7 @@
 {
 	"name" : "slothsoft/amber",
 	"description" : "A Farah module for processing game files from the amber engine (i.e., Ambermoon and Amberstar).",
-	"license" : "WTFPL",
+	"license" : "MIT",
 	"authors" : [{
 			"name" : "Daniel Schulz",
 			"email" : "info.slothsoft@gmail.com"
