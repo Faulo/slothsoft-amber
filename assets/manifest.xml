@@ -114,7 +114,6 @@
 
 	<fragment name="api">
 		<fragment name="default">
-			<link-script ref="/webpack/main.js" />
 			<link-stylesheet ref="/css/default" />
 			<link-stylesheet ref="/css/amber-picker" />
 		</fragment>
