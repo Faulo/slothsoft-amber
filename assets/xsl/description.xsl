@@ -5,6 +5,7 @@
 
 	<xsl:template match="/*">
 		<div>
+		<!-- 
 			<script type="module"><![CDATA[
 import * as Module from "/slothsoft@farah/js/Module";
 
@@ -19,6 +20,7 @@ import("/slothsoft@farah/js/Farah/Module")
 	.then(document => alert(document));
 //*/
 			]]></script>
+			 -->
 			<span data-dict=".">
 				<xsl:text>description:</xsl:text>
 				<xsl:value-of select="*[@name = 'sites']//sfs:page[@current]/@name" />
