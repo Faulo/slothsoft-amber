@@ -1,4 +1,4 @@
-name: Continuous Integration Tests
+name: CI Tests
 
 on: [push]
 
@@ -11,7 +11,7 @@ jobs:
       matrix:
         composer: ["lowest", "stable"]
         php: ["7.4", "8.0"]
-        extensions: [""]
+        extensions: ["xsl"]
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
