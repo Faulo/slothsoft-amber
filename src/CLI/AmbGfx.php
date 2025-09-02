@@ -21,7 +21,8 @@ class AmbGfx {
         foreach ($args as $key => $val) {
             $command .= sprintf(' -%s %s', $key, escapeshellarg((string) $val));
         }
-        return `$command`;
+        $result = `$command`;
+        return is_string($result) ? $result : json_encode($result);
     }
 
     public function extractTga(SplFileInfo $inFile, SplFileInfo $outFile, int $width = 32, int $bitplanes = 5, int $offset = 0, int $size = 0, int $palette = 49, int $firstColor = 0): void {
