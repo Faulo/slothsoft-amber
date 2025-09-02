@@ -6,11 +6,12 @@ use RuntimeException;
 use SplFileInfo;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
+use Symfony\Component\Process\Process;
 
 class AmbGfx {
 
     public static function isSupported(): bool {
-        return PHP_OS_FAMILY === 'Windows';
+        return PHP_OS_FAMILY === 'Windows' or FileSystem::commandExists('wine');
     }
 
     private $ambgfxPath;
@@ -22,12 +23,24 @@ class AmbGfx {
     }
 
     private function exec(string $file, array $args): string {
-        $command = escapeshellarg($this->ambgfxPath) . ' ' . escapeshellarg($file);
-        foreach ($args as $key => $val) {
-            $command .= sprintf(' -%s %s', $key, escapeshellarg((string) $val));
+        $command = [];
+
+        if (PHP_OS_FAMILY !== 'Windows') {
+            $command[] = 'wine';
         }
-        $result = `$command`;
-        return is_string($result) ? $result : json_encode($result);
+
+        $command[] = $this->ambgfxPath;
+
+        $command[] = $file;
+
+        foreach ($args as $key => $value) {
+            $command[] = "-$key";
+            $command[] = $value;
+        }
+
+        $process = new Process($command);
+        $process->run();
+        return $process->getOutput();
     }
 
     public function extractTga(SplFileInfo $inFile, SplFileInfo $outFile, int $width = 32, int $bitplanes = 5, int $offset = 0, int $size = 0, int $palette = 49, int $firstColor = 0): void {
