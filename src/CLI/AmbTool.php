@@ -32,6 +32,9 @@ class AmbTool {
             ...$args
         ]);
         $process->run();
+        my_dump([
+            $process->getCommandLine() => $process->getOutput()
+        ]);
         return $process->getOutput();
     }
 
