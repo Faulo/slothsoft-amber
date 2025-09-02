@@ -11,7 +11,7 @@ pipeline {
 			}
 			steps {
 				script {
-					def versions = ["7.4", "8.0"]
+					def versions = ["7.4", "8.0", "8.1", "8.2", "8.3"]
 
 					for (version in versions) {
 						def image = "faulo/farah:${version}"
@@ -47,7 +47,7 @@ pipeline {
 			}
 			steps {
 				script {
-					def versions = ["7.4", "8.0"]
+					def versions = ["7.4", "8.0", "8.1", "8.2", "8.3"]
 
 					for (version in versions) {
 						def image = "faulo/farah:${version}"
