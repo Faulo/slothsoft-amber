@@ -23,7 +23,7 @@ class AmbGfxTest extends TestCase {
      * @dataProvider gfxProvider
      * @test
      */
-    public function testExtract(string $inFile, string $expectedFile, int $width, int $bitplanes, int $offset, int $size = 0, int $palette) {
+    public function testExtract(string $inFile, string $expectedFile, int $width, int $bitplanes, int $offset, int $size, int $palette) {
         $actualFile = FileInfoFactory::createTempFile();
 
         $sut = self::init();
