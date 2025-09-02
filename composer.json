@@ -18,7 +18,8 @@
 		"phpunit/phpunit" : "~9.6.23"
 	},
 	"suggest" : {
-		"ext-imagick" : "Needed to extract images with ambgfx"
+		"ext-imagick" : "Needed to extract images with ambgfx",
+		"ext-gd" : "Needed to extract images with ambgfx"
 	},
 	"autoload" : {
 		"psr-4" : {
