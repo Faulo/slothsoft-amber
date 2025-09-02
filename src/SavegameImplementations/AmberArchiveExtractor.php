@@ -27,7 +27,7 @@ class AmberArchiveExtractor extends CopyArchiveExtractor {
 
                 $this->ambtool->extractArchive($archivePath, $tempDir);
 
-                $fileList = FileSystem::scanDir($tempDir, FileSystem::SCANDIR_FILEINFO);
+                $fileList = FileSystem::scanDir($tempDir->getRealPath(), FileSystem::SCANDIR_FILEINFO);
 
                 if (count($fileList) !== 1) {
                     throw new LogicException("JH archive '$archivePath' must contain exactly 1 file");

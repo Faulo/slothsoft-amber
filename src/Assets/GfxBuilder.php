@@ -6,10 +6,12 @@ use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\ParameterFilters\GfxParameterFilter;
 use Slothsoft\Core\ImageHelper;
 use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Core\IO\Writable\Delegates\DOMWriterFromElementDelegate;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\DOMWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileInfoResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ResultBuilderStrategyInterface;
@@ -17,6 +19,8 @@ use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Node\ArchiveNode;
 use Slothsoft\Savegame\Node\FileContainer;
 use Slothsoft\Savegame\Node\ImageValue;
+use DOMDocument;
+use DOMElement;
 use SplFileInfo;
 
 class GfxBuilder implements ExecutableBuilderStrategyInterface {
@@ -74,7 +78,12 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
     }
 
     private function processInfoset(string $infosetId): ResultBuilderStrategyInterface {
-        throw new \InvalidArgumentException('Must provide archiveId.');
+        return new DOMWriterResultBuilder(new DOMWriterFromElementDelegate(function (DOMDocument $document) use ($infosetId): DOMElement {
+            $root = $document->createElement('infoset');
+            $root->setAttribute('id', $infosetId);
+            $root->textContent = 'Must provide archiveId.';
+            return $root;
+        }), 'infoset.xml');
     }
 
     private function processArchive(string $infosetId, string $archiveId): ResultBuilderStrategyInterface {

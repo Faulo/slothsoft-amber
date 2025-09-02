@@ -20,35 +20,35 @@
 			<resource-directory name="editor" type="application/xslt+xml" />
 
 			<fragment name="gfx">
-				<use-document name="icons-4-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004&amp;paletteId=6" />
-				<use-document name="icons-5-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005&amp;paletteId=6" />
-				<use-document name="items" ref="/game-resources/gfx?archiveId=Object_icons&amp;paletteId=49&amp;fileId" />
-				<use-document name="portraits" ref="/game-resources/gfx?archiveId=Portraits.amb&amp;paletteId=49&amp;fileId" />
-				<use-document name="monsters" ref="/game-resources/gfx?archiveId=Monster_gfx.amb" />
-				<use-document name="backgrounds" ref="/game-resources/gfx?archiveId=Combat_background.amb" />
-				<use-document name="events" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=31&amp;gfxId" />
+				<use-manifest name="icons-4-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004&amp;paletteId=6" />
+				<use-manifest name="icons-5-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005&amp;paletteId=6" />
+				<use-manifest name="items" ref="/game-resources/gfx?archiveId=Object_icons&amp;paletteId=49&amp;fileId" />
+				<use-manifest name="portraits" ref="/game-resources/gfx?archiveId=Portraits.amb&amp;paletteId=49&amp;fileId" />
+				<use-manifest name="monsters" ref="/game-resources/gfx?archiveId=Monster_gfx.amb" />
+				<use-manifest name="backgrounds" ref="/game-resources/gfx?archiveId=Combat_background.amb" />
+				<use-manifest name="events" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=31&amp;gfxId" />
 				<fragment name="icons">
-					<use-document name="1" ref="/game-resources/gfx?archiveId=1Icon_gfx.amb&amp;fileId=001" />
-					<use-document name="2" ref="/game-resources/gfx?archiveId=3Icon_gfx.amb&amp;fileId=002" />
-					<use-document name="3" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=003" />
-					<use-document name="4" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004" />
-					<use-document name="5" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005" />
-					<use-document name="6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=006" />
-					<use-document name="7" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=007" />
-					<use-document name="8" ref="/game-resources/gfx?archiveId=3Icon_gfx.amb&amp;fileId=008" />
+					<use-manifest name="1" ref="/game-resources/gfx?archiveId=1Icon_gfx.amb&amp;fileId=001" />
+					<use-manifest name="2" ref="/game-resources/gfx?archiveId=3Icon_gfx.amb&amp;fileId=002" />
+					<use-manifest name="3" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=003" />
+					<use-manifest name="4" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004" />
+					<use-manifest name="5" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005" />
+					<use-manifest name="6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=006" />
+					<use-manifest name="7" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=007" />
+					<use-manifest name="8" ref="/game-resources/gfx?archiveId=3Icon_gfx.amb&amp;fileId=008" />
 				</fragment>
 				<fragment name="layouts">
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=001&amp;paletteId=10" name="main-1" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=002&amp;paletteId=10" name="inventory" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=003&amp;paletteId=10" name="place" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=004&amp;paletteId=10" name="combat" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=005&amp;paletteId=10" name="main-2" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=006&amp;paletteId=10" name="stats" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=007&amp;paletteId=10" name="event" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=008&amp;paletteId=10" name="dialog" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=009&amp;paletteId=10" name="main-3" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=010&amp;paletteId=10" name="debug" />
-					<use-document ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=011&amp;paletteId=10" name="error" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=001&amp;paletteId=10" name="main-1" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=002&amp;paletteId=10" name="inventory" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=003&amp;paletteId=10" name="place" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=004&amp;paletteId=10" name="combat" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=005&amp;paletteId=10" name="main-2" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=006&amp;paletteId=10" name="stats" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=007&amp;paletteId=10" name="event" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=008&amp;paletteId=10" name="dialog" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=009&amp;paletteId=10" name="main-3" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=010&amp;paletteId=10" name="debug" />
+					<use-manifest ref="/game-resources/gfx?archiveId=Layouts.amb&amp;fileId=011&amp;paletteId=10" name="error" />
 				</fragment>
 			</fragment>
 		</directory>
