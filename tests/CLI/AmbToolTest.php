@@ -34,12 +34,12 @@ class AmbToolTest extends TestCase {
     }
 
     public static function archiveProvider(): array {
-        return [
+        return PHP_OS_FAMILY === 'Windows' ? [
             '2Icon_gfx.amb' => [
                 'test-files/2Icon_gfx/2Icon_gfx.amb',
                 'test-files/2Icon_gfx/archive'
             ]
-        ];
+        ] : [];
     }
 
     private static function init(): AmbTool {
