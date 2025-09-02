@@ -31,13 +31,19 @@ class AmbTool {
     }
 
     private function exec(string ...$args): string {
-        array_unshift($args, $this->ambtoolPath);
+        $command = [];
 
         if (PHP_OS_FAMILY !== 'Windows') {
-            array_unshift($args, 'wine');
+            $command[] = 'wine';
         }
 
-        $process = new Process($args);
+        $command[] = $this->ambtoolPath;
+
+        foreach ($args as $value) {
+            $command[] = $value;
+        }
+
+        $process = new Process($command);
         $process->run();
         return $process->getOutput();
     }
