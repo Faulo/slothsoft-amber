@@ -1,8 +1,40 @@
+def runTests(def versions) {
+	for (version in versions) {
+		def image = "faulo/farah:${version}"
+
+		stage("PHP: ${version}") {
+			callShell "docker pull ${image}"
+
+			docker.image(image).inside {
+				callShell 'composer update --prefer-lowest'
+				callShell 'composer exec server-clean cache'
+
+				dir('.reports') {
+					deleteDir()
+				}
+
+				def report = ".reports/${version}.xml"
+
+				catchError(stageResult: 'UNSTABLE', buildResult: 'UNSTABLE', catchInterruptions: false) {
+					callShell "composer exec phpunit -- --log-junit ${report}"
+				}
+
+				if (fileExists(report)) {
+					junit report
+				}
+			}
+		}
+	}
+}
+
 pipeline {
 	agent none
 	options {
 		disableConcurrentBuilds()
 		disableResume()
+	}
+	environment {
+		COMPOSER_PROCESS_TIMEOUT = '3600'
 	}
 	stages {
 		stage('Linux') {
@@ -11,38 +43,7 @@ pipeline {
 			}
 			steps {
 				script {
-					def versions = ["7.4", "8.0", "8.1", "8.2", "8.3"]
-
-					for (version in versions) {
-						def image = "faulo/farah:${version}"
-
-						stage("PHP: ${version}") {
-							callShell "docker pull ${image}"
-
-							docker.image(image).inside {
-								callShell 'dpkg --add-architecture i386'
-								callShell 'apt update'
-								callShell 'apt install wine32 -y'
-								
-								callShell 'composer update --prefer-lowest'
-								callShell 'composer exec server-clean cache'
-
-								dir('.reports') {
-									deleteDir()
-								}
-
-								def report = ".reports/${version}.xml"
-
-								catchError(stageResult: 'UNSTABLE', buildResult: 'UNSTABLE', catchInterruptions: false) {
-									callShell "composer exec phpunit -- --log-junit ${report}"
-								}
-
-								if (fileExists(report)) {
-									junit report
-								}
-							}
-						}
-					}
+					runTests(["7.4", "8.0", "8.1", "8.2", "8.3"])
 				}
 			}
 		}
@@ -52,34 +53,7 @@ pipeline {
 			}
 			steps {
 				script {
-					def versions = ["7.4", "8.0", "8.1", "8.2", "8.3"]
-
-					for (version in versions) {
-						def image = "faulo/farah:${version}"
-
-						stage("PHP: ${version}") {
-							callShell "docker pull ${image}"
-
-							docker.image(image).inside {
-								callShell 'composer update --prefer-lowest'
-								callShell 'composer exec server-clean cache'
-
-								dir('.reports') {
-									deleteDir()
-								}
-
-								def report = ".reports/${version}.xml"
-
-								catchError(stageResult: 'UNSTABLE', buildResult: 'UNSTABLE', catchInterruptions: false) {
-									callShell "composer exec phpunit -- --log-junit ${report}"
-								}
-
-								if (fileExists(report)) {
-									junit report
-								}
-							}
-						}
-					}
+					runTests(["7.4", "8.0", "8.1", "8.2", "8.3"])
 				}
 			}
 		}
