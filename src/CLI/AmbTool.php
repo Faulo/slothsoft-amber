@@ -6,6 +6,7 @@ use Symfony\Component\Process\Process;
 use DomainException;
 use InvalidArgumentException;
 use SplFileInfo;
+use Slothsoft\Core\FileSystem;
 
 class AmbTool {
 
@@ -56,9 +57,9 @@ class AmbTool {
         if (! $archivePath->isFile()) {
             throw new InvalidArgumentException("'$archivePath' is not a valid archive file.");
         }
-        if (! $targetDir->isDir()) {
-            mkdir((string) $targetDir, 0777, true);
-        }
+
+        FileSystem::ensureDirectory((string) $targetDir);
+
         $this->exec($archivePath->getRealPath(), $targetDir->getRealPath());
     }
 

@@ -4,6 +4,7 @@ namespace Slothsoft\Amber\CLI;
 
 use RuntimeException;
 use SplFileInfo;
+use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
 
 class AmbGfx {
@@ -27,9 +28,8 @@ class AmbGfx {
 
     public function extractTga(SplFileInfo $inFile, SplFileInfo $outFile, int $width = 32, int $bitplanes = 5, int $offset = 0, int $size = 0, int $palette = 49, int $firstColor = 0): void {
         $outDirectory = FileInfoFactory::createFromPath($outFile->getPath());
-        if (! $outDirectory->isDir()) {
-            mkdir((string) $outDirectory, 0777, true);
-        }
+
+        FileSystem::ensureDirectory((string) $outDirectory);
 
         $options = [
             'out' => (string) $outFile,
