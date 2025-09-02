@@ -9,6 +9,10 @@ use Slothsoft\Core\IO\FileInfoFactory;
 
 class AmbGfx {
 
+    public static function isSupported(): bool {
+        return PHP_OS_FAMILY === 'Windows';
+    }
+
     private $ambgfxPath;
 
     public function __construct(string $ambgfxPath) {

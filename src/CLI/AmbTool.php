@@ -10,6 +10,10 @@ use Slothsoft\Core\FileSystem;
 
 class AmbTool {
 
+    public static function isSupported(): bool {
+        return PHP_OS_FAMILY === 'Windows' or FileSystem::commandExists('wine');
+    }
+
     public const TYPE_RAW = 'Raw';
 
     public const TYPE_AM2 = 'AM2';
@@ -27,10 +31,13 @@ class AmbTool {
     }
 
     private function exec(string ...$args): string {
-        $process = new Process([
-            $this->ambtoolPath,
-            ...$args
-        ]);
+        array_unshift($args, $this->ambtoolPath);
+
+        if (PHP_OS_FAMILY !== 'Windows') {
+            array_unshift($args, 'wine');
+        }
+
+        $process = new Process($args);
         $process->run();
         return $process->getOutput();
     }

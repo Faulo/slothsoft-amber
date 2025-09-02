@@ -47,7 +47,7 @@ class AmbToolTest extends TestCase {
     }
 
     public static function archiveProvider(): array {
-        return PHP_OS_FAMILY === 'Windows' ? [
+        return AmbTool::isSupported() ? [
             '2Icon_gfx.amb' => [
                 'test-files/2Icon_gfx/2Icon_gfx.amb',
                 AmbTool::TYPE_AMBR,

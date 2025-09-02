@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
@@ -27,7 +28,7 @@ use Generator;
 class DatasetBuilder implements ExecutableBuilderStrategyInterface {
 
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
-        if (PHP_OS_FAMILY !== 'Windows') {
+        if (! AmbTool::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
 

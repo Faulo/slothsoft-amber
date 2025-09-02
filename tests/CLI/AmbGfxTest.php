@@ -33,7 +33,7 @@ class AmbGfxTest extends TestCase {
     }
 
     public static function gfxProvider(): array {
-        return PHP_OS_FAMILY === 'Windows' ? [
+        return AmbGfx::isSupported() ? [
             '2Icon_gfx.amb/003/1' => [
                 'test-files/2Icon_gfx/archive/003',
                 'test-files/2Icon_gfx/ambgfx/003/0/49.tga',

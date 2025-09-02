@@ -22,29 +22,18 @@ use Slothsoft\Savegame\Node\ImageValue;
 use DOMDocument;
 use DOMElement;
 use SplFileInfo;
+use Slothsoft\Amber\CLI\AmbGfx;
 
 class GfxBuilder implements ExecutableBuilderStrategyInterface {
 
-    /**
-     *
-     * @var AssetInterface
-     */
-    private $asset;
+    private AssetInterface $asset;
 
-    /**
-     *
-     * @var FarahUrlArguments
-     */
-    private $args;
+    private FarahUrlArguments $args;
 
-    /**
-     *
-     * @var Editor
-     */
-    private $editor;
+    private Editor $editor;
 
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
-        if (PHP_OS_FAMILY !== 'Windows') {
+        if (! AmbGfx::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
 

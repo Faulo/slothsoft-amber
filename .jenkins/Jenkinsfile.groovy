@@ -20,6 +20,10 @@ pipeline {
 							callShell "docker pull ${image}"
 
 							docker.image(image).inside {
+								callShell 'dpkg --add-architecture i386'
+								callShell 'apt update'
+								callShell 'apt install wine32 -y'
+								
 								callShell 'composer update --prefer-lowest'
 								callShell 'composer exec server-clean cache'
 

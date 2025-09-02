@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\DOMHelper;
@@ -17,7 +18,7 @@ use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
 class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
 
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
-        if (PHP_OS_FAMILY !== 'Windows') {
+        if (! AmbGfx::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
 
