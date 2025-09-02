@@ -24,10 +24,23 @@ class AmbToolTest extends TestCase {
      * @dataProvider archiveProvider
      * @test
      */
-    public function testExtract(string $inFile, string $expectedDirectory) {
-        $actualDirectory = temp_dir(__CLASS__);
-
+    public function testInspect(string $inFile, string $expectedType, string $expectedDirectory) {
         $sut = self::init();
+
+        $actualType = $sut->inspectArchive(FileInfoFactory::createFromPath($inFile));
+
+        $this->assertEquals($expectedType, $actualType);
+    }
+
+    /**
+     *
+     * @dataProvider archiveProvider
+     * @test
+     */
+    public function testExtract(string $inFile, string $expectedType, string $expectedDirectory) {
+        $sut = self::init();
+
+        $actualDirectory = temp_dir(__CLASS__);
         $sut->extractArchive(FileInfoFactory::createFromPath($inFile), FileInfoFactory::createFromPath($actualDirectory));
 
         $this->assertEquals(FileSystem::scanDir($expectedDirectory), FileSystem::scanDir($actualDirectory));
@@ -37,6 +50,7 @@ class AmbToolTest extends TestCase {
         return PHP_OS_FAMILY === 'Windows' ? [
             '2Icon_gfx.amb' => [
                 'test-files/2Icon_gfx/2Icon_gfx.amb',
+                AmbTool::TYPE_AMBR,
                 'test-files/2Icon_gfx/archive'
             ]
         ] : [];

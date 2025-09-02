@@ -2,21 +2,22 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\CLI;
 
+use Symfony\Component\Process\Process;
 use DomainException;
 use InvalidArgumentException;
 use SplFileInfo;
 
 class AmbTool {
 
-    const TYPE_RAW = 'Raw';
+    public const TYPE_RAW = 'Raw';
 
-    const TYPE_AM2 = 'AM2';
+    public const TYPE_AM2 = 'AM2';
 
-    const TYPE_AMBR = 'AMBR';
+    public const TYPE_AMBR = 'AMBR';
 
-    const TYPE_JH = 'JH';
+    public const TYPE_JH = 'JH';
 
-    private $ambtoolPath;
+    private string $ambtoolPath;
 
     public function __construct(string $ambtoolPath) {
         assert(file_exists($ambtoolPath), "ambtool not found at $ambtoolPath");
@@ -24,14 +25,13 @@ class AmbTool {
         $this->ambtoolPath = $ambtoolPath;
     }
 
-    private function exec(...$args): array {
-        $command = escapeshellarg($this->ambtoolPath);
-        foreach ($args as $arg) {
-            $command .= ' ' . escapeshellarg((string) $arg);
-        }
-        $output = null;
-        exec($command, $output);
-        return $output;
+    private function exec(string ...$args): string {
+        $process = new Process([
+            $this->ambtoolPath,
+            ...$args
+        ]);
+        $process->run();
+        return $process->getOutput();
     }
 
     public function inspectArchive(SplFileInfo $archivePath): string {
@@ -42,8 +42,9 @@ class AmbTool {
                 $ret = $inspectCache[$archivePath];
             } else {
                 $output = $this->exec($archivePath);
-                if (isset($output[1])) {
-                    $ret = $this->translateAmbtoolFormat($output[1]);
+                $match = [];
+                if (preg_match('~Format: .+?\)~', $output, $match)) {
+                    $ret = $this->translateAmbtoolFormat($match[0]);
                 }
                 $inspectCache[$archivePath] = $ret;
             }
