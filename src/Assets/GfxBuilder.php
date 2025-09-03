@@ -82,9 +82,6 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
         $this->editor->loadArchive($archiveId);
         $archiveNode = $this->editor->getArchiveNode($archiveId);
 
-        $this->maxHeight = 0;
-        $this->maxWidth = 0;
-
         return new FileInfoResultBuilder($this->createArchiveImage($archiveNode, $gfxId, $paletteId));
     }
 
@@ -95,9 +92,6 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
         $this->editor->loadArchive($archiveId);
         $archiveNode = $this->editor->getArchiveNode($archiveId);
         $fileNode = $archiveNode->getFileNodeByName($fileId);
-
-        $this->maxHeight = 0;
-        $this->maxWidth = 0;
 
         return new FileInfoResultBuilder($this->createFileImage($fileNode, $gfxId, $paletteId));
     }
