@@ -52,6 +52,7 @@
 					<use-manifest name="25" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=025" />
 				</fragment>
 				<fragment name="backgrounds">
+					<use-manifest name="2" ref="/game-resources/gfx?archiveId=Combat_background.amb&amp;paletteId=22&amp;fileId=002" />
 					<use-manifest name="8" ref="/game-resources/gfx?archiveId=Combat_background.amb&amp;paletteId=22&amp;fileId=008" />
 				</fragment>
 				<fragment name="events">
