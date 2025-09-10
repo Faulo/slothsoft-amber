@@ -29,6 +29,13 @@
 				<fragment name="events">
 					<use-manifest name="1" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=26&amp;fileId=001" />
 					<use-manifest name="2" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=31&amp;fileId=002" />
+					<use-manifest name="3" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=32&amp;fileId=003" />
+					<use-manifest name="4" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=32&amp;fileId=004" />
+					<use-manifest name="5" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=32&amp;fileId=005" />
+					<use-manifest name="6" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=32&amp;fileId=006" />
+					<use-manifest name="7" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=32&amp;fileId=007" />
+					<use-manifest name="8" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=32&amp;fileId=008" />
+					<use-manifest name="9" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=37&amp;fileId=009" />
 				</fragment>
 				<fragment name="icons">
 					<use-manifest name="1" ref="/game-resources/gfx?archiveId=1Icon_gfx.amb&amp;fileId=001" />
