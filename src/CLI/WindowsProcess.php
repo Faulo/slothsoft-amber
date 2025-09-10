@@ -37,11 +37,6 @@ class WindowsProcess {
         $env = self::getWineDirectory();
         $server = new Process(self::WINE_COMMAND, null, $env);
         $server->run();
-
-        if ($server->getExitCode() !== 0) {
-            trigger_error("wineserver failed!" . PHP_EOL . '> ' . $server->getCommandLine() . PHP_EOL . $server->getErrorOutput() . PHP_EOL . $server->getOutput(), E_USER_ERROR);
-        }
-
         return $env;
     }
 
