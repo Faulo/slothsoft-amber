@@ -24,7 +24,33 @@
 				<use-manifest name="icons-5-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005&amp;paletteId=6" />
 				<use-manifest name="items" ref="/game-resources/gfx?archiveId=Object_icons&amp;paletteId=49&amp;fileId" />
 				<use-manifest name="portraits" ref="/game-resources/gfx?archiveId=Portraits.amb&amp;paletteId=49&amp;fileId" />
-				<use-manifest name="monsters" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23" />
+				<fragment name="monsters">
+					<use-manifest name="1" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=001" />
+					<use-manifest name="2" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=002" />
+					<use-manifest name="3" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=003" />
+					<use-manifest name="4" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=004" />
+					<use-manifest name="5" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=005" />
+					<use-manifest name="6" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=006" />
+					<use-manifest name="7" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=007" />
+					<use-manifest name="8" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=008" />
+					<use-manifest name="9" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=009" />
+					<use-manifest name="10" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=010" />
+					<use-manifest name="11" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=011" />
+					<use-manifest name="12" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=012" />
+					<use-manifest name="13" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=013" />
+					<use-manifest name="14" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=014" />
+					<use-manifest name="15" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=015" />
+					<use-manifest name="16" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=016" />
+					<use-manifest name="17" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=017" />
+					<use-manifest name="18" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=018" />
+					<use-manifest name="19" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=019" />
+					<use-manifest name="20" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=020" />
+					<use-manifest name="21" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=021" />
+					<use-manifest name="22" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=022" />
+					<use-manifest name="23" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=023" />
+					<use-manifest name="24" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=024" />
+					<use-manifest name="25" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23&amp;fileId=025" />
+				</fragment>
 				<use-manifest name="backgrounds" ref="/game-resources/gfx?archiveId=Combat_background.amb" />
 				<fragment name="events">
 					<use-manifest name="1" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=26&amp;fileId=001" />
