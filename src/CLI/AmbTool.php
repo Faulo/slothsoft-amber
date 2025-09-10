@@ -31,7 +31,7 @@ class AmbTool {
     }
 
     private function exec(string ...$args): string {
-        $process = new WineProcess([
+        $process = WindowsProcess::create([
             $this->ambtoolPath,
             ...$args
         ]);

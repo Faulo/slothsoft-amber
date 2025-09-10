@@ -32,7 +32,7 @@ class AmbGfx {
             $command[] = $value;
         }
 
-        $process = new WineProcess($command);
+        $process = WindowsProcess::create($command);
         $process->run();
 
         if ($process->getExitCode() !== 0) {
