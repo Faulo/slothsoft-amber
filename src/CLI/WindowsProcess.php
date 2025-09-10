@@ -11,13 +11,13 @@ class WindowsProcess {
     public static function create(array $command): Process {
         switch (PHP_OS_FAMILY) {
             case 'Windows':
+                return new Process($command);
+            default:
                 $env = self::startWineServer();
 
                 array_unshift($command, 'wine');
 
                 return new Process($command, null, $env);
-            default:
-                return new Process($command);
         }
     }
 
