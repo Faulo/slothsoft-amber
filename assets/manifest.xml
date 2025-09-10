@@ -24,9 +24,12 @@
 				<use-manifest name="icons-5-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005&amp;paletteId=6" />
 				<use-manifest name="items" ref="/game-resources/gfx?archiveId=Object_icons&amp;paletteId=49&amp;fileId" />
 				<use-manifest name="portraits" ref="/game-resources/gfx?archiveId=Portraits.amb&amp;paletteId=49&amp;fileId" />
-				<use-manifest name="monsters" ref="/game-resources/gfx?archiveId=Monster_gfx.amb" />
+				<use-manifest name="monsters" ref="/game-resources/gfx?archiveId=Monster_gfx.amb&amp;paletteId=23" />
 				<use-manifest name="backgrounds" ref="/game-resources/gfx?archiveId=Combat_background.amb" />
-				<use-manifest name="events" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=31&amp;gfxId" />
+				<fragment name="events">
+					<use-manifest name="1" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=26&amp;fileId=001" />
+					<use-manifest name="2" ref="/game-resources/gfx?archiveId=Event_pix.amb&amp;paletteId=31&amp;fileId=002" />
+				</fragment>
 				<fragment name="icons">
 					<use-manifest name="1" ref="/game-resources/gfx?archiveId=1Icon_gfx.amb&amp;fileId=001" />
 					<use-manifest name="2" ref="/game-resources/gfx?archiveId=3Icon_gfx.amb&amp;fileId=002" />
