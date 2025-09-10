@@ -21,7 +21,7 @@ class AmbGfx {
         $this->ambgfxPath = $ambgfxPath;
     }
 
-    private function exec(string $file, array $args): string {
+    private function exec(string $file, array $args): void {
         $command = [];
 
         $command[] = $this->ambgfxPath;
@@ -35,7 +35,9 @@ class AmbGfx {
         $process = new WineProcess($command);
         $process->run();
 
-        return $process->getOutput();
+        if ($process->getExitCode() !== 0) {
+            throw new RuntimeException("amgfx failed!" . PHP_EOL . '> ' . $process->getCommandLine() . PHP_EOL . $process->getErrorOutput() . PHP_EOL . $process->getOutput());
+        }
     }
 
     public function extractTga(SplFileInfo $inFile, SplFileInfo $outFile, int $width = 32, int $bitplanes = 5, int $offset = 0, int $size = 0, int $palette = 49, int $firstColor = 0): void {
@@ -55,11 +57,7 @@ class AmbGfx {
             $options['size'] = $size;
         }
 
-        $result = $this->exec($inFile->getRealPath(), $options);
-
-        if (! $outFile->isFile()) {
-            throw new RuntimeException($result);
-        }
+        $this->exec($inFile->getRealPath(), $options);
     }
 }
 

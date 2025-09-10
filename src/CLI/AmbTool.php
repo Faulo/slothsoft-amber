@@ -5,6 +5,7 @@ namespace Slothsoft\Amber\CLI;
 use Slothsoft\Core\FileSystem;
 use DomainException;
 use InvalidArgumentException;
+use RuntimeException;
 use SplFileInfo;
 
 class AmbTool {
@@ -36,6 +37,10 @@ class AmbTool {
         ]);
 
         $process->run();
+
+        if ($process->getExitCode() !== 0) {
+            throw new RuntimeException("ambtool failed!" . PHP_EOL . '> ' . $process->getCommandLine() . PHP_EOL . $process->getErrorOutput() . PHP_EOL . $process->getOutput());
+        }
 
         return $process->getOutput();
     }
