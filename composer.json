@@ -11,8 +11,8 @@
 	"require" : {
 		"php" : ">=7.4",
 		"slothsoft/core" : "^1.13.3",
-		"slothsoft/farah" : "^1.16.3",
-		"slothsoft/savegame" : "1.0.x-dev",
+		"slothsoft/farah" : "^1.16.5",
+		"slothsoft/savegame" : "^1.0.10",
 		"ext-imagick" : "*",
 		"ext-gd" : "*"
 	},
