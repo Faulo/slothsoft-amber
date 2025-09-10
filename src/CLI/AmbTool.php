@@ -2,11 +2,10 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\CLI;
 
-use Symfony\Component\Process\Process;
+use Slothsoft\Core\FileSystem;
 use DomainException;
 use InvalidArgumentException;
 use SplFileInfo;
-use Slothsoft\Core\FileSystem;
 
 class AmbTool {
 
@@ -31,20 +30,13 @@ class AmbTool {
     }
 
     private function exec(string ...$args): string {
-        $command = [];
+        $process = new WineProcess([
+            $this->ambtoolPath,
+            ...$args
+        ]);
 
-        if (PHP_OS_FAMILY !== 'Windows') {
-            $command[] = 'wine';
-        }
-
-        $command[] = $this->ambtoolPath;
-
-        foreach ($args as $value) {
-            $command[] = $value;
-        }
-
-        $process = new Process($command);
         $process->run();
+
         return $process->getOutput();
     }
 

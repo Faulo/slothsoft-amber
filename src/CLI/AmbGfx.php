@@ -2,11 +2,10 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\CLI;
 
-use RuntimeException;
-use SplFileInfo;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
-use Symfony\Component\Process\Process;
+use RuntimeException;
+use SplFileInfo;
 
 class AmbGfx {
 
@@ -25,12 +24,7 @@ class AmbGfx {
     private function exec(string $file, array $args): string {
         $command = [];
 
-        if (PHP_OS_FAMILY !== 'Windows') {
-            $command[] = 'wine';
-        }
-
         $command[] = $this->ambgfxPath;
-
         $command[] = $file;
 
         foreach ($args as $key => $value) {
@@ -38,8 +32,9 @@ class AmbGfx {
             $command[] = $value;
         }
 
-        $process = new Process($command);
+        $process = new WineProcess($command);
         $process->run();
+
         return $process->getOutput();
     }
 
