@@ -13,11 +13,11 @@ use Slothsoft\Farah\Module\Module;
  * @see AmbGfx
  */
 class AmbGfxTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(AmbGfx::class), "Failed to load class 'Slothsoft\Amber\CLI\AmbGfx'!");
     }
-
+    
     /**
      *
      * @dataProvider gfxProvider
@@ -25,13 +25,13 @@ class AmbGfxTest extends TestCase {
      */
     public function testExtract(string $inFile, string $expectedFile, int $width, int $bitplanes, int $offset, int $size, int $palette) {
         $actualFile = FileInfoFactory::createTempFile();
-
+        
         $sut = self::init();
         $sut->extractTga(FileInfoFactory::createFromPath($inFile), $actualFile, $width, $bitplanes, $offset, $size, $palette);
-
+        
         $this->assertFileEquals($expectedFile, (string) $actualFile);
     }
-
+    
     public static function gfxProvider(): array {
         return AmbGfx::isSupported() ? [
             '2Icon_gfx.amb/003/1' => [
@@ -63,7 +63,7 @@ class AmbGfxTest extends TestCase {
             ]
         ] : [];
     }
-
+    
     private static function init(): AmbGfx {
         static $sut = null;
         if ($sut === null) {
@@ -71,7 +71,7 @@ class AmbGfxTest extends TestCase {
         }
         return $sut;
     }
-
+    
     private static function getPath(): string {
         return (string) Module::resolveToAsset(FarahUrl::createFromReference('farah://slothsoft@amber/cli/amgfx'))->getFileInfo();
     }

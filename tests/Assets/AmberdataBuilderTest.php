@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @todo auto-generated
  */
 class AmberdataBuilderTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(AmberdataBuilder::class), "Failed to load class 'Slothsoft\Amber\Assets\AmberdataBuilder'!");
     }

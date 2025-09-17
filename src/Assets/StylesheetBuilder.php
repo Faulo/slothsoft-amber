@@ -16,32 +16,32 @@ use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuil
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
 
 class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
-
+    
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         if (! AmbGfx::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
-
+        
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
-
+        
         $writer = new StringWriterFromStringDelegate(function () use ($context, $args): string {
             $game = $args->get(ResourceParameterFilter::PARAM_GAME);
             $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
             $user = $args->get(ResourceParameterFilter::PARAM_USER);
             // $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
-
+            
             $controller = new EditorController();
-
+            
             $config = $controller->createEditorConfig($game, $version, $user, 'gfx');
             $editor = $controller->createEditor($config);
-
+            
             $contextUrl = $context->createUrl($args);
             $dataUrl = $contextUrl->withPath("/game-resources/amberdata");
-
+            
             $dataDocument = DOMHelper::loadDocument((string) $dataUrl);
-
+            
             $gfxNodeList = $dataDocument->getElementsByTagNameNS(DOMHelper::NS_AMBER_AMBERDATA, 'gfx');
-
+            
             $imageData = [];
             $imageCoords = [];
             foreach ($gfxNodeList as $gfxNode) {
@@ -67,9 +67,9 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                     }
                 }
             }
-
+            
             $css = [];
-
+            
             foreach ($gfxNodeList as $gfxNode) {
                 $archiveId = $gfxNode->getAttribute('archive');
                 $fileId = $gfxNode->getAttribute('file');
@@ -80,13 +80,13 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                 $gfxLabel = $gfxNode->getAttribute('label');
                 $gfxWidth = $gfxNode->getAttribute('target-width');
                 $gfxHeight = $gfxNode->getAttribute('target-height');
-
+                
                 $x = $imageCoords[$archiveId][$gfxPosition]['x'];
                 $y = $imageCoords[$archiveId][$gfxPosition]['y'];
-
+                
                 $imageStyle = '';
                 $labelStyle = '';
-
+                
                 if ($x !== 0) {
                     $imageStyle .= sprintf('background-position-x: -%dem;', $x * $imageData[$archiveId]['width']);
                 }
@@ -102,7 +102,7 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                 if ($gfxLabel !== '') {
                     $labelStyle .= sprintf('content: "%s";', $gfxLabel);
                 }
-
+                
                 if ($imageStyle !== '') {
                     $css[] = "amber-{$gfxGroup}[value=\"$gfxId\"]::after { $imageStyle }";
                 }
@@ -112,7 +112,7 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
             }
             return implode(PHP_EOL, $css);
         }, "$infosetId.css");
-
+        
         $writer = new FileWriterFromStringWriter($writer);
         $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.css");
         return new ExecutableStrategies($resultBuilder);

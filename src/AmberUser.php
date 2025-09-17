@@ -3,7 +3,7 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber;
 
 class AmberUser {
-
+    
     /**
      *
      * @todo put this somewhere else maybe

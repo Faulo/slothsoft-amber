@@ -7,19 +7,19 @@ use Slothsoft\Farah\Module\Asset\ParameterFilterStrategy\AbstractMapParameterFil
 use Slothsoft\Amber\AmberUser;
 
 class ResourceParameterFilter extends AbstractMapParameterFilter {
-
+    
     const PARAM_GAME = 'game';
-
+    
     const PARAM_VERSION = 'version';
-
+    
     const PARAM_USER = 'user';
-
+    
     const PARAM_INFOSET_ID = 'infosetId';
-
+    
     const PARAM_ARCHIVE_ID = 'archiveId';
-
+    
     const PARAM_FILE_ID = 'fileId';
-
+    
     protected function createValueSanitizers(): array {
         return [
             self::PARAM_GAME => new FileNameSanitizer('ambermoon'),

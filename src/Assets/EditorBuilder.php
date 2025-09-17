@@ -16,25 +16,25 @@ use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuil
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
 
 class EditorBuilder implements ExecutableBuilderStrategyInterface {
-
+    
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         if (! AmbGfx::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
-
+        
         $game = $args->get(EditorParameterFilter::PARAM_GAME);
         $version = $args->get(EditorParameterFilter::PARAM_VERSION);
         $user = $args->get(EditorParameterFilter::PARAM_USER);
         $infosetId = $args->get(EditorParameterFilter::PARAM_INFOSET_ID);
-
+        
         $request = (array) $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
-
+        
         $controller = new EditorController();
         $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
         $editor = $controller->createEditor($config);
-
+        
         $action = $request['action'] ?? 'view';
-
+        
         if ($action === 'upload') {
             $errors = $_FILES['save']['error'] ?? [];
             foreach ($errors as $archiveId => $error) {
@@ -44,18 +44,18 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface {
                 }
             }
         }
-
+        
         if (isset($request['archiveId'])) {
             $archiveId = $request['archiveId'];
             $editor->loadArchive($archiveId);
             $editor->applyValues($request['data'] ?? []);
-
+            
             $archive = $editor->getArchiveNode($archiveId);
-
+            
             if ($action === 'save') {
                 $editor->writeGameFile($archiveId, $archive);
             }
-
+            
             if ($action === 'download') {
                 $resultBuilder = new FileWriterResultBuilder($archive, $archive->getArchiveId());
                 $strategies = new ExecutableStrategies($resultBuilder);
@@ -64,20 +64,20 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface {
         } else {
             $editor->load();
         }
-
+        
         $savegame = $editor->getSavegameNode();
-
+        
         $writer = $savegame->getChunkWriter();
-
+        
         // $shouldRefreshCacheDelegate = function (SplFileInfo $cacheFile) {
         // return true;
         // };
         // $writer = new ChunkWriterFileCache($writer, FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
-
+        
         $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.editor.xml');
         return new ExecutableStrategies($resultBuilder);
     }
-
+    
     // if ($uploadedArchives = $editor->getConfigValue('uploadedArchives')) {
     // if (isset($uploadedArchives[$this->name])) {
     // move_uploaded_file($uploadedArchives[$this->name], $tempFile);

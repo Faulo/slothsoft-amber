@@ -14,11 +14,11 @@ use Slothsoft\Farah\Module\Module;
  * @see AmbTool
  */
 class AmbToolTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(AmbTool::class), "Failed to load class 'Slothsoft\Amber\CLI\AmbTool'!");
     }
-
+    
     /**
      *
      * @dataProvider archiveProvider
@@ -26,12 +26,12 @@ class AmbToolTest extends TestCase {
      */
     public function testInspect(string $inFile, string $expectedType, string $expectedDirectory) {
         $sut = self::init();
-
+        
         $actualType = $sut->inspectArchive(FileInfoFactory::createFromPath($inFile));
-
+        
         $this->assertEquals($expectedType, $actualType);
     }
-
+    
     /**
      *
      * @dataProvider archiveProvider
@@ -39,13 +39,13 @@ class AmbToolTest extends TestCase {
      */
     public function testExtract(string $inFile, string $expectedType, string $expectedDirectory) {
         $sut = self::init();
-
+        
         $actualDirectory = temp_dir(__CLASS__);
         $sut->extractArchive(FileInfoFactory::createFromPath($inFile), FileInfoFactory::createFromPath($actualDirectory));
-
+        
         $this->assertEquals(FileSystem::scanDir($expectedDirectory), FileSystem::scanDir($actualDirectory));
     }
-
+    
     public static function archiveProvider(): array {
         return AmbTool::isSupported() ? [
             '2Icon_gfx.amb' => [
@@ -55,7 +55,7 @@ class AmbToolTest extends TestCase {
             ]
         ] : [];
     }
-
+    
     private static function init(): AmbTool {
         static $sut = null;
         if ($sut === null) {
@@ -63,7 +63,7 @@ class AmbToolTest extends TestCase {
         }
         return $sut;
     }
-
+    
     private static function getPath(): string {
         return (string) Module::resolveToAsset(FarahUrl::createFromReference('farah://slothsoft@amber/cli/ambtool'))->getFileInfo();
     }

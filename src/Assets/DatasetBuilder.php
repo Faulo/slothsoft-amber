@@ -26,24 +26,24 @@ use Slothsoft\Savegame\Build\XmlBuilder;
 use Generator;
 
 class DatasetBuilder implements ExecutableBuilderStrategyInterface {
-
+    
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         if (! AmbTool::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
-
+        
         $game = $args->get(ResourceParameterFilter::PARAM_GAME);
         $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
         $user = $args->get(ResourceParameterFilter::PARAM_USER);
-
+        
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
         $archiveId = $args->get(ResourceParameterFilter::PARAM_ARCHIVE_ID);
         $fileId = $args->get(ResourceParameterFilter::PARAM_FILE_ID);
-
+        
         $controller = new EditorController();
-
+        
         $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
-
+        
         if ($fileId === '') {
             if ($archiveId === '') {
                 if ($infosetId === '') {
@@ -59,10 +59,10 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         } else {
             $resultBuilder = $this->processFile($config, $infosetId, $archiveId, $fileId);
         }
-
+        
         return new ExecutableStrategies($resultBuilder);
     }
-
+    
     private function processInfosets(): ResultBuilderStrategyInterface {
         $chunkDelegate = function (): Generator {
             yield '<xml>';
@@ -71,7 +71,7 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         $writer = new ChunkWriterFromChunksDelegate($chunkDelegate);
         return new ChunkWriterResultBuilder($writer, "infosets.xml");
     }
-
+    
     private function processInfoset(EditorConfig $config, string $infosetId): ResultBuilderStrategyInterface {
         $chunkDelegate = function () use ($config, $infosetId): ChunkWriterInterface {
             $editor = new Editor($config);
@@ -82,7 +82,7 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);
         return new ChunkWriterResultBuilder($writer, "$infosetId.xml");
     }
-
+    
     private function processArchive(EditorConfig $config, string $infosetId, string $archiveId): ResultBuilderStrategyInterface {
         $chunkDelegate = function () use ($config, $infosetId, $archiveId): ChunkWriterInterface {
             $editor = new Editor($config);
@@ -94,7 +94,7 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);
         return new ChunkWriterResultBuilder($writer, "$infosetId.$archiveId.xml");
     }
-
+    
     private function processFile(EditorConfig $config, string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface {
         $chunkDelegate = function () use ($config, $infosetId, $archiveId, $fileId): ChunkWriterInterface {
             $editor = new Editor($config);
@@ -108,7 +108,7 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);
         return new ChunkWriterResultBuilder($writer, "$infosetId.$archiveId.$fileId.xml");
     }
-
+    
     private function createXmlBuilder(string $cacheDirectory, BuildableInterface $node): BuilderInterface {
         $builder = new XmlBuilder($node);
         $builder->registerTagBlacklist([]);
@@ -117,12 +117,12 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
             'bit',
             'encoding'
         ]);
-
+        
         $builder->registerTagCachelist([
             $node->getBuildTag()
         ]);
         $builder->setCacheDirectory($cacheDirectory);
-
+        
         return $builder;
     }
 }

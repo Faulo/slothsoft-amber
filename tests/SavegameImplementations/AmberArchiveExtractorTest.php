@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @todo auto-generated
  */
 class AmberArchiveExtractorTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(AmberArchiveExtractor::class), "Failed to load class 'Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor'!");
     }

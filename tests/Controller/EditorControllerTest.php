@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @todo auto-generated
  */
 class EditorControllerTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(EditorController::class), "Failed to load class 'Slothsoft\Amber\Controller\EditorController'!");
     }

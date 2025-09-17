@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @todo auto-generated
  */
 class GfxBuilderTest extends TestCase {
-
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(GfxBuilder::class), "Failed to load class 'Slothsoft\Amber\Assets\GfxBuilder'!");
     }
