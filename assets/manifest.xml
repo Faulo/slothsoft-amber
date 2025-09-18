@@ -129,7 +129,7 @@
 	<fragment name="html">
 		<fragment name="description">
 			<use-template ref="/xsl/description" />
-			<use-document ref="//farah/sites" name="sites" />
+			<use-document ref="//farah/current-sitemap" name="sites" />
 			<import ref="/api/default" />
 			<import ref="/api/MapViewer" />
 			<import ref="/api/DungeonViewer" />
