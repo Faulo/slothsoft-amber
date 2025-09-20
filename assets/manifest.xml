@@ -158,7 +158,7 @@
 		</fragment>
 		<fragment name="SavegameEditor">
 			<link-script ref="/js/SavegameEditor" />
-			<import ref="//core/api/DOMHelper" />
+			<import ref="//farah/api/DOMHelper" />
 		</fragment>
 		<fragment name="MapViewer">
 			<link-script ref="/js/MapViewer" />

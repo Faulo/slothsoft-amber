@@ -6,6 +6,7 @@ services:
             - ../composer.json:${DOCKER_WORKDIR}/composer.json
             - ../composer.lock:${DOCKER_WORKDIR}/composer.lock
             - ../assets:${DOCKER_WORKDIR}/assets
+            - ../scripts:${DOCKER_WORKDIR}/scripts
             - ../src:${DOCKER_WORKDIR}/src
             - .:${DOCKER_WORKDIR}/html
             - ../.farah-cache:/tmp/.farah-cache
