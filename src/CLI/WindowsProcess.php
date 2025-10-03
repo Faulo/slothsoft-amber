@@ -41,7 +41,7 @@ class WindowsProcess {
     }
     
     private static function getWineDirectory(): array {
-        $directory = ServerEnvironment::getDataDirectory() . DIRECTORY_SEPARATOR . self::WINE_DIRECTORY;
+        $directory = ServerEnvironment::getCacheDirectory() . DIRECTORY_SEPARATOR . self::WINE_DIRECTORY;
         FileSystem::ensureDirectory($directory);
         return [
             self::WINE_PREFIX => $directory
