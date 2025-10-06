@@ -12,7 +12,7 @@
 		"php" : ">=7.4",
 		"slothsoft/core" : "^1.13.3",
 		"slothsoft/farah" : "^1.21.3",
-		"slothsoft/savegame" : "^1.0.10",
+		"slothsoft/savegame" : "^1.0.11",
 		"ext-imagick" : "*",
 		"ext-gd" : "*"
 	},
