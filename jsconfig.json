@@ -2,13 +2,13 @@
   "compilerOptions": {
     "paths": {
       "/slothsoft@amber/*": [
-        "./assets/*"
+        "assets/*"
       ],
       "/slothsoft@farah/*": [
-        "../slothsoft-farah/assets/*"
+        "vendor/slothsoft/farah/assets/*"
       ],
       "/slothsoft@savegame/*": [
-        "../slothsoft-savegame/assets/*"
+        "vendor/slothsoft/savegame/assets/*"
       ]
     }
   }
