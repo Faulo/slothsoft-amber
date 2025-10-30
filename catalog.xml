@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <uri name="farah://slothsoft@amber/games/ambermoon/convert/globals/dictionary" uri="assets/games/ambermoon/convert/globals/dictionary.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/convert/globals/extract" uri="assets/games/ambermoon/convert/globals/extract.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/convert/globals/static" uri="assets/games/ambermoon/convert/globals/static.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.classes" uri="assets/games/ambermoon/convert/lib.classes.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.dictionaries" uri="assets/games/ambermoon/convert/lib.dictionaries.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.items" uri="assets/games/ambermoon/convert/lib.items.xsl"/>
@@ -9,6 +12,13 @@
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.portraits" uri="assets/games/ambermoon/convert/lib.portraits.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.spells" uri="assets/games/ambermoon/convert/lib.spells.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/null" uri="assets/games/ambermoon/convert/null.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/convert/unused/global.dictionary" uri="assets/games/ambermoon/convert/unused/global.dictionary.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/convert/unused/libs" uri="assets/games/ambermoon/convert/unused/libs.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/editor/globals/dictionary" uri="assets/games/ambermoon/editor/globals/dictionary.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/editor/globals/editor" uri="assets/games/ambermoon/editor/globals/editor.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/editor/globals/maps" uri="assets/games/ambermoon/editor/globals/maps.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/editor/globals/picker" uri="assets/games/ambermoon/editor/globals/picker.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/editor/globals/savegame" uri="assets/games/ambermoon/editor/globals/savegame.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/editor/lib.dictionaries" uri="assets/games/ambermoon/editor/lib.dictionaries.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/editor/lib.extra" uri="assets/games/ambermoon/editor/lib.extra.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/editor/lib.items" uri="assets/games/ambermoon/editor/lib.items.xsl"/>
@@ -21,6 +31,8 @@
   <uri name="farah://slothsoft@amber/games/ambermoon/editor/null" uri="assets/games/ambermoon/editor/null.xsl"/>
   <uri name="farah://slothsoft@amber/xsl/description" uri="assets/xsl/description.xsl"/>
   <uri name="farah://slothsoft@amber/xsl/editor.data-list" uri="assets/xsl/editor.data-list.xsl"/>
+  <uri name="farah://slothsoft@amber/xsl/unused/editor" uri="assets/xsl/unused/editor.xsl"/>
+  <uri name="farah://slothsoft@amber/xsl/unused/editor.savegame" uri="assets/xsl/unused/editor.savegame.xsl"/>
   <uri name="http://schema.slothsoft.net/amber/amberdata" uri="assets/schema/amberdata/0.1.xsd"/>
   <system systemId="farah://slothsoft@amber/schema/amberdata/0.1" uri="assets/schema/amberdata/0.1.xsd"/>
 </catalog>
