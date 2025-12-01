@@ -98,17 +98,17 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
         return new FileInfoResultBuilder($this->createFileImage($fileNode, $gfxId, $paletteId));
     }
     
-    private $archiveWidth;
+    private int $archiveWidth;
     
-    private $archiveHeight;
+    private int $archiveHeight;
     
-    private $fileWidth;
+    private int $fileWidth;
     
-    private $fileHeight;
+    private int $fileHeight;
     
-    private $imageWidth;
+    private int $imageWidth;
     
-    private $imageHeight;
+    private int $imageHeight;
     
     private function createArchiveImage(ArchiveNode $archiveNode, int $gfxId, int $paletteId): SplFileInfo {
         $archiveNode->load();
@@ -192,18 +192,25 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
     private function createImage(ImageValue $imageNode, int $paletteId): SplFileInfo {
         $imageFiles = [];
         $images = [];
-        $image = null;
         
         $this->imageWidth = $imageNode->getWidth();
         $this->imageHeight = $imageNode->getHeight();
         
         if ($paletteId === - 1) {
             foreach (range(0, 49) as $tmpPaletteId) {
-                $imageFiles[] = $this->extractSingleImage($imageNode, $tmpPaletteId, $image);
+                [
+                    $file,
+                    $image
+                ] = $this->extractSingleImage($imageNode, $tmpPaletteId);
+                $imageFiles[] = $file;
                 $images[] = $image;
             }
         } else {
-            $imageFiles[] = $this->extractSingleImage($imageNode, $paletteId, $image);
+            [
+                $file,
+                $image
+            ] = $this->extractSingleImage($imageNode, $paletteId);
+            $imageFiles[] = $file;
             $images[] = $image;
         }
         
@@ -229,7 +236,7 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
         return $destFile;
     }
     
-    private function extractSingleImage(ImageValue $image, int $paletteId, ?Imagick &$sprite): SplFileInfo {
+    private function extractSingleImage(ImageValue $image, int $paletteId): array {
         $controller = new EditorController();
         $ambGfx = $controller->createAmbGfx();
         
@@ -261,7 +268,10 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
             $sprite = new Imagick((string) $pngFile);
         }
         
-        return $pngFile;
+        return [
+            $pngFile,
+            $sprite
+        ];
     }
 }
 

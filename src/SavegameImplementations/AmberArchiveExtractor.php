@@ -12,7 +12,7 @@ use SplFileInfo;
 
 class AmberArchiveExtractor extends CopyArchiveExtractor {
     
-    private $ambtool;
+    private AmbTool $ambtool;
     
     public function __construct(AmbTool $ambtool) {
         $this->ambtool = $ambtool;
