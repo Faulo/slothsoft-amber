@@ -1072,14 +1072,12 @@
 
 
 
-	<xsl:template match="*" mode="item">
+	<xsl:template match="node()" mode="item">
 		<pre class="errorMessage">
 			Unbekanntes form Element:
 			<xsl:value-of select="name()" />
 		</pre>
 	</xsl:template>
-
-
 
 	<xsl:template match="*" mode="item">
 		<xsl:param name="class" select="''" />
@@ -1091,6 +1089,7 @@
 			<xsl:apply-templates select="." mode="form-content" />
 		</div>
 	</xsl:template>
+    
 	<xsl:template match="save:instruction[@type = 'bit-field']" mode="item">
 		<xsl:param name="class" select="''" />
 		<div>
@@ -1101,6 +1100,7 @@
 			<xsl:apply-templates select="." mode="form-content" />
 		</div>
 	</xsl:template>
+    
 	<xsl:template match="save:instruction[@type = 'string-dictionary']" mode="item">
 		<xsl:param name="class" select="''" />
 		<div>
