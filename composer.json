@@ -43,5 +43,8 @@
 			"dev-main" : "1.1.x-dev"
 		}
 	},
-	"homepage" : "http://farah.slothsoft.net/modules/amber"
+	"homepage" : "http://farah.slothsoft.net/modules/amber",
+	"config" : {
+		"process-timeout" : 3600
+	}
 }
