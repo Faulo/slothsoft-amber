@@ -21,6 +21,8 @@ use Slothsoft\Savegame\Node\FileContainer;
 use Slothsoft\Savegame\Node\ImageValue;
 use DOMDocument;
 use DOMElement;
+use Imagick;
+use ImagickException;
 use SplFileInfo;
 use Slothsoft\Amber\CLI\AmbGfx;
 
@@ -189,16 +191,20 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
     
     private function createImage(ImageValue $imageNode, int $paletteId): SplFileInfo {
         $imageFiles = [];
+        $images = [];
+        $image = null;
         
         $this->imageWidth = $imageNode->getWidth();
         $this->imageHeight = $imageNode->getHeight();
         
         if ($paletteId === - 1) {
             foreach (range(0, 49) as $tmpPaletteId) {
-                $imageFiles[] = $this->extractSingleImage($imageNode, $tmpPaletteId);
+                $imageFiles[] = $this->extractSingleImage($imageNode, $tmpPaletteId, $image);
+                $images[] = $image;
             }
         } else {
-            $imageFiles[] = $this->extractSingleImage($imageNode, $paletteId);
+            $imageFiles[] = $this->extractSingleImage($imageNode, $paletteId, $image);
+            $images[] = $image;
         }
         
         $imageCount = count($imageFiles);
@@ -213,7 +219,7 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
             if ($imageCount === 1) {
                 copy((string) $gfxFile, (string) $destFile);
             } else {
-                ImageHelper::createSpriteSheet($destFile, $this->imageWidth, $this->imageHeight, $cols, $rows, ...$imageFiles);
+                ImageHelper::createSpriteSheetFromImages($destFile, $this->imageWidth, $this->imageHeight, $cols, $rows, ...$images);
             }
         }
         
@@ -223,7 +229,7 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
         return $destFile;
     }
     
-    private function extractSingleImage(ImageValue $image, int $paletteId): SplFileInfo {
+    private function extractSingleImage(ImageValue $image, int $paletteId, ?Imagick &$sprite): SplFileInfo {
         $controller = new EditorController();
         $ambGfx = $controller->createAmbGfx();
         
@@ -231,11 +237,28 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
         $tgaFile = FileInfoFactory::createFromPath("{$gfxFile->getPath()}/../ambgfx/{$gfxFile->getFilename()}/{$image->getImageId()}/$paletteId.tga");
         $pngFile = FileInfoFactory::createFromPath("{$gfxFile->getPath()}/../iview/{$gfxFile->getFilename()}/{$image->getImageId()}/$paletteId.png");
         
+        $hasConverted = false;
+        $hasExtracted = false;
+        
         if (! $pngFile->isFile()) {
             if (! $tgaFile->isFile()) {
                 $ambGfx->extractTga($gfxFile, $tgaFile, $image->getWidth(), $image->getBitplanes(), $image->getContentOffset(), $image->getContentSize(), $paletteId);
+                $hasExtracted = true;
             }
             ImageHelper::convertToPng($tgaFile, $pngFile, 0);
+            $hasConverted = true;
+        }
+        
+        try {
+            $sprite = new Imagick((string) $pngFile);
+        } catch (ImagickException $e) {
+            if (! $hasExtracted) {
+                $ambGfx->extractTga($gfxFile, $tgaFile, $image->getWidth(), $image->getBitplanes(), $image->getContentOffset(), $image->getContentSize(), $paletteId);
+            }
+            if (! $hasConverted) {
+                ImageHelper::convertToPng($tgaFile, $pngFile, 0);
+            }
+            $sprite = new Imagick((string) $pngFile);
         }
         
         return $pngFile;
