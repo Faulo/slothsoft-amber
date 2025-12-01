@@ -1,109 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <globals xmlns="http://schema.slothsoft.net/savegame/editor">
-	<global global-id="item">
-		<integer name="item-amount" position="0" />
-		<integer name="item-charge" position="1" />
-		<bit-field name="item-status" position="3" first-bit="0" last-bit="1" dictionary-ref="item-status" />
-		<integer name="item-id" position="4" size="2" />
-	</global>
-	<global global-id="stat">
-		<signed-integer name="current" position="0" size="2" min="0" max="999" />
-		<signed-integer name="maximum" position="2" size="2" min="0" max="999" />
-		<signed-integer name="current-mod" position="4" size="2" />
-		<!--<signed-integer name="maximum-mod" position="6" size="2"/> -->
-	</global>
-	<global global-id="skill">
-		<signed-integer name="current" position="0" size="2" min="0" max="99" />
-		<signed-integer name="maximum" position="2" size="2" min="0" max="99" />
-		<signed-integer name="current-mod" position="4" size="2" />
-		<!--<signed-integer name="maximum-mod" position="6" size="2"/> -->
-	</global>
-	<global global-id="age">
-		<signed-integer name="current" position="0" size="2" min="0" max="999" />
-		<signed-integer name="maximum" position="2" size="2" min="0" max="999" />
-	</global>
-	<global global-id="hitpoint">
-		<signed-integer name="current" position="0" size="2" min="0" max="9999" />
-		<signed-integer name="maximum" position="2" size="2" min="0" max="9999" />
-		<signed-integer name="maximum-mod" position="4" size="2" />
-	</global>
-	
-	<global global-id="character-name">
-		<string name="name" position="274" size="15" encoding="CP850" />
-	</global>
-	
-	<global global-id="character">
-		<select name="character-type" position="0" dictionary-ref="character-types" />
-		<select name="gender" position="1" dictionary-ref="genders" />
-		<select name="race" position="2" dictionary-ref="races" />
-		<select name="class" position="3" dictionary-ref="classes" />
-		<bit-field name="spellbooks" position="4" dictionary-ref="spell-types" first-bit="0" last-bit="3"/>
-		<integer name="level" position="5" min="0" max="99" />
-		<select name="hand" position="6" dictionary-ref="hands" />
-		<select name="finger" position="7" dictionary-ref="fingers" />
-		<bit-field name="languages" position="8" dictionary-ref="languages" />
+    <global global-id="item">
+        <integer name="item-amount" position="0" />
+        <integer name="item-charge" position="1" />
+        <bit-field name="item-status" position="3" first-bit="0" last-bit="1" dictionary-ref="item-status" />
+        <integer name="item-id" position="4" size="2" />
+    </global>
+    <global global-id="stat">
+        <signed-integer name="current" position="0" size="2" min="0" max="999" />
+        <signed-integer name="maximum" position="2" size="2" min="0" max="999" />
+        <signed-integer name="current-mod" position="4" size="2" />
+        <!--<signed-integer name="maximum-mod" position="6" size="2"/> -->
+    </global>
+    <global global-id="skill">
+        <signed-integer name="current" position="0" size="2" min="0" max="99" />
+        <signed-integer name="maximum" position="2" size="2" min="0" max="99" />
+        <signed-integer name="current-mod" position="4" size="2" />
+        <!--<signed-integer name="maximum-mod" position="6" size="2"/> -->
+    </global>
+    <global global-id="age">
+        <signed-integer name="current" position="0" size="2" min="0" max="999" />
+        <signed-integer name="maximum" position="2" size="2" min="0" max="999" />
+    </global>
+    <global global-id="hitpoint">
+        <signed-integer name="current" position="0" size="2" min="0" max="9999" />
+        <signed-integer name="maximum" position="2" size="2" min="0" max="9999" />
+        <signed-integer name="maximum-mod" position="4" size="2" />
+    </global>
 
-		<!-- <integer name="portrait" position="9" size="2"/> <integer name="combat-sprite" position="11" size="2"/> -->
+    <global global-id="character-name">
+        <string name="name" position="274" size="15" encoding="CP850" />
+    </global>
 
-		<integer name="attacks-per-round" position="17" max="99" />
+    <global global-id="character">
+        <select name="character-type" position="0" dictionary-ref="character-types" />
+        <select name="gender" position="1" dictionary-ref="genders" />
+        <select name="race" position="2" dictionary-ref="races" />
+        <select name="class" position="3" dictionary-ref="classes" />
+        <bit-field name="spellbooks" position="4" dictionary-ref="spell-types" first-bit="0" last-bit="3" />
+        <integer name="level" position="5" min="0" max="99" />
+        <select name="hand" position="6" dictionary-ref="hands" />
+        <select name="finger" position="7" dictionary-ref="fingers" />
+        <bit-field name="languages" position="8" dictionary-ref="languages" />
 
-		<integer name="spelllearn-points" position="20" size="2" max="9999" />
-		<integer name="training-points" position="22" size="2" max="9999" />
-		<integer name="gold" position="24" size="2" />
-		<integer name="food" position="26" size="2" />
-		<integer name="fixed-FFFF" position="28" size="2" />
-		<bit-field position="30" size="2" name="ailments" dictionary-ref="ailments" />
-		<integer name="combat-experience" position="32" size="2" />
+        <!-- <integer name="portrait" position="9" size="2"/> <integer name="combat-sprite" position="11" size="2"/> -->
 
-		<repeat-group name="attributes" position="42" group-size="8" group-count="8" dictionary-ref="attributes">
-			<use-global ref="stat" />
-		</repeat-group>
+        <integer name="attacks-per-round" position="17" max="99" />
 
-		<!-- 100-200 -->
-		<group name="age" position="106">
-			<use-global ref="age" />
-		</group>
+        <integer name="spelllearn-points" position="20" size="2" max="9999" />
+        <integer name="training-points" position="22" size="2" max="9999" />
+        <integer name="gold" position="24" size="2" />
+        <integer name="food" position="26" size="2" />
+        <integer name="fixed-FFFF" position="28" size="2" />
+        <bit-field position="30" size="2" name="ailments" dictionary-ref="ailments" />
+        <integer name="combat-experience" position="32" size="2" />
 
-		<repeat-group name="skills" position="122" group-size="8" group-count="10" dictionary-ref="skills">
-			<use-global ref="skill" />
-		</repeat-group>
+        <repeat-group name="attributes" position="42" group-size="8" group-count="8" dictionary-ref="attributes">
+            <use-global ref="stat" />
+        </repeat-group>
 
-		<!-- 200-300 -->
-		<group name="hit-points" position="202">
-			<use-global ref="hitpoint" />
-		</group>
-		<group name="spell-points" position="208">
-			<use-global ref="hitpoint" />
-		</group>
+        <!-- 100-200 -->
+        <group name="age" position="106">
+            <use-global ref="age" />
+        </group>
 
-		<signed-integer name="combat-defense" position="215" />
-		<signed-integer name="defense" position="217" />
+        <repeat-group name="skills" position="122" group-size="8" group-count="10" dictionary-ref="skills">
+            <use-global ref="skill" />
+        </repeat-group>
 
-		<signed-integer name="combat-attack" position="218" size="2" />
-		<signed-integer name="attack" position="220" size="2" />
+        <!-- 200-300 -->
+        <group name="hit-points" position="202">
+            <use-global ref="hitpoint" />
+        </group>
+        <group name="spell-points" position="208">
+            <use-global ref="hitpoint" />
+        </group>
 
-		<integer name="magic-attack" position="223" max="99" />
+        <signed-integer name="combat-defense" position="215" />
+        <signed-integer name="defense" position="217" />
 
-		<integer name="magic-defense" position="225" max="99" />
-		<integer name="apr-per-level" position="226" size="2" max="50" />
-		<integer name="hp-per-level" position="228" size="2" max="99" />
-		<integer name="sp-per-level" position="230" size="2" max="99" />
-		<integer name="slp-per-level" position="232" size="2" max="99" />
-		<integer name="tp-per-level" position="234" size="2" max="99" />
-		<integer name="experience" position="238" size="4" />
-		
-		<group name="spells" dictionary-ref="spell-types">
-			<bit-field position="242" size="4" first-bit="1" last-bit="30"
-				dictionary-ref="spells-0" />
-			<bit-field position="246" size="4" first-bit="1" last-bit="29"
-				dictionary-ref="spells-1" />
-			<bit-field position="250" size="4" first-bit="1" last-bit="17"
-				dictionary-ref="spells-2" />
-			<bit-field position="254" size="4" first-bit="1" last-bit="30"
-				dictionary-ref="spells-3" />
-		</group>
+        <signed-integer name="combat-attack" position="218" size="2" />
+        <signed-integer name="attack" position="220" size="2" />
 
-		<integer name="weight" position="271" size="3" />
-		<use-global ref="character-name" />
-	</global>
+        <integer name="magic-attack" position="223" max="99" />
+
+        <integer name="magic-defense" position="225" max="99" />
+        <integer name="apr-per-level" position="226" size="2" max="50" />
+        <integer name="hp-per-level" position="228" size="2" max="99" />
+        <integer name="sp-per-level" position="230" size="2" max="99" />
+        <integer name="slp-per-level" position="232" size="2" max="99" />
+        <integer name="tp-per-level" position="234" size="2" max="99" />
+        <integer name="experience" position="238" size="4" />
+
+        <group name="spells" dictionary-ref="spell-types">
+            <bit-field position="242" size="4" first-bit="1" last-bit="30" dictionary-ref="spells-0" />
+            <bit-field position="246" size="4" first-bit="1" last-bit="29" dictionary-ref="spells-1" />
+            <bit-field position="250" size="4" first-bit="1" last-bit="17" dictionary-ref="spells-2" />
+            <bit-field position="254" size="4" first-bit="1" last-bit="30" dictionary-ref="spells-3" />
+        </group>
+
+        <integer name="weight" position="271" size="3" />
+        <use-global ref="character-name" />
+    </global>
 </globals>

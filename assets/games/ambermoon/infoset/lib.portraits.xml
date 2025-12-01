@@ -1,5 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<savegame.editor version="0.3"
-	xmlns="http://schema.slothsoft.net/savegame/editor"
-	xmlns:xi="http://www.w3.org/2001/XInclude">
+<savegame.editor version="0.3" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
 </savegame.editor>

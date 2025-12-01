@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor"	path="Amberfiles/2Wall3D.amb"	type="JH" >	<for-each-file>		<image-map width="128" height="80" image-count="1" bitplanes="4"/>	</for-each-file>	</archive>
+<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" path="Amberfiles/2Wall3D.amb" type="JH">    <for-each-file>        <image-map width="128" height="80" image-count="1" bitplanes="4" />    </for-each-file></archive>

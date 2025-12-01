@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<savegame.editor version="0.3"
-	xmlns="http://schema.slothsoft.net/savegame/editor"
-	xmlns:xi="http://www.w3.org/2001/XInclude">
+<savegame.editor version="0.3" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<xi:include href="globals/AM2"/>
-	<xi:include href="globals/maps"/>
-	<xi:include href="globals/characters"/>
-	
-	<xi:include href="archives/Amberfiles/AM2_BLIT"/>
-	<xi:include href="archives/Amberfiles/Dictionary.german" />
-	
-	<xi:include href="archives/Amberfiles/1Map_texts.amb" />
-	<xi:include href="archives/Amberfiles/2Map_texts.amb" />
-	<xi:include href="archives/Amberfiles/3Map_texts.amb" />
-	
-	<xi:include href="archives/Amberfiles/Save.00/Party_char.amb"/>
-	<xi:include href="archives/Amberfiles/NPC_char.amb"/>
-	<xi:include href="archives/Amberfiles/Monster_char_data.amb"/>
-	<xi:include href="archives/Amberfiles/Monster_groups.amb"/>
+    <xi:include href="globals/AM2" />
+    <xi:include href="globals/maps" />
+    <xi:include href="globals/characters" />
+
+    <xi:include href="archives/Amberfiles/AM2_BLIT" />
+    <xi:include href="archives/Amberfiles/Dictionary.german" />
+
+    <xi:include href="archives/Amberfiles/1Map_texts.amb" />
+    <xi:include href="archives/Amberfiles/2Map_texts.amb" />
+    <xi:include href="archives/Amberfiles/3Map_texts.amb" />
+
+    <xi:include href="archives/Amberfiles/Save.00/Party_char.amb" />
+    <xi:include href="archives/Amberfiles/NPC_char.amb" />
+    <xi:include href="archives/Amberfiles/Monster_char_data.amb" />
+    <xi:include href="archives/Amberfiles/Monster_groups.amb" />
 </savegame.editor>
