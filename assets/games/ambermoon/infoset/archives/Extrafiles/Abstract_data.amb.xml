@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns="http://schema.slothsoft.net/savegame/editor" path="Extrafiles/Abstract_data.amb" type="Raw">
+<archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3" path="Extrafiles/Abstract_data.amb" type="Raw">
     <for-each-file>
         <group name="classes" position="0">
             <repeat-group group-size="42" group-count="10">

@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" path="Amberfiles/Place_data" type="JH">    <for-each-file>        <use-global ref="places" position="0x002" />    </for-each-file></archive>
+<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3" path="Amberfiles/Place_data" type="JH">    <for-each-file>        <use-global ref="places" position="0x002" />    </for-each-file></archive>

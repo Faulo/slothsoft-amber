@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" path="Amberfiles/1Icon_gfx.amb" type="JH">    <file file-name="001">        <image-map width="16" height="24720" image-count="1545" bitplanes="5" />    </file></archive>
+<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3" path="Amberfiles/1Icon_gfx.amb" type="JH">    <file file-name="001">        <image-map width="16" height="24720" image-count="1545" bitplanes="5" />    </file></archive>

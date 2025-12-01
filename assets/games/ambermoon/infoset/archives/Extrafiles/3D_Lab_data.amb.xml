@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns="http://schema.slothsoft.net/savegame/editor" path="Extrafiles/3D_Lab_data.amb" type="AMBR">
+<archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3" path="Extrafiles/3D_Lab_data.amb" type="AMBR">
     <for-each-file>
         <use-global ref="lab-data" />
     </for-each-file>
