@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemap version="1.0" xmlns="http://schema.slothsoft.net/farah/sitemap" xmlns:sfm="http://schema.slothsoft.net/farah/module">
+<domain-fragment version="1.1" xmlns="http://schema.slothsoft.net/farah/sitemap" xmlns:sfm="http://schema.slothsoft.net/farah/module">
     <page name="Ambermoon" title="Ambermoon" module="amber" ref="description" status-active="" status-public="">
         <sfm:param name="game" value="ambermoon" />
 
@@ -25,4 +25,4 @@
         <page name="ItemList" title="ItemList" redirect="/Ambermoon/Thalion-v1.05-DE/GameData/ItemList" status-active="" />
         <page name="PortraitList" title="PortraitList" redirect="/Ambermoon/Thalion-v1.05-DE/GameData/PortraitList" status-active="" />
     </page>
-</sitemap>
+</domain-fragment>
