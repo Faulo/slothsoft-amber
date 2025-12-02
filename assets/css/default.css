@@ -124,6 +124,7 @@
 	background-color: #444433;
 	border-color: #444433;
 }
+
 .Amber .textlabel {
 	white-space: pre-wrap;
 	border-style: solid;
@@ -292,6 +293,7 @@
 .Amber .RaceData .number {
 	width: 3ch;
 }
+
 .Amber .ClassData .number {
 	width: 4ch;
 }
@@ -437,6 +439,7 @@
 .events {
 	font-size: smaller;
 }
+
 .spells {
 	font-size: 0.75em;
 	min-width: 12em;
