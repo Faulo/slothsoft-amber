@@ -96,6 +96,8 @@
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/3D_Map_data.amb" uri="assets/games/ambermoon/infoset/archives/Extrafiles/3D_Map_data.amb.xml"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/Abstract_data.amb" uri="assets/games/ambermoon/infoset/archives/Extrafiles/Abstract_data.amb.xml"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/gfx" uri="assets/games/ambermoon/infoset/gfx.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/gfx.items" uri="assets/games/ambermoon/infoset/gfx.items.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/gfx.portraits" uri="assets/games/ambermoon/infoset/gfx.portraits.xml"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/globals/AM2" uri="assets/games/ambermoon/infoset/globals/AM2.xml"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/globals/characters" uri="assets/games/ambermoon/infoset/globals/characters.xml"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/globals/events" uri="assets/games/ambermoon/infoset/globals/events.xml"/>
@@ -114,8 +116,6 @@
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.save" uri="assets/games/ambermoon/infoset/lib.save.xml"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.spells" uri="assets/games/ambermoon/infoset/lib.spells.xml"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/infoset/null" uri="assets/games/ambermoon/infoset/null.xml"/>
-  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/unused/gfx.items" uri="assets/games/ambermoon/infoset/unused/gfx.items.xml"/>
-  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/unused/gfx.portraits" uri="assets/games/ambermoon/infoset/unused/gfx.portraits.xml"/>
   <uri name="farah://slothsoft@amber/games/index" uri="assets/games/index.xml"/>
   <uri name="farah://slothsoft@amber/xsl/description" uri="assets/xsl/description.xsl"/>
   <uri name="farah://slothsoft@amber/xsl/editor" uri="assets/xsl/editor.xsl"/>
