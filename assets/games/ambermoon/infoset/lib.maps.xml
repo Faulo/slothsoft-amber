@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <savegame.editor version="0.3" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <xi:include href="globals/maps" />
-    <xi:include href="globals/events" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/maps" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/events" />
 
 
-    <xi:include href="archives/Amberfiles/1Map_data.amb" />
-    <xi:include href="archives/Amberfiles/1Map_texts.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/1Map_data.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/1Map_texts.amb" />
 
-    <xi:include href="archives/Amberfiles/2Map_data.amb" />
-    <xi:include href="archives/Amberfiles/2Lab_data.amb" />
-    <xi:include href="archives/Amberfiles/2Map_texts.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Map_data.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Lab_data.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Map_texts.amb" />
 
-    <xi:include href="archives/Amberfiles/3Map_data.amb" />
-    <xi:include href="archives/Amberfiles/3Lab_data.amb" />
-    <xi:include href="archives/Amberfiles/3Map_texts.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Map_data.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Lab_data.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Map_texts.amb" />
 
-    <xi:include href="archives/Amberfiles/Icon_data.amb" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Icon_data.amb" />
 </savegame.editor>

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <savegame.editor version="0.3" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
-
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/gfx" xpointer="xpointer(/*/*[@path='Amberfiles/Portraits.amb'])" />
+    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Portraits.amb" />
 </savegame.editor>

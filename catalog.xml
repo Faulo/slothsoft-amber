@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <uri name="farah://slothsoft@amber/dictionary/de-de" uri="assets/dictionary/de-de.xml"/>
+  <uri name="farah://slothsoft@amber/dictionary/en-us" uri="assets/dictionary/en-us.xml"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/globals/dictionary" uri="assets/games/ambermoon/convert/globals/dictionary.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/globals/extract" uri="assets/games/ambermoon/convert/globals/extract.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/globals/static" uri="assets/games/ambermoon/convert/globals/static.xsl"/>
@@ -29,10 +31,96 @@
   <uri name="farah://slothsoft@amber/games/ambermoon/editor/lib.save" uri="assets/games/ambermoon/editor/lib.save.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/editor/lib.spells" uri="assets/games/ambermoon/editor/lib.spells.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/editor/null" uri="assets/games/ambermoon/editor/null.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/1Icon_gfx.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/1Icon_gfx.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/1Map_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/1Map_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/1Map_texts.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/1Map_texts.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Icon_gfx.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/2Icon_gfx.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Lab_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/2Lab_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Map_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/2Map_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Map_texts.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/2Map_texts.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Object3D.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/2Object3D.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Overlay3D.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/2Overlay3D.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Wall3D.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/2Wall3D.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Icon_gfx.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/3Icon_gfx.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Lab_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/3Lab_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Map_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/3Map_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Map_texts.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/3Map_texts.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Object3D.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/3Object3D.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Overlay3D.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/3Overlay3D.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Wall3D.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/3Wall3D.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/AM2_BLIT" uri="assets/games/ambermoon/infoset/archives/Amberfiles/AM2_BLIT.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/AM2_CPU" uri="assets/games/ambermoon/infoset/archives/Amberfiles/AM2_CPU.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Ambermoon_extro" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Ambermoon_extro.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Ambermoon_intro" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Ambermoon_intro.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Automap_graphics" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Automap_graphics.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Combat_background.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Combat_background.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Combat_graphics" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Combat_graphics.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Dictionary.german" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Dictionary.german.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Event_pix.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Event_pix.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Extro_music" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Extro_music.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Fantasy_intro" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Fantasy_intro.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Floors.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Floors.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Icon_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Icon_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Intro_music" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Intro_music.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Keymap" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Keymap.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Lab_background.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Lab_background.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Layouts.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Layouts.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Monster_char_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Monster_char_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Monster_gfx.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Monster_gfx.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Monster_groups.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Monster_groups.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Music.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Music.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/NPC_char.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/NPC_char.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/NPC_gfx.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/NPC_gfx.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/NPC_texts.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/NPC_texts.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Object_icons" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Object_icons.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Object_texts.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Object_texts.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Palettes.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Palettes.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Party_gfx.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Party_gfx.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Party_texts.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Party_texts.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Pics_80x80.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Pics_80x80.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Place_data" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Place_data.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Portraits.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Portraits.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Riddlemouth_graphics" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Riddlemouth_graphics.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Save.00/Automap.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Save.00/Automap.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Save.00/Chest_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Save.00/Chest_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Save.00/Merchant_data.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Save.00/Merchant_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Save.00/Party_char.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Save.00/Party_char.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Save.00/Party_data.sav" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Save.00/Party_data.sav.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Saves" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Saves.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Stationary" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Stationary.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Travel_gfx.amb" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Travel_gfx.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Trouble.doc" uri="assets/games/ambermoon/infoset/archives/Amberfiles/Trouble.doc.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/2D_Icon_data.amb" uri="assets/games/ambermoon/infoset/archives/Extrafiles/2D_Icon_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/2D_Map_data.amb" uri="assets/games/ambermoon/infoset/archives/Extrafiles/2D_Map_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/3D_Lab_data.amb" uri="assets/games/ambermoon/infoset/archives/Extrafiles/3D_Lab_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/3D_Map_data.amb" uri="assets/games/ambermoon/infoset/archives/Extrafiles/3D_Map_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/Abstract_data.amb" uri="assets/games/ambermoon/infoset/archives/Extrafiles/Abstract_data.amb.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/gfx" uri="assets/games/ambermoon/infoset/gfx.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/globals/AM2" uri="assets/games/ambermoon/infoset/globals/AM2.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/globals/characters" uri="assets/games/ambermoon/infoset/globals/characters.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/globals/events" uri="assets/games/ambermoon/infoset/globals/events.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/globals/maps" uri="assets/games/ambermoon/infoset/globals/maps.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/globals/places" uri="assets/games/ambermoon/infoset/globals/places.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.classes" uri="assets/games/ambermoon/infoset/lib.classes.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.dictionaries" uri="assets/games/ambermoon/infoset/lib.dictionaries.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.extra" uri="assets/games/ambermoon/infoset/lib.extra.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.items" uri="assets/games/ambermoon/infoset/lib.items.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.maps" uri="assets/games/ambermoon/infoset/lib.maps.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.monsters" uri="assets/games/ambermoon/infoset/lib.monsters.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.npcs" uri="assets/games/ambermoon/infoset/lib.npcs.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.pcs" uri="assets/games/ambermoon/infoset/lib.pcs.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.places" uri="assets/games/ambermoon/infoset/lib.places.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.portraits" uri="assets/games/ambermoon/infoset/lib.portraits.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.save" uri="assets/games/ambermoon/infoset/lib.save.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/lib.spells" uri="assets/games/ambermoon/infoset/lib.spells.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/null" uri="assets/games/ambermoon/infoset/null.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/unused/gfx.items" uri="assets/games/ambermoon/infoset/unused/gfx.items.xml"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/infoset/unused/gfx.portraits" uri="assets/games/ambermoon/infoset/unused/gfx.portraits.xml"/>
+  <uri name="farah://slothsoft@amber/games/index" uri="assets/games/index.xml"/>
   <uri name="farah://slothsoft@amber/xsl/description" uri="assets/xsl/description.xsl"/>
+  <uri name="farah://slothsoft@amber/xsl/editor" uri="assets/xsl/editor.xsl"/>
   <uri name="farah://slothsoft@amber/xsl/editor.data-list" uri="assets/xsl/editor.data-list.xsl"/>
-  <uri name="farah://slothsoft@amber/xsl/unused/editor" uri="assets/xsl/unused/editor.xsl"/>
-  <uri name="farah://slothsoft@amber/xsl/unused/editor.savegame" uri="assets/xsl/unused/editor.savegame.xsl"/>
+  <uri name="farah://slothsoft@amber/xsl/editor.savegame" uri="assets/xsl/editor.savegame.xsl"/>
   <uri name="http://schema.slothsoft.net/amber/amberdata" uri="assets/schema/amberdata/0.1.xsd"/>
   <system systemId="farah://slothsoft@amber/schema/amberdata/0.1" uri="assets/schema/amberdata/0.1.xsd"/>
 </catalog>
