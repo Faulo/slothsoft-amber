@@ -1,268 +1,266 @@
 <?xml version="1.0"?>
-<xsd:schema targetNamespace="http://schema.slothsoft.net/amber/amberdata"
-	xmlns="http://schema.slothsoft.net/amber/amberdata" 
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ssv="http://schema.slothsoft.net/schema/versioning"
-	elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xsd:schema targetNamespace="http://schema.slothsoft.net/amber/amberdata" xmlns="http://schema.slothsoft.net/amber/amberdata" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ssv="http://schema.slothsoft.net/schema/versioning" elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
 
-	<xsd:annotation>
-		<xsd:appinfo>
-			<ssv:info version="1.0">
-				<ssv:name>Amber Engine Data</ssv:name>
-				<ssv:version>0.1</ssv:version>
-				<ssv:revision>R20171117</ssv:revision>
-				<ssv:prefix>saa</ssv:prefix>
-				<ssv:namespace>http://schema.slothsoft.net/amber/amberdata</ssv:namespace>
-				<ssv:author email="daniel.lio.schulz@gmail.com">Daniel Schulz</ssv:author>
-				<ssv:description><![CDATA[
+    <xsd:annotation>
+        <xsd:appinfo>
+            <ssv:info version="1.0">
+                <ssv:name>Amber Engine Data</ssv:name>
+                <ssv:version>0.1</ssv:version>
+                <ssv:revision>R20171117</ssv:revision>
+                <ssv:prefix>saa</ssv:prefix>
+                <ssv:namespace>http://schema.slothsoft.net/amber/amberdata</ssv:namespace>
+                <ssv:author email="daniel.lio.schulz@gmail.com">Daniel Schulz</ssv:author>
+                <ssv:description><![CDATA[
 This namespace defines elements to describe the game data of games using the Amber engine, that is, Ambermoon and Amberstar.
 				]]></ssv:description>
-				<ssv:changelog><![CDATA[
+                <ssv:changelog><![CDATA[
 *** Version 0.1 ***
 	R20171117
 		- initial release
 				]]></ssv:changelog>
-			</ssv:info>
-		</xsd:appinfo>
-	</xsd:annotation>
+            </ssv:info>
+        </xsd:appinfo>
+    </xsd:annotation>
 
-	<xsd:attributeGroup name="schemaVersion">
-		<xsd:attribute name="version" type="xsd:token" use="required" fixed="0.1">
-			<xsd:annotation>
-				<xsd:documentation>The schema version used by the instance document.</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:attributeGroup>
+    <xsd:attributeGroup name="schemaVersion">
+        <xsd:attribute name="version" type="xsd:token" use="required" fixed="0.1">
+            <xsd:annotation>
+                <xsd:documentation>The schema version used by the instance document.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:attributeGroup>
 
-	<xsd:element name="amberdata">
-		<xsd:complexType>
-			<xsd:complexContent>
-				<xsd:restriction base="xsd:anyType">
-					<xsd:choice minOccurs="0" maxOccurs="unbounded">
-						<xsd:element ref="item-list" />
-						<xsd:element ref="portrait-list" />
-						<xsd:element ref="pc-list" />
-						<xsd:element ref="npc-list" />
-						<xsd:element ref="monster-list" />
-						<xsd:element ref="class-list" />
-						<xsd:element ref="map-list" />
-						<xsd:element ref="tileset-icon-list" />
-						<xsd:element ref="tileset-lab-list" />
-						<xsd:element ref="gfx-archive-list" />
-						<xsd:element ref="dictionary-list" />
-					</xsd:choice>
-					<xsd:attributeGroup ref="schemaVersion" />
-				</xsd:restriction>
-			</xsd:complexContent>
-		</xsd:complexType>
-	</xsd:element>
+    <xsd:element name="amberdata">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:restriction base="xsd:anyType">
+                    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                        <xsd:element ref="item-list" />
+                        <xsd:element ref="portrait-list" />
+                        <xsd:element ref="pc-list" />
+                        <xsd:element ref="npc-list" />
+                        <xsd:element ref="monster-list" />
+                        <xsd:element ref="class-list" />
+                        <xsd:element ref="map-list" />
+                        <xsd:element ref="tileset-icon-list" />
+                        <xsd:element ref="tileset-lab-list" />
+                        <xsd:element ref="gfx-archive-list" />
+                        <xsd:element ref="dictionary-list" />
+                    </xsd:choice>
+                    <xsd:attributeGroup ref="schemaVersion" />
+                </xsd:restriction>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="item-list">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element ref="item" minOccurs="0" maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="item">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element ref="class-reference" minOccurs="0" maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="item-instance">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="item-reference">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
+    <xsd:element name="item-list">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="item" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="portrait-list">
-	</xsd:element>
-	
-	<xsd:complexType name="character">
-		<xsd:attribute name="id" type="xsd:token"/>
-		<xsd:attribute name="name" type="xsd:token"/>
-	</xsd:complexType>
+    <xsd:element name="item">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="class-reference" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="pc-list">
-	</xsd:element>
-	
-	<xsd:element name="pc" >
-		<xsd:complexType>
-			<xsd:complexContent>
-				<xsd:extension base="character">
-				</xsd:extension>
-			</xsd:complexContent>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="pc-instance">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="pc-reference">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
+    <xsd:element name="item-instance">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="npc-list">
-	</xsd:element>
-	
-	<xsd:element name="npc">
-		<xsd:complexType>
-			<xsd:complexContent>
-				<xsd:extension base="character">
-				</xsd:extension>
-			</xsd:complexContent>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="npc-instance">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="npc-reference">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
+    <xsd:element name="item-reference">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="monster-list">
-	</xsd:element>
-	
-	<xsd:element name="monster">
-		<xsd:complexType>
-			<xsd:complexContent>
-				<xsd:extension base="character">
-				</xsd:extension>
-			</xsd:complexContent>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="monster-instance">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="monster-reference">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
 
-	<xsd:element name="class-list">
-	</xsd:element>
+    <xsd:element name="portrait-list">
+    </xsd:element>
 
-	<xsd:element name="class">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-			<xsd:attribute name="name" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="class-instance">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="class-reference">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
+    <xsd:complexType name="character">
+        <xsd:attribute name="id" type="xsd:token" />
+        <xsd:attribute name="name" type="xsd:token" />
+    </xsd:complexType>
 
-	<xsd:element name="spellbook-list">
-	</xsd:element>
+    <xsd:element name="pc-list">
+    </xsd:element>
 
-	<xsd:element name="spellbook">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element ref="spell" minOccurs="0" maxOccurs="unbounded"/>
-			</xsd:sequence>
-			<xsd:attribute name="id" type="xsd:token"/>
-			<xsd:attribute name="name" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="spellbook-instance">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element ref="spell-reference" minOccurs="0" maxOccurs="unbounded"/>
-			</xsd:sequence>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="spellbook-reference">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="spell">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-			<xsd:attribute name="name" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	<xsd:element name="spell-reference">
-		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:token"/>
-		</xsd:complexType>
-	</xsd:element>
-	
-	
-	<xsd:element name="map-list">
-	</xsd:element>
+    <xsd:element name="pc">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="character">
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="tileset-icon-list">
-	</xsd:element>
+    <xsd:element name="pc-instance">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="tileset-lab-list">
-	</xsd:element>
+    <xsd:element name="pc-reference">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="gfx-archive-list">
-	</xsd:element>
+    <xsd:element name="npc-list">
+    </xsd:element>
 
-	<xsd:element name="dictionary-list">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element ref="dictionary" minOccurs="0" maxOccurs="unbounded"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+    <xsd:element name="npc">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="character">
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="dictionary">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element ref="option" minOccurs="0" maxOccurs="unbounded" />
-			</xsd:sequence>
-			<xsd:attribute name="dictionary-id" type="xsd:normalizedString" />
-		</xsd:complexType>
-	</xsd:element>
+    <xsd:element name="npc-instance">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
 
-	<xsd:element name="option">
-		<xsd:complexType>
-			<xsd:attribute name="key" type="xsd:normalizedString" />
-			<xsd:attribute name="val" type="xsd:normalizedString" />
-			<xsd:attribute name="title" type="xsd:normalizedString" use="optional" />
-		</xsd:complexType>
-	</xsd:element>
+    <xsd:element name="npc-reference">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="monster-list">
+    </xsd:element>
+
+    <xsd:element name="monster">
+        <xsd:complexType>
+            <xsd:complexContent>
+                <xsd:extension base="character">
+                </xsd:extension>
+            </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="monster-instance">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="monster-reference">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="class-list">
+    </xsd:element>
+
+    <xsd:element name="class">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+            <xsd:attribute name="name" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="class-instance">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="class-reference">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="spellbook-list">
+    </xsd:element>
+
+    <xsd:element name="spellbook">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="spell" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:token" />
+            <xsd:attribute name="name" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="spellbook-instance">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="spell-reference" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="spellbook-reference">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="spell">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+            <xsd:attribute name="name" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="spell-reference">
+        <xsd:complexType>
+            <xsd:attribute name="id" type="xsd:token" />
+        </xsd:complexType>
+    </xsd:element>
+
+
+    <xsd:element name="map-list">
+    </xsd:element>
+
+    <xsd:element name="tileset-icon-list">
+    </xsd:element>
+
+    <xsd:element name="tileset-lab-list">
+    </xsd:element>
+
+    <xsd:element name="gfx-archive-list">
+    </xsd:element>
+
+    <xsd:element name="dictionary-list">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="dictionary" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="dictionary">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="option" minOccurs="0" maxOccurs="unbounded" />
+            </xsd:sequence>
+            <xsd:attribute name="dictionary-id" type="xsd:normalizedString" />
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:element name="option">
+        <xsd:complexType>
+            <xsd:attribute name="key" type="xsd:normalizedString" />
+            <xsd:attribute name="val" type="xsd:normalizedString" />
+            <xsd:attribute name="title" type="xsd:normalizedString" use="optional" />
+        </xsd:complexType>
+    </xsd:element>
 </xsd:schema>
