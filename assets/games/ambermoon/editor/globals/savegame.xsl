@@ -366,14 +366,12 @@
 
 
 
-	<xsl:template match="*" mode="item">
+	<xsl:template match="node()" mode="item">
 		<pre class="errorMessage">
 			Unbekanntes form Element:
 			<xsl:value-of select="name()" />
 		</pre>
 	</xsl:template>
-
-
 
 	<xsl:template match="*" mode="item">
 		<xsl:param name="class" select="''" />
@@ -385,6 +383,7 @@
 			<xsl:apply-templates select="." mode="form-content" />
 		</div>
 	</xsl:template>
+    
 	<xsl:template match="sse:instruction[@type = 'bit-field']" mode="item">
 		<xsl:param name="class" select="''" />
 		<div>
@@ -395,6 +394,7 @@
 			<xsl:apply-templates select="." mode="form-content" />
 		</div>
 	</xsl:template>
+    
 	<xsl:template match="sse:instruction[@type = 'string-dictionary']" mode="item">
 		<xsl:param name="class" select="''" />
 		<div>
@@ -420,8 +420,8 @@
 			</table>
 		</div>
 	</xsl:template>
-	<xsl:template
-		match="sse:string | sse:integer | sse:signed-integer | sse:select | sse:binary | sse:event-script" mode="item">
+    
+	<xsl:template match="sse:string | sse:integer | sse:signed-integer | sse:select | sse:binary | sse:event-script" mode="item">
 		<xsl:param name="class" select="''" />
 		<label>
 			<xsl:apply-templates select="." mode="form-attributes">
@@ -431,6 +431,7 @@
 			<xsl:apply-templates select="." mode="form-content" />
 		</label>
 	</xsl:template>
+    
 	<xsl:template match="sse:bit" mode="item">
 		<xsl:param name="class" select="''" />
 		<label>

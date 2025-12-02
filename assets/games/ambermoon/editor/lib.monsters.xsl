@@ -5,10 +5,10 @@
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:sse="http://schema.slothsoft.net/savegame/editor">	
 	
-	<xsl:import href="globals/dictionary" />
-	<xsl:import href="globals/savegame" />
-	<xsl:import href="globals/editor" />
-	<xsl:import href="globals/picker" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/editor/globals/dictionary" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/editor/globals/savegame" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/editor/globals/editor" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/editor/globals/picker" />
 	
 	<xsl:template match="sse:archive[@name='Monster_char_data.amb']" mode="form-content">
 		<xsl:call-template name="picker.items"/>

@@ -6,6 +6,9 @@
 	xmlns:sse="http://schema.slothsoft.net/savegame/editor"
 	xmlns:sfx="http://schema.slothsoft.net/farah/xslt"
 	xmlns:exsl="http://exslt.org/common">
+    
+    <xsl:import href="farah://slothsoft@amber/games/ambermoon/editor/globals/picker" />
+    <xsl:import href="farah://slothsoft@amber/games/ambermoon/editor/globals/savegame" />
 	
 	<xsl:template name="maps.data-file">
 		<xsl:call-template name="picker.tileset-icons"/>

@@ -4,8 +4,8 @@
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:sse="http://schema.slothsoft.net/savegame/editor">
 
-	<xsl:import href="globals/dictionary" />
-	<xsl:import href="globals/extract" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/globals/dictionary" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/globals/extract" />
 	
 	<xsl:template match="/*">
 		<amberdata version="0.1">

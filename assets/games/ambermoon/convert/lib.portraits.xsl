@@ -4,7 +4,7 @@
 	xmlns:saa="http://schema.slothsoft.net/amber/amberdata"
 	xmlns:sse="http://schema.slothsoft.net/savegame/editor">
 	
-	<xsl:import href="globals/static" />
+	<xsl:import href="farah://slothsoft@amber/games/ambermoon/convert/globals/static" />
 	
 	<xsl:template match="/*">
 		<amberdata version="0.1">
