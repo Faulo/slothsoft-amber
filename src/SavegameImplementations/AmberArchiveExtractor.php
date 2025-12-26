@@ -5,17 +5,21 @@ namespace Slothsoft\Amber\SavegameImplementations;
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Savegame\Node\ArchiveParser\ArchiveExtractorInterface;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 use DomainException;
 use LogicException;
 use SplFileInfo;
 
-class AmberArchiveExtractor extends CopyArchiveExtractor {
+final class AmberArchiveExtractor implements ArchiveExtractorInterface {
     
     private AmbTool $ambtool;
     
+    private CopyArchiveExtractor $extractor;
+    
     public function __construct(AmbTool $ambtool) {
         $this->ambtool = $ambtool;
+        $this->extractor = new CopyArchiveExtractor();
     }
     
     public function extractArchive(SplFileInfo $archivePath, SplFileInfo $targetDir): bool {
@@ -38,7 +42,7 @@ class AmberArchiveExtractor extends CopyArchiveExtractor {
                 $this->ambtool->extractArchive($archivePath, $targetDir);
                 return true;
             case '':
-                return parent::extractArchive($archivePath, $targetDir);
+                return $this->extractor->extractArchive($archivePath, $targetDir);
             default:
                 throw new DomainException("Unknown AmbTool type '$type'!");
         }

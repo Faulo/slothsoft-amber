@@ -4,7 +4,7 @@ namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
 
-class AmberArchiveBuilder implements ArchiveBuilderInterface {
+final class AmberArchiveBuilder implements ArchiveBuilderInterface {
     
     public function buildArchive(iterable $buildChildren): string {
         $header = [];
