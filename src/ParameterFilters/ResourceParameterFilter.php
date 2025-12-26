@@ -8,17 +8,17 @@ use Slothsoft\Farah\Module\Asset\ParameterFilterStrategy\AbstractMapParameterFil
 
 class ResourceParameterFilter extends AbstractMapParameterFilter {
     
-    const PARAM_GAME = 'game';
+    public const PARAM_GAME = 'game';
     
-    const PARAM_VERSION = 'version';
+    public const PARAM_VERSION = 'version';
     
-    const PARAM_USER = 'user';
+    public const PARAM_USER = 'user';
     
-    const PARAM_INFOSET_ID = 'infosetId';
+    public const PARAM_INFOSET_ID = 'infosetId';
     
-    const PARAM_ARCHIVE_ID = 'archiveId';
+    public const PARAM_ARCHIVE_ID = 'archiveId';
     
-    const PARAM_FILE_ID = 'fileId';
+    public const PARAM_FILE_ID = 'fileId';
     
     protected function createValueSanitizers(): array {
         return [
