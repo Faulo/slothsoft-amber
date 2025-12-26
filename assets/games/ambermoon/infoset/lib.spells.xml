@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <savegame version="0.4" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/AM2" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/AM2" />
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/AM2_BLIT" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/AM2_BLIT" />
 </savegame>

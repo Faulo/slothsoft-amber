@@ -1,122 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <globals xmlns="http://schema.slothsoft.net/savegame/editor" version="0.4">
-    <global global-id="places">
-        <group name="places">
-            <use-global position="0x000" ref="place-inn" />
-            <use-global position="0x020" ref="place-trainer" />
-            <use-global position="0x040" ref="place-trainer" />
-            <use-global position="0x060" ref="place-trainer" />
-            <use-global position="0x080" ref="place-healer" />
-            <use-global position="0x0A0" ref="place-healer" />
-            <use-global position="0x0C0" ref="place-shop" />
-            <use-global position="0x0E0" ref="place-inn" />
-            <use-global position="0x100" ref="place-trainer" />
-            <use-global position="0x120" ref="place-trainer" />
-            <use-global position="0x140" ref="place-transport" />
-            <use-global position="0x160" ref="place-shop" />
-            <use-global position="0x180" ref="place-food" />
-            <use-global position="0x1A0" ref="place-sage" />
-            <use-global position="0x1C0" ref="place-transport" />
-            <use-global position="0x1E0" ref="place-shop" />
-            <use-global position="0x200" ref="place-trainer" />
-            <use-global position="0x220" ref="place-shop" />
-            <use-global position="0x240" ref="place-shop" />
-            <use-global position="0x260" ref="place-shop" />
-            <use-global position="0x280" ref="place-shop" />
-            <use-global position="0x2A0" ref="place-healer" />
-            <use-global position="0x2C0" ref="place-shop" />
-            <use-global position="0x2E0" ref="place-shop" />
-            <use-global position="0x300" ref="place-inn" />
-            <use-global position="0x320" ref="place-food" />
-            <use-global position="0x340" ref="place-shop" />
-            <use-global position="0x360" ref="place-trainer" />
-            <use-global position="0x380" ref="place-trainer" />
-            <use-global position="0x3A0" ref="place-shop" />
-            <use-global position="0x3C0" ref="place-trainer" />
-            <use-global position="0x3E0" ref="place-blacksmith" />
-            <use-global position="0x400" ref="place-sage" />
-            <use-global position="0x420" ref="place-inn" />
-            <use-global position="0x440" ref="place-shop" />
-            <use-global position="0x460" ref="place-healer" />
-            <use-global position="0x480" ref="place-food" />
-            <use-global position="0x4A0" ref="place-inn" />
-            <use-global position="0x4C0" ref="place-trainer" />
-            <use-global position="0x4E0" ref="place-shop" />
-            <use-global position="0x500" ref="place-inn" />
-            <use-global position="0x520" ref="place-shop" />
-            <use-global position="0x540" ref="place-food" />
-            <use-global position="0x560" ref="place-shop" />
-            <use-global position="0x580" ref="place-shop" />
-            <use-global position="0x5A0" ref="place-healer" />
-            <use-global position="0x5C0" ref="place-inn" />
-            <use-global position="0x5E0" ref="place-sage" />
-            <use-global position="0x600" ref="place-blacksmith" />
-            <use-global position="0x620" ref="place-food" />
-            <use-global position="0x640" ref="place-shop" />
-            <use-global position="0x660" ref="place-healer" />
-            <use-global position="0x680" ref="place-inn" />
-            <use-global position="0x6A0" ref="place-blacksmith" />
-            <use-global position="0x6C0" ref="place-healer" />
-            <use-global position="0x6E0" ref="place-food" />
-            <use-global position="0x700" ref="place-shop" />
-            <use-global position="0x720" ref="place-inn" />
-            <use-global position="0x740" ref="place-blacksmith" />
-            <use-global position="0x760" ref="place-blacksmith" />
-            <use-global position="0x780" ref="place-shop" />
-            <use-global position="0x7A0" ref="place-food" />
-            <use-global position="0x7C0" ref="place-shop" />
-            <use-global position="0x7E0" ref="place-blacksmith" />
-            <use-global position="0x800" ref="place-blacksmith" />
-        </group>
-        <string-dictionary position="0x820" name="names" type="size-fixed" encoding="CP850" string-size="30" string-count="64" />
-    </global>
+	<global global-id="places">
+		<group name="places">
+			<use-global position="0x000" ref="place-inn" />
+			<use-global position="0x020" ref="place-trainer" />
+			<use-global position="0x040" ref="place-trainer" />
+			<use-global position="0x060" ref="place-trainer" />
+			<use-global position="0x080" ref="place-healer" />
+			<use-global position="0x0A0" ref="place-healer" />
+			<use-global position="0x0C0" ref="place-shop" />
+			<use-global position="0x0E0" ref="place-inn" />
+			<use-global position="0x100" ref="place-trainer" />
+			<use-global position="0x120" ref="place-trainer" />
+			<use-global position="0x140" ref="place-transport" />
+			<use-global position="0x160" ref="place-shop" />
+			<use-global position="0x180" ref="place-food" />
+			<use-global position="0x1A0" ref="place-sage" />
+			<use-global position="0x1C0" ref="place-transport" />
+			<use-global position="0x1E0" ref="place-shop" />
+			<use-global position="0x200" ref="place-trainer" />
+			<use-global position="0x220" ref="place-shop" />
+			<use-global position="0x240" ref="place-shop" />
+			<use-global position="0x260" ref="place-shop" />
+			<use-global position="0x280" ref="place-shop" />
+			<use-global position="0x2A0" ref="place-healer" />
+			<use-global position="0x2C0" ref="place-shop" />
+			<use-global position="0x2E0" ref="place-shop" />
+			<use-global position="0x300" ref="place-inn" />
+			<use-global position="0x320" ref="place-food" />
+			<use-global position="0x340" ref="place-shop" />
+			<use-global position="0x360" ref="place-trainer" />
+			<use-global position="0x380" ref="place-trainer" />
+			<use-global position="0x3A0" ref="place-shop" />
+			<use-global position="0x3C0" ref="place-trainer" />
+			<use-global position="0x3E0" ref="place-blacksmith" />
+			<use-global position="0x400" ref="place-sage" />
+			<use-global position="0x420" ref="place-inn" />
+			<use-global position="0x440" ref="place-shop" />
+			<use-global position="0x460" ref="place-healer" />
+			<use-global position="0x480" ref="place-food" />
+			<use-global position="0x4A0" ref="place-inn" />
+			<use-global position="0x4C0" ref="place-trainer" />
+			<use-global position="0x4E0" ref="place-shop" />
+			<use-global position="0x500" ref="place-inn" />
+			<use-global position="0x520" ref="place-shop" />
+			<use-global position="0x540" ref="place-food" />
+			<use-global position="0x560" ref="place-shop" />
+			<use-global position="0x580" ref="place-shop" />
+			<use-global position="0x5A0" ref="place-healer" />
+			<use-global position="0x5C0" ref="place-inn" />
+			<use-global position="0x5E0" ref="place-sage" />
+			<use-global position="0x600" ref="place-blacksmith" />
+			<use-global position="0x620" ref="place-food" />
+			<use-global position="0x640" ref="place-shop" />
+			<use-global position="0x660" ref="place-healer" />
+			<use-global position="0x680" ref="place-inn" />
+			<use-global position="0x6A0" ref="place-blacksmith" />
+			<use-global position="0x6C0" ref="place-healer" />
+			<use-global position="0x6E0" ref="place-food" />
+			<use-global position="0x700" ref="place-shop" />
+			<use-global position="0x720" ref="place-inn" />
+			<use-global position="0x740" ref="place-blacksmith" />
+			<use-global position="0x760" ref="place-blacksmith" />
+			<use-global position="0x780" ref="place-shop" />
+			<use-global position="0x7A0" ref="place-food" />
+			<use-global position="0x7C0" ref="place-shop" />
+			<use-global position="0x7E0" ref="place-blacksmith" />
+			<use-global position="0x800" ref="place-blacksmith" />
+		</group>
+		<string-dictionary position="0x820" name="names" type="size-fixed" encoding="CP850" string-size="30" string-count="64" />
+	</global>
 
-    <global global-id="place-inn">
-        <group>
-            <integer position="0" name="price" size="2" />
-            <integer position="2" name="map-x" size="2" />
-            <integer position="4" name="map-y" size="2" />
-            <select position="6" name="map-id" size="2" dictionary-ref="map-ids" />
-            <integer position="8" name="healing" size="2" />
-        </group>
-    </global>
-    <global global-id="place-trainer">
-        <group>
-            <select position="0" name="skill" size="2" dictionary-ref="skills" />
-            <integer position="2" name="price" size="2" />
-        </group>
-    </global>
-    <global global-id="place-healer">
-        <repeat-group group-size="2" group-count="13" dictionary-ref="ailments-healer">
-            <integer size="2" />
-        </repeat-group>
-    </global>
-    <global global-id="place-shop">
-        <group>
-        </group>
-    </global>
-    <global global-id="place-food">
-        <group>
-            <integer name="price" size="2" />
-        </group>
-    </global>
-    <global global-id="place-sage">
-        <group>
-            <integer name="price" size="2" />
-        </group>
-    </global>
-    <global global-id="place-blacksmith">
-        <group>
-            <integer name="price" size="2" />
-        </group>
-    </global>
-    <global global-id="place-transport">
-        <group>
-            <integer position="0" name="price" size="2" />
-            <integer position="2" name="map-x" size="2" />
-            <integer position="4" name="map-y" size="2" />
-            <select position="6" name="map-id" size="2" dictionary-ref="map-ids" />
-            <select position="8" name="spawn" size="2" dictionary-ref="event-spawn-types" />
-        </group>
-    </global>
+	<global global-id="place-inn">
+		<group>
+			<integer position="0" name="price" size="2" />
+			<integer position="2" name="map-x" size="2" />
+			<integer position="4" name="map-y" size="2" />
+			<select position="6" name="map-id" size="2" dictionary-ref="map-ids" />
+			<integer position="8" name="healing" size="2" />
+		</group>
+	</global>
+	<global global-id="place-trainer">
+		<group>
+			<select position="0" name="skill" size="2" dictionary-ref="skills" />
+			<integer position="2" name="price" size="2" />
+		</group>
+	</global>
+	<global global-id="place-healer">
+		<repeat-group group-size="2" group-count="13" dictionary-ref="ailments-healer">
+			<integer size="2" />
+		</repeat-group>
+	</global>
+	<global global-id="place-shop">
+		<group>
+		</group>
+	</global>
+	<global global-id="place-food">
+		<group>
+			<integer name="price" size="2" />
+		</group>
+	</global>
+	<global global-id="place-sage">
+		<group>
+			<integer name="price" size="2" />
+		</group>
+	</global>
+	<global global-id="place-blacksmith">
+		<group>
+			<integer name="price" size="2" />
+		</group>
+	</global>
+	<global global-id="place-transport">
+		<group>
+			<integer position="0" name="price" size="2" />
+			<integer position="2" name="map-x" size="2" />
+			<integer position="4" name="map-y" size="2" />
+			<select position="6" name="map-id" size="2" dictionary-ref="map-ids" />
+			<select position="8" name="spawn" size="2" dictionary-ref="event-spawn-types" />
+		</group>
+	</global>
 </globals>

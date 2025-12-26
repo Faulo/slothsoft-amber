@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <savegame version="0.4" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/1Icon_gfx.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Icon_gfx.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Icon_gfx.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/1Icon_gfx.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Icon_gfx.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/3Icon_gfx.amb" />
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Wall3D.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/2Wall3D.amb" />
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Object_icons" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Combat_background.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Portraits.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Pics_80x80.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Event_pix.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Layouts.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Automap_graphics" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Stationary" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Monster_gfx.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Object_icons" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Combat_background.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Portraits.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Pics_80x80.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Event_pix.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Layouts.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Automap_graphics" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Stationary" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Amberfiles/Monster_gfx.amb" />
 </savegame>

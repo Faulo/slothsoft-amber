@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.4" path="Extrafiles/Abstract_data.amb" type="Raw">
-    <for-each-file>
-        <group name="classes" position="0">
-            <repeat-group group-size="42" group-count="10">
-                <string position="0" name="name" size="12" />
-                <repeat-group position="12" name="skills" group-size="2" group-count="10" dictionary-ref="skills">
-                    <integer size="2" max="99" />
-                </repeat-group>
-                <integer position="32" name="apr-per-level" size="2" max="50" />
-                <integer position="34" name="hp-per-level" size="2" max="99" />
-                <integer position="36" name="sp-per-level" size="2" max="99" />
-                <integer position="38" name="slp-per-level" size="2" max="99" />
-                <integer position="40" name="tp-per-level" size="2" max="99" />
-            </repeat-group>
-        </group>
-    </for-each-file>
+	<for-each-file>
+		<group name="classes" position="0">
+			<repeat-group group-size="42" group-count="10">
+				<string position="0" name="name" size="12" />
+				<repeat-group position="12" name="skills" group-size="2" group-count="10" dictionary-ref="skills">
+					<integer size="2" max="99" />
+				</repeat-group>
+				<integer position="32" name="apr-per-level" size="2" max="50" />
+				<integer position="34" name="hp-per-level" size="2" max="99" />
+				<integer position="36" name="sp-per-level" size="2" max="99" />
+				<integer position="38" name="slp-per-level" size="2" max="99" />
+				<integer position="40" name="tp-per-level" size="2" max="99" />
+			</repeat-group>
+		</group>
+	</for-each-file>
 </archive>

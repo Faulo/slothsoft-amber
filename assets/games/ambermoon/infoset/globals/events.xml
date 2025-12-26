@@ -1,663 +1,663 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <globals xmlns="http://schema.slothsoft.net/savegame/editor" version="0.4">
-    <global global-id="events">
-        <group name="events">
-            <event-dictionary />
-            <!-- <event-script position="488"/> -->
-        </group>
-    </global>
-
-    <global global-id="event-bit-type">
-        <select position="0" name="event-type" dictionary-ref="event-types" />
-    </global>
-    <global global-id="event-bit-subtype">
-        <integer position="1" name="event-subtype" />
-    </global>
-    <global global-id="event-bit-trigger">
-        <select position="1" name="event-subtype" dictionary-ref="event-trigger-types" />
-    </global>
-    <global global-id="event-bit-if">
-        <select position="1" name="event-subtype" dictionary-ref="event-if-types" />
-    </global>
-    <global global-id="event-bit-set">
-        <select position="1" name="event-subtype" dictionary-ref="event-set-types" />
-    </global>
-    <global global-id="event-bit-create">
-        <select position="1" name="event-subtype" dictionary-ref="event-create-types" />
-    </global>
-    <global global-id="event-bit-award">
-        <select position="1" name="event-subtype" dictionary-ref="event-award-types" />
-    </global>
-    <global global-id="event-bit-goto">
-        <select position="10" name="event-goto" size="2" dictionary-ref="gotos" />
-    </global>
-    <global global-id="event-unknown">
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-subtype" />
-        <integer name="event-payload" position="2" />
-        <integer name="event-payload" position="3" />
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-        <integer name="event-payload" position="6" />
-        <integer name="event-payload" position="7" />
-        <integer name="event-payload" position="8" />
-        <integer name="event-payload" position="9" />
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-01">
-        <!-- teleport -->
-        <use-global ref="event-bit-type" />
-        <select name="event-payload" position="6" size="2" dictionary-ref="map-ids" />
-        <integer name="event-payload" position="1" size="1" />
-        <integer name="event-payload" position="2" size="1" />
-        <select name="event-payload" position="3" size="1" dictionary-ref="map-directions" />
-        <select name="event-payload" position="5" size="1" dictionary-ref="event-teleport-types" />
-        <use-global ref="event-bit-goto" />
-
-        <select position="8" size="2" name="event-payload" dictionary-ref="gotos" />
-
-        <integer name="event-null" position="4" />
-    </global>
-    <global global-id="event-02">
-        <!-- door -->
-        <use-global ref="event-bit-type" />
-
-        <integer name="event-payload" position="1" size="1" />
-        <integer name="event-payload" position="2" size="1" />
-        <integer name="event-payload" position="3" />
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-
-        <select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
-
-        <select position="8" size="2" name="event-payload" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-03">
-        <!-- chest -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-subtype" />
-        <integer name="event-payload" position="2" />
-        <integer name="event-payload" position="3" />
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-        <select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-04">
-        <!-- popup text -->
-        <use-global ref="event-bit-type" />
-
-        <select name="event-payload" position="1" dictionary-ref="events" />
-        <select name="event-payload" position="2" size="2" dictionary-ref="popup-bitmask" />
-        <select name="event-payload" position="5" dictionary-ref="map-texts" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-09">
-        <!-- award -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-award" />
-        <integer name="event-payload" position="2" />
-        <integer name="event-payload" position="3" />
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-        <integer name="event-payload" position="6" />
-        <integer name="event-payload" position="7" />
-        <integer name="event-payload" position="8" />
-        <integer name="event-payload" position="9" />
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-09.00">
-        <!-- award attribute -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-award" />
-        <select position="2" size="1" name="event-payload" dictionary-ref="award-operations" />
-        <select position="4" size="1" name="event-payload" dictionary-ref="target" />
-        <select position="6" size="2" name="event-payload" dictionary-ref="attributes" />
-        <integer name="event-payload" position="8" />
-        <integer name="event-payload" position="9" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="5" />
-    </global>
-    <global global-id="event-09.07">
-        <!-- award language -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-award" />
-        <select position="2" size="1" name="event-payload" dictionary-ref="award-operations" />
-        <select position="4" size="1" name="event-payload" dictionary-ref="target" />
-        <select position="6" size="2" name="event-payload" dictionary-ref="languages" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-09.08">
-        <!-- award experience -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-award" />
-        <select position="2" size="1" name="event-payload" dictionary-ref="award-operations" />
-        <select position="4" size="1" name="event-payload" dictionary-ref="target" />
-        <integer position="8" size="2" name="event-payload" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-    </global>
-    <global global-id="event-10">
-        <!-- set tile -->
-        <use-global ref="event-bit-type" />
-
-        <integer name="event-payload" position="1" />
-        <integer name="event-payload" position="2" />
-        <integer name="event-payload" position="6" size="2" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="map-ids" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-    </global>
-    <global global-id="event-11">
-        <!-- battle -->
-        <use-global ref="event-bit-type" />
-        <integer position="6" name="event-payload" size="2" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="1" />
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-12">
-        <!-- place -->
-        <use-global ref="event-bit-type" />
-        <integer name="event-payload" position="2" size="2" />
-        <integer name="event-payload" position="4" size="2" />
-        <select position="6" name="event-payload" size="2" dictionary-ref="places" />
-        <select position="8" name="event-payload" size="2" dictionary-ref="merchants" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-FFFF" position="1" />
-    </global>
-    <global global-id="event-13">
-        <!-- if -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-if" />
-        <integer name="event-payload" position="2" />
-        <integer name="event-payload" position="3" />
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-        <integer name="event-payload" position="6" />
-        <integer name="event-payload" position="7" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-13.00">
-        <!-- global variable -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-set" />
-
-        <integer name="event-payload" position="6" size="2" />
-        <select name="event-payload" position="2" size="2" dictionary-ref="boolean-reverse" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-    </global>
-    <global global-id="event-13.04">
-        <!-- map variable -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-if" />
-
-        <integer name="event-payload" position="6" />
-        <integer name="event-payload" position="7" />
-        <select name="event-payload" position="2" size="2" dictionary-ref="boolean-reverse" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-    </global>
-    <global global-id="event-13.05">
-        <!-- partymember -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-if" />
-
-        <select name="event-payload" position="6" size="2" dictionary-ref="pc-ids" />
-        <select name="event-payload" position="2" size="2" dictionary-ref="boolean-reverse" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-    </global>
-    <global global-id="event-13.06">
-        <!-- item owned -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-if" />
-
-        <select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
-        <select position="2" size="1" name="event-payload" dictionary-ref="proportionality" />
-        <integer position="3" size="1" name="event-payload" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-    </global>
-    <global global-id="event-13.07">
-        <!-- item used -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-if" />
-
-        <select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
-        <integer position="2" size="1" name="event-payload" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer position="3" size="1" name="event-null" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-    </global>
-    <global global-id="event-13.09">
-        <!-- exit -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-if" />
-
-        <integer position="2" size="2" name="event-payload" />
-        <integer position="6" size="2" name="event-payload" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-    </global>
-    <global global-id="event-14">
-        <!-- set -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-set" />
-        <integer name="event-payload" position="2" />
-        <integer name="event-payload" position="3" />
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-        <integer name="event-payload" position="6" />
-        <integer name="event-payload" position="7" />
-        <integer name="event-payload" position="8" />
-        <integer name="event-payload" position="9" />
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-14.00">
-        <!-- global variable -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-set" />
-
-        <integer name="event-payload" position="6" size="2" />
-        <select name="event-payload" position="2" dictionary-ref="boolean" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-14.04">
-        <!-- map variable -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-set" />
-
-        <integer name="event-payload" position="6" />
-        <integer name="event-payload" position="7" />
-        <select name="event-payload" position="2" dictionary-ref="boolean" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-14.06">
-        <!-- inventory -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-set" />
-        <select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
-        <integer name="event-payload" position="3" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-14.08">
-        <!-- keyword -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-set" />
-        <select position="6" size="2" name="event-payload" dictionary-ref="keywords" />
-        <select position="2" size="1" name="event-payload" dictionary-ref="boolean" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-15">
-        <!-- if-1d100 -->
-        <use-global ref="event-bit-type" />
-        <integer name="event-payload" position="1" min="1" max="99" />
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-16">
-        <!-- start -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-        <integer name="event-payload" position="2" />
-        <integer name="event-payload" position="3" />
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-        <integer name="event-payload" position="6" />
-        <integer name="event-payload" position="7" />
-        <integer name="event-payload" position="8" />
-        <integer name="event-payload" position="9" />
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-16.00">
-        <!-- keyword -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-
-        <select position="6" size="2" name="event-payload" dictionary-ref="keywords" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-16.01">
-        <!-- show item -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-
-        <select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-16.02">
-        <!-- give item -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-
-        <select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-16.03">
-        <!-- give gold -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-
-        <integer position="6" size="2" name="event-payload" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-16.04">
-        <!-- give food -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-
-        <integer position="6" size="2" name="event-payload" />
-
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-16.05">
-        <!-- join group -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-16.06">
-        <!-- leave group -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-16.07">
-        <!-- start conversation -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-16.08">
-        <!-- end conversation -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-trigger" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-17">
-        <!-- print text -->
-        <use-global ref="event-bit-type" />
-        <integer name="event-payload" position="1" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-18">
-        <!-- create -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-create" />
-        <integer name="event-payload" position="2" />
-        <integer name="event-payload" position="3" />
-        <integer name="event-payload" position="4" />
-        <integer name="event-payload" position="5" />
-        <integer name="event-payload" position="6" />
-        <integer name="event-payload" position="7" />
-        <integer name="event-payload" position="8" />
-        <integer name="event-payload" position="9" />
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-18.00">
-        <!-- item -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-create" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="item-ids" />
-        <integer name="event-payload" position="6" size="2" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-    </global>
-    <global global-id="event-18.01">
-        <!-- gold -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-create" />
-        <integer name="event-payload" position="6" size="2" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-18.02">
-        <!-- food -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-create" />
-        <integer name="event-payload" position="6" size="2" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-19">
-        <!-- prompt -->
-        <use-global ref="event-bit-type" />
-        <integer name="event-payload" position="1" min="1" max="99" />
-        <integer name="event-null" position="2" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
-
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-20">
-        <!-- play music -->
-        <use-global ref="event-bit-type" />
-        <select name="event-payload" position="2" dictionary-ref="songs" />
-        <use-global ref="event-bit-goto" />
-
-        <integer name="event-null" position="1" />
-        <integer name="event-null" position="3" />
-        <integer name="event-null" position="4" />
-        <integer name="event-null" position="5" />
-        <integer name="event-null" position="6" />
-        <integer name="event-null" position="7" />
-        <integer name="event-null" position="8" />
-        <integer name="event-null" position="9" />
-    </global>
-    <global global-id="event-21.00">
-        <!-- exit -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-22">
-        <!-- spawn -->
-        <use-global ref="event-bit-type" />
-        <select position="3" name="event-subtype" dictionary-ref="event-spawn-types" />
-        <select name="event-payload" position="6" size="2" dictionary-ref="map-ids" />
-        <integer name="event-payload" position="1" size="1" />
-        <integer name="event-payload" position="2" size="1" />
-        <use-global ref="event-bit-goto" />
-    </global>
-    <global global-id="event-23.00">
-        <!-- null -->
-        <use-global ref="event-bit-type" />
-        <use-global ref="event-bit-goto" />
-    </global>
+	<global global-id="events">
+		<group name="events">
+			<event-dictionary />
+			<!-- <event-script position="488"/> -->
+		</group>
+	</global>
+
+	<global global-id="event-bit-type">
+		<select position="0" name="event-type" dictionary-ref="event-types" />
+	</global>
+	<global global-id="event-bit-subtype">
+		<integer position="1" name="event-subtype" />
+	</global>
+	<global global-id="event-bit-trigger">
+		<select position="1" name="event-subtype" dictionary-ref="event-trigger-types" />
+	</global>
+	<global global-id="event-bit-if">
+		<select position="1" name="event-subtype" dictionary-ref="event-if-types" />
+	</global>
+	<global global-id="event-bit-set">
+		<select position="1" name="event-subtype" dictionary-ref="event-set-types" />
+	</global>
+	<global global-id="event-bit-create">
+		<select position="1" name="event-subtype" dictionary-ref="event-create-types" />
+	</global>
+	<global global-id="event-bit-award">
+		<select position="1" name="event-subtype" dictionary-ref="event-award-types" />
+	</global>
+	<global global-id="event-bit-goto">
+		<select position="10" name="event-goto" size="2" dictionary-ref="gotos" />
+	</global>
+	<global global-id="event-unknown">
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-subtype" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-01">
+		<!-- teleport -->
+		<use-global ref="event-bit-type" />
+		<select name="event-payload" position="6" size="2" dictionary-ref="map-ids" />
+		<integer name="event-payload" position="1" size="1" />
+		<integer name="event-payload" position="2" size="1" />
+		<select name="event-payload" position="3" size="1" dictionary-ref="map-directions" />
+		<select name="event-payload" position="5" size="1" dictionary-ref="event-teleport-types" />
+		<use-global ref="event-bit-goto" />
+
+		<select position="8" size="2" name="event-payload" dictionary-ref="gotos" />
+
+		<integer name="event-null" position="4" />
+	</global>
+	<global global-id="event-02">
+		<!-- door -->
+		<use-global ref="event-bit-type" />
+
+		<integer name="event-payload" position="1" size="1" />
+		<integer name="event-payload" position="2" size="1" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
+
+		<select position="8" size="2" name="event-payload" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-03">
+		<!-- chest -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-subtype" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-04">
+		<!-- popup text -->
+		<use-global ref="event-bit-type" />
+
+		<select name="event-payload" position="1" dictionary-ref="events" />
+		<select name="event-payload" position="2" size="2" dictionary-ref="popup-bitmask" />
+		<select name="event-payload" position="5" dictionary-ref="map-texts" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-09">
+		<!-- award -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-award" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-09.00">
+		<!-- award attribute -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-award" />
+		<select position="2" size="1" name="event-payload" dictionary-ref="award-operations" />
+		<select position="4" size="1" name="event-payload" dictionary-ref="target" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="attributes" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-09.07">
+		<!-- award language -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-award" />
+		<select position="2" size="1" name="event-payload" dictionary-ref="award-operations" />
+		<select position="4" size="1" name="event-payload" dictionary-ref="target" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="languages" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-09.08">
+		<!-- award experience -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-award" />
+		<select position="2" size="1" name="event-payload" dictionary-ref="award-operations" />
+		<select position="4" size="1" name="event-payload" dictionary-ref="target" />
+		<integer position="8" size="2" name="event-payload" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+	</global>
+	<global global-id="event-10">
+		<!-- set tile -->
+		<use-global ref="event-bit-type" />
+
+		<integer name="event-payload" position="1" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="6" size="2" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="map-ids" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-11">
+		<!-- battle -->
+		<use-global ref="event-bit-type" />
+		<integer position="6" name="event-payload" size="2" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="1" />
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-12">
+		<!-- place -->
+		<use-global ref="event-bit-type" />
+		<integer name="event-payload" position="2" size="2" />
+		<integer name="event-payload" position="4" size="2" />
+		<select position="6" name="event-payload" size="2" dictionary-ref="places" />
+		<select position="8" name="event-payload" size="2" dictionary-ref="merchants" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-FFFF" position="1" />
+	</global>
+	<global global-id="event-13">
+		<!-- if -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-13.00">
+		<!-- global variable -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+
+		<integer name="event-payload" position="6" size="2" />
+		<select name="event-payload" position="2" size="2" dictionary-ref="boolean-reverse" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.04">
+		<!-- map variable -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<select name="event-payload" position="2" size="2" dictionary-ref="boolean-reverse" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.05">
+		<!-- partymember -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<select name="event-payload" position="6" size="2" dictionary-ref="pc-ids" />
+		<select name="event-payload" position="2" size="2" dictionary-ref="boolean-reverse" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.06">
+		<!-- item owned -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
+		<select position="2" size="1" name="event-payload" dictionary-ref="proportionality" />
+		<integer position="3" size="1" name="event-payload" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.07">
+		<!-- item used -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
+		<integer position="2" size="1" name="event-payload" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer position="3" size="1" name="event-null" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-13.09">
+		<!-- exit -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-if" />
+
+		<integer position="2" size="2" name="event-payload" />
+		<integer position="6" size="2" name="event-payload" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+	</global>
+	<global global-id="event-14">
+		<!-- set -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-14.00">
+		<!-- global variable -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+
+		<integer name="event-payload" position="6" size="2" />
+		<select name="event-payload" position="2" dictionary-ref="boolean" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-14.04">
+		<!-- map variable -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<select name="event-payload" position="2" dictionary-ref="boolean" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-14.06">
+		<!-- inventory -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
+		<integer name="event-payload" position="3" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-14.08">
+		<!-- keyword -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-set" />
+		<select position="6" size="2" name="event-payload" dictionary-ref="keywords" />
+		<select position="2" size="1" name="event-payload" dictionary-ref="boolean" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-15">
+		<!-- if-1d100 -->
+		<use-global ref="event-bit-type" />
+		<integer name="event-payload" position="1" min="1" max="99" />
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-16">
+		<!-- start -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-16.00">
+		<!-- keyword -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<select position="6" size="2" name="event-payload" dictionary-ref="keywords" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.01">
+		<!-- show item -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.02">
+		<!-- give item -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<select position="6" size="2" name="event-payload" dictionary-ref="item-ids" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.03">
+		<!-- give gold -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<integer position="6" size="2" name="event-payload" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.04">
+		<!-- give food -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+
+		<integer position="6" size="2" name="event-payload" />
+
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.05">
+		<!-- join group -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.06">
+		<!-- leave group -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.07">
+		<!-- start conversation -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-16.08">
+		<!-- end conversation -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-trigger" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-17">
+		<!-- print text -->
+		<use-global ref="event-bit-type" />
+		<integer name="event-payload" position="1" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-18">
+		<!-- create -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-create" />
+		<integer name="event-payload" position="2" />
+		<integer name="event-payload" position="3" />
+		<integer name="event-payload" position="4" />
+		<integer name="event-payload" position="5" />
+		<integer name="event-payload" position="6" />
+		<integer name="event-payload" position="7" />
+		<integer name="event-payload" position="8" />
+		<integer name="event-payload" position="9" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-18.00">
+		<!-- item -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-create" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="item-ids" />
+		<integer name="event-payload" position="6" size="2" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+	</global>
+	<global global-id="event-18.01">
+		<!-- gold -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-create" />
+		<integer name="event-payload" position="6" size="2" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-18.02">
+		<!-- food -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-create" />
+		<integer name="event-payload" position="6" size="2" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-19">
+		<!-- prompt -->
+		<use-global ref="event-bit-type" />
+		<integer name="event-payload" position="1" min="1" max="99" />
+		<integer name="event-null" position="2" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<select name="event-payload" position="8" size="2" dictionary-ref="gotos" />
+
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-20">
+		<!-- play music -->
+		<use-global ref="event-bit-type" />
+		<select name="event-payload" position="2" dictionary-ref="songs" />
+		<use-global ref="event-bit-goto" />
+
+		<integer name="event-null" position="1" />
+		<integer name="event-null" position="3" />
+		<integer name="event-null" position="4" />
+		<integer name="event-null" position="5" />
+		<integer name="event-null" position="6" />
+		<integer name="event-null" position="7" />
+		<integer name="event-null" position="8" />
+		<integer name="event-null" position="9" />
+	</global>
+	<global global-id="event-21.00">
+		<!-- exit -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-22">
+		<!-- spawn -->
+		<use-global ref="event-bit-type" />
+		<select position="3" name="event-subtype" dictionary-ref="event-spawn-types" />
+		<select name="event-payload" position="6" size="2" dictionary-ref="map-ids" />
+		<integer name="event-payload" position="1" size="1" />
+		<integer name="event-payload" position="2" size="1" />
+		<use-global ref="event-bit-goto" />
+	</global>
+	<global global-id="event-23.00">
+		<!-- null -->
+		<use-global ref="event-bit-type" />
+		<use-global ref="event-bit-goto" />
+	</global>
 </globals>

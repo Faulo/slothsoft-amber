@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <savegame version="0.4" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/AM2" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/characters" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/events" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/maps" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/places" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/AM2" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/characters" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/events" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/maps" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/globals/places" />
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/2D_Map_data.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/2D_Icon_data.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/2D_Map_data.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/2D_Icon_data.amb" />
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/3D_Map_data.amb" />
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/3D_Lab_data.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/3D_Map_data.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/3D_Lab_data.amb" />
 
-    <xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/Abstract_data.amb" />
+	<xi:include href="farah://slothsoft@amber/games/ambermoon/infoset/archives/Extrafiles/Abstract_data.amb" />
 </savegame>
