@@ -3,7 +3,7 @@
     xmlns:str="http://exslt.org/strings" xmlns:set="http://exslt.org/sets" xmlns:math="http://exslt.org/math" xmlns:php="http://php.net/xsl" xmlns:save="http://schema.slothsoft.net/savegame/editor" xmlns:sse="http://schema.slothsoft.net/savegame/editor" xmlns:html="http://www.w3.org/1999/xhtml"
     extension-element-prefixes="exsl func str set math php">
 
-    <xsl:variable name="dataDocument" select="/*/*/sse:savegame.editor" />
+    <xsl:variable name="dataDocument" select="/*/*/sse:savegame" />
     <xsl:variable name="dictionaryDocument" select="/*/*[@name = 'dictionaries']/saa:amberdata" />
 
     <xsl:variable name="lib" select="string($dataDocument/../@name)" />
@@ -51,7 +51,7 @@
     <xsl:template match="/*">
         <amberdata version="0.1">
             <xsl:copy-of select="." />
-            <xsl:for-each select=".//sse:savegame.editor">
+            <xsl:for-each select=".//sse:savegame">
                 <xsl:choose>
                     <xsl:when test="$lib = 'graphics'">
                         <xsl:call-template name="extract-graphics" />

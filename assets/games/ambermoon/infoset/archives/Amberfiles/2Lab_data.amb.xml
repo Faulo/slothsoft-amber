@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3" path="Amberfiles/2Lab_data.amb" type="AMBR">    <for-each-file>        <use-global ref="lab-data" />    </for-each-file></archive>
+<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.4" path="Amberfiles/2Lab_data.amb" type="AMBR">    <for-each-file>        <use-global ref="lab-data" />    </for-each-file></archive>

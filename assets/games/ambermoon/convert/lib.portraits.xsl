@@ -4,11 +4,11 @@
 
     <xsl:template match="/*">
         <amberdata version="0.1">
-            <xsl:apply-templates select="*/sse:savegame.editor" />
+            <xsl:apply-templates select="*/sse:savegame" />
         </amberdata>
     </xsl:template>
 
-    <xsl:template match="sse:savegame.editor">
+    <xsl:template match="sse:savegame">
         <xsl:copy-of select="$static/saa:portrait-list" />
 
         <xsl:for-each select="$static//saa:portrait">

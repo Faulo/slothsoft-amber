@@ -40,19 +40,20 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         $archiveId = $args->get(ResourceParameterFilter::PARAM_ARCHIVE_ID);
         $fileId = $args->get(ResourceParameterFilter::PARAM_FILE_ID);
         
+        if ($infosetId === '') {
+            $url = "farah://slothsoft@amber/games/$game/infoset";
+            $url = FarahUrl::createFromReference($url);
+            $resultBuilder = new ProxyResultBuilder(Module::resolveToExecutable($url));
+            return new ExecutableStrategies($resultBuilder);
+        }
+        
         $controller = new EditorController();
         
         $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
         
         if ($fileId === '') {
             if ($archiveId === '') {
-                if ($infosetId === '') {
-                    $url = "farah://slothsoft@amber/games/$game/infoset";
-                    $url = FarahUrl::createFromReference($url);
-                    $resultBuilder = new ProxyResultBuilder(Module::resolveToExecutable($url));
-                } else {
-                    $resultBuilder = $this->processInfoset($config, $infosetId);
-                }
+                $resultBuilder = $this->processInfoset($config, $infosetId);
             } else {
                 $resultBuilder = $this->processArchive($config, $infosetId, $archiveId);
             }

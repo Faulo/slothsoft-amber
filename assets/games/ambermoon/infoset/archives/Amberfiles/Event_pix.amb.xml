@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3" path="Amberfiles/Event_pix.amb" type="JH">    <for-each-file>        <image width="320" height="92" bitplanes="5" />    </for-each-file></archive>
+<?xml version="1.0" encoding="UTF-8"?><archive xmlns="http://schema.slothsoft.net/savegame/editor" version="0.4" path="Amberfiles/Event_pix.amb" type="JH">    <for-each-file>        <image width="320" height="92" bitplanes="5" />    </for-each-file></archive>

@@ -14,11 +14,11 @@
 
     <xsl:template match="/*">
         <amberdata version="0.1">
-            <xsl:apply-templates select="*/sse:savegame.editor" />
+            <xsl:apply-templates select="*/sse:savegame" />
         </amberdata>
     </xsl:template>
 
-    <xsl:template match="sse:savegame.editor">
+    <xsl:template match="sse:savegame">
         <dictionary-list>
             <xsl:call-template name="dictionary.characters" />
             <xsl:call-template name="dictionary.monsters" />

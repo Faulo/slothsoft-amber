@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<globals xmlns="http://schema.slothsoft.net/savegame/editor" version="0.3">
+<globals xmlns="http://schema.slothsoft.net/savegame/editor" version="0.4">
     <global global-id="map-texts">
         <string-dictionary type="size-first" encoding="CP850" position="0" name="label" />
     </global>

@@ -74,7 +74,7 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface {
         // };
         // $writer = new ChunkWriterFileCache($writer, FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
         
-        $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.editor.xml');
+        $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.xml');
         return new ExecutableStrategies($resultBuilder);
     }
     

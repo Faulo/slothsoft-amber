@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exsl="http://exslt.org/common"
     xmlns:func="http://exslt.org/functions" xmlns:str="http://exslt.org/strings" xmlns:php="http://php.net/xsl" xmlns:save="http://schema.slothsoft.net/savegame/editor" extension-element-prefixes="exsl func str php">
 
-    <!-- <xsl:key name="dictionary-option" match="save:savegame.editor/save:dictionary/save:option" use="../@dictionary-id" /> -->
+    <!-- <xsl:key name="dictionary-option" match="save:savegame/save:dictionary/save:option" use="../@dictionary-id" /> -->
 
     <xsl:key name="dictionary-option" match="/*/*[@name='dictionaries']/saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option" use="../@dictionary-id" />
 

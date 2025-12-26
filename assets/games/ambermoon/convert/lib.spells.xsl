@@ -5,11 +5,11 @@
 
     <xsl:template match="/*">
         <amberdata version="0.1">
-            <xsl:apply-templates select="*/sse:savegame.editor" />
+            <xsl:apply-templates select="*/sse:savegame" />
         </amberdata>
     </xsl:template>
 
-    <xsl:template match="sse:savegame.editor">
+    <xsl:template match="sse:savegame">
         <xsl:variable name="spell-types" select="sse:archive[@name='AM2_BLIT']//*[@name='spell-types']/*" />
         <xsl:variable name="spell-data" select="sse:archive[@name='AM2_BLIT']//*[@name='spell-data']/*" />
         <xsl:variable name="spell-names" select="sse:archive[@name='AM2_BLIT']//*[@name='spell-names']/*" />
