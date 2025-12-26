@@ -19,7 +19,7 @@ use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
 use SplFileInfo;
 
-class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
+final class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         $game = $args->get(ResourceParameterFilter::PARAM_GAME);
@@ -37,24 +37,23 @@ class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
         $cacheFile = implode(DIRECTORY_SEPARATOR, $cacheFile);
         $cacheFile = FileInfoFactory::createFromPath($cacheFile);
         
-        $domDelegate = function () use ($context, $args, $game, $infosetId): DOMWriterInterface {
-            $contextUrl = $context->createUrl($args);
-            $convertUrl = $contextUrl->withPath("/games/$game/convert/$infosetId");
-            $datasetUrl = $contextUrl->withPath("/game-resources/dataset");
-            $dictionaryUrl = $infosetId === 'lib.dictionaries' ? null : $contextUrl->withQuery('infosetId=lib.dictionaries');
-            
+        $contextUrl = $context->createUrl($args);
+        $datasetUrl = $contextUrl->withPath("/game-resources/dataset");
+        $templateUrl = $contextUrl->withPath("/games/$game/convert/$infosetId");
+        $dictionaryUrl = $infosetId === 'lib.dictionaries' ? null : $contextUrl->withQuery('infosetId=lib.dictionaries');
+        
+        $domDelegate = function () use ($contextUrl, $datasetUrl, $templateUrl, $dictionaryUrl): DOMWriterInterface {
             $writer = new AssetFragmentDOMWriter($contextUrl);
             $writer->appendChild(new AssetDocumentDOMWriter($datasetUrl));
             if ($dictionaryUrl) {
                 $writer->appendChild(new AssetDocumentDOMWriter($dictionaryUrl));
             }
-            $template = Module::resolveToDOMWriter($convertUrl);
+            $template = Module::resolveToDOMWriter($templateUrl);
             return new TransformationDOMWriter($writer, $template);
         };
         
-        $shouldRefreshDelegate = function (SplFileInfo $cacheFile): bool {
-            // return $config->infosetFile->getMTime() > $cacheFile->getMTime();
-            return false;
+        $shouldRefreshDelegate = function (SplFileInfo $cacheFile) use ($datasetUrl, $templateUrl): bool {
+            return filemtime((string) $datasetUrl) > $cacheFile->getMTime() or filemtime((string) $templateUrl) > $cacheFile->getMTime();
         };
         
         $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);

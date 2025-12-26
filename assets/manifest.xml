@@ -18,6 +18,7 @@
 			<resource-directory name="infoset" type="application/xml" />
 			<resource-directory name="convert" type="application/xslt+xml" />
 			<resource-directory name="editor" type="application/xslt+xml" />
+            <use-manifest name="dictionaries" ref="/game-resources/amberdata?infosetId=lib.dictionaries" />
 
 			<fragment name="gfx">
 				<use-manifest name="icons-4-6" ref="/game-resources/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004&amp;paletteId=6" />

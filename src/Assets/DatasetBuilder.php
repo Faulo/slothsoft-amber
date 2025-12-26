@@ -7,8 +7,6 @@ use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunkWriterDelegate;
-use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunksDelegate;
-use Slothsoft\Farah\FarahUrl\FarahUrl;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Module;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
@@ -23,7 +21,6 @@ use Slothsoft\Savegame\EditorConfig;
 use Slothsoft\Savegame\Build\BuildableInterface;
 use Slothsoft\Savegame\Build\BuilderInterface;
 use Slothsoft\Savegame\Build\XmlBuilder;
-use Generator;
 
 class DatasetBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -41,8 +38,7 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         $fileId = $args->get(ResourceParameterFilter::PARAM_FILE_ID);
         
         if ($infosetId === '') {
-            $url = "farah://slothsoft@amber/games/$game/infoset";
-            $url = FarahUrl::createFromReference($url);
+            $url = $context->createUrl()->withPath("/games/$game/infoset");
             $resultBuilder = new ProxyResultBuilder(Module::resolveToExecutable($url));
             return new ExecutableStrategies($resultBuilder);
         }
@@ -64,20 +60,10 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         return new ExecutableStrategies($resultBuilder);
     }
     
-    private function processInfosets(): ResultBuilderStrategyInterface {
-        $chunkDelegate = function (): Generator {
-            yield '<xml>';
-            yield '</xml>';
-        };
-        $writer = new ChunkWriterFromChunksDelegate($chunkDelegate);
-        return new ChunkWriterResultBuilder($writer, "infosets.xml");
-    }
-    
     private function processInfoset(EditorConfig $config, string $infosetId): ResultBuilderStrategyInterface {
         $chunkDelegate = function () use ($config, $infosetId): ChunkWriterInterface {
             $editor = new Editor($config);
-            $editor->load();
-            $savegameNode = $editor->getSavegameNode();
+            $savegameNode = $editor->loadSavegame(true, true);
             return $this->createXmlBuilder((string) $config->cacheDirectory, $savegameNode);
         };
         $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);
@@ -87,9 +73,7 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
     private function processArchive(EditorConfig $config, string $infosetId, string $archiveId): ResultBuilderStrategyInterface {
         $chunkDelegate = function () use ($config, $infosetId, $archiveId): ChunkWriterInterface {
             $editor = new Editor($config);
-            $editor->loadArchive($archiveId);
-            $savegameNode = $editor->getSavegameNode();
-            $archiveNode = $savegameNode->getArchiveById($archiveId);
+            $archiveNode = $editor->loadArchive($archiveId, true);
             return $this->createXmlBuilder((string) $config->cacheDirectory, $archiveNode);
         };
         $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);
@@ -99,11 +83,7 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
     private function processFile(EditorConfig $config, string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface {
         $chunkDelegate = function () use ($config, $infosetId, $archiveId, $fileId): ChunkWriterInterface {
             $editor = new Editor($config);
-            $editor->loadArchive($archiveId);
-            $savegameNode = $editor->getSavegameNode();
-            $archiveNode = $savegameNode->getArchiveById($archiveId);
-            $fileNode = $archiveNode->getFileNodeByName($fileId);
-            $fileNode->load();
+            $fileNode = $editor->loadFile($archiveId, $fileId);
             return $this->createXmlBuilder((string) $config->cacheDirectory, $fileNode);
         };
         $writer = new ChunkWriterFromChunkWriterDelegate($chunkDelegate);

@@ -12,13 +12,13 @@
 		"php" : ">=7.4",
 		"slothsoft/core" : "^1.14.3",
 		"slothsoft/farah" : "^1.22.2",
-		"slothsoft/savegame" : "^1.1.2",
+		"slothsoft/savegame" : "^1.1.7",
 		"ext-imagick" : "*",
 		"ext-gd" : "*"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "~9.6.23",
-		"slothsoft/farah-testing" : "^1.1.2"
+		"slothsoft/farah-testing" : "^1.1.6"
 	},
 	"autoload" : {
 		"psr-4" : {
