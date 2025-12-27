@@ -22,21 +22,19 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
             return new ExecutableStrategies(new NullResultBuilder());
         }
         
+        $contextUrl = $context->createUrl($args);
+        $dataUrl = $contextUrl->withPath("/game-resources/amberdata");
+        
+        $game = $args->get(ResourceParameterFilter::PARAM_GAME);
+        $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
+        $user = $args->get(ResourceParameterFilter::PARAM_USER);
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
         
-        $writer = new StringWriterFromStringDelegate(function () use ($context, $args): string {
-            $game = $args->get(ResourceParameterFilter::PARAM_GAME);
-            $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
-            $user = $args->get(ResourceParameterFilter::PARAM_USER);
-            // $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
-            
+        $writer = new StringWriterFromStringDelegate(function () use ($dataUrl, $game, $version, $user): string {
             $controller = new EditorController();
             
             $config = $controller->createEditorConfig($game, $version, $user, 'gfx');
             $editor = $controller->createEditor($config);
-            
-            $contextUrl = $context->createUrl($args);
-            $dataUrl = $contextUrl->withPath("/game-resources/amberdata");
             
             $dataDocument = DOMHelper::loadDocument((string) $dataUrl);
             
@@ -51,7 +49,6 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                         'width' => 0,
                         'height' => 0
                     ];
-                    $imageData[$archiveId] = [];
                     $archiveNode = $editor->getArchiveNode($archiveId);
                     $archiveNode->load();
                     foreach ($archiveNode->getFileNodes() as $x => $fileNode) {
@@ -110,6 +107,7 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                     $css[] = "amber-{$gfxGroup}[value=\"$gfxId\"]:hover::before { $labelStyle }";
                 }
             }
+            
             return implode(PHP_EOL, $css);
         }, "$infosetId.css");
         
