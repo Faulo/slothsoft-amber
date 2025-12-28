@@ -12,6 +12,7 @@
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.npcs" uri="assets/games/ambermoon/convert/lib.npcs.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.pcs" uri="assets/games/ambermoon/convert/lib.pcs.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.portraits" uri="assets/games/ambermoon/convert/lib.portraits.xsl"/>
+  <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.save" uri="assets/games/ambermoon/convert/lib.save.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/lib.spells" uri="assets/games/ambermoon/convert/lib.spells.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/null" uri="assets/games/ambermoon/convert/null.xsl"/>
   <uri name="farah://slothsoft@amber/games/ambermoon/convert/unused/global.dictionary" uri="assets/games/ambermoon/convert/unused/global.dictionary.xsl"/>

@@ -6,14 +6,15 @@ use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\DOMHelper;
-use Slothsoft\Core\IO\Writable\Adapter\FileWriterFromStringWriter;
-use Slothsoft\Core\IO\Writable\Delegates\StringWriterFromStringDelegate;
+use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunksDelegate;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
+use Slothsoft\Farah\Module\Module;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
+use Generator;
 
 class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -30,15 +31,17 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
         $user = $args->get(ResourceParameterFilter::PARAM_USER);
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
         
-        $writer = new StringWriterFromStringDelegate(function () use ($dataUrl, $game, $version, $user): string {
+        $writer = new ChunkWriterFromChunksDelegate(function () use ($dataUrl, $game, $version, $user): Generator {
             $controller = new EditorController();
             
             $config = $controller->createEditorConfig($game, $version, $user, 'gfx');
             $editor = $controller->createEditor($config);
             
-            $dataDocument = DOMHelper::loadDocument((string) $dataUrl);
+            $dataDocument = Module::resolveToDOMWriter($dataUrl)->toDocument();
             
-            $gfxNodeList = $dataDocument->getElementsByTagNameNS(DOMHelper::NS_AMBER_AMBERDATA, 'gfx');
+            $gfxNodeList = [
+                ...$dataDocument->getElementsByTagNameNS(DOMHelper::NS_AMBER_AMBERDATA, 'gfx')
+            ];
             
             $imageData = [];
             $imageCoords = [];
@@ -49,10 +52,8 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                         'width' => 0,
                         'height' => 0
                     ];
-                    $archiveNode = $editor->getArchiveNode($archiveId);
-                    $archiveNode->load();
+                    $archiveNode = $editor->loadArchive($archiveId, true);
                     foreach ($archiveNode->getFileNodes() as $x => $fileNode) {
-                        $fileNode->load();
                         foreach ($fileNode->getImageNodes() as $y => $imageNode) {
                             $imageData[$archiveId]['width'] = max($imageData[$archiveId]['width'], $imageNode->getWidth());
                             $imageData[$archiveId]['height'] = max($imageData[$archiveId]['height'], $imageNode->getHeight());
@@ -64,8 +65,6 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                     }
                 }
             }
-            
-            $css = [];
             
             foreach ($gfxNodeList as $gfxNode) {
                 $archiveId = $gfxNode->getAttribute('archive');
@@ -101,18 +100,16 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                 }
                 
                 if ($imageStyle !== '') {
-                    $css[] = "amber-{$gfxGroup}[value=\"$gfxId\"]::after { $imageStyle }";
+                    yield "amber-{$gfxGroup}[value=\"$gfxId\"]::after { $imageStyle }" . PHP_EOL;
                 }
+                
                 if ($labelStyle !== '') {
-                    $css[] = "amber-{$gfxGroup}[value=\"$gfxId\"]:hover::before { $labelStyle }";
+                    yield "amber-{$gfxGroup}[value=\"$gfxId\"]:hover::before { $labelStyle }" . PHP_EOL;
                 }
             }
-            
-            return implode(PHP_EOL, $css);
         }, "$infosetId.css");
         
-        $writer = new FileWriterFromStringWriter($writer);
-        $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.css");
+        $resultBuilder = new ChunkWriterResultBuilder($writer, "$infosetId.css");
         return new ExecutableStrategies($resultBuilder);
     }
 }

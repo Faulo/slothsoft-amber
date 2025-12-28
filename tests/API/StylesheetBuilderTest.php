@@ -29,9 +29,9 @@ final class StylesheetBuilderTest extends TestCase {
         $sut = new StylesheetBuilder();
         
         for ($i = 0; $i < $iterations; $i ++) {
-            $actual = $sut->buildExecutableStrategies($asset, $args)->resultBuilder->buildResultStrategies($executable, FarahUrlStreamIdentifier::createEmpty())->streamBuilder->buildStringWriter($result);
+            $actual = $sut->buildExecutableStrategies($asset, $args)->resultBuilder->buildResultStrategies($executable, FarahUrlStreamIdentifier::createEmpty())->streamBuilder->buildStreamWriter($result)->toStream();
             
-            $this->assertThat($actual->toString(), new IsEqual($expected));
+            $this->assertThat($actual, new IsEqual($expected));
         }
     }
     
