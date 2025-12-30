@@ -81,31 +81,38 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                 $x = $imageCoords[$archiveId][$gfxPosition]['x'];
                 $y = $imageCoords[$archiveId][$gfxPosition]['y'];
                 
-                $imageStyle = '';
-                $labelStyle = '';
+                $imageStyle = [];
+                $labelStyle = [];
                 
                 if ($x !== 0) {
-                    $imageStyle .= sprintf('background-position-x: -%dem;', $x * $imageData[$archiveId]['width']);
+                    $imageStyle[] = sprintf('  background-position-x: -%dem;', $x * $imageData[$archiveId]['width']) . PHP_EOL;
                 }
                 if ($y !== 0) {
-                    $imageStyle .= sprintf('background-position-y: -%dem;', $y * $imageData[$archiveId]['height']);
+                    $imageStyle[] = sprintf('  background-position-y: -%dem;', $y * $imageData[$archiveId]['height']) . PHP_EOL;
                 }
                 if ($fileId !== '') {
-                    $imageStyle .= sprintf('background-image: url("/slothsoft@amber/game-resources/gfx?game=%s&version=%s&archiveId=%s&fileId=%03d&gfxId=%d&paletteId=%d");', $game, $version, $archiveId, $fileId, $gfxPosition, $paletteId);
+                    $imageStyle[] = sprintf('  background-image: url("/slothsoft@amber/game-resources/gfx?game=%s&version=%s&archiveId=%s&fileId=%03d&gfxId=%d&paletteId=%d");', $game, $version, $archiveId, $fileId, $gfxPosition, $paletteId) . PHP_EOL;
                 }
-                if ($gfxWidth !== '' and $gfxHeight !== '') {
-                    $imageStyle .= sprintf('width: %dem; height: %dem;', $gfxWidth, $gfxHeight);
+                if ($gfxWidth !== '') {
+                    $imageStyle[] = sprintf('  width: %dem;', $gfxWidth) . PHP_EOL;
+                }
+                if ($gfxHeight !== '') {
+                    $imageStyle[] = sprintf('  height: %dem;', $gfxHeight) . PHP_EOL;
                 }
                 if ($gfxLabel !== '') {
-                    $labelStyle .= sprintf('content: "%s";', $gfxLabel);
+                    $labelStyle[] = sprintf('  content: "%s";', $gfxLabel) . PHP_EOL;
                 }
                 
-                if ($imageStyle !== '') {
-                    yield "amber-{$gfxGroup}[value=\"$gfxId\"]::after { $imageStyle }" . PHP_EOL;
+                if ($imageStyle !== []) {
+                    yield "amber-{$gfxGroup}[value=\"$gfxId\"]::after {" . PHP_EOL;
+                    yield from $imageStyle;
+                    yield '}' . PHP_EOL;
                 }
                 
-                if ($labelStyle !== '') {
-                    yield "amber-{$gfxGroup}[value=\"$gfxId\"]:hover::before { $labelStyle }" . PHP_EOL;
+                if ($labelStyle !== []) {
+                    yield "amber-{$gfxGroup}[value=\"$gfxId\"]:hover::before {" . PHP_EOL;
+                    yield from $labelStyle;
+                    yield '}' . PHP_EOL;
                 }
             }
         });
