@@ -14,6 +14,7 @@ use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStra
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
+use DOMXPath;
 use Generator;
 
 class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
@@ -39,9 +40,9 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
             
             $dataDocument = Module::resolveToDOMWriter($dataUrl)->toDocument();
             
-            $gfxNodeList = [
-                ...$dataDocument->getElementsByTagNameNS(DOMHelper::NS_AMBER_AMBERDATA, 'gfx')
-            ];
+            $xpath = new DOMXPath($dataDocument);
+            $xpath->registerNamespace('saa', DOMHelper::NS_AMBER_AMBERDATA);
+            $gfxNodeList = $xpath->evaluate('//saa:gfx');
             
             $imageData = [];
             $imageCoords = [];
@@ -107,7 +108,7 @@ class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                     yield "amber-{$gfxGroup}[value=\"$gfxId\"]:hover::before { $labelStyle }" . PHP_EOL;
                 }
             }
-        }, "$infosetId.css");
+        });
         
         $resultBuilder = new ChunkWriterResultBuilder($writer, "$infosetId.css");
         return new ExecutableStrategies($resultBuilder);

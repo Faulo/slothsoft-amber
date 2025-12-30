@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\API;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Constraint\GreaterThan;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Slothsoft\Amber\Assets\StylesheetBuilder;
 use Slothsoft\Farah\FarahUrl\FarahUrl;
@@ -20,6 +21,8 @@ final class StylesheetBuilderTest extends TestCase {
         
         $expected = file_get_contents($ref);
         
+        $this->assertThat(count(explode(PHP_EOL, $expected)), new GreaterThan(3));
+        
         $asset = Module::resolveToAsset($url);
         $executable = Module::resolveToExecutable($url);
         $result = Module::resolveToResult($url);
@@ -36,7 +39,7 @@ final class StylesheetBuilderTest extends TestCase {
     }
     
     public function performanceProvider(): iterable {
-        yield 'benchmark' => [
+        yield 'benchmark document' => [
             'farah://slothsoft@amber/game-resources/stylesheet?infosetId=lib.items',
             100
         ];
