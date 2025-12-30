@@ -151,7 +151,7 @@ article.Portrait amber-portrait-id::after {
 }
 
 .Character {
-	width: 80ch;
+	width: auto;
 }
 
 .Character .textbox {
@@ -160,10 +160,6 @@ article.Portrait amber-portrait-id::after {
 
 .Character .textlabel {
 	width: auto;
-}
-
-.Character td {
-	
 }
 
 .Character .inventory {
@@ -206,13 +202,8 @@ amber-gfx-id {
 }
 
 amber-monster-id::after {
-	/*
-	width: 96em;
-	height: 96em;
-	background-size: cover;
-	background-image: url("/slothsoft@amber/games/ambermoon/gfx/monsters");
-	*/
 	font-size: 2px;
+	background-size: 100%;
 	background-clip: content-box;
 	background-repeat: no-repeat;
 	display: block;
