@@ -293,7 +293,6 @@
 		<saa:text id="{$id}">
 			<xsl:for-each select="str:split($root, '^')">
 				<saa:paragraph><xsl:value-of select="translate(., '$×', '&#160;ß')" /></saa:paragraph>
-				<!-- <br xmlns="http://www.w3.org/1999/xhtml" /> -->
 			</xsl:for-each>
 		</saa:text>
 	</xsl:template>

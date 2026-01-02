@@ -151,11 +151,15 @@ article.Portrait amber-portrait-id::after {
 }
 
 .Character {
-	width: auto;
+	width: 80ch;
+}
+
+.Character > table {
+	width: 100%;
 }
 
 .Character .textbox {
-	width: auto;
+    width: auto;
 }
 
 .Character .textlabel {

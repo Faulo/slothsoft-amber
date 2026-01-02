@@ -112,7 +112,6 @@
 }
 
 .Amber .textbox {
-	white-space: pre-wrap;
 	border-style: ridge;
 	border-width: 2px;
 	padding: 0.5ch;
@@ -123,6 +122,14 @@
 	font-size: smaller;
 	background-color: #444433;
 	border-color: #444433;
+}
+
+.Amber .textbox p {
+    margin: 0;
+}
+
+.Amber .textbox p + p {
+	margin-top: 1em;
 }
 
 .Amber .textlabel {

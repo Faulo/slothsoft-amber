@@ -433,7 +433,9 @@ window.addEventListener(
                             </summary>
                             <xsl:for-each select="saa:text">
                                 <div class="textbox">
-                                    <xsl:copy-of select="node()" />
+                                    <xsl:for-each select="saa:paragraph">
+                                        <p><xsl:value-of select="normalize-space(.)"/></p>
+                                    </xsl:for-each>
                                 </div>
                             </xsl:for-each>
                         </details>
@@ -617,7 +619,9 @@ window.addEventListener(
                     <xsl:when test="saa:text">
                         <li>
                             <div class="textbox">
-                                <xsl:copy-of select="saa:text/node()" />
+                                <xsl:for-each select="saa:text/saa:paragraph">
+                                    <p><xsl:value-of select="normalize-space(.)"/></p>
+                                </xsl:for-each>
                             </div>
                         </li>
                     </xsl:when>
