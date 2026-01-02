@@ -151,7 +151,8 @@ article.Portrait amber-portrait-id::after {
 }
 
 .Character {
-	width: 80ch;
+	width: 92ch;
+	margin: 1em 0.5em;
 }
 
 .Character > table {
