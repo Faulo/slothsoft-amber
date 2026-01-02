@@ -55,7 +55,7 @@ class AmbTool {
                 $output = $this->exec($archivePath);
                 $match = [];
                 if (preg_match('~Format: .+?\)~', $output, $match)) {
-                    $ret = $this->translateAmbtoolFormat($match[0]);
+                    $ret = $this->translateAmbtoolFormat($match[0], $archivePath);
                 }
                 $inspectCache[$archivePath] = $ret;
             }
@@ -73,7 +73,7 @@ class AmbTool {
         $this->exec($archivePath->getRealPath(), $targetDir->getRealPath());
     }
     
-    private function translateAmbtoolFormat(string $output): string {
+    private function translateAmbtoolFormat(string $output, string $file): string {
         switch ($output) {
             case 'Format: JH (encrypted)':
                 return self::TYPE_JH;
@@ -85,8 +85,10 @@ class AmbTool {
                 return self::TYPE_AMBR;
             case 'Format: LOB (compressed)':
                 return self::TYPE_AMBR;
+            case 'Format: AMPC (compressed archive)':
+                return self::TYPE_AMBR;
             default:
-                throw new DomainException("Unknown ambtool.exe format '$output'!");
+                throw new DomainException("Unknown ambtool.exe format '$output' in  '$file'!");
         }
     }
 }
