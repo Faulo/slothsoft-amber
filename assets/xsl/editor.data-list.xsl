@@ -353,13 +353,11 @@ window.addEventListener(
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
-                                    hp:
+                                <td>
+                                    lp:
                                     <xsl:value-of select="concat(saa:class-instance/saa:hp/@current, '/', saa:class-instance/saa:hp/@maximum)" />
                                 </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
+                                <td>
                                     <xsl:if test="$isMage">
                                         sp:
                                         <xsl:value-of select="concat(saa:class-instance/saa:sp/@current, '/', saa:class-instance/saa:sp/@maximum)" />
@@ -368,14 +366,14 @@ window.addEventListener(
                             </tr>
                             <tr>
                                 <td>
+                                    tp:
+                                    <xsl:value-of select="@training-points" />
+                                </td>
+                                <td>
                                     <xsl:if test="$isMage">
                                         slp:
                                         <xsl:value-of select="@spelllearn-points" />
                                     </xsl:if>
-                                </td>
-                                <td>
-                                    tp:
-                                    <xsl:value-of select="@training-points" />
                                 </td>
                             </tr>
                             <tr>
@@ -396,6 +394,22 @@ window.addEventListener(
                                 <td>
                                     defense:
                                     <xsl:value-of select="@defense" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    m-b-w:
+                                    <xsl:value-of select="@magic-attack" />
+                                </td>
+                                <td>
+                                    m-b-r:
+                                    <xsl:value-of select="@magic-defense" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    APR:
+                                    <xsl:value-of select="@attacks-per-round" />
                                 </td>
                             </tr>
                         </table>
