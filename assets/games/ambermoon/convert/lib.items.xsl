@@ -66,6 +66,7 @@
 					</xsl:when>
 				</xsl:choose>
 			</xsl:variable>
+            <xsl:variable name="genders" select=".//*[@name = 'genders']/sse:bit" />
 
 			<xsl:apply-templates select=".//sse:integer[@name != ''] | .//sse:string" mode="attr" />
 
@@ -93,9 +94,10 @@
 			</xsl:if>
 			<xsl:attribute name="gender">
 				<xsl:choose>
-					<xsl:when test=".//*[@name = 'male']/@value &gt; .//*[@name = 'female']/@value">männlich</xsl:when>
-					<xsl:when test=".//*[@name = 'male']/@value &lt; .//*[@name = 'female']/@value">weiblich</xsl:when>
-					<xsl:otherwise>beide</xsl:otherwise>
+                    <xsl:when test="$genders[1][@value=1] and $genders[2][@value=1]">beide</xsl:when>
+                    <xsl:when test="$genders[1][@value=1]">männlich</xsl:when>
+                    <xsl:when test="$genders[2][@value=1]">weiblich</xsl:when>
+                    <xsl:otherwise>niemand</xsl:otherwise>
 				</xsl:choose>
 			</xsl:attribute>
 			<xsl:for-each select=".//*[@name = 'properties']/*[@value != '']">
