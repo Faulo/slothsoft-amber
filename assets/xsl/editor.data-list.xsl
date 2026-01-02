@@ -274,6 +274,11 @@ window.addEventListener(
                 <amber-portrait-id value="{@id}" />
             </amber-picker>
             <xsl:value-of select="@name" />
+            
+                <xsl:for-each select="//saa:portrait-instance[@id = current()/@id]">
+                    <div class="yellow"><xsl:value-of select="@character"/></div>
+                </xsl:for-each>
+            
         </article>
     </xsl:template>
 
