@@ -30,7 +30,7 @@ final class EditorParameters {
     }
     
     public function withInfoset(string $infoset): self {
-        return new self($this->repository, $this->game, $this->version, $this->user, $infoset);
+        return $this->infoset === $infoset ? $this : new self($this->repository, $this->game, $this->version, $this->user, $infoset);
     }
     
     private ?FarahUrl $repositoryUrl = null;
@@ -111,12 +111,6 @@ final class EditorParameters {
         return $this->amberdataUrl ??= $this->getAmberUrl()
             ->withPath("/game-resources/amberdata")
             ->withQueryArguments($this->getAmberArgs());
-    }
-    
-    private ?FarahUrl $dictionaryUrl = null;
-    
-    public function getProcessDictionaryUrl(): FarahUrl {
-        return $this->dictionaryUrl ??= $this->getProcessAmberdataUrl()->withQuery('infosetId=lib.dictionaries');
     }
 }
 

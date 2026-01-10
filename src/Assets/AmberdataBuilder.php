@@ -44,7 +44,7 @@ final class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
         $contextUrl = $parameters->getProcessAmberdataUrl();
         $datasetUrl = $parameters->getProcessDatasetUrl();
         $templateUrl = $parameters->getStaticConvertUrl();
-        $dictionaryUrl = $parameters->getProcessDictionaryUrl();
+        $dictionaryUrl = $parameters->withInfoset('lib.dictionaries')->getProcessAmberdataUrl();
         
         $domDelegate = function () use ($contextUrl, $datasetUrl, $templateUrl, $dictionaryUrl): DOMWriterInterface {
             $writer = new AssetFragmentDOMWriter($contextUrl);
