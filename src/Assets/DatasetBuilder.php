@@ -4,6 +4,7 @@ namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\Controller\EditorParameters;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\IO\Writable\ChunkWriterInterface;
 use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunkWriterDelegate;
@@ -22,13 +23,14 @@ use Slothsoft\Savegame\Build\BuildableInterface;
 use Slothsoft\Savegame\Build\BuilderInterface;
 use Slothsoft\Savegame\Build\XmlBuilder;
 
-class DatasetBuilder implements ExecutableBuilderStrategyInterface {
+final class DatasetBuilder implements ExecutableBuilderStrategyInterface {
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         if (! AmbTool::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
         
+        $repository = $args->get(ResourceParameterFilter::PARAM_REPOSITORY);
         $game = $args->get(ResourceParameterFilter::PARAM_GAME);
         $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
         $user = $args->get(ResourceParameterFilter::PARAM_USER);
@@ -37,15 +39,17 @@ class DatasetBuilder implements ExecutableBuilderStrategyInterface {
         $archiveId = $args->get(ResourceParameterFilter::PARAM_ARCHIVE_ID);
         $fileId = $args->get(ResourceParameterFilter::PARAM_FILE_ID);
         
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
+        
         if ($infosetId === '') {
-            $url = $context->createUrl()->withPath("/games/$game/infoset");
+            $url = $parameters->getStaticInfosetUrl();
             $resultBuilder = new ProxyResultBuilder(Module::resolveToExecutable($url));
             return new ExecutableStrategies($resultBuilder);
         }
         
         $controller = new EditorController();
         
-        $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
+        $config = $controller->createEditorConfig($parameters);
         
         if ($fileId === '') {
             if ($archiveId === '') {

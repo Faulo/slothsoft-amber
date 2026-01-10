@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\Controller\EditorParameters;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\ServerEnvironment;
 use Slothsoft\Core\IO\FileInfoFactory;
@@ -22,10 +23,13 @@ use SplFileInfo;
 final class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
+        $repository = $args->get(ResourceParameterFilter::PARAM_REPOSITORY);
         $game = $args->get(ResourceParameterFilter::PARAM_GAME);
         $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
-        // $user = $args->get(ResourceParameterFilter::PARAM_USER);
+        $user = $args->get(ResourceParameterFilter::PARAM_USER);
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
+        
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
         
         $cacheFile = [];
         $cacheFile[] = ServerEnvironment::getCacheDirectory();
@@ -37,15 +41,15 @@ final class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
         $cacheFile = implode(DIRECTORY_SEPARATOR, $cacheFile);
         $cacheFile = FileInfoFactory::createFromPath($cacheFile);
         
-        $contextUrl = $context->createUrl($args);
-        $datasetUrl = $contextUrl->withPath("/game-resources/dataset");
-        $templateUrl = $contextUrl->withPath("/games/$game/convert/$infosetId");
-        $dictionaryUrl = $infosetId === 'lib.dictionaries' ? null : $contextUrl->withQuery('infosetId=lib.dictionaries');
+        $contextUrl = $parameters->getProcessAmberdataUrl();
+        $datasetUrl = $parameters->getProcessDatasetUrl();
+        $templateUrl = $parameters->getStaticConvertUrl();
+        $dictionaryUrl = $parameters->getProcessDictionaryUrl();
         
         $domDelegate = function () use ($contextUrl, $datasetUrl, $templateUrl, $dictionaryUrl): DOMWriterInterface {
             $writer = new AssetFragmentDOMWriter($contextUrl);
             $writer->appendChild(new AssetDocumentDOMWriter($datasetUrl));
-            if ($dictionaryUrl) {
+            if ($dictionaryUrl !== $contextUrl) {
                 $writer->appendChild(new AssetDocumentDOMWriter($dictionaryUrl));
             }
             $template = Module::resolveToDOMWriter($templateUrl);

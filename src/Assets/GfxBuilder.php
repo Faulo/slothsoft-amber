@@ -2,7 +2,9 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\Controller\EditorParameters;
 use Slothsoft\Amber\ParameterFilters\GfxParameterFilter;
 use Slothsoft\Core\ImageHelper;
 use Slothsoft\Core\IO\FileInfoFactory;
@@ -24,9 +26,8 @@ use DOMElement;
 use Imagick;
 use ImagickException;
 use SplFileInfo;
-use Slothsoft\Amber\CLI\AmbGfx;
 
-class GfxBuilder implements ExecutableBuilderStrategyInterface {
+final class GfxBuilder implements ExecutableBuilderStrategyInterface {
     
     private AssetInterface $asset;
     
@@ -39,17 +40,20 @@ class GfxBuilder implements ExecutableBuilderStrategyInterface {
             return new ExecutableStrategies(new NullResultBuilder());
         }
         
+        $repository = $args->get(GfxParameterFilter::PARAM_REPOSITORY);
         $game = $args->get(GfxParameterFilter::PARAM_GAME);
         $version = $args->get(GfxParameterFilter::PARAM_VERSION);
         $user = $args->get(GfxParameterFilter::PARAM_USER);
-        
         $infosetId = $args->get(GfxParameterFilter::PARAM_INFOSET_ID);
+        
         $archiveId = $args->get(GfxParameterFilter::PARAM_ARCHIVE_ID);
         $fileId = $args->get(GfxParameterFilter::PARAM_FILE_ID);
         
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
+        
         $controller = new EditorController();
         
-        $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
+        $config = $controller->createEditorConfig($parameters);
         
         $this->asset = $context;
         $this->args = $args;

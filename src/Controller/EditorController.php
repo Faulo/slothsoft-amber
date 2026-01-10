@@ -6,32 +6,25 @@ use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
-use Slothsoft\Core\ServerEnvironment;
 use Slothsoft\Farah\FarahUrl\FarahUrl;
 use Slothsoft\Farah\Module\Module;
 use Slothsoft\Savegame\Editor;
+use Slothsoft\Savegame\EditorConfig;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 use SplFileInfo;
-use Slothsoft\Savegame\EditorConfig;
 
 class EditorController {
     
-    public function createEditorConfig(string $game, string $version, string $user, string $infoset): EditorConfig {
-        // $user = preg_replace('~[^\w]~', '', $user);
-        if ($game === '') {
-            throw new \InvalidArgumentException('$game must not be empty.');
-        }
-        if ($version === '') {
-            throw new \InvalidArgumentException('$version must not be empty.');
-        }
-        if ($user === '') {
-            throw new \InvalidArgumentException('$user must not be empty.');
-        }
-        if ($infoset === '') {
-            throw new \InvalidArgumentException('$infoset must not be empty.');
-        }
-        return new EditorConfig($this->getAmberAssetPath("/games/$game/source/$version"), new SplFileInfo(ServerEnvironment::getDataDirectory() . "/slothsoft/amber/$game/$version/$user"), new SplFileInfo(ServerEnvironment::getCacheDirectory() . "/slothsoft/amber/$game/$version/savegame/$infoset"), new SplFileInfo((string) $this->getAmberAssetUrl("/games/$game/infoset/$infoset")), $this->createArchiveExtractors(), $this->createArchiveBuilders());
+    public function createEditorConfig(EditorParameters $parameters): EditorConfig {
+        $sourceDirectory = $parameters->getRepositorySourceDirectory();
+        $userDirectory = $parameters->getServerDataDirectory();
+        $cacheDirectory = $parameters->getServerCacheDirectory();
+        $infosetFile = $parameters->getStaticInfosetFile();
+        $archiveExtractors = $this->createArchiveExtractors();
+        $archiveBuilders = $this->createArchiveBuilders();
+        
+        return new EditorConfig($sourceDirectory, $userDirectory, $cacheDirectory, $infosetFile, $archiveExtractors, $archiveBuilders);
     }
     
     public function createEditor(EditorConfig $config): Editor {

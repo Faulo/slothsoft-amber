@@ -4,6 +4,7 @@ namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\Controller\EditorParameters;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\DOMHelper;
 use Slothsoft\Core\IO\Writable\Delegates\ChunkWriterFromChunksDelegate;
@@ -17,25 +18,27 @@ use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
 use DOMXPath;
 use Generator;
 
-class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
+final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         if (! AmbGfx::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
         
-        $contextUrl = $context->createUrl($args);
-        $dataUrl = $contextUrl->withPath("/game-resources/amberdata");
-        
+        $repository = $args->get(ResourceParameterFilter::PARAM_REPOSITORY);
         $game = $args->get(ResourceParameterFilter::PARAM_GAME);
         $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
         $user = $args->get(ResourceParameterFilter::PARAM_USER);
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
         
-        $writer = new ChunkWriterFromChunksDelegate(function () use ($dataUrl, $game, $version, $user): Generator {
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
+        
+        $dataUrl = $parameters->getProcessAmberdataUrl();
+        
+        $writer = new ChunkWriterFromChunksDelegate(function () use ($dataUrl, $repository, $game, $version, $user): Generator {
             $controller = new EditorController();
-            
-            $config = $controller->createEditorConfig($game, $version, $user, 'gfx');
+            $parameters = new EditorParameters($repository, $game, $version, $user, 'gfx');
+            $config = $controller->createEditorConfig($parameters);
             $editor = $controller->createEditor($config);
             
             $dataDocument = Module::resolveToDOMWriter($dataUrl)->toDocument();

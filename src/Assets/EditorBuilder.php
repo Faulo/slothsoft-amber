@@ -4,6 +4,7 @@ namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\Controller\EditorParameters;
 use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Farah\Exception\HttpDownloadAssetException;
@@ -15,13 +16,14 @@ use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBui
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
 
-class EditorBuilder implements ExecutableBuilderStrategyInterface {
+final class EditorBuilder implements ExecutableBuilderStrategyInterface {
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
         if (! AmbGfx::isSupported()) {
             return new ExecutableStrategies(new NullResultBuilder());
         }
         
+        $repository = $args->get(EditorParameterFilter::PARAM_REPOSITORY);
         $game = $args->get(EditorParameterFilter::PARAM_GAME);
         $version = $args->get(EditorParameterFilter::PARAM_VERSION);
         $user = $args->get(EditorParameterFilter::PARAM_USER);
@@ -29,8 +31,10 @@ class EditorBuilder implements ExecutableBuilderStrategyInterface {
         
         $request = (array) $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
         
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
+        
         $controller = new EditorController();
-        $config = $controller->createEditorConfig($game, $version, $user, $infosetId);
+        $config = $controller->createEditorConfig($parameters);
         $editor = $controller->createEditor($config);
         
         $action = $request['action'] ?? 'view';

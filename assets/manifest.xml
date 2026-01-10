@@ -11,18 +11,20 @@
         <resource-directory name="amberdata" type="application/x-xsd+xml" />
     </directory>
 
+    <resource-directory name="source" type="*/*" />
+    <resource-directory name="release" type="*/*" />
+
     <directory name="games">
         <directory name="ambermoon">
+            <resource-directory name="infoset" type="application/xml" />
+            <resource-directory name="convert" type="application/xslt+xml" />
+            <resource-directory name="editor" type="application/xslt+xml" />
+
             <fragment name="css">
                 <use-manifest name="items" ref="/game-resources/stylesheet?infosetId=lib.items" />
                 <use-manifest name="portraits" ref="/game-resources/stylesheet?infosetId=lib.portraits" />
             </fragment>
 
-            <resource-directory name="release" type="*/*" />
-            <resource-directory name="source" type="*/*" />
-            <resource-directory name="infoset" type="application/xml" />
-            <resource-directory name="convert" type="application/xslt+xml" />
-            <resource-directory name="editor" type="application/xslt+xml" />
             <use-manifest name="dictionaries" ref="/game-resources/amberdata?infosetId=lib.dictionaries" />
 
             <fragment name="gfx">
@@ -97,7 +99,6 @@
                 </fragment>
             </fragment>
         </directory>
-        <resource name="index" type="application/xml" />
     </directory>
 
     <fragment name="game-resources">
