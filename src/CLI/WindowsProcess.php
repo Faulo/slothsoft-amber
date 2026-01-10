@@ -6,7 +6,7 @@ use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\ServerEnvironment;
 use Symfony\Component\Process\Process;
 
-class WindowsProcess {
+final class WindowsProcess {
     
     public static function create(array $command): Process {
         switch (PHP_OS_FAMILY) {

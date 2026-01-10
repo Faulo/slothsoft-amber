@@ -7,13 +7,13 @@ use Slothsoft\Core\IO\FileInfoFactory;
 use RuntimeException;
 use SplFileInfo;
 
-class AmbGfx {
+final class AmbGfx {
     
     public static function isSupported(): bool {
         return PHP_OS_FAMILY === 'Windows' or FileSystem::commandExists('wine');
     }
     
-    private $ambgfxPath;
+    private string $ambgfxPath;
     
     public function __construct(string $ambgfxPath) {
         assert(file_exists($ambgfxPath), "ambgfx not found at $ambgfxPath");

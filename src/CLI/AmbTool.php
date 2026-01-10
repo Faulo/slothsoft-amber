@@ -8,7 +8,7 @@ use InvalidArgumentException;
 use RuntimeException;
 use SplFileInfo;
 
-class AmbTool {
+final class AmbTool {
     
     public static function isSupported(): bool {
         return PHP_OS_FAMILY === 'Windows' or FileSystem::commandExists('wine');
