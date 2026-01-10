@@ -21,22 +21,16 @@ final class EditorParameters {
     
     private string $infoset;
     
-    private FarahUrlArguments $args;
-    
     public function __construct(string $repository, string $game, string $version, string $user, string $infoset) {
         $this->repository = $repository;
         $this->game = $game;
         $this->version = $version;
         $this->user = $user;
         $this->infoset = $infoset;
-        
-        $this->args = FarahUrlArguments::createFromValueList([
-            EditorParameterFilter::PARAM_REPOSITORY => $repository,
-            EditorParameterFilter::PARAM_GAME => $game,
-            EditorParameterFilter::PARAM_VERSION => $version,
-            EditorParameterFilter::PARAM_USER => $user,
-            EditorParameterFilter::PARAM_INFOSET_ID => $infoset
-        ]);
+    }
+    
+    public function withInfoset(string $infoset): self {
+        return new self($this->repository, $this->game, $this->version, $this->user, $infoset);
     }
     
     private ?FarahUrl $repositoryUrl = null;
@@ -69,6 +63,18 @@ final class EditorParameters {
         return $this->amberUrl ??= FarahUrl::createFromReference('farah://slothsoft@amber');
     }
     
+    private ?FarahUrlArguments $amberArgs = null;
+    
+    private function getAmberArgs(): FarahUrlArguments {
+        return $this->amberArgs ??= FarahUrlArguments::createFromValueList([
+            EditorParameterFilter::PARAM_REPOSITORY => $this->repository,
+            EditorParameterFilter::PARAM_GAME => $this->game,
+            EditorParameterFilter::PARAM_VERSION => $this->version,
+            EditorParameterFilter::PARAM_USER => $this->user,
+            EditorParameterFilter::PARAM_INFOSET_ID => $this->infoset
+        ]);
+    }
+    
     private ?FarahUrl $convertUrl = null;
     
     public function getStaticConvertUrl(): FarahUrl {
@@ -96,7 +102,7 @@ final class EditorParameters {
     public function getProcessDatasetUrl(): FarahUrl {
         return $this->datasetUrl ??= $this->getAmberUrl()
             ->withPath("/game-resources/dataset")
-            ->withQueryArguments($this->args);
+            ->withQueryArguments($this->getAmberArgs());
     }
     
     private ?FarahUrl $amberdataUrl = null;
@@ -104,7 +110,7 @@ final class EditorParameters {
     public function getProcessAmberdataUrl(): FarahUrl {
         return $this->amberdataUrl ??= $this->getAmberUrl()
             ->withPath("/game-resources/amberdata")
-            ->withQueryArguments($this->args);
+            ->withQueryArguments($this->getAmberArgs());
     }
     
     private ?FarahUrl $dictionaryUrl = null;
