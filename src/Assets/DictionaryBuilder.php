@@ -24,11 +24,11 @@ final class DictionaryBuilder implements ExecutableBuilderStrategyInterface {
         $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
         
         $dictionaryUrl = $parameters->getProcessDictionaryUrl();
-        $dataUrl = $parameters->getProcessAmberdataUrl();
+        $amberdataUrl = $parameters->getProcessAmberdataUrl();
         $templateUrl = $parameters->getStaticDictionaryTemplateUrl();
         
-        $writer = new TransformationDOMWriterByUrls($dataUrl, $templateUrl);
-        $writer = new DOMWriterFileCacheByUrl($dictionaryUrl, $writer, __FILE__, (string) $dataUrl, (string) $templateUrl);
+        $writer = new TransformationDOMWriterByUrls($amberdataUrl, $templateUrl);
+        $writer = new DOMWriterFileCacheByUrl($dictionaryUrl, $writer, __FILE__, (string) $amberdataUrl, (string) $templateUrl);
         $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }
