@@ -14,8 +14,6 @@ final class GfxParameterFilter extends ResourceParameterFilter {
     protected function createValueSanitizers(): array {
         return [
             self::PARAM_INFOSET_ID => new FileNameSanitizer('gfx'),
-            self::PARAM_ARCHIVE_ID => new FileNameSanitizer(''),
-            self::PARAM_FILE_ID => new FileNameSanitizer(''),
             self::PARAM_GFX_ID => new IntegerSanitizer(- 1),
             self::PARAM_PALETTE_ID => new IntegerSanitizer(49)
         ] + parent::createValueSanitizers();

@@ -105,6 +105,7 @@
         <custom-asset name="dataset" executable-builder="Slothsoft\Amber\Assets\DatasetBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\DatasetParameterFilter" />
         <custom-asset name="amberdata" executable-builder="Slothsoft\Amber\Assets\AmberdataBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
         <custom-asset name="stylesheet" executable-builder="Slothsoft\Amber\Assets\StylesheetBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
+        <custom-asset name="dictionary" executable-builder="Slothsoft\Amber\Assets\DictionaryBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\UserParameterFilter" path-resolver="Slothsoft\Farah\Module\Asset\PathResolverStrategy\CatchAllPathResolver" />
 
         <custom-asset name="gfx" executable-builder="Slothsoft\Amber\Assets\GfxBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\GfxParameterFilter" />
 

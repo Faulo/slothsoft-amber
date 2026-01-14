@@ -4,10 +4,7 @@ namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\Controller\EditorParameters;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
-use Slothsoft\Core\ServerEnvironment;
-use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Core\IO\Writable\DOMWriterInterface;
-use Slothsoft\Core\IO\Writable\Decorators\DOMWriterFileCache;
 use Slothsoft\Core\IO\Writable\Delegates\DOMWriterFromDOMWriterDelegate;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
 use Slothsoft\Farah\Module\Module;
@@ -15,10 +12,10 @@ use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\DOMWriter\AssetDocumentDOMWriter;
 use Slothsoft\Farah\Module\DOMWriter\AssetFragmentDOMWriter;
+use Slothsoft\Farah\Module\DOMWriter\DOMWriterFileCacheByUrl;
 use Slothsoft\Farah\Module\DOMWriter\TransformationDOMWriter;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
-use SplFileInfo;
 
 final class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -31,37 +28,23 @@ final class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
         
         $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
         
-        $cacheFile = [];
-        $cacheFile[] = ServerEnvironment::getCacheDirectory();
-        $cacheFile[] = 'slothsoft/amber';
-        $cacheFile[] = $game;
-        $cacheFile[] = $version;
-        $cacheFile[] = 'amberdata';
-        $cacheFile[] = "$infosetId.xml";
-        $cacheFile = implode(DIRECTORY_SEPARATOR, $cacheFile);
-        $cacheFile = FileInfoFactory::createFromPath($cacheFile);
-        
-        $contextUrl = $parameters->getProcessAmberdataUrl();
+        $amberdataUrl = $parameters->getProcessAmberdataUrl();
         $datasetUrl = $parameters->getProcessDatasetUrl();
         $templateUrl = $parameters->getStaticConvertUrl();
         $dictionaryUrl = $parameters->withInfoset('lib.dictionaries')->getProcessAmberdataUrl();
         
-        $domDelegate = function () use ($contextUrl, $datasetUrl, $templateUrl, $dictionaryUrl): DOMWriterInterface {
-            $writer = new AssetFragmentDOMWriter($contextUrl);
+        $domDelegate = function () use ($amberdataUrl, $datasetUrl, $templateUrl, $dictionaryUrl): DOMWriterInterface {
+            $writer = new AssetFragmentDOMWriter($amberdataUrl);
             $writer->appendChild(new AssetDocumentDOMWriter($datasetUrl));
-            if ($dictionaryUrl !== $contextUrl) {
+            if ($dictionaryUrl !== $amberdataUrl) {
                 $writer->appendChild(new AssetDocumentDOMWriter($dictionaryUrl));
             }
             $template = Module::resolveToDOMWriter($templateUrl);
             return new TransformationDOMWriter($writer, $template);
         };
         
-        $shouldRefreshDelegate = function (SplFileInfo $cacheFile) use ($datasetUrl, $templateUrl): bool {
-            return filemtime((string) $datasetUrl) > $cacheFile->getMTime() or filemtime((string) $templateUrl) > $cacheFile->getMTime();
-        };
-        
         $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);
-        $writer = new DOMWriterFileCache($writer, $cacheFile, $shouldRefreshDelegate);
+        $writer = new DOMWriterFileCacheByUrl($amberdataUrl, $writer, __FILE__, (string) $datasetUrl, (string) $templateUrl);
         $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }

@@ -97,6 +97,12 @@ final class EditorParameters {
         return $this->editorTemplateUrl ??= FarahUrl::createFromReference("/games/$this->game/editor/$this->infoset", $this->getAmberUrl());
     }
     
+    private ?FarahUrl $dictionaryTemplateUrl = null;
+    
+    public function getStaticDictionaryTemplateUrl(): FarahUrl {
+        return $this->dictionaryTemplateUrl ??= FarahUrl::createFromReference("/xsl/dictionary", $this->getAmberUrl());
+    }
+    
     private ?FarahUrl $datasetUrl = null;
     
     public function getProcessDatasetUrl(): FarahUrl {
@@ -110,6 +116,14 @@ final class EditorParameters {
     public function getProcessAmberdataUrl(): FarahUrl {
         return $this->amberdataUrl ??= $this->getAmberUrl()
             ->withPath("/game-resources/amberdata")
+            ->withQueryArguments($this->getAmberArgs());
+    }
+    
+    private ?FarahUrl $dictionaryUrl = null;
+    
+    public function getProcessDictionaryUrl(): FarahUrl {
+        return $this->dictionaryUrl ??= $this->getAmberUrl()
+            ->withPath("/game-resources/dictionary")
             ->withQueryArguments($this->getAmberArgs());
     }
 }
