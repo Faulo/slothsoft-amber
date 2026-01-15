@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:sfx="http://schema.slothsoft.net/farah/xslt">
 
+    <xsl:import href="farah://slothsoft@amber/templates/ambermoon/viewer/globals/amber-list" />
+
     <xsl:import href="farah://slothsoft@farah/xsl/xslt" />
 
     <xsl:template match="saa:class-list">
