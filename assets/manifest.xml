@@ -2,14 +2,16 @@
 <assets xmlns="http://schema.slothsoft.net/farah/module" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1">
     <fragment name="api">
         <custom-asset name="savegame" executable-builder="Slothsoft\Amber\Assets\DatasetBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\DatasetParameterFilter" />
-        <custom-asset name="amberdata" executable-builder="Slothsoft\Amber\Assets\AmberdataBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
-        <custom-asset name="stylesheet" executable-builder="Slothsoft\Amber\Assets\StylesheetBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
+        <custom-asset name="amberdata" executable-builder="Slothsoft\Amber\Assets\AmberdataBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter" />
+        <custom-asset name="stylesheet" executable-builder="Slothsoft\Amber\Assets\StylesheetBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter" />
         <custom-asset name="dictionary" executable-builder="Slothsoft\Amber\Assets\DictionaryBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\UserParameterFilter" path-resolver="Slothsoft\Farah\Module\Asset\PathResolverStrategy\CatchAllPathResolver" />
 
         <custom-asset name="gfx" executable-builder="Slothsoft\Amber\Assets\GfxBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\GfxParameterFilter" />
 
         <custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter" />
-        <custom-asset name="editor-template" executable-builder="Slothsoft\Amber\Assets\EditorTemplateBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\ResourceParameterFilter" />
+        <custom-asset name="editor-template" executable-builder="Slothsoft\Amber\Assets\EditorTemplateBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter" />
+
+        <custom-asset name="viewer" executable-builder="Slothsoft\Amber\Assets\ViewerBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter" />
     </fragment>
 
     <resource-directory name="cli" type="application/vnd.microsoft.portable-executable" />
@@ -114,6 +116,7 @@
             <resource-directory name="dictionary" type="application/xslt+xml" />
             <resource-directory name="editor" type="application/xslt+xml" />
             <resource-directory name="savegame" type="application/xml" />
+            <resource-directory name="viewer" type="application/xslt+xml" />
         </directory>
     </directory>
 

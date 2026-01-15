@@ -13,6 +13,7 @@ class AmberUser {
         static $instance;
         if ($instance === null) {
             $instance = uniqid();
+            $instance = '';
         }
         return $instance;
     }

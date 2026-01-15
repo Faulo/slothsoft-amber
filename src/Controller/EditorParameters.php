@@ -103,6 +103,12 @@ final class EditorParameters {
         return $this->dictionaryTemplateUrl ??= FarahUrl::createFromReference("/templates/$this->game/dictionary/$this->infoset", $this->getAmberUrl());
     }
     
+    private ?FarahUrl $viewerTemplateUrl = null;
+    
+    public function getStaticViewerTemplateUrl(): FarahUrl {
+        return $this->viewerTemplateUrl ??= FarahUrl::createFromReference("/templates/$this->game/viewer/$this->infoset", $this->getAmberUrl());
+    }
+    
     private ?FarahUrl $datasetUrl = null;
     
     public function getProcessDatasetUrl(): FarahUrl {

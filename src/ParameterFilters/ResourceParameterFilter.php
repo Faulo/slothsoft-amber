@@ -4,9 +4,7 @@ namespace Slothsoft\Amber\ParameterFilters;
 
 use Slothsoft\Core\IO\Sanitizer\FileNameSanitizer;
 
-class ResourceParameterFilter extends UserParameterFilter {
-    
-    public const PARAM_INFOSET_ID = 'infosetId';
+class ResourceParameterFilter extends InfosetParameterFilter {
     
     public const PARAM_ARCHIVE_ID = 'archiveId';
     
@@ -14,7 +12,6 @@ class ResourceParameterFilter extends UserParameterFilter {
     
     protected function createValueSanitizers(): array {
         return [
-            self::PARAM_INFOSET_ID => new FileNameSanitizer('null'),
             self::PARAM_ARCHIVE_ID => new FileNameSanitizer(''),
             self::PARAM_FILE_ID => new FileNameSanitizer('')
         ] + parent::createValueSanitizers();
