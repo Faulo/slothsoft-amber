@@ -53,7 +53,7 @@
                         </td>
                     </tr>
                     <tr class="right-aligned">
-                        <td>Finger:</td>
+                        <td colspan="2">Finger:</td>
                         <td class="number">
                             <xsl:value-of select="@fingers" />
                         </td>
