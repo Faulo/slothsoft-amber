@@ -17,6 +17,7 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/null" uri="assets/templates/ambermoon/amberdata/null.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/unused/global.dictionary" uri="assets/templates/ambermoon/amberdata/unused/global.dictionary.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/unused/libs" uri="assets/templates/ambermoon/amberdata/unused/libs.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/dictionary/lib.dictionaries" uri="assets/templates/ambermoon/dictionary/lib.dictionaries.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/dictionary" uri="assets/templates/ambermoon/editor/globals/dictionary.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/editor" uri="assets/templates/ambermoon/editor/globals/editor.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/maps" uri="assets/templates/ambermoon/editor/globals/maps.xsl"/>
@@ -117,6 +118,10 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.save" uri="assets/templates/ambermoon/savegame/lib.save.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.spells" uri="assets/templates/ambermoon/savegame/lib.spells.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/null" uri="assets/templates/ambermoon/savegame/null.xml"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/globals/amber-list" uri="assets/templates/ambermoon/viewer/globals/amber-list.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.classes" uri="assets/templates/ambermoon/viewer/lib.classes.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.items" uri="assets/templates/ambermoon/viewer/lib.items.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.portraits" uri="assets/templates/ambermoon/viewer/lib.portraits.xsl"/>
   <uri name="http://schema.slothsoft.net/amber/amberdata" uri="assets/schema/amberdata/0.1.xsd"/>
   <system systemId="farah://slothsoft@amber/schema/amberdata/0.1" uri="assets/schema/amberdata/0.1.xsd"/>
 </catalog>
