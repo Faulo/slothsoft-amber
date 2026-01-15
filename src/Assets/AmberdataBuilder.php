@@ -12,7 +12,7 @@ use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\DOMWriter\AssetDocumentDOMWriter;
 use Slothsoft\Farah\Module\DOMWriter\AssetFragmentDOMWriter;
-use Slothsoft\Farah\Module\DOMWriter\DOMWriterFileCacheByUrl;
+use Slothsoft\Farah\Module\DOMWriter\DOMWriterFileCacheWithDependencies;
 use Slothsoft\Farah\Module\DOMWriter\TransformationDOMWriter;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
@@ -44,7 +44,7 @@ final class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
         };
         
         $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);
-        $writer = new DOMWriterFileCacheByUrl($amberdataUrl, $writer, __FILE__, (string) $datasetUrl, (string) $templateUrl);
+        $writer = new DOMWriterFileCacheWithDependencies($writer, $context->createCacheFile("$infosetId.xml", $args), __FILE__, (string) $datasetUrl, (string) $templateUrl);
         $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }
