@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:saa="http://schema.slothsoft.net/amber/amberdata">
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/viewer/globals/amber-list" />
-    
+
     <xsl:template match="saa:item-list">
-        <xsl:call-template name="amber-list"/>
+        <xsl:call-template name="amber-list" />
     </xsl:template>
-    
+
     <xsl:template match="saa:item-category">
-        <xsl:call-template name="amber-category"/>
-    </xsl:template>    
+        <xsl:call-template name="amber-category" />
+    </xsl:template>
 
     <xsl:template match="saa:item">
         <!--<item xmlns="" id="361" image="9" name="MAGIERSTIEFEL" type="Schuhe" hands="0" fingers="0" damage="0" armor="6" weight="850" gender="beide" class="Magier Mystik. Alchem. Heiler"/> -->

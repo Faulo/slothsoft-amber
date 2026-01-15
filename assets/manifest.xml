@@ -12,7 +12,8 @@
         <custom-asset name="editor-template" executable-builder="Slothsoft\Amber\Assets\EditorTemplateBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter" />
 
         <custom-asset name="viewer" executable-builder="Slothsoft\Amber\Assets\ViewerBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter">
-            <link-stylesheet ref="/api/stylesheet" />
+            <link-stylesheet ref="/static/ambermoon/css/items" />
+            <link-stylesheet ref="/static/ambermoon/css/portraits" />
             <link-stylesheet ref="/css/AmberPicker" />
             <link-module ref="/js/AmberPicker" />
         </custom-asset>
