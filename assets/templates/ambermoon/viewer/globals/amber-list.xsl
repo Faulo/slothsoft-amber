@@ -19,6 +19,8 @@
         <xsl:copy-of select="." />
     </xsl:template>
 
+    <xsl:template match="saa:portrait-instance-list | saa:gfx-list" />
+
     <xsl:template match="saa:portrait-list | saa:item-list | saa:monster-list | saa:npc-list | saa:pc-list">
         <div class="amber-list amber-list--{local-name()}">
             <xsl:apply-templates select="*" />
@@ -258,14 +260,15 @@
     </xsl:template>
 
     <xsl:template match="saa:portrait">
-        <article data-portrait-id="{@id}" data-template="flex" class="Portrait">
-            <amber-picker infoset="lib.portraits" type="portrait" class="portrait-picker" role="button" tabindex="0">
+        <article data-portrait-id="{@id}" class="amber-portrait">
+            <amber-picker infoset="lib.portraits" type="portrait" role="button" tabindex="0">
                 <amber-portrait-id value="{@id}" />
             </amber-picker>
-            <xsl:value-of select="@name" />
-
+            <div class="amber-portrait__name">
+                <xsl:value-of select="@name" />
+            </div>
             <xsl:for-each select="//saa:portrait-instance[@id = current()/@id]">
-                <div class="yellow">
+                <div class="amber-portrait__character">
                     <xsl:value-of select="@character" />
                 </div>
             </xsl:for-each>
@@ -458,13 +461,13 @@
     </xsl:template>
 
     <xsl:template match="saa:monster" mode="itemlist-picture">
-        <amber-picker infoset="lib.monsters" type="monster" class="item-picker" role="button" tabindex="0">
+        <amber-picker infoset="lib.monsters" type="monster" role="button" tabindex="0">
             <amber-monster-id value="{@id}" />
         </amber-picker>
     </xsl:template>
 
     <xsl:template match="saa:pc | saa:npc" mode="itemlist-picture">
-        <amber-picker infoset="lib.portraits" type="portrait" class="item-picker" role="button" tabindex="0">
+        <amber-picker infoset="lib.portraits" type="portrait" role="button" tabindex="0">
             <amber-portrait-id value="{@portrait-id}" />
         </amber-picker>
     </xsl:template>
@@ -514,7 +517,7 @@
     </xsl:template>
 
     <xsl:template match="saa:slot" mode="itemlist-inline">
-        <amber-picker infoset="lib.items" type="item" class="item-picker" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-picker infoset="lib.items" type="item" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
             <amber-item-id value="{saa:item-instance/@item-id}" />
             <amber-item-amount value="{saa:item-instance/@item-amount}" />
             <amber-item-charge value="{saa:item-instance/@item-charge}" />
@@ -533,7 +536,7 @@
                 <tbody class="amber-item__name">
                     <tr>
                         <td rowspan="2">
-                            <amber-picker infoset="lib.items" type="item" class="item-picker" role="button" tabindex="0">
+                            <amber-picker infoset="lib.items" type="item" role="button" tabindex="0">
                                 <amber-item-gfx value="{@image-id}" />
                             </amber-picker>
                         </td>

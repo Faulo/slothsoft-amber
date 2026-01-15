@@ -36,8 +36,8 @@ amber-item-id::after, amber-item-gfx::after {
 	font-size: 2px;
 	width: 16em;
 	height: 16em;
-	border: 2px solid transparent;	
-    image-rendering: pixelated;
+	border: 2px solid transparent;
+	image-rendering: pixelated;
 	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
 	background-clip: content-box;
 	background-size: cover;
@@ -272,14 +272,22 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 }
 
 /* BEM */
-.amber-item {
-    display: flex;
-    flex-direction: row;
+.amber-list__items {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
+
+.amber-item {
+	display: flex;
+	flex-direction: row;
+}
+
 .amber-item td, .amber-item th {
 	vertical-align: top;
 }
+
 .amber-item__class-reference {
-    display: inline-block;
-    width: 50%;
+	display: inline-block;
+	width: 50%;
 }

@@ -12,24 +12,29 @@
 
     <xsl:template match="sse:savegame">
         <xsl:variable name="characters" select="sse:archive[@name='NPC_char.amb' or @name='Party_char.amb']/*" />
-        <xsl:for-each select="$characters">
-            <xsl:sort select=".//*[@name = 'portrait-id']/@value" data-type="number" />
-            <portrait-instance>
-                <xsl:apply-templates select=".//*[@name = 'portrait-id']" mode="attr">
-                    <xsl:with-param name="name" select="'id'" />
-                </xsl:apply-templates>
-                <xsl:apply-templates select=".//*[@name = 'name']" mode="attr">
-                    <xsl:with-param name="name" select="'character'" />
-                </xsl:apply-templates>
-                <xsl:apply-templates select=".//*[@name = 'race']" mode="attr" />
-                <xsl:apply-templates select=".//*[@name = 'gender']" mode="attr" />
-            </portrait-instance>
-        </xsl:for-each>
+
+        <portrait-instance-list>
+            <xsl:for-each select="$characters">
+                <xsl:sort select=".//*[@name = 'portrait-id']/@value" data-type="number" />
+                <portrait-instance>
+                    <xsl:apply-templates select=".//*[@name = 'portrait-id']" mode="attr">
+                        <xsl:with-param name="name" select="'id'" />
+                    </xsl:apply-templates>
+                    <xsl:apply-templates select=".//*[@name = 'name']" mode="attr">
+                        <xsl:with-param name="name" select="'character'" />
+                    </xsl:apply-templates>
+                    <xsl:apply-templates select=".//*[@name = 'race']" mode="attr" />
+                    <xsl:apply-templates select=".//*[@name = 'gender']" mode="attr" />
+                </portrait-instance>
+            </xsl:for-each>
+        </portrait-instance-list>
 
         <xsl:copy-of select="$static/saa:portrait-list" />
 
-        <xsl:for-each select="$static//saa:portrait">
-            <gfx archive="Portraits.amb" group="portrait-id" id="{@id}" position="{@id - 1}" />
-        </xsl:for-each>
+        <gfx-list>
+            <xsl:for-each select="$static//saa:portrait">
+                <gfx archive="Portraits.amb" group="portrait-id" id="{@id}" position="{@id - 1}" />
+            </xsl:for-each>
+        </gfx-list>
     </xsl:template>
 </xsl:stylesheet>
