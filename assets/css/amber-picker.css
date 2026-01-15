@@ -78,7 +78,7 @@ amber-broken::after {
 	display: block;
 	content: " ";
 	background-clip: content-box;
-	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
+	background-image: url("/slothsoft@amber/static/ambermoon/gfx/broken");
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -155,12 +155,12 @@ article.Portrait amber-portrait-id::after {
 	margin: 1em 0.5em;
 }
 
-.Character > table {
+.Character>table {
 	width: 100%;
 }
 
 .Character .textbox {
-    width: auto;
+	width: auto;
 }
 
 .Character .textlabel {

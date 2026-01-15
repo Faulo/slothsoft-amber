@@ -26,14 +26,15 @@
 
     <resource-directory name="source" type="*/*" />
 
-    <fragment name="static">
-        <fragment name="ambermoon">
+    <directory name="static">
+        <directory name="ambermoon">
             <fragment name="css">
                 <use-manifest name="items" ref="/api/stylesheet?infosetId=lib.items" />
                 <use-manifest name="portraits" ref="/api/stylesheet?infosetId=lib.portraits" />
             </fragment>
             <use-manifest name="dictionaries" ref="/api/amberdata?infosetId=lib.dictionaries" />
-            <fragment name="gfx">
+            <directory name="gfx">
+                <resource name="broken" type="image/png" />
                 <use-manifest name="icons-4-6" ref="/api/gfx?archiveId=2Icon_gfx.amb&amp;fileId=004&amp;paletteId=6" />
                 <use-manifest name="icons-5-6" ref="/api/gfx?archiveId=2Icon_gfx.amb&amp;fileId=005&amp;paletteId=6" />
                 <use-manifest name="items" ref="/api/gfx?archiveId=Object_icons&amp;paletteId=49&amp;fileId" />
@@ -103,9 +104,9 @@
                     <use-manifest ref="/api/gfx?archiveId=Layouts.amb&amp;fileId=010&amp;paletteId=10" name="debug" />
                     <use-manifest ref="/api/gfx?archiveId=Layouts.amb&amp;fileId=011&amp;paletteId=10" name="error" />
                 </fragment>
-            </fragment>
-        </fragment>
-    </fragment>
+            </directory>
+        </directory>
+    </directory>
 
     <directory name="templates">
         <directory name="ambermoon">
