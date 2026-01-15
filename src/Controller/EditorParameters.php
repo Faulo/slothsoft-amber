@@ -107,7 +107,7 @@ final class EditorParameters {
     
     public function getProcessDatasetUrl(): FarahUrl {
         return $this->datasetUrl ??= $this->getAmberUrl()
-            ->withPath("/api/dataset")
+            ->withPath("/api/savegame")
             ->withQueryArguments($this->getAmberArgs());
     }
     

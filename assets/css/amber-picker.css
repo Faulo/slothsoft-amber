@@ -37,7 +37,7 @@ amber-item-id::after, amber-item-gfx::after {
 	width: 16em;
 	height: 16em;
 	border: 2px solid transparent;
-	background-image: url("/slothsoft@amber/templates/ambermoon/gfx/items");
+	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
 	background-clip: content-box;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -78,7 +78,7 @@ amber-broken::after {
 	display: block;
 	content: " ";
 	background-clip: content-box;
-	background-image: url(/getResource.php/amber/items-map);
+	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -130,7 +130,7 @@ amber-portrait-id::after {
 	width: 32em;
 	height: 34em;
 	font-size: 2px;
-	background-image: url("/slothsoft@amber/templates/ambermoon/gfx/portraits");
+	background-image: url("/slothsoft@amber/static/ambermoon/gfx/portraits");
 	background-clip: content-box;
 	background-size: cover;
 	background-repeat: no-repeat;
