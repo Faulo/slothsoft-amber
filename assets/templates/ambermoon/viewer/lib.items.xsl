@@ -21,25 +21,25 @@
                                 <amber-item-gfx value="{@image-id}" />
                             </amber-picker>
                         </td>
-                        <th>
+                        <th colspan="2">
                             <xsl:value-of select="@name" />
                         </th>
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <xsl:value-of select="@type" />
                         </td>
                     </tr>
                 </tbody>
                 <tbody class="amber-item__worth">
                     <tr class="right-aligned">
-                        <td>Gewicht:</td>
+                        <td colspan="2">Gewicht:</td>
                         <td class="number">
                             <xsl:value-of select="concat(@weight, ' gr')" />
                         </td>
                     </tr>
                     <tr class="right-aligned">
-                        <td>Wert:</td>
+                        <td colspan="2">Wert:</td>
                         <td class="number">
                             <xsl:value-of select="concat(@price, ' gp')" />
                         </td>
@@ -47,7 +47,7 @@
                 </tbody>
                 <tbody class="amber-item__stats">
                     <tr class="right-aligned">
-                        <td>Hände:</td>
+                        <td colspan="2">Hände:</td>
                         <td class="number">
                             <xsl:value-of select="@hands" />
                         </td>
@@ -59,7 +59,7 @@
                         </td>
                     </tr>
                     <tr class="right-aligned">
-                        <td>Schaden:</td>
+                        <td colspan="2">Schaden:</td>
                         <td class="number">
                             <xsl:if test="@damage &gt; 0">
                                 <xsl:text>+</xsl:text>
@@ -68,7 +68,7 @@
                         </td>
                     </tr>
                     <tr class="right-aligned">
-                        <td>Schutz:</td>
+                        <td colspan="2">Schutz:</td>
                         <td class="number">
                             <xsl:if test="@armor &gt; 0">
                                 <xsl:text>+</xsl:text>
