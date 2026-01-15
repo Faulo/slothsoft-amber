@@ -94,7 +94,7 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                     $imageStyle[] = sprintf('  background-position-y: -%dem;', $y * $imageData[$archiveId]['height']) . PHP_EOL;
                 }
                 if ($fileId !== '') {
-                    $imageStyle[] = sprintf('  background-image: url("/slothsoft@amber/game-resources/gfx?game=%s&version=%s&archiveId=%s&fileId=%03d&gfxId=%d&paletteId=%d");', $game, $version, $archiveId, $fileId, $gfxPosition, $paletteId) . PHP_EOL;
+                    $imageStyle[] = sprintf('  background-image: url("/slothsoft@amber/api/gfx?game=%s&version=%s&archiveId=%s&fileId=%03d&gfxId=%d&paletteId=%d");', $game, $version, $archiveId, $fileId, $gfxPosition, $paletteId) . PHP_EOL;
                 }
                 if ($gfxWidth !== '') {
                     $imageStyle[] = sprintf('  width: %dem;', $gfxWidth) . PHP_EOL;

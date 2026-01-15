@@ -78,13 +78,13 @@ final class EditorParameters {
     private ?FarahUrl $convertUrl = null;
     
     public function getStaticConvertUrl(): FarahUrl {
-        return $this->convertUrl ??= FarahUrl::createFromReference("/games/$this->game/convert/$this->infoset", $this->getAmberUrl());
+        return $this->convertUrl ??= FarahUrl::createFromReference("/templates/$this->game/convert/$this->infoset", $this->getAmberUrl());
     }
     
     private ?FarahUrl $infosetUrl = null;
     
     public function getStaticInfosetUrl(): FarahUrl {
-        return $this->infosetUrl ??= FarahUrl::createFromReference("/games/$this->game/infoset/$this->infoset", $this->getAmberUrl());
+        return $this->infosetUrl ??= FarahUrl::createFromReference("/templates/$this->game/infoset/$this->infoset", $this->getAmberUrl());
     }
     
     public function getStaticInfosetFile(): SplFileInfo {
@@ -94,7 +94,7 @@ final class EditorParameters {
     private ?FarahUrl $editorTemplateUrl = null;
     
     public function getStaticEditorTemplateUrl(): FarahUrl {
-        return $this->editorTemplateUrl ??= FarahUrl::createFromReference("/games/$this->game/editor/$this->infoset", $this->getAmberUrl());
+        return $this->editorTemplateUrl ??= FarahUrl::createFromReference("/templates/$this->game/editor/$this->infoset", $this->getAmberUrl());
     }
     
     private ?FarahUrl $dictionaryTemplateUrl = null;
@@ -107,7 +107,7 @@ final class EditorParameters {
     
     public function getProcessDatasetUrl(): FarahUrl {
         return $this->datasetUrl ??= $this->getAmberUrl()
-            ->withPath("/game-resources/dataset")
+            ->withPath("/api/dataset")
             ->withQueryArguments($this->getAmberArgs());
     }
     
@@ -115,7 +115,7 @@ final class EditorParameters {
     
     public function getProcessAmberdataUrl(): FarahUrl {
         return $this->amberdataUrl ??= $this->getAmberUrl()
-            ->withPath("/game-resources/amberdata")
+            ->withPath("/api/amberdata")
             ->withQueryArguments($this->getAmberArgs());
     }
     
@@ -123,7 +123,7 @@ final class EditorParameters {
     
     public function getProcessDictionaryUrl(): FarahUrl {
         return $this->dictionaryUrl ??= $this->getAmberUrl()
-            ->withPath("/game-resources/dictionary")
+            ->withPath("/api/dictionary")
             ->withQueryArguments($this->getAmberArgs());
     }
 }

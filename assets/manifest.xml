@@ -116,7 +116,7 @@
     </directory>
 
     <!-- <resource-directory name="xsl" type="application/xslt+xml" /> <fragment name="game-editor"> </fragment> <fragment name="game-list"> <use-template ref="/xsl/editor.data-list" /> <use-document name="dictionaries" ref="/api/amberdata?infosetId=lib.dictionaries" /> <use-document name="list" ref="/api/amberdata?archiveId" 
-        /> <link-stylesheet ref="/css/default" /> <link-stylesheet ref="/css/amber-picker" /> <link-stylesheet ref="/games/ambermoon/css/items" /> <link-stylesheet ref="/games/ambermoon/css/portraits" /> <link-stylesheet ref="/api/stylesheet" /> <import ref="/api/SavegameEditor" /> </fragment> -->
+        /> <link-stylesheet ref="/css/default" /> <link-stylesheet ref="/css/amber-picker" /> <link-stylesheet ref="/templates/ambermoon/css/items" /> <link-stylesheet ref="/templates/ambermoon/css/portraits" /> <link-stylesheet ref="/api/stylesheet" /> <import ref="/api/SavegameEditor" /> </fragment> -->
 
     <!-- <fragment name="game-client"> <use-template ref="/xsl/game.client"/> <use-document name="client" ref="/api/amberdata?infosetId=client"/> <link-stylesheet ref="/css/default"/> <link-stylesheet ref="/css/amber-picker"/> <link-stylesheet ref="/api/stylesheet"/> <link-script ref="/js/AmberClient"/> 
         <link-script ref="/js/MapViewer"/> <link-script ref="/js/pixijs/pixi.min"/> <link-script ref="/js/DungeonViewer"/> <link-script ref="/js/babylonjs/babylon.custom"/> </fragment> -->
