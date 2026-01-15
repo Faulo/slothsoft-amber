@@ -78,13 +78,13 @@ final class EditorParameters {
     private ?FarahUrl $convertUrl = null;
     
     public function getStaticConvertUrl(): FarahUrl {
-        return $this->convertUrl ??= FarahUrl::createFromReference("/templates/$this->game/convert/$this->infoset", $this->getAmberUrl());
+        return $this->convertUrl ??= FarahUrl::createFromReference("/templates/$this->game/amberdata/$this->infoset", $this->getAmberUrl());
     }
     
     private ?FarahUrl $infosetUrl = null;
     
     public function getStaticInfosetUrl(): FarahUrl {
-        return $this->infosetUrl ??= FarahUrl::createFromReference("/templates/$this->game/infoset/$this->infoset", $this->getAmberUrl());
+        return $this->infosetUrl ??= FarahUrl::createFromReference("/templates/$this->game/savegame/$this->infoset", $this->getAmberUrl());
     }
     
     public function getStaticInfosetFile(): SplFileInfo {
