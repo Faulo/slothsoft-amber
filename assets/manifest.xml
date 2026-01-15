@@ -11,7 +11,11 @@
         <custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter" />
         <custom-asset name="editor-template" executable-builder="Slothsoft\Amber\Assets\EditorTemplateBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter" />
 
-        <custom-asset name="viewer" executable-builder="Slothsoft\Amber\Assets\ViewerBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter" />
+        <custom-asset name="viewer" executable-builder="Slothsoft\Amber\Assets\ViewerBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter">
+            <link-stylesheet ref="/api/stylesheet" />
+            <link-stylesheet ref="/css/AmberPicker" />
+            <link-module ref="/js/AmberPicker" />
+        </custom-asset>
     </fragment>
 
     <resource-directory name="cli" type="application/vnd.microsoft.portable-executable" />

@@ -109,6 +109,10 @@ final class EditorParameters {
         return $this->viewerTemplateUrl ??= FarahUrl::createFromReference("/templates/$this->game/viewer/$this->infoset", $this->getAmberUrl());
     }
     
+    public function getStaticViewerGlobalUrls(): iterable {
+        yield FarahUrl::createFromReference("/templates/$this->game/viewer/globals/amber-list", $this->getAmberUrl());
+    }
+    
     private ?FarahUrl $datasetUrl = null;
     
     public function getProcessDatasetUrl(): FarahUrl {

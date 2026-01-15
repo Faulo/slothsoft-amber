@@ -11,6 +11,8 @@ use Slothsoft\Farah\Module\DOMWriter\DOMWriterFileCacheWithDependencies;
 use Slothsoft\Farah\Module\DOMWriter\TransformationDOMWriterByUrls;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FromManifestInstructionBuilder;
+use Slothsoft\Farah\LinkDecorator\DecoratedDOMWriter;
 
 final class ViewerBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -26,8 +28,19 @@ final class ViewerBuilder implements ExecutableBuilderStrategyInterface {
         $amberdataUrl = $parameters->getProcessAmberdataUrl();
         $templateUrl = $parameters->getStaticViewerTemplateUrl();
         
+        $dependentFiles = [];
+        $dependentFiles[] = __FILE__;
+        $dependentFiles[] = (string) $context->getManifest()->createManifestFile('manifest.xml');
+        $dependentFiles[] = (string) $amberdataUrl;
+        $dependentFiles[] = (string) $templateUrl;
+        foreach ($parameters->getStaticViewerGlobalUrls() as $globalUrl) {
+            $dependentFiles[] = (string) $globalUrl;
+        }
+        
         $writer = new TransformationDOMWriterByUrls($amberdataUrl, $templateUrl);
-        $writer = new DOMWriterFileCacheWithDependencies($writer, $context->createCacheFile("$infosetId.xml", $args), __FILE__, (string) $amberdataUrl, (string) $templateUrl);
+        $instructions = (new FromManifestInstructionBuilder())->buildLinkInstructions($context, $args);
+        $writer = new DecoratedDOMWriter($writer, $instructions->stylesheetUrls, $instructions->scriptUrls, $instructions->moduleUrls, $instructions->contentUrls);
+        $writer = new DOMWriterFileCacheWithDependencies($writer, $context->createCacheFile("$infosetId.xml", $args), ...$dependentFiles);
         $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }
