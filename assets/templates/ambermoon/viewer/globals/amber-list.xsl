@@ -27,37 +27,6 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="saa:class-list">
-        <details data-template="flex">
-            <summary>
-                <h2>
-                    Fähigkeiten
-                </h2>
-            </summary>
-            <ul>
-                <xsl:for-each select="*">
-                    <li>
-                        <xsl:apply-templates select="." />
-                    </li>
-                </xsl:for-each>
-            </ul>
-        </details>
-        <details data-template="flex">
-            <summary>
-                <h2>
-                    Erfahrungstabelle
-                </h2>
-            </summary>
-            <ul>
-                <xsl:for-each select="*">
-                    <li>
-                        <xsl:apply-templates select="." mode="experience" />
-                    </li>
-                </xsl:for-each>
-            </ul>
-        </details>
-    </xsl:template>
-
     <xsl:template match="saa:spellbook-list">
         spellbook-list
     </xsl:template>
@@ -117,89 +86,6 @@
                 </div>
             </details>
         </xsl:if>
-    </xsl:template>
-
-    <xsl:template match="saa:class">
-        <table class="ClassData">
-            <caption>
-                <xsl:value-of select="@name" />
-            </caption>
-            <tbody>
-                <xsl:for-each select="saa:skill">
-                    <tr class="right-aligned">
-                        <td>
-                            <xsl:value-of select="@name" />
-                            <xsl:text>:</xsl:text>
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="concat(@maximum, '%')" />
-                        </td>
-                    </tr>
-                </xsl:for-each>
-            </tbody>
-            <tbody>
-                <tr>
-                    <th class="yellow smaller" colspan="2">
-                        <xsl:choose>
-                            <xsl:when test="saa:spellbook-reference">
-                                <xsl:for-each select="saa:spellbook-reference">
-                                    <p>
-                                        <xsl:value-of select="@name" />
-                                    </p>
-                                </xsl:for-each>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <p>-</p>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </th>
-                </tr>
-            </tbody>
-        </table>
-    </xsl:template>
-
-    <xsl:template match="saa:class" mode="experience">
-        <xsl:variable name="class" select="." />
-        <table class="ClassData">
-            <caption>
-                <xsl:value-of select="@name" />
-            </caption>
-            <thead>
-                <tr>
-                    <th>level</th>
-                    <th>experience</th>
-                    <th>hp</th>
-                    <th>sp</th>
-                    <th>tp</th>
-                    <th>slp</th>
-                </tr>
-            </thead>
-            <tbody>
-                <xsl:for-each select="sfx:range(1, 50)">
-                    <xsl:variable name="lvl" select="." />
-                    <tr class="right-aligned">
-                        <td class="number green">
-                            <xsl:value-of select="$lvl" />
-                        </td>
-                        <td class="number yellow">
-                            <xsl:value-of select="$class/@base-experience * $lvl * ($lvl + 1) div 2" />
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="$class/@hp-per-level * $lvl" />
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="$class/@sp-per-level * $lvl" />
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="$class/@tp-per-level * $lvl" />
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="$class/@slp-per-level * $lvl" />
-                        </td>
-                    </tr>
-                </xsl:for-each>
-            </tbody>
-        </table>
     </xsl:template>
 
     <xsl:template match="saa:class-instance" mode="itemlist-inline">
