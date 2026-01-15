@@ -40,7 +40,7 @@ final class StylesheetBuilderTest extends TestCase {
     
     public function performanceProvider(): iterable {
         yield 'benchmark document' => [
-            'farah://slothsoft@amber/game-resources/stylesheet?infosetId=lib.items',
+            'farah://slothsoft@amber/api/stylesheet?infosetId=lib.items',
             100
         ];
     }

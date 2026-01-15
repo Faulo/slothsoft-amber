@@ -100,7 +100,7 @@ final class EditorParameters {
     private ?FarahUrl $dictionaryTemplateUrl = null;
     
     public function getStaticDictionaryTemplateUrl(): FarahUrl {
-        return $this->dictionaryTemplateUrl ??= FarahUrl::createFromReference("/xsl/dictionary", $this->getAmberUrl());
+        return $this->dictionaryTemplateUrl ??= FarahUrl::createFromReference("/templates/$this->game/dictionary/$this->infoset", $this->getAmberUrl());
     }
     
     private ?FarahUrl $datasetUrl = null;

@@ -110,9 +110,10 @@
 
     <directory name="templates">
         <directory name="ambermoon">
-            <resource-directory name="savegame" type="application/xml" />
             <resource-directory name="amberdata" type="application/xslt+xml" />
+            <resource-directory name="dictionary" type="application/xslt+xml" />
             <resource-directory name="editor" type="application/xslt+xml" />
+            <resource-directory name="savegame" type="application/xml" />
         </directory>
     </directory>
 
