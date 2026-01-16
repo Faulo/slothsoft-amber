@@ -27,27 +27,40 @@ final class DeploderTest extends TestCase {
      *
      * @dataProvider fileProvider
      */
-    public function test_load(string $in): void {
-        $inFile = FileInfoFactory::createFromPath($in);
-        
-        $sut = new Deploder();
-        $actual = $sut->load($inFile);
-        
-        $this->assertTrue($actual);
-    }
-    
-    /**
-     *
-     * @dataProvider fileProvider
-     * @depends test_load
-     */
-    public function test_getHunkCount(string $in, string $out, int $hunkCount): void {
+    public function test_load_imploded(string $in): void {
         $inFile = FileInfoFactory::createFromPath($in);
         
         $sut = new Deploder();
         $sut->load($inFile);
         
-        $actual = $sut->getHunkCount();
+        $this->assertTrue(true);
+    }
+    
+    /**
+     *
+     * @dataProvider fileProvider
+     */
+    public function test_load_deploded(string $in, string $out): void {
+        $outFile = FileInfoFactory::createFromPath($out);
+        
+        $sut = new Deploder();
+        $sut->load($outFile);
+        
+        $this->assertTrue(true);
+    }
+    
+    /**
+     *
+     * @dataProvider fileProvider
+     * @depends test_load_imploded
+     */
+    public function test_getRealHunkCount(string $in, string $out, int $hunkCount): void {
+        $inFile = FileInfoFactory::createFromPath($in);
+        
+        $sut = new Deploder();
+        $sut->load($inFile);
+        
+        $actual = $sut->getRealHunkCount();
         
         $this->assertThat($actual, new IsEqual($hunkCount));
     }
@@ -55,19 +68,54 @@ final class DeploderTest extends TestCase {
     /**
      *
      * @dataProvider fileProvider
-     * @depends test_load
+     * @depends test_load_imploded
      */
-    public function test_explode(string $in, string $out, int $hunkCount): void {
+    public function test_save_imploded(string $in, string $out, int $hunkCount): void {
         $inFile = FileInfoFactory::createFromPath($in);
         $actualFile = FileInfoFactory::createTempFile();
         
         $sut = new Deploder();
         $sut->load($inFile);
         
-        $sut->explode($actualFile);
-        $actual = (string) $actualFile;
+        $sut->save($actualFile);
         
-        $this->assertFileEquals($out, $actual);
+        $this->assertFileEquals($in, (string) $actualFile);
+    }
+    
+    /**
+     *
+     * @dataProvider fileProvider
+     * @depends test_load_deploded
+     */
+    public function test_save_deploded(string $in, string $out, int $hunkCount): void {
+        $outFile = FileInfoFactory::createFromPath($out);
+        $actualFile = FileInfoFactory::createTempFile();
+        
+        $sut = new Deploder();
+        $sut->load($outFile);
+        
+        $sut->save($actualFile);
+        
+        $this->assertFileEquals($out, (string) $actualFile);
+    }
+    
+    /**
+     *
+     * @dataProvider fileProvider
+     * @depends test_save_deploded
+     */
+    public function test_deplode(string $in, string $out, int $hunkCount): void {
+        $inFile = FileInfoFactory::createFromPath($in);
+        $actualFile = FileInfoFactory::createTempFile();
+        
+        $sut = new Deploder();
+        $sut->load($inFile);
+        
+        $sut->deplode();
+        
+        $sut->save($actualFile);
+        
+        $this->assertFileEquals($out, (string) $actualFile);
     }
     
     public function fileProvider(): iterable {

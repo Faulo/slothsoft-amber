@@ -1,0 +1,103 @@
+<?php
+declare(strict_types = 1);
+namespace Slothsoft\Amber\CLI;
+
+use Ds\Map;
+use Slothsoft\Savegame\Converter;
+
+final class Hunk {
+    
+    public const TYPE_CODE = 0x3E9;
+    
+    public const TYPE_DATA = 0x3EA;
+    
+    public const TYPE_BSS = 0x3EB;
+    
+    public const TYPE_RELOC32 = 0x3EC;
+    
+    public const TYPE_END = 0x3F2;
+    
+    public static function createCode(int $memoryFlags, int $numEntries, string $data): Hunk {
+        $hunk = new Hunk();
+        $hunk->type = self::TYPE_CODE;
+        $hunk->memoryFlags = $memoryFlags;
+        $hunk->size = $numEntries;
+        $hunk->numEntries = $numEntries;
+        $hunk->data = $data;
+        return $hunk;
+    }
+    
+    public static function createData(int $memoryFlags, int $numEntries, string $data): Hunk {
+        $hunk = new Hunk();
+        $hunk->type = self::TYPE_DATA;
+        $hunk->memoryFlags = $memoryFlags;
+        $hunk->size = $numEntries;
+        $hunk->numEntries = $numEntries;
+        $hunk->data = $data;
+        return $hunk;
+    }
+    
+    public static function createBSS(int $memoryFlags, int $numEntries): Hunk {
+        $hunk = new Hunk();
+        $hunk->type = self::TYPE_BSS;
+        $hunk->memoryFlags = $memoryFlags;
+        $hunk->size = $numEntries;
+        $hunk->numEntries = $numEntries;
+        return $hunk;
+    }
+    
+    public static function createReloc32(int $size, Map $entries): Hunk {
+        $hunk = new Hunk();
+        $hunk->type = self::TYPE_RELOC32;
+        $hunk->size = $size;
+        $hunk->entries = $entries;
+        return $hunk;
+    }
+    
+    public static function createEnd(): Hunk {
+        $hunk = new Hunk();
+        $hunk->type = self::TYPE_END;
+        return $hunk;
+    }
+    
+    public int $type;
+    
+    public function getTypeName(): string {
+        switch ($this->type) {
+            case Hunk::TYPE_CODE:
+                return 'Code';
+            case Hunk::TYPE_DATA:
+                return 'Data';
+            case Hunk::TYPE_BSS:
+                return 'BSS';
+            case Hunk::TYPE_RELOC32:
+                return 'Reloc32';
+            case Hunk::TYPE_END:
+                return 'End';
+            default:
+                return 'Unknown';
+        }
+    }
+    
+    public int $memoryFlags;
+    
+    public int $size;
+    
+    public ?string $data;
+    
+    public int $numEntries;
+    
+    public ?Map $entries;
+    
+    public function isReal(): bool {
+        return $this->type === self::TYPE_CODE or $this->type === self::TYPE_DATA or $this->type === self::TYPE_BSS;
+    }
+    
+    public function getDataString(int $offset, int $size = 1): string {
+        return substr($this->data, $offset, $size);
+    }
+    
+    public function getDataInteger(int $offset, int $size = 1): int {
+        return Converter::getInstance()->decodeInteger($this->getDataString($offset, $size), $size);
+    }
+}
