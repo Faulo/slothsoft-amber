@@ -5,6 +5,7 @@ namespace Slothsoft\Amber\CLI;
 use PHPUnit\Framework\TestCase;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\FarahTesting\TestUtils;
+use Throwable;
 use PHPUnit\Framework\Constraint\IsEqual;
 
 /**
@@ -118,7 +119,60 @@ final class DeploderTest extends TestCase {
         $this->assertFileEquals($out, (string) $actualFile);
     }
     
+    /**
+     *
+     * @depends test_save_deploded
+     */
+    public function test_deplode_hunkSizes(): void {
+        $hunkSizes = [];
+        $hunkSizes[] = 183136;
+        $hunkSizes[] = 84728;
+        $hunkSizes[] = 5492;
+        $hunkSizes[] = 15716;
+        $hunkSizes[] = 87856;
+        $hunkSizes[] = 59360;
+        
+        $in = 'test-files/Amberfiles/AM2_CPU.imploded';
+        
+        $inFile = FileInfoFactory::createFromPath($in);
+        
+        $sut = new Deploder();
+        $sut->load($inFile);
+        
+        try {
+            $sut->deplode();
+        } catch (Throwable $e) {}
+        
+        $this->assertThat($sut->deplodedHunkSizes, new IsEqual($hunkSizes));
+    }
+    
+    /**
+     *
+     * @depends test_save_deploded
+     */
+    public function test_deplode_metadata(): void {
+        $in = 'test-files/Amberfiles/AM2_CPU.imploded';
+        
+        $inFile = FileInfoFactory::createFromPath($in);
+        
+        $sut = new Deploder();
+        $sut->load($inFile);
+        
+        try {
+            $sut->deplode();
+        } catch (Throwable $e) {}
+        
+        $this->assertThat($sut->firstLiteralLength, new IsEqual(60));
+        $this->assertThat($sut->initialBitBuffer, new IsEqual(162));
+        $this->assertThat($sut->dataSize, new IsEqual(160241));
+    }
+    
     public function fileProvider(): iterable {
+        yield 'AM2_CPU' => [
+            'test-files/Amberfiles/AM2_CPU.imploded',
+            'test-files/Amberfiles/AM2_CPU.exploded',
+            10
+        ];
         yield 'AM2_BLIT' => [
             'test-files/Amberfiles/AM2_BLIT.imploded',
             'test-files/Amberfiles/AM2_BLIT.exploded',

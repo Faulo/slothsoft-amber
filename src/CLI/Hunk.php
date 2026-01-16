@@ -71,7 +71,7 @@ final class Hunk {
             case Hunk::TYPE_BSS:
                 return 'BSS';
             case Hunk::TYPE_RELOC32:
-                return 'Reloc32';
+                return 'RELOC32';
             case Hunk::TYPE_END:
                 return 'End';
             default:
@@ -90,7 +90,16 @@ final class Hunk {
     public ?Map $entries;
     
     public function isReal(): bool {
-        return $this->type === self::TYPE_CODE or $this->type === self::TYPE_DATA or $this->type === self::TYPE_BSS;
+        switch ($this->type) {
+            case Hunk::TYPE_CODE:
+                return true;
+            case Hunk::TYPE_DATA:
+                return true;
+            case Hunk::TYPE_BSS:
+                return true;
+            default:
+                return false;
+        }
     }
     
     public function getDataString(int $offset, int $size = 1): string {

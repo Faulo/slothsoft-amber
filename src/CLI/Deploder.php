@@ -129,7 +129,7 @@ final class Deploder {
             }
         }
         
-        if ($this->in->ftell() < $inFile->getSize()) {
+        if ($this->in->ftell() + self::SIZEOF_UINT === $inFile->getSize()) {
             $type = $this->readInt(self::SIZEOF_UINT) & 0x1fffffff;
             if ($type !== Hunk::TYPE_END) {
                 throw new UnexpectedValueException((string) $type);
@@ -201,6 +201,7 @@ final class Deploder {
                     if ($size !== $hunk->size) {
                         throw new UnexpectedValueException("RELOC32 has size '$hunk->size', but entries are $size bytes long.");
                     }
+                    break;
                 case Hunk::TYPE_END:
                     break;
                 default:
@@ -229,9 +230,15 @@ final class Deploder {
         fclose($deploded);
     }
     
-    private array $deplodedHunkSizes;
+    public array $deplodedHunkSizes;
     
-    private array $deplodedMemFlags;
+    public array $deplodedMemFlags;
+    
+    public int $firstLiteralLength;
+    
+    public int $initialBitBuffer;
+    
+    public int $dataSize;
     
     /**
      *
@@ -274,11 +281,17 @@ final class Deploder {
             $matchExtra[] = $lastCodeHunk->getDataInteger(0x188 + 16 + $i);
         }
         
-        $firstLiteralLength = $lastCodeHunk->getDataInteger(0x1E6, 2);
-        $initialBitBuffer = $lastCodeHunk->getDataInteger(0x1E8);
-        $dataSize = $lastCodeHunk->getDataInteger(8, 4);
+        $this->firstLiteralLength = $lastCodeHunk->getDataInteger(0x1E6, 2);
+        $this->initialBitBuffer = $lastCodeHunk->getDataInteger(0x1E8);
+        $this->dataSize = $lastCodeHunk->getDataInteger(8, 4);
         
-        self::deplodeData($deploded, $lastDataHunk, $matchBase, $matchExtra, $dataSize, $firstLiteralLength, $initialBitBuffer);
+        self::deplodeData($deploded, $lastDataHunk, $matchBase, $matchExtra, $this->dataSize, $this->firstLiteralLength, $this->initialBitBuffer);
+        
+        $outputSize = ftell($deploded);
+        assert($outputSize > 162_000 and $outputSize < 200_000, "Wrong output size maybe.");
+        foreach ($this->deplodedHunkSizes as $i => $hunkSize) {
+            assert($outputSize > $hunkSize, "Wrong output size maybe. Hunk $i is $hunkSize bytes, but total data is $outputSize bytes.");
+        }
     }
     
     private static array $DeplodeLiteralBase = [
@@ -340,6 +353,7 @@ final class Deploder {
         
         $readOutput = function (int $offset, int $length) use ($output): string {
             $index = ftell($output);
+            assert($offset + $length < $index, "Attempted to read output that has not yet been written.");
             fseek($output, $offset, SEEK_SET);
             $result = fread($output, $length);
             fseek($output, $index, SEEK_SET);
@@ -462,15 +476,14 @@ final class Deploder {
             
             /* copy match */
             for ($i = 0; $i < $matchLength + 1; $i ++) {
-                fwrite($output, $readOutput($match, 1));
-                $match ++;
+                fwrite($output, $readOutput($match + $i, 1));
             }
         }
     }
     
     private function replaceImplodedHunks($deploded): void {
+        $deplodedSize = ftell($deploded);
         rewind($deploded);
-        $deplodedSize = fstat($deploded)['size'];
         
         $readString = function (int $size) use ($deploded): string {
             $result = fread($deploded, $size);
@@ -566,8 +579,6 @@ final class Deploder {
                     break;
             }
         }
-        
-        my_dump($this->deplodedHunkSizes);
         
         $hunk = array_pop($hunks);
         if ($hunk->type !== Hunk::TYPE_END) {
