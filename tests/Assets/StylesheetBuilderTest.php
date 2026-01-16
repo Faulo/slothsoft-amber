@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class StylesheetBuilderTest extends TestCase {
+final class StylesheetBuilderTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(StylesheetBuilder::class), "Failed to load class 'Slothsoft\Amber\Assets\StylesheetBuilder'!");
