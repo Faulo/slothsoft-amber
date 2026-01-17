@@ -9,7 +9,7 @@
 	],
 	"type" : "library",
 	"require" : {
-		"php" : ">=7.4",
+		"php" : "^8.0",
 		"slothsoft/core" : "^1.14.3",
 		"slothsoft/farah" : "^1.26.25",
 		"slothsoft/savegame" : "^1.1.7",
