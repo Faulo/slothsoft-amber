@@ -5,9 +5,11 @@ namespace Slothsoft\Amber\CLI;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Core\IO\Memory;
 use Slothsoft\Core\StreamWrapper\StreamWrapperInterface;
 use Slothsoft\FarahTesting\TestUtils;
 use Slothsoft\FarahTesting\Constraints\FileEqualsFile;
+use InvalidArgumentException;
 use Throwable;
 
 /**
@@ -195,15 +197,16 @@ final class AmigaExecutableTest extends TestCase {
     }
     
     /**
+     *
+     * @dataProvider accessModeProvider
      */
-    public function test_deplodeData(): void {
+    public function test_deplodeData(string $accessMode): void {
         $in = self::AM2_CPU_DATA_IMPLODED;
+        $out = temp_file(__CLASS__);
         
-        $inFile = FileInfoFactory::createFromPath($in);
-        $inAccess = new FileDataAccess($inFile, StreamWrapperInterface::MODE_OPEN_READONLY);
+        $inAccess = self::createFileReader($in, $accessMode);
         
-        $outFile = FileInfoFactory::createTempFile();
-        $outAccess = new FileDataAccess($outFile, StreamWrapperInterface::MODE_CREATE_READWRITE);
+        $outAccess = self::openFileWriter($out, $accessMode);
         
         try {
             AmigaExecutable::deplodeData($inAccess, $outAccess, self::$cpuInfo);
@@ -211,7 +214,96 @@ final class AmigaExecutableTest extends TestCase {
             trigger_error((string) $e, E_USER_WARNING);
         }
         
-        $this->assertThat($outFile, new FileEqualsFile(self::AM2_CPU_DATA_DEPLODED));
+        self::closeFileWriter($out, $accessMode, $outAccess);
+        
+        $this->assertThat($out, new FileEqualsFile(self::AM2_CPU_DATA_DEPLODED));
+    }
+    
+    private static function createFileReader(string $path, string $mode): DataAccessInterface {
+        switch ($mode) {
+            case 'string':
+                return new StringDataAccess(file_get_contents($path));
+            case 'file':
+                $file = FileInfoFactory::createFromPath($path);
+                return new FileDataAccess($file, StreamWrapperInterface::MODE_OPEN_READONLY);
+            case 'tmpfile':
+                $resource = tmpfile();
+                fwrite($resource, file_get_contents($path));
+                rewind($resource);
+                return new ResourceDataAccess($resource);
+            case 'temp':
+                $resource = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
+                fwrite($resource, file_get_contents($path));
+                rewind($resource);
+                return new ResourceDataAccess($resource);
+            case 'memory':
+                $resource = fopen('php://memory', StreamWrapperInterface::MODE_CREATE_READWRITE);
+                fwrite($resource, file_get_contents($path));
+                rewind($resource);
+                return new ResourceDataAccess($resource);
+            default:
+                throw new InvalidArgumentException($mode);
+        }
+    }
+    
+    private static function openFileWriter(string $path, string $mode): DataAccessInterface {
+        switch ($mode) {
+            case 'string':
+                return new StringDataAccess('');
+            case 'file':
+                $file = FileInfoFactory::createFromPath($path);
+                return new FileDataAccess($file, StreamWrapperInterface::MODE_CREATE_READWRITE);
+            case 'tmpfile':
+                $resource = tmpfile();
+                return new ResourceDataAccess($resource);
+            case 'temp':
+                $resource = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
+                return new ResourceDataAccess($resource);
+            case 'memory':
+                $resource = fopen('php://memory', StreamWrapperInterface::MODE_CREATE_READWRITE);
+                return new ResourceDataAccess($resource);
+            default:
+                throw new InvalidArgumentException($mode);
+        }
+    }
+    
+    private static function closeFileWriter(string $path, string $mode, DataAccessInterface $access): void {
+        switch ($mode) {
+            case 'string':
+                file_put_contents($path, $access->data);
+                return;
+            case 'file':
+                return;
+            case 'tmpfile':
+            case 'temp':
+            case 'memory':
+                $access->setPosition(0);
+                file_put_contents($path, $access->readString(Memory::ONE_MEGABYTE));
+                return;
+            default:
+                throw new InvalidArgumentException($mode);
+        }
+    }
+    
+    public function accessModeProvider(): iterable {
+        yield 'string' => [
+            'string'
+        ];
+        yield 'file' => [
+            'file'
+        ];
+        
+        yield 'tmpfile' => [
+            'tmpfile'
+        ];
+        
+        yield 'php://temp' => [
+            'temp'
+        ];
+        
+        yield 'php://memory' => [
+            'memory'
+        ];
     }
     
     /**
