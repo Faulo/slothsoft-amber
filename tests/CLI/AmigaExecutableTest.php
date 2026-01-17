@@ -15,11 +15,11 @@ use Throwable;
  */
 final class AmigaExecutableTest extends TestCase {
     
-    private const AM2_CPU_IMPLODED = self::AM2_CPU_IMPLODED;
+    private const AM2_CPU_IMPLODED = 'test-files/Amberfiles/AM2_CPU.imploded';
     
     private const AM2_CPU_DEPLODED = 'test-files/Amberfiles/AM2_CPU.deploded';
     
-    private const AM2_BLIT_IMPLODED = self::AM2_BLIT_IMPLODED;
+    private const AM2_BLIT_IMPLODED = 'test-files/Amberfiles/AM2_BLIT.imploded';
     
     private const AM2_BLIT_DEPLODED = 'test-files/Amberfiles/AM2_BLIT.deploded';
     
