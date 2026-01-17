@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\CLI;
 
+use Ds\Map;
 use PHPUnit\Util\InvalidDataSetException;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
@@ -11,7 +12,6 @@ use Exception;
 use SplFileInfo;
 use SplFileObject;
 use UnexpectedValueException;
-use Ds\Map;
 
 final class Deploder {
     
@@ -240,6 +240,12 @@ final class Deploder {
     
     public int $dataSize;
     
+    public array $matchBase;
+    
+    public array $matchExtra;
+    
+    public int $deplodedSize;
+    
     /**
      *
      * @link https://github.com/Pyrdacor/Ambermoon.net/blob/master/Ambermoon.Data.Legacy/Serialization/AmigaExecutable.cs
@@ -272,26 +278,22 @@ final class Deploder {
         array_pop($this->deplodedHunkSizes);
         array_pop($this->deplodedMemFlags);
         
-        $matchBase = [];
+        $this->matchBase = [];
         for ($i = 0; $i < 8; $i ++) {
-            $matchBase[] = $lastCodeHunk->getDataInteger(0x188 + $i * 2, 2);
+            $this->matchBase[] = $lastCodeHunk->getDataInteger(0x188 + $i * 2, 2);
         }
-        $matchExtra = [];
+        $this->matchExtra = [];
         for ($i = 0; $i < 12; $i ++) {
-            $matchExtra[] = $lastCodeHunk->getDataInteger(0x188 + 16 + $i);
+            $this->matchExtra[] = $lastCodeHunk->getDataInteger(0x188 + 16 + $i);
         }
         
         $this->firstLiteralLength = $lastCodeHunk->getDataInteger(0x1E6, 2);
         $this->initialBitBuffer = $lastCodeHunk->getDataInteger(0x1E8);
         $this->dataSize = $lastCodeHunk->getDataInteger(8, 4);
         
-        self::deplodeData($deploded, $lastDataHunk, $matchBase, $matchExtra, $this->dataSize, $this->firstLiteralLength, $this->initialBitBuffer);
+        self::deplodeData($deploded, $lastDataHunk, $this->matchBase, $this->matchExtra, $this->dataSize, $this->firstLiteralLength, $this->initialBitBuffer);
         
-        $outputSize = ftell($deploded);
-        assert($outputSize > 162_000 and $outputSize < 200_000, "Wrong output size maybe.");
-        foreach ($this->deplodedHunkSizes as $i => $hunkSize) {
-            assert($outputSize > $hunkSize, "Wrong output size maybe. Hunk $i is $hunkSize bytes, but total data is $outputSize bytes.");
-        }
+        $this->deplodedSize = ftell($deploded);
     }
     
     private static array $DeplodeLiteralBase = [

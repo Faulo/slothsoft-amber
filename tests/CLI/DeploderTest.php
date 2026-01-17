@@ -3,10 +3,10 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\CLI;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Constraint\IsEqual;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\FarahTesting\TestUtils;
 use Throwable;
-use PHPUnit\Framework\Constraint\IsEqual;
 
 /**
  * DeploderTest
@@ -102,25 +102,6 @@ final class DeploderTest extends TestCase {
     
     /**
      *
-     * @dataProvider fileProvider
-     * @depends test_save_deploded
-     */
-    public function test_deplode(string $in, string $out, int $hunkCount): void {
-        $inFile = FileInfoFactory::createFromPath($in);
-        $actualFile = FileInfoFactory::createTempFile();
-        
-        $sut = new Deploder();
-        $sut->load($inFile);
-        
-        $sut->deplode();
-        
-        $sut->save($actualFile);
-        
-        $this->assertFileEquals($out, (string) $actualFile);
-    }
-    
-    /**
-     *
      * @depends test_save_deploded
      */
     public function test_deplode_hunkSizes(): void {
@@ -165,6 +146,90 @@ final class DeploderTest extends TestCase {
         $this->assertThat($sut->firstLiteralLength, new IsEqual(60));
         $this->assertThat($sut->initialBitBuffer, new IsEqual(162));
         $this->assertThat($sut->dataSize, new IsEqual(160241));
+    }
+    
+    /**
+     *
+     * @depends test_deplode_metadata
+     */
+    public function test_deplode_table(): void {
+        $matchBase = [];
+        $matchBase[] = 64;
+        $matchBase[] = 128;
+        $matchBase[] = 128;
+        $matchBase[] = 256;
+        $matchBase[] = 192;
+        $matchBase[] = 640;
+        $matchBase[] = 1152;
+        $matchBase[] = 2304;
+        
+        $matchExtra = [];
+        $matchExtra[] = 6;
+        $matchExtra[] = 7;
+        $matchExtra[] = 7;
+        $matchExtra[] = 128;
+        $matchExtra[] = 7;
+        $matchExtra[] = 129;
+        $matchExtra[] = 130;
+        $matchExtra[] = 131;
+        $matchExtra[] = 128;
+        $matchExtra[] = 131;
+        $matchExtra[] = 133;
+        $matchExtra[] = 134;
+        
+        $in = 'test-files/Amberfiles/AM2_CPU.imploded';
+        
+        $inFile = FileInfoFactory::createFromPath($in);
+        
+        $sut = new Deploder();
+        $sut->load($inFile);
+        
+        try {
+            $sut->deplode();
+        } catch (Throwable $e) {}
+        
+        $this->assertThat($sut->matchBase, new IsEqual($matchBase));
+        $this->assertThat($sut->matchExtra, new IsEqual($matchExtra));
+    }
+    
+    /**
+     *
+     * @depends test_deplode_table
+     */
+    public function test_deplode_deplodedSize(): void {
+        $deplodedSize = 347940;
+        
+        $in = 'test-files/Amberfiles/AM2_CPU.imploded';
+        
+        $inFile = FileInfoFactory::createFromPath($in);
+        
+        $sut = new Deploder();
+        $sut->load($inFile);
+        
+        try {
+            $sut->deplode();
+        } catch (Throwable $e) {}
+        
+        $this->assertThat($sut->deplodedSize, new IsEqual($deplodedSize));
+    }
+    
+    /**
+     *
+     * @dataProvider fileProvider
+     * @depends test_deplode_deplodedSize
+     */
+    public function test_deplode(string $in, string $out, int $hunkCount): void {
+        $inFile = FileInfoFactory::createFromPath($in);
+        $actualFile = FileInfoFactory::createTempFile();
+        
+        $sut = new Deploder();
+        $sut->load($inFile);
+        
+        $sut->deplode();
+        
+        $sut->save($actualFile);
+        
+        $this->assertFileEquals($out, (string) $actualFile);
     }
     
     public function fileProvider(): iterable {
