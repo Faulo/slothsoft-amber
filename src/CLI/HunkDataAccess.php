@@ -2,47 +2,21 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\CLI;
 
-use BadMethodCallException;
+use Slothsoft\Core\StreamWrapper\StreamWrapperInterface;
 
-final class HunkDataAccess implements DataAccessInterface {
+final class HunkDataAccess extends ResourceDataAccess {
     
-    private Hunk $hunk;
-    
-    private int $position = 0;
+    private $resource;
     
     public function __construct(Hunk $hunk) {
-        $this->hunk = $hunk;
+        $this->resource = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
+        fwrite($this->resource, $hunk->data);
+        rewind($this->resource);
+        
+        parent::__construct($this->resource);
     }
     
-    public function getPosition(): int {
-        return $this->position;
-    }
-    
-    public function setPosition(int $position): void {
-        $this->position = $position;
-    }
-    
-    public function readString(int $size, bool $peek = false): string {
-        $result = $this->hunk->getDataString($this->position, $size);
-        if (! $peek) {
-            $this->position += $size;
-        }
-        return $result;
-    }
-    
-    public function readInteger(int $size, bool $peek = false): int {
-        $result = $this->hunk->getDataInteger($this->position, $size);
-        if (! $peek) {
-            $this->position += $size;
-        }
-        return $result;
-    }
-    
-    public function writeString(string $value): void {
-        throw new BadMethodCallException();
-    }
-    
-    public function writeInteger(int $value, int $size): void {
-        throw new BadMethodCallException();
+    public function __destruct() {
+        fclose($this->resource);
     }
 }

@@ -169,7 +169,7 @@ final class AmigaExecutableTest extends TestCase {
         $sut->load($inFile);
         
         try {
-            $sut->deplode();
+            $sut->deplode(false, false);
         } catch (Throwable $e) {}
         
         $this->assertThat($sut->deplodedHunkSizes, new IsEqual($hunkSizes));
@@ -188,7 +188,7 @@ final class AmigaExecutableTest extends TestCase {
         $sut->load($inFile);
         
         try {
-            $sut->deplode();
+            $sut->deplode(false, false);
         } catch (Throwable $e) {}
         
         $this->assertThat($sut->deplodeInfo, new IsEqual(self::$cpuInfo));
@@ -229,7 +229,7 @@ final class AmigaExecutableTest extends TestCase {
         $sut->load($inFile);
         
         try {
-            $sut->deplode();
+            $sut->deplode(true, false);
         } catch (Throwable $e) {
             trigger_error((string) $e, E_USER_WARNING);
         }

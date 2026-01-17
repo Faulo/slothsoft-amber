@@ -4,7 +4,7 @@ namespace Slothsoft\Amber\CLI;
 
 use Slothsoft\Savegame\Converter;
 
-final class ResourceDataAccess implements DataAccessInterface {
+class ResourceDataAccess implements DataAccessInterface {
     
     private Converter $converter;
     

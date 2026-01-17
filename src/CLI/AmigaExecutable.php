@@ -211,21 +211,31 @@ final class AmigaExecutable {
         $this->out->writeInteger($value, $size);
     }
     
-    public function deplode(): void {
-        $temp = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
+    public function deplode(bool $loadDeplodedData = true, bool $replaceImplodedHunks = true): void {
+        $this->loadDeplodeInfo();
         
-        $tempAccess = new ResourceDataAccess($temp);
-        
-        $this->deplodeHunks($tempAccess);
-        
-        // $this->replaceImplodedHunks($tempAccess);
-        
-        fclose($temp);
+        if ($loadDeplodedData) {
+            
+            $temp = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
+            
+            $tempAccess = new ResourceDataAccess($temp);
+            
+            $this->loadDeplodedData($tempAccess);
+            
+            if ($replaceImplodedHunks) {
+                
+                $this->replaceImplodedHunks($tempAccess);
+            }
+            
+            fclose($temp);
+        }
     }
     
     public array $deplodedHunkSizes;
     
     public array $deplodedMemFlags;
+    
+    private Hunk $lastDataHunk;
     
     public AmigaExecutableDeplodeInfo $deplodeInfo;
     
@@ -235,7 +245,7 @@ final class AmigaExecutable {
      *
      * @link https://github.com/Pyrdacor/Ambermoon.net/blob/master/Ambermoon.Data.Legacy/Serialization/AmigaExecutable.cs
      */
-    private function deplodeHunks(DataAccessInterface $deploded): void {
+    private function loadDeplodeInfo(): void {
         $lastCodeHunk = null;
         $lastDataHunk = null;
         $this->deplodedHunkSizes = [];
@@ -277,11 +287,15 @@ final class AmigaExecutable {
         $this->deplodeInfo->initialBitBuffer = $lastCodeHunk->getDataInteger(0x1E8);
         $this->deplodeInfo->implodedSize = $lastCodeHunk->getDataInteger(8, 4);
         
-        $lastDataHunkAccess = new HunkDataAccess($lastDataHunk);
+        $this->lastDataHunk = $lastDataHunk;
+    }
+    
+    private function loadDeplodedData(DataAccessInterface $output) {
+        $lastDataHunkAccess = new HunkDataAccess($this->lastDataHunk);
         
-        self::deplodeData($lastDataHunkAccess, $deploded, $this->deplodeInfo);
+        self::deplodeData($lastDataHunkAccess, $output, $this->deplodeInfo);
         
-        $this->deplodedSize = $deploded->getPosition();
+        $this->deplodedSize = $output->getPosition();
     }
     
     private static array $DeplodeLiteralBase = [
