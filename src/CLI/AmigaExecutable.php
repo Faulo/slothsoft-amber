@@ -13,7 +13,7 @@ use SplFileInfo;
 use SplFileObject;
 use UnexpectedValueException;
 
-final class Deploder {
+final class AmigaExecutable {
     
     public static function isSupported(): bool {
         return true;

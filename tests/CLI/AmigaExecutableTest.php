@@ -9,14 +9,14 @@ use Slothsoft\FarahTesting\TestUtils;
 use Throwable;
 
 /**
- * DeploderTest
+ * AmigaExecutableTest
  *
- * @see Deploder
+ * @see AmigaExecutable
  */
-final class DeploderTest extends TestCase {
+final class AmigaExecutableTest extends TestCase {
     
     public function testClassExists(): void {
-        $this->assertTrue(class_exists(Deploder::class), "Failed to load class 'Slothsoft\Amber\CLI\Deploder'!");
+        $this->assertTrue(class_exists(AmigaExecutable::class), "Failed to load class 'Slothsoft\Amber\CLI\AmigaExecutable'!");
     }
     
     protected function setUp(): void {
@@ -31,7 +31,7 @@ final class DeploderTest extends TestCase {
     public function test_load_imploded(string $in): void {
         $inFile = FileInfoFactory::createFromPath($in);
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($inFile);
         
         $this->assertTrue(true);
@@ -44,7 +44,7 @@ final class DeploderTest extends TestCase {
     public function test_load_deploded(string $in, string $out): void {
         $outFile = FileInfoFactory::createFromPath($out);
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($outFile);
         
         $this->assertTrue(true);
@@ -58,7 +58,7 @@ final class DeploderTest extends TestCase {
     public function test_getRealHunkCount(string $in, string $out, int $hunkCount): void {
         $inFile = FileInfoFactory::createFromPath($in);
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($inFile);
         
         $actual = $sut->getRealHunkCount();
@@ -75,7 +75,7 @@ final class DeploderTest extends TestCase {
         $inFile = FileInfoFactory::createFromPath($in);
         $actualFile = FileInfoFactory::createTempFile();
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($inFile);
         
         $sut->save($actualFile);
@@ -92,7 +92,7 @@ final class DeploderTest extends TestCase {
         $outFile = FileInfoFactory::createFromPath($out);
         $actualFile = FileInfoFactory::createTempFile();
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($outFile);
         
         $sut->save($actualFile);
@@ -117,7 +117,7 @@ final class DeploderTest extends TestCase {
         
         $inFile = FileInfoFactory::createFromPath($in);
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($inFile);
         
         try {
@@ -136,7 +136,7 @@ final class DeploderTest extends TestCase {
         
         $inFile = FileInfoFactory::createFromPath($in);
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($inFile);
         
         try {
@@ -181,7 +181,7 @@ final class DeploderTest extends TestCase {
         
         $inFile = FileInfoFactory::createFromPath($in);
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($inFile);
         
         try {
@@ -203,7 +203,7 @@ final class DeploderTest extends TestCase {
         
         $inFile = FileInfoFactory::createFromPath($in);
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($inFile);
         
         try {
@@ -222,7 +222,7 @@ final class DeploderTest extends TestCase {
         $inFile = FileInfoFactory::createFromPath($in);
         $actualFile = FileInfoFactory::createTempFile();
         
-        $sut = new Deploder();
+        $sut = new AmigaExecutable();
         $sut->load($inFile);
         
         $sut->deplode();
