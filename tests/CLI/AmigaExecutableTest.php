@@ -15,6 +15,14 @@ use Throwable;
  */
 final class AmigaExecutableTest extends TestCase {
     
+    private const AM2_CPU_IMPLODED = self::AM2_CPU_IMPLODED;
+    
+    private const AM2_CPU_DEPLODED = 'test-files/Amberfiles/AM2_CPU.deploded';
+    
+    private const AM2_BLIT_IMPLODED = self::AM2_BLIT_IMPLODED;
+    
+    private const AM2_BLIT_DEPLODED = 'test-files/Amberfiles/AM2_BLIT.deploded';
+    
     public function testClassExists(): void {
         $this->assertTrue(class_exists(AmigaExecutable::class), "Failed to load class 'Slothsoft\Amber\CLI\AmigaExecutable'!");
     }
@@ -113,7 +121,7 @@ final class AmigaExecutableTest extends TestCase {
         $hunkSizes[] = 87856;
         $hunkSizes[] = 59360;
         
-        $in = 'test-files/Amberfiles/AM2_CPU.imploded';
+        $in = self::AM2_CPU_IMPLODED;
         
         $inFile = FileInfoFactory::createFromPath($in);
         
@@ -132,7 +140,7 @@ final class AmigaExecutableTest extends TestCase {
      * @depends test_save_deploded
      */
     public function test_deplode_metadata(): void {
-        $in = 'test-files/Amberfiles/AM2_CPU.imploded';
+        $in = self::AM2_CPU_IMPLODED;
         
         $inFile = FileInfoFactory::createFromPath($in);
         
@@ -177,7 +185,7 @@ final class AmigaExecutableTest extends TestCase {
         $matchExtra[] = 133;
         $matchExtra[] = 134;
         
-        $in = 'test-files/Amberfiles/AM2_CPU.imploded';
+        $in = self::AM2_CPU_IMPLODED;
         
         $inFile = FileInfoFactory::createFromPath($in);
         
@@ -199,7 +207,7 @@ final class AmigaExecutableTest extends TestCase {
     public function test_deplode_deplodedSize(): void {
         $deplodedSize = 347940;
         
-        $in = 'test-files/Amberfiles/AM2_CPU.imploded';
+        $in = self::AM2_CPU_IMPLODED;
         
         $inFile = FileInfoFactory::createFromPath($in);
         
@@ -234,13 +242,13 @@ final class AmigaExecutableTest extends TestCase {
     
     public function fileProvider(): iterable {
         yield 'AM2_CPU' => [
-            'test-files/Amberfiles/AM2_CPU.imploded',
-            'test-files/Amberfiles/AM2_CPU.exploded',
+            self::AM2_CPU_IMPLODED,
+            self::AM2_CPU_DEPLODED,
             10
         ];
         yield 'AM2_BLIT' => [
-            'test-files/Amberfiles/AM2_BLIT.imploded',
-            'test-files/Amberfiles/AM2_BLIT.exploded',
+            self::AM2_BLIT_IMPLODED,
+            self::AM2_BLIT_DEPLODED,
             11
         ];
     }
