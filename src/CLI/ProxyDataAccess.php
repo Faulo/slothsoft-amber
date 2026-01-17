@@ -37,36 +37,38 @@ final class ProxyDataAccess implements DataAccessInterface {
     }
     
     public function readString(int $size, bool $peek = false): string {
-        $this->preparePosition();
-        
         if (! $peek and $this->inReverse) {
             $this->position -= $size;
         }
         
+        $this->preparePosition();
+        
         $result = $this->data->readString($size);
+        
+        $this->restorePosition();
         
         if (! $peek and ! $this->inReverse) {
             $this->position += $size;
         }
         
-        $this->restorePosition();
         return $result;
     }
     
     public function readInteger(int $size, bool $peek = false): int {
-        $this->preparePosition();
-        
         if (! $peek and $this->inReverse) {
             $this->position -= $size;
         }
         
+        $this->preparePosition();
+        
         $result = $this->data->readInteger($size);
+        
+        $this->restorePosition();
         
         if (! $peek and ! $this->inReverse) {
             $this->position += $size;
         }
         
-        $this->restorePosition();
         return $result;
     }
     

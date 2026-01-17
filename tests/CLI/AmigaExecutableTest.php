@@ -5,9 +5,10 @@ namespace Slothsoft\Amber\CLI;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Slothsoft\Core\IO\FileInfoFactory;
-use Slothsoft\FarahTesting\TestUtils;
-use Throwable;
 use Slothsoft\Core\StreamWrapper\StreamWrapperInterface;
+use Slothsoft\FarahTesting\TestUtils;
+use Slothsoft\FarahTesting\Constraints\FileEqualsFile;
+use Throwable;
 
 /**
  * AmigaExecutableTest
@@ -210,7 +211,7 @@ final class AmigaExecutableTest extends TestCase {
             trigger_error((string) $e, E_USER_WARNING);
         }
         
-        $this->assertFileEquals(self::AM2_CPU_DATA_DEPLODED, (string) $outFile);
+        $this->assertThat($outFile, new FileEqualsFile(self::AM2_CPU_DATA_DEPLODED));
     }
     
     /**
