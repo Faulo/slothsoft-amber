@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\CLI;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Constraint\Count;
 use PHPUnit\Framework\Constraint\IsEqual;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Core\IO\Memory;
@@ -65,6 +66,24 @@ final class AmigaExecutableTest extends TestCase {
         
         return self::$cpuInfo;
     }
+    
+    private static array $cpuHunkSizes = [
+        183136,
+        84728,
+        5492,
+        15716,
+        87856,
+        59360
+    ];
+    
+    private static array $cpuMemFlags = [
+        0,
+        1073741824,
+        0,
+        1073741824,
+        0,
+        0
+    ];
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(AmigaExecutable::class), "Failed to load class 'Slothsoft\Amber\CLI\AmigaExecutable'!");
@@ -156,14 +175,6 @@ final class AmigaExecutableTest extends TestCase {
      * @depends test_save_deploded
      */
     public function test_deplode_hunkSizes(): void {
-        $hunkSizes = [];
-        $hunkSizes[] = 183136;
-        $hunkSizes[] = 84728;
-        $hunkSizes[] = 5492;
-        $hunkSizes[] = 15716;
-        $hunkSizes[] = 87856;
-        $hunkSizes[] = 59360;
-        
         $in = self::AM2_CPU_IMPLODED;
         
         $inFile = FileInfoFactory::createFromPath($in);
@@ -175,7 +186,26 @@ final class AmigaExecutableTest extends TestCase {
             $sut->deplode(false, false);
         } catch (Throwable $e) {}
         
-        $this->assertThat($sut->deplodedHunkSizes, new IsEqual($hunkSizes));
+        $this->assertThat($sut->deplodedHunkSizes, new IsEqual(self::$cpuHunkSizes));
+    }
+    
+    /**
+     *
+     * @depends test_save_deploded
+     */
+    public function test_deplode_memFlags(): void {
+        $in = self::AM2_CPU_IMPLODED;
+        
+        $inFile = FileInfoFactory::createFromPath($in);
+        
+        $sut = new AmigaExecutable();
+        $sut->load($inFile);
+        
+        try {
+            $sut->deplode(false, false);
+        } catch (Throwable $e) {}
+        
+        $this->assertThat($sut->deplodedMemFlags, new IsEqual(self::$cpuMemFlags));
     }
     
     /**
@@ -200,6 +230,25 @@ final class AmigaExecutableTest extends TestCase {
     /**
      *
      * @dataProvider accessModeProvider
+     */
+    public function test_createDeplodedHunks(string $accessMode): void {
+        $in = self::AM2_CPU_DATA_DEPLODED;
+        
+        $inAccess = self::createFileReader($in, $accessMode);
+        
+        try {
+            $actual = AmigaExecutable::createDeplodedHunks($inAccess, filesize($in), self::$cpuHunkSizes, self::$cpuMemFlags);
+            
+            $this->assertThat($actual, new Count(21));
+        } catch (Throwable $e) {
+            trigger_error((string) $e, E_USER_WARNING);
+        }
+    }
+    
+    /**
+     *
+     * @dataProvider accessModeProvider
+     * @depends test_createDeplodedHunks
      */
     public function test_deplodeData(string $accessMode): void {
         $in = self::AM2_CPU_DATA_IMPLODED;
@@ -318,7 +367,7 @@ final class AmigaExecutableTest extends TestCase {
     /**
      *
      * @dataProvider fileProvider
-     * @depends test_deplode_deplodedSize
+     * @depends test_createDeplodedHunks
      */
     public function test_deplode(string $in, string $out, int $hunkCount): void {
         $inFile = FileInfoFactory::createFromPath($in);

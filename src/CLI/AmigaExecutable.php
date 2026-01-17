@@ -223,8 +223,7 @@ final class AmigaExecutable {
             $this->loadDeplodedData($tempAccess);
             
             if ($replaceImplodedHunks) {
-                
-                $this->replaceImplodedHunks($tempAccess);
+                $this->hunks = self::createDeplodedHunks($tempAccess, $this->deplodedSize, $this->deplodedHunkSizes, $this->deplodedMemFlags);
             }
             
             fclose($temp);
@@ -449,8 +448,8 @@ final class AmigaExecutable {
         }
     }
     
-    private function replaceImplodedHunks(DataAccessInterface $deploded): void {
-        $deplodedSize = $this->deplodedSize;
+    public static function createDeplodedHunks(DataAccessInterface $deploded, int $deplodedSize, array $deplodedHunkSizes, array $deplodedMemFlags): array {
+        $deplodedSize = $deplodedSize;
         $deploded->setPosition(0);
         
         $readString = function (int $size) use ($deploded): string {
@@ -495,11 +494,11 @@ final class AmigaExecutable {
             switch ($flags) {
                 case 0:
                     // Code
-                    if ($hunkSize * 4 !== $this->deplodedHunkSizes[$hunkSizeIndex]) {
+                    if ($hunkSize * 4 !== $deplodedHunkSizes[$hunkSizeIndex]) {
                         $hunkSize *= 4;
-                        throw new UnexpectedValueException("Invalid hunk data size '$hunkSize', expected '{$this->deplodedHunkSizes[$hunkSizeIndex]}'.");
+                        throw new UnexpectedValueException("Invalid hunk data size '$hunkSize', expected '{$deplodedHunkSizes[$hunkSizeIndex]}'.");
                     }
-                    $hunks[] = Hunk::createCode($this->deplodedMemFlags[$hunkSizeIndex], $hunkSize, $readString($this->deplodedHunkSizes[$hunkSizeIndex]));
+                    $hunks[] = Hunk::createCode($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $readString($deplodedHunkSizes[$hunkSizeIndex]));
                     $hunkSizeIndex ++;
                     break;
                 case 2:
@@ -507,20 +506,20 @@ final class AmigaExecutable {
                     $isBSS = ($eof(self::SIZEOF_UINT) or ($peekInt() & 0x3fffffff === 0)); // a size follows -> no BSS but DATA
                     if ($isBSS) {
                         // BSS
-                        if ($hunkSizeIndex == count($this->deplodedHunkSizes)) {
+                        if ($hunkSizeIndex == count($deplodedHunkSizes)) {
                             throw new UnexpectedValueException("Invalid hunk size index '$hunkSizeIndex'.");
                         }
                         
-                        $hunks[] = Hunk::createBSS($this->deplodedMemFlags[$hunkSizeIndex], $this->deplodedHunkSizes[$hunkSizeIndex] / 4);
+                        $hunks[] = Hunk::createBSS($deplodedMemFlags[$hunkSizeIndex], $deplodedHunkSizes[$hunkSizeIndex] / 4);
                     } else {
                         // Data
                         $hunkSize = $readInt() & 0x3fffffff;
                         
-                        if ($hunkSize * 4 !== $this->deplodedHunkSizes[$hunkSizeIndex]) {
+                        if ($hunkSize * 4 !== $deplodedHunkSizes[$hunkSizeIndex]) {
                             throw new UnexpectedValueException("Invalid hunk data size '$hunkSize'.");
                         }
                         
-                        $hunks[] = Hunk::createData($this->deplodedMemFlags[$hunkSizeIndex], $hunkSize, $readString($hunkSize * 4));
+                        $hunks[] = Hunk::createData($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $readString($hunkSize * 4));
                     }
                     
                     $hunkSizeIndex ++;
@@ -551,6 +550,6 @@ final class AmigaExecutable {
             $hunks[] = $hunk;
         }
         
-        $this->hunks = $hunks;
+        return $hunks;
     }
 }
