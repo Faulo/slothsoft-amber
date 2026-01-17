@@ -7,7 +7,6 @@ use PHPUnit\Util\InvalidDataSetException;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Core\StreamWrapper\StreamWrapperInterface;
-use Exception;
 use SplFileInfo;
 use UnexpectedValueException;
 
@@ -315,7 +314,7 @@ final class AmigaExecutable {
         $literalLength = $info->firstLiteralLength; // word at offset 0x1E6 in the last code hunk
         $bitBuffer = $info->initialBitBuffer; // byte at offset 0x1E8 in the last code hunk
         
-        $readBits = function (int $count) use ($reverseInput, $bitBuffer): int {
+        $readBits = function (int $count) use ($reverseInput, &$bitBuffer): int {
             $result = 0;
             
             if (($count & 0x80) !== 0) {
@@ -325,13 +324,14 @@ final class AmigaExecutable {
             
             for ($i = 0; $i < $count; $i ++) {
                 $bit = $bitBuffer >> 7;
-                $bitBuffer <<= 1;
+                $bitBuffer = ($bitBuffer << 1) % 256;
                 
                 if ($bitBuffer == 0) {
                     $temp = $bit;
                     $bitBuffer = $reverseInput->readInteger(self::SIZEOF_BYTE);
                     $bit = $bitBuffer >> 7;
-                    $bitBuffer <<= 1;
+                    $bitBuffer = ($bitBuffer << 1) % 256;
+                    
                     if ($temp !== 0) {
                         $bitBuffer ++;
                     }
@@ -344,13 +344,7 @@ final class AmigaExecutable {
             return $result;
         };
         
-        $time = time();
-        
         while ($reverseInput->getPosition() > 0) {
-            if (time() - $time > 1) {
-                throw new Exception("timed out");
-            }
-            
             for ($i = 0; $i < $literalLength; $i ++) {
                 $output->writeString($reverseInput->readString(1));
             }
