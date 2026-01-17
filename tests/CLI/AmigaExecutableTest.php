@@ -7,6 +7,7 @@ use PHPUnit\Framework\Constraint\IsEqual;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\FarahTesting\TestUtils;
 use Throwable;
+use Slothsoft\Core\StreamWrapper\StreamWrapperInterface;
 
 /**
  * AmigaExecutableTest
@@ -17,11 +18,48 @@ final class AmigaExecutableTest extends TestCase {
     
     private const AM2_CPU_IMPLODED = 'test-files/Amberfiles/AM2_CPU.imploded';
     
+    private const AM2_CPU_DATA_IMPLODED = 'test-files/Amberfiles/AM2_CPU_DATA.imploded';
+    
     private const AM2_CPU_DEPLODED = 'test-files/Amberfiles/AM2_CPU.deploded';
+    
+    private const AM2_CPU_DATA_DEPLODED = 'test-files/Amberfiles/AM2_CPU_DATA.deploded';
     
     private const AM2_BLIT_IMPLODED = 'test-files/Amberfiles/AM2_BLIT.imploded';
     
     private const AM2_BLIT_DEPLODED = 'test-files/Amberfiles/AM2_BLIT.deploded';
+    
+    private static AmigaExecutableDeplodeInfo $cpuInfo;
+    
+    private static function setUpCpuInfo(): void {
+        if (! isset(self::$cpuInfo)) {
+            self::$cpuInfo = new AmigaExecutableDeplodeInfo();
+            self::$cpuInfo->firstLiteralLength = 60;
+            self::$cpuInfo->initialBitBuffer = 162;
+            self::$cpuInfo->implodedSize = 160241;
+            
+            self::$cpuInfo->matchBase[] = 64;
+            self::$cpuInfo->matchBase[] = 128;
+            self::$cpuInfo->matchBase[] = 128;
+            self::$cpuInfo->matchBase[] = 256;
+            self::$cpuInfo->matchBase[] = 192;
+            self::$cpuInfo->matchBase[] = 640;
+            self::$cpuInfo->matchBase[] = 1152;
+            self::$cpuInfo->matchBase[] = 2304;
+            
+            self::$cpuInfo->matchExtra[] = 6;
+            self::$cpuInfo->matchExtra[] = 7;
+            self::$cpuInfo->matchExtra[] = 7;
+            self::$cpuInfo->matchExtra[] = 128;
+            self::$cpuInfo->matchExtra[] = 7;
+            self::$cpuInfo->matchExtra[] = 129;
+            self::$cpuInfo->matchExtra[] = 130;
+            self::$cpuInfo->matchExtra[] = 131;
+            self::$cpuInfo->matchExtra[] = 128;
+            self::$cpuInfo->matchExtra[] = 131;
+            self::$cpuInfo->matchExtra[] = 133;
+            self::$cpuInfo->matchExtra[] = 134;
+        }
+    }
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(AmigaExecutable::class), "Failed to load class 'Slothsoft\Amber\CLI\AmigaExecutable'!");
@@ -30,6 +68,7 @@ final class AmigaExecutableTest extends TestCase {
     protected function setUp(): void {
         parent::setUp();
         TestUtils::changeWorkingDirectoryToComposerRoot();
+        self::setUpCpuInfo();
     }
     
     /**
@@ -151,58 +190,32 @@ final class AmigaExecutableTest extends TestCase {
             $sut->deplode();
         } catch (Throwable $e) {}
         
-        $this->assertThat($sut->firstLiteralLength, new IsEqual(60));
-        $this->assertThat($sut->initialBitBuffer, new IsEqual(162));
-        $this->assertThat($sut->dataSize, new IsEqual(160241));
+        $this->assertThat($sut->deplodeInfo, new IsEqual(self::$cpuInfo));
     }
     
     /**
-     *
-     * @depends test_deplode_metadata
      */
-    public function test_deplode_table(): void {
-        $matchBase = [];
-        $matchBase[] = 64;
-        $matchBase[] = 128;
-        $matchBase[] = 128;
-        $matchBase[] = 256;
-        $matchBase[] = 192;
-        $matchBase[] = 640;
-        $matchBase[] = 1152;
-        $matchBase[] = 2304;
-        
-        $matchExtra = [];
-        $matchExtra[] = 6;
-        $matchExtra[] = 7;
-        $matchExtra[] = 7;
-        $matchExtra[] = 128;
-        $matchExtra[] = 7;
-        $matchExtra[] = 129;
-        $matchExtra[] = 130;
-        $matchExtra[] = 131;
-        $matchExtra[] = 128;
-        $matchExtra[] = 131;
-        $matchExtra[] = 133;
-        $matchExtra[] = 134;
-        
-        $in = self::AM2_CPU_IMPLODED;
+    public function test_deplodeData(): void {
+        $in = self::AM2_CPU_DATA_IMPLODED;
         
         $inFile = FileInfoFactory::createFromPath($in);
+        $inAccess = new FileDataAccess($inFile, StreamWrapperInterface::MODE_OPEN_READONLY);
         
-        $sut = new AmigaExecutable();
-        $sut->load($inFile);
+        $outFile = FileInfoFactory::createTempFile();
+        $outAccess = new FileDataAccess($outFile, StreamWrapperInterface::MODE_CREATE_READWRITE);
         
         try {
-            $sut->deplode();
-        } catch (Throwable $e) {}
+            AmigaExecutable::deplodeData($inAccess, $outAccess, self::$cpuInfo);
+        } catch (Throwable $e) {
+            trigger_error((string) $e, E_USER_WARNING);
+        }
         
-        $this->assertThat($sut->matchBase, new IsEqual($matchBase));
-        $this->assertThat($sut->matchExtra, new IsEqual($matchExtra));
+        $this->assertFileEquals(self::AM2_CPU_DATA_DEPLODED, (string) $outFile);
     }
     
     /**
      *
-     * @depends test_deplode_table
+     * @depends test_deplodeData
      */
     public function test_deplode_deplodedSize(): void {
         $deplodedSize = 347940;

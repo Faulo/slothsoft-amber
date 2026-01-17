@@ -219,7 +219,7 @@ final class AmigaExecutable {
         
         $this->deplodeHunks($tempAccess);
         
-        $this->replaceImplodedHunks($tempAccess);
+        // $this->replaceImplodedHunks($tempAccess);
         
         fclose($temp);
     }
@@ -228,15 +228,7 @@ final class AmigaExecutable {
     
     public array $deplodedMemFlags;
     
-    public int $firstLiteralLength;
-    
-    public int $initialBitBuffer;
-    
-    public int $dataSize;
-    
-    public array $matchBase;
-    
-    public array $matchExtra;
+    public AmigaExecutableDeplodeInfo $deplodeInfo;
     
     public int $deplodedSize;
     
@@ -272,22 +264,23 @@ final class AmigaExecutable {
         array_pop($this->deplodedHunkSizes);
         array_pop($this->deplodedMemFlags);
         
-        $this->matchBase = [];
+        $this->deplodeInfo = new AmigaExecutableDeplodeInfo();
+        
         for ($i = 0; $i < 8; $i ++) {
-            $this->matchBase[] = $lastCodeHunk->getDataInteger(0x188 + $i * 2, 2);
-        }
-        $this->matchExtra = [];
-        for ($i = 0; $i < 12; $i ++) {
-            $this->matchExtra[] = $lastCodeHunk->getDataInteger(0x188 + 16 + $i);
+            $this->deplodeInfo->matchBase[] = $lastCodeHunk->getDataInteger(0x188 + $i * 2, 2);
         }
         
-        $this->firstLiteralLength = $lastCodeHunk->getDataInteger(0x1E6, 2);
-        $this->initialBitBuffer = $lastCodeHunk->getDataInteger(0x1E8);
-        $this->dataSize = $lastCodeHunk->getDataInteger(8, 4);
+        for ($i = 0; $i < 12; $i ++) {
+            $this->deplodeInfo->matchExtra[] = $lastCodeHunk->getDataInteger(0x188 + 16 + $i);
+        }
+        
+        $this->deplodeInfo->firstLiteralLength = $lastCodeHunk->getDataInteger(0x1E6, 2);
+        $this->deplodeInfo->initialBitBuffer = $lastCodeHunk->getDataInteger(0x1E8);
+        $this->deplodeInfo->implodedSize = $lastCodeHunk->getDataInteger(8, 4);
         
         $lastDataHunkAccess = new HunkDataAccess($lastDataHunk);
         
-        self::deplodeData($deploded, $lastDataHunkAccess, $this->matchBase, $this->matchExtra, $this->dataSize, $this->firstLiteralLength, $this->initialBitBuffer);
+        self::deplodeData($lastDataHunkAccess, $deploded, $this->deplodeInfo);
         
         $this->deplodedSize = $deploded->getPosition();
     }
@@ -314,13 +307,13 @@ final class AmigaExecutable {
         14
     ];
     
-    public static function deplodeData(DataAccessInterface $output, DataAccessInterface $input, array $matchBase, array $matchExtra, int $implodedSize, int $firstLiteralLength, int $initialBitBuffer): void {
+    public static function deplodeData(DataAccessInterface $input, DataAccessInterface $output, AmigaExecutableDeplodeInfo $info): void {
         $output->setPosition(0);
         $currentOutput = new ProxyDataAccess($output);
         $reverseInput = new ProxyDataAccess($input, true);
-        $reverseInput->setPosition($implodedSize);
-        $literalLength = $firstLiteralLength; // word at offset 0x1E6 in the last code hunk
-        $bitBuffer = $initialBitBuffer; // byte at offset 0x1E8 in the last code hunk
+        $reverseInput->setPosition($info->implodedSize);
+        $literalLength = $info->firstLiteralLength; // word at offset 0x1E6 in the last code hunk
+        $bitBuffer = $info->initialBitBuffer; // byte at offset 0x1E8 in the last code hunk
         
         $readBits = function (int $count) use ($reverseInput, $bitBuffer): int {
             $result = 0;
@@ -450,14 +443,14 @@ final class AmigaExecutable {
             $x = $selector;
             if ($readBits(1) !== 0) {
                 if ($readBits(1) !== 0) {
-                    $match -= $matchBase[$selector + 4];
+                    $match -= $info->matchBase[$selector + 4];
                     $x += 8;
                 } else {
-                    $match -= $matchBase[$selector];
+                    $match -= $info->matchBase[$selector];
                     $x += 4;
                 }
             }
-            $x = $matchExtra[$x];
+            $x = $info->matchExtra[$x];
             
             /*
              * obtain the value of the next [x] extra bits and
