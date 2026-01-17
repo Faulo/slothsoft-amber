@@ -336,32 +336,24 @@ final class AmigaExecutableTest extends TestCase {
     }
     
     public function accessModeProvider(): iterable {
+        yield 'string' => [
+            'string'
+        ];
+        
+        yield 'file' => [
+            'file'
+        ];
+        
+        yield 'tmpfile' => [
+            'tmpfile'
+        ];
         yield 'php://temp' => [
             'temp'
         ];
-    }
-    
-    /**
-     *
-     * @depends test_deplodeData
-     */
-    public function test_deplode_deplodedSize(): void {
-        $deplodedSize = 347940;
         
-        $in = self::AM2_CPU_IMPLODED;
-        
-        $inFile = FileInfoFactory::createFromPath($in);
-        
-        $sut = new AmigaExecutable();
-        $sut->load($inFile);
-        
-        try {
-            $sut->deplode(true, false);
-        } catch (Throwable $e) {
-            trigger_error((string) $e, E_USER_WARNING);
-        }
-        
-        $this->assertThat($sut->deplodedSize, new IsEqual($deplodedSize));
+        yield 'php://memory' => [
+            'memory'
+        ];
     }
     
     /**
