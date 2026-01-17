@@ -21,11 +21,11 @@ final class AmigaExecutableTest extends TestCase {
     
     private const AM2_CPU_IMPLODED = 'test-files/Amberfiles/AM2_CPU.imploded';
     
-    private const AM2_CPU_DATA_IMPLODED = 'test-files/Amberfiles/AM2_CPU_DATA.imploded';
+    public const AM2_CPU_DATA_IMPLODED = 'test-files/Amberfiles/AM2_CPU_DATA.imploded';
     
     private const AM2_CPU_DEPLODED = 'test-files/Amberfiles/AM2_CPU.deploded';
     
-    private const AM2_CPU_DATA_DEPLODED = 'test-files/Amberfiles/AM2_CPU_DATA.deploded';
+    public const AM2_CPU_DATA_DEPLODED = 'test-files/Amberfiles/AM2_CPU_DATA.deploded';
     
     private const AM2_BLIT_IMPLODED = 'test-files/Amberfiles/AM2_BLIT.imploded';
     
@@ -33,7 +33,7 @@ final class AmigaExecutableTest extends TestCase {
     
     private static AmigaExecutableDeplodeInfo $cpuInfo;
     
-    private static function setUpCpuInfo(): void {
+    public static function getCpuInfo(): AmigaExecutableDeplodeInfo {
         if (! isset(self::$cpuInfo)) {
             self::$cpuInfo = new AmigaExecutableDeplodeInfo();
             self::$cpuInfo->firstLiteralLength = 60;
@@ -62,6 +62,8 @@ final class AmigaExecutableTest extends TestCase {
             self::$cpuInfo->matchExtra[] = 133;
             self::$cpuInfo->matchExtra[] = 134;
         }
+        
+        return self::$cpuInfo;
     }
     
     public function testClassExists(): void {
@@ -71,7 +73,6 @@ final class AmigaExecutableTest extends TestCase {
     protected function setUp(): void {
         parent::setUp();
         TestUtils::changeWorkingDirectoryToComposerRoot();
-        self::setUpCpuInfo();
     }
     
     /**
@@ -193,7 +194,7 @@ final class AmigaExecutableTest extends TestCase {
             $sut->deplode(false, false);
         } catch (Throwable $e) {}
         
-        $this->assertThat($sut->deplodeInfo, new IsEqual(self::$cpuInfo));
+        $this->assertThat($sut->deplodeInfo, new IsEqual(self::getCpuInfo()));
     }
     
     /**
@@ -209,7 +210,7 @@ final class AmigaExecutableTest extends TestCase {
         $outAccess = self::openFileWriter($out, $accessMode);
         
         try {
-            AmigaExecutable::deplodeData($inAccess, $outAccess, self::$cpuInfo);
+            AmigaExecutable::deplodeData($inAccess, $outAccess, self::getCpuInfo());
         } catch (Throwable $e) {
             trigger_error((string) $e, E_USER_WARNING);
         }
@@ -219,7 +220,7 @@ final class AmigaExecutableTest extends TestCase {
         $this->assertThat($out, new FileEqualsFile(self::AM2_CPU_DATA_DEPLODED));
     }
     
-    private static function createFileReader(string $path, string $mode): DataAccessInterface {
+    public static function createFileReader(string $path, string $mode): DataAccessInterface {
         switch ($mode) {
             case 'string':
                 return new StringDataAccess(file_get_contents($path));
@@ -246,7 +247,7 @@ final class AmigaExecutableTest extends TestCase {
         }
     }
     
-    private static function openFileWriter(string $path, string $mode): DataAccessInterface {
+    public static function openFileWriter(string $path, string $mode): DataAccessInterface {
         switch ($mode) {
             case 'string':
                 return new StringDataAccess('');
@@ -267,7 +268,7 @@ final class AmigaExecutableTest extends TestCase {
         }
     }
     
-    private static function closeFileWriter(string $path, string $mode, DataAccessInterface $access): void {
+    public static function closeFileWriter(string $path, string $mode, DataAccessInterface $access): void {
         switch ($mode) {
             case 'string':
                 file_put_contents($path, $access->data);
@@ -289,6 +290,7 @@ final class AmigaExecutableTest extends TestCase {
         yield 'string' => [
             'string'
         ];
+        
         yield 'file' => [
             'file'
         ];

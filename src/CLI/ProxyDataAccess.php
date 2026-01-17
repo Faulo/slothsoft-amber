@@ -21,17 +21,6 @@ final class ProxyDataAccess implements DataAccessInterface {
         return $this->position;
     }
     
-    private int $storedPosition;
-    
-    private function preparePosition(): void {
-        $this->storedPosition = $this->data->getPosition();
-        $this->data->setPosition($this->position);
-    }
-    
-    private function restorePosition(): void {
-        $this->data->setPosition($this->storedPosition);
-    }
-    
     public function setPosition(int $position): void {
         $this->position = $position;
     }
@@ -41,11 +30,15 @@ final class ProxyDataAccess implements DataAccessInterface {
             $this->position -= $size;
         }
         
-        $this->preparePosition();
+        $storedPosition = $this->data->getPosition();
         
-        $result = $this->data->readString($size);
-        
-        $this->restorePosition();
+        if ($storedPosition === $this->position) {
+            $result = $this->data->readString($size, true);
+        } else {
+            $this->data->setPosition($this->position);
+            $result = $this->data->readString($size);
+            $this->data->setPosition($storedPosition);
+        }
         
         if (! $peek and ! $this->inReverse) {
             $this->position += $size;
@@ -59,11 +52,15 @@ final class ProxyDataAccess implements DataAccessInterface {
             $this->position -= $size;
         }
         
-        $this->preparePosition();
+        $storedPosition = $this->data->getPosition();
         
-        $result = $this->data->readInteger($size);
-        
-        $this->restorePosition();
+        if ($storedPosition === $this->position) {
+            $result = $this->data->readInteger($size, true);
+        } else {
+            $this->data->setPosition($this->position);
+            $result = $this->data->readInteger($size);
+            $this->data->setPosition($storedPosition);
+        }
         
         if (! $peek and ! $this->inReverse) {
             $this->position += $size;

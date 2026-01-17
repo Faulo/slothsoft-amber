@@ -359,8 +359,8 @@ final class AmigaExecutable {
         };
         
         while ($reverseInput->getPosition() > 0) {
-            for ($i = 0; $i < $literalLength; $i ++) {
-                $output->writeString($reverseInput->readString(1));
+            if ($literalLength > 0) {
+                $output->writeString(strrev($reverseInput->readString($literalLength)));
             }
             
             if ($reverseInput->getPosition() <= 0) {
@@ -388,24 +388,23 @@ final class AmigaExecutable {
                         if ($readBits(1) !== 0) {
                             if ($readBits(1) !== 0) { // 11111
                                 $matchLength = $reverseInput->readInteger(self::SIZEOF_BYTE);
-                                $matchLength --;
                             } else { // 11110
-                                $matchLength = 5 + $readBits(3);
+                                $matchLength = 6 + $readBits(3);
                             }
                         } else { // 1110
-                            $matchLength = 4;
+                            $matchLength = 5;
                         }
                     } else { // 110
                         $selector = 2;
-                        $matchLength = 3;
+                        $matchLength = 4;
                     }
                 } else { // 10
                     $selector = 1;
-                    $matchLength = 2;
+                    $matchLength = 3;
                 }
             } else { // 0
                 $selector = 0;
-                $matchLength = 1;
+                $matchLength = 2;
             }
             
             if ($matchLength <= 0) {
@@ -468,9 +467,14 @@ final class AmigaExecutable {
             
             $currentOutput->setPosition($match);
             
+            $availableLength = $output->getPosition() - $match;
+            
             /* copy match */
-            for ($i = 0; $i < $matchLength + 1; $i ++) {
-                $output->writeString($currentOutput->readString(self::SIZEOF_BYTE));
+            while ($matchLength > 0) {
+                // match may include output yet to be hidden, beware
+                $deltaLength = min($matchLength, $availableLength);
+                $output->writeString($currentOutput->readString($deltaLength));
+                $matchLength -= $deltaLength;
             }
         }
     }
