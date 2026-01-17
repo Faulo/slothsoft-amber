@@ -216,7 +216,9 @@ final class AmigaExecutableTest extends TestCase {
         
         try {
             $sut->deplode();
-        } catch (Throwable $e) {}
+        } catch (Throwable $e) {
+            trigger_error((string) $e, E_USER_WARNING);
+        }
         
         $this->assertThat($sut->deplodedSize, new IsEqual($deplodedSize));
     }

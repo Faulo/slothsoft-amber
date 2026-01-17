@@ -7,10 +7,8 @@ use PHPUnit\Util\InvalidDataSetException;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Core\StreamWrapper\StreamWrapperInterface;
-use Slothsoft\Savegame\Converter;
 use Exception;
 use SplFileInfo;
-use SplFileObject;
 use UnexpectedValueException;
 
 final class AmigaExecutable {
@@ -27,11 +25,9 @@ final class AmigaExecutable {
     
     private const SIZEOF_DWORD = 4;
     
-    private Converter $converter;
+    private ?DataAccessInterface $in;
     
-    private ?SplFileObject $in;
-    
-    private ?SplFileObject $out;
+    private ?DataAccessInterface $out;
     
     private int $realHunkCount;
     
@@ -43,12 +39,8 @@ final class AmigaExecutable {
         return $this->realHunkCount;
     }
     
-    public function __construct() {
-        $this->converter = Converter::getInstance();
-    }
-    
     public function load(SplFileInfo $inFile): void {
-        $this->in = $inFile->openFile(StreamWrapperInterface::MODE_OPEN_READONLY);
+        $this->in = new FileDataAccess($inFile, StreamWrapperInterface::MODE_OPEN_READONLY);
         
         if ($this->readInt(self::SIZEOF_UINT) !== 0x000003F3) {
             throw new UnexpectedValueException('0x000003F3');
@@ -103,7 +95,7 @@ final class AmigaExecutable {
                     $this->hunks[] = $hunk;
                     break;
                 case Hunk::TYPE_RELOC32:
-                    $start = $this->in->ftell();
+                    $start = $this->in->getPosition();
                     $entries = new Map();
                     
                     while (($offsetCount = $this->readInt(self::SIZEOF_UINT)) !== 0) {
@@ -115,7 +107,7 @@ final class AmigaExecutable {
                         $entries->put($hunkNumber, $list);
                     }
                     
-                    $size = $this->in->ftell() - $start;
+                    $size = $this->in->getPosition() - $start;
                     
                     $this->hunks[] = Hunk::createReloc32($size, $entries);
                     $this->totalHunkCount ++;
@@ -129,7 +121,7 @@ final class AmigaExecutable {
             }
         }
         
-        if ($this->in->ftell() + self::SIZEOF_UINT === $inFile->getSize()) {
+        if ($this->in->getPosition() + self::SIZEOF_UINT === $inFile->getSize()) {
             $type = $this->readInt(self::SIZEOF_UINT) & 0x1fffffff;
             if ($type !== Hunk::TYPE_END) {
                 throw new UnexpectedValueException((string) $type);
@@ -137,19 +129,19 @@ final class AmigaExecutable {
             $this->hunks[] = Hunk::createEnd();
         }
         
-        if ($this->in->ftell() !== $inFile->getSize()) {
-            throw new UnexpectedValueException((string) $this->in->ftell());
+        if ($this->in->getPosition() !== $inFile->getSize()) {
+            throw new UnexpectedValueException((string) $this->in->getPosition());
         }
         
         $this->in = null;
     }
     
     private function readString(int $size): string {
-        return $this->in->fread($size);
+        return $this->in->readString($size);
     }
     
     private function readInt(int $size): int {
-        return $this->converter->decodeInteger($this->in->fread($size), $size);
+        return $this->in->readInteger($size);
     }
     
     public function save(SplFileInfo $outFile): void {
@@ -157,7 +149,7 @@ final class AmigaExecutable {
         
         FileSystem::ensureDirectory((string) $outDirectory);
         
-        $this->out = $outFile->openFile(StreamWrapperInterface::MODE_CREATE_WRITEONLY);
+        $this->out = new FileDataAccess($outFile, StreamWrapperInterface::MODE_CREATE_WRITEONLY);
         
         $this->writeInt(0x000003F3, self::SIZEOF_UINT);
         $this->writeInt(0, self::SIZEOF_UINT);
@@ -187,7 +179,7 @@ final class AmigaExecutable {
                     $this->writeInt($hunk->numEntries, self::SIZEOF_UINT);
                     break;
                 case Hunk::TYPE_RELOC32:
-                    $start = $this->out->ftell();
+                    $start = $this->out->getPosition();
                     /** @var array $entry */
                     foreach ($hunk->entries as $hunkNumber => $entry) {
                         $this->writeInt(count($entry), self::SIZEOF_UINT);
@@ -197,7 +189,7 @@ final class AmigaExecutable {
                         }
                     }
                     $this->writeInt(0, self::SIZEOF_UINT);
-                    $size = $this->out->ftell() - $start;
+                    $size = $this->out->getPosition() - $start;
                     if ($size !== $hunk->size) {
                         throw new UnexpectedValueException("RELOC32 has size '$hunk->size', but entries are $size bytes long.");
                     }
@@ -213,21 +205,23 @@ final class AmigaExecutable {
     }
     
     private function writeString(string $value): void {
-        $this->out->fwrite($value);
+        $this->out->writeString($value);
     }
     
     private function writeInt(int $value, int $size): void {
-        $this->out->fwrite($this->converter->encodeInteger($value, $size), $size);
+        $this->out->writeInteger($value, $size);
     }
     
     public function deplode(): void {
-        $deploded = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
+        $temp = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
         
-        $this->deplodeHunks($deploded);
+        $tempAccess = new ResourceDataAccess($temp);
         
-        $this->replaceImplodedHunks($deploded);
+        $this->deplodeHunks($tempAccess);
         
-        fclose($deploded);
+        $this->replaceImplodedHunks($tempAccess);
+        
+        fclose($temp);
     }
     
     public array $deplodedHunkSizes;
@@ -250,7 +244,7 @@ final class AmigaExecutable {
      *
      * @link https://github.com/Pyrdacor/Ambermoon.net/blob/master/Ambermoon.Data.Legacy/Serialization/AmigaExecutable.cs
      */
-    private function deplodeHunks($deploded): void {
+    private function deplodeHunks(DataAccessInterface $deploded): void {
         $lastCodeHunk = null;
         $lastDataHunk = null;
         $this->deplodedHunkSizes = [];
@@ -291,9 +285,11 @@ final class AmigaExecutable {
         $this->initialBitBuffer = $lastCodeHunk->getDataInteger(0x1E8);
         $this->dataSize = $lastCodeHunk->getDataInteger(8, 4);
         
-        self::deplodeData($deploded, $lastDataHunk, $this->matchBase, $this->matchExtra, $this->dataSize, $this->firstLiteralLength, $this->initialBitBuffer);
+        $lastDataHunkAccess = new HunkDataAccess($lastDataHunk);
         
-        $this->deplodedSize = ftell($deploded);
+        self::deplodeData($deploded, $lastDataHunkAccess, $this->matchBase, $this->matchExtra, $this->dataSize, $this->firstLiteralLength, $this->initialBitBuffer);
+        
+        $this->deplodedSize = $deploded->getPosition();
     }
     
     private static array $DeplodeLiteralBase = [
@@ -318,17 +314,19 @@ final class AmigaExecutable {
         14
     ];
     
-    private static function deplodeData($output, Hunk $hunk, array $matchBase, array $matchExtra, int $implodedSize, int $firstLiteralLength, int $initialBitBuffer): void {
-        rewind($output);
-        $index = $implodedSize;
+    public static function deplodeData(DataAccessInterface $output, DataAccessInterface $input, array $matchBase, array $matchExtra, int $implodedSize, int $firstLiteralLength, int $initialBitBuffer): void {
+        $output->setPosition(0);
+        $currentOutput = new ProxyDataAccess($output);
+        $reverseInput = new ProxyDataAccess($input, true);
+        $reverseInput->setPosition($implodedSize);
         $literalLength = $firstLiteralLength; // word at offset 0x1E6 in the last code hunk
         $bitBuffer = $initialBitBuffer; // byte at offset 0x1E8 in the last code hunk
         
-        $readBits = function (int $count) use ($hunk, $index, $bitBuffer): int {
+        $readBits = function (int $count) use ($reverseInput, $bitBuffer): int {
             $result = 0;
             
             if (($count & 0x80) !== 0) {
-                $result = $hunk->getDataInteger(-- $index);
+                $result = $reverseInput->readInteger(self::SIZEOF_BYTE);
                 $count &= 0x7f;
             }
             
@@ -338,7 +336,7 @@ final class AmigaExecutable {
                 
                 if ($bitBuffer == 0) {
                     $temp = $bit;
-                    $bitBuffer = $hunk->getDataInteger(-- $index);
+                    $bitBuffer = $reverseInput->readInteger(self::SIZEOF_BYTE);
                     $bit = $bitBuffer >> 7;
                     $bitBuffer <<= 1;
                     if ($temp !== 0) {
@@ -353,27 +351,18 @@ final class AmigaExecutable {
             return $result;
         };
         
-        $readOutput = function (int $offset, int $length) use ($output): string {
-            $index = ftell($output);
-            assert($offset + $length < $index, "Attempted to read output that has not yet been written.");
-            fseek($output, $offset, SEEK_SET);
-            $result = fread($output, $length);
-            fseek($output, $index, SEEK_SET);
-            return $result;
-        };
-        
         $time = time();
         
-        while ($index > 0) {
+        while ($reverseInput->getPosition() > 0) {
             if (time() - $time > 1) {
                 throw new Exception("timed out");
             }
             
             for ($i = 0; $i < $literalLength; $i ++) {
-                fwrite($output, $hunk->getDataString(-- $index));
+                $output->writeString($reverseInput->readString(1));
             }
             
-            if ($index <= 0) {
+            if ($reverseInput->getPosition() <= 0) {
                 break;
             }
             
@@ -397,7 +386,7 @@ final class AmigaExecutable {
                         
                         if ($readBits(1) !== 0) {
                             if ($readBits(1) !== 0) { // 11111
-                                $matchLength = $hunk->getDataInteger(-- $index);
+                                $matchLength = $reverseInput->readInteger(self::SIZEOF_BYTE);
                                 $matchLength --;
                             } else { // 11110
                                 $matchLength = 5 + $readBits(3);
@@ -457,7 +446,7 @@ final class AmigaExecutable {
              * 10 -> base = 1 + _base[selector + 0] extra = _extra[selector + 4]
              * 11 -> base = 1 + _base[selector + 4] extra = _extra[selector + 8]
              */
-            $match = ftell($output) - 1;
+            $match = $output->getPosition() - 1;
             $x = $selector;
             if ($readBits(1) !== 0) {
                 if ($readBits(1) !== 0) {
@@ -476,19 +465,21 @@ final class AmigaExecutable {
              */
             $match -= $readBits($x);
             
+            $currentOutput->setPosition($match);
+            
             /* copy match */
             for ($i = 0; $i < $matchLength + 1; $i ++) {
-                fwrite($output, $readOutput($match + $i, 1));
+                $output->writeString($currentOutput->readString(self::SIZEOF_BYTE));
             }
         }
     }
     
-    private function replaceImplodedHunks($deploded): void {
-        $deplodedSize = ftell($deploded);
-        rewind($deploded);
+    private function replaceImplodedHunks(DataAccessInterface $deploded): void {
+        $deplodedSize = $this->deplodedSize;
+        $deploded->setPosition(0);
         
         $readString = function (int $size) use ($deploded): string {
-            $result = fread($deploded, $size);
+            $result = $deploded->readString($size);
             $resultSize = strlen($result);
             if ($resultSize !== $size) {
                 $missing = $size - $resultSize;
@@ -497,16 +488,13 @@ final class AmigaExecutable {
             return $result;
         };
         $readInt = function (int $size = self::SIZEOF_UINT) use ($deploded): int {
-            return Converter::getInstance()->decodeInteger(fread($deploded, $size), $size);
+            return $deploded->readInteger($size);
         };
         $peekInt = function (int $size = self::SIZEOF_UINT) use ($deploded): int {
-            $index = ftell($deploded);
-            $result = Converter::getInstance()->decodeInteger(fread($deploded, $size), $size);
-            fseek($deploded, $index, SEEK_SET);
-            return $result;
+            return $deploded->readInteger($size, true);
         };
         $eof = function (int $sizeLeft = 0) use ($deploded, $deplodedSize): bool {
-            return ftell($deploded) + $sizeLeft >= $deplodedSize;
+            return $deploded->getPosition() + $sizeLeft >= $deplodedSize;
         };
         
         $hunks = [];
@@ -533,6 +521,7 @@ final class AmigaExecutable {
                 case 0:
                     // Code
                     if ($hunkSize * 4 !== $this->deplodedHunkSizes[$hunkSizeIndex]) {
+                        $hunkSize *= 4;
                         throw new UnexpectedValueException("Invalid hunk data size '$hunkSize', expected '{$this->deplodedHunkSizes[$hunkSizeIndex]}'.");
                     }
                     $hunks[] = Hunk::createCode($this->deplodedMemFlags[$hunkSizeIndex], $hunkSize, $readString($this->deplodedHunkSizes[$hunkSizeIndex]));
