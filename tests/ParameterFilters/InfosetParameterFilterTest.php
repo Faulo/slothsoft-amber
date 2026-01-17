@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class InfosetParameterFilterTest extends TestCase {
+final class InfosetParameterFilterTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(InfosetParameterFilter::class), "Failed to load class 'Slothsoft\Amber\ParameterFilters\InfosetParameterFilter'!");

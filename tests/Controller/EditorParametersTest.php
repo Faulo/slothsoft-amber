@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class EditorParametersTest extends TestCase {
+final class EditorParametersTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(EditorParameters::class), "Failed to load class 'Slothsoft\Amber\Controller\EditorParameters'!");

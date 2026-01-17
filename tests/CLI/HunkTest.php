@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class HunkTest extends TestCase {
+final class HunkTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(Hunk::class), "Failed to load class 'Slothsoft\Amber\CLI\Hunk'!");

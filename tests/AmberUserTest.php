@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-class AmberUserTest extends TestCase {
+final class AmberUserTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(AmberUser::class), "Failed to load class 'Slothsoft\Amber\AmberUser'!");
