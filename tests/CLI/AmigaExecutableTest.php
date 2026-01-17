@@ -239,7 +239,7 @@ final class AmigaExecutableTest extends TestCase {
         try {
             $actual = AmigaExecutable::createDeplodedHunks($inAccess, filesize($in), self::$cpuHunkSizes, self::$cpuMemFlags);
             
-            $this->assertThat($actual, new Count(21));
+            $this->assertThat($actual, new Count(13));
         } catch (Throwable $e) {
             trigger_error((string) $e, E_USER_WARNING);
         }
@@ -367,7 +367,6 @@ final class AmigaExecutableTest extends TestCase {
     /**
      *
      * @dataProvider fileProvider
-     * @depends test_createDeplodedHunks
      */
     public function test_deplode(string $in, string $out, int $hunkCount): void {
         $inFile = FileInfoFactory::createFromPath($in);
@@ -380,7 +379,7 @@ final class AmigaExecutableTest extends TestCase {
         
         $sut->save($actualFile);
         
-        $this->assertFileEquals($out, (string) $actualFile);
+        $this->assertThat($actualFile, new FileEqualsFile($out));
     }
     
     public function fileProvider(): iterable {

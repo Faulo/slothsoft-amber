@@ -46,11 +46,12 @@ final class Hunk {
         return $hunk;
     }
     
-    public static function createReloc32(int $size, Map $entries): Hunk {
+    public static function createReloc32(int $size, Map $entries, int $memoryFlags = 0): Hunk {
         $hunk = new Hunk();
         $hunk->type = self::TYPE_RELOC32;
         $hunk->size = $size;
         $hunk->entries = $entries;
+        $hunk->memoryFlags = $memoryFlags;
         return $hunk;
     }
     

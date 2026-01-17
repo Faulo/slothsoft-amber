@@ -164,6 +164,7 @@ final class AmigaExecutable {
             }
         }
         
+        $lastHunk = null;
         /** @var Hunk $hunk */
         foreach ($this->hunks as $hunk) {
             $this->writeInt($hunk->type, self::SIZEOF_UINT);
@@ -198,6 +199,11 @@ final class AmigaExecutable {
                 default:
                     throw new UnexpectedValueException("Dunno what to do with hunk type '$hunk->type'");
             }
+            $lastHunk = $hunk;
+        }
+        
+        if ($lastHunk and $lastHunk->type !== Hunk::TYPE_END) {
+            $this->writeInt(Hunk::TYPE_END, self::SIZEOF_UINT);
         }
         
         $this->out = null;
@@ -224,6 +230,13 @@ final class AmigaExecutable {
             
             if ($replaceImplodedHunks) {
                 $this->hunks = self::createDeplodedHunks($tempAccess, $this->deplodedSize, $this->deplodedHunkSizes, $this->deplodedMemFlags);
+                $this->totalHunkCount = count($this->hunks);
+                $this->realHunkCount = 0;
+                foreach ($this->hunks as $hunk) {
+                    if ($hunk->isReal()) {
+                        $this->realHunkCount ++;
+                    }
+                }
             }
             
             fclose($temp);
@@ -449,24 +462,8 @@ final class AmigaExecutable {
     }
     
     public static function createDeplodedHunks(DataAccessInterface $deploded, int $deplodedSize, array $deplodedHunkSizes, array $deplodedMemFlags): array {
-        $deplodedSize = $deplodedSize;
         $deploded->setPosition(0);
         
-        $readString = function (int $size) use ($deploded): string {
-            $result = $deploded->readString($size);
-            $resultSize = strlen($result);
-            if ($resultSize !== $size) {
-                $missing = $size - $resultSize;
-                throw new UnexpectedValueException("Tried to read $size bytes, but only found $resultSize. Missing $missing bytes.");
-            }
-            return $result;
-        };
-        $readInt = function (int $size = self::SIZEOF_UINT) use ($deploded): int {
-            return $deploded->readInteger($size);
-        };
-        $peekInt = function (int $size = self::SIZEOF_UINT) use ($deploded): int {
-            return $deploded->readInteger($size, true);
-        };
         $eof = function (int $sizeLeft = 0) use ($deploded, $deplodedSize): bool {
             return $deploded->getPosition() + $sizeLeft >= $deplodedSize;
         };
@@ -479,7 +476,7 @@ final class AmigaExecutable {
         $hunkSizeIndex = 0;
         
         while (! $eof()) {
-            $header = $readInt();
+            $header = $deploded->readInteger(self::SIZEOF_UINT);
             $flags = $header >> 30;
             $hunkSize = $header & 0x3FFFFFFF;
             
@@ -498,28 +495,49 @@ final class AmigaExecutable {
                         $hunkSize *= 4;
                         throw new UnexpectedValueException("Invalid hunk data size '$hunkSize', expected '{$deplodedHunkSizes[$hunkSizeIndex]}'.");
                     }
-                    $hunks[] = Hunk::createCode($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $readString($deplodedHunkSizes[$hunkSizeIndex]));
+                    $hunks[] = Hunk::createCode($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $deploded->readString($deplodedHunkSizes[$hunkSizeIndex]));
                     $hunkSizeIndex ++;
+                    break;
+                case 1:
+                    $start = $deploded->getPosition();
+                    $entries = new Map();
+                    
+                    // Note: The imploder stores the reloc offsets as deltas!
+                    
+                    while (($offsetCount = $deploded->readInteger(self::SIZEOF_UINT)) !== 0) {
+                        $currentOffset = 0;
+                        $hunkNumber = $deploded->readInteger(self::SIZEOF_UINT);
+                        $list = [];
+                        for ($o = 0; $o < $offsetCount; $o ++) {
+                            $currentOffset += $deploded->readInteger(self::SIZEOF_UINT);
+                            $list[] = $currentOffset;
+                        }
+                        $entries->put($hunkNumber, $list);
+                    }
+                    
+                    $size = $deploded->getPosition() - $start;
+                    
+                    $hunks[] = Hunk::createReloc32($size, $entries, $hunkSizeIndex === 0 ? 0 : $deplodedMemFlags[$hunkSizeIndex - 1]);
                     break;
                 case 2:
                 case 3:
-                    $isBSS = ($eof(self::SIZEOF_UINT) or ($peekInt() & 0x3fffffff === 0)); // a size follows -> no BSS but DATA
-                    if ($isBSS) {
-                        // BSS
-                        if ($hunkSizeIndex == count($deplodedHunkSizes)) {
-                            throw new UnexpectedValueException("Invalid hunk size index '$hunkSizeIndex'.");
-                        }
-                        
-                        $hunks[] = Hunk::createBSS($deplodedMemFlags[$hunkSizeIndex], $deplodedHunkSizes[$hunkSizeIndex] / 4);
-                    } else {
+                    $hunkSize = $eof(self::SIZEOF_UINT) ? 0 : ($deploded->readInteger(self::SIZEOF_UINT, true) & 0x3fffffff);
+                    if ($hunkSize > 0) {
                         // Data
-                        $hunkSize = $readInt() & 0x3fffffff;
+                        $deploded->readString(self::SIZEOF_UINT);
                         
                         if ($hunkSize * 4 !== $deplodedHunkSizes[$hunkSizeIndex]) {
                             throw new UnexpectedValueException("Invalid hunk data size '$hunkSize'.");
                         }
                         
-                        $hunks[] = Hunk::createData($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $readString($hunkSize * 4));
+                        $hunks[] = Hunk::createData($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $deploded->readString($hunkSize * 4));
+                    } else {
+                        // BSS
+                        if ($hunkSizeIndex == count($deplodedHunkSizes)) {
+                            break 2;
+                        }
+                        
+                        $hunks[] = Hunk::createBSS($deplodedMemFlags[$hunkSizeIndex], $deplodedHunkSizes[$hunkSizeIndex] / 4);
                     }
                     
                     $hunkSizeIndex ++;
@@ -529,7 +547,7 @@ final class AmigaExecutable {
             }
             
             if (! $eof(self::SIZEOF_UINT)) {
-                $nextHeader = $peekInt();
+                $nextHeader = $deploded->readInteger(self::SIZEOF_UINT, true);
                 $nextFlags = $nextHeader >> 30;
                 if ($nextFlags == 1) { // RELOC32 follows, do not add END
                     continue;
