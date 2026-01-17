@@ -121,7 +121,11 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/globals/amber-list" uri="assets/templates/ambermoon/viewer/globals/amber-list.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.classes" uri="assets/templates/ambermoon/viewer/lib.classes.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.items" uri="assets/templates/ambermoon/viewer/lib.items.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.monsters" uri="assets/templates/ambermoon/viewer/lib.monsters.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.npcs" uri="assets/templates/ambermoon/viewer/lib.npcs.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.pcs" uri="assets/templates/ambermoon/viewer/lib.pcs.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.portraits" uri="assets/templates/ambermoon/viewer/lib.portraits.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/null" uri="assets/templates/ambermoon/viewer/null.xsl"/>
   <uri name="http://schema.slothsoft.net/amber/amberdata" uri="assets/schema/amberdata/0.1.xsd"/>
   <system systemId="farah://slothsoft@amber/schema/amberdata/0.1" uri="assets/schema/amberdata/0.1.xsd"/>
 </catalog>

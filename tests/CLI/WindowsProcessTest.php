@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-final class WindowsProcessTest extends TestCase {
+class WindowsProcessTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(WindowsProcess::class), "Failed to load class 'Slothsoft\Amber\CLI\WindowsProcess'!");

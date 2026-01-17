@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-final class EditorTemplateBuilderTest extends TestCase {
+class EditorTemplateBuilderTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(EditorTemplateBuilder::class), "Failed to load class 'Slothsoft\Amber\Assets\EditorTemplateBuilder'!");

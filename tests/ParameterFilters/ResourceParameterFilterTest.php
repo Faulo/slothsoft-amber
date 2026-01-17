@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-final class ResourceParameterFilterTest extends TestCase {
+class ResourceParameterFilterTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(ResourceParameterFilter::class), "Failed to load class 'Slothsoft\Amber\ParameterFilters\ResourceParameterFilter'!");

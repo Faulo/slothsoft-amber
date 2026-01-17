@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @todo auto-generated
  */
-final class GfxParameterFilterTest extends TestCase {
+class GfxParameterFilterTest extends TestCase {
     
     public function testClassExists(): void {
         $this->assertTrue(class_exists(GfxParameterFilter::class), "Failed to load class 'Slothsoft\Amber\ParameterFilters\GfxParameterFilter'!");
