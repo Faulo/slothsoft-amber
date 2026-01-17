@@ -326,37 +326,7 @@ final class AmigaExecutable {
         $reverseInput = new ProxyDataAccess($input, true);
         $reverseInput->setPosition($info->implodedSize);
         $literalLength = $info->firstLiteralLength; // word at offset 0x1E6 in the last code hunk
-        $bitBuffer = $info->initialBitBuffer; // byte at offset 0x1E8 in the last code hunk
-        
-        $readBits = function (int $count) use ($reverseInput, &$bitBuffer): int {
-            $result = 0;
-            
-            if (($count & 0x80) !== 0) {
-                $result = $reverseInput->readInteger(self::SIZEOF_BYTE);
-                $count &= 0x7f;
-            }
-            
-            for ($i = 0; $i < $count; $i ++) {
-                $bit = $bitBuffer >> 7;
-                $bitBuffer = ($bitBuffer << 1) % 256;
-                
-                if ($bitBuffer == 0) {
-                    $temp = $bit;
-                    $bitBuffer = $reverseInput->readInteger(self::SIZEOF_BYTE);
-                    $bit = $bitBuffer >> 7;
-                    $bitBuffer = ($bitBuffer << 1) % 256;
-                    
-                    if ($temp !== 0) {
-                        $bitBuffer ++;
-                    }
-                }
-                
-                $result <<= 1;
-                $result |= $bit;
-            }
-            
-            return $result;
-        };
+        $bits = new BitReader($reverseInput, $info->initialBitBuffer); // byte at offset 0x1E8 in the last code hunk
         
         while ($reverseInput->getPosition() > 0) {
             if ($literalLength > 0) {
@@ -380,16 +350,16 @@ final class AmigaExecutable {
              */
             $selector = 0;
             $matchLength = 0;
-            if ($readBits(1) !== 0) {
-                if ($readBits(1) !== 0) {
-                    if ($readBits(1) !== 0) {
+            if ($bits->read(1) !== 0) {
+                if ($bits->read(1) !== 0) {
+                    if ($bits->read(1) !== 0) {
                         $selector = 3;
                         
-                        if ($readBits(1) !== 0) {
-                            if ($readBits(1) !== 0) { // 11111
+                        if ($bits->read(1) !== 0) {
+                            if ($bits->read(1) !== 0) { // 11111
                                 $matchLength = $reverseInput->readInteger(self::SIZEOF_BYTE);
                             } else { // 11110
-                                $matchLength = 6 + $readBits(3);
+                                $matchLength = 6 + $bits->read(3);
                             }
                         } else { // 1110
                             $matchLength = 5;
@@ -423,8 +393,8 @@ final class AmigaExecutable {
              */
             $y = 0;
             $x = $selector;
-            if ($readBits(1) !== 0) {
-                if ($readBits(1) !== 0) { // 11
+            if ($bits->read(1) !== 0) {
+                if ($bits->read(1) !== 0) { // 11
                     $y = self::$DeplodeLiteralBase[$x];
                     $x += 8;
                 } else { // 10
@@ -435,7 +405,7 @@ final class AmigaExecutable {
             $x = self::$DeplodeLiteralExtraBits[$x];
             
             /* next literal run length: read [x] bits and add [y] */
-            $literalLength = $y + $readBits($x);
+            $literalLength = $y + $bits->read($x);
             
             /*
              * another Huffman tuple, for deciding the match distance: _base and
@@ -448,8 +418,8 @@ final class AmigaExecutable {
              */
             $match = $output->getPosition() - 1;
             $x = $selector;
-            if ($readBits(1) !== 0) {
-                if ($readBits(1) !== 0) {
+            if ($bits->read(1) !== 0) {
+                if ($bits->read(1) !== 0) {
                     $match -= $info->matchBase[$selector + 4];
                     $x += 8;
                 } else {
@@ -463,7 +433,7 @@ final class AmigaExecutable {
              * obtain the value of the next [x] extra bits and
              * add it to the match offset
              */
-            $match -= $readBits($x);
+            $match -= $bits->read($x);
             
             $currentOutput->setPosition($match);
             
@@ -471,7 +441,7 @@ final class AmigaExecutable {
             
             /* copy match */
             while ($matchLength > 0) {
-                // match may include output yet to be hidden, beware
+                // $match may include output yet to be written, so only write as much as is available
                 $deltaLength = min($matchLength, $availableLength);
                 $output->writeString($currentOutput->readString($deltaLength));
                 $matchLength -= $deltaLength;
