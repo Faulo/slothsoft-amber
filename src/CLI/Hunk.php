@@ -7,15 +7,20 @@ use Slothsoft\Savegame\Converter;
 
 final class Hunk {
     
-    public const TYPE_CODE = 0x3E9;
+    // 0x3E9
+    public const TYPE_CODE = 1001;
     
-    public const TYPE_DATA = 0x3EA;
+    // 0x3EA
+    public const TYPE_DATA = 1002;
     
-    public const TYPE_BSS = 0x3EB;
+    // 0x3EB
+    public const TYPE_BSS = 1003;
     
-    public const TYPE_RELOC32 = 0x3EC;
+    // 0x3EC
+    public const TYPE_RELOC32 = 1004;
     
-    public const TYPE_END = 0x3F2;
+    // 0x3F2
+    public const TYPE_END = 1010;
     
     public static function createCode(int $memoryFlags, int $numEntries, string $data): Hunk {
         $hunk = new Hunk();

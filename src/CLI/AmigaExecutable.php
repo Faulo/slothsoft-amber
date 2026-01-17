@@ -523,14 +523,22 @@ final class AmigaExecutable {
                 case 3:
                     $hunkSize = $eof(self::SIZEOF_UINT) ? 0 : ($deploded->readInteger(self::SIZEOF_UINT, true) & 0x3fffffff);
                     if ($hunkSize > 0) {
-                        // Data
+                        // Data or AM2_BLIT Code
                         $deploded->readString(self::SIZEOF_UINT);
                         
                         if ($hunkSize * 4 !== $deplodedHunkSizes[$hunkSizeIndex]) {
-                            throw new UnexpectedValueException("Invalid hunk data size '$hunkSize'.");
+                            $hunkSize *= 4;
+                            throw new UnexpectedValueException("Invalid hunk data size '$hunkSize', expected '{$deplodedHunkSizes[$hunkSizeIndex]}'.");
                         }
                         
-                        $hunks[] = Hunk::createData($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $deploded->readString($hunkSize * 4));
+                        // this might very well be the second code hunk of AM2_BLIT!
+                        $isCode = ($header === 2147483648 and $hunkSize === 0x01B1);
+                        
+                        if ($isCode) {
+                            $hunks[] = Hunk::createCode($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $deploded->readString($deplodedHunkSizes[$hunkSizeIndex]));
+                        } else {
+                            $hunks[] = Hunk::createData($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $deploded->readString($deplodedHunkSizes[$hunkSizeIndex]));
+                        }
                     } else {
                         // BSS
                         if ($hunkSizeIndex == count($deplodedHunkSizes)) {
