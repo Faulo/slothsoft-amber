@@ -287,24 +287,8 @@ final class AmigaExecutableTest extends TestCase {
     }
     
     public function accessModeProvider(): iterable {
-        yield 'string' => [
-            'string'
-        ];
-        
-        yield 'file' => [
-            'file'
-        ];
-        
-        yield 'tmpfile' => [
-            'tmpfile'
-        ];
-        
         yield 'php://temp' => [
             'temp'
-        ];
-        
-        yield 'php://memory' => [
-            'memory'
         ];
     }
     

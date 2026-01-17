@@ -16,9 +16,9 @@ final class BitReader {
     public function read(int $count): int {
         $result = 0;
         
-        if (($count & 0x80) !== 0) {
+        if ($count >= 128) {
+            $count -= 128;
             $result = $this->reverseInput->readInteger(1);
-            $count &= 0x7f;
         }
         
         for ($i = 0; $i < $count; $i ++) {
