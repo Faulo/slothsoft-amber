@@ -14,6 +14,10 @@ final class AmberExecutableExtractor implements ArchiveExtractorInterface {
         $executable = new AmigaExecutable();
         $executable->load($archivePath);
         
+        if ($executable->requiresDeploding()) {
+            $executable->deplode();
+        }
+        
         $directory = (string) $targetDirectory;
         FileSystem::ensureDirectory($directory);
         

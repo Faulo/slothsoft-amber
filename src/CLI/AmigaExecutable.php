@@ -144,8 +144,15 @@ final class AmigaExecutable {
         $this->in = null;
     }
     
+    // where in AM2 does it say "Ambermoon"?
+    private const MAGIC_OFFSET = 6;
+    
+    private const MAGIC_LENGTH = 5;
+    
+    private const MAGIC_WORD = 'Amber';
+    
     public function requiresDeploding(): bool {
-        return false;
+        return $this->hunks[0]->type !== Hunk::TYPE_CODE or $this->hunks[0]->getDataString(self::MAGIC_OFFSET, self::MAGIC_LENGTH) !== self::MAGIC_WORD;
     }
     
     private function readString(int $size): string {
