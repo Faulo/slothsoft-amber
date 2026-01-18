@@ -96,6 +96,38 @@ final class AmigaExecutableTest extends TestCase {
     
     /**
      *
+     * @dataProvider requiresDeplodingProvider
+     */
+    public function test_load_requiresDeploding(string $in, bool $requiresDeploding): void {
+        $inFile = FileInfoFactory::createFromPath($in);
+        
+        $sut = new AmigaExecutable();
+        $sut->load($inFile);
+        
+        $this->assertThat($sut->requiresDeploding(), new IsEqual($requiresDeploding));
+    }
+    
+    public function requiresDeplodingProvider(): iterable {
+        yield 'AM2_CPU imploded' => [
+            self::AM2_CPU_IMPLODED,
+            true
+        ];
+        yield 'AM2_CPU deploded' => [
+            self::AM2_CPU_DEPLODED,
+            false
+        ];
+        yield 'AM2_BLIT imploded' => [
+            self::AM2_BLIT_IMPLODED,
+            true
+        ];
+        yield 'AM2_BLIT deploded' => [
+            self::AM2_BLIT_DEPLODED,
+            false
+        ];
+    }
+    
+    /**
+     *
      * @dataProvider fileProvider
      */
     public function test_load_imploded(string $in): void {
@@ -238,7 +270,7 @@ final class AmigaExecutableTest extends TestCase {
         
         $this->assertThat([
             ...$sut->getRealHunks()
-        ], new Count(13));
+        ], new Count(6));
     }
     
     /**

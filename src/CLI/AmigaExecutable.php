@@ -144,6 +144,10 @@ final class AmigaExecutable {
         $this->in = null;
     }
     
+    public function requiresDeploding(): bool {
+        return false;
+    }
+    
     private function readString(int $size): string {
         return $this->in->readString($size);
     }
