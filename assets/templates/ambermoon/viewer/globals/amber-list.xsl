@@ -4,14 +4,17 @@
 
     <xsl:import href="farah://slothsoft@farah/xsl/xslt" />
 
-    <xsl:variable name="amberdata" select="/*/*[@name='amberdata']/saa:amberdata" />
+    <xsl:key name="dictionary-option" match="//saa:dictionary/saa:option" use="../@dictionary-id" />
 
-    <xsl:key name="dictionary-option" match="/*/*[@name='dictionaries']/saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option" use="../@dictionary-id" />
+    <xsl:template match="sfm:fragment-info">
+        <div>
+            <xsl:apply-templates select="sfm:document-info[1]/saa:amberdata" />
+        </div>
+    </xsl:template>
+
 
     <xsl:template match="saa:amberdata">
-        <div>
-            <xsl:apply-templates select="*" />
-        </div>
+        <xsl:apply-templates select="*" />
     </xsl:template>
 
     <xsl:template match="*">
