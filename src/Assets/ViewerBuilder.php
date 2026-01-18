@@ -36,6 +36,8 @@ final class ViewerBuilder implements ExecutableBuilderStrategyInterface {
         $templateUrl = $parameters->getStaticViewerTemplateUrl();
         $dictionaryUrl = $parameters->withInfoset('lib.dictionaries')->getProcessAmberdataUrl();
         
+        $instructions->stylesheetUrls->add(...$parameters->getProcessStylesheetUrls());
+        
         $domDelegate = function () use ($amberdataUrl, $templateUrl, $dictionaryUrl): DOMWriterInterface {
             $writer = new AssetFragmentDOMWriter($amberdataUrl);
             $writer->appendChild(new AssetDocumentDOMWriter($amberdataUrl, $amberdataUrl->getArguments()

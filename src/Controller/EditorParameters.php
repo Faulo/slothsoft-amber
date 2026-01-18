@@ -136,5 +136,14 @@ final class EditorParameters {
             ->withPath("/api/dictionary")
             ->withQueryArguments($this->getAmberArgs());
     }
+    
+    public function getProcessStylesheetUrls(): iterable {
+        $url = $this->getAmberUrl()
+            ->withPath("/api/stylesheet")
+            ->withQueryArguments($this->getAmberArgs());
+        yield $url->withAdditionalQueryArguments(FarahUrlArguments::createFromQuery('infosetId=lib.items'));
+        yield $url->withAdditionalQueryArguments(FarahUrlArguments::createFromQuery('infosetId=lib.portraits'));
+        yield $url->withAdditionalQueryArguments(FarahUrlArguments::createFromQuery('infosetId=lib.monsters'));
+    }
 }
 

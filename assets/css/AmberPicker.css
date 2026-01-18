@@ -213,6 +213,7 @@ amber-monster-id::after {
 	background-size: 100%;
 	background-clip: content-box;
 	background-repeat: no-repeat;
+	image-rendering: pixelated;
 	display: block;
 	content: " ";
 }
