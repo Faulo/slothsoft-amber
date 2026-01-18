@@ -228,6 +228,20 @@ final class AmigaExecutableTest extends TestCase {
     }
     
     /**
+     */
+    public function test_load_deplodedHunks(): void {
+        $in = self::AM2_CPU_DEPLODED;
+        $inFile = FileInfoFactory::createFromPath($in);
+        
+        $sut = new AmigaExecutable();
+        $sut->load($inFile);
+        
+        $this->assertThat([
+            ...$sut->getRealHunks()
+        ], new Count(13));
+    }
+    
+    /**
      *
      * @dataProvider accessModeProvider
      */

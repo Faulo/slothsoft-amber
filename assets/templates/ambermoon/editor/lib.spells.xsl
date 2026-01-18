@@ -7,7 +7,7 @@
 	<xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/editor" />
 	<xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/picker" />
 
-	<xsl:template match="sse:archive[@name='AM2_CPU'] | sse:archive[@name='AM2_BLIT']" mode="form-content">
+	<xsl:template match="sse:archive[@type='AM2']" mode="form-content">
 		<xsl:for-each select="sse:file">
 			<xsl:variable name="spell-effects" select=".//*[@name = 'spell-effects']/*" />
 			<xsl:variable name="spell-data" select=".//*[@name = 'spell-data']/*" />

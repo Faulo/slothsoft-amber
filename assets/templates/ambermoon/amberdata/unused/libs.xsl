@@ -356,7 +356,7 @@
 	</xsl:template>
 
 	<xsl:template name="extract-items">
-		<xsl:variable name="items" select="(sse:archive[@name='AM2_CPU'] | sse:archive[@name='AM2_BLIT'])//*[@name = 'items']/*/*" />
+		<xsl:variable name="items" select="sse:archive[@type='AM2']//*[@name = 'items']/*/*" />
 		<xsl:variable name="texts" select="sse:archive[@name='Object_texts.amb']" />
 
 		<xsl:if test="count($items)">
@@ -883,7 +883,7 @@
 
 
 	<xsl:template name="extract-dictionaries">
-		<xsl:variable name="AM2" select="sse:archive[@name='AM2_BLIT' or @name='AM2_CPU']" />
+		<xsl:variable name="AM2" select="sse:archive[@type='AM2']" />
 		<dictionary-list>
 			<dictionary dictionary-id="events">
 				<option key="0" val="valdyn" />

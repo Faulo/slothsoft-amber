@@ -1,99 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <globals xmlns="http://schema.slothsoft.net/savegame/editor" version="0.4">
-	<global global-id="AM2-spell">
-		<integer position="1" name="sp" />
-		<integer position="2" name="slp" />
-		<select position="3" name="spell-target" dictionary-ref="spell-targets" />
-		<bit-field position="0" name="spell-places" dictionary-ref="spell-places" />
-		<integer position="4" name="spell-modifiers" />
-	</global>
-	<global global-id="AM2-spell-effects">
-		<group name="spell-effects">
-			<repeat-group group-size="1" group-count="30" name="spells-white" position="0">
-				<select name="spell-effect" dictionary-ref="spell-effects" />
-			</repeat-group>
-		</group>
-	</global>
-	<global global-id="AM2-spell-data">
-		<group name="spell-data">
-			<repeat-group group-size="5" group-count="30" name="spells-white" position="0">
-				<use-global ref="AM2-spell" />
-			</repeat-group>
-			<repeat-group group-size="5" group-count="30" name="spells-blue" position="150">
-				<use-global ref="AM2-spell" />
-			</repeat-group>
-			<repeat-group group-size="5" group-count="30" name="spells-green" position="300">
-				<use-global ref="AM2-spell" />
-			</repeat-group>
-			<repeat-group group-size="5" group-count="30" name="spells-black" position="450">
-				<use-global ref="AM2-spell" />
-			</repeat-group>
-			<repeat-group group-size="5" group-count="30" name="spells-unused" position="600">
-				<use-global ref="AM2-spell" />
-			</repeat-group>
-			<repeat-group group-size="5" group-count="30" name="spells-unused" position="750">
-				<use-global ref="AM2-spell" />
-			</repeat-group>
-			<repeat-group group-size="5" group-count="30" name="spells-misc" position="900">
-				<use-global ref="AM2-spell" />
-			</repeat-group>
-		</group>
-	</global>
-	<global global-id="AM2-strings">
-		<group name="strings">
-			<string-dictionary type="null-delimited" encoding="8bit" position="0x000" name="spell-types" string-count="7" />
-			<group name="spell-names">
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x02F" name="spells-white" string-count="30" />
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x20A" name="spells-blue" string-count="30" />
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x398" name="spells-green" string-count="30" />
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x4AD" name="spells-black" string-count="30" />
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x5F2" name="spells-unused" string-count="30" />
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x610" name="spells-unused" string-count="30" />
-				<string-dictionary type="null-delimited" encoding="8bit" position="0x62E" name="spells-misc" string-count="30" />
-			</group>
-		</group>
-	</global>
-	<global global-id="AM2-items">
-		<repeat-group name="items" group-size="60" group-count="402">
-			<integer position="0" name="image-id" />
-			<select position="1" name="type" dictionary-ref="item-types" />
-			<select position="2" name="slot" dictionary-ref="item-slots" />
-			<integer position="5" name="hands" max="2" />
-			<integer position="6" name="fingers" max="2" />
-			<bit-field position="4" name="genders" first-bit="0" last-bit="1" dictionary-ref="genders" />
-			<integer position="7" name="lp-max" />
-			<integer position="8" name="sp-max" />
-			<select position="9" name="attribute-type" dictionary-ref="attributes" />
-			<integer position="10" name="attribute-value" />
-			<select position="11" name="skill-type" dictionary-ref="skills" />
-			<integer position="12" name="skill-value" />
+    <global global-id="AM2-CODE-1">
+        <string name="version" position="0x06" size="15" encoding="CP850" />
+        <string name="date" position="0x16" size="19" encoding="CP850" />
+        <use-global position="0x0AD50" ref="AM2-spell-effects" />
+    </global>
+    <global global-id="AM2-DATA-2">
+        <group name="integers" position="0x795C">
+            <use-global ref="AM2-integers" />
+        </group>
+        <group name="strings">
+            <string-dictionary type="null-delimited" encoding="8bit" position="0xB9FE" name="music" string-count="32" />
+            <string-dictionary type="null-delimited" encoding="8bit" position="0x80A4" name="map-worlds" string-count="3" />
+        </group>
+        <use-global position="0x6540" ref="AM2-spell-data" />
+        <use-global position="0xBC4C" ref="AM2-strings" />
+        <use-global position="0xF8B4" ref="AM2-items" />
+    </global>
+    <global global-id="AM2-spell">
+        <integer position="1" name="sp" />
+        <integer position="2" name="slp" />
+        <select position="3" name="spell-target" dictionary-ref="spell-targets" />
+        <bit-field position="0" name="spell-places" dictionary-ref="spell-places" />
+        <integer position="4" name="spell-modifiers" />
+    </global>
+    <global global-id="AM2-spell-effects">
+        <group name="spell-effects">
+            <repeat-group group-size="1" group-count="30" name="spells-white" position="0">
+                <select name="spell-effect" dictionary-ref="spell-effects" />
+            </repeat-group>
+        </group>
+    </global>
+    <global global-id="AM2-spell-data">
+        <group name="spell-data">
+            <repeat-group group-size="5" group-count="30" name="spells-white" position="0">
+                <use-global ref="AM2-spell" />
+            </repeat-group>
+            <repeat-group group-size="5" group-count="30" name="spells-blue" position="150">
+                <use-global ref="AM2-spell" />
+            </repeat-group>
+            <repeat-group group-size="5" group-count="30" name="spells-green" position="300">
+                <use-global ref="AM2-spell" />
+            </repeat-group>
+            <repeat-group group-size="5" group-count="30" name="spells-black" position="450">
+                <use-global ref="AM2-spell" />
+            </repeat-group>
+            <repeat-group group-size="5" group-count="30" name="spells-unused" position="600">
+                <use-global ref="AM2-spell" />
+            </repeat-group>
+            <repeat-group group-size="5" group-count="30" name="spells-unused" position="750">
+                <use-global ref="AM2-spell" />
+            </repeat-group>
+            <repeat-group group-size="5" group-count="30" name="spells-misc" position="900">
+                <use-global ref="AM2-spell" />
+            </repeat-group>
+        </group>
+    </global>
+    <global global-id="AM2-strings">
+        <group name="strings">
+            <string-dictionary type="null-delimited" encoding="8bit" position="0x000" name="spell-types" string-count="7" />
+            <group name="spell-names">
+                <string-dictionary type="null-delimited" encoding="8bit" position="0x02F" name="spells-white" string-count="30" />
+                <string-dictionary type="null-delimited" encoding="8bit" position="0x20A" name="spells-blue" string-count="30" />
+                <string-dictionary type="null-delimited" encoding="8bit" position="0x398" name="spells-green" string-count="30" />
+                <string-dictionary type="null-delimited" encoding="8bit" position="0x4AD" name="spells-black" string-count="30" />
+                <string-dictionary type="null-delimited" encoding="8bit" position="0x5F2" name="spells-unused" string-count="30" />
+                <string-dictionary type="null-delimited" encoding="8bit" position="0x610" name="spells-unused" string-count="30" />
+                <string-dictionary type="null-delimited" encoding="8bit" position="0x62E" name="spells-misc" string-count="30" />
+            </group>
+        </group>
+    </global>
+    <global global-id="AM2-items">
+        <repeat-group name="items" group-size="60" group-count="402">
+            <integer position="0" name="image-id" />
+            <select position="1" name="type" dictionary-ref="item-types" />
+            <select position="2" name="slot" dictionary-ref="item-slots" />
+            <integer position="5" name="hands" max="2" />
+            <integer position="6" name="fingers" max="2" />
+            <bit-field position="4" name="genders" first-bit="0" last-bit="1" dictionary-ref="genders" />
+            <integer position="7" name="lp-max" />
+            <integer position="8" name="sp-max" />
+            <select position="9" name="attribute-type" dictionary-ref="attributes" />
+            <integer position="10" name="attribute-value" />
+            <select position="11" name="skill-type" dictionary-ref="skills" />
+            <integer position="12" name="skill-value" />
 
-			<integer position="13" name="armor" />
-			<integer position="14" name="damage" />
-			<select position="15" name="ammunition-type" dictionary-ref="ammunitions" />
-			<select position="16" name="ranged-type" dictionary-ref="ammunitions" />
+            <integer position="13" name="armor" />
+            <integer position="14" name="damage" />
+            <select position="15" name="ammunition-type" dictionary-ref="ammunitions" />
+            <select position="16" name="ranged-type" dictionary-ref="ammunitions" />
 
-			<integer position="21" name="subtype" />
-			<integer position="22" name="subsubtype" />
-			<select position="23" name="spell-type" dictionary-ref="spell-types" />
-			<integer position="24" name="spell-id" />
-			<integer position="25" name="charges-default" />
-			<integer position="27" name="max-charges-by-shop" />
-			<integer position="28" name="max-charges-by-spell" />
-			<integer position="29" name="price-per-charge" />
-			<integer position="30" name="magic-armor" />
-			<integer position="31" name="magic-weapon" />
-			<bit-field position="32" name="properties" first-bit="0" last-bit="6" dictionary-ref="item-properties" />
-			<bit-field position="33" name="default-status" first-bit="0" last-bit="1" dictionary-ref="item-status" />
-			<bit-field position="34" name="classes" size="2" first-bit="0" last-bit="8" dictionary-ref="classes" />
-			<integer position="36" name="price" size="2" />
-			<integer position="38" name="weight" size="2" />
-			<string position="40" name="name" size="19" encoding="CP850" />
-		</repeat-group>
-	</global>
-	<global global-id="AM2-integers">
-		<repeat-group name="class-experience" group-size="2" group-count="10">
-			<integer size="2" />
-		</repeat-group>
-	</global>
+            <integer position="21" name="subtype" />
+            <integer position="22" name="subsubtype" />
+            <select position="23" name="spell-type" dictionary-ref="spell-types" />
+            <integer position="24" name="spell-id" />
+            <integer position="25" name="charges-default" />
+            <integer position="27" name="max-charges-by-shop" />
+            <integer position="28" name="max-charges-by-spell" />
+            <integer position="29" name="price-per-charge" />
+            <integer position="30" name="magic-armor" />
+            <integer position="31" name="magic-weapon" />
+            <bit-field position="32" name="properties" first-bit="0" last-bit="6" dictionary-ref="item-properties" />
+            <bit-field position="33" name="default-status" first-bit="0" last-bit="1" dictionary-ref="item-status" />
+            <bit-field position="34" name="classes" size="2" first-bit="0" last-bit="8" dictionary-ref="classes" />
+            <integer position="36" name="price" size="2" />
+            <integer position="38" name="weight" size="2" />
+            <string position="40" name="name" size="19" encoding="CP850" />
+        </repeat-group>
+    </global>
+    <global global-id="AM2-integers">
+        <repeat-group name="class-experience" group-size="2" group-count="10">
+            <integer size="2" />
+        </repeat-group>
+    </global>
 </globals>

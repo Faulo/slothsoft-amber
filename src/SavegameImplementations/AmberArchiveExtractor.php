@@ -22,7 +22,7 @@ final class AmberArchiveExtractor implements ArchiveExtractorInterface {
         $this->extractor = new CopyArchiveExtractor();
     }
     
-    public function extractArchive(SplFileInfo $archivePath, SplFileInfo $targetDir): bool {
+    public function extractArchive(SplFileInfo $archivePath, SplFileInfo $targetDirectory): bool {
         $type = $this->ambtool->inspectArchive($archivePath);
         switch ($type) {
             case AmbTool::TYPE_JH:
@@ -37,12 +37,12 @@ final class AmberArchiveExtractor implements ArchiveExtractorInterface {
                     throw new LogicException("JH archive '$archivePath' must contain exactly 1 file");
                 }
                 
-                return $this->extractArchive($fileList[0], $targetDir);
+                return $this->extractArchive($fileList[0], $targetDirectory);
             case AmbTool::TYPE_AMBR:
-                $this->ambtool->extractArchive($archivePath, $targetDir);
+                $this->ambtool->extractArchive($archivePath, $targetDirectory);
                 return true;
             case '':
-                return $this->extractor->extractArchive($archivePath, $targetDir);
+                return $this->extractor->extractArchive($archivePath, $targetDirectory);
             default:
                 throw new DomainException("Unknown AmbTool type '$type'!");
         }

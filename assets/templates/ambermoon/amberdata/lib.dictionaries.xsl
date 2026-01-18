@@ -5,7 +5,7 @@
 
 	<xsl:import href="farah://slothsoft@farah/xsl/xslt" />
 
-	<xsl:variable name="AM2" select=".//sse:archive[@name='AM2_BLIT' or @name='AM2_CPU']" />
+	<xsl:variable name="AM2" select=".//sse:archive[@type='AM2']" />
 	<xsl:variable name="Dict" select=".//sse:archive[@name='Dictionary.german']" />
 	<xsl:variable name="MapTexts" select=".//sse:archive[@name='1Map_texts.amb' or @name='2Map_texts.amb' or @name='3Map_texts.amb']" />
 	<xsl:variable name="PCs" select=".//sse:archive[@name='Party_char.amb']" />

@@ -34,6 +34,15 @@ final class AmigaExecutable {
     
     private array $hunks;
     
+    public function getRealHunks(): iterable {
+        /** @var Hunk $hunk */
+        foreach ($this->hunks as $hunk) {
+            if ($hunk->isReal()) {
+                yield $hunk;
+            }
+        }
+    }
+    
     public function getRealHunkCount(): int {
         return $this->realHunkCount;
     }

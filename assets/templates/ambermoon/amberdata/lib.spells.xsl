@@ -11,9 +11,9 @@
 	</xsl:template>
 
 	<xsl:template match="sse:savegame">
-		<xsl:variable name="spell-types" select="sse:archive[@name='AM2_BLIT']//*[@name='spell-types']/*" />
-		<xsl:variable name="spell-data" select="sse:archive[@name='AM2_BLIT']//*[@name='spell-data']/*" />
-		<xsl:variable name="spell-names" select="sse:archive[@name='AM2_BLIT']//*[@name='spell-names']/*" />
+		<xsl:variable name="spell-types" select="sse:archive[@type='AM2']//*[@name='spell-types']/*" />
+		<xsl:variable name="spell-data" select="sse:archive[@type='AM2']//*[@name='spell-data']/*" />
+		<xsl:variable name="spell-names" select="sse:archive[@type='AM2']//*[@name='spell-names']/*" />
 		<xsl:if test="count($spell-types)">
 			<spellbook-list>
 				<xsl:for-each select="$spell-types">

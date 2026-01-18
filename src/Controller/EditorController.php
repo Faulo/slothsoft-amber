@@ -6,6 +6,7 @@ use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
+use Slothsoft\Amber\SavegameImplementations\AmberExecutableExtractor;
 use Slothsoft\Farah\FarahUrl\FarahUrl;
 use Slothsoft\Farah\Module\Module;
 use Slothsoft\Savegame\Editor;
@@ -57,7 +58,9 @@ class EditorController {
         
         $copyExtractor = new CopyArchiveExtractor();
         $ret[AmbTool::TYPE_RAW] = $copyExtractor;
-        $ret[AmbTool::TYPE_AM2] = $copyExtractor;
+        
+        $executableExtractor = new AmberExecutableExtractor();
+        $ret[AmbTool::TYPE_AM2] = $executableExtractor;
         
         return $ret;
     }
