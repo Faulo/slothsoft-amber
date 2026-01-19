@@ -22,6 +22,8 @@
     <resource-directory name="css" type="text/css" />
 
     <resource-directory name="dictionary" type="application/xml" />
+    
+    <resource-directory name="fonts" type="application/font-sfnt" />
 
     <resource-directory name="js" type="application/javascript" />
 

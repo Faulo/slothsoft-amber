@@ -2,9 +2,14 @@
 amber-picker {
 	display: block;
 	position: relative;
-	width: fit-content;
-	width: -moz-fit-content;
-	width: -webkit-fit-content;
+	box-sizing: border-box;
+	width: 3ch;
+	height: 3ch;
+	background-color: #444433;
+	border-color: #222222 #aaaa99 #aaaa99 #222222;
+	border-width: 0.125em;
+	border-style: solid;
+	background-color: #444433;
 }
 
 /* items */
@@ -36,7 +41,6 @@ amber-item-id::after, amber-item-gfx::after {
 	font-size: 2px;
 	width: 16em;
 	height: 16em;
-	border: 2px solid transparent;
 	image-rendering: pixelated;
 	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
 	background-clip: content-box;
@@ -282,13 +286,137 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 .amber-item {
 	display: flex;
 	flex-direction: row;
+	border: 4px ridge black;
+	flex-grow: 0;
+	line-height: 1em;
+	width: fit-content;
+	font-size: 16px;
+	background-color: #666655;
 }
 
-.amber-item td, .amber-item th {
-	vertical-align: top;
+.amber-item>* {
+	margin: 0.5ch 0.5ch;
 }
 
-.amber-item__class-reference {
-	display: inline-block;
-	width: 50%;
+.amber-item table {
+	border-spacing: 0;
+}
+
+.amber-item td {
+	padding: 0;
+}
+
+.amber-text {
+	font-family: "Amberworld 5px", monospace;
+	color: #ffffee;
+	text-shadow: 0.125em 0.125em 0px black;
+	font-size: 16px;
+}
+
+.amber-item__name {
+	text-align: left;
+	padding: 0 0.5ch;
+}
+
+.amber-item__name .amber-text {
+	width: 19ch;
+}
+
+.amber-text--gray {
+	color: #aaaa99;
+}
+
+.amber-text--silver {
+	color: #ccccbb;
+}
+
+.amber-text--yellow {
+	color: #ffcc00;
+}
+
+.amber-text--orange {
+	color: #ff9900;
+}
+
+.amber-text--red {
+	color: #cc4433;
+}
+
+.amber-item__worth, .amber-item__stats {
+	text-align: right;
+}
+
+.amber-item__header {
+	display: flex;
+}
+
+.amber-item__worth::before, .amber-item__stats::before,
+	.amber-item__magic tbody+tbody::before {
+	height: 0.25em;
+	display: table-row;
+	content: " ";
+}
+
+.amber-item__worth .amber-item__value {
+	width: 10ch;
+}
+
+.amber-item__stats .amber-item__value {
+	width: 4ch;
+}
+
+.amber-item__restrictions {
+	display: flex;
+	flex-direction: column;
+}
+
+.amber-item__restrictions dd {
+	margin: 0;
+}
+
+.amber-item__classes {
+	flex-grow: 1;
+}
+
+.amber-item__classes ul {
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-rows: repeat(6, auto);
+	list-style-type: none;
+	padding: 0;
+	grid-auto-flow: column;
+	grid-template-rows: repeat(5, auto);
+}
+
+.amber-item__magic tbody:first-child {
+	text-align: right;
+}
+
+.amber-item__magic .amber-item__value {
+	width: 3ch;
+	padding-right: 1ch;
+}
+
+.amber-item__magic .amber-item__value:last-child {
+	padding-right: 0;
+}
+
+.amber-item__textbox {
+	width: 43ch;
+	height: 8.75em;
+	overflow-y: auto;
+}
+
+.amber-item__textbox p {
+	margin: 0;
+	line-height: 0.875em;
+}
+
+.amber-item__textbox p+p {
+	margin-top: 0.875em;;
+}
+
+@font-face {
+	font-family: Amberworld 5px;
+	src: local("Amberworld 5px"), url("/slothsoft@amber/fonts/Amberworld");
 }
