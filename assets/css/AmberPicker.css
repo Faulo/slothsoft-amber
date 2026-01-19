@@ -285,7 +285,6 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 .amber-item {
 	display: flex;
 	flex-direction: row;
-	border: 4px ridge #444433;
 	line-height: 1em;
 	width: fit-content;
 	font-size: 16px;
