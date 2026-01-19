@@ -418,5 +418,5 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 
 @font-face {
 	font-family: Amberworld 5px;
-	src: local("Amberworld 5px"), url("/slothsoft@amber/fonts/Amberworld");
+	src: local("Amberworld 5px"), url("/slothsoft@amber/fonts/Amberworld 5px");
 }
