@@ -390,11 +390,11 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 	padding: 0;
 	grid-auto-flow: column;
 	grid-template-rows: repeat(5, auto);
-	width: 22ch;
+	width: 21ch;
 }
 
-.amber-item__classes li {
-	width: 50%;
+.amber-item__magic {
+	width: 22ch;
 }
 
 .amber-item__magic tbody:first-child {
