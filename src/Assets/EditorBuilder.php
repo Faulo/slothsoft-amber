@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
 use Slothsoft\Amber\Controller\EditorParameters;
+use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
 use Slothsoft\Core\IO\Writable\DOMWriterInterface;
 use Slothsoft\Core\IO\Writable\Delegates\DOMWriterFromDOMWriterDelegate;
@@ -13,12 +14,10 @@ use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
 use Slothsoft\Farah\Module\DOMWriter\AssetDocumentDOMWriter;
 use Slothsoft\Farah\Module\DOMWriter\AssetFragmentDOMWriter;
-use Slothsoft\Farah\Module\DOMWriter\DOMWriterFileCacheWithDependencies;
 use Slothsoft\Farah\Module\DOMWriter\TransformationDOMWriter;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\DOMWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FromManifestInstructionBuilder;
-use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
 
 final class EditorBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -48,19 +47,9 @@ final class EditorBuilder implements ExecutableBuilderStrategyInterface {
             return new TransformationDOMWriter($writer, $template);
         };
         
-        $dependentFiles = [];
-        $dependentFiles[] = __FILE__;
-        $dependentFiles[] = (string) $context->getManifest()->createManifestFile('manifest.xml');
-        $dependentFiles[] = (string) $editorUrl;
-        $dependentFiles[] = (string) $templateUrl;
-        foreach ($parameters->getStaticEditorGlobalUrls() as $globalUrl) {
-            $dependentFiles[] = (string) $globalUrl;
-        }
-        
         $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);
         $writer = new DecoratedDOMWriter($writer, $instructions->stylesheetUrls, $instructions->scriptUrls, $instructions->moduleUrls, $instructions->contentUrls);
-        $writer = new DOMWriterFileCacheWithDependencies($writer, $context->createCacheFile("$infosetId.xml", $args), ...$dependentFiles);
-        $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.xml");
+        $resultBuilder = new DOMWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }
 }

@@ -10,6 +10,18 @@ final class EditorParameterFilter extends InfosetParameterFilter {
     
     public const PARAM_EDITOR_DATA_ARCHIVE = 'archiveId';
     
+    public const PARAM_EDITOR_DATA_VALUES = 'data';
+    
+    public const PARAM_EDITOR_DATA_ACTION = 'action';
+    
+    public const PARAM_EDITOR_ACTION_VIEW = 'view';
+    
+    public const PARAM_EDITOR_ACTION_SAVE = 'save';
+    
+    public const PARAM_EDITOR_ACTION_DOWNLOAD = 'download';
+    
+    public const PARAM_EDITOR_ACTION_UPLOAD = 'upload';
+    
     protected function createValueSanitizers(): array {
         return [
             self::PARAM_EDITOR_DATA => new ArraySanitizer()
