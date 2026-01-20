@@ -2,110 +2,66 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
-use Slothsoft\Amber\CLI\AmbGfx;
-use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\Controller\EditorParameters;
-use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
-use Slothsoft\Core\IO\FileInfoFactory;
-use Slothsoft\Farah\Exception\HttpDownloadAssetException;
+use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
+use Slothsoft\Core\IO\Writable\DOMWriterInterface;
+use Slothsoft\Core\IO\Writable\Delegates\DOMWriterFromDOMWriterDelegate;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
+use Slothsoft\Farah\LinkDecorator\DecoratedDOMWriter;
+use Slothsoft\Farah\Module\Module;
 use Slothsoft\Farah\Module\Asset\AssetInterface;
 use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
+use Slothsoft\Farah\Module\DOMWriter\AssetDocumentDOMWriter;
+use Slothsoft\Farah\Module\DOMWriter\AssetFragmentDOMWriter;
+use Slothsoft\Farah\Module\DOMWriter\DOMWriterFileCacheWithDependencies;
+use Slothsoft\Farah\Module\DOMWriter\TransformationDOMWriter;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
-use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FromManifestInstructionBuilder;
+use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
 
 final class EditorBuilder implements ExecutableBuilderStrategyInterface {
     
     public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
-        if (! AmbGfx::isSupported()) {
-            return new ExecutableStrategies(new NullResultBuilder());
+        $instructions = (new FromManifestInstructionBuilder())->buildLinkInstructions($context, $args);
+        
+        $repository = $args->get(ResourceParameterFilter::PARAM_REPOSITORY);
+        $game = $args->get(ResourceParameterFilter::PARAM_GAME);
+        $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
+        $user = $args->get(ResourceParameterFilter::PARAM_USER);
+        $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
+        $save = $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
+        
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId, $save);
+        
+        $contextUrl = $context->createUrl($args);
+        $editorUrl = $parameters->getProcessEditorDataUrl();
+        $templateUrl = $parameters->getStaticEditorTemplateUrl();
+        
+        $instructions->stylesheetUrls->add(...$parameters->getProcessStylesheetUrls());
+        
+        $domDelegate = function () use ($contextUrl, $editorUrl, $templateUrl): DOMWriterInterface {
+            $writer = new AssetFragmentDOMWriter($contextUrl);
+            $writer->appendChild(new AssetDocumentDOMWriter($editorUrl, $editorUrl->getArguments()
+                ->get(ResourceParameterFilter::PARAM_INFOSET_ID)));
+            $template = Module::resolveToDOMWriter($templateUrl);
+            return new TransformationDOMWriter($writer, $template);
+        };
+        
+        $dependentFiles = [];
+        $dependentFiles[] = __FILE__;
+        $dependentFiles[] = (string) $context->getManifest()->createManifestFile('manifest.xml');
+        $dependentFiles[] = (string) $editorUrl;
+        $dependentFiles[] = (string) $templateUrl;
+        foreach ($parameters->getStaticEditorGlobalUrls() as $globalUrl) {
+            $dependentFiles[] = (string) $globalUrl;
         }
         
-        $repository = $args->get(EditorParameterFilter::PARAM_REPOSITORY);
-        $game = $args->get(EditorParameterFilter::PARAM_GAME);
-        $version = $args->get(EditorParameterFilter::PARAM_VERSION);
-        $user = $args->get(EditorParameterFilter::PARAM_USER);
-        $infosetId = $args->get(EditorParameterFilter::PARAM_INFOSET_ID);
-        
-        $request = (array) $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
-        
-        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
-        
-        $controller = new EditorController();
-        $config = $controller->createEditorConfig($parameters);
-        $editor = $controller->createEditor($config);
-        
-        $action = $request['action'] ?? 'view';
-        
-        if ($action === 'upload') {
-            $errors = $_FILES['save']['error'] ?? [];
-            foreach ($errors as $archiveId => $error) {
-                if ($error === UPLOAD_ERR_OK) {
-                    $path = $_FILES['save']['tmp_name'][$archiveId] ?? '';
-                    $editor->writeGameFile($archiveId, FileInfoFactory::createFromUpload($path));
-                }
-            }
-        }
-        
-        if (isset($request['archiveId'])) {
-            $archiveId = $request['archiveId'];
-            $editor->loadArchive($archiveId);
-            $editor->applyValues($request['data'] ?? []);
-            
-            $archive = $editor->getArchiveNode($archiveId);
-            
-            if ($action === 'save') {
-                $editor->writeGameFile($archiveId, $archive);
-            }
-            
-            if ($action === 'download') {
-                $resultBuilder = new FileWriterResultBuilder($archive, $archive->getArchiveId());
-                $strategies = new ExecutableStrategies($resultBuilder);
-                throw new HttpDownloadAssetException($strategies);
-            }
-        } else {
-            $editor->load();
-        }
-        
-        $savegame = $editor->getSavegameNode();
-        
-        $writer = $savegame->getChunkWriter();
-        
-        // $shouldRefreshCacheDelegate = function (SplFileInfo $cacheFile) {
-        // return true;
-        // };
-        // $writer = new ChunkWriterFileCache($writer, FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
-        
-        $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.xml');
+        $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);
+        $writer = new DecoratedDOMWriter($writer, $instructions->stylesheetUrls, $instructions->scriptUrls, $instructions->moduleUrls, $instructions->contentUrls);
+        $writer = new DOMWriterFileCacheWithDependencies($writer, $context->createCacheFile("$infosetId.xml", $args), ...$dependentFiles);
+        $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }
-    
-    // if ($uploadedArchives = $editor->getConfigValue('uploadedArchives')) {
-    // if (isset($uploadedArchives[$this->name])) {
-    // move_uploaded_file($uploadedArchives[$this->name], $tempFile);
-    // }
-    // }
-    // if (isset($request['editor'])) {
-    // if (isset($request['editor']['action'])) {
-    // switch ($request['editor']['action']) {
-    // case 'download':
-    // $resultBuilder = new NullResultBuilder();
-    // foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
-    // if ($file = $editor->getArchiveFile($fileName)) {
-    // $resultBuilder = new FileWriterResultBuilder($file);
-    // break;
-    // }
-    // }
-    // break;
-    // case 'save':
-    // foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
-    // $editor->writeArchiveFile($fileName);
-    // }
-    // break;
-    // }
-    // }
-    // }
 }
 

@@ -21,12 +21,15 @@ final class EditorParameters {
     
     private string $infoset;
     
-    public function __construct(string $repository, string $game, string $version, string $user, string $infoset) {
+    private array $save;
+    
+    public function __construct(string $repository, string $game, string $version, string $user, string $infoset, array $save = []) {
         $this->repository = $repository;
         $this->game = $game;
         $this->version = $version;
         $this->user = $user;
         $this->infoset = $infoset;
+        $this->save = $save;
     }
     
     public function withInfoset(string $infoset): self {
@@ -75,6 +78,19 @@ final class EditorParameters {
         ]);
     }
     
+    private ?FarahUrlArguments $editorArgs = null;
+    
+    private function getEditorArgs(): FarahUrlArguments {
+        return $this->editorArgs ??= FarahUrlArguments::createFromValueList([
+            EditorParameterFilter::PARAM_REPOSITORY => $this->repository,
+            EditorParameterFilter::PARAM_GAME => $this->game,
+            EditorParameterFilter::PARAM_VERSION => $this->version,
+            EditorParameterFilter::PARAM_USER => $this->user,
+            EditorParameterFilter::PARAM_INFOSET_ID => $this->infoset,
+            EditorParameterFilter::PARAM_EDITOR_DATA => $this->save
+        ]);
+    }
+    
     private ?FarahUrl $convertUrl = null;
     
     public function getStaticConvertUrl(): FarahUrl {
@@ -95,6 +111,10 @@ final class EditorParameters {
     
     public function getStaticEditorTemplateUrl(): FarahUrl {
         return $this->editorTemplateUrl ??= FarahUrl::createFromReference("/templates/$this->game/editor/$this->infoset", $this->getAmberUrl());
+    }
+    
+    public function getStaticEditorGlobalUrls(): iterable {
+        yield FarahUrl::createFromReference("/templates/$this->game/editor/globals/editor", $this->getAmberUrl());
     }
     
     private ?FarahUrl $dictionaryTemplateUrl = null;
@@ -127,6 +147,14 @@ final class EditorParameters {
         return $this->amberdataUrl ??= $this->getAmberUrl()
             ->withPath("/api/amberdata")
             ->withQueryArguments($this->getAmberArgs());
+    }
+    
+    private ?FarahUrl $processEditorUrl = null;
+    
+    public function getProcessEditorDataUrl(): FarahUrl {
+        return $this->processEditorUrl ??= $this->getAmberUrl()
+            ->withPath("/api/editor-data")
+            ->withQueryArguments($this->getEditorArgs());
     }
     
     private ?FarahUrl $dictionaryUrl = null;

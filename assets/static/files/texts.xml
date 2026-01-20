@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <link href="http://localhost/slothsoft@farah/font-face-generator?assets=//slothsoft@amber/fonts" rel="stylesheet" type="text/css" />
+
+        <style type="text/css"><![CDATA[
+body {
+    margin: 0;
+}
+
+main {
+    background: #666655;
+}
+
+p {
+    margin: 0;
+    padding: 12px;
+    width: 550px;
+    height: 350px;
+    box-sizing: border-box;
+}
+
+.text {
+    color: #ffffee;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    text-shadow: 0.125em 0.125em 0px black;
+    line-height: 1em;
+}
+.text span {
+    display: inline-block;
+    width: 12px;
+    text-align: left;
+}
+
+main > * {
+    margin: 0;
+}
+main > *:nth-child(1) {
+    font-family: "Amberworld 5px", monospace;
+}
+main > *:nth-child(2) {
+    font-family: "Ambermoon-game", monospace;
+}
+main > *:nth-child(3) {
+    font-family: "Ambermoon-rune", monospace;
+}
+main > *:nth-child(2) .text,
+main > *:nth-child(3) .text {
+    font-size: 10px;
+    line-height: 1.6em;
+    text-shadow: 0.2em 0.2em 0px black;
+}
+	]]></style>
+        <template><![CDATA[
+Liebe Computerspielwissenschaftler*innen!
+
+Es ist meine außerordentliche Freude, euch 
+zum hundertvierundsiebzigsten Historischen 
+Spieleabend die wilden neunziger der Rol-
+lenspiele zu präsentieren. Wir spielen drei
+perlen des Genres, die alle auf ihre Art 
+nach den Sternen griffen und damit ein Er-
+lebnis schufen, welches ihre Communities 
+auch Dreißig Jahre später noch lieben.
+
+Wann? Diesen Freitag, um Sieben (s.t.)
+Wo? Im Games Innovation Lab im Zapf
+Wer? Daniel moderiert!
+Was? Open-World Dungeon Crawlers:
+- Ambermoon
+- The Elder Scrolls II: Daggerfall
+- Might and Magic VI: The Mandate of Heaven
+
+Ihr seid alle herzlich eingeladen!]]></template>
+        <script type="module" async="async"><![CDATA[
+const targets = document.querySelectorAll("article");
+for (const target of targets) {
+    for (const template of document.querySelectorAll("template")) {
+        const text = template.content.textContent.trim();
+        const p = document.createElementNS(target.namespaceURI, "p");
+        p.setAttribute("class", "text");
+        for (let i = 0; i < text.length; i++) {
+            const t = text[i];
+            if (t == "\n") {
+                p.appendChild(document.createElementNS(target.namespaceURI, "br"));
+            } else {
+                const span = document.createElementNS(target.namespaceURI, "span");
+                span.textContent = t;
+                p.appendChild(span);
+            }
+        }
+        target.appendChild(p);
+    }
+}
+        ]]></script>
+    </head>
+    <body>
+        <main>
+            <article />
+            <article />
+            <article />
+        </main>
+    </body>
+</html>

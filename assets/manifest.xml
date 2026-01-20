@@ -8,13 +8,22 @@
 
         <custom-asset name="gfx" executable-builder="Slothsoft\Amber\Assets\GfxBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\GfxParameterFilter" />
 
-        <custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter" />
-        <custom-asset name="editor-template" executable-builder="Slothsoft\Amber\Assets\EditorTemplateBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter" />
+        <custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter">
+            <import ref="/includes/AmberPicker" />
+        </custom-asset>
+        <custom-asset name="editor-data" executable-builder="Slothsoft\Amber\Assets\EditorDataBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter" />
 
         <custom-asset name="viewer" executable-builder="Slothsoft\Amber\Assets\ViewerBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter">
+            <import ref="/includes/AmberPicker" />
+        </custom-asset>
+    </fragment>
+
+    <fragment name="includes">
+        <fragment name="AmberPicker">
+            <link-stylesheet ref="//farah/font-face-generator?assets=//slothsoft@amber/fonts" />
             <link-stylesheet ref="/css/AmberPicker" />
             <link-module ref="/js/AmberPicker" />
-        </custom-asset>
+        </fragment>
     </fragment>
 
     <resource-directory name="cli" type="application/vnd.microsoft.portable-executable" />
@@ -22,8 +31,8 @@
     <resource-directory name="css" type="text/css" />
 
     <resource-directory name="dictionary" type="application/xml" />
-    
-    <resource-directory name="fonts" type="application/font-sfnt" />
+
+    <resource-directory name="fonts" type="font/*" />
 
     <resource-directory name="js" type="application/javascript" />
 
@@ -34,6 +43,7 @@
     <resource-directory name="source" type="*/*" />
 
     <directory name="static">
+        <resource-directory name="files" type="*/*" />
         <directory name="ambermoon">
             <fragment name="css">
                 <use-manifest name="items" ref="/api/stylesheet?infosetId=lib.items" />

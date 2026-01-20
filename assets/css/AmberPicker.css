@@ -452,9 +452,3 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 	background-color: #444433;
 	border-style: solid;
 }
-
-@font-face {
-	font-family: "Amberworld 5px";
-	src: local("Amberworld 5px"),
-		url("/slothsoft@amber/fonts/Amberworld 5px");
-}

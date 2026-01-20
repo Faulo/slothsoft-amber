@@ -1,0 +1,116 @@
+<?php
+declare(strict_types = 1);
+namespace Slothsoft\Amber\Assets;
+
+use Slothsoft\Amber\CLI\AmbGfx;
+use Slothsoft\Amber\Controller\EditorController;
+use Slothsoft\Amber\Controller\EditorParameters;
+use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
+use Slothsoft\Core\IO\FileInfoFactory;
+use Slothsoft\Farah\Exception\HttpDownloadAssetException;
+use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
+use Slothsoft\Farah\Module\Asset\AssetInterface;
+use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStrategyInterface;
+use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
+use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
+
+final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
+    
+    public function buildExecutableStrategies(AssetInterface $context, FarahUrlArguments $args): ExecutableStrategies {
+        if (! AmbGfx::isSupported()) {
+            return new ExecutableStrategies(new NullResultBuilder());
+        }
+        
+        $repository = $args->get(EditorParameterFilter::PARAM_REPOSITORY);
+        $game = $args->get(EditorParameterFilter::PARAM_GAME);
+        $version = $args->get(EditorParameterFilter::PARAM_VERSION);
+        $user = $args->get(EditorParameterFilter::PARAM_USER);
+        $infosetId = $args->get(EditorParameterFilter::PARAM_INFOSET_ID);
+        
+        $request = (array) $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
+        
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
+        
+        $controller = new EditorController();
+        $config = $controller->createEditorConfig($parameters);
+        $editor = $controller->createEditor($config);
+        
+        $action = $request['action'] ?? 'view';
+        
+        if ($action === 'upload') {
+            $errors = $_FILES[EditorParameterFilter::PARAM_EDITOR_DATA]['error'] ?? [];
+            foreach ($errors as $archiveId => $error) {
+                if ($error === UPLOAD_ERR_OK) {
+                    $path = $_FILES[EditorParameterFilter::PARAM_EDITOR_DATA]['tmp_name'][$archiveId] ?? '';
+                    $editor->writeGameFile($archiveId, FileInfoFactory::createFromUpload($path));
+                }
+            }
+        }
+        
+        if (isset($request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE])) {
+            $archiveId = $request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE];
+            $editor->loadArchive($archiveId);
+            $editor->applyValues($request['data'] ?? []);
+            
+            $archive = $editor->getArchiveNode($archiveId);
+            $archive->load(true);
+            
+            if ($action === 'save') {
+                $editor->writeGameFile($archiveId, $archive);
+            }
+            
+            if ($action === 'download') {
+                $resultBuilder = new FileWriterResultBuilder($archive, $archive->getArchiveId());
+                $strategies = new ExecutableStrategies($resultBuilder);
+                throw new HttpDownloadAssetException($strategies);
+            }
+        } else {
+            $editor->load();
+        }
+        
+        // $url = $parameters->getProcessDatasetUrl();
+        // $resultBuilder = new ProxyResultBuilder(Module::resolveToExecutable($url));
+        // return new ExecutableStrategies($resultBuilder);
+        
+        $savegame = $editor->getSavegameNode();
+        
+        $writer = $savegame->getChunkWriter();
+        
+        // $shouldRefreshCacheDelegate = function (SplFileInfo $cacheFile) {
+        // return true;
+        // };
+        // $writer = new ChunkWriterFileCache($writer, FileInfoFactory::createTempFile(), $shouldRefreshCacheDelegate);
+        
+        $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.xml');
+        return new ExecutableStrategies($resultBuilder);
+    }
+    
+    // if ($uploadedArchives = $editor->getConfigValue('uploadedArchives')) {
+    // if (isset($uploadedArchives[$this->name])) {
+    // move_uploaded_file($uploadedArchives[$this->name], $tempFile);
+    // }
+    // }
+    // if (isset($request['editor'])) {
+    // if (isset($request['editor']['action'])) {
+    // switch ($request['editor']['action']) {
+    // case 'download':
+    // $resultBuilder = new NullResultBuilder();
+    // foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
+    // if ($file = $editor->getArchiveFile($fileName)) {
+    // $resultBuilder = new FileWriterResultBuilder($file);
+    // break;
+    // }
+    // }
+    // break;
+    // case 'save':
+    // foreach ($editorConfig['selectedArchives'] as $fileName => $tmp) {
+    // $editor->writeArchiveFile($fileName);
+    // }
+    // break;
+    // }
+    // }
+    // }
+}
+
