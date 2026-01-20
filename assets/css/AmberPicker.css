@@ -327,6 +327,10 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 	white-space: nowrap;
 }
 
+.amber-text--dark {
+	color: #888877;
+}
+
 .amber-text--gray {
 	color: #aaaa99;
 }
@@ -345,6 +349,10 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 
 .amber-text--red {
 	color: #cc4433;
+}
+
+.amber-text--runes {
+	font-family: Ambermoon-rune;
 }
 
 .amber-item__worth, .amber-item__stats {

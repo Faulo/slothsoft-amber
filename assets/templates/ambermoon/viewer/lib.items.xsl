@@ -96,7 +96,21 @@
                 <xsl:when test="saa:text">
                     <div class="amber-item__textbox">
                         <xsl:for-each select="saa:text/saa:paragraph">
-                            <p class="amber-text amber-text--silver">
+                            <p>
+                                <xsl:attribute name="class">
+                                    <xsl:text>amber-text</xsl:text>
+                                    <xsl:choose>
+                                        <xsl:when test="@ink">
+                                            <xsl:value-of select="concat(' amber-text--', @ink)" />
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:text> amber-text--silver</xsl:text>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                    <xsl:if test="@language">
+                                        <xsl:value-of select="concat(' amber-text--', @language)" />
+                                    </xsl:if>
+                                </xsl:attribute>
                                 <xsl:value-of select="normalize-space(.)" />
                             </p>
                         </xsl:for-each>
