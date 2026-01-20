@@ -14,19 +14,20 @@
 
     <xsl:template match="saa:portrait">
         <article data-portrait-id="{@id}" class="amber-portrait">
+            <div class="amber-portrait__id amber-text amber-text--yellow">
+                <xsl:text>Portrait #</xsl:text>
+                <xsl:value-of select="format-number(@id, '000')" />
+            </div>
             <amber-picker infoset="lib.portraits" type="portrait" role="button" tabindex="0">
                 <amber-portrait-id value="{@id}" />
             </amber-picker>
-
-            <div class="amber-portrait__name">
-                <xsl:value-of select="@name" />
+            <div class="amber-portrait__name amber-text amber-text--silver">
+                <xsl:for-each select="//saa:portrait-instance[@id = current()/@id]">
+                    <div class="amber-portrait__character">
+                        <xsl:value-of select="@character" />
+                    </div>
+                </xsl:for-each>
             </div>
-
-            <xsl:for-each select="//saa:portrait-instance[@id = current()/@id]">
-                <div class="amber-portrait__character">
-                    <xsl:value-of select="@character" />
-                </div>
-            </xsl:for-each>
         </article>
     </xsl:template>
 </xsl:stylesheet>

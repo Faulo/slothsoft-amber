@@ -351,6 +351,10 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 	color: #cc4433;
 }
 
+.amber-text--green {
+	color: #AAAA44;
+}
+
 .amber-text--runes {
 	font-family: Ambermoon-rune;
 }
@@ -458,4 +462,34 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 	border-style: solid;
 	background-color: #444433;
 	border-style: solid;
+}
+
+amber-picker[type="portrait"] {
+	width: fit-content;
+	height: fit-content;
+	margin: auto;
+	background: linear-gradient(#001100, #0011ff);
+}
+
+.amber-portrait {
+	text-align: center;
+	width: fit-content;
+	background-color: #666655;
+	padding: 1ch 0;
+}
+
+.amber-portrait__name {
+	height: 4em;
+	width: 16ch; display : flex;
+	flex-direction: column;
+	justify-content: space-around;
+	display: flex;
+}
+
+.amber-portrait__name>* {
+	line-height: 1em;
+}
+
+.amber-portrait amber-portrait-id::after {
+	font-size: 5px !important;
 }
