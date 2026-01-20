@@ -5,7 +5,7 @@
 	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/globals/maps" />
 	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/globals/characters" />
 
-	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/archives/Amberfiles/AM2_CPU" />
+	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/archives/Amberfiles/AM2_BLIT" />
 	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/archives/Amberfiles/Dictionary.german" />
 
 	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/archives/Amberfiles/1Map_texts.amb" />
