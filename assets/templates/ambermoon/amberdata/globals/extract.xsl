@@ -311,7 +311,7 @@
         <xsl:param name="text" select="string(.)" />
         <xsl:param name="ink" select="$INK_DEFAULT_VALUE" />
         <xsl:param name="language" select="''" />
-        <xsl:variable name="normalized" select="normalize-space(translate($text, '$', '&#160;'))" />
+        <xsl:variable name="normalized" select="normalize-space(translate($text, '×$', 'ß&#160;'))" />
         <xsl:choose>
             <xsl:when test="$normalized = ''" />
             <xsl:when test="contains($normalized, $INK_DEFAULT_KEY)">
