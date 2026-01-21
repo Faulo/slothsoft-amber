@@ -114,6 +114,31 @@
         </table>
     </xsl:template>
 
+
+    <xsl:template match="saa:class-instance" mode="character">
+        <table class="amber-character__skills">
+            <caption class="amber-text amber-text--green">fähigkeiten</caption>
+            <tbody>
+                <xsl:for-each select="saa:skill">
+                    <tr>
+                        <td>
+                            <xsl:value-of select="@name" />
+                        </td>
+                        <td>
+                            <xsl:value-of select="concat(@current, '%')" />
+                        </td>
+                        <td>
+                            <xsl:text>/</xsl:text>
+                        </td>
+                        <td>
+                            <xsl:value-of select="concat(@maximum, '%')" />
+                        </td>
+                    </tr>
+                </xsl:for-each>
+            </tbody>
+        </table>
+    </xsl:template>
+
     <xsl:template match="saa:race">
         <article data-race-id="{@id}" data-template="flex" class="Race">
             <xsl:value-of select="@name" />
@@ -147,177 +172,218 @@
         </table>
     </xsl:template>
 
+    <xsl:template match="saa:race" mode="character">
+        <table class="amber-character__attributes">
+            <caption class="amber-text amber-text--green">attribute</caption>
+            <tbody>
+                <xsl:for-each select="saa:attribute">
+                    <tr class="right-aligned">
+                        <td data-hover-text="{@name}">
+                            <xsl:value-of select="@name" />
+                        </td>
+                        <xsl:if test="@current">
+                            <td>
+                                <xsl:value-of select="@current" />
+                            </td>
+                            <td>
+                                <xsl:text>/</xsl:text>
+                            </td>
+                        </xsl:if>
+                        <td>
+                            <xsl:value-of select="@maximum" />
+                        </td>
+                    </tr>
+                </xsl:for-each>
+            </tbody>
+        </table>
+    </xsl:template>
+
 
     <xsl:template match="saa:monster | saa:npc | saa:pc">
         <xsl:variable name="isMage" select="saa:class-instance/saa:sp/@maximum &gt; 0" />
-        <article data-monster-id="{@id}" class="Character">
-            <table>
-                <tr>
-                    <td class="attributes">
-                        <h3>attributes</h3>
-                        <xsl:apply-templates select="saa:race" mode="itemlist-inline" />
-                    </td>
-                    <td class="languages">
-                        <h3>languages</h3>
+        <article data-character-id="{@id}" class="amber-character amber-character--{local-name()} amber-text">
+
+            <div class="amber-character__tables">
+                <div class="amber-character__body">
+                    <div class="amber-character__tables">
+                        <xsl:apply-templates select="saa:race" mode="character" />
                         <xsl:variable name="languages" select="saa:language/@name" />
-                        <table>
-                            <xsl:for-each select="key('dictionary-option', 'languages')">
-                                <tr>
-                                    <td>
-                                        <xsl:if test="@val = $languages">
-                                            <xsl:value-of select="@val" />
-                                        </xsl:if>
-                                        <xsl:text>&#160;</xsl:text>
-                                    </td>
-                                </tr>
-                            </xsl:for-each>
+                        <table class="amber-character__languages">
+                            <caption class="amber-text amber-text--green">sprachen</caption>
+                            <tbody>
+                                <xsl:for-each select="key('dictionary-option', 'languages')">
+                                    <tr>
+                                        <td>
+                                            <xsl:if test="@val = $languages">
+                                                <xsl:value-of select="@val" />
+                                            </xsl:if>
+                                        </td>
+                                    </tr>
+                                </xsl:for-each>
+                            </tbody>
                         </table>
-                    </td>
-                    <td class="skills">
-                        <h3>skills</h3>
-                        <xsl:apply-templates select="saa:class-instance" mode="itemlist-inline" />
-                    </td>
-                    <td class="character-sheet">
-                        <table>
-                            <tr>
-                                <td rowspan="5">
-                                    <xsl:apply-templates select="." mode="itemlist-picture" />
-                                </td>
-                                <td>
-                                    <xsl:value-of select="saa:race/@name" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <xsl:value-of select="concat(@gender, ' ')" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    age:
-                                    <xsl:value-of select="saa:race/saa:age/@current" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <xsl:value-of select="saa:class-instance/@name" />
-                                    <xsl:text> </xsl:text>
-                                    <xsl:value-of select="@level" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    ep:
-                                    <xsl:value-of select="saa:class-instance/@experience" />
-                                </td>
-                            </tr>
-                        </table>
-                        <table>
-                            <tr>
-                                <td colspan="2" class="yellow">
-                                    <xsl:value-of select="@name" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    lp:
-                                    <xsl:value-of select="concat(saa:class-instance/saa:hp/@current, '/', saa:class-instance/saa:hp/@maximum)" />
-                                </td>
-                                <td>
-                                    <xsl:if test="$isMage">
-                                        sp:
-                                        <xsl:value-of select="concat(saa:class-instance/saa:sp/@current, '/', saa:class-instance/saa:sp/@maximum)" />
-                                    </xsl:if>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    tp:
-                                    <xsl:value-of select="@training-points" />
-                                </td>
-                                <td>
-                                    <xsl:if test="$isMage">
-                                        slp:
-                                        <xsl:value-of select="@spelllearn-points" />
-                                    </xsl:if>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    gold:
-                                    <xsl:value-of select="@gold" />
-                                </td>
-                                <td>
-                                    food:
-                                    <xsl:value-of select="@food" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    attack:
-                                    <xsl:value-of select="@attack" />
-                                </td>
-                                <td>
-                                    defense:
-                                    <xsl:value-of select="@defense" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    m-b-w:
-                                    <xsl:value-of select="@magic-attack" />
-                                </td>
-                                <td>
-                                    m-b-r:
-                                    <xsl:value-of select="@magic-defense" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    APR:
+                    </div>
+                    <xsl:if test="saa:equipment">
+                        <div class="amber-character__equipment">
+                            <h3 class="amber-text amber-text--green">ausrüstung</h3>
+                            <xsl:apply-templates select="saa:equipment" mode="character" />
+                        </div>
+                    </xsl:if>
+                </div>
+                <div>
+                    <div class="amber-character__tables">
+                        <div>
+                            <xsl:apply-templates select="saa:class-instance" mode="character" />
+                            <xsl:if test="saa:equipment">
+                                <div class="amber-character__apr">
+                                    <span data-hover-text="Attacken pro Runde">APR:</span>
                                     <xsl:value-of select="@attacks-per-round" />
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-            <xsl:if test="saa:equipment and saa:inventory">
-                <table>
-                    <tr>
-                        <td>
-                            <h3>equipment</h3>
-                            <xsl:apply-templates select="saa:equipment" mode="itemlist-inline" />
-                        </td>
-                        <td>
-                            <h3>inventory</h3>
-                            <xsl:apply-templates select="saa:inventory" mode="itemlist-inline" />
-                            <xsl:if test="saa:class-instance/saa:spellbook-instance/*">
-                                <h3>spells</h3>
-                                <xsl:apply-templates select="saa:class-instance/saa:spellbook-instance[*]" mode="itemlist-inline" />
+                                    <span data-hover-text="Weitere APR alle {saa:class-instance/@apr-per-level} Stufen">
+                                        <xsl:value-of select="concat(' (', saa:class-instance/@apr-per-level, ')')" />
+                                    </span>
+                                </div>
                             </xsl:if>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                        <div class="amber-character__sheet">
+                            <div class="amber-character__tables">
+                                <xsl:apply-templates select="." mode="character-picture" />
+                                <ul class="amber-character__basic-info">
+                                    <li>
+                                        <xsl:value-of select="saa:race/@name" />
+                                    </li>
+                                    <li>
+                                        <xsl:value-of select="@gender" />
+                                    </li>
+                                    <li>
+                                        <xsl:text>alter: </xsl:text>
+                                        <xsl:value-of select="saa:race/saa:age/@current" />
+                                    </li>
+                                    <li>
+                                        <xsl:value-of select="saa:class-instance/@name" />
+                                        <xsl:text> </xsl:text>
+                                        <xsl:value-of select="@level" />
+                                    </li>
+                                    <li>
+                                        <xsl:text>ep:</xsl:text>
+                                        <xsl:value-of select="saa:class-instance/@experience" />
+                                    </li>
+                                    <li>
+                                        <span class="amber-icon amber-icon--gold">:</span>
+                                        <xsl:value-of select="@gold" />
+                                    </li>
+                                    <li>
+                                        <span class="amber-icon amber-icon--food">:</span>
+                                        <xsl:value-of select="@food" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="amber-character__combat-info">
+                                <li class="amber-character__name amber-text amber-text--yellow">
+                                    <xsl:value-of select="@name" />
+                                </li>
+                                <li>
+                                    <span data-ch="3">lp:</span>
+                                    <span data-ch="4">
+                                        <xsl:value-of select="saa:class-instance/saa:hp/@current" />
+                                    </span>
+                                    <span>/</span>
+                                    <span data-ch="4">
+                                        <xsl:value-of select="saa:class-instance/saa:hp/@maximum" />
+                                    </span>
+                                    <span data-ch="5">tp:</span>
+                                    <span data-ch="3">
+                                        <xsl:value-of select="@training-points" />
+                                    </span>
+                                </li>
+                                <li>
+                                    <xsl:if test="$isMage">
+                                        <span data-ch="3">sp:</span>
+                                        <span data-ch="4">
+                                            <xsl:value-of select="saa:class-instance/saa:sp/@current" />
+                                        </span>
+                                        <span>/</span>
+                                        <span data-ch="4">
+                                            <xsl:value-of select="saa:class-instance/saa:sp/@maximum" />
+                                        </span>
+                                        <span data-ch="5">slp:</span>
+                                        <span data-ch="3">
+                                            <xsl:value-of select="@spelllearn-points" />
+                                        </span>
+                                    </xsl:if>
+                                </li>
+                                <xsl:if test="saa:equipment">
+                                    <li>
+                                        <span class="amber-icon amber-icon--attack">:</span>
+                                        <span data-ch="4">
+                                            <xsl:choose>
+                                                <xsl:when test="@attack > 0">
+                                                    <xsl:text>+</xsl:text>
+                                                    <xsl:value-of select="@attack" />
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of select="@attack" />
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </span>
+                                        <span data-ch="4" class="amber-icon amber-icon--magic-attack" data-hover-text="Magische Angriffskraft">:</span>
+                                        <span>
+                                            <xsl:value-of select="@magic-attack" />
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="amber-icon amber-icon--defense">:</span>
+                                        <span data-ch="4">
+                                            <xsl:choose>
+                                                <xsl:when test="@defense > 0">
+                                                    <xsl:text>+</xsl:text>
+                                                    <xsl:value-of select="@defense" />
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:value-of select="@defense" />
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </span>
+                                        <span data-ch="4" class="amber-icon amber-icon--magic-defense" data-hover-text="Magischer Rüstschutz">:</span>
+                                        <span>
+                                            <xsl:value-of select="@magic-defense" />
+                                        </span>
+                                    </li>
+                                </xsl:if>
+                            </ul>
+                        </div>
+                    </div>
+                    <xsl:if test="saa:inventory">
+                        <div class="amber-character__inventory">
+                            <h3 class="amber-text amber-text--green">inventar</h3>
+                            <xsl:apply-templates select="saa:inventory" mode="character" />
+                        </div>
+                    </xsl:if>
+                </div>
+            </div>
+            <xsl:if test="saa:class-instance/saa:spellbook-instance/*">
+                <div class="amber-character__spells">
+                    <h3 class="amber-text amber-text--green">Zaubersprüche</h3>
+                    <xsl:apply-templates select="saa:class-instance/saa:spellbook-instance[*]" mode="character" />
+                </div>
             </xsl:if>
             <xsl:if test="saa:event">
-                <div>
-                    <h3>dialog</h3>
+                <div class="amber-character__dialog">
+                    <h3 class="amber-text amber-text--green">dialogoptionen</h3>
                     <xsl:for-each select="saa:event">
                         <details>
-                            <summary class="textlabel">
+                            <summary>
                                 <xsl:for-each select="saa:trigger">
                                     <xsl:value-of select="@name" />
                                     <xsl:if test="@value">
                                         <xsl:text>: </xsl:text>
-                                        <span class="yellow">
+                                        <span class="amber-text amber-text--yellow">
                                             <xsl:value-of select="@value" />
                                         </span>
                                     </xsl:if>
                                 </xsl:for-each>
                             </summary>
                             <xsl:for-each select="saa:text">
-                                <div class="textbox">
+                                <div class="amber-textbox amber-text amber-text--silver">
                                     <xsl:for-each select="saa:paragraph">
                                         <p>
                                             <xsl:value-of select="normalize-space(.)" />
@@ -332,60 +398,51 @@
         </article>
     </xsl:template>
 
-    <xsl:template match="saa:monster" mode="itemlist-picture">
+    <xsl:template match="saa:monster" mode="character-picture">
         <amber-picker infoset="lib.monsters" type="monster" role="button" tabindex="0">
             <amber-monster-id value="{@id}" />
         </amber-picker>
     </xsl:template>
 
-    <xsl:template match="saa:pc | saa:npc" mode="itemlist-picture">
+    <xsl:template match="saa:pc | saa:npc" mode="character-picture">
         <amber-picker infoset="lib.portraits" type="portrait" role="button" tabindex="0">
             <amber-portrait-id value="{@portrait-id}" />
         </amber-picker>
     </xsl:template>
 
-    <xsl:template match="saa:spellbook-instance" mode="itemlist-inline">
-        <div class="spells">
-            <h3 class="yellow">
-                <xsl:value-of select="@name" />
-            </h3>
-            <ul>
-                <xsl:for-each select="saa:spell-reference">
-                    <li>
-                        <xsl:value-of select="@name" />
-                    </li>
-                </xsl:for-each>
-            </ul>
-        </div>
+    <xsl:template match="saa:spellbook-instance" mode="character">
+        <ul>
+            <xsl:for-each select="saa:spell-reference">
+                <li class="amber-text amber-text--spellbook-{../@id}">
+                    <xsl:value-of select="@name" />
+                </li>
+            </xsl:for-each>
+        </ul>
     </xsl:template>
 
-    <xsl:template match="saa:equipment" mode="itemlist-inline">
+    <xsl:template match="saa:equipment" mode="character">
         <xsl:variable name="options" select="key('dictionary-option', 'equipment-slots')" />
-        <div class="equipment" data-template="flex">
-            <ul>
-                <xsl:for-each select="saa:slot">
-                    <xsl:variable name="pos" select="position()" />
-                    <li>
-                        <xsl:apply-templates select="." mode="itemlist-inline" />
-                        <span class="name">
-                            <xsl:value-of select="$options[$pos]/@val" />
-                        </span>
-                    </li>
-                </xsl:for-each>
-            </ul>
-        </div>
+        <ul>
+            <xsl:for-each select="saa:slot">
+                <xsl:variable name="pos" select="position()" />
+                <li>
+                    <xsl:apply-templates select="." mode="itemlist-inline" />
+                    <span class="name">
+                        <xsl:value-of select="$options[$pos]/@val" />
+                    </span>
+                </li>
+            </xsl:for-each>
+        </ul>
     </xsl:template>
 
-    <xsl:template match="saa:inventory" mode="itemlist-inline">
-        <div class="inventory" data-template="flex">
-            <ul>
-                <xsl:for-each select="saa:slot">
-                    <li>
-                        <xsl:apply-templates select="." mode="itemlist-inline" />
-                    </li>
-                </xsl:for-each>
-            </ul>
-        </div>
+    <xsl:template match="saa:inventory" mode="character">
+        <ul>
+            <xsl:for-each select="saa:slot">
+                <li>
+                    <xsl:apply-templates select="." mode="itemlist-inline" />
+                </li>
+            </xsl:for-each>
+        </ul>
     </xsl:template>
 
     <xsl:template match="saa:slot" mode="itemlist-inline">

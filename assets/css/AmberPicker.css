@@ -3,7 +3,6 @@ amber-picker {
 	display: block;
 	position: relative;
 	box-sizing: border-box;
-	width: 3ch;
 	border-color: #222222 #aaaa99 #aaaa99 #222222;
 	border-width: 0.125em;
 	border-style: solid;
@@ -13,6 +12,10 @@ amber-picker {
 /* items */
 amber-picker.item-picker {
 	margin: auto;
+}
+
+amber-picker[type="item"] {
+	width: 3ch;
 }
 
 amber-item-id, amber-item-amount, amber-item-charge, amber-broken,
@@ -354,6 +357,22 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 	color: #AAAA44;
 }
 
+.amber-text--spellbook-0 {
+	color: #fefeff;
+}
+
+.amber-text--spellbook-1 {
+	color: #8798a9;
+}
+
+.amber-text--spellbook-2 {
+	color: #cfcf2e;
+}
+
+.amber-text--spellbook-3 {
+	color: #cc4433;
+}
+
 .amber-text--runes {
 	font-family: Ambermoon-rune;
 }
@@ -531,6 +550,10 @@ amber-portrait-id[value="102"] {
 	border-spacing: 0;
 }
 
+.amber-character tr {
+	height: 1.4em;
+}
+
 .amber-character td {
 	padding: 0;
 }
@@ -576,7 +599,15 @@ amber-portrait-id[value="102"] {
 	margin-left: 1ch;
 }
 
-.amber-character__languages td {
+.amber-character__attributes {
+	width: 10ch;
+}
+
+.amber-character__languages {
+	width: 12ch;
+}
+
+.amber-character__skills {
 	width: 12ch;
 }
 
@@ -601,6 +632,10 @@ amber-portrait-id[value="102"] {
 
 .amber-character__equipment  amber-picker {
 	margin: auto;
+}
+
+.amber-character__apr {
+	text-align: center;
 }
 
 .amber-character__inventory ul {
@@ -636,6 +671,10 @@ amber-portrait-id[value="102"] {
 	text-align: center;
 }
 
+.amber-character__sheet {
+	width: 22ch;
+}
+
 .amber-character__basic-info {
 	flex-grow: 1;
 	margin: 0;
@@ -666,6 +705,14 @@ amber-portrait-id[value="102"] {
 
 .amber-character__sheet [data-ch] {
 	text-align: right;
+}
+
+.amber-character--monster .amber-character__sheet {
+	width: 40ch;
+}
+
+.amber-character--monster .amber-character__spells ul {
+	grid-template-columns: repeat(4, 1fr);
 }
 
 .amber-icon {
