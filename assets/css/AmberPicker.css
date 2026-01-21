@@ -15,7 +15,7 @@ amber-picker.item-picker {
 }
 
 amber-picker[type="item"] {
-	width: 3ch;
+	width: fit-content;
 }
 
 amber-item-id, amber-item-amount, amber-item-charge, amber-broken,
