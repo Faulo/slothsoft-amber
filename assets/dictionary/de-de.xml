@@ -13,4 +13,34 @@
     <sfd:text xml:id="Hand">Hand</sfd:text>
     <sfd:text xml:id="Finger">Finger</sfd:text>
     <sfd:text xml:id="Stats">Stats</sfd:text>
+
+
+    <sfd:text xml:id="att.STÄ">Stärke</sfd:text>
+    <sfd:text xml:id="att.INT">Intelligenz</sfd:text>
+    <sfd:text xml:id="att.GES">Geschicklichkeit</sfd:text>
+    <sfd:text xml:id="att.SCH">Schnelligkeit</sfd:text>
+    <sfd:text xml:id="att.KON">Konstitution</sfd:text>
+    <sfd:text xml:id="att.KAR">Karisma</sfd:text>
+    <sfd:text xml:id="att.GLÜ">Glück</sfd:text>
+    <sfd:text xml:id="att.A-M">Anti-Magie</sfd:text>
+
+    <sfd:text xml:id="skill.ATT">Attacke</sfd:text>
+    <sfd:text xml:id="skill.PAR">Parade</sfd:text>
+    <sfd:text xml:id="skill.SCH">Schwimmen</sfd:text>
+    <sfd:text xml:id="skill.KRI">Kritischer Treffer</sfd:text>
+    <sfd:text xml:id="skill.F-F">Fallen finden</sfd:text>
+    <sfd:text xml:id="skill.F-E">Fallen entschärfen</sfd:text>
+    <sfd:text xml:id="skill.S-Ö">Schlösser knacken</sfd:text>
+    <sfd:text xml:id="skill.SUC">Suchen</sfd:text>
+    <sfd:text xml:id="skill.SRL">Spruchrollen lesen</sfd:text>
+    <sfd:text xml:id="skill.M-B">Magie benutzen</sfd:text>
+
+
+
+
+
+
+
+
+
 </sfd:dictionary>

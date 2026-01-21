@@ -376,13 +376,13 @@
 			<option key="0" val="ATT" title="Attacke" />
 			<option key="1" val="PAR" title="Parade" />
 			<option key="2" val="SCH" title="Schwimmen" />
-			<option key="3" val="KRI" title="Kritische Treffer" />
-			<option key="4" val="F-F" title="Fallen Finden" />
-			<option key="5" val="F-E" title="Fallen Entschärfen" />
-			<option key="6" val="S-Ö" title="Schlösser Knacken" />
+			<option key="3" val="KRI" title="Kritischer Treffer" />
+			<option key="4" val="F-F" title="Fallen finden" />
+			<option key="5" val="F-E" title="Fallen entschärfen" />
+			<option key="6" val="S-Ö" title="Schlösser knacken" />
 			<option key="7" val="SUC" title="Suchen" />
-			<option key="8" val="SRL" title="Spruchrollen Lesen" />
-			<option key="9" val="M-B" title="Magie Benutzen" />
+			<option key="8" val="SRL" title="Spruchrollen lesen" />
+			<option key="9" val="M-B" title="Magie benutzen" />
 		</dictionary>
 
 		<dictionary dictionary-id="equipment-slots">

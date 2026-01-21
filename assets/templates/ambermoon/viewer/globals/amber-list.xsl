@@ -116,12 +116,13 @@
 
 
     <xsl:template match="saa:class-instance" mode="character">
+        <xsl:variable name="skills" select="key('dictionary-option', 'skills')" />
         <table class="amber-character__skills">
             <caption class="amber-text amber-text--green">fähigkeiten</caption>
             <tbody>
                 <xsl:for-each select="saa:skill">
                     <tr>
-                        <td>
+                        <td data-hover-text="{$skills[@val = current()/@name]/@title}">
                             <xsl:value-of select="@name" />
                         </td>
                         <td>
@@ -173,12 +174,13 @@
     </xsl:template>
 
     <xsl:template match="saa:race" mode="character">
+        <xsl:variable name="attributes" select="key('dictionary-option', 'attributes')" />
         <table class="amber-character__attributes">
             <caption class="amber-text amber-text--green">attribute</caption>
             <tbody>
                 <xsl:for-each select="saa:attribute">
                     <tr class="right-aligned">
-                        <td data-hover-text="{@name}">
+                        <td data-hover-text="{$attributes[@val = current()/@name]/@title}">
                             <xsl:value-of select="@name" />
                         </td>
                         <xsl:if test="@current">
