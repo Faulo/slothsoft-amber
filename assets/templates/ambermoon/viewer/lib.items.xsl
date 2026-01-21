@@ -94,7 +94,7 @@
             </div>
             <xsl:choose>
                 <xsl:when test="saa:text">
-                    <div class="amber-item__textbox">
+                    <div class="amber-textbox">
                         <xsl:for-each select="saa:text/saa:paragraph">
                             <p>
                                 <xsl:attribute name="class">
