@@ -482,19 +482,18 @@ amber-portrait-id[value="102"] {
 	text-align: center;
 	width: fit-content;
 	background-color: #666655;
-	padding: 1ch 0;
 }
 
 .amber-portrait__id {
-	line-height: 2em;
+	line-height: 4em;
 }
 
 .amber-portrait__name {
-	height: 4em;
+	height: 5em;
 	width: 16ch;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-around;
+	justify-content: space-evenly;
 	display: flex;
 }
 
@@ -503,5 +502,5 @@ amber-portrait-id[value="102"] {
 }
 
 .amber-portrait amber-portrait-id::after {
-	font-size: 5px !important;
+	font-size: 4px !important;
 }
