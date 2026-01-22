@@ -270,11 +270,11 @@
                                         <xsl:value-of select="saa:class-instance/@experience" />
                                     </li>
                                     <li>
-                                        <span class="amber-icon amber-icon--gold">:</span>
+                                        <span class="amber-icon amber-icon--gold" data-hover-text="Gold">:</span>
                                         <xsl:value-of select="@gold" />
                                     </li>
                                     <li>
-                                        <span class="amber-icon amber-icon--food">:</span>
+                                        <span class="amber-icon amber-icon--food" data-hover-text="Rationen">:</span>
                                         <xsl:value-of select="@food" />
                                     </li>
                                 </ul>
@@ -315,7 +315,7 @@
                                 </li>
                                 <xsl:if test="saa:equipment">
                                     <li>
-                                        <span class="amber-icon amber-icon--attack">:</span>
+                                        <span class="amber-icon amber-icon--attack" data-hover-text="Schaden">:</span>
                                         <span data-ch="4">
                                             <xsl:choose>
                                                 <xsl:when test="@attack > 0">
@@ -333,7 +333,7 @@
                                         </span>
                                     </li>
                                     <li>
-                                        <span class="amber-icon amber-icon--defense">:</span>
+                                        <span class="amber-icon amber-icon--defense" data-hover-text="Schutz">:</span>
                                         <span data-ch="4">
                                             <xsl:choose>
                                                 <xsl:when test="@defense > 0">

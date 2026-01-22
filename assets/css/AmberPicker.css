@@ -414,14 +414,12 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 }
 
 .amber-item__classes ul {
-	display: grid;
-	grid-auto-flow: column;
-	grid-template-rows: repeat(6, auto);
-	list-style-type: none;
+	width: 21ch;
 	padding: 0;
+	display: grid;
+	list-style: none;
 	grid-auto-flow: column;
 	grid-template-rows: repeat(5, auto);
-	width: 21ch;
 }
 
 .amber-item__magic {
