@@ -688,6 +688,10 @@ amber-portrait-id[value="102"] {
 	width: 20ch;
 }
 
+.amber-character__combat-info li {
+	min-height: 1.4em;
+}
+
 .amber-character__sheet td {
 	line-height: 16px;
 	text-align: right;
