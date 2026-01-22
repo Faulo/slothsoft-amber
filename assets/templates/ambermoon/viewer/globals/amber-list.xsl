@@ -257,7 +257,7 @@
                                         <xsl:value-of select="@gender" />
                                     </li>
                                     <li>
-                                        <xsl:text>alter: </xsl:text>
+                                        <xsl:text>alter:</xsl:text>
                                         <xsl:value-of select="saa:race/saa:age/@current" />
                                     </li>
                                     <li>
