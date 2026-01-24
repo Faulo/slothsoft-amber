@@ -2,7 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:func="http://exslt.org/functions"
 	extension-element-prefixes="func">
 
-	<xsl:key name="dictionary-option" match="/*/*[@name='dictionaries']/saa:amberdata/saa:dictionary-list/saa:dictionary/saa:option" use="../@dictionary-id" />
+	<xsl:key name="dictionary-option" match="//saa:dictionary/saa:option" use="../@dictionary-id" />
 
 	<func:function name="saa:getName">
 		<xsl:param name="context" select="." />

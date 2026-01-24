@@ -23,6 +23,7 @@
             <link-stylesheet ref="//farah/font-face-generator?assets=//slothsoft@amber/fonts" />
             <link-stylesheet ref="/css/AmberPicker" />
             <link-module ref="/js/AmberPicker" />
+            <link-module ref="/js/TabsView" />
         </fragment>
     </fragment>
 

@@ -9,7 +9,7 @@
 
 	<xsl:template match="sse:archive[@type='AM2']" mode="form-content">
 		<xsl:for-each select="sse:file">
-			<xsl:for-each select="*[@name = 'items']">
+			<xsl:for-each select=".//*[@name = 'items']">
 				<xsl:variable name="categories" select="key('dictionary-option', 'item-types')" />
 				<xsl:variable name="items" select="*" />
 				<xsl:call-template name="savegame.tabs">

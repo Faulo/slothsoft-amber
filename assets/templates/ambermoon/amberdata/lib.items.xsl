@@ -12,7 +12,7 @@
 	</xsl:template>
 
 	<xsl:template match="sse:savegame">
-		<xsl:variable name="items" select="sse:archive[@type='AM2']//*[@name = 'items']/*" />
+		<xsl:variable name="items" select="sse:archive[@type='AM2'][1]//*[@name = 'items']/*" />
 		<xsl:variable name="texts" select="sse:archive[@name='Object_texts.amb']" />
 
 		<xsl:if test="count($items)">

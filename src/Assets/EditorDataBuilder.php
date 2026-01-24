@@ -44,6 +44,7 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         }
         
         $savegame = $editor->getSavegameNode();
+        $cacheDirectory = $config->cacheDirectory . DIRECTORY_SEPARATOR . 'editor-data';
         
         $writer = new XmlBuilder($savegame);
         
@@ -51,7 +52,7 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
             $archiveId = $request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE];
             $archive = $editor->loadArchive($archiveId, true);
             
-            $writer->setCacheDirectory($config->cacheDirectory . DIRECTORY_SEPARATOR . $archiveId);
+            $writer->setCacheDirectory($cacheDirectory . $archiveId);
             
             if (isset($request[EditorParameterFilter::PARAM_EDITOR_DATA_VALUES])) {
                 $editor->applyValues($request[EditorParameterFilter::PARAM_EDITOR_DATA_VALUES]);
@@ -67,7 +68,7 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
                 throw new HttpDownloadAssetException($strategies);
             }
         } else {
-            $writer->setCacheDirectory((string) $config->cacheDirectory);
+            $writer->setCacheDirectory($cacheDirectory);
         }
         
         $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.xml');

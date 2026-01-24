@@ -11,7 +11,7 @@
 	</xsl:template>
 
 	<xsl:template match="sse:savegame">
-		<xsl:variable name="expList" select="sse:archive[@type='AM2']//*[@name='class-experience']/*" />
+		<xsl:variable name="expList" select="sse:archive[@type='AM2'][1]//*[@name='class-experience']/*" />
 		<xsl:variable name="characters" select="sse:archive[@name='NPC_char.amb']/* | sse:archive[@name='Party_char.amb']/*" />
 		<xsl:if test="count($expList)">
 			<saa:class-list>

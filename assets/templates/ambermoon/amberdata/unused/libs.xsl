@@ -883,7 +883,7 @@
 
 
 	<xsl:template name="extract-dictionaries">
-		<xsl:variable name="AM2" select="sse:archive[@type='AM2']" />
+		<xsl:variable name="AM2" select="sse:archive[@type='AM2'][1]" />
 		<dictionary-list>
 			<dictionary dictionary-id="events">
 				<option key="0" val="valdyn" />

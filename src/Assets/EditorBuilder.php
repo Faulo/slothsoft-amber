@@ -36,13 +36,17 @@ final class EditorBuilder implements ExecutableBuilderStrategyInterface {
         $contextUrl = $context->createUrl($args);
         $editorUrl = $parameters->getProcessEditorDataUrl();
         $templateUrl = $parameters->getStaticEditorTemplateUrl();
+        $dictionaryUrl = $parameters->withInfoset('lib.dictionaries')->getProcessAmberdataUrl();
         
         $instructions->stylesheetUrls->add(...$parameters->getProcessStylesheetUrls());
         
-        $domDelegate = function () use ($contextUrl, $editorUrl, $templateUrl): DOMWriterInterface {
+        $domDelegate = function () use ($contextUrl, $editorUrl, $templateUrl, $dictionaryUrl): DOMWriterInterface {
             $writer = new AssetFragmentDOMWriter($contextUrl);
             $writer->appendChild(new AssetDocumentDOMWriter($editorUrl, $editorUrl->getArguments()
                 ->get(ResourceParameterFilter::PARAM_INFOSET_ID)));
+            $writer->appendChild(new AssetDocumentDOMWriter($dictionaryUrl, $dictionaryUrl->getArguments()
+                ->get(ResourceParameterFilter::PARAM_INFOSET_ID)));
+            
             $template = Module::resolveToDOMWriter($templateUrl);
             return new TransformationDOMWriter($writer, $template);
         };

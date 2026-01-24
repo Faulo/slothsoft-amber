@@ -5,7 +5,7 @@
 
 	<xsl:import href="farah://slothsoft@farah/xsl/xslt" />
 
-	<xsl:variable name="AM2" select=".//sse:archive[@type='AM2']" />
+	<xsl:variable name="AM2" select=".//sse:archive[@type='AM2'][1]" />
 	<xsl:variable name="Dict" select=".//sse:archive[@name='Dictionary.german']" />
 	<xsl:variable name="MapTexts" select=".//sse:archive[@name='1Map_texts.amb' or @name='2Map_texts.amb' or @name='3Map_texts.amb']" />
 	<xsl:variable name="PCs" select=".//sse:archive[@name='Party_char.amb']" />
@@ -124,7 +124,6 @@
 		</dictionary>
 
 		<dictionary dictionary-id="item-types">
-			<option key="21" val="Zustandsveränderung" />
 			<option key="1" val="Rüstung" />
 			<option key="2" val="Helm" />
 			<option key="3" val="Schuhe" />
@@ -145,6 +144,7 @@
 			<option key="18" val="Mag. Gegenstand" />
 			<option key="19" val="Spezialgegenstand" />
 			<option key="20" val="Transportmittel" />
+            <option key="21" val="Zustandsveränderung" />
 		</dictionary>
 
 		<dictionary dictionary-id="item-slots">

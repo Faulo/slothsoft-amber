@@ -797,13 +797,14 @@
 	</func:function>
 
 	<xsl:template name="savegame.tabs">
+        <xsl:param name="id" select="generate-id(.)" />
 		<xsl:param name="label" select="''" />
 		<xsl:param name="class" select="''" />
 		<xsl:param name="list" select="/.." />
 		<xsl:param name="optionTokens" select="/.." />
 		<xsl:param name="options" select="exsl:node-set($optionTokens)/*" />
 
-		<div data-template="tabs">
+		<div data-tabs="{$id}">
 			<xsl:if test="string-length($class)">
 				<xsl:attribute name="class"><xsl:value-of select="$class" /></xsl:attribute>
 			</xsl:if>
