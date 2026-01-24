@@ -52,7 +52,7 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
             $archiveId = $request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE];
             $archive = $editor->loadArchive($archiveId, true);
             
-            $writer->setCacheDirectory($cacheDirectory . $archiveId);
+            $writer->setCacheDirectory($cacheDirectory . DIRECTORY_SEPARATOR . $archiveId);
             
             if (isset($request[EditorParameterFilter::PARAM_EDITOR_DATA_VALUES])) {
                 $editor->applyValues($request[EditorParameterFilter::PARAM_EDITOR_DATA_VALUES]);
