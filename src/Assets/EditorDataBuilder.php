@@ -35,10 +35,10 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         
         if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_UPLOAD) {
             $errors = $_FILES[EditorParameterFilter::PARAM_EDITOR_DATA]['error'] ?? [];
-            foreach ($errors as $archiveId => $error) {
+            foreach ($errors as $archivePath => $error) {
                 if ($error === UPLOAD_ERR_OK) {
-                    $path = $_FILES[EditorParameterFilter::PARAM_EDITOR_DATA]['tmp_name'][$archiveId] ?? '';
-                    $editor->writeGameFile($archiveId, FileInfoFactory::createFromUpload($path));
+                    $path = $_FILES[EditorParameterFilter::PARAM_EDITOR_DATA]['tmp_name'][$archivePath] ?? '';
+                    $editor->writeGameFile($archivePath, FileInfoFactory::createFromUpload($path));
                 }
             }
         }
@@ -49,17 +49,17 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         $writer = new XmlBuilder($savegame);
         
         if (isset($request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE])) {
-            $archiveId = $request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE];
-            $archive = $editor->loadArchive($archiveId, true);
+            $archivePath = $request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE];
+            $archive = $editor->loadArchive($archivePath, true);
             
-            $writer->setCacheDirectory($cacheDirectory . DIRECTORY_SEPARATOR . $archiveId);
+            $writer->setCacheDirectory($cacheDirectory . DIRECTORY_SEPARATOR . $archivePath);
             
             if (isset($request[EditorParameterFilter::PARAM_EDITOR_DATA_VALUES])) {
                 $editor->applyValues($request[EditorParameterFilter::PARAM_EDITOR_DATA_VALUES]);
             }
             
             if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_SAVE) {
-                $editor->writeGameFile($archiveId, $archive);
+                $editor->writeGameFile($archivePath, $archive);
             }
             
             if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_DOWNLOAD) {

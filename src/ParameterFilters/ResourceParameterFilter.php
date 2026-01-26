@@ -6,7 +6,7 @@ use Slothsoft\Core\IO\Sanitizer\FileNameSanitizer;
 
 class ResourceParameterFilter extends InfosetParameterFilter {
     
-    public const PARAM_ARCHIVE_ID = 'archiveId';
+    public const PARAM_ARCHIVE_ID = 'archivePath';
     
     public const PARAM_FILE_ID = 'fileId';
     

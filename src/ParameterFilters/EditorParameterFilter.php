@@ -8,7 +8,7 @@ final class EditorParameterFilter extends InfosetParameterFilter {
     
     public const PARAM_EDITOR_DATA = 'save';
     
-    public const PARAM_EDITOR_DATA_ARCHIVE = 'archiveId';
+    public const PARAM_EDITOR_DATA_ARCHIVE = 'archivePath';
     
     public const PARAM_EDITOR_DATA_VALUES = 'data';
     
