@@ -12,7 +12,6 @@ function bootstrap() {
 
 export default class AmberPicker {
     constructor(viewerUrl) {
-        console.info(viewerUrl);
     }
 
     closePopup() {
