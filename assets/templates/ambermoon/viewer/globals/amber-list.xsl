@@ -401,13 +401,13 @@
     </xsl:template>
 
     <xsl:template match="saa:monster" mode="character-picture">
-        <amber-embed infoset="lib.monsters" type="monster" role="button" tabindex="0">
+        <amber-embed infoset="lib.monsters" type="monster">
             <amber-monster-id value="{@id}" />
         </amber-embed>
     </xsl:template>
 
     <xsl:template match="saa:pc | saa:npc" mode="character-picture">
-        <amber-embed infoset="lib.portraits" type="portrait" role="button" tabindex="0">
+        <amber-embed infoset="lib.portraits" type="portrait">
             <amber-portrait-id value="{@portrait-id}" />
         </amber-embed>
     </xsl:template>
@@ -448,7 +448,7 @@
     </xsl:template>
 
     <xsl:template match="saa:slot" mode="itemlist-inline">
-        <amber-embed infoset="lib.items" type="item" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.items" type="item" id="{saa:item-instance/@item-id}" mode="popup">
             <amber-item-id value="{saa:item-instance/@item-id}" />
             <amber-item-amount value="{saa:item-instance/@item-amount}" />
             <xsl:if test="saa:item-instance/@is-identified">

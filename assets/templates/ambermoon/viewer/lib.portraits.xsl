@@ -18,7 +18,7 @@
                 <xsl:text>Portrait #</xsl:text>
                 <xsl:value-of select="format-number(@id, '000')" />
             </div>
-            <amber-embed infoset="lib.portraits" type="portrait" role="button" tabindex="0">
+            <amber-embed infoset="lib.portraits" type="portrait">
                 <amber-portrait-id value="{@id}" />
             </amber-embed>
             <div class="amber-portrait__name amber-text amber-text--silver">

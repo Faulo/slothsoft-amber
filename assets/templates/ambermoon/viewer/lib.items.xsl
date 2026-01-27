@@ -17,7 +17,7 @@
                 <div>
                     <div class="amber-item__header">
                         <div class="amber-item__gfx">
-                            <amber-embed infoset="lib.items" type="item" role="button" tabindex="0">
+                            <amber-embed infoset="lib.items" type="item-gfx">
                                 <amber-item-gfx value="{@image-id}" />
                             </amber-embed>
                         </div>

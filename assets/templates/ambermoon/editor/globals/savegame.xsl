@@ -507,14 +507,14 @@
     </xsl:template>
 
     <xsl:template match="*" mode="portrait-picker">
-        <amber-embed infoset="lib.portraits" type="portrait" class="portrait-picker" contextmenu="amber-embed-portrait" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.portraits" type="portrait" mode="picker">
             <xsl:apply-templates select="." mode="form-picker" />
         </amber-embed>
     </xsl:template>
     <xsl:template match="*" mode="item-picker">
         <xsl:variable name="itemId" select=".//*[@name = 'item-id']/@value" />
         <!--<xsl:variable name="item" select="key('item', $itemId)" /> data-hover-text="{$item/@name}" -->
-        <amber-embed infoset="lib.items" type="item" class="item-picker" contextmenu="amber-embed-item" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.items" type="item" mode="popup picker">
             <xsl:if test="../@name = 'equipment'">
                 <xsl:attribute name="data-picker-filter-amber-item-id"><xsl:value-of select="saa:getName()" /></xsl:attribute>
             </xsl:if>
@@ -530,7 +530,7 @@
         </amber-embed>
     </xsl:template>
     <xsl:template match="*" mode="tile-picker">
-        <amber-embed infoset="lib.tileset.icons" type="tileset-icon" class="tile-picker" contextmenu="amber-embed-tileset-icon" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.tileset.icons" type="tileset-icon" mode="picker">
             <xsl:apply-templates select="*[1]" mode="form-picker">
                 <xsl:with-param name="name" select="'tile-id'" />
             </xsl:apply-templates>
@@ -543,7 +543,7 @@
         </amber-embed>
     </xsl:template>
     <xsl:template match="*" mode="monster-sprite-picker">
-        <amber-embed infoset="lib.monsters" type="monster-sprite" class="monster-sprite-picker" contextmenu="amber-embed-monster-sprite" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.monsters" type="monster-gfx" mode="picker">
             <xsl:apply-templates select=".//*[@name = 'gfx-id']" mode="form-picker" />
         </amber-embed>
     </xsl:template>
