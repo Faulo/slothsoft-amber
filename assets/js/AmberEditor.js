@@ -83,7 +83,7 @@ class AmberEditorPage {
         mappings["Schlösser Knacken"] = characterNode.querySelectorAll(".skills tr")[6].querySelector("input[data-name='current-mod']");
         mappings["Suchen"] = characterNode.querySelectorAll(".skills tr")[7].querySelector("input[data-name='current-mod']");
         mappings["Spruchrollen Lesen"] = characterNode.querySelectorAll(".skills tr")[8].querySelector("input[data-name='current-mod']");
-        mappings["Magie Benutzen"] = characterNode.querySelectorAll(".skills tr")[9].querySelector("input[data-name='current-mod']");
+        mappings["Magie benutzen"] = characterNode.querySelectorAll(".skills tr")[9].querySelector("input[data-name='current-mod']");
 
         mappings["weight"] = characterNode.querySelector("input[data-name='weight']");
 
@@ -140,12 +140,15 @@ class AmberEditorPage {
 
         const result = [];
 
-        for (let key in mappings) {
-            if (mappings[key]) {
-                if (mappings[key].value != data[key]) {
-                    result.push(`${key}: ${mappings[key].value} => ${data[key]}`);
-                    mappings[key].value = data[key];
-                }
+        for (let key in data) {
+            if (!mappings[key]) {
+                alert(`Unknown data key "${key}"`);
+                continue;
+            }
+
+            if (mappings[key].value != data[key]) {
+                result.push(`${key}: ${mappings[key].value} => ${data[key]}`);
+                mappings[key].value = data[key];
             }
         }
 
