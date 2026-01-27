@@ -18,8 +18,12 @@ amber-embed[aria-role]:hover {
 	border-style: outset;
 }
 
-amber-embed[aria-role]:active {
+amber-embed[aria-role]:focused {
 	border-style: inset;
+}
+
+amber-embed[aria-role]:active {
+	border-style: dotted;
 }
 
 amber-embed[type="monster"] {

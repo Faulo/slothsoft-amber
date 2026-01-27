@@ -507,14 +507,14 @@
     </xsl:template>
 
     <xsl:template match="*" mode="portrait-picker">
-        <amber-embed infoset="lib.portraits" type="portrait" mode="picker">
+        <amber-embed infoset="lib.portraits" type="portrait" id="{@value}" mode="popup picker">
             <xsl:apply-templates select="." mode="form-picker" />
         </amber-embed>
     </xsl:template>
     <xsl:template match="*" mode="item-picker">
         <xsl:variable name="itemId" select=".//*[@name = 'item-id']/@value" />
         <!--<xsl:variable name="item" select="key('item', $itemId)" /> data-hover-text="{$item/@name}" -->
-        <amber-embed infoset="lib.items" type="item" mode="popup picker">
+        <amber-embed infoset="lib.items" type="item" id="{.//*[@name = 'item-id']/@value}" mode="popup picker">
             <xsl:if test="../@name = 'equipment'">
                 <xsl:attribute name="data-picker-filter-amber-item-id"><xsl:value-of select="saa:getName()" /></xsl:attribute>
             </xsl:if>
