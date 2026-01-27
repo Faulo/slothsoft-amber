@@ -507,14 +507,14 @@
     </xsl:template>
 
     <xsl:template match="*" mode="portrait-picker">
-        <amber-picker infoset="lib.portraits" type="portrait" class="portrait-picker" contextmenu="amber-picker-portrait" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.portraits" type="portrait" class="portrait-picker" contextmenu="amber-embed-portrait" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
             <xsl:apply-templates select="." mode="form-picker" />
-        </amber-picker>
+        </amber-embed>
     </xsl:template>
     <xsl:template match="*" mode="item-picker">
         <xsl:variable name="itemId" select=".//*[@name = 'item-id']/@value" />
         <!--<xsl:variable name="item" select="key('item', $itemId)" /> data-hover-text="{$item/@name}" -->
-        <amber-picker infoset="lib.items" type="item" class="item-picker" contextmenu="amber-picker-item" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.items" type="item" class="item-picker" contextmenu="amber-embed-item" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
             <xsl:if test="../@name = 'equipment'">
                 <xsl:attribute name="data-picker-filter-amber-item-id"><xsl:value-of select="saa:getName()" /></xsl:attribute>
             </xsl:if>
@@ -527,10 +527,10 @@
                 <xsl:with-param name="name" select="'broken'" />
             </xsl:apply-templates>
             <xsl:apply-templates select=".//*[@name = 'item-charge']" mode="form-picker" />
-        </amber-picker>
+        </amber-embed>
     </xsl:template>
     <xsl:template match="*" mode="tile-picker">
-        <amber-picker infoset="lib.tileset.icons" type="tileset-icon" class="tile-picker" contextmenu="amber-picker-tileset-icon" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.tileset.icons" type="tileset-icon" class="tile-picker" contextmenu="amber-embed-tileset-icon" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
             <xsl:apply-templates select="*[1]" mode="form-picker">
                 <xsl:with-param name="name" select="'tile-id'" />
             </xsl:apply-templates>
@@ -540,12 +540,12 @@
             <xsl:apply-templates select="*[3]" mode="form-picker">
                 <xsl:with-param name="name" select="'event-id'" />
             </xsl:apply-templates>
-        </amber-picker>
+        </amber-embed>
     </xsl:template>
     <xsl:template match="*" mode="monster-sprite-picker">
-        <amber-picker infoset="lib.monsters" type="monster-sprite" class="monster-sprite-picker" contextmenu="amber-picker-monster-sprite" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.monsters" type="monster-sprite" class="monster-sprite-picker" contextmenu="amber-embed-monster-sprite" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
             <xsl:apply-templates select=".//*[@name = 'gfx-id']" mode="form-picker" />
-        </amber-picker>
+        </amber-embed>
     </xsl:template>
 
     <!-- form-content values -->

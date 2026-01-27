@@ -21,7 +21,11 @@
     <fragment name="includes">
         <fragment name="AmberPicker">
             <link-stylesheet ref="//farah/font-face-generator?assets=//slothsoft@amber/fonts" />
-            <link-stylesheet ref="/css/AmberPicker" />
+            <link-stylesheet ref="/css/amber-character" />
+            <link-stylesheet ref="/css/amber-item" />
+            <link-stylesheet ref="/css/amber-misc" />
+            <link-stylesheet ref="/css/amber-portrait" />
+            <link-stylesheet ref="/css/general" />
             <link-module ref="/js/AmberPicker" />
             <link-module ref="/js/TabsView" />
         </fragment>

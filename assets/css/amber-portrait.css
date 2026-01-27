@@ -1,0 +1,26 @@
+.amber-portrait {
+	text-align: center;
+	width: fit-content;
+	background-color: #666655;
+}
+
+.amber-portrait__id {
+	line-height: 4em;
+}
+
+.amber-portrait__name {
+	height: 5em;
+	width: 16ch;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	display: flex;
+}
+
+.amber-portrait__name>* {
+	line-height: 1em;
+}
+
+.amber-portrait amber-portrait-id::after {
+	font-size: 4px !important;
+}

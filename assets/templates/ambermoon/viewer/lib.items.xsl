@@ -17,9 +17,9 @@
                 <div>
                     <div class="amber-item__header">
                         <div class="amber-item__gfx">
-                            <amber-picker infoset="lib.items" type="item" role="button" tabindex="0">
+                            <amber-embed infoset="lib.items" type="item" role="button" tabindex="0">
                                 <amber-item-gfx value="{@image-id}" />
-                            </amber-picker>
+                            </amber-embed>
                         </div>
                         <div class="amber-item__name">
                             <div class="amber-text amber-text--yellow">

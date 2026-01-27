@@ -1,0 +1,102 @@
+.amber-item {
+	display: flex;
+	flex-direction: row;
+	width: fit-content;
+	background-color: #666655;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+
+.amber-item>* {
+	margin: 0.5ch 0.5ch;
+}
+
+.amber-item table {
+	border-spacing: 0;
+}
+
+.amber-item tr {
+	height: 1.6em;
+}
+
+.amber-item td {
+	padding: 0;
+}
+
+.amber-item__worth, .amber-item__stats {
+	text-align: right;
+}
+
+.amber-item__header {
+	display: flex;
+}
+
+.amber-item__worth::before, .amber-item__stats::before,
+	.amber-item__magic tbody+tbody::before {
+	height: 0.4em;
+	display: table-row;
+	content: " ";
+}
+
+.amber-item__worth .amber-item__value {
+	width: 10ch;
+}
+
+.amber-item__stats .amber-item__value {
+	width: 4ch;
+}
+
+.amber-item__restrictions {
+	display: flex;
+	flex-direction: column;
+}
+
+.amber-item__restrictions dd {
+	margin: 0;
+}
+
+.amber-item__classes {
+	flex-grow: 1;
+}
+
+.amber-item__classes ul {
+	width: 21ch;
+	padding: 0;
+	display: grid;
+	list-style: none;
+	grid-auto-flow: column;
+	grid-template-rows: repeat(5, auto);
+}
+
+.amber-item__magic {
+	width: 22ch;
+}
+
+.amber-item__magic tbody:first-child {
+	text-align: right;
+}
+
+.amber-item__magic .amber-item__value {
+	width: 3ch;
+	padding-right: 1ch;
+}
+
+.amber-item__magic .amber-item__value:last-child {
+	padding-right: 0;
+}
+
+.amber-item .amber-textbox {
+	width: 44ch;
+	height: 14em;
+	overflow-y: auto;
+}
+
+.amber-item__name {
+	text-align: left;
+	padding: 0 0.5ch;
+}
+
+.amber-item__name .amber-text {
+	width: 19ch;
+	white-space: nowrap;
+}

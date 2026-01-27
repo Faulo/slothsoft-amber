@@ -1,5 +1,5 @@
 /* alle picker */
-amber-picker {
+amber-embed {
 	display: block;
 	position: relative;
 	box-sizing: border-box;
@@ -9,12 +9,13 @@ amber-picker {
 	background-color: #444433;
 }
 
-/* items */
-amber-picker.item-picker {
-	margin: auto;
+amber-embed[type="monster"] {
+	width: fit-content;
+	height: fit-content;
 }
 
-amber-picker[type="item"] {
+/* items */
+amber-embed[type="item"] {
 	width: fit-content;
 }
 
@@ -70,10 +71,6 @@ amber-item-amount[value="255"]::after {
 	content: "**";
 }
 
-*[data-template="equip"] amber-item-amount {
-	display: none;
-}
-
 amber-broken::after {
 	font-size: 32px;
 	width: 1em;
@@ -126,7 +123,7 @@ amber-item-charge[value="255"]::after {
 }
 
 /* portraits */
-amber-picker.portrait-picker {
+amber-embed.portrait-picker {
 	border-style: ridge !important;
 }
 
@@ -155,62 +152,7 @@ article.Portrait amber-portrait-id::after {
 	font-size: 4px;
 }
 
-.Character amber-portrait-id::after {
-	font-size: 3px;
-}
-
-.Character {
-	width: 92ch;
-	margin: 1em 0.5em;
-}
-
-.Character>table {
-	width: 100%;
-}
-
-.Character .textbox {
-	width: auto;
-}
-
-.Character .textlabel {
-	width: auto;
-}
-
-.Character .inventory {
-	width: 30em;
-}
-
-.Character .spells ul {
-	column-gap: 1ch;
-	column-count: 3;
-	width: 63ch;
-}
-
-.Character .attributes, .Character .languages, .Character .skills {
-	vertical-align: top;
-}
-
-.Character .attributes, .Character .languages {
-	width: 12ch;
-}
-
-.Character .skills {
-	width: 15ch;
-}
-
-.Character .character-sheet {
-	width: 36ch;
-}
-
-.Character .character-sheet td {
-	padding: 0 1ch 0 0;
-}
-
 /* monsters */
-amer-picker.monster-sprite-picker {
-	border-style: ridge;
-}
-
 amber-gfx-id {
 	display: block;
 }
@@ -226,7 +168,7 @@ amber-monster-id::after {
 }
 
 /* tilesets */
-amber-picker.tile-picker {
+amber-embed.tile-picker {
 	border-width: 1px !important;
 	width: 34px;
 	height: 34px;
@@ -279,219 +221,7 @@ amber-event-id[value=""]::after, amber-event-id[value="0"]::after {
 	display: none;
 }
 
-/* BEM */
-.amber-list__items {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-}
-
-.amber-item {
-	display: flex;
-	flex-direction: row;
-	width: fit-content;
-	background-color: #666655;
-	justify-content: space-around;
-	flex-wrap: wrap;
-}
-
-.amber-item>* {
-	margin: 0.5ch 0.5ch;
-}
-
-.amber-item table {
-	border-spacing: 0;
-}
-
-.amber-item tr {
-	height: 1.6em;
-}
-
-.amber-item td {
-	padding: 0;
-}
-
-.amber-text {
-	font-family: "Ambermoon-game", monospace;
-	color: #ffffee;
-	text-shadow: 0.2em 0.2em 0px black;
-	font-size: 10px;
-	line-height: 1.6em;
-	font-weight: normal;
-	font-style: normal;
-}
-
-.amber-item__name {
-	text-align: left;
-	padding: 0 0.5ch;
-}
-
-.amber-item__name .amber-text {
-	width: 19ch;
-	white-space: nowrap;
-}
-
-.amber-text--dark {
-	color: #888877;
-}
-
-.amber-text--gray {
-	color: #aaaa99;
-}
-
-.amber-text--silver {
-	color: #ccccbb;
-}
-
-.amber-text--yellow {
-	color: #ffcc00;
-}
-
-.amber-text--orange {
-	color: #ff9900;
-}
-
-.amber-text--red {
-	color: #cc4433;
-}
-
-.amber-text--green {
-	color: #AAAA44;
-}
-
-.amber-text--spellbook-0 {
-	color: #fefeff;
-}
-
-.amber-text--spellbook-1 {
-	color: #8798a9;
-}
-
-.amber-text--spellbook-2 {
-	color: #cfcf2e;
-}
-
-.amber-text--spellbook-3 {
-	color: #cc4433;
-}
-
-.amber-text--runes {
-	font-family: Ambermoon-rune;
-}
-
-.amber-item__worth, .amber-item__stats {
-	text-align: right;
-}
-
-.amber-item__header {
-	display: flex;
-}
-
-.amber-item__worth::before, .amber-item__stats::before,
-	.amber-item__magic tbody+tbody::before {
-	height: 0.4em;
-	display: table-row;
-	content: " ";
-}
-
-.amber-item__worth .amber-item__value {
-	width: 10ch;
-}
-
-.amber-item__stats .amber-item__value {
-	width: 4ch;
-}
-
-.amber-item__restrictions {
-	display: flex;
-	flex-direction: column;
-}
-
-.amber-item__restrictions dd {
-	margin: 0;
-}
-
-.amber-item__classes {
-	flex-grow: 1;
-}
-
-.amber-item__classes ul {
-	width: 21ch;
-	padding: 0;
-	display: grid;
-	list-style: none;
-	grid-auto-flow: column;
-	grid-template-rows: repeat(5, auto);
-}
-
-.amber-item__magic {
-	width: 22ch;
-}
-
-.amber-item__magic tbody:first-child {
-	text-align: right;
-}
-
-.amber-item__magic .amber-item__value {
-	width: 3ch;
-	padding-right: 1ch;
-}
-
-.amber-item__magic .amber-item__value:last-child {
-	padding-right: 0;
-}
-
-.amber-item .amber-textbox {
-	width: 44ch;
-	height: 14em;
-	overflow-y: auto;
-}
-
-.amber-character .amber-textbox {
-	width: 56ch;
-	margin: 0.5ch auto;
-}
-
-.amber-character .amber-textbox+.amber-textbox {
-	margin-top: 1ch;
-}
-
-.amber-textbox p {
-	margin: 0;
-	line-height: 1.4em;
-}
-
-.amber-textbox p+p {
-	margin-top: 1.4em;;
-}
-
-*[data-hover-text] {
-	position: relative;
-}
-
-*[data-hover-text]:hover::after {
-	display: block;
-	content: attr(data-hover-text);
-	pointer-events: none;
-	text-align: center;
-	position: absolute;
-	width: max-content;
-	width: -moz-max-content;
-	width: -webkit-max-content;
-	left: 50%;
-	top: 0.5ch;
-	transform: translate(-50%, -50%);
-	margin-left: -2px;
-	z-index: 10;
-	border-color: #aaaa99 #222222 #222222 #aaaa99;
-	border-width: 0.125em;
-	padding: 0.125em;
-	border-style: solid;
-	background-color: #444433;
-	border-style: solid;
-}
-
-amber-picker[type="portrait"] {
+amber-embed[type="portrait"] {
 	width: fit-content;
 	height: fit-content;
 	margin: auto;
@@ -503,284 +233,4 @@ amber-portrait-id {
 
 amber-portrait-id[value="102"] {
 	background: black;
-}
-
-.amber-portrait {
-	text-align: center;
-	width: fit-content;
-	background-color: #666655;
-}
-
-.amber-portrait__id {
-	line-height: 4em;
-}
-
-.amber-portrait__name {
-	height: 5em;
-	width: 16ch;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	display: flex;
-}
-
-.amber-portrait__name>* {
-	line-height: 1em;
-}
-
-.amber-portrait amber-portrait-id::after {
-	font-size: 4px !important;
-}
-
-.amber-character {
-	background-color: #666655;
-	line-height: 1.4em;
-	width: fit-content;
-	display: flex;
-	flex-direction: column;
-}
-
-.amber-character__body {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.amber-character table {
-	border-spacing: 0;
-}
-
-.amber-character tr {
-	height: 1.4em;
-}
-
-.amber-character td {
-	padding: 0;
-}
-
-.amber-character__tables {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-}
-
-.amber-character__tables>*, .amber-character__equipment,
-	.amber-character__inventory, .amber-character__dialog,
-	.amber-character__spells {
-	margin: 0.5ch;
-}
-
-.amber-character__spells ul {
-	list-style: none;
-	margin: 0;
-	padding: 0 0 0 1ch;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-}
-
-.amber-character__spells .amber-text {
-	line-height: 1.4em;
-}
-
-.amber-character__attributes td, .amber-character__skills td {
-	text-align: right;
-}
-
-.amber-character__attributes td:first-child, .amber-character__skills td:first-child
-	{
-	padding-right: 1ch;
-}
-
-.amber-character__dialog summary {
-	line-height: 1.8em;
-}
-
-.amber-character__dialog details {
-	margin-left: 1ch;
-}
-
-.amber-character__attributes {
-	width: 10ch;
-}
-
-.amber-character__languages {
-	width: 12ch;
-}
-
-.amber-character__skills {
-	width: 12ch;
-}
-
-.amber-character__equipment ul {
-	margin: 0;
-	padding: 0;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	list-style: none;
-	text-align: center;
-	margin-top: -1em;
-}
-
-.amber-character__equipment li {
-	line-height: 2em;
-	margin-top: 1em;
-}
-
-.amber-character__equipment amber-item-amount::after {
-	display: none;
-}
-
-.amber-character__equipment  amber-picker {
-	margin: auto;
-}
-
-.amber-character__apr {
-	text-align: center;
-}
-
-.amber-character__inventory ul {
-	margin: 0;
-	padding: 0;
-	display: grid;
-	grid-auto-flow: column;
-	grid-template-columns: repeat(8, 1fr);
-	grid-template-rows: repeat(3, 1fr);
-	list-style: none;
-	width: fit-content;
-}
-
-.amber-character caption {
-	margin: 0 0 0.5em 0;
-	line-height: 1em;
-}
-
-.amber-character h3 {
-	margin: 0 0 0.5em 0;
-	line-height: 1em;
-}
-
-.amber-character__inventory h3 {
-	margin-top: -2em;
-}
-
-.amber-character__name {
-	margin: 0.5em 0;
-}
-
-.amber-character__equipment h3 {
-	text-align: center;
-}
-
-.amber-character__sheet {
-	width: 22ch;
-}
-
-.amber-character__basic-info {
-	flex-grow: 1;
-	margin: 0;
-	padding: 0 0 0 0.5ch;
-	list-style: none;
-}
-
-.amber-character__combat-info {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	text-align: center;
-	width: 20ch;
-}
-
-.amber-character__combat-info li {
-	min-height: 1.4em;
-}
-
-.amber-character__sheet td {
-	line-height: 16px;
-	text-align: right;
-}
-
-.amber-character__sheet amber-picker {
-	margin: 0;
-}
-
-.amber-character__sheet amber-portrait-id::after {
-	font-size: 3px !important;
-}
-
-.amber-character__sheet [data-ch] {
-	text-align: right;
-}
-
-.amber-character--monster .amber-character__sheet {
-	width: 40ch;
-}
-
-.amber-character--monster .amber-character__spells ul {
-	grid-template-columns: repeat(4, 1fr);
-}
-
-.amber-icon {
-	display: inline-block;
-}
-
-.amber-icon::before {
-	font-size: 16px;
-	width: 1em;
-	height: 1em;
-	image-rendering: pixelated;
-	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
-	background-clip: content-box;
-	background-size: cover;
-	background-repeat: no-repeat;
-	content: " ";
-	display: inline-block;
-	vertical-align: bottom;
-}
-
-.amber-icon--attack::before {
-	background-position-y: -24em;
-}
-
-.amber-icon--magic-attack::before {
-	background-position-y: -48em;
-}
-
-.amber-icon--defense::before {
-	background-position-y: -42em;
-}
-
-.amber-icon--magic-defense::before {
-	background-position-y: -89em;
-}
-
-.amber-icon--gold::before {
-	background-position-y: -96em;
-}
-
-.amber-icon--food::before {
-	background-position-y: -109em;
-}
-
-span[data-ch] {
-	display: inline-block;
-}
-
-*[data-ch="1"] {
-	width: 1ch;
-}
-
-*[data-ch="2"] {
-	width: 2ch;
-}
-
-*[data-ch="3"] {
-	width: 3ch;
-}
-
-*[data-ch="4"] {
-	width: 4ch;
-}
-
-*[data-ch="5"] {
-	width: 5ch;
 }

@@ -18,9 +18,9 @@
                 <xsl:text>Portrait #</xsl:text>
                 <xsl:value-of select="format-number(@id, '000')" />
             </div>
-            <amber-picker infoset="lib.portraits" type="portrait" role="button" tabindex="0">
+            <amber-embed infoset="lib.portraits" type="portrait" role="button" tabindex="0">
                 <amber-portrait-id value="{@id}" />
-            </amber-picker>
+            </amber-embed>
             <div class="amber-portrait__name amber-text amber-text--silver">
                 <xsl:for-each select="//saa:portrait-instance[@id = current()/@id]">
                     <div class="amber-portrait__character">

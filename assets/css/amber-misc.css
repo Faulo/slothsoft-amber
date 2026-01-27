@@ -1,0 +1,114 @@
+.amber-list__items {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.amber-text {
+	font-family: "Ambermoon-game", monospace;
+	color: #ffffee;
+	text-shadow: 0.2em 0.2em 0px black;
+	font-size: 10px;
+	line-height: 1.6em;
+	font-weight: normal;
+	font-style: normal;
+}
+
+.amber-text--dark {
+	color: #888877;
+}
+
+.amber-text--gray {
+	color: #aaaa99;
+}
+
+.amber-text--silver {
+	color: #ccccbb;
+}
+
+.amber-text--yellow {
+	color: #ffcc00;
+}
+
+.amber-text--orange {
+	color: #ff9900;
+}
+
+.amber-text--red {
+	color: #cc4433;
+}
+
+.amber-text--green {
+	color: #AAAA44;
+}
+
+.amber-text--spellbook-0 {
+	color: #fefeff;
+}
+
+.amber-text--spellbook-1 {
+	color: #8798a9;
+}
+
+.amber-text--spellbook-2 {
+	color: #cfcf2e;
+}
+
+.amber-text--spellbook-3 {
+	color: #cc4433;
+}
+
+.amber-text--runes {
+	font-family: Ambermoon-rune;
+}
+
+.amber-textbox p {
+	margin: 0;
+	line-height: 1.4em;
+}
+
+.amber-textbox p+p {
+	margin-top: 1.4em;;
+}
+
+.amber-icon {
+	display: inline-block;
+}
+
+.amber-icon::before {
+	font-size: 16px;
+	width: 1em;
+	height: 1em;
+	image-rendering: pixelated;
+	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
+	background-clip: content-box;
+	background-size: cover;
+	background-repeat: no-repeat;
+	content: " ";
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.amber-icon--attack::before {
+	background-position-y: -24em;
+}
+
+.amber-icon--magic-attack::before {
+	background-position-y: -48em;
+}
+
+.amber-icon--defense::before {
+	background-position-y: -42em;
+}
+
+.amber-icon--magic-defense::before {
+	background-position-y: -89em;
+}
+
+.amber-icon--gold::before {
+	background-position-y: -96em;
+}
+
+.amber-icon--food::before {
+	background-position-y: -109em;
+}

@@ -401,15 +401,15 @@
     </xsl:template>
 
     <xsl:template match="saa:monster" mode="character-picture">
-        <amber-picker infoset="lib.monsters" type="monster" role="button" tabindex="0">
+        <amber-embed infoset="lib.monsters" type="monster" role="button" tabindex="0">
             <amber-monster-id value="{@id}" />
-        </amber-picker>
+        </amber-embed>
     </xsl:template>
 
     <xsl:template match="saa:pc | saa:npc" mode="character-picture">
-        <amber-picker infoset="lib.portraits" type="portrait" role="button" tabindex="0">
+        <amber-embed infoset="lib.portraits" type="portrait" role="button" tabindex="0">
             <amber-portrait-id value="{@portrait-id}" />
-        </amber-picker>
+        </amber-embed>
     </xsl:template>
 
     <xsl:template match="saa:spellbook-instance" mode="character">
@@ -448,7 +448,7 @@
     </xsl:template>
 
     <xsl:template match="saa:slot" mode="itemlist-inline">
-        <amber-picker infoset="lib.items" type="item" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
+        <amber-embed infoset="lib.items" type="item" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
             <amber-item-id value="{saa:item-instance/@item-id}" />
             <amber-item-amount value="{saa:item-instance/@item-amount}" />
             <xsl:if test="saa:item-instance/@is-identified">
@@ -458,7 +458,7 @@
                 <amber-broken />
             </xsl:if>
             <amber-item-charge value="{saa:item-instance/@item-charge}" />
-        </amber-picker>
+        </amber-embed>
         <xsl:if test="@name">
             <span class="name">
                 <xsl:value-of select="@name" />

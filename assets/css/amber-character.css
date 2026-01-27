@@ -1,0 +1,199 @@
+.amber-character {
+	background-color: #666655;
+	line-height: 1.4em;
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+}
+
+.amber-character__body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.amber-character table {
+	border-spacing: 0;
+}
+
+.amber-character tr {
+	height: 1.4em;
+}
+
+.amber-character td {
+	padding: 0;
+}
+
+.amber-character__tables {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.amber-character__tables>*, .amber-character__equipment,
+	.amber-character__inventory, .amber-character__dialog,
+	.amber-character__spells {
+	margin: 0.5ch;
+}
+
+.amber-character__spells ul {
+	list-style: none;
+	margin: 0;
+	padding: 0 0 0 1ch;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.amber-character__spells .amber-text {
+	line-height: 1.4em;
+}
+
+.amber-character__attributes td, .amber-character__skills td {
+	text-align: right;
+}
+
+.amber-character__attributes td:first-child, .amber-character__skills td:first-child
+	{
+	padding-right: 1ch;
+}
+
+.amber-character__dialog summary {
+	line-height: 1.8em;
+}
+
+.amber-character__dialog details {
+	margin-left: 1ch;
+}
+
+.amber-character__attributes {
+	width: 10ch;
+}
+
+.amber-character__languages {
+	width: 12ch;
+}
+
+.amber-character__skills {
+	width: 12ch;
+}
+
+.amber-character__equipment ul {
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	list-style: none;
+	text-align: center;
+	margin-top: -1em;
+}
+
+.amber-character__equipment li {
+	line-height: 2em;
+	margin-top: 1em;
+}
+
+.amber-character__equipment amber-item-amount::after {
+	display: none;
+}
+
+.amber-character__equipment  amber-embed {
+	margin: auto;
+}
+
+.amber-character__apr {
+	text-align: center;
+}
+
+.amber-character__inventory ul {
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	list-style: none;
+	width: fit-content;
+}
+
+.amber-character caption {
+	margin: 0 0 0.5em 0;
+	line-height: 1em;
+}
+
+.amber-character h3 {
+	margin: 0 0 0.5em 0;
+	line-height: 1em;
+}
+
+.amber-character__inventory h3 {
+	margin-top: -2em;
+}
+
+.amber-character__name {
+	margin: 0.5em 0;
+}
+
+.amber-character__equipment h3 {
+	text-align: center;
+}
+
+.amber-character__equipment amber-item-amount {
+	display: none;
+}
+
+.amber-character__sheet {
+	width: 22ch;
+}
+
+.amber-character__basic-info {
+	flex-grow: 1;
+	margin: 0;
+	padding: 0 0 0 0.5ch;
+	list-style: none;
+}
+
+.amber-character__combat-info {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+	width: 20ch;
+}
+
+.amber-character__combat-info li {
+	min-height: 1.4em;
+}
+
+.amber-character__sheet td {
+	line-height: 16px;
+	text-align: right;
+}
+
+.amber-character__sheet amber-embed {
+	margin: 0;
+}
+
+.amber-character__sheet amber-portrait-id::after {
+	font-size: 3px !important;
+}
+
+.amber-character__sheet [data-ch] {
+	text-align: right;
+}
+
+.amber-character--monster .amber-character__sheet {
+	width: 40ch;
+}
+
+.amber-character--monster .amber-character__spells ul {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.amber-character .amber-textbox {
+	width: 56ch;
+	margin: 0.5ch auto;
+}
+
+.amber-character .amber-textbox+.amber-textbox {
+	margin-top: 1ch;
+}
