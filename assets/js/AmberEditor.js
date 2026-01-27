@@ -5,6 +5,9 @@ import AmberAPI from "/slothsoft@amber/js/AmberAPI";
 import DOM from "/slothsoft@farah/js/DOM";
 import { NS } from "/slothsoft@farah/js/XMLNamespaces";
 
+const WEIGHT_OF_GOLD = 5;
+const WEIGHT_OF_FOOD = 250;
+
 function bootstrap() {
     for (let node of window.document.querySelectorAll("form")) {
         new AmberEditor(node);
@@ -34,9 +37,11 @@ class AmberEditorPage {
 
     async #execute(buttonNode, action) {
         buttonNode.disabled = true;
+        buttonNode.title = "Berechnet...";
         switch (action) {
             case "apply-equipment":
-                await this.#applyEquipment();
+                buttonNode.title = await this.#applyEquipment();
+                alert(buttonNode.title);
                 break;
             default:
                 alert(`Unknown action "${action}"`);
@@ -49,8 +54,8 @@ class AmberEditorPage {
         const characterNode = this.#fieldsetNode;
 
         const mappings = {};
-        mappings["lp-max"] = characterNode.querySelector("*[data-name='hit-points'] input[data-name='maximum-mod']");
-        mappings["sp-max"] = characterNode.querySelector("*[data-name='spell-points'] input[data-name='maximum-mod']");
+        mappings["lp-max"] = characterNode.querySelectorAll("input[data-name='maximum-mod']")[0];
+        mappings["sp-max"] = characterNode.querySelectorAll("input[data-name='maximum-mod']")[1];
         mappings["hands"] = characterNode.querySelector("select[data-name='hand']");
         mappings["fingers"] = characterNode.querySelector("select[data-name='finger']");
         mappings["damage"] = characterNode.querySelector("input[data-name='attack']");
@@ -80,6 +85,8 @@ class AmberEditorPage {
         mappings["Spruchrollen Lesen"] = characterNode.querySelectorAll(".skills tr")[8].querySelector("input[data-name='current-mod']");
         mappings["Magie Benutzen"] = characterNode.querySelectorAll(".skills tr")[9].querySelector("input[data-name='current-mod']");
 
+        mappings["weight"] = characterNode.querySelector("input[data-name='weight']");
+
         const data = {};
         for (let key in mappings) {
             data[key] = 0;
@@ -95,7 +102,6 @@ class AmberEditorPage {
         }
 
         const itemNodes = await AmberAPI.getAmberdataItems(itemIds);
-
         itemNodes.forEach(
             (itemNode) => {
                 for (let key in data) {
@@ -103,20 +109,47 @@ class AmberEditorPage {
                         data[key] += parseInt(itemNode.getAttribute(key));
                     }
                 }
-                if (itemNode.getAttribute("attribute-type")) {
+                if (parseInt(itemNode.getAttribute("attribute-value"))) {
                     data[itemNode.getAttribute("attribute-type")] += parseInt(itemNode.getAttribute("attribute-value"));
                 }
-                if (itemNode.getAttribute("skill-type")) {
+                if (parseInt(itemNode.getAttribute("skill-value"))) {
                     data[itemNode.getAttribute("skill-type")] += parseInt(itemNode.getAttribute("skill-value"));
                 }
             }
-        )
+        );
+
+        // Gewichtsberechnung
+        const goldNode = characterNode.querySelector("input[data-name='gold']");
+        if (goldNode) {
+            data["weight"] += WEIGHT_OF_GOLD * parseInt(goldNode.value);
+        }
+
+        const foodNode = characterNode.querySelector("input[data-name='food']");
+        if (foodNode) {
+            data["weight"] += WEIGHT_OF_FOOD * parseInt(foodNode.value);
+        }
+
+        for (let itemPicker of characterNode.querySelectorAll(".inventory amber-embed")) {
+            const itemId = parseInt(itemPicker.querySelector("amber-item-id input").value);
+            const itemAmount = parseInt(itemPicker.querySelector("amber-item-amount input").value);
+            if (itemId) {
+                const itemNode = await AmberAPI.getAmberdataItem(itemId);
+                data["weight"] += itemAmount * parseInt(itemNode.getAttribute("weight"))
+            }
+        }
+
+        const result = [];
 
         for (let key in mappings) {
             if (mappings[key]) {
-                mappings[key].value = data[key];
+                if (mappings[key].value != data[key]) {
+                    result.push(`${key}: ${mappings[key].value} => ${data[key]}`);
+                    mappings[key].value = data[key];
+                }
             }
         }
+
+        return result.length > 0 ? "Änderungen: " + result.join("; ") : "Keine Änderungen nötig!";
     }
 }
 

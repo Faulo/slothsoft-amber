@@ -10,13 +10,14 @@ class AmberAPI {
 
     #documents = {};
 
-    constructor() {
-        console.log("AmberAPI constructor");
-    }
-
     getAmberdataItems(itemIds) {
         return this.getAmberdataDocument("lib.items")
             .then(document => itemIds.map(itemId => document.querySelector(`item[id="${itemId}"]`)));
+    }
+
+    getAmberdataItem(itemId) {
+        return this.getAmberdataDocument("lib.items")
+            .then(document => document.querySelector(`item[id="${itemId}"]`));
     }
 
     getAmberdataElement(infosetId, type, id) {
