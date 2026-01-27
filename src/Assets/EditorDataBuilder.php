@@ -63,7 +63,7 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
             }
             
             if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_DOWNLOAD) {
-                $resultBuilder = new FileWriterResultBuilder($archive, $archive->getArchiveId());
+                $resultBuilder = new FileWriterResultBuilder($archive, $archive->getName());
                 $strategies = new ExecutableStrategies($resultBuilder);
                 throw new HttpDownloadAssetException($strategies);
             }
