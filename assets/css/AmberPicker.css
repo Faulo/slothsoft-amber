@@ -79,14 +79,16 @@ amber-broken::after {
 	width: 1em;
 	height: 1em;
 	position: absolute;
-	top: 2px;
-	left: 2px;
+	top: 0px;
+	left: 0px;
 	display: block;
 	content: " ";
 	background-clip: content-box;
 	background-image: url("/slothsoft@amber/static/ambermoon/gfx/broken");
 	background-size: cover;
 	background-repeat: no-repeat;
+	pointer-events: none;
+	image-rendering: pixelated;
 }
 
 amber-broken[value=""]::after {

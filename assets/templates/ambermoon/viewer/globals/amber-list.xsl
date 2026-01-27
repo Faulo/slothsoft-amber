@@ -451,6 +451,12 @@
         <amber-picker infoset="lib.items" type="item" role="button" tabindex="0" onclick="savegameEditor.openPopup(arguments[0])">
             <amber-item-id value="{saa:item-instance/@item-id}" />
             <amber-item-amount value="{saa:item-instance/@item-amount}" />
+            <xsl:if test="saa:item-instance/@is-identified">
+                <amber-identified />
+            </xsl:if>
+            <xsl:if test="saa:item-instance/@is-broken">
+                <amber-broken />
+            </xsl:if>
             <amber-item-charge value="{saa:item-instance/@item-charge}" />
         </amber-picker>
         <xsl:if test="@name">
