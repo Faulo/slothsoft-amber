@@ -88,36 +88,43 @@ class AmberEditorPage {
             const maxInput = mappings[key][2];
 
             const max = parseInt(maxInput.value);
-            const step = Math.floor(max / 5);
 
-            const isAttribute = attributes.includes(key);
-            const isSpecial = specials.includes(key);
-
-            let amount, type, modifier;
-
-            if (isAttribute) {
-                if (isSpecial) {
-                    amount = 5;
-                    type = step + 1;
-                    modifier = -amount;
-                } else {
-                    amount = 5;
-                    type = step;
-                    modifier = 0;
-                }
+            if (max === 0) {
+                currentInput.value = 0;
             } else {
-                if (isSpecial) {
-                    amount = step;
-                    type = 6;
-                    modifier = -amount;
+                const isAttribute = attributes.includes(key);
+                const isSpecial = specials.includes(key);
+
+                let amount, type;
+
+                if (isAttribute) {
+                    amount = 2;
+                    const step = Math.floor(max / amount);
+
+                    if (isSpecial) {
+                        type = step + 1;
+                    } else {
+                        type = step;
+                    }
                 } else {
-                    amount = step;
-                    type = 5;
-                    modifier = 0;
+                    amount = 4;
+                    const step = Math.floor(max / amount);
+
+                    if (isSpecial) {
+                        type = step + 1;
+                    } else {
+                        type = step;
+                    }
+                }
+
+                const modifier = (max - amount * type);
+
+                currentInput.value = this.#roll(amount, type, modifier);
+
+                if (currentInput.value === maxInput.value) {
+                    console.log(`High roll for ${key}: ${max}`);
                 }
             }
-
-            currentInput.value = this.#roll(amount, type, modifier);
         }
     }
 
@@ -129,6 +136,11 @@ class AmberEditorPage {
 
         // const modifierText = modifier > 0 ? `+${modifier}` : modifier < 0 ? modifier.toString() : "";
         // console.log(`${amount}d${type}${modifierText}=${result}`);
+
+        if (result < 0) {
+            result = 0;
+        }
+
         return result;
     }
 
