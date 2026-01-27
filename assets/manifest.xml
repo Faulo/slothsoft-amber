@@ -26,6 +26,7 @@
             <link-stylesheet ref="/css/amber-misc" />
             <link-stylesheet ref="/css/amber-portrait" />
             <link-stylesheet ref="/css/general" />
+            <link-stylesheet ref="/css/AmberPicker" />
             <link-module ref="/js/AmberPicker" />
             <link-module ref="/js/TabsView" />
         </fragment>
