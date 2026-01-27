@@ -18,9 +18,6 @@
 					<li>
 						<xsl:call-template name="savegame.flex">
 							<xsl:with-param name="items">
-								<div>
-									<xsl:call-template name="savegame.amber.testing" />
-								</div>
 								<xsl:call-template name="savegame.amber.events" />
 								<div>
 									<xsl:call-template name="savegame.amber.character-common" />

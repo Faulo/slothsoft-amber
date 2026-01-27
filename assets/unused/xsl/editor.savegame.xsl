@@ -103,9 +103,6 @@
                     <li><!--ng-controller="character{@name}" -->
                         <xsl:call-template name="savegame.flex">
                             <xsl:with-param name="items">
-                                <div>
-                                    <xsl:call-template name="savegame.amber.testing" />
-                                </div>
                                 <xsl:call-template name="savegame.amber.events" />
                                 <div>
                                     <xsl:call-template name="savegame.amber.character-common" />
@@ -146,9 +143,6 @@
                     <li>
                         <xsl:call-template name="savegame.flex">
                             <xsl:with-param name="items">
-                                <div>
-                                    <xsl:call-template name="savegame.amber.testing" />
-                                </div>
                                 <xsl:call-template name="savegame.amber.events" />
                                 <div>
                                     <xsl:call-template name="savegame.amber.character-common" />
@@ -179,9 +173,6 @@
                     <li>
                         <xsl:call-template name="savegame.flex">
                             <xsl:with-param name="items">
-                                <div>
-                                    <xsl:call-template name="savegame.amber.testing" />
-                                </div>
                                 <xsl:call-template name="savegame.amber.events" />
                                 <div>
                                     <xsl:call-template name="savegame.amber.character-common" />
@@ -700,18 +691,6 @@
         </xsl:for-each>
     </xsl:template>
 
-    <xsl:template name="savegame.amber.testing">
-        <xsl:for-each select=".//*[@name = 'testing']">
-            <div>
-                <xsl:call-template name="savegame.table">
-                    <xsl:with-param name="label" select="'Unbekannt'" />
-                    <xsl:with-param name="items">
-                        <xsl:apply-templates select="*" mode="item" />
-                    </xsl:with-param>
-                </xsl:call-template>
-            </div>
-        </xsl:for-each>
-    </xsl:template>
     <xsl:template name="savegame.amber.events">
         <xsl:for-each select=".//*[@name = 'events']">
             <xsl:for-each select="save:event-script | save:binary">

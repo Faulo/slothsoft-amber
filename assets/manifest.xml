@@ -9,7 +9,7 @@
         <custom-asset name="gfx" executable-builder="Slothsoft\Amber\Assets\GfxBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\GfxParameterFilter" />
 
         <custom-asset name="editor" executable-builder="Slothsoft\Amber\Assets\EditorBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter">
-            <import ref="/includes/AmberPicker" />
+            <import ref="/includes/AmberEditor" />
         </custom-asset>
         <custom-asset name="editor-data" executable-builder="Slothsoft\Amber\Assets\EditorDataBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter" />
 
@@ -29,6 +29,10 @@
             <link-stylesheet ref="/css/AmberPicker" />
             <link-module ref="/js/AmberPicker" />
             <link-module ref="/js/TabsView" />
+        </fragment>
+        <fragment name="AmberEditor">
+            <import ref="/includes/AmberPicker" />
+            <link-module ref="/js/AmberEditor" />
         </fragment>
     </fragment>
 

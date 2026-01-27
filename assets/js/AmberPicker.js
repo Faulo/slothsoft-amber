@@ -1,27 +1,22 @@
 "use strict";
 
 import Bootstrap from "/slothsoft@farah/js/Bootstrap";
-import DOM from "/slothsoft@farah/js/DOM";
+import AmberAPI from "/slothsoft@amber/js/AmberAPI";
 import { NS } from "/slothsoft@farah/js/XMLNamespaces";
 
-const viewerUrl = "/slothsoft@amber/api/viewer";
-
 function bootstrap() {
-    window.AmberPicker = new AmberPicker(window.document, viewerUrl);
+    window.AmberPicker = new AmberPicker(window.document);
 }
 
 export default class AmberPicker {
     #document;
     #rootNode;
     #popupNode;
-    #viewerUrl;
     #embeds = [];
-    #infosets = {};
 
-    constructor(document, viewerUrl) {
+    constructor(document) {
         this.#document = document;
         this.#rootNode = document.body ? document.body : document.documentElement;
-        this.#viewerUrl = viewerUrl;
 
         this.#popupNode = this.#document.createElementNS(NS.XHTML, "div");
         this.#popupNode.setAttribute("class", `amber-popup`);
@@ -33,14 +28,6 @@ export default class AmberPicker {
         }
     }
 
-    #loadInfoset(url) {
-        if (this.#infosets[url]) {
-            return Promise.resolve(this.#infosets[url]);
-        }
-
-        return DOM.loadDocumentAsync(url).then(d => this.#infosets[url] = d);
-    }
-
     closePopup() {
         while (this.#popupNode.hasChildNodes()) {
             this.#popupNode.removeChild(this.#popupNode.lastChild);
@@ -50,15 +37,12 @@ export default class AmberPicker {
     }
 
     openPopup(infosetId, type, id) {
-        const url = this.#viewerUrl + "?infosetId=" + infosetId;
-        this.#loadInfoset(url)
-            .then(infosetDocument => {
-                const infosetNode = infosetDocument.querySelector(`*[data-${type}-id="${id}"]`);
-                if (infosetNode) {
-                    this.closePopup();
-                    this.#popupNode.setAttribute("class", `amber-popup amber-popup--visible amber-poup--${type}`);
-                    this.#popupNode.appendChild(this.#document.importNode(infosetNode, true));
-                }
+        AmberAPI
+            .getViewElement(infosetId, type, id)
+            .then(infosetNode => {
+                this.closePopup();
+                this.#popupNode.setAttribute("class", `amber-popup amber-popup--visible amber-poup--${type}`);
+                this.#popupNode.appendChild(this.#document.importNode(infosetNode, true));
             });
     }
 }

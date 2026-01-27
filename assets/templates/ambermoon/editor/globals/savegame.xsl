@@ -4,18 +4,6 @@
 
     <xsl:import href="farah://slothsoft@farah/xsl/xslt" />
 
-    <xsl:template name="savegame.amber.testing">
-        <xsl:for-each select=".//*[@name = 'testing']">
-            <div>
-                <xsl:call-template name="savegame.table">
-                    <xsl:with-param name="label" select="'Unbekannt'" />
-                    <xsl:with-param name="items">
-                        <xsl:apply-templates select="*" mode="item" />
-                    </xsl:with-param>
-                </xsl:call-template>
-            </div>
-        </xsl:for-each>
-    </xsl:template>
     <xsl:template name="savegame.amber.events">
         <xsl:for-each select=".//*[@name = 'events']">
             <xsl:for-each select="sse:event-script | sse:binary">
@@ -301,8 +289,8 @@
             </xsl:with-param>
         </xsl:call-template>
         <xsl:call-template name="savegame.button">
-            <xsl:with-param name="label" select="'apply equipment'" />
-            <xsl:with-param name="action" select="'savegameEditor.setEquipment(this);'" />
+            <xsl:with-param name="label" select="'Ausrüstungsboni berechnen'" />
+            <xsl:with-param name="action" select="'apply-equipment'" />
         </xsl:call-template>
     </xsl:template>
     <xsl:template name="savegame.amber.character-inventory">
@@ -888,7 +876,7 @@
         <xsl:param name="label" select="''" />
         <xsl:param name="action" select="''" />
 
-        <button type="button" onclick="{$action}">
+        <button type="button" data-editor-action="{$action}" disabled="disabled">
             <xsl:value-of select="$label" />
         </button>
     </xsl:template>
