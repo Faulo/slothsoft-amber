@@ -80,6 +80,7 @@ class AmberEditorPage {
         mappings["Spruchrollen Lesen"] = characterNode.querySelectorAll(".skills tr")[8].querySelectorAll("input");
         mappings["Magie benutzen"] = characterNode.querySelectorAll(".skills tr")[9].querySelectorAll("input");
 
+        const attributes = ["Stärke", "Intelligenz", "Geschicklichkeit", "Schnelligkeit", "Konstitution", "Karisma", "Glück", "Anti-Magie"];
         const specials = ["Anti-Magie", "Schwimmen", "Kritische Treffer", "Fallen Finden", "Fallen Entschärfen", "Schlösser Knacken", "Suchen"];
 
         for (let key in mappings) {
@@ -87,9 +88,36 @@ class AmberEditorPage {
             const maxInput = mappings[key][2];
 
             const max = parseInt(maxInput.value);
-            const amount = Math.floor(max / 5);
+            const step = Math.floor(max / 5);
+
+            const isAttribute = attributes.includes(key);
             const isSpecial = specials.includes(key);
-            currentInput.value = isSpecial ? this.#roll(amount, 6, -amount) : this.#roll(amount, 5, 0);
+
+            let amount, type, modifier;
+
+            if (isAttribute) {
+                if (isSpecial) {
+                    amount = 5;
+                    type = step + 1;
+                    modifier = -amount;
+                } else {
+                    amount = 5;
+                    type = step;
+                    modifier = 0;
+                }
+            } else {
+                if (isSpecial) {
+                    amount = step;
+                    type = 6;
+                    modifier = -amount;
+                } else {
+                    amount = step;
+                    type = 5;
+                    modifier = 0;
+                }
+            }
+
+            currentInput.value = this.#roll(amount, type, modifier);
         }
     }
 
