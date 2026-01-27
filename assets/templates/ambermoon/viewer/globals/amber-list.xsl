@@ -407,7 +407,7 @@
     </xsl:template>
 
     <xsl:template match="saa:pc | saa:npc" mode="character-picture">
-        <amber-embed infoset="lib.portraits" type="portrait">
+        <amber-embed infoset="lib.portraits" type="portrait" id="{@portrait-id}" mode="popup">
             <amber-portrait-id value="{@portrait-id}" />
         </amber-embed>
     </xsl:template>

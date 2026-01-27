@@ -9,6 +9,15 @@ amber-embed {
 	background-color: #444433;
 }
 
+amber-embed[aria-role]:hover {
+	border-color: #ffcc00;
+	border-style: outset;
+}
+
+amber-embed[aria-role]:active {
+	border-style: inset;
+}
+
 amber-embed[type="monster"] {
 	width: fit-content;
 	height: fit-content;
@@ -98,6 +107,7 @@ amber-identified::after {
 	right: 2px;
 	font-size: 0.5em;
 	content: "👁";
+	pointer-events: none;
 }
 
 amber-identified[value=""]::after {
@@ -111,6 +121,7 @@ amber-item-charge::after {
 	color: rgb(255, 204, 0);
 	font-size: 0.5em;
 	content: attr(value);
+	pointer-events: none;
 }
 
 amber-item-charge[value=""]::after, amber-item-charge[value="0"]::after
