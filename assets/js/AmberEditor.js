@@ -37,9 +37,13 @@ class AmberEditorPage {
 
     async #execute(buttonNode, action) {
         buttonNode.disabled = true;
-        buttonNode.title = "Berechnet...";
+        buttonNode.title = "";
         switch (action) {
+            case "roll-stats":
+                this.#rollStats();
+                break;
             case "apply-equipment":
+                buttonNode.title = "Berechnet...";
                 buttonNode.title = await this.#applyEquipment();
                 alert(buttonNode.title);
                 break;
@@ -48,6 +52,56 @@ class AmberEditorPage {
                 break;
         }
         buttonNode.disabled = false;
+    }
+    #rollStats() {
+        const characterNode = this.#fieldsetNode;
+
+        const mappings = {};
+
+        //Attribute
+        mappings["Stärke"] = characterNode.querySelectorAll(".attributes tr")[0].querySelectorAll("input");
+        mappings["Intelligenz"] = characterNode.querySelectorAll(".attributes tr")[1].querySelectorAll("input");
+        mappings["Geschicklichkeit"] = characterNode.querySelectorAll(".attributes tr")[2].querySelectorAll("input");
+        mappings["Schnelligkeit"] = characterNode.querySelectorAll(".attributes tr")[3].querySelectorAll("input");
+        mappings["Konstitution"] = characterNode.querySelectorAll(".attributes tr")[4].querySelectorAll("input");
+        mappings["Karisma"] = characterNode.querySelectorAll(".attributes tr")[5].querySelectorAll("input");
+        mappings["Glück"] = characterNode.querySelectorAll(".attributes tr")[6].querySelectorAll("input");
+        mappings["Anti-Magie"] = characterNode.querySelectorAll(".attributes tr")[7].querySelectorAll("input");
+
+        //Skills
+        mappings["Attacke"] = characterNode.querySelectorAll(".skills tr")[0].querySelectorAll("input");
+        mappings["Parade"] = characterNode.querySelectorAll(".skills tr")[1].querySelectorAll("input");
+        mappings["Schwimmen"] = characterNode.querySelectorAll(".skills tr")[2].querySelectorAll("input");
+        mappings["Kritische Treffer"] = characterNode.querySelectorAll(".skills tr")[3].querySelectorAll("input");
+        mappings["Fallen Finden"] = characterNode.querySelectorAll(".skills tr")[4].querySelectorAll("input");
+        mappings["Fallen Entschärfen"] = characterNode.querySelectorAll(".skills tr")[5].querySelectorAll("input");
+        mappings["Schlösser Knacken"] = characterNode.querySelectorAll(".skills tr")[6].querySelectorAll("input");
+        mappings["Suchen"] = characterNode.querySelectorAll(".skills tr")[7].querySelectorAll("input");
+        mappings["Spruchrollen Lesen"] = characterNode.querySelectorAll(".skills tr")[8].querySelectorAll("input");
+        mappings["Magie benutzen"] = characterNode.querySelectorAll(".skills tr")[9].querySelectorAll("input");
+
+        const specials = ["Anti-Magie", "Schwimmen", "Kritische Treffer", "Fallen Finden", "Fallen Entschärfen", "Schlösser Knacken", "Suchen"];
+
+        for (let key in mappings) {
+            const currentInput = mappings[key][0];
+            const maxInput = mappings[key][2];
+
+            const max = parseInt(maxInput.value);
+            const amount = Math.floor(max / 5);
+            const isSpecial = specials.includes(key);
+            currentInput.value = isSpecial ? this.#roll(amount, 6, -amount) : this.#roll(amount, 5, 0);
+        }
+    }
+
+    #roll(amount, type, modifier) {
+        let result = amount + modifier;
+        for (let i = 0; i < amount; i++) {
+            result += Math.floor(Math.random() * type);
+        }
+
+        // const modifierText = modifier > 0 ? `+${modifier}` : modifier < 0 ? modifier.toString() : "";
+        // console.log(`${amount}d${type}${modifierText}=${result}`);
+        return result;
     }
 
     async #applyEquipment() {

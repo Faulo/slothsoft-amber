@@ -259,6 +259,10 @@
                 <xsl:apply-templates select=".//*[@name = 'slp-per-level']" mode="item" />
             </xsl:with-param>
         </xsl:call-template>
+        <xsl:call-template name="savegame.button">
+            <xsl:with-param name="label" select="'Attribute und Fähigkeiten würfeln'" />
+            <xsl:with-param name="action" select="'roll-stats'" />
+        </xsl:call-template>
     </xsl:template>
     <xsl:template name="savegame.amber.character-equipment">
         <xsl:for-each select=".//*[@name = 'equipment']">
