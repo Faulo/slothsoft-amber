@@ -9,6 +9,10 @@ amber-embed {
 	background-color: #444433;
 }
 
+amber-embed[aria-role] {
+	cursor: pointer;
+}
+
 amber-embed[aria-role]:hover {
 	border-color: #ffcc00;
 	border-style: outset;
