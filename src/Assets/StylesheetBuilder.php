@@ -56,7 +56,7 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                         'width' => 0,
                         'height' => 0
                     ];
-                    $archiveNode = $editor->loadArchive("Amberfiles/$archiveId", true);
+                    $archiveNode = $editor->loadArchive($archiveId, true);
                     foreach ($archiveNode->getFileNodes() as $x => $fileNode) {
                         foreach ($fileNode->getImageNodes() as $y => $imageNode) {
                             $imageData[$archiveId]['width'] = max($imageData[$archiveId]['width'], $imageNode->getWidth());

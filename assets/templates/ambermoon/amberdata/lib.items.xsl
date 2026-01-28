@@ -114,8 +114,8 @@
 					<xsl:with-param name="id" select="0" />
 				</xsl:call-template>
 			</xsl:if>
-			<gfx archive="Object_icons" group="item-id" id="{$id}" position="{$gfxId}" label="{.//*[@name = 'name']/@value}" />
-			<gfx archive="Object_icons" group="item-gfx" id="{$gfxId}" position="{$gfxId}" />
+			<gfx archive="Amberfiles/Object_icons" group="item-id" id="{$id}" position="{$gfxId}" label="{.//*[@name = 'name']/@value}" />
+			<gfx archive="Amberfiles/Object_icons" group="item-gfx" id="{$gfxId}" position="{$gfxId}" />
 		</item>
 	</xsl:template>
 

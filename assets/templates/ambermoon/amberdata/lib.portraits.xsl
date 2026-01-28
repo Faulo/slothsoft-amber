@@ -33,7 +33,7 @@
 
         <gfx-list>
             <xsl:for-each select="$static//saa:portrait">
-                <gfx archive="Portraits.amb" group="portrait-id" id="{@id}" position="{@id - 1}" />
+                <gfx archive="Amberfiles/Portraits.amb" group="portrait-id" id="{@id}" position="{@id - 1}" />
             </xsl:for-each>
         </gfx-list>
     </xsl:template>

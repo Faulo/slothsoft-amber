@@ -95,7 +95,7 @@
 		<xsl:variable name="animationLengths" select=".//*[@name = 'length']" />
 		<xsl:variable name="animationMirrors" select=".//*[@name = 'mirror']/*" />
 
-		<saa:gfx archive="Monster_gfx.amb" file="{.//*[@name='gfx-id']/@value}" palette="3" group="monster-id" id="{$id}" position="0" sourge-width="{$width/*[@name = 'source']/@value}"
+		<saa:gfx archive="Amberfiles/Monster_gfx.amb" file="{.//*[@name='gfx-id']/@value}" palette="3" group="monster-id" id="{$id}" position="0" sourge-width="{$width/*[@name = 'source']/@value}"
 			source-height="{$height/*[@name = 'source']/@value}" target-width="{$width/*[@name = 'target']/@value}" target-height="{$height/*[@name = 'target']/@value}">
 			<xsl:for-each select="$animationCycles">
 				<xsl:variable name="pos" select="position()" />
