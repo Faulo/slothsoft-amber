@@ -88,7 +88,7 @@
 																<xsl:value-of select="position()" />
 															</td>
 															<td>
-																<amber-embed type="tileset-icon-{$tilesetId}" type="tile">
+																<amber-embed type="tileset-icon-{$tilesetId}">
 																	<amber-tile-id value="{position()}" />
 																</amber-embed>
 															</td>
