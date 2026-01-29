@@ -1,0 +1,432 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link href="http://localhost/slothsoft@amber/css/AmberPicker"
+	rel="stylesheet" type="text/css" />
+<link
+	href="http://localhost/slothsoft@amber/api/stylesheet?infosetId=lib.items"
+	rel="stylesheet" type="text/css" />
+<link href="http://localhost/slothsoft@amber/css/amber-misc"
+	rel="stylesheet" type="text/css" />
+<link href="http://localhost/slothsoft@amber/css/amber-editor"
+	rel="stylesheet" type="text/css" />
+</head>
+<body>
+	<form class="amber-editor amber-editor--new  amber-text">
+		<nav class="amber-editor__actions">
+			<button name="save[action]" type="submit" value="save"
+				class="amber-editor__input amber-editor__input--widget amber-text amber-text--yellow">Speichern</button>
+			<button name="save[action]" type="submit" value="download"
+				class="amber-editor__input amber-editor__input--widget amber-text amber-text--yellow">
+				Download <span class="amber-text amber-text--orange">Party_char.amb</span>
+			</button>
+			<button name="save[action]" type="submit" value="download"
+				class="amber-editor__input amber-editor__input--widget amber-text amber-text--yellow">
+				Download <span class="amber-text amber-text--orange">Party_data.sav</span>
+			</button>
+		</nav>
+		<div class="amber-editor__party">
+			<fieldset>
+				<div>
+					<default:input xmlns:default="http://www.w3.org/1999/xhtml"
+						name="save[data][224]" value="Kadda" data-name="name" type="text"
+						maxlength="15"
+						class="amber-editor__input amber-text amber-text--yellow" />
+				</div>
+				<div>
+					<amber-embed infoset="lib.portraits" type="portrait" role="button"
+						tabindex="0"> <amber-portrait-id value="5"></amber-portrait-id></amber-embed>
+					<default:select xmlns:default="http://www.w3.org/1999/xhtml"
+						name="save[data][3]" data-name="race"
+						class="amber-editor__input amber-editor__input--widget amber-text">
+						<default:option value="0">Mensch</default:option>
+						<default:option value="1" selected="selected">Portrait #123</default:option>
+						<default:option value="2">Zwerg</default:option>
+						<default:option value="3">Gnom</default:option>
+						<default:option value="4">Halb-Elf</default:option>
+						<default:option value="5">Sylphe</default:option>
+						<default:option value="6">Feline</default:option>
+						<default:option value="7">Moraner</default:option>
+						<default:option value="8">Thalioner</default:option>
+						<default:option value="13">(leer)</default:option>
+						<default:option value="14">Tier</default:option>
+					</default:select>
+				</div>
+				<div>
+					<default:select xmlns:default="http://www.w3.org/1999/xhtml"
+						name="save[data][3]" data-name="race"
+						class="amber-editor__input amber-editor__input--widget amber-text amber-text--green">
+						<default:option value="0">Mensch</default:option>
+						<default:option value="1" selected="selected">Elf</default:option>
+						<default:option value="2">Zwerg</default:option>
+						<default:option value="3">Gnom</default:option>
+						<default:option value="4">Halb-Elf</default:option>
+						<default:option value="5">Sylphe</default:option>
+						<default:option value="6">Feline</default:option>
+						<default:option value="7">Moraner</default:option>
+						<default:option value="8">Thalioner</default:option>
+						<default:option value="13">(leer)</default:option>
+						<default:option value="14">Tier</default:option>
+					</default:select>
+				</div>
+				<div>
+					<default:select xmlns:default="http://www.w3.org/1999/xhtml"
+						name="save[data][2]" data-name="gender"
+						class="amber-editor__input amber-editor__input--widget amber-text">
+						<default:option value="0">männlich</default:option>
+						<default:option value="1" selected="selected">weiblich</default:option>
+					</default:select>
+				</div>
+				<div xmlns:default="http://www.w3.org/1999/xhtml">
+					<label>Alter:<default:input name="save[data][67]"
+							value="33" data-name="current" type="number" step="1" min="0"
+							max="999" size="3"
+							class="amber-editor__input amber-editor__input--current amber-text" />/<default:input
+							readonly="readonly" name="save[data][68]" value="999"
+							data-name="maximum" type="number" step="1" min="0" max="999"
+							size="3"
+							class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" /></label>
+				</div>
+				<div>
+					<default:select
+						class="amber-editor__input amber-editor__input--widget amber-text amber-text--blue"
+						xmlns:default="http://www.w3.org/1999/xhtml" name="save[data][4]"
+						data-name="class">
+						<default:option value="0">Abenteurer</default:option>
+						<default:option value="1">Krieger</default:option>
+						<default:option value="2">Paladin</default:option>
+						<default:option value="3">Dieb</default:option>
+						<default:option value="4">Ranger</default:option>
+						<default:option value="5" selected="selected">Heiler</default:option>
+						<default:option value="6">Alchemist</default:option>
+						<default:option value="7">Mystiker</default:option>
+						<default:option value="8">Magier</default:option>
+						<default:option value="9">Katze</default:option>
+						<default:option value="10">(leer)</default:option>
+					</default:select>
+				</div>
+				<div xmlns:default="http://www.w3.org/1999/xhtml">
+					<label>LP: <default:input name="save[data][67]" value="33"
+							data-name="current" type="number" step="1" min="0" max="999"
+							size="2" readonly="readonly"
+							class="amber-editor__input amber-editor__input--current amber-text amber-text--blue" /></label>
+					<label>SP: <default:input name="save[data][67]" value="33"
+							data-name="current" type="number" step="1" min="0" max="999"
+							size="2" readonly="readonly"
+							class="amber-editor__input amber-editor__input--current amber-text amber-text--blue" /></label>
+					<br /> <label>TP: <default:input name="save[data][67]"
+							value="33" data-name="current" type="number" step="1" min="0"
+							max="999" size="2" readonly="readonly"
+							class="amber-editor__input amber-editor__input--current amber-text amber-text--blue" /></label>
+					<label>SLP: <default:input name="save[data][67]" value="33"
+							data-name="current" type="number" step="1" min="0" max="999"
+							size="2" readonly="readonly"
+							class="amber-editor__input amber-editor__input--current amber-text amber-text--blue" /></label>
+				</div>
+				<div xmlns:default="http://www.w3.org/1999/xhtml">
+					<label>EP:<default:input name="save[data][67]" value="150"
+							data-name="current" type="number" step="1" min="0" max="999"
+							size="3" readonly="readonly"
+							class="amber-editor__input amber-editor__input--text amber-text amber-text--blue" /></label>
+				</div>
+				<div xmlns:default="http://www.w3.org/1999/xhtml">
+					<label>APR pro Level:<default:input name="save[data][67]"
+							value="5" data-name="current" type="number" step="1" min="0"
+							max="999" size="2" readonly="readonly"
+							class="amber-editor__input amber-editor__input--text amber-text amber-text--blue" /></label>
+				</div>
+				<div>
+					<default:table xmlns:default="http://www.w3.org/1999/xhtml"
+						class="amber-editor__attributes">
+						<caption class="amber-text amber-text--green">Attribute</caption>
+						<default:tbody>
+							<default:tr>
+								<default:th>
+									<default:span class="name">STÄ</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][43]" value="25"
+										data-name="current" type="number" step="1" min="0" max="999"
+										size="2" readonly="readonly"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][44]" value="35" data-name="maximum"
+										type="number" step="1" min="0" max="999" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">INT</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][46]" value="76"
+										data-name="current" type="number" step="1" min="0" max="999"
+										size="2" readonly="readonly"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][47]" value="90" data-name="maximum"
+										type="number" step="1" min="0" max="999" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">GES</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][49]" value="60"
+										data-name="current" type="number" step="1" min="0" max="999"
+										size="2" readonly="readonly"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][50]" value="70" data-name="maximum"
+										type="number" step="1" min="0" max="999" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">SCH</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][52]" value="69"
+										data-name="current" type="number" step="1" min="0" max="999"
+										size="2" readonly="readonly"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][53]" value="70" data-name="maximum"
+										type="number" step="1" min="0" max="999" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">KON</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][55]" value="16"
+										data-name="current" type="number" step="1" min="0" max="999"
+										size="2" readonly="readonly"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][56]" value="35" data-name="maximum"
+										type="number" step="1" min="0" max="999" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">KAR</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][58]" value="45"
+										data-name="current" type="number" step="1" min="0" max="999"
+										size="2" readonly="readonly"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][59]" value="90" data-name="maximum"
+										type="number" step="1" min="0" max="999" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">GLÜ</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][61]" value="28"
+										data-name="current" type="number" step="1" min="0" max="999"
+										size="2" readonly="readonly"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][62]" value="50" data-name="maximum"
+										type="number" step="1" min="0" max="999" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">A-M</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][64]" value="27"
+										data-name="current" type="number" step="1" min="0" max="999"
+										size="2" readonly="readonly"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][65]" value="30" data-name="maximum"
+										type="number" step="1" min="0" max="999" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--green" />
+								</default:td>
+							</default:tr>
+						</default:tbody>
+					</default:table>
+				</div>
+				<div>
+					<default:table xmlns:default="http://www.w3.org/1999/xhtml"
+						class="amber-editor__skills">
+						<caption class="amber-text amber-text--blue">Fähigkeiten</caption>
+						<default:tbody>
+							<default:tr>
+								<default:th>
+									<default:span class="name">ATT</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][69]" value="25"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][70]" value="25" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">PAR</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][72]" value="17"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][73]" value="40" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">SCH</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][75]" value="43"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][76]" value="95" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">KRI</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][78]" value="0"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][79]" value="0" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">F-F</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][81]" value="0"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][82]" value="0" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">F-E</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][84]" value="0"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][85]" value="0" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">S-Ö</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][87]" value="0"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][88]" value="0" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">SUC</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][90]" value="0"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][91]" value="0" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">SRL</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][93]" value="65"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][94]" value="95" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+							<default:tr>
+								<default:th>
+									<default:span class="name">M-B</default:span>
+								</default:th>
+								<default:td>
+									<default:input name="save[data][96]" value="93"
+										readonly="readonly" data-name="current" type="number" step="1"
+										min="0" max="99" size="2"
+										class="amber-editor__input amber-editor__input--current amber-text amber-text--orange" />/<default:input
+										name="save[data][97]" value="95" data-name="maximum"
+										type="number" step="1" min="0" max="99" size="2"
+										readonly="readonly"
+										class="amber-editor__input amber-editor__input--maximum amber-text amber-text--blue" />
+								</default:td>
+							</default:tr>
+						</default:tbody>
+					</default:table>
+				</div>
+				<div>
+					<default:button xmlns:default="http://www.w3.org/1999/xhtml"
+						type="button" data-editor-action="roll-stats"
+						class="amber-editor__input amber-editor__input--widget amber-text amber-text--orange">Neu Würfeln</default:button>
+				</div>
+			</fieldset>
+		</div>
+	</form>
+</body>
+</html>

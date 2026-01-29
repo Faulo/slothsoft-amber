@@ -465,32 +465,52 @@
         <xsl:apply-templates select="*" mode="form-content" />
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'current']]" mode="form-content">
-        <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
-        <xsl:text>/</xsl:text>
-        <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+        <span>
+            <xsl:if test="@name">
+                <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
+            <xsl:text>/</xsl:text>
+            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+        </span>
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'current'] and *[@name = 'current-mod']]" mode="form-content">
-        <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
-        <xsl:text>+</xsl:text>
-        <xsl:apply-templates select="*[@name = 'current-mod']" mode="form-content" />
-        <xsl:text>/</xsl:text>
-        <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+        <span>
+            <xsl:if test="@name">
+                <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
+            <xsl:text>+</xsl:text>
+            <xsl:apply-templates select="*[@name = 'current-mod']" mode="form-content" />
+            <xsl:text>/</xsl:text>
+            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+        </span>
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'current'] and *[@name = 'maximum-mod']]" mode="form-content">
-        <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
-        <xsl:text>/</xsl:text>
-        <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
-        <xsl:text>+</xsl:text>
-        <xsl:apply-templates select="*[@name = 'maximum-mod']" mode="form-content" />
+        <span>
+            <xsl:if test="@name">
+                <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
+            <xsl:text>/</xsl:text>
+            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+            <xsl:text>+</xsl:text>
+            <xsl:apply-templates select="*[@name = 'maximum-mod']" mode="form-content" />
+        </span>
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'current'] and *[@name = 'current-mod'] and *[@name = 'maximum-mod']]" mode="form-content">
-        <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
-        <xsl:text>+</xsl:text>
-        <xsl:apply-templates select="*[@name = 'current-mod']" mode="form-content" />
-        <xsl:text>/</xsl:text>
-        <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
-        <xsl:text>+</xsl:text>
-        <xsl:apply-templates select="*[@name = 'maximum-mod']" mode="form-content" />
+        <span>
+            <xsl:if test="@name">
+                <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
+            </xsl:if>
+            <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
+            <xsl:text>+</xsl:text>
+            <xsl:apply-templates select="*[@name = 'current-mod']" mode="form-content" />
+            <xsl:text>/</xsl:text>
+            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+            <xsl:text>+</xsl:text>
+            <xsl:apply-templates select="*[@name = 'maximum-mod']" mode="form-content" />
+        </span>
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'source'] and *[@name = 'target']]" mode="form-content">
         <xsl:apply-templates select="*[@name = 'target']" mode="form-content" />
@@ -540,13 +560,26 @@
         </amber-embed>
     </xsl:template>
 
-    <!-- form-content values -->
-    <xsl:template match="sse:integer | sse:signed-integer" mode="form-content">
-        <input name="save[data][{@value-id}]" value="{@value}">
+    <!-- form-hidden values -->
+    <xsl:template match="*[@value-id]" mode="form-hidden">
+        <xsl:param name="value" select="@value" />
+        <input name="save[data][{@value-id}]" value="{$value}" type="hidden">
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
-            <xsl:if test="@readonly">
+        </input>
+    </xsl:template>
+
+    <!-- form-content values -->
+    <xsl:template match="sse:integer | sse:signed-integer" mode="form-content">
+        <xsl:param name="additionalClasses" select="''" />
+        <xsl:param name="readonly" select="@readonly" />
+        <xsl:param name="size" select="@size" />
+        <input name="save[data][{@value-id}]" value="{@value}" class="amber-editor__input amber-text {$additionalClasses}">
+            <xsl:if test="string-length(@name)">
+                <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
+            </xsl:if>
+            <xsl:if test="$readonly">
                 <xsl:attribute name="readonly">readonly</xsl:attribute>
             </xsl:if>
             <xsl:if test="@disabled">
@@ -556,16 +589,18 @@
             <xsl:attribute name="step">1</xsl:attribute>
             <xsl:attribute name="min"><xsl:value-of select="@min" /></xsl:attribute>
             <xsl:attribute name="max"><xsl:value-of select="@max" /></xsl:attribute>
-            <xsl:attribute name="size"><xsl:value-of select="@size" /></xsl:attribute>
+            <xsl:attribute name="size"><xsl:value-of select="$size" /></xsl:attribute>
         </input>
     </xsl:template>
 
     <xsl:template match="sse:string" mode="form-content">
-        <input name="save[data][{@value-id}]" value="{@value}">
+        <xsl:param name="additionalClasses" select="''" />
+        <xsl:param name="readonly" select="@readonly" />
+        <input name="save[data][{@value-id}]" value="{@value}" class="amber-editor__input amber-text {$additionalClasses}">
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
-            <xsl:if test="@readonly">
+            <xsl:if test="$readonly">
                 <xsl:attribute name="readonly">readonly</xsl:attribute>
             </xsl:if>
             <xsl:if test="@disabled">
@@ -604,8 +639,9 @@
     </xsl:template>
 
     <xsl:template match="sse:bit" mode="form-content">
+        <xsl:param name="value" select="@value" />
         <input type="checkbox" name="save[data][{@value-id}_checkbox]">
-            <xsl:if test="@value &gt; 0">
+            <xsl:if test="$value &gt; 0">
                 <xsl:attribute name="checked">checked</xsl:attribute>
             </xsl:if>
         </input>
@@ -613,14 +649,19 @@
     </xsl:template>
 
     <xsl:template match="sse:select" mode="form-content">
+        <xsl:param name="additionalClasses" select="''" />
+        <xsl:param name="editorAction" select="''" />
         <xsl:variable name="node" select="." />
         <xsl:variable name="options" select="key('dictionary-option', @dictionary-ref)" />
-        <select name="save[data][{@value-id}]">
+        <select name="save[data][{@value-id}]" class="amber-editor__input amber-editor__input--widget amber-text {$additionalClasses}">
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
             <xsl:if test="@disabled">
                 <xsl:attribute name="disabled">disabled</xsl:attribute>
+            </xsl:if>
+            <xsl:if test="string-length($editorAction)">
+                <xsl:attribute name="data-editor-action"><xsl:value-of select="$editorAction" /></xsl:attribute>
             </xsl:if>
             <xsl:for-each select="$options">
                 <option value="{@key}">
@@ -685,7 +726,6 @@
         </xsl:if>
     </xsl:template>
     <xsl:template match="sse:instruction[@type = 'bit-field']" mode="form-name">
-        <xsl:copy-of select="." />
         <xsl:if test="string-length(@name)">
             <h3 class="name">
                 <xsl:if test="string-length(@title)">

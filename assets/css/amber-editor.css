@@ -1,0 +1,123 @@
+.amber-editor {
+	background-color: #666655;
+	width: fit-content;
+	margin: auto;
+	padding: 1ch;
+}
+
+.amber-editor amber-portrait-id::after {
+	font-size: 3px;
+}
+
+.amber-editor__actions {
+	display: flex;
+	justify-content: center;
+	gap: 2ch;
+}
+
+.amber-editor *[readonly] {
+	border: none;
+	background: none;
+	appearance: textfield;
+	padding: 0;
+}
+
+.amber-editor__input {
+	box-sizing: border-box;
+	border-color: #222222 #aaaa99 #aaaa99 #222222;
+	border-width: 0.125em;
+	border-style: solid;
+	background-color: #444433;
+	text-align: center;
+	padding: 2px 4px;
+}
+
+*[maxlength="15"].amber-editor__input {
+	max-width: 194px;
+}
+
+.amber-editor__input:hover {
+	border-color: #ffcc00;
+}
+
+.amber-editor__input--widget {
+	border-color: #aaaa99 #222222 #222222 #aaaa99;
+}
+
+.amber-editor__input--widget:active {
+	border-color: #222222 #aaaa99 #aaaa99 #222222;
+	padding: 3px 3px 1px 5px;
+}
+
+.amber-editor__input--left {
+	text-align: left;
+}
+
+.amber-editor__input--right {
+	text-align: right;
+}
+
+.amber-editor select, .amber-editor input[type="text"] {
+	display: block;
+	width: 100%;
+	margin: auto;
+	box-sizing: border-box;
+}
+
+.amber-editor input[type="number"] {
+	appearance: textfield;
+}
+
+.amber-editor th {
+	text-align: right;
+	font-weight: normal;
+}
+
+.amber-editor td {
+	text-align: center;
+}
+
+.amber-editor__attributes, .amber-editor__skills {
+	margin: auto;
+	width: 12ch;
+}
+
+.amber-editor__party {
+	display: flex;
+	justify-content: center;
+	gap: 2ch;
+	margin: 1em auto;
+}
+
+.amber-editor__party>* {
+	width: fit-content;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	border: none;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5em;
+}
+
+.amber-editor__languages ul {
+	margin: 0;
+	padding-left: 2ch;
+	list-style: none;
+	text-align: left;
+	list-style: none;
+}
+
+.amber-editor__hidden {
+	display: none;
+}
+
+.amber-editor *[data-class] {
+	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
+	background-size: 16px;
+	background-repeat: no-repeat;
+}
+
+.amber-editor *[data-class="0"] {
+	background-position-y: -32px;
+}
