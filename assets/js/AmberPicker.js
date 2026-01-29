@@ -51,7 +51,6 @@ class AmberEmbed {
     #picker;
     #node;
     #type;
-    #id;
     #modes = {
         "popup": false,
         "picker": false
@@ -62,7 +61,6 @@ class AmberEmbed {
         this.#node = node;
 
         this.#type = this.#node.getAttribute("type");
-        this.#id = this.#node.getAttribute("id");
 
         for (let mode of this.#node.getAttribute("mode").split(" ")) {
             this.#modes[mode] = true;
@@ -81,10 +79,11 @@ class AmberEmbed {
     }
 
     #activatePopup(eve) {
-        if (this.#id) {
+        const id = this.#node.getAttribute("id");
+        if (id) {
             eve.preventDefault();
             eve.stopPropagation();
-            this.#picker.openPopup(this.#node.getAttribute("infoset"), this.#type, this.#id);
+            this.#picker.openPopup(this.#node.getAttribute("infoset"), this.#type, id);
         }
     }
 

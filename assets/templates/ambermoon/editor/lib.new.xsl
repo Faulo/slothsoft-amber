@@ -6,6 +6,8 @@
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/editor" />
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/picker" />
 
+    <xsl:variable name="portraits" select="document('farah://slothsoft@amber/api/amberdata?infosetId=lib.portraits')/saa:amberdata/saa:portrait-list" />
+
     <xsl:template match="sse:archive[@name='Party_char.amb']" mode="form-content">
         <div class="amber-editor__party">
             <xsl:for-each select="sse:file[position() &lt;= 6]">
@@ -16,8 +18,25 @@
                         </xsl:apply-templates>
                     </div>
                     <xsl:for-each select=".//*[@name = 'portrait-id']">
+                        <xsl:variable name="value" select="@value" />
                         <div>
                             <xsl:apply-templates select="." mode="portrait-picker" />
+                            <xsl:for-each select="$portraits">
+                                <select class="amber-editor__input amber-editor__input--widget amber-text" data-editor-action="apply-portrait">
+                                    <xsl:for-each select="*">
+                                        <optgroup label="{@name}">
+                                            <xsl:for-each select="*">
+                                                <option value="{@id}">
+                                                    <xsl:if test="@id = $value">
+                                                        <xsl:attribute name="selected">selected</xsl:attribute>
+                                                    </xsl:if>
+                                                    <xsl:value-of select="concat('Portrait #', @id)" />
+                                                </option>
+                                            </xsl:for-each>
+                                        </optgroup>
+                                    </xsl:for-each>
+                                </select>
+                            </xsl:for-each>
                         </div>
                     </xsl:for-each>
                     <div>

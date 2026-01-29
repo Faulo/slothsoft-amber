@@ -111,13 +111,3 @@
 .amber-editor__hidden {
 	display: none;
 }
-
-.amber-editor *[data-class] {
-	background-image: url("/slothsoft@amber/static/ambermoon/gfx/items");
-	background-size: 16px;
-	background-repeat: no-repeat;
-}
-
-.amber-editor *[data-class="0"] {
-	background-position-y: -32px;
-}

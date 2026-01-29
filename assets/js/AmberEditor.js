@@ -54,6 +54,9 @@ class AmberEditorPage {
             case "apply-class":
                 this.#applyClass();
                 break;
+            case "apply-portrait":
+                this.#applyPortrait(buttonNode.value);
+                break;
             case "apply-equipment":
                 buttonNode.title = "Berechnet...";
                 buttonNode.title = await this.#applyEquipment();
@@ -143,6 +146,15 @@ class AmberEditorPage {
         }
 
         return result;
+    }
+
+    #applyPortrait(portraitId) {
+        this.#character ??= new AmberCharacter(this.#fieldsetNode);
+
+        const input = this.#character.inputs["portrait-id"];
+        input.value = portraitId;
+        input.parentNode.setAttribute("value", portraitId);
+        input.parentNode.parentNode.setAttribute("id", portraitId);
     }
 
     #applyRace() {
@@ -575,7 +587,7 @@ class AmberCharacter {
     constructor(characterNode) {
 
         const simpleKeys = [
-            "race", "class",
+            "race", "class", "portrait-id",
             "hp-per-level", "sp-per-level", "tp-per-level", "slp-per-level", "apr-per-level",
             "training-points", "spelllearn-points",
             "experience", "level", "attacks-per-round",
