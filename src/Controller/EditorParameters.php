@@ -3,6 +3,7 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\Controller;
 
 use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
+use Slothsoft\Amber\ParameterFilters\GfxParameterFilter;
 use Slothsoft\Core\ServerEnvironment;
 use Slothsoft\Farah\FarahUrl\FarahUrl;
 use Slothsoft\Farah\FarahUrl\FarahUrlArguments;
@@ -172,6 +173,17 @@ final class EditorParameters {
         yield $url->withAdditionalQueryArguments(FarahUrlArguments::createFromQuery('infosetId=lib.items'));
         yield $url->withAdditionalQueryArguments(FarahUrlArguments::createFromQuery('infosetId=lib.portraits'));
         yield $url->withAdditionalQueryArguments(FarahUrlArguments::createFromQuery('infosetId=lib.monsters'));
+    }
+    
+    public function createGfxUrl(string $archiveId, string $fileId, int $gfxPosition, int $paletteId): FarahUrl {
+        $args = $this->getAmberArgs()
+            ->withArgument(GfxParameterFilter::PARAM_ARCHIVE_ID, $archiveId)
+            ->withArgument(GfxParameterFilter::PARAM_FILE_ID, $fileId)
+            ->withArgument(GfxParameterFilter::PARAM_GFX_ID, $gfxPosition)
+            ->withArgument(GfxParameterFilter::PARAM_PALETTE_ID, $paletteId);
+        return $this->getAmberUrl()
+            ->withPath("/api/gfx")
+            ->withQueryArguments($args);
     }
 }
 

@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber;
 
-class AmberUser {
+final class AmberUser {
     
     /**
      *

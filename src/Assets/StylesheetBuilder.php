@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\AmberUtils;
 use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\Controller\EditorParameters;
@@ -15,6 +16,7 @@ use Slothsoft\Farah\Module\Asset\ExecutableBuilderStrategy\ExecutableBuilderStra
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\NullResultBuilder;
+use DOMElement;
 use DOMXPath;
 use Generator;
 
@@ -49,6 +51,7 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
             
             $imageData = [];
             $imageCoords = [];
+            /** @var DOMElement $gfxNode */
             foreach ($gfxNodeList as $gfxNode) {
                 $archiveId = $gfxNode->getAttribute('archive');
                 if (! isset($imageData[$archiveId])) {
@@ -70,16 +73,17 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                 }
             }
             
+            /** @var DOMElement $gfxNode */
             foreach ($gfxNodeList as $gfxNode) {
                 $archiveId = $gfxNode->getAttribute('archive');
-                $fileId = $gfxNode->getAttribute('file');
-                $paletteId = $gfxNode->getAttribute('palette');
+                $fileId = sprintf('%03d', $gfxNode->getAttribute('file'));
+                $paletteId = (int) $gfxNode->getAttribute('palette');
                 $gfxGroup = $gfxNode->getAttribute('group');
-                $gfxId = $gfxNode->getAttribute('id');
-                $gfxPosition = $gfxNode->getAttribute('position');
+                $gfxId = (int) $gfxNode->getAttribute('id');
+                $gfxPosition = (int) $gfxNode->getAttribute('position');
                 $gfxLabel = $gfxNode->getAttribute('label');
-                $gfxWidth = $gfxNode->getAttribute('target-width');
-                $gfxHeight = $gfxNode->getAttribute('target-height');
+                $gfxWidth = (int) $gfxNode->getAttribute('target-width');
+                $gfxHeight = (int) $gfxNode->getAttribute('target-height');
                 
                 $x = $imageCoords[$archiveId][$gfxPosition]['x'];
                 $y = $imageCoords[$archiveId][$gfxPosition]['y'];
@@ -93,13 +97,14 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                 if ($y !== 0) {
                     $imageStyle[] = sprintf('  background-position-y: -%dem;', $y * $imageData[$archiveId]['height']) . PHP_EOL;
                 }
-                if ($fileId !== '') {
-                    $imageStyle[] = sprintf('  background-image: url("/slothsoft@amber/api/gfx?game=%s&version=%s&archiveId=%s&fileId=%03d&gfxId=%d&paletteId=%d");', $game, $version, $archiveId, $fileId, $gfxPosition, $paletteId) . PHP_EOL;
+                if ($fileId !== '000') {
+                    $fileUrl = $parameters->createGfxUrl($archiveId, $fileId, $gfxPosition, $paletteId);
+                    $imageStyle[] = sprintf('  background-image: url("%s");', AmberUtils::toHref($fileUrl)) . PHP_EOL;
                 }
-                if ($gfxWidth !== '') {
+                if ($gfxWidth !== 0) {
                     $imageStyle[] = sprintf('  width: %dem;', $gfxWidth) . PHP_EOL;
                 }
-                if ($gfxHeight !== '') {
+                if ($gfxHeight !== 0) {
                     $imageStyle[] = sprintf('  height: %dem;', $gfxHeight) . PHP_EOL;
                 }
                 if ($gfxLabel !== '') {

@@ -82,8 +82,8 @@ final class GfxBuilder implements ExecutableBuilderStrategyInterface {
     }
     
     private function processArchive(string $infosetId, string $archiveId): ResultBuilderStrategyInterface {
-        $gfxId = $this->args->get(GfxParameterFilter::PARAM_GFX_ID);
-        $paletteId = $this->args->get(GfxParameterFilter::PARAM_PALETTE_ID);
+        $gfxId = (int) $this->args->get(GfxParameterFilter::PARAM_GFX_ID);
+        $paletteId = (int) $this->args->get(GfxParameterFilter::PARAM_PALETTE_ID);
         
         $this->editor->loadArchive($archiveId);
         $archiveNode = $this->editor->getArchiveNode($archiveId);
@@ -92,8 +92,8 @@ final class GfxBuilder implements ExecutableBuilderStrategyInterface {
     }
     
     private function processFile(string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface {
-        $gfxId = $this->args->get(GfxParameterFilter::PARAM_GFX_ID);
-        $paletteId = $this->args->get(GfxParameterFilter::PARAM_PALETTE_ID);
+        $gfxId = (int) $this->args->get(GfxParameterFilter::PARAM_GFX_ID);
+        $paletteId = (int) $this->args->get(GfxParameterFilter::PARAM_PALETTE_ID);
         
         $this->editor->loadArchive($archiveId);
         $archiveNode = $this->editor->getArchiveNode($archiveId);
