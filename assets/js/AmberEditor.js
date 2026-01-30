@@ -99,7 +99,7 @@ class AmberEditorPage {
                 const isAttribute = attributes.includes(key);
                 const isSpecial = specials.includes(key);
 
-                let amount, type;
+                let amount, type, modifier;
 
                 if (isAttribute) {
                     amount = 2;
@@ -110,18 +110,20 @@ class AmberEditorPage {
                     } else {
                         type = step;
                     }
+
+                    modifier = (max - amount * type);
                 } else {
                     const step = 5;
-                    amount = Math.floor(max / step);
+                    amount = Math.max(1, Math.floor(0.8 * max / step));
 
                     if (isSpecial) {
                         type = step + 1;
+                        modifier = -amount;
                     } else {
                         type = step;
+                        modifier = 0;
                     }
                 }
-
-                const modifier = (max - amount * type);
 
                 currentInput.value = this.#roll(amount, type, modifier);
 
