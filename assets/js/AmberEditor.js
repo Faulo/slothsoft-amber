@@ -111,8 +111,8 @@ class AmberEditorPage {
                         type = step;
                     }
                 } else {
-                    amount = 4;
-                    const step = Math.floor(max / amount);
+                    const step = 5;
+                    amount = Math.floor(max / step);
 
                     if (isSpecial) {
                         type = step + 1;

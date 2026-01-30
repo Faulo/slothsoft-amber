@@ -10,8 +10,6 @@ final class EditorParameterFilter extends InfosetParameterFilter {
     
     public const PARAM_EDITOR_DATA_ARCHIVE = 'archivePath';
     
-    public const PARAM_EDITOR_DATA_VALUES = 'data';
-    
     public const PARAM_EDITOR_DATA_ACTION = 'action';
     
     public const PARAM_EDITOR_ACTION_VIEW = 'view';

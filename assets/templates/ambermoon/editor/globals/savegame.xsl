@@ -563,7 +563,8 @@
     <!-- form-hidden values -->
     <xsl:template match="*[@value-id]" mode="form-hidden">
         <xsl:param name="value" select="@value" />
-        <input name="save[data][{@value-id}]" value="{$value}" type="hidden">
+        <input value="{$value}" type="hidden">
+            <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
@@ -575,7 +576,8 @@
         <xsl:param name="additionalClasses" select="''" />
         <xsl:param name="readonly" select="@readonly" />
         <xsl:param name="size" select="@size" />
-        <input name="save[data][{@value-id}]" value="{@value}" class="amber-editor__input amber-text {$additionalClasses}">
+        <input value="{@value}" class="amber-editor__input amber-text {$additionalClasses}">
+            <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
@@ -596,7 +598,8 @@
     <xsl:template match="sse:string" mode="form-content">
         <xsl:param name="additionalClasses" select="''" />
         <xsl:param name="readonly" select="@readonly" />
-        <input name="save[data][{@value-id}]" value="{@value}" class="amber-editor__input amber-text {$additionalClasses}">
+        <input value="{@value}" class="amber-editor__input amber-text {$additionalClasses}">
+            <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
@@ -615,7 +618,8 @@
     <xsl:template match="sse:binary" mode="form-content">
         <xsl:variable name="cols" select="24" />
         <xsl:variable name="rows" select="ceiling(string-length(@value) div $cols)" />
-        <textarea name="save[data][{@value-id}]" rows="{$rows}" cols="{$cols}" data-type="{local-name()}">
+        <textarea rows="{$rows}" cols="{$cols}" data-type="{local-name()}">
+            <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="@readonly">
                 <xsl:attribute name="readonly">readonly</xsl:attribute>
             </xsl:if>
@@ -627,7 +631,8 @@
     </xsl:template>
 
     <xsl:template match="sse:event-script" mode="form-content">
-        <textarea name="save[data][{@value-id}]" rows="20" cols="40" data-type="event-script">
+        <textarea rows="20" cols="40" data-type="event-script">
+            <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="@readonly">
                 <xsl:attribute name="readonly">readonly</xsl:attribute>
             </xsl:if>
@@ -640,12 +645,17 @@
 
     <xsl:template match="sse:bit" mode="form-content">
         <xsl:param name="value" select="@value" />
-        <input type="checkbox" name="save[data][{@value-id}_checkbox]">
+        <input type="checkbox">
+            <xsl:apply-templates select="." mode="form-key">
+                <xsl:with-param name="id-suffix" select="'_checkbox'" />
+            </xsl:apply-templates>
             <xsl:if test="$value &gt; 0">
                 <xsl:attribute name="checked">checked</xsl:attribute>
             </xsl:if>
         </input>
-        <input type="hidden" name="save[data][{@value-id}]" value="_checkbox" />
+        <input type="hidden" value="_checkbox">
+            <xsl:apply-templates select="." mode="form-key" />
+        </input>
     </xsl:template>
 
     <xsl:template match="sse:select" mode="form-content">
@@ -653,7 +663,8 @@
         <xsl:param name="editorAction" select="''" />
         <xsl:variable name="node" select="." />
         <xsl:variable name="options" select="key('dictionary-option', @dictionary-ref)" />
-        <select name="save[data][{@value-id}]" class="amber-editor__input amber-editor__input--widget amber-text {$additionalClasses}">
+        <select class="amber-editor__input amber-editor__input--widget amber-text {$additionalClasses}">
+            <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
@@ -692,6 +703,21 @@
         </xsl:if>
         <!-- <xsl:if test="string-length(@template)"> <xsl:attribute name="data-template"><xsl:value-of select="@template" /></xsl:attribute> </xsl:if> <xsl:if test="string-length(@dict)"> <xsl:attribute name="data-dictionary"><xsl:value-of select="@dict" /></xsl:attribute> </xsl:if> <xsl:if test="string-length(@instruction)"> 
             <xsl:attribute name="data-instruction"><xsl:value-of select="@instruction" /></xsl:attribute> </xsl:if> <xsl:if test="string-length(@name)"> <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute> </xsl:if> -->
+    </xsl:template>
+
+    <xsl:template match="*" mode="form-key">
+    </xsl:template>
+
+    <xsl:template match="*[@value-id]" mode="form-key">
+        <xsl:param name="id-suffix" select="''" />
+        <xsl:attribute name="name">
+            <xsl:text>save[</xsl:text>
+            <xsl:value-of select="ancestor-or-self::sse:archive/@path" />
+            <xsl:text>][</xsl:text>
+            <xsl:value-of select="@value-id" />
+            <xsl:value-of select="$id-suffix" />
+            <xsl:text>]</xsl:text>
+        </xsl:attribute>
     </xsl:template>
 
 
@@ -778,17 +804,24 @@
     <!-- form-hidden -->
     <xsl:template match="*" mode="form-hidden">
         <xsl:if test="string-length(@value-id)">
-            <input type="hidden" name="save[data][{@value-id}]" value="{@value}" />
+            <input type="hidden" value="{@value}">
+                <xsl:apply-templates select="." mode="form-key" />
+            </input>
         </xsl:if>
     </xsl:template>
     <xsl:template match="sse:bit" mode="form-hidden">
         <xsl:if test="string-length(@value-id)">
-            <input type="checkbox" name="save[data][{@value-id}_checkbox]" hidden="hidden">
+            <input type="checkbox" hidden="hidden">
+                <xsl:apply-templates select="." mode="form-key">
+                    <xsl:with-param name="id-suffix" select="'_checkbox'" />
+                </xsl:apply-templates>
                 <xsl:if test="@value &gt; 0">
                     <xsl:attribute name="checked">checked</xsl:attribute>
                 </xsl:if>
             </input>
-            <input type="hidden" name="save[data][{@value-id}]" value="_checkbox" />
+            <input type="hidden" value="_checkbox">
+                <xsl:apply-templates select="." mode="form-key" />
+            </input>
         </xsl:if>
     </xsl:template>
 
