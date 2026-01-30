@@ -232,7 +232,7 @@
                         </div>
                     </xsl:for-each>
                     <div>
-                        <button type="button" data-editor-action="roll-stats" class="amber-editor__input amber-editor__input--widget amber-text amber-text--orange">Neu Würfeln</button>
+                        <button type="button" data-editor-action="roll-character" class="amber-editor__input amber-editor__input--widget amber-text amber-text--orange">Neu Würfeln</button>
 
                         <xsl:for-each select=".//*[@name = 'hand' or @name = 'finger' or @name = 'finger' or @name = 'attack' or @name = 'defense' or @name = 'magic-attack' or @name = 'magic-defense' or @name = 'gold' or @name = 'food' or @name = 'weight']">
                             <xsl:apply-templates select="." mode="form-hidden">

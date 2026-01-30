@@ -45,6 +45,11 @@ class AmberEditorPage {
         buttonNode.disabled = true;
         buttonNode.title = "";
         switch (action) {
+            case "roll-character":
+                this.#applyRace();
+                this.#applyClass();
+                this.#rollStats();
+                break;
             case "roll-stats":
                 this.#rollStats();
                 break;
