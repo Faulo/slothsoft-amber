@@ -87,7 +87,7 @@ class AmberEditorPage {
             const selectNode = selectNodes[i];
             selectNode.selectedIndex = characterIndex <= count ? characterIndex : 0;
         }
-        
+
         const checkboxNodes = this.#fieldsetNode.querySelectorAll("input[type='checkbox']");
         for (let i = 0; i < checkboxNodes.length; i++) {
             const characterIndex = i + 1;
