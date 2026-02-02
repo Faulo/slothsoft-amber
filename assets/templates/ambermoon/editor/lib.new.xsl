@@ -273,42 +273,42 @@
         </div>
     </xsl:template>
 
-    <xsl:template match="nothing">
-        <xsl:call-template name="savegame.tabs">
-            <xsl:with-param name="label" select="'Aktiver Charakter:'" />
-            <xsl:with-param name="options" select=".//*[@name = 'name']/@value" />
-            <xsl:with-param name="list">
-                <xsl:for-each select="sse:file">
-                    <li>
-                        <fieldset>
-                            <xsl:call-template name="savegame.flex">
-                                <xsl:with-param name="items">
-                                    <xsl:call-template name="savegame.amber.events" />
-                                    <div>
-                                        <xsl:call-template name="savegame.amber.character-common" />
-                                        <xsl:call-template name="savegame.amber.character-ailments" />
-                                    </div>
-                                    <div>
-                                        <xsl:call-template name="savegame.amber.character-race" />
-                                    </div>
-                                    <div>
-                                        <xsl:call-template name="savegame.amber.character-class" />
-                                    </div>
-                                    <div>
-                                        <xsl:call-template name="savegame.amber.character-equipment" />
-                                    </div>
-                                    <div>
-                                        <xsl:call-template name="savegame.amber.character-inventory" />
-                                    </div>
-                                    <div>
-                                        <xsl:call-template name="savegame.amber.character-spells" />
-                                    </div>
-                                </xsl:with-param>
-                            </xsl:call-template>
-                        </fieldset>
-                    </li>
+    <xsl:template match="sse:archive[@name='Party_data.sav']" mode="form-content">
+        <xsl:for-each select="sse:file">
+            <xsl:copy-of select="." />
+            <fieldset class="amber-editor__save">
+                <xsl:for-each select=".//*[@name='member-count']">
+                    <label class="amber-editor__member-count amber-text amber-text--orange">
+                        <xsl:text>Anzahl der Gruppenmitglieder:</xsl:text>
+                        <input type="range" min="1" max="6" list="member-count" value="{@value}" class="amber-text" data-editor-action="apply-member-count">
+                            <xsl:apply-templates select="." mode="form-key" />
+                        </input>
+                    </label>
+                    <datalist id="member-count">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">6</option>
+                        <option value="6">6</option>
+                    </datalist>
                 </xsl:for-each>
-            </xsl:with-param>
-        </xsl:call-template>
+                <div class="amber-editor__save-members">
+                    <xsl:for-each select=".//*[@name='party-composition']//sse:select">
+                        <xsl:apply-templates select="." mode="form-content" />
+                    </xsl:for-each>
+                </div>
+                <div class="amber-editor__hidden">
+                    <div class="amber-editor__party-bits">
+                        <input type="checkbox" checked="checked" />
+                        <xsl:apply-templates select=".//*[@name='partybit-netsrak-absent']" mode="form-content" />
+                        <xsl:apply-templates select=".//*[@name='partybit-mando-absent']" mode="form-content" />
+                        <xsl:apply-templates select=".//*[@name='partybit-erik-absent']" mode="form-content" />
+                        <xsl:apply-templates select=".//*[@name='partybit-chris-absent']" mode="form-content" />
+                        <xsl:apply-templates select=".//*[@name='partybit-monika-absent']" mode="form-content" />
+                    </div>
+                </div>
+            </fieldset>
+        </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>

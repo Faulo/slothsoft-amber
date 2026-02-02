@@ -30,11 +30,15 @@ class AmberEditorPage {
         for (let node of fieldsetNode.querySelectorAll("*[data-editor-action]")) {
             const action = node.getAttribute("data-editor-action");
             switch (node.localName) {
+                case "input":
                 case "select":
                     node.addEventListener("change", () => this.#execute(node, action), false);
                     break;
                 case "button":
                     node.addEventListener("click", () => this.#execute(node, action), false);
+                    break;
+                default:
+                    alert(`Unknown node "${node.localName}"`);
                     break;
             }
             node.disabled = false;
@@ -45,6 +49,9 @@ class AmberEditorPage {
         buttonNode.disabled = true;
         buttonNode.title = "";
         switch (action) {
+            case "apply-member-count":
+                this.#applyMemberCount(buttonNode.value);
+                break;
             case "roll-character":
                 this.#applyRace();
                 this.#applyClass();
@@ -73,7 +80,21 @@ class AmberEditorPage {
         }
         buttonNode.disabled = false;
     }
-
+    #applyMemberCount(count) {
+        const selectNodes = this.#fieldsetNode.querySelectorAll("select");
+        for (let i = 0; i < selectNodes.length; i++) {
+            const characterIndex = i + 1;
+            const selectNode = selectNodes[i];
+            selectNode.selectedIndex = characterIndex <= count ? characterIndex : 0;
+        }
+        
+        const checkboxNodes = this.#fieldsetNode.querySelectorAll("input[type='checkbox']");
+        for (let i = 0; i < checkboxNodes.length; i++) {
+            const characterIndex = i + 1;
+            const checkboxNode = checkboxNodes[i];
+            checkboxNode.checked = characterIndex <= count;
+        }
+    }
     #rollStats() {
         this.#character ??= new AmberCharacter(this.#fieldsetNode);
 
