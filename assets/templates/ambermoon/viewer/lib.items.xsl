@@ -129,8 +129,51 @@
                             </ul>
                         </dd>
                         <dt class="amber-text amber-text--gray">Geschlecht</dt>
+                        <dt class="amber-item__properties amber-text amber-text--gray">Merkmale</dt>
                         <dd>
                             <xsl:value-of select="@gender" />
+                        </dd>
+                        <dd class="amber-item__properties">
+                            <xsl:choose>
+                                <xsl:when test="@is-disposable">
+                                    <span class="amber-icon amber-icon--is-important amber-icon--not" data-hover-text="wegwerfbar" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <span class="amber-icon amber-icon--is-important" data-hover-text="wichtig" />
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:choose>
+                                <xsl:when test="@is-stackable">
+                                    <span class="amber-icon amber-icon--is-stackable" data-hover-text="stapelbar" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <span class="amber-icon amber-icon--is-stackable amber-icon--not" data-hover-text="nicht stapelbar" />
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:choose>
+                                <xsl:when test="@is-combat-equippable">
+                                    <span class="amber-icon amber-icon--is-combat-equippable" data-hover-text="im kampf entfernbar" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <span class="amber-icon amber-icon--is-combat-equippable amber-icon--not" data-hover-text="nicht im kampf entfernbar" />
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:choose>
+                                <xsl:when test="@is-useable">
+                                    <span class="amber-icon amber-icon--is-useable" data-hover-text="benutzbar" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <span class="amber-icon amber-icon--is-useable amber-icon--not" data-hover-text="nicht benutzbar" />
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:choose>
+                                <xsl:when test="@is-cloneable">
+                                    <span class="amber-icon amber-icon--is-cloneable" data-hover-text="duplizierbar" />
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <span class="amber-icon amber-icon--is-cloneable amber-icon--not" data-hover-text="nicht duplizierbar" />
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </dd>
                     </dl>
                     <table class="amber-item__magic">

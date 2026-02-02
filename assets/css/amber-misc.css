@@ -43,7 +43,7 @@
 }
 
 .amber-text--blue {
-    color: #8798a9;
+	color: #8798a9;
 }
 
 .amber-text--spellbook-0 {
@@ -115,6 +115,30 @@
 
 .amber-icon--food::before {
 	background-position-y: -109em;
+}
+
+.amber-icon--is-important::before {
+	background-position-y: -94em
+}
+
+.amber-icon--is-stackable::before {
+	background-position-y: -51em;
+}
+
+.amber-icon--is-combat-equippable::before {
+	background-position-y: -76em;
+}
+
+.amber-icon--is-useable::before {
+	background-position-y: -67em;
+}
+
+.amber-icon--is-cloneable::before {
+    background-position-y: -96em;
+}
+
+.amber-icon--not::before {
+    opacity: 0.3;
 }
 
 .amber-popup {

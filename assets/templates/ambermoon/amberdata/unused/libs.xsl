@@ -974,7 +974,7 @@
 
 			<dictionary dictionary-id="item-properties">
 				<option key="0" val="cursed" />
-				<option key="1" val="purchaseable" />
+				<option key="1" val="disposable" />
 				<option key="2" val="stackable" />
 				<option key="3" val="combat-equippable" />
 				<option key="4" val="useable" />
