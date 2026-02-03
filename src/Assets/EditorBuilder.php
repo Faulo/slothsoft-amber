@@ -29,9 +29,14 @@ final class EditorBuilder implements ExecutableBuilderStrategyInterface {
         $version = $args->get(ResourceParameterFilter::PARAM_VERSION);
         $user = $args->get(ResourceParameterFilter::PARAM_USER);
         $infosetId = $args->get(ResourceParameterFilter::PARAM_INFOSET_ID);
+        
+        $archivePath = $args->get(EditorParameterFilter::PARAM_ARCHIVE_ID);
+        $action = $args->get(EditorParameterFilter::PARAM_EDITOR_ACTION);
+        $download = $args->get(EditorParameterFilter::PARAM_EDITOR_DOWNLOAD);
         $save = $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
         
-        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId, $save);
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
+        $parameters = $parameters->withEditorArgs($archivePath, $action, $download, $save);
         
         $contextUrl = $context->createUrl($args);
         $editorUrl = $parameters->getProcessEditorDataUrl();

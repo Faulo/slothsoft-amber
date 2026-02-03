@@ -22,15 +22,12 @@ final class EditorParameters {
     
     private string $infoset;
     
-    private array $save;
-    
-    public function __construct(string $repository, string $game, string $version, string $user, string $infoset, array $save = []) {
+    public function __construct(string $repository, string $game, string $version, string $user, string $infoset) {
         $this->repository = $repository;
         $this->game = $game;
         $this->version = $version;
         $this->user = $user;
         $this->infoset = $infoset;
-        $this->save = $save;
     }
     
     public function withInfoset(string $infoset): self {
@@ -82,14 +79,25 @@ final class EditorParameters {
     private ?FarahUrlArguments $editorArgs = null;
     
     private function getEditorArgs(): FarahUrlArguments {
-        return $this->editorArgs ??= FarahUrlArguments::createFromValueList([
+        return $this->editorArgs;
+    }
+    
+    public function withEditorArgs(string $archivePath, string $action, string $download, array $save): self {
+        $result = new self($this->repository, $this->game, $this->version, $this->user, $this->infoset);
+        $result->editorArgs = FarahUrlArguments::createFromValueList([
+            // default
             EditorParameterFilter::PARAM_REPOSITORY => $this->repository,
             EditorParameterFilter::PARAM_GAME => $this->game,
             EditorParameterFilter::PARAM_VERSION => $this->version,
             EditorParameterFilter::PARAM_USER => $this->user,
             EditorParameterFilter::PARAM_INFOSET_ID => $this->infoset,
-            EditorParameterFilter::PARAM_EDITOR_DATA => $this->save
+            // editor specific
+            EditorParameterFilter::PARAM_ARCHIVE_ID => $archivePath,
+            EditorParameterFilter::PARAM_EDITOR_ACTION => $action,
+            EditorParameterFilter::PARAM_EDITOR_DOWNLOAD => $download,
+            EditorParameterFilter::PARAM_EDITOR_DATA => $save
         ]);
+        return $result;
     }
     
     private ?FarahUrl $convertUrl = null;

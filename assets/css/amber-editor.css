@@ -118,19 +118,11 @@
 
 .amber-editor__member-count {
 	display: block;
-	padding: 0 10ch;
 	text-align: center;
 }
 
 .amber-editor__member-count input {
 	display: block;
-	width: 100ch;
-	margin: 0.75em 0;
-}
-
-.amber-editor__save-members {
-	display: flex;
-	width: 120ch;
-	pointer-events: none;
-	opacity: 0.7;
+	width: 92ch;
+	margin: 0.75em auto;
 }

@@ -7,11 +7,45 @@
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/picker" />
 
     <xsl:variable name="portraits" select="document('farah://slothsoft@amber/api/amberdata?infosetId=lib.portraits')/saa:amberdata/saa:portrait-list" />
+    <xsl:variable name="member-count" select=".//*[@name='member-count']/@value" />
+
+    <xsl:template match="sse:savegame">
+        <xsl:variable name="selectedArchives" select="sse:archive[*]" />
+
+        <form action="?user={@save-id}" method="POST" class="amber-editor amber-text">
+            <input type="hidden" name="repository" value="{$repository}" />
+            <input type="hidden" name="game" value="{$game}" />
+            <input type="hidden" name="version" value="{$version}" />
+            <input type="hidden" name="infosetId" value="{$infoset}" />
+            <input type="hidden" name="archivePath" value="_" />
+
+            <xsl:apply-templates select="sse:archive[@name='Party_data.sav']" mode="form-content" />
+            <xsl:apply-templates select="sse:archive[@name='Party_char.amb']" mode="form-content" />
+
+            <nav class="amber-editor__actions">
+                <button name="action" type="submit" value="save">Speichern</button>
+                <xsl:for-each select="$selectedArchives">
+                    <button name="download" type="submit" value="{@path}">
+                        <xsl:text>Download </xsl:text>
+                        <span class="amber-text amber-text--green">
+                            <xsl:value-of select="@name" />
+                        </span>
+                    </button>
+                </xsl:for-each>
+            </nav>
+        </form>
+    </xsl:template>
 
     <xsl:template match="sse:archive[@name='Party_char.amb']" mode="form-content">
         <div class="amber-editor__party">
             <xsl:for-each select="sse:file[position() &lt;= 6]">
+                <xsl:variable name="isVisible" select="position() &lt;= $member-count" />
                 <fieldset>
+                    <xsl:attribute name="style">
+                        <xsl:choose>
+                        <xsl:when test="$isVisible">visibility: visible;</xsl:when>
+                        <xsl:otherwise>visibility: hidden;</xsl:otherwise></xsl:choose>
+                    </xsl:attribute>
                     <div>
                         <xsl:apply-templates select=".//*[@name = 'name']" mode="form-content">
                             <xsl:with-param name="additionalClasses" select="'amber-text--yellow'" />
@@ -293,12 +327,12 @@
                         <option value="6">6</option>
                     </datalist>
                 </xsl:for-each>
-                <div class="amber-editor__save-members">
-                    <xsl:for-each select=".//*[@name='party-composition']//sse:select">
-                        <xsl:apply-templates select="." mode="form-content" />
-                    </xsl:for-each>
-                </div>
                 <div class="amber-editor__hidden">
+                    <div class="amber-editor__save-members">
+                        <xsl:for-each select=".//*[@name='party-composition']//sse:select">
+                            <xsl:apply-templates select="." mode="form-content" />
+                        </xsl:for-each>
+                    </div>
                     <div class="amber-editor__party-bits">
                         <input type="checkbox" checked="checked" />
                         <xsl:apply-templates select=".//*[@name='partybit-netsrak-absent']" mode="form-content" />

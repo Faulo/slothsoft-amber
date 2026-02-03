@@ -43,6 +43,11 @@ class AmberEditorPage {
             }
             node.disabled = false;
         }
+
+        for (let node of fieldsetNode.querySelectorAll("*[data-editor-onload]")) {
+            const action = node.getAttribute("data-editor-onload");
+            this.#execute(node, action);
+        }
     }
 
     async #execute(buttonNode, action) {
@@ -93,6 +98,13 @@ class AmberEditorPage {
             const characterIndex = i + 1;
             const checkboxNode = checkboxNodes[i];
             checkboxNode.checked = characterIndex <= count;
+        }
+
+        const characterNodes = this.#fieldsetNode.parentNode.querySelectorAll(".amber-editor__party>*");
+        for (let i = 0; i < characterNodes.length; i++) {
+            const characterIndex = i + 1;
+            const characterNode = characterNodes[i];
+            characterNode.style.visibility = characterIndex <= count ? "visible" : "hidden";
         }
     }
     #rollStats() {

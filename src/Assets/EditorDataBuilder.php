@@ -14,6 +14,7 @@ use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
 use Slothsoft\Savegame\Build\XmlBuilder;
+use Slothsoft\Savegame\Node\ArchiveNode;
 
 final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -23,21 +24,23 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         $version = $args->get(EditorParameterFilter::PARAM_VERSION);
         $user = $args->get(EditorParameterFilter::PARAM_USER);
         $infosetId = $args->get(EditorParameterFilter::PARAM_INFOSET_ID);
-        $request = $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
         
-        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId, $request);
+        $archivePath = $args->get(EditorParameterFilter::PARAM_ARCHIVE_ID);
+        $action = $args->get(EditorParameterFilter::PARAM_EDITOR_ACTION);
+        $download = $args->get(EditorParameterFilter::PARAM_EDITOR_DOWNLOAD);
+        $save = $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
+        
+        $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
         
         $controller = new EditorController();
         $config = $controller->createEditorConfig($parameters);
         $editor = $controller->createEditor($config);
         
-        $action = $request[EditorParameterFilter::PARAM_EDITOR_DATA_ACTION] ?? EditorParameterFilter::PARAM_EDITOR_ACTION_VIEW;
-        
         if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_UPLOAD) {
-            $errors = $_FILES[EditorParameterFilter::PARAM_EDITOR_DATA]['error'] ?? [];
+            $errors = $_FILES[EditorParameterFilter::PARAM_EDITOR_UPLOAD]['error'] ?? [];
             foreach ($errors as $archivePath => $error) {
                 if ($error === UPLOAD_ERR_OK) {
-                    $path = $_FILES[EditorParameterFilter::PARAM_EDITOR_DATA]['tmp_name'][$archivePath] ?? '';
+                    $path = $_FILES[EditorParameterFilter::PARAM_EDITOR_UPLOAD]['tmp_name'][$archivePath] ?? '';
                     $editor->writeGameFile($archivePath, FileInfoFactory::createFromUpload($path));
                 }
             }
@@ -48,27 +51,40 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         
         $writer = new XmlBuilder($savegame);
         
-        if (isset($request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE])) {
-            $archivePath = $request[EditorParameterFilter::PARAM_EDITOR_DATA_ARCHIVE];
-            $archive = $editor->loadArchive($archivePath, true);
-            
-            $writer->setCacheDirectory($cacheDirectory . DIRECTORY_SEPARATOR . $archivePath);
-            
-            if (isset($request[$archivePath]) and is_array($request[$archivePath])) {
-                $editor->applyValues($request[$archivePath]);
+        $archives = [];
+        switch ($archivePath) {
+            case '':
+                $writer->setCacheDirectory($cacheDirectory);
+                break;
+            case '_':
+                $writer->setCacheDirectory($cacheDirectory . DIRECTORY_SEPARATOR . '_');
+                $editor->loadSavegame(true, true);
+                /** @var ArchiveNode $archive */
+                foreach ($savegame->getArchiveNodes() as $archive) {
+                    $archivePath = $archive->getArchivePath();
+                    $archives[$archivePath] = $archive;
+                }
+                break;
+            default:
+                $writer->setCacheDirectory($cacheDirectory . DIRECTORY_SEPARATOR . $archivePath);
+                $archives[$archivePath] = $editor->loadArchive($archivePath, true);
+                break;
+        }
+        
+        foreach ($archives as $archivePath => $archive) {
+            if (isset($save[$archivePath]) and is_array($save[$archivePath])) {
+                $editor->applyValues($save[$archivePath]);
             }
             
             if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_SAVE) {
                 $editor->writeGameFile($archivePath, $archive);
             }
             
-            if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_DOWNLOAD) {
+            if ($download === $archivePath) {
                 $resultBuilder = new FileWriterResultBuilder($archive, $archive->getName());
                 $strategies = new ExecutableStrategies($resultBuilder);
                 throw new HttpDownloadAssetException($strategies);
             }
-        } else {
-            $writer->setCacheDirectory($cacheDirectory);
         }
         
         $resultBuilder = new ChunkWriterResultBuilder($writer, 'savegame.xml');
