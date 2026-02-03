@@ -41,11 +41,9 @@
             <xsl:for-each select="sse:file[position() &lt;= 6]">
                 <xsl:variable name="isVisible" select="position() &lt;= $member-count" />
                 <fieldset>
-                    <xsl:attribute name="style">
-                        <xsl:choose>
-                        <xsl:when test="$isVisible">visibility: visible;</xsl:when>
-                        <xsl:otherwise>visibility: hidden;</xsl:otherwise></xsl:choose>
-                    </xsl:attribute>
+                    <xsl:if test="not($isVisible)">
+                        <xsl:attribute name="disabled">disabled</xsl:attribute>
+                    </xsl:if>
                     <div>
                         <xsl:apply-templates select=".//*[@name = 'name']" mode="form-content">
                             <xsl:with-param name="additionalClasses" select="'amber-text--yellow'" />

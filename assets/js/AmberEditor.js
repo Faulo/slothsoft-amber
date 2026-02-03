@@ -104,7 +104,7 @@ class AmberEditorPage {
         for (let i = 0; i < characterNodes.length; i++) {
             const characterIndex = i + 1;
             const characterNode = characterNodes[i];
-            characterNode.style.visibility = characterIndex <= count ? "visible" : "hidden";
+            characterNode.disabled = characterIndex > count;
         }
     }
     #rollStats() {
