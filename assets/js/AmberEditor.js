@@ -123,7 +123,8 @@ class AmberEditorPage {
         }
 
         const attributes = ["Stärke", "Intelligenz", "Geschicklichkeit", "Schnelligkeit", "Konstitution", "Karisma", "Glück", "Anti-Magie"];
-        const specials = ["Anti-Magie", "Schwimmen", "Kritische Treffer", "Fallen Finden", "Fallen Entschärfen", "Schlösser Knacken", "Suchen"];
+        const specials = ["Anti-Magie", "Kritische Treffer", "Fallen Finden", "Fallen Entschärfen", "Schlösser Knacken", "Suchen"];
+        const zeros = ["Schwimmen"];
 
         for (let key in mappings) {
             const currentInput = mappings[key][0];
@@ -131,7 +132,9 @@ class AmberEditorPage {
 
             const max = parseInt(maxInput.value);
 
-            if (max === 0) {
+            const isZero = zeros.includes(key);
+
+            if (max === 0 || isZero) {
                 currentInput.value = 0;
             } else {
                 const isAttribute = attributes.includes(key);
