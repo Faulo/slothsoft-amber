@@ -152,18 +152,18 @@
                             </xsl:choose>
                             <xsl:choose>
                                 <xsl:when test="@is-combat-equippable">
-                                    <span class="amber-icon amber-icon--is-combat-equippable" data-hover-text="im kampf entfernbar" />
+                                    <span class="amber-icon amber-icon--is-combat-equippable" data-hover-text="im kampf ausrüstbar" />
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <span class="amber-icon amber-icon--is-combat-equippable amber-icon--not" data-hover-text="nicht im kampf entfernbar" />
+                                    <span class="amber-icon amber-icon--is-combat-equippable amber-icon--not" data-hover-text="nicht im kampf ausrüstbar" />
                                 </xsl:otherwise>
                             </xsl:choose>
                             <xsl:choose>
                                 <xsl:when test="@is-useable">
-                                    <span class="amber-icon amber-icon--is-useable" data-hover-text="benutzbar" />
+                                    <span class="amber-icon amber-icon--is-useable" data-hover-text="verbraucht durch benutzung" />
                                 </xsl:when>
                                 <xsl:otherwise>
-                                    <span class="amber-icon amber-icon--is-useable amber-icon--not" data-hover-text="nicht benutzbar" />
+                                    <span class="amber-icon amber-icon--is-useable amber-icon--not" data-hover-text="benutzung verbraucht nicht" />
                                 </xsl:otherwise>
                             </xsl:choose>
                             <xsl:choose>

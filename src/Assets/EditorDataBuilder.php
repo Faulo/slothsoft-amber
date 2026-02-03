@@ -54,7 +54,7 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
             
             $writer->setCacheDirectory($cacheDirectory . DIRECTORY_SEPARATOR . $archivePath);
             
-            if (isset($request[$archivePath])) {
+            if (isset($request[$archivePath]) and is_array($request[$archivePath])) {
                 $editor->applyValues($request[$archivePath]);
             }
             

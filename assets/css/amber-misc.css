@@ -126,11 +126,11 @@
 }
 
 .amber-icon--is-combat-equippable::before {
-	background-position-y: -76em;
+	background-position-y: -24em;
 }
 
 .amber-icon--is-useable::before {
-	background-position-y: -67em;
+	background-position-y: -97em;
 }
 
 .amber-icon--is-cloneable::before {
