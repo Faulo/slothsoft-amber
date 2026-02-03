@@ -9,10 +9,10 @@
     <xsl:variable name="portraits" select="document('farah://slothsoft@amber/api/amberdata?infosetId=lib.portraits')/saa:amberdata/saa:portrait-list" />
     <xsl:variable name="member-count" select=".//*[@name='member-count']/@value" />
 
-    <xsl:template match="sse:savegame">
+    <xsl:template match="sse:savegame[count(sse:archive[*]) = 2]">
         <xsl:variable name="selectedArchives" select="sse:archive[*]" />
 
-        <form action="?user={@save-id}" method="POST" class="amber-editor amber-text">
+        <form action="?user={$user}" method="POST" class="amber-editor amber-text">
             <input type="hidden" name="repository" value="{$repository}" />
             <input type="hidden" name="game" value="{$game}" />
             <input type="hidden" name="version" value="{$version}" />
@@ -39,7 +39,7 @@
     <xsl:template match="sse:archive[@name='Party_char.amb']" mode="form-content">
         <div class="amber-editor__party">
             <xsl:for-each select="sse:file[position() &lt;= 6]">
-                <xsl:variable name="isVisible" select="position() &lt;= $member-count" />
+                <xsl:variable name="isVisible" select="not($member-count) or position() &lt;= $member-count" />
                 <fieldset>
                     <xsl:if test="not($isVisible)">
                         <xsl:attribute name="disabled">disabled</xsl:attribute>
@@ -307,7 +307,6 @@
 
     <xsl:template match="sse:archive[@name='Party_data.sav']" mode="form-content">
         <xsl:for-each select="sse:file">
-            <xsl:copy-of select="." />
             <fieldset class="amber-editor__save">
                 <xsl:for-each select=".//*[@name='member-count']">
                     <label class="amber-editor__member-count amber-text amber-text--orange">

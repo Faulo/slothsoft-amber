@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\AmberUser;
 use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\Controller\EditorParameters;
 use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
@@ -30,6 +31,11 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         $download = $args->get(EditorParameterFilter::PARAM_EDITOR_DOWNLOAD);
         $save = $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
         
+        $hasSaveData = ($save and $action !== EditorParameterFilter::PARAM_EDITOR_ACTION_VIEW);
+        if ($hasSaveData) {
+            $user = AmberUser::getNewIdIfDefault($user);
+        }
+        
         $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
         
         $controller = new EditorController();
@@ -47,6 +53,7 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         }
         
         $savegame = $editor->getSavegameNode();
+        
         $cacheDirectory = $config->cacheDirectory . DIRECTORY_SEPARATOR . 'editor-data';
         
         $writer = new XmlBuilder($savegame);

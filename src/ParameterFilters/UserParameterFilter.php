@@ -22,7 +22,7 @@ class UserParameterFilter extends AbstractMapParameterFilter {
             self::PARAM_REPOSITORY => new StringSanitizer('farah://slothsoft@amber/source'),
             self::PARAM_GAME => new FileNameSanitizer('ambermoon'),
             self::PARAM_VERSION => new FileNameSanitizer('Thalion-v1.05-DE'),
-            self::PARAM_USER => new FileNameSanitizer((string) AmberUser::getId())
+            self::PARAM_USER => new FileNameSanitizer(AmberUser::DEFAULT_ID)
         ];
     }
 }

@@ -2,6 +2,7 @@
 declare(strict_types = 1);
 namespace Slothsoft\Amber\Assets;
 
+use Slothsoft\Amber\AmberUser;
 use Slothsoft\Amber\Controller\EditorParameters;
 use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
 use Slothsoft\Amber\ParameterFilters\ResourceParameterFilter;
@@ -35,10 +36,18 @@ final class EditorBuilder implements ExecutableBuilderStrategyInterface {
         $download = $args->get(EditorParameterFilter::PARAM_EDITOR_DOWNLOAD);
         $save = $args->get(EditorParameterFilter::PARAM_EDITOR_DATA);
         
+        $hasSaveData = ($save and $action !== EditorParameterFilter::PARAM_EDITOR_ACTION_VIEW);
+        if ($hasSaveData) {
+            $user = AmberUser::getNewIdIfDefault($user);
+        }
+        
         $parameters = new EditorParameters($repository, $game, $version, $user, $infosetId);
         $parameters = $parameters->withEditorArgs($archivePath, $action, $download, $save);
         
-        $contextUrl = $context->createUrl($args);
+        $userArgs = FarahUrlArguments::createFromValueList([
+            ResourceParameterFilter::PARAM_USER => AmberUser::getNewIdIfDefault($user)
+        ]);
+        $contextUrl = $context->createUrl($args)->withAdditionalQueryArguments($userArgs, true);
         $editorUrl = $parameters->getProcessEditorDataUrl();
         $templateUrl = $parameters->getStaticEditorTemplateUrl();
         $dictionaryUrl = $parameters->withInfoset('lib.dictionaries')->getProcessAmberdataUrl();
