@@ -19,9 +19,9 @@
             <input type="hidden" name="infosetId" value="{$infoset}" />
             <input type="hidden" name="archivePath" value="_" />
 
-            <h3 class="amber-text amber-text--green amber-text--large">
+            <h2 class="amber-text amber-text--cyan amber-text--large">
                 <xsl:text>Neue Quest starten</xsl:text>
-            </h3>
+            </h2>
 
             <div class="amber-text">
                 <xsl:apply-templates select="sse:archive[@name='Party_data.sav']" mode="form-content" />
@@ -37,7 +37,7 @@
                 <xsl:for-each select="$selectedArchives">
                     <button name="download" type="submit" value="{@path}">
                         <xsl:text>Download </xsl:text>
-                        <span class="amber-text amber-text--green">
+                        <span class="amber-text amber-text--cyan">
                             <xsl:value-of select="@name" />
                         </span>
                     </button>

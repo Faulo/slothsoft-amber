@@ -128,7 +128,7 @@
             <xsl:with-param name="list">
                 <xsl:for-each select="$fileList">
                     <li>
-                        <xsl:call-template name="savegame.amber.shop" />
+                        <xsl:call-template name="savegame.amber.chest" />
                     </li>
                 </xsl:for-each>
             </xsl:with-param>

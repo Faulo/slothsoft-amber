@@ -1,6 +1,6 @@
 .amber-editor__settings {
 	margin: auto;
-	width: fit-content;
+	width: 50em;
 }
 
 .amber-editor__form {
@@ -18,11 +18,13 @@
 	display: flex;
 	justify-content: center;
 	gap: 2ch;
+	margin-top: 1em;
 }
 
 .amber-editor__info {
 	display: block;
 	text-align: center;
+	margin-top: 1em;
 }
 
 .amber-editor *[readonly] {
@@ -42,11 +44,19 @@
 	padding: 2px 4px;
 }
 
+.amber-editor__input:disabled {
+	opacity: 0.8;
+}
+
+.amber-editor__input--tabs {
+	text-align: left;
+}
+
 *[maxlength="15"].amber-editor__input {
 	max-width: 194px;
 }
 
-.amber-editor__input:hover {
+.amber-editor__input:enabled:hover {
 	border-color: #ffcc00;
 }
 
@@ -54,7 +64,7 @@
 	border-color: #aaaa99 #222222 #222222 #aaaa99;
 }
 
-.amber-editor__input--widget:active {
+.amber-editor__input--widget:enabled::active {
 	border-color: #222222 #aaaa99 #aaaa99 #222222;
 	padding: 3px 3px 1px 5px;
 }
@@ -153,7 +163,7 @@
 	font-weight: bold;
 }
 
-.amber-editor__form h3 {
+.amber-editor__form h2 {
 	text-align: center;
 	margin-top: 0;
 }

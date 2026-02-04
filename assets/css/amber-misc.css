@@ -26,6 +26,10 @@
 	color: #ccccbb;
 }
 
+.amber-text--cyan {
+	color: #00ccff;
+}
+
 .amber-text--yellow {
 	color: #ffcc00;
 }
@@ -67,7 +71,7 @@
 }
 
 .amber-text--large {
-    font-size: 15px;
+	font-size: 15px;
 }
 
 .amber-textbox p {
@@ -138,11 +142,11 @@
 }
 
 .amber-icon--is-cloneable::before {
-    background-position-y: -96em;
+	background-position-y: -96em;
 }
 
 .amber-icon--not::before {
-    opacity: 0.3;
+	opacity: 0.3;
 }
 
 .amber-popup {
@@ -160,4 +164,42 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.amber-tabs__label {
+	display: block;
+	text-align: center;
+	margin: 0.5em 0;
+}
+
+.amber-tabs__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.amber-flex__list {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.amber-table__label {
+	text-align: center;
+	margin: 0.5em 0;
+}
+
+.amber-flex__label {
+	text-align: center;
+	margin: 0.5em 0;
+}
+
+.amber-flex--shop .amber-flex__list {
+	display: grid;
+	grid-auto-flow: row;
+	grid-template-columns: repeat(12, 1fr);
+	width: fit-content;
+	margin: auto;
+	gap: 0.5ch;
 }

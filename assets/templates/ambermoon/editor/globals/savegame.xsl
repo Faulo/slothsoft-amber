@@ -308,6 +308,7 @@
             </xsl:call-template>
         </xsl:for-each>
     </xsl:template>
+
     <xsl:template name="savegame.amber.character-spells">
         <xsl:for-each select=".//*[@name = 'spells']">
             <xsl:call-template name="savegame.flex">
@@ -319,7 +320,20 @@
             </xsl:call-template>
         </xsl:for-each>
     </xsl:template>
+
     <xsl:template name="savegame.amber.shop">
+        <xsl:for-each select="*[@name = 'inventory']">
+            <xsl:call-template name="savegame.flex">
+                <xsl:with-param name="label" select="'Inventar'" />
+                <xsl:with-param name="class" select="'shop'" />
+                <xsl:with-param name="items">
+                    <xsl:apply-templates select="*/*" mode="item-picker" />
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:for-each>
+    </xsl:template>
+
+    <xsl:template name="savegame.amber.chest">
         <xsl:call-template name="savegame.flex">
             <xsl:with-param name="items">
                 <xsl:for-each select="*[@name = 'inventory']">
@@ -862,20 +876,24 @@
     <xsl:template name="savegame.tabs">
         <xsl:param name="id" select="generate-id(.)" />
         <xsl:param name="label" select="''" />
-        <xsl:param name="class" select="''" />
         <xsl:param name="list" select="/.." />
         <xsl:param name="optionTokens" select="/.." />
         <xsl:param name="options" select="exsl:node-set($optionTokens)/*" />
 
-        <div data-tabs="{$id}">
-            <xsl:if test="string-length($class)">
-                <xsl:attribute name="class"><xsl:value-of select="$class" /></xsl:attribute>
-            </xsl:if>
-            <label>
-                <span class="name">
-                    <xsl:value-of select="$label" />
-                </span>
-                <select class="command" disabled="disabled">
+        <div>
+            <xsl:attribute name="class">
+                <xsl:text>amber-tabs</xsl:text>
+                <xsl:if test="string-length($id)">
+                    <xsl:value-of select="concat(' amber-tabs--', $id)" />
+                </xsl:if>
+            </xsl:attribute>
+            <label class="amber-tabs__label">
+                <xsl:if test="$label">
+                    <span>
+                        <xsl:value-of select="$label" />
+                    </span>
+                </xsl:if>
+                <select class="amber-editor__input amber-editor__input--widget amber-editor__input--tabs amber-text amber-text--yellow" disabled="disabled">
                     <xsl:for-each select="$options">
                         <option value="{position() - 1}">
                             <xsl:if test="count(ancestor::sse:file/../sse:file) &gt; 1 and ancestor::sse:file/@file-name != current()">
@@ -886,7 +904,7 @@
                     </xsl:for-each>
                 </select>
             </label>
-            <ul>
+            <ul class="amber-tabs__list">
                 <xsl:copy-of select="$list" />
             </ul>
         </div>
@@ -899,14 +917,17 @@
 
         <xsl:variable name="rows" select="exsl:node-set($items)/*" />
         <xsl:if test="$rows">
-            <xsl:if test="string-length($label)">
-                <h3 class="name">
-                    <xsl:value-of select="$label" />
-                </h3>
-            </xsl:if>
             <table>
-                <xsl:if test="string-length($class)">
-                    <xsl:attribute name="class"><xsl:value-of select="$class" /></xsl:attribute>
+                <xsl:attribute name="class">
+                    <xsl:text>amber-table</xsl:text>
+                    <xsl:if test="string-length($class)">
+                        <xsl:value-of select="concat(' amber-table--', $class)" />
+                    </xsl:if>
+                </xsl:attribute>
+                <xsl:if test="string-length($label)">
+                    <caption class="amber-table__label amber-text amber-text--green">
+                        <xsl:value-of select="$label" />
+                    </caption>
                 </xsl:if>
                 <tbody>
                     <xsl:for-each select="$rows">
@@ -930,23 +951,25 @@
         <xsl:param name="class" select="''" />
         <xsl:param name="items" select="/.." />
 
-        <div data-template="flex">
-            <xsl:if test="string-length($class)">
-                <xsl:attribute name="class"><xsl:value-of select="$class" /></xsl:attribute>
-            </xsl:if>
-            <xsl:if test="string-length($label)">
-                <h3 class="name">
-                    <xsl:value-of select="$label" />
-                </h3>
-            </xsl:if>
-            <ul>
-                <xsl:for-each select="exsl:node-set($items)/*">
-                    <li>
-                        <xsl:copy-of select="." />
-                    </li>
-                </xsl:for-each>
-            </ul>
-        </div>
+
+        <xsl:attribute name="class">
+                <xsl:text>amber-flex</xsl:text>
+                <xsl:if test="string-length($class)">
+                    <xsl:value-of select="concat(' amber-flex--', $class)" />
+                </xsl:if>
+            </xsl:attribute>
+        <xsl:if test="string-length($label)">
+            <h3 class="amber-flex__label amber-text amber-text--green">
+                <xsl:value-of select="$label" />
+            </h3>
+        </xsl:if>
+        <ul class="amber-flex__list">
+            <xsl:for-each select="exsl:node-set($items)/*">
+                <li>
+                    <xsl:copy-of select="." />
+                </li>
+            </xsl:for-each>
+        </ul>
     </xsl:template>
 
     <xsl:template name="savegame.button">
