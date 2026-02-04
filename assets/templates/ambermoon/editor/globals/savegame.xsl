@@ -352,7 +352,9 @@
                         <xsl:call-template name="savegame.table">
                             <xsl:with-param name="label" select="'Wertvolles'" />
                             <xsl:with-param name="items">
-                                <xsl:apply-templates select="*" mode="item" />
+                                <xsl:apply-templates select="*" mode="item">
+                                    <xsl:with-param name="size" select="6" />
+                                </xsl:apply-templates>
                             </xsl:with-param>
                         </xsl:call-template>
                     </div>
@@ -420,12 +422,15 @@
 
     <xsl:template match="sse:string | sse:integer | sse:signed-integer | sse:select | sse:binary | sse:event-script" mode="item">
         <xsl:param name="class" select="''" />
+        <xsl:param name="size" select="@size" />
         <label>
             <xsl:apply-templates select="." mode="form-attributes">
                 <xsl:with-param name="class" select="$class" />
             </xsl:apply-templates>
             <xsl:apply-templates select="." mode="form-name" />
-            <xsl:apply-templates select="." mode="form-content" />
+            <xsl:apply-templates select="." mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
         </label>
     </xsl:template>
 
