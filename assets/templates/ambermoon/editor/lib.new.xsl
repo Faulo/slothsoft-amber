@@ -28,11 +28,11 @@
                 <xsl:apply-templates select="sse:archive[@name='Party_char.amb']" mode="form-content" />
             </div>
 
+            <label class="amber-editor__info">
+                <xsl:text>Spielstand-ID: </xsl:text>
+                <input type="text" value="{$user}" readonly="readonly" size="13" />
+            </label>
             <nav class="amber-editor__actions">
-                <label>
-                    <xsl:text>Spielstand-ID: </xsl:text>
-                    <input type="text" value="{$user}" readonly="readonly" size="13" />
-                </label>
                 <button name="action" type="submit" value="save">Speichern</button>
                 <xsl:for-each select="$selectedArchives">
                     <button name="download" type="submit" value="{@path}">

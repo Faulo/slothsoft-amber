@@ -20,6 +20,11 @@
 	gap: 2ch;
 }
 
+.amber-editor__info {
+	display: block;
+	text-align: center;
+}
+
 .amber-editor *[readonly] {
 	border: none;
 	background: none;
