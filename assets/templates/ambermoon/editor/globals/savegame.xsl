@@ -576,7 +576,7 @@
         <xsl:param name="additionalClasses" select="''" />
         <xsl:param name="readonly" select="@readonly" />
         <xsl:param name="size" select="@size" />
-        <input value="{@value}" class="amber-editor__input amber-text {$additionalClasses}">
+        <input value="{@value}" class="amber-editor__input amber-editor__input--{local-name()} amber-text {$additionalClasses}">
             <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
@@ -598,7 +598,7 @@
     <xsl:template match="sse:string" mode="form-content">
         <xsl:param name="additionalClasses" select="''" />
         <xsl:param name="readonly" select="@readonly" />
-        <input value="{@value}" class="amber-editor__input amber-text {$additionalClasses}">
+        <input value="{@value}" class="amber-editor__input amber-editor__input--{local-name()} amber-text {$additionalClasses}">
             <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
@@ -663,7 +663,7 @@
         <xsl:param name="editorAction" select="''" />
         <xsl:variable name="node" select="." />
         <xsl:variable name="options" select="key('dictionary-option', @dictionary-ref)" />
-        <select class="amber-editor__input amber-editor__input--widget amber-text {$additionalClasses}">
+        <select class="amber-editor__input amber-editor__input--{local-name()} amber-editor__input--widget amber-text {$additionalClasses}">
             <xsl:apply-templates select="." mode="form-key" />
             <xsl:if test="string-length(@name)">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>

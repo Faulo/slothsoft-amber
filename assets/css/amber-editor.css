@@ -1,8 +1,13 @@
-.amber-editor {
-	background-color: #666655;
-	width: fit-content;
+.amber-editor__settings {
 	margin: auto;
-	padding: 1ch;
+	width: fit-content;
+}
+
+.amber-editor__form {
+	background-color: #666655;
+	margin: auto;
+	width: fit-content;
+	padding: 1em;
 }
 
 .amber-editor amber-portrait-id::after {
@@ -57,14 +62,15 @@
 	text-align: right;
 }
 
-.amber-editor select, .amber-editor input[type="text"] {
+.amber-editor__input--select, .amber-editor__input--string {
 	display: block;
 	width: 100%;
 	margin: auto;
 	box-sizing: border-box;
 }
 
-.amber-editor input[type="number"] {
+.amber-editor__input--integer[readonly],
+	.amber-editor__input--signed-integer[readonly] {
 	appearance: textfield;
 }
 
@@ -129,4 +135,20 @@
 	display: block;
 	width: 92ch;
 	margin: 0.75em auto;
+}
+
+.amber-editor__settings td {
+	text-align: left;
+	padding: 0.25em 0.5em;
+}
+
+.amber-editor__settings th {
+	text-align: left;
+	padding: 0.25em 0.5em;
+	font-weight: bold;
+}
+
+.amber-editor__form h3 {
+	text-align: center;
+	margin-top: 0;
 }

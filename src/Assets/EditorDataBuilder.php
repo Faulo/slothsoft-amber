@@ -79,15 +79,17 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         }
         
         foreach ($archives as $archivePath => $archive) {
+            $isDownload = $download === $archivePath;
+            
             if (isset($save[$archivePath]) and is_array($save[$archivePath])) {
                 $editor->applyValues($save[$archivePath]);
+                
+                if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_SAVE or $isDownload) {
+                    $editor->writeGameFile($archivePath, $archive);
+                }
             }
             
-            if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_SAVE) {
-                $editor->writeGameFile($archivePath, $archive);
-            }
-            
-            if ($download === $archivePath) {
+            if ($isDownload) {
                 $resultBuilder = new FileWriterResultBuilder($archive, $archive->getName());
                 $strategies = new ExecutableStrategies($resultBuilder);
                 throw new HttpDownloadAssetException($strategies);

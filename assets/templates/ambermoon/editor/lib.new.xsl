@@ -12,17 +12,27 @@
     <xsl:template match="sse:savegame[count(sse:archive[*]) = 2]">
         <xsl:variable name="selectedArchives" select="sse:archive[*]" />
 
-        <form action="?user={$user}" method="POST" class="amber-editor amber-text">
+        <form action="?user={$user}" method="POST" class="amber-editor__form">
             <input type="hidden" name="repository" value="{$repository}" />
             <input type="hidden" name="game" value="{$game}" />
             <input type="hidden" name="version" value="{$version}" />
             <input type="hidden" name="infosetId" value="{$infoset}" />
             <input type="hidden" name="archivePath" value="_" />
 
-            <xsl:apply-templates select="sse:archive[@name='Party_data.sav']" mode="form-content" />
-            <xsl:apply-templates select="sse:archive[@name='Party_char.amb']" mode="form-content" />
+            <h3 class="amber-text amber-text--green amber-text--large">
+                <xsl:text>Neue Quest starten</xsl:text>
+            </h3>
+
+            <div class="amber-text">
+                <xsl:apply-templates select="sse:archive[@name='Party_data.sav']" mode="form-content" />
+                <xsl:apply-templates select="sse:archive[@name='Party_char.amb']" mode="form-content" />
+            </div>
 
             <nav class="amber-editor__actions">
+                <label>
+                    <xsl:text>Spielstand-ID: </xsl:text>
+                    <input type="text" value="{$user}" readonly="readonly" size="13" />
+                </label>
                 <button name="action" type="submit" value="save">Speichern</button>
                 <xsl:for-each select="$selectedArchives">
                     <button name="download" type="submit" value="{@path}">
@@ -54,7 +64,7 @@
                         <div>
                             <xsl:apply-templates select="." mode="portrait-picker" />
                             <xsl:for-each select="$portraits">
-                                <select class="amber-editor__input amber-editor__input--widget amber-text" data-editor-action="apply-portrait">
+                                <select class="amber-editor__input amber-editor__input--select amber-editor__input--widget amber-text" data-editor-action="apply-portrait">
                                     <xsl:for-each select="*">
                                         <optgroup label="{@name}">
                                             <xsl:for-each select="*">
@@ -311,7 +321,7 @@
                 <xsl:for-each select=".//*[@name='member-count']">
                     <label class="amber-editor__member-count amber-text amber-text--orange">
                         <xsl:text>Anzahl der Gruppenmitglieder:</xsl:text>
-                        <input type="range" min="1" max="6" list="member-count" value="{@value}" class="amber-text" data-editor-action="apply-member-count">
+                        <input type="range" min="1" max="6" list="member-count" value="{@value}" class="amber-editor__input amber-text" data-editor-action="apply-member-count">
                             <xsl:apply-templates select="." mode="form-key" />
                         </input>
                     </label>

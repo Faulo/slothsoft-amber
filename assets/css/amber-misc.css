@@ -66,6 +66,10 @@
 	font-family: Ambermoon-rune;
 }
 
+.amber-text--large {
+    font-size: 15px;
+}
+
 .amber-textbox p {
 	margin: 0;
 	line-height: 1.4em;
