@@ -19,6 +19,8 @@ use Slothsoft\Farah\Module\DOMWriter\TransformationDOMWriter;
 use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\DOMWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FromManifestInstructionBuilder;
+use Slothsoft\Farah\Module\DOMWriter\TranslationDOMWriter2;
+use Slothsoft\Farah\Dictionary;
 
 final class EditorBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -67,6 +69,11 @@ final class EditorBuilder implements ExecutableBuilderStrategyInterface {
         
         $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);
         $writer = new DecoratedDOMWriter($writer, $instructions->stylesheetUrls, $instructions->scriptUrls, $instructions->moduleUrls, $instructions->contentUrls);
+        if (! $instructions->dictionaryUrls->isEmpty()) {
+            $dict = Dictionary::getInstance();
+            $dict->setLang('de-de');
+            $writer = new TranslationDOMWriter2($writer, Dictionary::getInstance(), $instructions->dictionaryUrls);
+        }
         $resultBuilder = new DOMWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }

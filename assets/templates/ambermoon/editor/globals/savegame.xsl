@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:saa="http://schema.slothsoft.net/amber/amberdata" xmlns:sse="http://schema.slothsoft.net/savegame/editor" xmlns:sfx="http://schema.slothsoft.net/farah/xslt"
-    xmlns:exsl="http://exslt.org/common" xmlns:func="http://exslt.org/functions" extension-element-prefixes="func">
+    xmlns:exsl="http://exslt.org/common" xmlns:func="http://exslt.org/functions" extension-element-prefixes="func" xmlns:sfd="http://schema.slothsoft.net/farah/dictionary">
 
     <xsl:import href="farah://slothsoft@farah/xsl/xslt" />
 
@@ -142,13 +142,33 @@
                 </xsl:for-each>
                 <xsl:apply-templates select=".//*[@name = 'name']" mode="item" />
                 <xsl:apply-templates select=".//*[@name = 'gender']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'experience']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'level']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'attacks-per-round']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'hit-points']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'spell-points']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'training-points']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'spelllearn-points']" mode="item" />
+                <xsl:apply-templates select=".//*[@name = 'experience']" mode="item">
+                    <xsl:with-param name="size" select="7" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'level']" mode="item">
+                    <xsl:with-param name="size" select="2" />
+                </xsl:apply-templates>
+                <div>
+                    <xsl:call-template name="savegame.button">
+                        <xsl:with-param name="label" select="'Level anwenden'" />
+                        <xsl:with-param name="action" select="'apply-level'" />
+                    </xsl:call-template>
+                </div>
+                <xsl:apply-templates select=".//*[@name = 'attacks-per-round']" mode="item">
+                    <xsl:with-param name="size" select="2" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'hit-points']" mode="item">
+                    <xsl:with-param name="size" select="3" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'spell-points']" mode="item">
+                    <xsl:with-param name="size" select="3" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'training-points']" mode="item">
+                    <xsl:with-param name="size" select="4" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'spelllearn-points']" mode="item">
+                    <xsl:with-param name="size" select="4" />
+                </xsl:apply-templates>
             </xsl:with-param>
         </xsl:call-template>
     </xsl:template>
@@ -219,6 +239,12 @@
             <xsl:with-param name="label" select="'Rasse'" />
             <xsl:with-param name="items">
                 <xsl:apply-templates select=".//*[@name = 'race']" mode="item" />
+                <div>
+                    <xsl:call-template name="savegame.button">
+                        <xsl:with-param name="label" select="'Rasse anwenden'" />
+                        <xsl:with-param name="action" select="'apply-race'" />
+                    </xsl:call-template>
+                </div>
                 <xsl:apply-templates select=".//*[@name = 'age']" mode="item" />
             </xsl:with-param>
         </xsl:call-template>
@@ -238,6 +264,12 @@
             <xsl:with-param name="label" select="'Klasse'" />
             <xsl:with-param name="items">
                 <xsl:apply-templates select=".//*[@name = 'class']" mode="item" />
+                <div>
+                    <xsl:call-template name="savegame.button">
+                        <xsl:with-param name="label" select="'Klasse anwenden'" />
+                        <xsl:with-param name="action" select="'apply-class'" />
+                    </xsl:call-template>
+                </div>
             </xsl:with-param>
         </xsl:call-template>
         <xsl:apply-templates select=".//*[@name = 'spellbooks']" mode="item" />
@@ -261,7 +293,7 @@
             </xsl:with-param>
         </xsl:call-template>
         <xsl:call-template name="savegame.button">
-            <xsl:with-param name="label" select="'Attribute und Fähigkeiten würfeln'" />
+            <xsl:with-param name="label" select="'Neu würfeln'" />
             <xsl:with-param name="action" select="'roll-stats'" />
         </xsl:call-template>
     </xsl:template>
@@ -375,12 +407,15 @@
 
     <xsl:template match="*" mode="item">
         <xsl:param name="class" select="''" />
+        <xsl:param name="size" select="@size" />
         <div>
             <xsl:apply-templates select="." mode="form-attributes">
                 <xsl:with-param name="class" select="$class" />
             </xsl:apply-templates>
             <xsl:apply-templates select="." mode="form-name" />
-            <xsl:apply-templates select="." mode="form-content" />
+            <xsl:apply-templates select="." mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
         </div>
     </xsl:template>
 
@@ -485,37 +520,56 @@
         <xsl:apply-templates select="*" mode="form-content" />
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'current']]" mode="form-content">
+        <xsl:param name="size" select="@size" />
         <span>
             <xsl:if test="@name">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
+            <xsl:apply-templates select="*[@name = 'current']" mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
             <xsl:text>/</xsl:text>
-            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
         </span>
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'current'] and *[@name = 'current-mod']]" mode="form-content">
+        <xsl:param name="size" select="@size" />
         <span>
             <xsl:if test="@name">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
+            <xsl:apply-templates select="*[@name = 'current']" mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
             <xsl:text>+</xsl:text>
-            <xsl:apply-templates select="*[@name = 'current-mod']" mode="form-content" />
+            <xsl:apply-templates select="*[@name = 'current-mod']" mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
             <xsl:text>/</xsl:text>
-            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
         </span>
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'current'] and *[@name = 'maximum-mod']]" mode="form-content">
+        <xsl:param name="size" select="@size" />
         <span>
             <xsl:if test="@name">
                 <xsl:attribute name="data-name"><xsl:value-of select="@name" /></xsl:attribute>
             </xsl:if>
-            <xsl:apply-templates select="*[@name = 'current']" mode="form-content" />
+            <xsl:apply-templates select="*[@name = 'current']" mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
             <xsl:text>/</xsl:text>
-            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content" />
+            <xsl:apply-templates select="*[@name = 'maximum']" mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
             <xsl:text>+</xsl:text>
-            <xsl:apply-templates select="*[@name = 'maximum-mod']" mode="form-content" />
+            <xsl:apply-templates select="*[@name = 'maximum-mod']" mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
         </span>
     </xsl:template>
     <xsl:template match="sse:group[*[@name = 'current'] and *[@name = 'current-mod'] and *[@name = 'maximum-mod']]" mode="form-content">
@@ -745,12 +799,12 @@
     <!-- form-name -->
     <xsl:template match="*" mode="form-name">
         <xsl:if test="string-length(@name)">
-            <span>
+            <sfd:lookup key="form-name.{@name}">
                 <xsl:if test="string-length(@title)">
                     <xsl:attribute name="data-hover-text"><xsl:value-of select="@title" /></xsl:attribute>
                 </xsl:if>
                 <xsl:value-of select="@name" />
-            </span>
+            </sfd:lookup>
         </xsl:if>
         <xsl:if test="../@dictionary-ref">
             <xsl:variable name="options" select="key('dictionary-option', ../@dictionary-ref)" />
@@ -987,7 +1041,7 @@
         <xsl:param name="label" select="''" />
         <xsl:param name="action" select="''" />
 
-        <button type="button" data-editor-action="{$action}" disabled="disabled">
+        <button class="amber-editor__input amber-editor__input--widget amber-text amber-text--orange" type="button" data-editor-action="{$action}" disabled="disabled">
             <xsl:value-of select="$label" />
         </button>
     </xsl:template>

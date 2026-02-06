@@ -35,6 +35,17 @@
     <sfd:text xml:id="skill.SRL">Spruchrollen lesen</sfd:text>
     <sfd:text xml:id="skill.M-B">Magie benutzen</sfd:text>
 
+    <sfd:text xml:id="form-name.experience">EP:</sfd:text>
+    <sfd:text xml:id="form-name.attacks-per-round">APR:</sfd:text>
+    <sfd:text xml:id="form-name.age">Alter:</sfd:text>
+    <sfd:text xml:id="form-name.level">Level:</sfd:text>
+    <sfd:text xml:id="form-name.hit-points">LP:</sfd:text>
+    <sfd:text xml:id="form-name.spell-points">SP:</sfd:text>
+    <sfd:text xml:id="form-name.training-points">TP:</sfd:text>
+    <sfd:text xml:id="form-name.spelllearn-points">SLP:</sfd:text>
+
+
+
 
 
 

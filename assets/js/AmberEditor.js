@@ -60,6 +60,7 @@ class AmberEditorPage {
             case "roll-character":
                 this.#applyRace();
                 this.#applyClass();
+                this.#applyLevel();
                 this.#rollStats();
                 break;
             case "roll-stats":
@@ -70,6 +71,9 @@ class AmberEditorPage {
                 break;
             case "apply-class":
                 this.#applyClass();
+                break;
+            case "apply-level":
+                this.#applyLevel();
                 break;
             case "apply-portrait":
                 this.#applyPortrait(buttonNode.value);
@@ -237,25 +241,43 @@ class AmberEditorPage {
             }
 
             const mappings = {};
-            mappings["hit-points--current"] = "Lebenspunkte";
-            mappings["hit-points--maximum"] = "Lebenspunkte";
-            mappings["hp-per-level"] = "Lebenspunkte";
-            mappings["training-points"] = "Trainingspunkte";
-            mappings["tp-per-level"] = "Trainingspunkte";
-            mappings["spell-points--current"] = "Spruchpunkte";
-            mappings["spell-points--maximum"] = "Spruchpunkte";
-            mappings["sp-per-level"] = "Spruchpunkte";
-            mappings["spelllearn-points"] = "Spruchlesepunkte";
-            mappings["slp-per-level"] = "Spruchlesepunkte";
-            mappings["apr-per-level"] = "AttackenProRundeProLevel";
+            mappings["hp-per-level"] = klasse.Lebenspunkte;
+            mappings["tp-per-level"] = klasse.Trainingspunkte;
+            mappings["sp-per-level"] = klasse.Spruchpunkte;
+            mappings["slp-per-level"] = klasse.Spruchlesepunkte;
+            mappings["apr-per-level"] = klasse.AttackenProRundeProLevel;
 
             for (let key in mappings) {
-                this.#character.inputs[key].value = klasse[mappings[key]];
+                this.#character.inputs[key].value = mappings[key];
             }
 
             // Zauberschule
             for (let i = 0; i < this.#character.spellbooks.length; i++) {
                 this.#character.spellbooks[i].checked = i === klasse.Zauberschule - 1;
+            }
+        }
+    }
+
+    #applyLevel() {
+        this.#character ??= new AmberCharacter(this.#fieldsetNode);
+
+        const classId = this.#character.inputs["class"].value;
+
+        if (AmberCharacter.classes[classId]) {
+            const klasse = AmberCharacter.classes[classId];
+            const level = parseInt(this.#character.inputs.level.value);
+
+            const mappings = {};
+            mappings["hit-points--current"] = klasse.Lebenspunkte * level + parseInt(this.#character.inputs["hit-points--maximum-mod"].value);
+            mappings["hit-points--maximum"] = klasse.Lebenspunkte * level;
+            mappings["training-points"] = klasse.Trainingspunkte * level;
+            mappings["spell-points--current"] = klasse.Spruchpunkte * level + parseInt(this.#character.inputs["spell-points--maximum-mod"].value);
+            mappings["spell-points--maximum"] = klasse.Spruchpunkte * level;
+            mappings["spelllearn-points"] = klasse.Spruchlesepunkte * level;
+            mappings["attacks-per-round"] = klasse.AttackenProRundeProLevel == 0 ? 1 : Math.max(1, Math.floor(level / klasse.AttackenProRundeProLevel));
+
+            for (let key in mappings) {
+                this.#character.inputs[key].value = mappings[key];
             }
         }
     }

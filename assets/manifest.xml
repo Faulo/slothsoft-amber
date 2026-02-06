@@ -34,6 +34,7 @@
         <fragment name="AmberEditor">
             <import ref="/includes/AmberPicker" />
             <link-module ref="/js/AmberEditor" />
+            <link-dictionary ref="/dictionary" />
         </fragment>
     </fragment>
 

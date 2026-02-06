@@ -196,7 +196,7 @@
                     <div>
                         <xsl:apply-templates select=".//*[@name = 'class']" mode="form-content">
                             <xsl:with-param name="additionalClasses" select="'amber-text--blue'" />
-                            <xsl:with-param name="editorAction" select="'apply-class'" />
+                            <xsl:with-param name="editorAction" select="'apply-class apply-level'" />
                         </xsl:apply-templates>
                     </div>
                     <div class="amber-editor__languages">
