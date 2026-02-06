@@ -1,6 +1,6 @@
 .amber-editor__settings {
 	margin: auto;
-	width: 50em;
+	width: 60em;
 }
 
 .amber-editor__form {
@@ -170,4 +170,35 @@
 .amber-editor__form h2 {
 	text-align: center;
 	margin-top: 0;
+}
+
+.amber-editor .amber-table--attributes, .amber-editor .amber-table--skills
+	{
+	width: 20ch;
+}
+
+.amber-table--common {
+	width: 30ch;
+}
+
+.amber-flex--equipment ul {
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	list-style: none;
+	text-align: center;
+}
+
+.amber-flex--equipment amber-embed {
+	margin: auto;
+}
+
+.amber-flex--inventory ul {
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	list-style: none;
+	text-align: center;
 }

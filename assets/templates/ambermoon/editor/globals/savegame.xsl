@@ -8,7 +8,7 @@
         <xsl:for-each select=".//*[@name = 'events']">
             <xsl:for-each select="sse:event-script | sse:binary">
                 <div>
-                    <h3 class="name">Events</h3>
+                    <h3 class="amber-text amber-text--green">Events</h3>
                     <xsl:apply-templates select="." mode="form-content" />
                 </div>
             </xsl:for-each>
@@ -16,7 +16,7 @@
                 <div class="events">
                     <!-- <xsl:call-template name="savegame.flex"> <xsl:with-param name="label" select="'Events'"/> <xsl:with-param name="class" select="'events'"/> <xsl:with-param name="items"> <xsl:for-each select="sse:instruction[@type = 'event']"> <div> <h3 class="name"><xsl:value-of select="@name"/></h3> 
                         <xsl:call-template name="savegame.table"> <xsl:with-param name="items"> <xsl:apply-templates select="sse:instruction[@type = 'event-step']/*" mode="item"/> </xsl:with-param> </xsl:call-template> </div> </xsl:for-each> </xsl:with-param> </xsl:call-template> -->
-                    <h3 class="name">Events</h3>
+                    <h3 class="amber-text amber-text--green">Events</h3>
                     <table>
                         <thead>
                             <tr>
@@ -96,7 +96,7 @@
         <xsl:for-each select=".//*[@name='fields']">
             <xsl:variable name="fields" select="*" />
             <div>
-                <h3 class="name">fields</h3>
+                <h3 class="amber-text amber-text--green">fields</h3>
                 <div class="map">
 
                     <table data-palette="{$palette}">
@@ -131,6 +131,7 @@
     <xsl:template name="savegame.amber.character-common">
         <xsl:call-template name="savegame.table">
             <xsl:with-param name="label" select="'Allgemein'" />
+            <xsl:with-param name="class" select="'common'" />
             <xsl:with-param name="items">
                 <xsl:apply-templates select=".//*[@name = 'character-type']" mode="item" />
                 <xsl:for-each select=".//*[@name = 'portrait-id']">
@@ -186,7 +187,7 @@
                 <xsl:for-each select="$animationCycles">
                     <xsl:variable name="pos" select="position()" />
                     <div>
-                        <div class="name">
+                        <div>
                             <xsl:call-template name="savegame.table">
                                 <xsl:with-param name="label" select="../@name" />
                                 <xsl:with-param name="items">
@@ -237,9 +238,9 @@
             <xsl:with-param name="label" select="'Klasse'" />
             <xsl:with-param name="items">
                 <xsl:apply-templates select=".//*[@name = 'class']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'spellbooks']" mode="item" />
             </xsl:with-param>
         </xsl:call-template>
+        <xsl:apply-templates select=".//*[@name = 'spellbooks']" mode="item" />
         <xsl:for-each select=".//*[@name = 'skills']">
             <xsl:call-template name="savegame.table">
                 <xsl:with-param name="label" select="'Fähigkeiten'" />
@@ -744,7 +745,7 @@
     <!-- form-name -->
     <xsl:template match="*" mode="form-name">
         <xsl:if test="string-length(@name)">
-            <span class="name">
+            <span>
                 <xsl:if test="string-length(@title)">
                     <xsl:attribute name="data-hover-text"><xsl:value-of select="@title" /></xsl:attribute>
                 </xsl:if>
@@ -757,12 +758,12 @@
             <xsl:for-each select="$options[@key = $key]">
                 <xsl:choose>
                     <xsl:when test="@description">
-                        <abbr class="name" title="{@description}">
+                        <abbr title="{@description}">
                             <xsl:value-of select="@val" />
                         </abbr>
                     </xsl:when>
                     <xsl:otherwise>
-                        <span class="name">
+                        <span>
                             <xsl:value-of select="@val" />
                         </span>
                     </xsl:otherwise>
@@ -772,7 +773,7 @@
     </xsl:template>
     <xsl:template match="sse:instruction[@type = 'bit-field']" mode="form-name">
         <xsl:if test="string-length(@name)">
-            <h3 class="name">
+            <h3 class="amber-text amber-text--green">
                 <xsl:if test="string-length(@title)">
                     <xsl:attribute name="data-hover-text"><xsl:value-of select="@title" /></xsl:attribute>
                 </xsl:if>
@@ -786,13 +787,13 @@
                 <xsl:choose>
                     <xsl:when test="@description">
                         <h3>
-                            <abbr class="name" title="{@description}">
+                            <abbr title="{@description}">
                                 <xsl:value-of select="@val" />
                             </abbr>
                         </h3>
                     </xsl:when>
                     <xsl:otherwise>
-                        <h3 class="name">
+                        <h3 class="amber-text amber-text--green">
                             <xsl:value-of select="@val" />
                         </h3>
                     </xsl:otherwise>
@@ -902,7 +903,7 @@
                     <xsl:for-each select="$options">
                         <option value="{position() - 1}">
                             <xsl:if test="count(ancestor::sse:file/../sse:file) &gt; 1 and ancestor::sse:file/@file-name != current()">
-                                <xsl:value-of select="concat('[', ancestor::sse:file/@file-name, '] ')" />
+                                <xsl:value-of select="concat(ancestor::sse:file/@file-name, ' ')" />
                             </xsl:if>
                             <xsl:value-of select="." />
                         </option>
@@ -923,6 +924,9 @@
         <xsl:variable name="rows" select="exsl:node-set($items)/*" />
         <xsl:if test="$rows">
             <table>
+                <xsl:if test="string-length($class)">
+                    <xsl:attribute name="data-name"><xsl:value-of select="$class" /></xsl:attribute>
+                </xsl:if>
                 <xsl:attribute name="class">
                     <xsl:text>amber-table</xsl:text>
                     <xsl:if test="string-length($class)">
@@ -956,13 +960,15 @@
         <xsl:param name="class" select="''" />
         <xsl:param name="items" select="/.." />
 
-
+        <xsl:if test="string-length($class)">
+            <xsl:attribute name="data-name"><xsl:value-of select="$class" /></xsl:attribute>
+        </xsl:if>
         <xsl:attribute name="class">
-                <xsl:text>amber-flex</xsl:text>
-                <xsl:if test="string-length($class)">
-                    <xsl:value-of select="concat(' amber-flex--', $class)" />
-                </xsl:if>
-            </xsl:attribute>
+            <xsl:text>amber-flex</xsl:text>
+            <xsl:if test="string-length($class)">
+                <xsl:value-of select="concat(' amber-flex--', $class)" />
+            </xsl:if>
+        </xsl:attribute>
         <xsl:if test="string-length($label)">
             <h3 class="amber-flex__label amber-text amber-text--green">
                 <xsl:value-of select="$label" />

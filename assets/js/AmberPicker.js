@@ -79,7 +79,7 @@ class AmberEmbed {
     }
 
     #activatePopup(eve) {
-        const id = this.#node.getAttribute("id");
+        const id = parseInt(this.#node.getAttribute("id"));
         if (id) {
             eve.preventDefault();
             eve.stopPropagation();

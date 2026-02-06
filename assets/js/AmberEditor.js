@@ -656,7 +656,7 @@ class AmberCharacter {
         this.inputs["spell-points--maximum"] = characterNode.querySelector("*[data-name='spell-points'] input[data-name='maximum']");
         this.inputs["spell-points--maximum-mod"] = characterNode.querySelector("*[data-name='spell-points'] input[data-name='maximum-mod']");
 
-        const attributes = characterNode.querySelectorAll(".attributes tr");
+        const attributes = characterNode.querySelectorAll("*[data-name='attributes'] tr");
         this.attributes["Stärke"] = attributes[0];
         this.attributes["Intelligenz"] = attributes[1];
         this.attributes["Geschicklichkeit"] = attributes[2];
@@ -666,7 +666,7 @@ class AmberCharacter {
         this.attributes["Glück"] = attributes[6];
         this.attributes["Anti-Magie"] = attributes[7];
 
-        const skills = characterNode.querySelectorAll(".skills tr");
+        const skills = characterNode.querySelectorAll("*[data-name='skills'] tr");
         this.skills["Attacke"] = skills[0];
         this.skills["Parade"] = skills[1];
         this.skills["Schwimmen"] = skills[2];
@@ -678,8 +678,8 @@ class AmberCharacter {
         this.skills["Spruchrollen Lesen"] = skills[8];
         this.skills["Magie benutzen"] = skills[9];
 
-        this.equippedItems.push(...characterNode.querySelectorAll(".equipment amber-embed"));
-        this.carriedItems.push(...characterNode.querySelectorAll(".inventory amber-embed"));
+        this.equippedItems.push(...characterNode.querySelectorAll("*[data-name='equipment'] amber-embed"));
+        this.carriedItems.push(...characterNode.querySelectorAll("*[data-name='inventory'] amber-embed"));
 
         this.spellbooks.push(...characterNode.querySelectorAll('*[data-name="spellbooks"] input[type="checkbox"]'));
     }
