@@ -86,9 +86,6 @@
                             <xsl:with-param name="additionalClasses" select="'amber-text--green'" />
                             <xsl:with-param name="editorAction" select="'apply-race'" />
                         </xsl:apply-templates>
-                        <!-- <xsl:call-template name="savegame.table"> <xsl:with-param name="label" select="'Rasse'" /> <xsl:with-param name="items"> <xsl:apply-templates select=".//*[@name = 'race']" mode="item" /> <xsl:apply-templates select=".//*[@name = 'age']" mode="item" /> </xsl:with-param> </xsl:call-template> 
-                            <xsl:for-each select=".//*[@name = 'attributes']"> <xsl:call-template name="savegame.table"> <xsl:with-param name="label" select="'Attribute'" /> <xsl:with-param name="class" select="'attributes'" /> <xsl:with-param name="items"> <xsl:apply-templates select="*" mode="item" /> </xsl:with-param> </xsl:call-template> 
-                            </xsl:for-each> <xsl:apply-templates select=".//*[@name = 'languages']" mode="item" /> -->
                     </div>
                     <div>
                         <xsl:apply-templates select=".//*[@name = 'gender']" mode="form-content" />
@@ -207,7 +204,7 @@
                     </div>
                     <xsl:for-each select=".//*[@name = 'attributes']">
                         <div>
-                            <table class="amber-editor__attributes attributes">
+                            <table class="amber-editor__attributes" data-name="attributes">
                                 <caption class="amber-text amber-text--green">Attribute</caption>
                                 <tbody>
                                     <xsl:for-each select="*">
@@ -241,7 +238,7 @@
                     </xsl:for-each>
                     <xsl:for-each select=".//*[@name = 'skills']">
                         <div>
-                            <table class="amber-editor__skills skills">
+                            <table class="amber-editor__skills" data-name="skills">
                                 <caption class="amber-text amber-text--blue">Fähigkeiten</caption>
                                 <tbody>
                                     <xsl:for-each select="*">
@@ -283,9 +280,11 @@
                         </xsl:for-each>
 
                         <xsl:for-each select=".//*[@name = 'equipment' or @name = 'inventory']">
-                            <xsl:apply-templates select="*/*" mode="form-hidden">
-                                <xsl:with-param name="value" select="0" />
-                            </xsl:apply-templates>
+                            <div data-name="{@name}">
+                                <xsl:apply-templates select="*/*" mode="form-hidden">
+                                    <xsl:with-param name="value" select="0" />
+                                </xsl:apply-templates>
+                            </div>
                         </xsl:for-each>
 
                         <div class="amber-editor__hidden">
