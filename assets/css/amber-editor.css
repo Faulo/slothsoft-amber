@@ -52,7 +52,7 @@
 	text-align: left;
 }
 
-*[maxlength="15"].amber-editor__input {
+.amber-editor--infoset-lib.new .amber-editor__input--string {
 	max-width: 194px;
 }
 
@@ -98,8 +98,12 @@
 	font-weight: normal;
 }
 
-.amber-editor td {
+.amber-table td {
 	text-align: center;
+}
+
+.amber-table .amber-editor__input--widget {
+	width: 100%;
 }
 
 .amber-editor__attributes, .amber-editor__skills {
@@ -177,11 +181,7 @@
 	width: 20ch;
 }
 
-.amber-table--common {
-	width: 30ch;
-}
-
-.amber-flex--equipment ul {
+.amber-flex--equipment .amber-flex__list {
 	margin: 0;
 	padding: 0;
 	display: grid;
@@ -194,11 +194,22 @@
 	margin: auto;
 }
 
-.amber-flex--inventory ul {
+.amber-flex--character {
+	margin: auto;
+	padding: 0;
+	border: none;
+}
+
+.amber-flex--inventory .amber-flex__list {
 	margin: 0;
 	padding: 0;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	list-style: none;
 	text-align: center;
+	gap: 0.5ch;
+}
+
+.amber-editor__input--button {
+	width: 100%;
 }

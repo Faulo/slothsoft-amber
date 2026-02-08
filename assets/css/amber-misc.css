@@ -186,6 +186,10 @@
 	gap: 1ch;
 }
 
+.amber-table {
+	margin: auto;
+}
+
 .amber-table__label {
 	text-align: center;
 	margin: 0.5em 0;

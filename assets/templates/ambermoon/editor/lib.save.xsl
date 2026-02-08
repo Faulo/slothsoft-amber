@@ -18,6 +18,7 @@
                     <li>
                         <fieldset>
                             <xsl:call-template name="savegame.flex">
+                                <xsl:with-param name="class" select="'character'" />
                                 <xsl:with-param name="items">
                                     <xsl:call-template name="savegame.amber.events" />
                                     <div>

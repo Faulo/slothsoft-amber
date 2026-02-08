@@ -130,7 +130,7 @@
     </xsl:template>
     <xsl:template name="savegame.amber.character-common">
         <xsl:call-template name="savegame.table">
-            <xsl:with-param name="label" select="'Allgemein'" />
+            <xsl:with-param name="label" select="'common'" />
             <xsl:with-param name="class" select="'common'" />
             <xsl:with-param name="items">
                 <xsl:apply-templates select=".//*[@name = 'character-type']" mode="item" />
@@ -154,9 +154,6 @@
                         <xsl:with-param name="action" select="'apply-level'" />
                     </xsl:call-template>
                 </div>
-                <xsl:apply-templates select=".//*[@name = 'attacks-per-round']" mode="item">
-                    <xsl:with-param name="size" select="2" />
-                </xsl:apply-templates>
                 <xsl:apply-templates select=".//*[@name = 'hit-points']" mode="item">
                     <xsl:with-param name="size" select="3" />
                 </xsl:apply-templates>
@@ -168,6 +165,9 @@
                 </xsl:apply-templates>
                 <xsl:apply-templates select=".//*[@name = 'spelllearn-points']" mode="item">
                     <xsl:with-param name="size" select="4" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'attacks-per-round']" mode="item">
+                    <xsl:with-param name="size" select="2" />
                 </xsl:apply-templates>
             </xsl:with-param>
         </xsl:call-template>
@@ -236,7 +236,7 @@
     </xsl:template>
     <xsl:template name="savegame.amber.character-race">
         <xsl:call-template name="savegame.table">
-            <xsl:with-param name="label" select="'Rasse'" />
+            <xsl:with-param name="label" select="'race'" />
             <xsl:with-param name="items">
                 <xsl:apply-templates select=".//*[@name = 'race']" mode="item" />
                 <div>
@@ -250,10 +250,12 @@
         </xsl:call-template>
         <xsl:for-each select=".//*[@name = 'attributes']">
             <xsl:call-template name="savegame.table">
-                <xsl:with-param name="label" select="'Attribute'" />
+                <xsl:with-param name="label" select="'attributes'" />
                 <xsl:with-param name="class" select="'attributes'" />
                 <xsl:with-param name="items">
-                    <xsl:apply-templates select="*" mode="item" />
+                    <xsl:apply-templates select="*" mode="item">
+                        <xsl:with-param name="size" select="2" />
+                    </xsl:apply-templates>
                 </xsl:with-param>
             </xsl:call-template>
         </xsl:for-each>
@@ -261,7 +263,7 @@
     </xsl:template>
     <xsl:template name="savegame.amber.character-class">
         <xsl:call-template name="savegame.table">
-            <xsl:with-param name="label" select="'Klasse'" />
+            <xsl:with-param name="label" select="'class'" />
             <xsl:with-param name="items">
                 <xsl:apply-templates select=".//*[@name = 'class']" mode="item" />
                 <div>
@@ -272,26 +274,29 @@
                 </div>
             </xsl:with-param>
         </xsl:call-template>
-        <xsl:apply-templates select=".//*[@name = 'spellbooks']" mode="item" />
-        <xsl:for-each select=".//*[@name = 'skills']">
-            <xsl:call-template name="savegame.table">
-                <xsl:with-param name="label" select="'Fähigkeiten'" />
-                <xsl:with-param name="class" select="'skills'" />
-                <xsl:with-param name="items">
-                    <xsl:apply-templates select="*" mode="item" />
-                </xsl:with-param>
-            </xsl:call-template>
-        </xsl:for-each>
         <xsl:call-template name="savegame.table">
-            <xsl:with-param name="label" select="''" />
+            <xsl:with-param name="label" select="'class-constants'" />
+            <xsl:with-param name="class" select="'class-constants'" />
             <xsl:with-param name="items">
-                <xsl:apply-templates select=".//*[@name = 'apr-per-level']" mode="item" />
                 <xsl:apply-templates select=".//*[@name = 'hp-per-level']" mode="item" />
                 <xsl:apply-templates select=".//*[@name = 'sp-per-level']" mode="item" />
                 <xsl:apply-templates select=".//*[@name = 'tp-per-level']" mode="item" />
                 <xsl:apply-templates select=".//*[@name = 'slp-per-level']" mode="item" />
+                <xsl:apply-templates select=".//*[@name = 'apr-per-level']" mode="item" />
             </xsl:with-param>
         </xsl:call-template>
+        <xsl:apply-templates select=".//*[@name = 'spellbooks']" mode="item" />
+        <xsl:for-each select=".//*[@name = 'skills']">
+            <xsl:call-template name="savegame.table">
+                <xsl:with-param name="label" select="'skills'" />
+                <xsl:with-param name="class" select="'skills'" />
+                <xsl:with-param name="items">
+                    <xsl:apply-templates select="*" mode="item">
+                        <xsl:with-param name="size" select="2" />
+                    </xsl:apply-templates>
+                </xsl:with-param>
+            </xsl:call-template>
+        </xsl:for-each>
         <xsl:call-template name="savegame.button">
             <xsl:with-param name="label" select="'Neu würfeln'" />
             <xsl:with-param name="action" select="'roll-stats'" />
@@ -316,13 +321,27 @@
             <xsl:with-param name="items">
                 <xsl:apply-templates select=".//*[@name = 'hand']" mode="item" />
                 <xsl:apply-templates select=".//*[@name = 'finger']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'attack']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'defense']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'magic-attack']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'magic-defense']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'gold']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'food']" mode="item" />
-                <xsl:apply-templates select=".//*[@name = 'weight']" mode="item" />
+                <xsl:apply-templates select=".//*[@name = 'attack']" mode="item">
+                    <xsl:with-param name="size" select="3" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'defense']" mode="item">
+                    <xsl:with-param name="size" select="3" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'magic-attack']" mode="item">
+                    <xsl:with-param name="size" select="2" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'magic-defense']" mode="item">
+                    <xsl:with-param name="size" select="2" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'gold']" mode="item">
+                    <xsl:with-param name="size" select="6" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'food']" mode="item">
+                    <xsl:with-param name="size" select="6" />
+                </xsl:apply-templates>
+                <xsl:apply-templates select=".//*[@name = 'weight']" mode="item">
+                    <xsl:with-param name="size" select="6" />
+                </xsl:apply-templates>
             </xsl:with-param>
         </xsl:call-template>
         <xsl:call-template name="savegame.button">
@@ -492,6 +511,7 @@
 
     <!-- form-content instructions -->
     <xsl:template match="sse:group | sse:instruction" mode="form-content">
+        <xsl:param name="size" select="@size" />
         <xsl:choose>
             <xsl:when test="@dictionary-ref">
                 <xsl:variable name="options" select="key('dictionary-option', @dictionary-ref)" />
@@ -503,7 +523,9 @@
                 </xsl:for-each>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:apply-templates select="*" mode="item" />
+                <xsl:apply-templates select="*" mode="item">
+                    <xsl:with-param name="size" select="$size" />
+                </xsl:apply-templates>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -831,7 +853,9 @@
                 <xsl:if test="string-length(@title)">
                     <xsl:attribute name="data-hover-text"><xsl:value-of select="@title" /></xsl:attribute>
                 </xsl:if>
-                <xsl:value-of select="@name" />
+                <sfd:lookup key="form-name.{@name}">
+                    <xsl:value-of select="@name" />
+                </sfd:lookup>
             </h3>
         </xsl:if>
         <xsl:if test="../@dictionary-ref">
@@ -989,7 +1013,9 @@
                 </xsl:attribute>
                 <xsl:if test="string-length($label)">
                     <caption class="amber-table__label amber-text amber-text--green">
-                        <xsl:value-of select="$label" />
+                        <sfd:lookup key="form-label.{$label}">
+                            <xsl:value-of select="$label" />
+                        </sfd:lookup>
                     </caption>
                 </xsl:if>
                 <tbody>
@@ -1041,7 +1067,7 @@
         <xsl:param name="label" select="''" />
         <xsl:param name="action" select="''" />
 
-        <button class="amber-editor__input amber-editor__input--widget amber-text amber-text--orange" type="button" data-editor-action="{$action}" disabled="disabled">
+        <button class="amber-editor__input amber-editor__input--button amber-editor__input--widget amber-text amber-text--orange" type="button" data-editor-action="{$action}" disabled="disabled">
             <xsl:value-of select="$label" />
         </button>
     </xsl:template>
