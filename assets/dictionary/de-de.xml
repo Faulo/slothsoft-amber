@@ -36,13 +36,13 @@
     <sfd:text xml:id="skill.M-B">Magie benutzen</sfd:text>
 
     <sfd:text xml:id="form-name.experience">EP:</sfd:text>
-    <sfd:text xml:id="form-name.attacks-per-round">APR:&#160;&#160;</sfd:text>
-    <sfd:text xml:id="form-name.character-type"></sfd:text>
-    <sfd:text xml:id="form-name.portrait-id"></sfd:text>
-    <sfd:text xml:id="form-name.name"></sfd:text>
-    <sfd:text xml:id="form-name.gender"></sfd:text>
+    <sfd:text xml:id="form-name.attacks-per-round">APR:</sfd:text>
+    <sfd:text xml:id="form-name.character-type">Typ:</sfd:text>
+    <sfd:text xml:id="form-name.portrait-id">Portrait:</sfd:text>
+    <sfd:text xml:id="form-name.name">Name:</sfd:text>
+    <sfd:text xml:id="form-name.gender">Geschlecht:</sfd:text>
     <sfd:text xml:id="form-name.age">Alter:</sfd:text>
-    <sfd:text xml:id="form-name.level">Level:&#160;&#160;</sfd:text>
+    <sfd:text xml:id="form-name.level">Level:</sfd:text>
     <sfd:text xml:id="form-name.hit-points">LP:</sfd:text>
     <sfd:text xml:id="form-name.spell-points">SP:</sfd:text>
     <sfd:text xml:id="form-name.training-points">&#160;TP:</sfd:text>
@@ -52,20 +52,20 @@
     <sfd:text xml:id="form-name.sp-per-level">&#160;SP pro Level:</sfd:text>
     <sfd:text xml:id="form-name.tp-per-level">&#160;TP pro Level:</sfd:text>
     <sfd:text xml:id="form-name.slp-per-level">SLP pro Level:</sfd:text>
-    <sfd:text xml:id="form-name.race"></sfd:text>
-    <sfd:text xml:id="form-name.class"></sfd:text>
-    <sfd:text xml:id="form-name.hand"></sfd:text>
-    <sfd:text xml:id="form-name.finger"></sfd:text>
+    <sfd:text xml:id="form-name.race">Rasse:</sfd:text>
+    <sfd:text xml:id="form-name.class">Klasse:</sfd:text>
+    <sfd:text xml:id="form-name.hand">Hände:</sfd:text>
+    <sfd:text xml:id="form-name.finger">Finger:</sfd:text>
     <sfd:text xml:id="form-name.ailments">Zustandsveränderungen</sfd:text>
     <sfd:text xml:id="form-name.languages">Sprachen</sfd:text>
     <sfd:text xml:id="form-name.spellbooks">Zauberschulen</sfd:text>
     <sfd:text xml:id="form-name.attack">Schaden:</sfd:text>
-    <sfd:text xml:id="form-name.defense">Schutz:&#160;</sfd:text>
-    <sfd:text xml:id="form-name.gold">Gold:&#160;&#160;&#160;&#160;</sfd:text>
-    <sfd:text xml:id="form-name.weight">Gewicht:&#160;</sfd:text>
+    <sfd:text xml:id="form-name.defense">Schutz:</sfd:text>
+    <sfd:text xml:id="form-name.gold">Gold:</sfd:text>
+    <sfd:text xml:id="form-name.weight">Gewicht:</sfd:text>
     <sfd:text xml:id="form-name.food">Rationen:</sfd:text>
-    <sfd:text xml:id="form-name.magic-attack">Mag. Angriff:&#160;&#160;&#160;</sfd:text>
-    <sfd:text xml:id="form-name.magic-defense">Mag. Rüstschutz:</sfd:text>
+    <sfd:text xml:id="form-name.magic-attack">Mag.&#160;Angriff:</sfd:text>
+    <sfd:text xml:id="form-name.magic-defense">Mag.&#160;Rüstschutz:</sfd:text>
 
     <sfd:text xml:id="form-label.common">Allgemein</sfd:text>
     <sfd:text xml:id="form-label.attributes">Attribute</sfd:text>
@@ -73,15 +73,5 @@
     <sfd:text xml:id="form-label.race">Rasse</sfd:text>
     <sfd:text xml:id="form-label.class">Klasse</sfd:text>
     <sfd:text xml:id="form-label.class-constants">Klassenkonstanten</sfd:text>
-
-
-
-
-
-
-
-
-
-
 
 </sfd:dictionary>

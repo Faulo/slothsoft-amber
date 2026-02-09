@@ -5,6 +5,7 @@
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/savegame" />
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/editor" />
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/picker" />
+    <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/portraits" />
 
     <xsl:template match="sse:archive[@name='Party_char.amb']" mode="form-content">
         <xsl:call-template name="picker.items" />

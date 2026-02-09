@@ -418,6 +418,8 @@
 
 
     <xsl:template match="node()" mode="item">
+        <xsl:param name="class" select="''" />
+        <xsl:param name="size" select="@size" />
         <pre class="errorMessage">
             Unbekanntes form Element:
             <xsl:value-of select="name()" />
@@ -440,17 +442,21 @@
 
     <xsl:template match="sse:instruction[@type = 'bit-field']" mode="item">
         <xsl:param name="class" select="''" />
+        <xsl:param name="size" select="@size" />
         <div>
             <xsl:apply-templates select="." mode="form-attributes">
                 <xsl:with-param name="class" select="$class" />
             </xsl:apply-templates>
             <xsl:apply-templates select="." mode="form-name" />
-            <xsl:apply-templates select="." mode="form-content" />
+            <xsl:apply-templates select="." mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
         </div>
     </xsl:template>
 
     <xsl:template match="sse:instruction[@type = 'string-dictionary']" mode="item">
         <xsl:param name="class" select="''" />
+        <xsl:param name="size" select="@size" />
         <div>
             <xsl:apply-templates select="." mode="form-attributes">
                 <xsl:with-param name="class" select="$class" />
@@ -491,11 +497,14 @@
 
     <xsl:template match="sse:bit" mode="item">
         <xsl:param name="class" select="''" />
+        <xsl:param name="size" select="@size" />
         <label>
             <xsl:apply-templates select="." mode="form-attributes">
                 <xsl:with-param name="class" select="$class" />
             </xsl:apply-templates>
-            <xsl:apply-templates select="." mode="form-content" />
+            <xsl:apply-templates select="." mode="form-content">
+                <xsl:with-param name="size" select="$size" />
+            </xsl:apply-templates>
             <xsl:apply-templates select="." mode="form-name" />
         </label>
     </xsl:template>
@@ -519,6 +528,7 @@
                     <xsl:variable name="key" select="position() - 1" />
                     <xsl:apply-templates select="." mode="item">
                         <xsl:with-param name="name" select="$options[@key = $key]/@val" />
+                        <xsl:with-param name="size" select="$size" />
                     </xsl:apply-templates>
                 </xsl:for-each>
             </xsl:when>
@@ -614,11 +624,6 @@
         <xsl:apply-templates select="*[@name = 'source']" mode="form-content" />
     </xsl:template>
 
-    <xsl:template match="*" mode="portrait-picker">
-        <amber-embed infoset="lib.portraits" type="portrait" id="{@value}" mode="popup picker">
-            <xsl:apply-templates select="." mode="form-picker" />
-        </amber-embed>
-    </xsl:template>
     <xsl:template match="*" mode="item-picker">
         <xsl:variable name="itemId" select=".//*[@name = 'item-id']/@value" />
         <!--<xsl:variable name="item" select="key('item', $itemId)" /> data-hover-text="{$item/@name}" -->
@@ -820,64 +825,41 @@
 
     <!-- form-name -->
     <xsl:template match="*" mode="form-name">
-        <xsl:if test="string-length(@name)">
-            <sfd:lookup key="form-name.{@name}">
-                <xsl:if test="string-length(@title)">
-                    <xsl:attribute name="data-hover-text"><xsl:value-of select="@title" /></xsl:attribute>
-                </xsl:if>
-                <xsl:value-of select="@name" />
-            </sfd:lookup>
-        </xsl:if>
-        <xsl:if test="../@dictionary-ref">
-            <xsl:variable name="options" select="key('dictionary-option', ../@dictionary-ref)" />
-            <xsl:variable name="key" select="count(preceding-sibling::*)" />
-            <xsl:for-each select="$options[@key = $key]">
-                <xsl:choose>
-                    <xsl:when test="@description">
-                        <abbr title="{@description}">
-                            <xsl:value-of select="@val" />
-                        </abbr>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <span>
-                            <xsl:value-of select="@val" />
-                        </span>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-        </xsl:if>
-    </xsl:template>
-    <xsl:template match="sse:instruction[@type = 'bit-field']" mode="form-name">
-        <xsl:if test="string-length(@name)">
-            <h3 class="amber-text amber-text--green">
-                <xsl:if test="string-length(@title)">
-                    <xsl:attribute name="data-hover-text"><xsl:value-of select="@title" /></xsl:attribute>
-                </xsl:if>
-                <sfd:lookup key="form-name.{@name}">
-                    <xsl:value-of select="@name" />
+        <xsl:choose>
+            <xsl:when test="string-length(@name)">
+                <xsl:variable name="key" select="concat('form-name.', @name)" />
+                <sfd:lookup key="{$key}">
+                    <xsl:value-of select="$key" />
                 </sfd:lookup>
-            </h3>
-        </xsl:if>
-        <xsl:if test="../@dictionary-ref">
-            <xsl:variable name="options" select="key('dictionary-option', ../@dictionary-ref)" />
-            <xsl:variable name="key" select="count(preceding-sibling::*)" />
-            <xsl:for-each select="$options[@key = $key]">
-                <xsl:choose>
-                    <xsl:when test="@description">
-                        <h3>
-                            <abbr title="{@description}">
-                                <xsl:value-of select="@val" />
-                            </abbr>
-                        </h3>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <h3 class="amber-text amber-text--green">
-                            <xsl:value-of select="@val" />
-                        </h3>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xsl:for-each>
-        </xsl:if>
+            </xsl:when>
+            <xsl:when test="../@dictionary-ref">
+                <xsl:variable name="key" select="concat(../@dictionary-ref, '.', count(preceding-sibling::*))" />
+                <sfd:lookup key="{$key}">
+                    <xsl:value-of select="$key" />
+                </sfd:lookup>
+            </xsl:when>
+        </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="sse:instruction[@type = 'bit-field']" mode="form-name">
+        <xsl:choose>
+            <xsl:when test="string-length(@name)">
+                <xsl:variable name="key" select="concat('form-name.', @name)" />
+                <h3 class="amber-text amber-text--green">
+                    <sfd:lookup key="{$key}">
+                        <xsl:value-of select="$key" />
+                    </sfd:lookup>
+                </h3>
+            </xsl:when>
+            <xsl:when test="../@dictionary-ref">
+                <xsl:variable name="key" select="concat(../@dictionary-ref, '.', count(preceding-sibling::*))" />
+                <h3 class="amber-text amber-text--green">
+                    <sfd:lookup key="{$key}">
+                        <xsl:value-of select="$key" />
+                    </sfd:lookup>
+                </h3>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
 
@@ -1022,12 +1004,21 @@
                     <xsl:for-each select="$rows">
                         <tr>
                             <xsl:copy-of select="@*" />
-                            <th>
-                                <xsl:copy-of select="*[@class='name']" />
-                            </th>
-                            <td>
-                                <xsl:copy-of select="node()[not(@class='name')]" />
-                            </td>
+                            <xsl:choose>
+                                <xsl:when test="sfd:lookup">
+                                    <th>
+                                        <xsl:copy-of select="sfd:lookup" />
+                                    </th>
+                                    <td>
+                                        <xsl:copy-of select="node()[not(self::sfd:lookup)]" />
+                                    </td>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <td colspan="2">
+                                        <xsl:copy-of select="node()" />
+                                    </td>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </tr>
                     </xsl:for-each>
                 </tbody>

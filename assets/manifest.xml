@@ -35,6 +35,7 @@
             <import ref="/includes/AmberPicker" />
             <link-module ref="/js/AmberEditor" />
             <link-dictionary ref="/dictionary" />
+            <link-dictionary ref="/api/dictionary" />
         </fragment>
     </fragment>
 

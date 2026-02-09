@@ -93,13 +93,15 @@
 	appearance: textfield;
 }
 
-.amber-editor th {
+.amber-table th {
 	text-align: right;
 	font-weight: normal;
+	padding: 0;
 }
 
 .amber-table td {
-	text-align: center;
+	text-align: left;
+	padding: 0;
 }
 
 .amber-table .amber-editor__input--widget {
@@ -179,6 +181,10 @@
 .amber-editor .amber-table--attributes, .amber-editor .amber-table--skills
 	{
 	width: 20ch;
+}
+
+.amber-table--attributes th::after, .amber-table--skills th::after {
+	content: ":";
 }
 
 .amber-flex--equipment .amber-flex__list {
