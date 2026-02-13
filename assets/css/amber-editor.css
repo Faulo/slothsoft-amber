@@ -84,7 +84,7 @@
 .amber-editor__input--select, .amber-editor__input--string {
 	display: block;
 	width: 100%;
-	margin: auto;
+	margin: 0 auto;
 	box-sizing: border-box;
 }
 
@@ -215,4 +215,8 @@
 
 .amber-editor__input--button {
 	width: 100%;
+}
+
+.amber-editor__event-payload {
+	display: flex;
 }

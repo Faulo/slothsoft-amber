@@ -693,86 +693,86 @@
 		</dictionary>
 
 		<dictionary dictionary-id="event-types">
-			<option key="0" val="debug" />
-			<option key="1" val="teleport" />
-			<option key="2" val="door" />
-			<option key="3" val="chest" />
-			<option key="4" val="popup text" />
-			<option key="5" val="spinner" />
-			<option key="6" val="take damage" />
-			<option key="8" val="riddlemouth" />
-			<option key="9" val="award" />
-			<option key="10" val="set tile" />
-			<option key="11" val="battle" />
-			<option key="12" val="place" />
-			<option key="13" val="if" />
-			<option key="14" val="set" />
+			<option key="0" val="Debug?" />
+			<option key="1" val="Teleportiere Gruppe" />
+			<option key="2" val="Tür" />
+			<option key="3" val="Truhe" />
+			<option key="4" val="Zeige Textbox" />
+			<option key="5" val="Spinner" />
+			<option key="6" val="Schaden" />
+			<option key="8" val="Rätselmund" />
+			<option key="9" val="Belohnung" />
+			<option key="10" val="Kartenveränderung" />
+			<option key="11" val="Kampf" />
+			<option key="12" val="Ort" />
+			<option key="13" val="wenn" />
+			<option key="14" val="anweisung" />
 			<option key="15" val="if-1d100" />
-			<option key="16" val="start" />
-			<option key="18" val="create" />
-			<option key="17" val="print text" />
-			<option key="19" val="prompt" />
-			<option key="20" val="play music" />
-			<option key="21" val="exit" />
+			<option key="16" val="Trigger" />
+			<option key="18" val="Erzeuge" />
+			<option key="17" val="Drucke Text" />
+			<option key="19" val="Frage" />
+			<option key="20" val="Musik" />
+			<option key="21" val="Ende" />
 			<option key="22" val="spawn" />
-			<option key="23" val="success" />
+			<option key="23" val="Dialog erfolgreich" />
 		</dictionary>
 
 		<dictionary dictionary-id="event-trigger-types">
-			<option key="0" val="mention keyword" />
-			<option key="1" val="show item" />
-			<option key="2" val="give item" />
-			<option key="3" val="give gold" />
-			<option key="4" val="give food" />
-			<option key="5" val="ask to join group" />
-			<option key="6" val="ask to leave group" />
-			<option key="7" val="start conversation" />
-			<option key="8" val="end conversation" />
+			<option key="0" val="Erwähne Stichwort" />
+			<option key="1" val="Zeige Gegenstand" />
+			<option key="2" val="Gib Gegenstand" />
+			<option key="3" val="Gib Gold" />
+			<option key="4" val="Gib Nahrung" />
+			<option key="5" val="der Gruppe beitreten" />
+			<option key="6" val="die Gruppe verlassen" />
+			<option key="7" val="Gesprächsbeginn" />
+			<option key="8" val="Gesprächsende" />
 		</dictionary>
 
 		<dictionary dictionary-id="event-award-types">
-			<option key="0" val="attribute" />
-			<option key="7" val="language" />
-			<option key="8" val="experience" />
-			<option key="9" val="alkemstat" />
+			<option key="0" val="Attribut" />
+			<option key="7" val="Sprache" />
+			<option key="8" val="Erfahrungspunkte" />
+			<option key="9" val="Alkem" />
 		</dictionary>
 
 		<dictionary dictionary-id="event-set-types">
-			<option key="0" val="global variable" />
-			<option key="1" val="map event?" />
-			<option key="4" val="map variable" />
-			<option key="6" val="take item" />
-			<option key="8" val="keyword" />
+			<option key="0" val="globale variable" />
+			<option key="1" val="karten-event?" />
+			<option key="4" val="kartenvariable" />
+			<option key="6" val="nimm Gegenstand" />
+			<option key="8" val="Stichwort" />
 		</dictionary>
 
 		<dictionary dictionary-id="event-create-types">
-			<option key="0" val="item" />
+			<option key="0" val="gegenstand" />
 			<option key="1" val="gold" />
-			<option key="2" val="food" />
+			<option key="2" val="nahrung" />
 		</dictionary>
 
 		<dictionary dictionary-id="event-if-types">
-			<option key="0" val="global variable" />
-			<option key="4" val="map variable" />
-			<option key="5" val="partymember" />
-			<option key="6" val="item owned" />
-			<option key="7" val="item used" />
+			<option key="0" val="globale variable" />
+			<option key="4" val="kartenvariable" />
+			<option key="5" val="gruppenmitglied" />
+			<option key="6" val="gegenstand in besitz" />
+			<option key="7" val="gegenstand in benutzung" />
 			<option key="9" val="exit" />
 			<option key="14" val="touch-action" />
 			<option key="20" val="inspect-action" />
 		</dictionary>
 
 		<dictionary dictionary-id="event-spawn-types">
-			<option key="1" val="horse" />
-			<option key="2" val="raft" />
-			<option key="3" val="ship" />
-			<option key="4" val="hoverdisc" />
-			<option key="5" val="giant eagle" />
-			<option key="6" val="cape" />
-			<option key="7" val="magic broom" />
-			<option key="8" val="swimming" />
-			<option key="9" val="lizard" />
-			<option key="10" val="sandship" />
+			<option key="1" val="Pferd" />
+			<option key="2" val="Floß" />
+			<option key="3" val="Schiff" />
+			<option key="4" val="MagischeFlugscheibe" />
+			<option key="5" val="Riesenadler" />
+			<option key="6" val="Umhang" />
+			<option key="7" val="Hexenbesen" />
+			<option key="8" val="Schwimmend" />
+			<option key="9" val="Reitechse" />
+			<option key="10" val="Sandschiff" />
 		</dictionary>
 
 		<dictionary dictionary-id="event-teleport-types">
@@ -800,8 +800,8 @@
 		</dictionary>
 
 		<dictionary dictionary-id="target">
-			<option key="0" val="leader" />
-			<option key="1" val="everyone" />
+			<option key="0" val="anführer" />
+			<option key="1" val="jeder" />
 		</dictionary>
 
 
