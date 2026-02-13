@@ -50,7 +50,7 @@
         <div class="amber-editor__party">
             <xsl:for-each select="sse:file[position() &lt;= 6]">
                 <xsl:variable name="isVisible" select="not($member-count) or position() &lt;= $member-count" />
-                <fieldset>
+                <fieldset class="amber-editor__fieldset">
                     <xsl:if test="not($isVisible)">
                         <xsl:attribute name="disabled">disabled</xsl:attribute>
                     </xsl:if>
@@ -300,7 +300,7 @@
 
     <xsl:template match="sse:archive[@name='Party_data.sav']" mode="form-content">
         <xsl:for-each select="sse:file">
-            <fieldset class="amber-editor__save">
+            <fieldset class="amber-editor__fieldset">
                 <xsl:for-each select=".//*[@name='member-count']">
                     <label class="amber-editor__member-count amber-text amber-text--orange">
                         <xsl:text>Anzahl der Gruppenmitglieder:</xsl:text>

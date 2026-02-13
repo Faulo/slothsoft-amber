@@ -2,6 +2,7 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
   <uri name="farah://slothsoft@amber/dictionary/de-de" uri="assets/dictionary/de-de.xml"/>
   <uri name="farah://slothsoft@amber/dictionary/en-us" uri="assets/dictionary/en-us.xml"/>
+  <uri name="farah://slothsoft@amber/static/files/texts.xml" uri="assets/static/files/texts.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/globals/dictionary" uri="assets/templates/ambermoon/amberdata/globals/dictionary.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/globals/extract" uri="assets/templates/ambermoon/amberdata/globals/extract.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/globals/static" uri="assets/templates/ambermoon/amberdata/globals/static.xsl"/>
@@ -9,25 +10,26 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.dictionaries" uri="assets/templates/ambermoon/amberdata/lib.dictionaries.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.items" uri="assets/templates/ambermoon/amberdata/lib.items.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.monsters" uri="assets/templates/ambermoon/amberdata/lib.monsters.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.new" uri="assets/templates/ambermoon/amberdata/lib.new.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.npcs" uri="assets/templates/ambermoon/amberdata/lib.npcs.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.pcs" uri="assets/templates/ambermoon/amberdata/lib.pcs.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.portraits" uri="assets/templates/ambermoon/amberdata/lib.portraits.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.save" uri="assets/templates/ambermoon/amberdata/lib.save.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.spells" uri="assets/templates/ambermoon/amberdata/lib.spells.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/null" uri="assets/templates/ambermoon/amberdata/null.xsl"/>
-  <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/unused/global.dictionary" uri="assets/templates/ambermoon/amberdata/unused/global.dictionary.xsl"/>
-  <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/unused/libs" uri="assets/templates/ambermoon/amberdata/unused/libs.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/dictionary/lib.dictionaries" uri="assets/templates/ambermoon/dictionary/lib.dictionaries.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/dictionary" uri="assets/templates/ambermoon/editor/globals/dictionary.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/editor" uri="assets/templates/ambermoon/editor/globals/editor.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/maps" uri="assets/templates/ambermoon/editor/globals/maps.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/picker" uri="assets/templates/ambermoon/editor/globals/picker.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/portraits" uri="assets/templates/ambermoon/editor/globals/portraits.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/globals/savegame" uri="assets/templates/ambermoon/editor/globals/savegame.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.dictionaries" uri="assets/templates/ambermoon/editor/lib.dictionaries.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.extra" uri="assets/templates/ambermoon/editor/lib.extra.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.items" uri="assets/templates/ambermoon/editor/lib.items.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.maps" uri="assets/templates/ambermoon/editor/lib.maps.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.monsters" uri="assets/templates/ambermoon/editor/lib.monsters.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.new" uri="assets/templates/ambermoon/editor/lib.new.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.npcs" uri="assets/templates/ambermoon/editor/lib.npcs.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.places" uri="assets/templates/ambermoon/editor/lib.places.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/editor/lib.save" uri="assets/templates/ambermoon/editor/lib.save.xsl"/>
@@ -111,6 +113,7 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.items" uri="assets/templates/ambermoon/savegame/lib.items.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.maps" uri="assets/templates/ambermoon/savegame/lib.maps.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.monsters" uri="assets/templates/ambermoon/savegame/lib.monsters.xml"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.new" uri="assets/templates/ambermoon/savegame/lib.new.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.npcs" uri="assets/templates/ambermoon/savegame/lib.npcs.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.pcs" uri="assets/templates/ambermoon/savegame/lib.pcs.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.places" uri="assets/templates/ambermoon/savegame/lib.places.xml"/>

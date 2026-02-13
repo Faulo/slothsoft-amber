@@ -17,7 +17,7 @@
             <xsl:with-param name="list">
                 <xsl:for-each select="sse:file">
                     <li>
-                        <fieldset>
+                        <fieldset class="amber-editor__fieldset">
                             <xsl:call-template name="savegame.flex">
                                 <xsl:with-param name="class" select="'character'" />
                                 <xsl:with-param name="items">
