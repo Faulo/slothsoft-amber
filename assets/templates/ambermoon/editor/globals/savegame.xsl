@@ -937,8 +937,7 @@
         <func:result>
             <xsl:for-each select="$files">
                 <token>
-                    <xsl:value-of select="concat('[', @file-name, '] ')" />
-                    <xsl:value-of select="saa:getDictionaryOption($dictionary-ref, number(@file-name))/@val" />
+                    <xsl:value-of select="concat(@file-name, ' ', saa:getDictionaryOption($dictionary-ref, number(@file-name))/@val)" />
                 </token>
             </xsl:for-each>
         </func:result>
