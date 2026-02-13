@@ -15,74 +15,70 @@
             <xsl:for-each select="sse:instruction[@type = 'event-dictionary'][*]">
                 <xsl:variable name="nulls" select="*[@name='event-null'][@value != '0']" />
                 <xsl:variable name="ffffs" select="*[@name='event-FFFF'][@value != '255']" />
-                <div class="events">
-                    <!-- <xsl:call-template name="savegame.flex"> <xsl:with-param name="label" select="'Events'"/> <xsl:with-param name="class" select="'events'"/> <xsl:with-param name="items"> <xsl:for-each select="sse:instruction[@type = 'event']"> <div> <h3 class="name"><xsl:value-of select="@name"/></h3> 
-                        <xsl:call-template name="savegame.table"> <xsl:with-param name="items"> <xsl:apply-templates select="sse:instruction[@type = 'event-step']/*" mode="item"/> </xsl:with-param> </xsl:call-template> </div> </xsl:for-each> </xsl:with-param> </xsl:call-template> -->
-                    <h3 class="amber-text amber-text--green">Dialogoptionen</h3>
-                    <table>
-                        <thead>
+                <table class="amber-table">
+                    <caption class="amber-table__label amber-text amber-text--green">Dialogoptionen</caption>
+                    <thead>
+                        <tr>
+                            <td />
+                            <td class="amber-text amber-text--silver">Befehl</td>
+                            <td class="amber-text amber-text--silver">Befehlsvariante</td>
+                            <td class="amber-text amber-text--silver">Variablen</td>
+                            <td class="amber-text amber-text--silver">Anschließend</td>
+                            <xsl:if test="$nulls">
+                                <td class="amber-text amber-text--silver">null</td>
+                            </xsl:if>
+                            <xsl:if test="$ffffs">
+                                <td class="amber-text amber-text--silver">FFFF</td>
+                            </xsl:if>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <xsl:for-each select="*/*">
+                            <xsl:if test="not(preceding-sibling::*)">
+                                <tr>
+                                    <td colspan="4" class="amber-text amber-text--green">
+                                        <xsl:value-of select="../@name" />
+                                    </td>
+                                </tr>
+                            </xsl:if>
                             <tr>
-                                <td class="amber-text amber-text--yellow">#</td>
-                                <td class="amber-text amber-text--yellow">Befehl</td>
-                                <td class="amber-text amber-text--yellow">Befehlsvariante</td>
-                                <td class="amber-text amber-text--yellow">Variablen</td>
-                                <td class="amber-text amber-text--yellow">Anschließend</td>
+                                <td class="amber-editor__event-number amber-text amber-text--silver">
+                                    <xsl:value-of select="position() - 1" />
+                                </td>
+                                <td>
+                                    <div class="amber-editor__event-payload">
+                                        <xsl:apply-templates select="*[@name='event-type']" mode="form-content" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="amber-editor__event-payload">
+                                        <xsl:apply-templates select="*[@name='event-subtype']" mode="form-content" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="amber-editor__event-payload">
+                                        <xsl:apply-templates select="*[@name='event-payload']" mode="form-content">
+                                            <xsl:with-param name="size" select="6" />
+                                        </xsl:apply-templates>
+                                    </div>
+                                </td>
+                                <td>
+                                    <xsl:apply-templates select="*[@name='event-goto']" mode="form-content" />
+                                </td>
                                 <xsl:if test="$nulls">
-                                    <td class="amber-text amber-text--blue">null</td>
+                                    <td>
+                                        <xsl:apply-templates select="$nulls" mode="form-content" />
+                                    </td>
                                 </xsl:if>
                                 <xsl:if test="$ffffs">
-                                    <td class="amber-text amber-text--blue">FFFF</td>
+                                    <td>
+                                        <xsl:apply-templates select="$ffffs" mode="form-content" />
+                                    </td>
                                 </xsl:if>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <xsl:for-each select="*/*">
-                                <xsl:if test="not(preceding-sibling::*)">
-                                    <tr>
-                                        <td colspan="4" class="amber-text amber-text--green">
-                                            <xsl:value-of select="../@name" />
-                                        </td>
-                                    </tr>
-                                </xsl:if>
-                                <tr>
-                                    <td class="amber-text amber-text--yellow">
-                                        <xsl:value-of select="position() - 1" />
-                                    </td>
-                                    <td>
-                                        <div class="amber-editor__event-payload">
-                                            <xsl:apply-templates select="*[@name='event-type']" mode="form-content" />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="amber-editor__event-payload">
-                                            <xsl:apply-templates select="*[@name='event-subtype']" mode="form-content" />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="amber-editor__event-payload">
-                                            <xsl:apply-templates select="*[@name='event-payload']" mode="form-content">
-                                                <xsl:with-param name="size" select="6" />
-                                            </xsl:apply-templates>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <xsl:apply-templates select="*[@name='event-goto']" mode="form-content" />
-                                    </td>
-                                    <xsl:if test="$nulls">
-                                        <td>
-                                            <xsl:apply-templates select="$nulls" mode="form-content" />
-                                        </td>
-                                    </xsl:if>
-                                    <xsl:if test="$ffffs">
-                                        <td>
-                                            <xsl:apply-templates select="$ffffs" mode="form-content" />
-                                        </td>
-                                    </xsl:if>
-                                </tr>
-                            </xsl:for-each>
-                        </tbody>
-                    </table>
-                </div>
+                        </xsl:for-each>
+                    </tbody>
+                </table>
             </xsl:for-each>
         </xsl:for-each>
     </xsl:template>

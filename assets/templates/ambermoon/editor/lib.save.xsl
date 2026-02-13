@@ -21,7 +21,6 @@
                             <xsl:call-template name="savegame.flex">
                                 <xsl:with-param name="class" select="'character'" />
                                 <xsl:with-param name="items">
-                                    <xsl:call-template name="savegame.amber.events" />
                                     <div>
                                         <xsl:call-template name="savegame.amber.character-common" />
                                         <xsl:call-template name="savegame.amber.character-ailments" />
@@ -40,6 +39,9 @@
                                     </div>
                                     <div>
                                         <xsl:call-template name="savegame.amber.character-spells" />
+                                    </div>
+                                    <div>
+                                        <xsl:call-template name="savegame.amber.events" />
                                     </div>
                                 </xsl:with-param>
                             </xsl:call-template>

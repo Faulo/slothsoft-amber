@@ -19,7 +19,6 @@
                         <fieldset class="amber-editor__fieldset">
                             <xsl:call-template name="savegame.flex">
                                 <xsl:with-param name="items">
-                                    <xsl:call-template name="savegame.amber.events" />
                                     <div>
                                         <xsl:call-template name="savegame.amber.character-common" />
                                     </div>
@@ -28,6 +27,9 @@
                                     </div>
                                     <div>
                                         <xsl:call-template name="savegame.amber.character-class" />
+                                    </div>
+                                    <div>
+                                        <xsl:call-template name="savegame.amber.events" />
                                     </div>
                                 </xsl:with-param>
                             </xsl:call-template>

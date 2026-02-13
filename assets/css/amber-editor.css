@@ -97,6 +97,10 @@
 	appearance: textfield;
 }
 
+.amber-table {
+	border-spacing: 2px;
+}
+
 .amber-table th {
 	text-align: right;
 	font-weight: normal;
@@ -219,4 +223,8 @@
 
 .amber-editor__event-payload {
 	display: flex;
+}
+
+.amber-table .amber-editor__event-number {
+	text-align: right;
 }
