@@ -1031,27 +1031,29 @@
         <xsl:param name="class" select="''" />
         <xsl:param name="items" select="/.." />
 
-        <xsl:if test="string-length($class)">
-            <xsl:attribute name="data-name"><xsl:value-of select="$class" /></xsl:attribute>
-        </xsl:if>
-        <xsl:attribute name="class">
-            <xsl:text>amber-flex</xsl:text>
+        <div>
             <xsl:if test="string-length($class)">
-                <xsl:value-of select="concat(' amber-flex--', $class)" />
+                <xsl:attribute name="data-name"><xsl:value-of select="$class" /></xsl:attribute>
             </xsl:if>
-        </xsl:attribute>
-        <xsl:if test="string-length($label)">
-            <h3 class="amber-flex__label amber-text amber-text--green">
-                <xsl:value-of select="$label" />
-            </h3>
-        </xsl:if>
-        <ul class="amber-flex__list">
-            <xsl:for-each select="exsl:node-set($items)/*">
-                <li>
-                    <xsl:copy-of select="." />
-                </li>
-            </xsl:for-each>
-        </ul>
+            <xsl:attribute name="class">
+                <xsl:text>amber-flex</xsl:text>
+                <xsl:if test="string-length($class)">
+                    <xsl:value-of select="concat(' amber-flex--', $class)" />
+                </xsl:if>
+            </xsl:attribute>
+            <xsl:if test="string-length($label)">
+                <h3 class="amber-flex__label amber-text amber-text--green">
+                    <xsl:value-of select="$label" />
+                </h3>
+            </xsl:if>
+            <ul class="amber-flex__list">
+                <xsl:for-each select="exsl:node-set($items)/*">
+                    <li>
+                        <xsl:copy-of select="." />
+                    </li>
+                </xsl:for-each>
+            </ul>
+        </div>
     </xsl:template>
 
     <xsl:template name="savegame.button">

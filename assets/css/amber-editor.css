@@ -27,6 +27,10 @@
 	margin-top: 1em;
 }
 
+.amber-editor__info .amber-flex__list {
+	justify-content: center;
+}
+
 .amber-editor *[readonly] {
 	border: none;
 	background: none;
