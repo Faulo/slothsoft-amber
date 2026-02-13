@@ -70,7 +70,7 @@
             <xsl:for-each select=".//sse:instruction[@name = 'mob-existance']">
                 <xsl:variable name="maps" select="key('dictionary-option', 'map-ids')" />
                 <div class="amber-editor__info">
-                    <h3 class="amber-text amber-text--cyan">Kartenspezifische Variablen</h3>
+                    <h3 class="amber-text amber-text--green">Kartenspezifische Variablen</h3>
                     <xsl:call-template name="savegame.tabs">
                         <xsl:with-param name="label" select="'Aktive Karte:'" />
                         <xsl:with-param name="optionTokens">
