@@ -78,6 +78,7 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
                 break;
         }
         
+        /** @var ArchiveNode $archive */
         foreach ($archives as $archivePath => $archive) {
             $isDownload = $download === $archivePath;
             
@@ -90,6 +91,9 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
             }
             
             if ($isDownload) {
+                $editor = $controller->createEditor($config);
+                $archive = $editor->loadArchive($archivePath, true);
+                
                 $resultBuilder = new FileWriterResultBuilder($archive, $archive->getName());
                 $strategies = new ExecutableStrategies($resultBuilder);
                 throw new HttpDownloadAssetException($strategies);
