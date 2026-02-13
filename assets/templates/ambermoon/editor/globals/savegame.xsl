@@ -42,7 +42,7 @@
                                 </tr>
                             </xsl:if>
                             <tr>
-                                <td class="amber-editor__event-number amber-text amber-text--silver">
+                                <td class="amber-editor__event-number amber-text amber-text--yellow">
                                     <xsl:value-of select="position() - 1" />
                                 </td>
                                 <td>
