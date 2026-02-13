@@ -2,6 +2,7 @@
 <savegame version="0.4" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
 
 	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/globals/characters" />
+    <xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/globals/events" />
 
 	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/archives/Amberfiles/Save.00/Party_char.amb" />
 	<xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/archives/Amberfiles/Save.00/Party_data.sav" />

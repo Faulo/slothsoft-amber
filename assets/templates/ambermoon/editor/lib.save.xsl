@@ -40,9 +40,11 @@
                                     <div>
                                         <xsl:call-template name="savegame.amber.character-spells" />
                                     </div>
-                                    <div>
-                                        <xsl:call-template name="savegame.amber.events" />
-                                    </div>
+                                    <xsl:if test=".//*[@name = 'events']/*/*">
+                                        <div>
+                                            <xsl:call-template name="savegame.amber.events" />
+                                        </div>
+                                    </xsl:if>
                                 </xsl:with-param>
                             </xsl:call-template>
                         </fieldset>

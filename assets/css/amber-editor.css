@@ -27,8 +27,9 @@
 	margin-top: 1em;
 }
 
-.amber-editor__info .amber-flex__list {
-	justify-content: center;
+.amber-editor .amber-flex__list {
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 }
 
 .amber-editor *[readonly] {
