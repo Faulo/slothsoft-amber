@@ -561,7 +561,7 @@ class AmberCharacter {
             "Attacke": 70,
             "Parade": 60,
             "Schwimmen": 95,
-            "Kritische Treffer": 0,
+            "Kritische Treffer": 5,
             "Fallen Finden": 40,
             "Fallen Entschärfen": 40,
             "Schlösser Knacken": 15,
