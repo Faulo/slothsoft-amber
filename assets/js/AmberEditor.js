@@ -552,7 +552,7 @@ class AmberCharacter {
             "Magie benutzen": 0,
         },
         {// Ranger
-            "Lebenspunkte": 10,
+            "Lebenspunkte": 12,
             "Spruchpunkte": 6,
             "Trainingspunkte": 12,
             "Spruchlesepunkte": 3,
