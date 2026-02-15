@@ -74,6 +74,18 @@
 	font-size: 15px;
 }
 
+.amber-text--left {
+	text-align: left !important;
+}
+
+.amber-text--right {
+	text-align: left !important;
+}
+
+.amber-text--center {
+	text-align: center !important;
+}
+
 .amber-textbox p {
 	margin: 0;
 	line-height: 1.4em;
@@ -207,4 +219,45 @@
 	width: fit-content;
 	margin: auto;
 	gap: 0.5ch;
+}
+
+.amber-class {
+	text-align: center;
+	width: fit-content;
+	background-color: #666655;
+}
+
+.amber-table {
+	border-spacing: 2px;
+}
+
+.amber-table th {
+	text-align: right;
+	font-weight: normal;
+	padding: 0;
+}
+
+.amber-table td {
+	text-align: left;
+	padding: 0;
+}
+
+.amber-table--numbers {
+	border-spacing: 1ch 0;
+}
+
+.amber-table--numbers td {
+	text-align: right;
+}
+
+.amber-table .amber-editor__input--widget {
+	width: 100%;
+}
+
+.amber-table--attributes th::after, .amber-table--skills th::after {
+	content: ":";
+}
+
+.amber-table .amber-editor__event-number {
+	text-align: right;
 }

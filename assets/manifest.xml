@@ -25,7 +25,6 @@
             <link-stylesheet ref="/css/amber-item" />
             <link-stylesheet ref="/css/amber-misc" />
             <link-stylesheet ref="/css/amber-portrait" />
-            <link-stylesheet ref="/css/amber-editor" />
             <link-stylesheet ref="/css/general" />
             <link-stylesheet ref="/css/AmberPicker" />
             <link-module ref="/js/AmberPicker" />
@@ -34,6 +33,7 @@
         <fragment name="AmberEditor">
             <import ref="/includes/AmberPicker" />
             <link-module ref="/js/AmberEditor" />
+            <link-stylesheet ref="/css/amber-editor" />
             <link-dictionary ref="/dictionary" />
             <link-dictionary ref="/api/dictionary" />
         </fragment>

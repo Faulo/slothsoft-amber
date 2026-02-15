@@ -33,85 +33,86 @@
     </xsl:template>
 
     <xsl:template match="saa:class" mode="skills">
-        <table class="amber-class amber-class--skills">
-            <caption>
-                <xsl:value-of select="@name" />
-            </caption>
-            <tbody>
-                <xsl:for-each select="saa:skill">
-                    <tr class="right-aligned">
-                        <td>
-                            <xsl:value-of select="@name" />
-                            <xsl:text>:</xsl:text>
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="concat(@maximum, '%')" />
+        <div class="amber-class amber-class--skills amber-text">
+            <table class="amber-table amber-table--numbers amber-table--skills" data-ch="13">
+                <caption class="amber-table__label amber-text amber-text--green">
+                    <xsl:value-of select="@name" />
+                </caption>
+                <tbody>
+                    <xsl:for-each select="saa:skill">
+                        <tr>
+                            <th>
+                                <xsl:value-of select="@name" />
+                            </th>
+                            <td>
+                                <xsl:value-of select="concat(@maximum, '%')" />
+                            </td>
+                        </tr>
+                    </xsl:for-each>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="amber-text amber-text--orange amber-text--center" colspan="2">
+                            <xsl:choose>
+                                <xsl:when test="saa:spellbook-reference">
+                                    <xsl:for-each select="saa:spellbook-reference">
+                                        <xsl:value-of select="@name" />
+                                    </xsl:for-each>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:text>-</xsl:text>
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </td>
                     </tr>
-                </xsl:for-each>
-            </tbody>
-            <tbody>
-                <tr>
-                    <th class="yellow smaller" colspan="2">
-                        <xsl:choose>
-                            <xsl:when test="saa:spellbook-reference">
-                                <xsl:for-each select="saa:spellbook-reference">
-                                    <p>
-                                        <xsl:value-of select="@name" />
-                                    </p>
-                                </xsl:for-each>
-                            </xsl:when>
-                            <xsl:otherwise>
-                                <p>-</p>
-                            </xsl:otherwise>
-                        </xsl:choose>
-                    </th>
-                </tr>
-            </tbody>
-        </table>
+                </tfoot>
+            </table>
+        </div>
     </xsl:template>
 
     <xsl:template match="saa:class" mode="experience">
         <xsl:variable name="class" select="." />
-        <table class="amber-class amber-class--experience">
-            <caption>
-                <xsl:value-of select="@name" />
-            </caption>
-            <thead>
-                <tr>
-                    <th>level</th>
-                    <th>experience</th>
-                    <th>lp</th>
-                    <th>sp</th>
-                    <th>tp</th>
-                    <th>slp</th>
-                </tr>
-            </thead>
-            <tbody>
-                <xsl:for-each select="sfx:range(1, 50)">
-                    <xsl:variable name="lvl" select="." />
-                    <tr class="right-aligned">
-                        <td class="number green">
-                            <xsl:value-of select="$lvl" />
-                        </td>
-                        <td class="number yellow">
-                            <xsl:value-of select="$class/@base-experience * $lvl * ($lvl + 1) div 2" />
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="$class/@hp-per-level * $lvl" />
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="$class/@sp-per-level * $lvl" />
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="$class/@tp-per-level * $lvl" />
-                        </td>
-                        <td class="number">
-                            <xsl:value-of select="$class/@slp-per-level * $lvl" />
-                        </td>
+        <div class="amber-class amber-class--experience amber-text">
+            <table class="amber-table amber-table--numbers">
+                <caption class="amber-table__label amber-text amber-text--green">
+                    <xsl:value-of select="@name" />
+                </caption>
+                <thead>
+                    <tr>
+                        <th class="amber-text amber-text--blue">level</th>
+                        <th class="amber-text amber-text--blue">Erfahrung</th>
+                        <th class="amber-text amber-text--blue" data-ch="3">lp</th>
+                        <th class="amber-text amber-text--blue" data-ch="3">sp</th>
+                        <th class="amber-text amber-text--blue" data-ch="3">tp</th>
+                        <th class="amber-text amber-text--blue" data-ch="3">slp</th>
                     </tr>
-                </xsl:for-each>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <xsl:for-each select="sfx:range(1, 50)">
+                        <xsl:variable name="lvl" select="." />
+                        <tr>
+                            <td class="amber-text amber-text--yellow">
+                                <xsl:value-of select="$lvl" />
+                            </td>
+                            <td class="amber-text">
+                                <xsl:value-of select="$class/@base-experience * $lvl * ($lvl + 1) div 2" />
+                            </td>
+                            <td class="amber-text amber-text--silver">
+                                <xsl:value-of select="$class/@hp-per-level * $lvl" />
+                            </td>
+                            <td class="amber-text">
+                                <xsl:value-of select="$class/@sp-per-level * $lvl" />
+                            </td>
+                            <td class="amber-text amber-text--silver">
+                                <xsl:value-of select="$class/@tp-per-level * $lvl" />
+                            </td>
+                            <td class="amber-text">
+                                <xsl:value-of select="$class/@slp-per-level * $lvl" />
+                            </td>
+                        </tr>
+                    </xsl:for-each>
+                </tbody>
+            </table>
+        </div>
     </xsl:template>
 </xsl:stylesheet>

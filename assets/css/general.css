@@ -47,3 +47,35 @@ span[data-ch] {
 *[data-ch="5"] {
 	width: 5ch;
 }
+
+*[data-ch="6"] {
+	width: 6ch;
+}
+
+*[data-ch="7"] {
+	width: 7ch;
+}
+
+*[data-ch="8"] {
+	width: 8ch;
+}
+
+*[data-ch="9"] {
+	width: 9ch;
+}
+
+*[data-ch="10"] {
+	width: 10ch;
+}
+
+*[data-ch="11"] {
+	width: 11ch;
+}
+
+*[data-ch="12"] {
+	width: 12ch;
+}
+
+*[data-ch="13"] {
+	width: 13ch;
+}
