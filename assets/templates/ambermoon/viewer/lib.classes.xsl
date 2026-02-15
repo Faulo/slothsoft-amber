@@ -5,13 +5,56 @@
 
     <xsl:import href="farah://slothsoft@farah/xsl/xslt" />
 
+    <xsl:template match="saa:race-list">
+        <div class="amber-list amber-list--{local-name()}">
+            <details class="amber-list__category">
+                <summary>Rassen</summary>
+                <div class="amber-list__items">
+                    <xsl:for-each select="*">
+                        <div class="amber-list__item">
+                            <xsl:apply-templates select="." />
+                        </div>
+                    </xsl:for-each>
+                </div>
+            </details>
+        </div>
+    </xsl:template>
+
+    <xsl:template match="saa:race">
+        <div class="amber-race amber-text">
+            <table class="amber-table amber-table--numbers amber-table--attributes" data-ch="13">
+                <caption class="amber-table__label amber-text amber-text--green">
+                    <xsl:value-of select="@name" />
+                </caption>
+                <tbody>
+                    <xsl:for-each select="saa:attribute">
+                        <tr>
+                            <th>
+                                <xsl:value-of select="@name" />
+                            </th>
+                            <td>
+                                <xsl:value-of select="@maximum" />
+                            </td>
+                        </tr>
+                    </xsl:for-each>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="amber-text amber-text--silver amber-text--center" colspan="2">
+                            <xsl:value-of select="concat('Höchstalter ', saa:age/@maximum)" />
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </xsl:template>
+
     <xsl:template match="saa:class-list">
         <div class="amber-list amber-list--{local-name()}">
             <details class="amber-list__category">
-                <summary>Fähigkeiten</summary>
+                <summary>Klassen</summary>
                 <div class="amber-list__items">
                     <xsl:for-each select="*">
-                        <xsl:sort select="@base-experience" data-type="number" />
                         <div class="amber-list__item">
                             <xsl:apply-templates select="." mode="skills" />
                         </div>
@@ -19,10 +62,9 @@
                 </div>
             </details>
             <details class="amber-list__category">
-                <summary>Erfahrungstabelle</summary>
+                <summary>Erfahrungstabellen</summary>
                 <div class="amber-list__items">
                     <xsl:for-each select="*">
-                        <xsl:sort select="@base-experience" data-type="number" />
                         <div class="amber-list__item">
                             <xsl:apply-templates select="." mode="experience" />
                         </div>

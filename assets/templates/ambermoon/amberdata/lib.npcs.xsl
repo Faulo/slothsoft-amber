@@ -43,7 +43,7 @@
 				<xsl:with-param name="id" select="$id" />
 				<xsl:with-param name="dialog" select="$dialog" />
 			</xsl:call-template>
-			<xsl:call-template name="extract-race">
+			<xsl:call-template name="extract-race-instance">
 				<xsl:with-param name="root" select="$root" />
 			</xsl:call-template>
 			<xsl:call-template name="extract-class-instance">

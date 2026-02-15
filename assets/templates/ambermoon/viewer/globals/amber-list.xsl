@@ -140,14 +140,14 @@
         </table>
     </xsl:template>
 
-    <xsl:template match="saa:race">
+    <xsl:template match="saa:race-instance">
         <article data-race-id="{@id}" data-template="flex" class="Race">
             <xsl:value-of select="@name" />
             <xsl:apply-templates select="." mode="itemlist-inline" />
         </article>
     </xsl:template>
 
-    <xsl:template match="saa:race" mode="itemlist-inline">
+    <xsl:template match="saa:race-instance" mode="itemlist-inline">
         <table class="RaceData">
             <tbody>
                 <xsl:for-each select="saa:attribute">
@@ -173,7 +173,7 @@
         </table>
     </xsl:template>
 
-    <xsl:template match="saa:race" mode="character">
+    <xsl:template match="saa:race-instance" mode="character">
         <xsl:variable name="attributes" select="key('dictionary-option', 'attributes')" />
         <table class="amber-character__attributes">
             <caption class="amber-text amber-text--green">attribute</caption>
@@ -208,7 +208,7 @@
             <div class="amber-character__tables">
                 <div class="amber-character__body">
                     <div class="amber-character__tables">
-                        <xsl:apply-templates select="saa:race" mode="character" />
+                        <xsl:apply-templates select="saa:race-instance" mode="character" />
                         <xsl:variable name="languages" select="saa:language/@name" />
                         <table class="amber-character__languages">
                             <caption class="amber-text amber-text--green">sprachen</caption>
@@ -251,14 +251,14 @@
                                 <xsl:apply-templates select="." mode="character-picture" />
                                 <ul class="amber-character__basic-info">
                                     <li>
-                                        <xsl:value-of select="saa:race/@name" />
+                                        <xsl:value-of select="saa:race-instance/@name" />
                                     </li>
                                     <li>
                                         <xsl:value-of select="@gender" />
                                     </li>
                                     <li>
                                         <xsl:text>alter:</xsl:text>
-                                        <xsl:value-of select="saa:race/saa:age/@current" />
+                                        <xsl:value-of select="saa:race-instance/saa:age/@current" />
                                     </li>
                                     <li>
                                         <xsl:value-of select="saa:class-instance/@name" />

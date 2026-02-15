@@ -194,11 +194,20 @@
             <xsl:apply-templates select=".//*[@name = 'race']" mode="attr">
                 <xsl:with-param name="name" select="'name'" />
             </xsl:apply-templates>
-            <xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'current']" mode="attr">
-                <xsl:with-param name="name" select="'age-current'" />
-            </xsl:apply-templates>
-            <xsl:apply-templates select=".//*[@name = 'age']//*[@name = 'maximum']" mode="attr">
-                <xsl:with-param name="name" select="'age-maximum'" />
+            <xsl:for-each select=".//*[@name = 'attributes']/*">
+                <saa:attribute name="{saa:getName()}" maximum="{*[@name = 'maximum']/@value}" />
+            </xsl:for-each>
+
+            <xsl:variable name="age" select=".//*[@name = 'age']/*" />
+            <saa:age maximum="{$age[@name='maximum']/@value}" />
+        </saa:race>
+    </xsl:template>
+
+    <xsl:template name="extract-race-instance">
+        <xsl:param name="root" />
+        <saa:race-instance>
+            <xsl:apply-templates select=".//*[@name = 'race']" mode="attr">
+                <xsl:with-param name="name" select="'name'" />
             </xsl:apply-templates>
             <xsl:for-each select=".//*[@name = 'attributes']/*">
                 <saa:attribute name="{saa:getName()}" current="{*[@name = 'current']/@value + *[@name = 'current-mod']/@value}" maximum="{*[@name = 'maximum']/@value}" />
@@ -206,7 +215,7 @@
 
             <xsl:variable name="age" select=".//*[@name = 'age']/*" />
             <saa:age current="{$age[@name='current']/@value}" maximum="{$age[@name='maximum']/@value}" />
-        </saa:race>
+        </saa:race-instance>
     </xsl:template>
 
     <xsl:template name="extract-item">
