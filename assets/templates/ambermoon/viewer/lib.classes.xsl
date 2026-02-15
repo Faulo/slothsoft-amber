@@ -40,7 +40,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td class="amber-text amber-text--silver amber-text--center" colspan="2">
+                        <td class="amber-table__footer  amber-text amber-text--silver" colspan="2">
                             <xsl:value-of select="concat('Höchstalter ', saa:age/@maximum)" />
                         </td>
                     </tr>
@@ -94,7 +94,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td class="amber-text amber-text--orange amber-text--center" colspan="2">
+                        <td class="amber-table__footer amber-text amber-text--orange" colspan="2">
                             <xsl:choose>
                                 <xsl:when test="saa:spellbook-reference">
                                     <xsl:for-each select="saa:spellbook-reference">
