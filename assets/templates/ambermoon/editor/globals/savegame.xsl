@@ -20,15 +20,15 @@
                     <thead>
                         <tr>
                             <td />
-                            <td class="amber-text amber-text--silver">Befehl</td>
-                            <td class="amber-text amber-text--silver">Befehlsvariante</td>
-                            <td class="amber-text amber-text--silver">Variablen</td>
-                            <td class="amber-text amber-text--silver">Anschließend</td>
+                            <td class="amber-text amber-text--blue">Befehl</td>
+                            <td class="amber-text amber-text--blue">Befehlsvariante</td>
+                            <td class="amber-text amber-text--blue">Variablen</td>
+                            <td class="amber-text amber-text--blue">Anschließend</td>
                             <xsl:if test="$nulls">
-                                <td class="amber-text amber-text--silver">null</td>
+                                <td class="amber-text amber-text--blue">null</td>
                             </xsl:if>
                             <xsl:if test="$ffffs">
-                                <td class="amber-text amber-text--silver">FFFF</td>
+                                <td class="amber-text amber-text--blue">FFFF</td>
                             </xsl:if>
                         </tr>
                     </thead>
