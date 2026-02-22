@@ -50,42 +50,44 @@ class AmberEditorPage {
         }
     }
 
-    async #execute(buttonNode, action) {
+    async #execute(buttonNode, actions) {
         buttonNode.disabled = true;
         buttonNode.title = "";
-        switch (action) {
-            case "apply-member-count":
-                this.#applyMemberCount(buttonNode.value);
-                break;
-            case "roll-character":
-                this.#applyRace();
-                this.#applyClass();
-                this.#applyLevel();
-                this.#rollStats();
-                break;
-            case "roll-stats":
-                this.#rollStats();
-                break;
-            case "apply-race":
-                this.#applyRace();
-                break;
-            case "apply-class":
-                this.#applyClass();
-                break;
-            case "apply-level":
-                this.#applyLevel();
-                break;
-            case "apply-portrait":
-                this.#applyPortrait(buttonNode.value);
-                break;
-            case "apply-equipment":
-                buttonNode.title = "Berechnet...";
-                buttonNode.title = await this.#applyEquipment();
-                alert(buttonNode.title);
-                break;
-            default:
-                alert(`Unknown action "${action}"`);
-                break;
+        for (let action of actions.split(" ")) {
+            switch (action) {
+                case "apply-member-count":
+                    this.#applyMemberCount(buttonNode.value);
+                    break;
+                case "roll-character":
+                    this.#applyRace();
+                    this.#applyClass();
+                    this.#applyLevel();
+                    this.#rollStats();
+                    break;
+                case "roll-stats":
+                    this.#rollStats();
+                    break;
+                case "apply-race":
+                    this.#applyRace();
+                    break;
+                case "apply-class":
+                    this.#applyClass();
+                    break;
+                case "apply-level":
+                    this.#applyLevel();
+                    break;
+                case "apply-portrait":
+                    this.#applyPortrait(buttonNode.value);
+                    break;
+                case "apply-equipment":
+                    buttonNode.title = "Berechnet...";
+                    buttonNode.title = await this.#applyEquipment();
+                    alert(buttonNode.title);
+                    break;
+                default:
+                    alert(`Unknown action "${action}"`);
+                    break;
+            }
         }
         buttonNode.disabled = false;
     }
