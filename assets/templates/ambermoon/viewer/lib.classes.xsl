@@ -127,6 +127,7 @@
                         <th class="amber-text amber-text--blue" data-ch="3">sp</th>
                         <th class="amber-text amber-text--blue" data-ch="3">tp</th>
                         <th class="amber-text amber-text--blue" data-ch="3">slp</th>
+                        <th class="amber-text amber-text--blue" data-ch="3">apr</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -150,6 +151,19 @@
                             </td>
                             <td class="amber-text">
                                 <xsl:value-of select="$class/@slp-per-level * $lvl" />
+                            </td>
+                            <td class="amber-text amber-text--silver">
+                                <xsl:choose>
+                                    <xsl:when test="$class/@apr-per-level = 0">
+                                        <xsl:text>1</xsl:text>
+                                    </xsl:when>
+                                    <xsl:when test="floor($lvl div $class/@apr-per-level) = 0">
+                                        <xsl:text>1</xsl:text>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="floor($lvl div $class/@apr-per-level)" />
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </td>
                         </tr>
                     </xsl:for-each>

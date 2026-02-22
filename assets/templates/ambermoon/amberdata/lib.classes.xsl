@@ -21,7 +21,6 @@
                 <xsl:for-each select="($characters[.//*[@name='race']/@value = $race])[1]">
                     <xsl:call-template name="extract-race">
                         <xsl:with-param name="root" select="." />
-                        <xsl:with-param name="include-current" select="false()" />
                     </xsl:call-template>
                 </xsl:for-each>
             </xsl:for-each>
