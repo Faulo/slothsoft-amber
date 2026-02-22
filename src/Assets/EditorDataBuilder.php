@@ -44,10 +44,11 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
         
         if ($action === EditorParameterFilter::PARAM_EDITOR_ACTION_UPLOAD) {
             $errors = $_FILES[EditorParameterFilter::PARAM_EDITOR_UPLOAD]['error'] ?? [];
-            foreach ($errors as $archivePath => $error) {
+            foreach ($errors as $path => $error) {
                 if ($error === UPLOAD_ERR_OK) {
-                    $path = $_FILES[EditorParameterFilter::PARAM_EDITOR_UPLOAD]['tmp_name'][$archivePath] ?? '';
-                    $editor->writeGameFile($archivePath, FileInfoFactory::createFromUpload($path));
+                    $archivePath = $path;
+                    $uploadPath = $_FILES[EditorParameterFilter::PARAM_EDITOR_UPLOAD]['tmp_name'][$path] ?? '';
+                    $editor->writeGameFile($path, FileInfoFactory::createFromUpload($uploadPath));
                 }
             }
         }
