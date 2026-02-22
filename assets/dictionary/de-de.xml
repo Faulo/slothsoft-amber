@@ -72,6 +72,14 @@
     <sfd:text xml:id="form-name.map-x">Position auf Karte, X:</sfd:text>
     <sfd:text xml:id="form-name.map-y">Position auf Karte, Y:</sfd:text>
 
+    <sfd:text xml:id="form-name.spell-places">Einsatzgebiete</sfd:text>
+    <sfd:text xml:id="form-name.sp">SP:</sfd:text>
+    <sfd:text xml:id="form-name.slp">SLP:</sfd:text>
+    <sfd:text xml:id="form-name.spell-target">Ziel:</sfd:text>
+    <sfd:text xml:id="form-name.spell-modifiers">Daten:</sfd:text>
+    <sfd:text xml:id="form-name.spell-effect">Effekt:</sfd:text>
+
+
 
     <sfd:text xml:id="form-name.01-08">Bits 00-07</sfd:text>
     <sfd:text xml:id="form-name.09-16">Bits 08-15</sfd:text>
