@@ -257,6 +257,8 @@ class AmberEditorPage {
             for (let i = 0; i < this.#character.spellbooks.length; i++) {
                 this.#character.spellbooks[i].checked = i === klasse.Zauberschule - 1;
             }
+
+            this.#character.spellmastery.checked = klasse.MeisterDerMagie;
         }
     }
 
@@ -498,6 +500,7 @@ class AmberCharacter {
             "Suchen": 25,
             "Spruchrollen Lesen": 50,
             "Magie benutzen": 50,
+            "MeisterDerMagie": false,
         },
         {// Krieger
             "Lebenspunkte": 16,
@@ -516,6 +519,7 @@ class AmberCharacter {
             "Suchen": 10,
             "Spruchrollen Lesen": 0,
             "Magie benutzen": 0,
+            "MeisterDerMagie": false,
         },
         {// Paladin
             "Lebenspunkte": 14,
@@ -534,6 +538,7 @@ class AmberCharacter {
             "Suchen": 30,
             "Spruchrollen Lesen": 50,
             "Magie benutzen": 50,
+            "MeisterDerMagie": false,
         },
         {// Dieb
             "Lebenspunkte": 8,
@@ -552,6 +557,7 @@ class AmberCharacter {
             "Suchen": 75,
             "Spruchrollen Lesen": 0,
             "Magie benutzen": 0,
+            "MeisterDerMagie": false,
         },
         {// Ranger
             "Lebenspunkte": 12,
@@ -570,6 +576,7 @@ class AmberCharacter {
             "Suchen": 95,
             "Spruchrollen Lesen": 50,
             "Magie benutzen": 50,
+            "MeisterDerMagie": false,
         },
         {// Heiler
             "Lebenspunkte": 6,
@@ -588,6 +595,7 @@ class AmberCharacter {
             "Suchen": 0,
             "Spruchrollen Lesen": 95,
             "Magie benutzen": 95,
+            "MeisterDerMagie": true,
         },
         {// Alchemist
             "Lebenspunkte": 6,
@@ -606,6 +614,7 @@ class AmberCharacter {
             "Suchen": 0,
             "Spruchrollen Lesen": 95,
             "Magie benutzen": 95,
+            "MeisterDerMagie": true,
         },
         {// Mystiker
             "Lebenspunkte": 6,
@@ -624,6 +633,7 @@ class AmberCharacter {
             "Suchen": 0,
             "Spruchrollen Lesen": 95,
             "Magie benutzen": 95,
+            "MeisterDerMagie": true,
         },
         {// Magier
             "Lebenspunkte": 6,
@@ -642,6 +652,7 @@ class AmberCharacter {
             "Suchen": 0,
             "Spruchrollen Lesen": 99,
             "Magie benutzen": 99,
+            "MeisterDerMagie": false,
         },
     ];
 
@@ -651,6 +662,7 @@ class AmberCharacter {
     equippedItems = [];
     carriedItems = [];
     spellbooks = [];
+    spellmastery = null;
     constructor(characterNode) {
 
         const simpleKeys = [
@@ -706,6 +718,8 @@ class AmberCharacter {
         this.carriedItems.push(...characterNode.querySelectorAll("*[data-name='inventory'] amber-embed"));
 
         this.spellbooks.push(...characterNode.querySelectorAll('*[data-name="spellbooks"] input[type="checkbox"]'));
+
+        this.spellmastery = characterNode.querySelector('*[data-name="spellmastery"] input[type="checkbox"]');
     }
 }
 

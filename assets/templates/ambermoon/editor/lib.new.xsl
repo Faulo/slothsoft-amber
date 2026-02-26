@@ -284,6 +284,11 @@
                                     <xsl:apply-templates select="*" mode="form-content" />
                                 </div>
                             </xsl:for-each>
+                            <xsl:for-each select=".//*[@name = 'spellmastery']">
+                                <div data-name="spellmastery">
+                                    <xsl:apply-templates select="*" mode="form-content" />
+                                </div>
+                            </xsl:for-each>
                             <xsl:for-each select=".//*[@name = 'spells']">
                                 <div data-name="spells">
                                     <xsl:apply-templates select="*/*" mode="form-content">
