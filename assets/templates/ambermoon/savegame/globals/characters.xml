@@ -38,6 +38,7 @@
 		<select name="race" position="2" dictionary-ref="races" />
 		<select name="class" position="3" dictionary-ref="classes" />
 		<bit-field name="spellbooks" position="4" dictionary-ref="spell-types" first-bit="0" last-bit="3" />
+		<bit-field name="spellmastery" position="4" dictionary-ref="spell-mastery" first-bit="7" last-bit="7" />
 		<integer name="level" position="5" min="0" max="99" />
 		<select name="hand" position="6" dictionary-ref="hands" />
 		<select name="finger" position="7" dictionary-ref="fingers" />

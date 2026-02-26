@@ -300,6 +300,7 @@
             </xsl:with-param>
         </xsl:call-template>
         <xsl:apply-templates select=".//*[@name = 'spellbooks']" mode="item" />
+        <xsl:apply-templates select=".//*[@name = 'spellmastery']" mode="form-content" />
         <xsl:for-each select=".//*[@name = 'skills']">
             <xsl:call-template name="savegame.table">
                 <xsl:with-param name="label" select="'skills'" />

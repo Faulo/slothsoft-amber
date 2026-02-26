@@ -144,7 +144,7 @@
 			<option key="18" val="Mag. Gegenstand" />
 			<option key="19" val="Spezialgegenstand" />
 			<option key="20" val="Transportmittel" />
-            <option key="21" val="Zustandsveränderung" />
+			<option key="21" val="Zustandsveränderung" />
 		</dictionary>
 
 		<dictionary dictionary-id="item-slots">
@@ -428,6 +428,10 @@
 			<option key="8" val="Magier" />
 			<option key="9" val="Katze" />
 			<option key="10" val="(leer)" />
+		</dictionary>
+
+		<dictionary dictionary-id="spell-mastery">
+			<option key="0" val="Meister der Magie" />
 		</dictionary>
 
 		<dictionary dictionary-id="schools">
