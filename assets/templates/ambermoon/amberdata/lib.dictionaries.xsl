@@ -386,7 +386,7 @@
 		</dictionary>
 
 		<dictionary dictionary-id="skills-or-null">
-			<option key="0" val="ATT" title="-" />
+			<option key="0" val="-" title="-" />
 			<option key="1" val="ATT" title="Attacke" />
 			<option key="2" val="PAR" title="Parade" />
 			<option key="3" val="SCH" title="Schwimmen" />

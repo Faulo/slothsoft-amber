@@ -33,9 +33,15 @@
 																<xsl:with-param name="items">
 																	<xsl:apply-templates select=".//*[@name = 'name']" mode="item" />
 																	<xsl:apply-templates select=".//*[@name = 'type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'image-id']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'price']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'weight']" mode="item" />
+																	<xsl:apply-templates select=".//*[@name = 'image-id']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'price']" mode="item">
+																		<xsl:with-param name="size" select="5" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'weight']" mode="item">
+																		<xsl:with-param name="size" select="5" />
+																	</xsl:apply-templates>
 																</xsl:with-param>
 															</xsl:call-template>
 															<xsl:apply-templates select=".//*[@name = 'classes']" mode="item" />
@@ -93,11 +99,21 @@
 																<xsl:with-param name="label" select="'enchantment'" />
 																<xsl:with-param name="items">
 																	<xsl:apply-templates select=".//*[@name = 'spell-type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'spell-id']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'charges-default']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'max-charges-by-spell']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'max-charges-by-shop']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'price-per-charge']" mode="item" />
+																	<xsl:apply-templates select=".//*[@name = 'spell-id']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'charges-default']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'max-charges-by-spell']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'max-charges-by-shop']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'price-per-charge']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
 																</xsl:with-param>
 															</xsl:call-template>
 															<xsl:call-template name="savegame.table">
