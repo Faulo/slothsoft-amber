@@ -338,6 +338,9 @@ class AmberEditorPage {
                 if (parseInt(itemNode.getAttribute("skill-value"))) {
                     data[itemNode.getAttribute("skill-type")] += parseInt(itemNode.getAttribute("skill-value"));
                 }
+                if (parseInt(itemNode.getAttribute("hidden-skill-value"))) {
+                    data[itemNode.getAttribute("hidden-skill-type")] -= parseInt(itemNode.getAttribute("hidden-skill-value"));
+                }
             }
         );
 

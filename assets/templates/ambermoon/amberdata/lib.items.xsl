@@ -66,7 +66,7 @@
 					</xsl:when>
 				</xsl:choose>
 			</xsl:variable>
-            <xsl:variable name="genders" select=".//*[@name = 'genders']/sse:bit" />
+			<xsl:variable name="genders" select=".//*[@name = 'genders']/sse:bit" />
 
 			<xsl:apply-templates select=".//sse:integer[@name != ''] | .//sse:string" mode="attr" />
 
@@ -82,6 +82,9 @@
 			</xsl:if>
 			<xsl:if test=".//*[@name = 'skill-value']/@value &gt; 0">
 				<xsl:apply-templates select=".//*[@name = 'skill-type']" mode="attr" />
+			</xsl:if>
+			<xsl:if test=".//*[@name = 'hidden-skill-value']/@value &gt; 0">
+				<xsl:apply-templates select=".//*[@name = 'hidden-skill-type']" mode="attr" />
 			</xsl:if>
 
 			<xsl:if test="$spell-id &gt; 0">

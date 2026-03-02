@@ -55,16 +55,36 @@
 															<xsl:call-template name="savegame.table">
 																<xsl:with-param name="label" select="'stats'" />
 																<xsl:with-param name="items">
-																	<xsl:apply-templates select=".//*[@name = 'damage']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'armor']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'magic-weapon']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'magic-armor']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'lp-max']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'sp-max']" mode="item" />
+																	<xsl:apply-templates select=".//*[@name = 'damage']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'armor']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'magic-weapon']" mode="item">
+																		<xsl:with-param name="size" select="2" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'magic-armor']" mode="item">
+																		<xsl:with-param name="size" select="2" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'lp-max']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'sp-max']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
 																	<xsl:apply-templates select=".//*[@name = 'attribute-type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'attribute-value']" mode="item" />
+																	<xsl:apply-templates select=".//*[@name = 'attribute-value']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
 																	<xsl:apply-templates select=".//*[@name = 'skill-type']" mode="item" />
-																	<xsl:apply-templates select=".//*[@name = 'skill-value']" mode="item" />
+																	<xsl:apply-templates select=".//*[@name = 'skill-value']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
+																	<xsl:apply-templates select=".//*[@name = 'hidden-skill-type']" mode="item" />
+																	<xsl:apply-templates select=".//*[@name = 'hidden-skill-value']" mode="item">
+																		<xsl:with-param name="size" select="3" />
+																	</xsl:apply-templates>
 																</xsl:with-param>
 															</xsl:call-template>
 														</div>

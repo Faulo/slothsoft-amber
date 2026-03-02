@@ -385,6 +385,20 @@
 			<option key="9" val="M-B" title="Magie benutzen" />
 		</dictionary>
 
+		<dictionary dictionary-id="skills-or-null">
+			<option key="0" val="ATT" title="-" />
+			<option key="1" val="ATT" title="Attacke" />
+			<option key="2" val="PAR" title="Parade" />
+			<option key="3" val="SCH" title="Schwimmen" />
+			<option key="4" val="KRI" title="Kritischer Treffer" />
+			<option key="5" val="F-F" title="Fallen finden" />
+			<option key="6" val="F-E" title="Fallen entschärfen" />
+			<option key="7" val="S-Ö" title="Schlösser knacken" />
+			<option key="8" val="SUC" title="Suchen" />
+			<option key="9" val="SRL" title="Spruchrollen lesen" />
+			<option key="10" val="M-B" title="Magie benutzen" />
+		</dictionary>
+
 		<dictionary dictionary-id="equipment-slots">
 			<option key="0" val="Amulett" />
 			<option key="1" val="Helm" />
