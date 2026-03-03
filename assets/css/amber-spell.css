@@ -1,0 +1,14 @@
+.amber-spell {
+	width: 30ch;
+	background-color: #666655;
+}
+
+.amber-spell__data {
+	display: flex;
+	align-items: start;
+	justify-content: space-between;
+}
+
+.amber-spell__data .amber-table {
+	margin: 0;
+}
