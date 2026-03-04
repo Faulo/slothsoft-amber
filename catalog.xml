@@ -128,6 +128,7 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.npcs" uri="assets/templates/ambermoon/viewer/lib.npcs.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.pcs" uri="assets/templates/ambermoon/viewer/lib.pcs.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.portraits" uri="assets/templates/ambermoon/viewer/lib.portraits.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.spells" uri="assets/templates/ambermoon/viewer/lib.spells.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/null" uri="assets/templates/ambermoon/viewer/null.xsl"/>
   <uri name="http://schema.slothsoft.net/amber/amberdata" uri="assets/schema/amberdata/0.1.xsd"/>
   <system systemId="farah://slothsoft@amber/schema/amberdata/0.1" uri="assets/schema/amberdata/0.1.xsd"/>

@@ -7,14 +7,14 @@ const WEIGHT_OF_GOLD = 5;
 const WEIGHT_OF_FOOD = 250;
 
 function bootstrap() {
-    for (let node of window.document.querySelectorAll("form")) {
+    for (const node of window.document.querySelectorAll("form")) {
         new AmberEditor(node);
     }
 }
 
 export default class AmberEditor {
     constructor(formNode) {
-        for (let node of formNode.querySelectorAll("fieldset")) {
+        for (const node of formNode.querySelectorAll("fieldset")) {
             new AmberEditorPage(node);
         }
     }
@@ -27,7 +27,7 @@ class AmberEditorPage {
     constructor(fieldsetNode) {
         this.#fieldsetNode = fieldsetNode;
 
-        for (let node of fieldsetNode.querySelectorAll("*[data-editor-action]")) {
+        for (const node of fieldsetNode.querySelectorAll("*[data-editor-action]")) {
             const action = node.getAttribute("data-editor-action");
             switch (node.localName) {
                 case "input":
@@ -44,7 +44,7 @@ class AmberEditorPage {
             node.disabled = false;
         }
 
-        for (let node of fieldsetNode.querySelectorAll("*[data-editor-onload]")) {
+        for (const node of fieldsetNode.querySelectorAll("*[data-editor-onload]")) {
             const action = node.getAttribute("data-editor-onload");
             this.#execute(node, action);
         }
@@ -53,7 +53,7 @@ class AmberEditorPage {
     async #execute(buttonNode, actions) {
         buttonNode.disabled = true;
         buttonNode.title = "";
-        for (let action of actions.split(" ")) {
+        for (const action of actions.split(" ")) {
             switch (action) {
                 case "apply-member-count":
                     this.#applyMemberCount(buttonNode.value);
@@ -119,12 +119,12 @@ class AmberEditorPage {
         const mappings = {};
 
         //Attribute
-        for (let key in this.#character.attributes) {
+        for (const key in this.#character.attributes) {
             mappings[key] = this.#character.attributes[key].querySelectorAll("input");
         }
 
         //Skills
-        for (let key in this.#character.skills) {
+        for (const key in this.#character.skills) {
             mappings[key] = this.#character.skills[key].querySelectorAll("input");
         }
 
@@ -132,7 +132,7 @@ class AmberEditorPage {
         const specials = ["Anti-Magie", "Kritische Treffer", "Fallen Finden", "Fallen Entschärfen", "Schlösser Knacken", "Suchen"];
         const zeros = ["Schwimmen"];
 
-        for (let key in mappings) {
+        for (const key in mappings) {
             const currentInput = mappings[key][0];
             const maxInput = mappings[key][2];
 
@@ -215,14 +215,14 @@ class AmberEditorPage {
             const race = AmberCharacter.races[raceId];
 
             //Attribute
-            for (let key in this.#character.attributes) {
+            for (const key in this.#character.attributes) {
                 const input = this.#character.attributes[key].querySelector("input[data-name='maximum']");
                 input.value = race[key];
             }
 
             const mappings = {};
             mappings["age--maximum"] = "Alter";
-            for (let key in mappings) {
+            for (const key in mappings) {
                 this.#character.inputs[key].value = race[mappings[key]];
             }
         }
@@ -237,7 +237,7 @@ class AmberEditorPage {
             const klasse = AmberCharacter.classes[classId];
 
             //Skills
-            for (let key in this.#character.skills) {
+            for (const key in this.#character.skills) {
                 const input = this.#character.skills[key].querySelector("input[data-name='maximum']");
                 input.value = klasse[key];
             }
@@ -249,7 +249,7 @@ class AmberEditorPage {
             mappings["slp-per-level"] = klasse.Spruchlesepunkte;
             mappings["apr-per-level"] = klasse.AttackenProRundeProLevel;
 
-            for (let key in mappings) {
+            for (const key in mappings) {
                 this.#character.inputs[key].value = mappings[key];
             }
 
@@ -280,7 +280,7 @@ class AmberEditorPage {
             mappings["spelllearn-points"] = klasse.Spruchlesepunkte * level;
             mappings["attacks-per-round"] = klasse.AttackenProRundeProLevel == 0 ? 1 : Math.max(1, Math.floor(level / klasse.AttackenProRundeProLevel));
 
-            for (let key in mappings) {
+            for (const key in mappings) {
                 this.#character.inputs[key].value = mappings[key];
             }
         }
@@ -300,24 +300,24 @@ class AmberEditorPage {
         mappings["magic-armor"] = this.#character.inputs["magic-defense"];
 
         //Attribute
-        for (let key in this.#character.attributes) {
+        for (const key in this.#character.attributes) {
             mappings[key] = this.#character.attributes[key].querySelector("input[data-name='current-mod']");
         }
 
         //Skills
-        for (let key in this.#character.skills) {
+        for (const key in this.#character.skills) {
             mappings[key] = this.#character.skills[key].querySelector("input[data-name='current-mod']");
         }
 
         mappings["weight"] = this.#character.inputs["weight"];
 
         const data = {};
-        for (let key in mappings) {
+        for (const key in mappings) {
             data[key] = 0;
         }
 
         const itemIds = [];
-        for (let itemPicker of this.#character.equippedItems) {
+        for (const itemPicker of this.#character.equippedItems) {
             const itemId = parseInt(itemPicker.querySelector("amber-item-id input").value);
             if (itemId) {
                 itemIds.push(itemId);
@@ -327,7 +327,7 @@ class AmberEditorPage {
         const itemNodes = await AmberAPI.getAmberdataItems(itemIds);
         itemNodes.forEach(
             (itemNode) => {
-                for (let key in data) {
+                for (const key in data) {
                     if (itemNode.hasAttribute(key)) {
                         data[key] += parseInt(itemNode.getAttribute(key));
                     }
@@ -355,7 +355,7 @@ class AmberEditorPage {
             data["weight"] += WEIGHT_OF_FOOD * parseInt(foodNode.value);
         }
 
-        for (let itemPicker of this.#character.carriedItems) {
+        for (const itemPicker of this.#character.carriedItems) {
             const itemId = parseInt(itemPicker.querySelector("amber-item-id input").value);
             const itemAmount = parseInt(itemPicker.querySelector("amber-item-amount input").value);
             if (itemId) {
@@ -366,7 +366,7 @@ class AmberEditorPage {
 
         const result = [];
 
-        for (let key in data) {
+        for (const key in data) {
             if (!mappings[key]) {
                 alert(`Unknown data key "${key}"`);
                 continue;
@@ -677,7 +677,7 @@ class AmberCharacter {
             "gold", "food", "weight"
         ];
 
-        for (let key of simpleKeys) {
+        for (const key of simpleKeys) {
             this.inputs[key] = characterNode.querySelector(`*[data-name="${key}"]`);
             if (!this.inputs[key]) {
                 console.warn(`Failed to find input with data-name "${key}" in node ${characterNode}`);

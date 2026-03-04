@@ -3,7 +3,7 @@
 import Bootstrap from "/slothsoft@farah/js/Bootstrap";
 
 function bootstrap() {
-    for (let node of document.querySelectorAll("*.amber-tabs")) {
+    for (const node of document.querySelectorAll("*.amber-tabs")) {
         node = new TabsView(node);
     }
 }

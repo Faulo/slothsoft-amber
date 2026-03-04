@@ -23,7 +23,7 @@ export default class AmberPopup {
         this.#rootNode.appendChild(this.#popupNode);
         this.#rootNode.addEventListener("click", this.closePopup.bind(this), false);
 
-        for (let node of this.#document.querySelectorAll("amber-embed[mode]")) {
+        for (const node of this.#document.querySelectorAll("amber-embed[mode~='popup']")) {
             this.#embeds.push(new AmberEmbed(this, node));
         }
     }
@@ -62,7 +62,7 @@ class AmberEmbed {
 
         this.#type = this.#node.getAttribute("type");
 
-        for (let mode of this.#node.getAttribute("mode").split(" ")) {
+        for (const mode of this.#node.getAttribute("mode").split(" ")) {
             this.#modes[mode] = true;
         }
 
