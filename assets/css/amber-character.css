@@ -92,7 +92,8 @@
 	margin-top: 1em;
 }
 
-.amber-character__equipment amber-item-amount::after {
+.amber-character__equipment amber-item-amount::after, *[data-name="equipment"] amber-item-amount::after
+	{
 	display: none;
 }
 

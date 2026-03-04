@@ -4,7 +4,7 @@ amber-embed {
 	position: relative;
 	box-sizing: border-box;
 	border-color: #222222 #aaaa99 #aaaa99 #222222;
-	border-width: 0.125em;
+	border-width: 0.25em;
 	border-style: solid;
 	background-color: #444433;
 }
@@ -114,6 +114,7 @@ amber-identified::after {
 	top: 24px;
 	right: 2px;
 	font-size: 0.5em;
+	line-height: 1em;
 	content: "👁";
 	pointer-events: none;
 }
@@ -124,12 +125,15 @@ amber-identified[value=""]::after {
 
 amber-item-charge::after {
 	position: absolute;
-	top: -2px;
+	top: 2px;
 	right: 2px;
 	color: rgb(255, 204, 0);
 	font-size: 0.5em;
+	line-height: 1em;
 	content: attr(value);
 	pointer-events: none;
+	content: attr(value);
+	right: 2px;
 }
 
 amber-item-charge[value=""]::after, amber-item-charge[value="0"]::after
