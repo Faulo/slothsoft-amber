@@ -14,12 +14,12 @@
         <custom-asset name="editor-data" executable-builder="Slothsoft\Amber\Assets\EditorDataBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\EditorParameterFilter" />
 
         <custom-asset name="viewer" executable-builder="Slothsoft\Amber\Assets\ViewerBuilder" parameter-filter="Slothsoft\Amber\ParameterFilters\InfosetParameterFilter">
-            <import ref="/includes/AmberPicker" />
+            <import ref="/includes/AmberPopup" />
         </custom-asset>
     </fragment>
 
     <fragment name="includes">
-        <fragment name="AmberPicker">
+        <fragment name="AmberPopup">
             <link-stylesheet ref="//farah/font-face-generator?assets=//slothsoft@amber/fonts" />
             <link-stylesheet ref="/css/amber-character" />
             <link-stylesheet ref="/css/amber-item" />
@@ -27,11 +27,15 @@
             <link-stylesheet ref="/css/amber-portrait" />
             <link-stylesheet ref="/css/amber-spell" />
             <link-stylesheet ref="/css/general" />
-            <link-stylesheet ref="/css/AmberPicker" />
-            <link-module ref="/js/AmberPicker" />
+            <link-stylesheet ref="/css/AmberPopup" />
+            <link-module ref="/js/AmberPopup" />
             <link-module ref="/js/TabsView" />
         </fragment>
+        <fragment name="AmberPicker">
+            <link-module ref="/js/AmberPicker" />
+        </fragment>
         <fragment name="AmberEditor">
+            <import ref="/includes/AmberPopup" />
             <import ref="/includes/AmberPicker" />
             <link-module ref="/js/AmberEditor" />
             <link-stylesheet ref="/css/amber-editor" />
