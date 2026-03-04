@@ -10,21 +10,20 @@ function bootstrap() {
 
 export default class AmberPopup {
     #document;
-    #rootNode;
     #popupNode;
-    #embeds = [];
 
     constructor(document) {
         this.#document = document;
-        this.#rootNode = document.body ? document.body : document.documentElement;
+        const rootNode = document.body ? document.body : document.documentElement;
 
         this.#popupNode = this.#document.createElementNS(NS.XHTML, "div");
         this.#popupNode.setAttribute("class", `amber-popup`);
-        this.#rootNode.appendChild(this.#popupNode);
-        this.#rootNode.addEventListener("click", this.closePopup.bind(this), false);
+
+        rootNode.appendChild(this.#popupNode);
+        rootNode.addEventListener("click", this.closePopup.bind(this), false);
 
         for (const node of this.#document.querySelectorAll("amber-embed[mode~='popup']")) {
-            this.#embeds.push(new AmberEmbed(this, node));
+            new AmberEmbed(this, node)
         }
     }
 
@@ -48,34 +47,23 @@ export default class AmberPopup {
 }
 
 class AmberEmbed {
-    #picker;
+    #popup;
     #node;
-    #type;
-    #modes = {
-        "popup": false,
-        "picker": false
-    };
 
-    constructor(picker, node) {
-        this.#picker = picker;
+    #infoset;
+    #type;
+
+    constructor(popup, node) {
+        this.#popup = popup;
         this.#node = node;
 
+        this.#infoset = this.#node.getAttribute("infoset");
         this.#type = this.#node.getAttribute("type");
-
-        for (const mode of this.#node.getAttribute("mode").split(" ")) {
-            this.#modes[mode] = true;
-        }
 
         this.#node.setAttribute("aria-role", "button");
         this.#node.setAttribute("tabindex", "0");
 
-        if (this.#modes.popup) {
-            this.#node.addEventListener("click", this.#activatePopup.bind(this), false);
-        }
-
-        if (this.#modes.picker) {
-            this.#node.addEventListener("contextmenu", this.#activatePicker.bind(this), false);
-        }
+        this.#node.addEventListener("click", this.#activatePopup.bind(this), false);
     }
 
     #activatePopup(eve) {
@@ -83,14 +71,8 @@ class AmberEmbed {
         if (id) {
             eve.preventDefault();
             eve.stopPropagation();
-            this.#picker.openPopup(this.#node.getAttribute("infoset"), this.#type, id);
+            this.#popup.openPopup(this.#infoset, this.#type, id);
         }
-    }
-
-    #activatePicker(eve) {
-        eve.preventDefault();
-        eve.stopPropagation();
-        console.log("activating picker");
     }
 }
 
