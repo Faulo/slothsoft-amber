@@ -1,7 +1,7 @@
-import { defineConfig, loadEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from "vite";
 import { resolve, basename } from "node:path";
 import { readdirSync } from "node:fs";
+import vue from "./node_modules/@vitejs/plugin-vue/dist/index.mjs";
 
 function getEntries() {
     const dir = resolve(__dirname, "src");
