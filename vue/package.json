@@ -10,7 +10,6 @@
         "watch": "vite build --mode production --watch"
     },
     "dependencies": {
-        "@imengyu/vue3-context-menu": "^1.5.4",
         "vue": "^3.5.29"
     },
     "devDependencies": {

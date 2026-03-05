@@ -1,0 +1,1 @@
+start "Wite" npm run watch
