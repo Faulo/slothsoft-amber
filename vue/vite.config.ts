@@ -5,14 +5,14 @@ import { readdirSync } from "node:fs";
 
 function getEntries() {
     const dir = resolve(__dirname, "src");
-    const files = readdirSync(dir, { recursive: false }).filter(file => file.indexOf(".") !== -1);
+    const files = readdirSync(dir, { recursive: false })
+        .filter(file => file.indexOf(".") !== -1)
+        .map(file => file.toString());
 
-    // Key bestimmt später den Output-Namen: js/<key>.js
-    // ContextMenu.vue => ContextMenu
     const input: Record<string, string> = {};
-    for (const f of files) {
-        const key = basename(f).replace(/\.\w+$/, "");
-        input[key] = resolve(dir, f);
+    for (const file of files) {
+        const key = basename(file).replace(/\.\w+$/, "");
+        input[key] = resolve(dir, file);
     }
     return input;
 }
