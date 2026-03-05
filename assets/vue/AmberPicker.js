@@ -1435,44 +1435,6 @@ const toReadonly = (value) => isObject(value) ? /* @__PURE__ */ readonly(value) 
 function isRef(r) {
   return r ? r["__v_isRef"] === true : false;
 }
-// @__NO_SIDE_EFFECTS__
-function ref(value) {
-  return createRef(value, false);
-}
-function createRef(rawValue, shallow) {
-  if (/* @__PURE__ */ isRef(rawValue)) {
-    return rawValue;
-  }
-  return new RefImpl(rawValue, shallow);
-}
-class RefImpl {
-  constructor(value, isShallow2) {
-    this.dep = new Dep();
-    this["__v_isRef"] = true;
-    this["__v_isShallow"] = false;
-    this._rawValue = isShallow2 ? value : /* @__PURE__ */ toRaw(value);
-    this._value = isShallow2 ? value : toReactive(value);
-    this["__v_isShallow"] = isShallow2;
-  }
-  get value() {
-    {
-      this.dep.track();
-    }
-    return this._value;
-  }
-  set value(newValue) {
-    const oldValue = this._rawValue;
-    const useDirectValue = this["__v_isShallow"] || /* @__PURE__ */ isShallow(newValue) || /* @__PURE__ */ isReadonly(newValue);
-    newValue = useDirectValue ? newValue : /* @__PURE__ */ toRaw(newValue);
-    if (hasChanged(newValue, oldValue)) {
-      this._rawValue = newValue;
-      this._value = useDirectValue ? newValue : toReactive(newValue);
-      {
-        this.dep.trigger();
-      }
-    }
-  }
-}
 function unref(ref2) {
   return /* @__PURE__ */ isRef(ref2) ? ref2.value : ref2;
 }
@@ -1555,7 +1517,7 @@ function onWatcherCleanup(cleanupFn, failSilently = false, owner = activeWatcher
     cleanups.push(cleanupFn);
   }
 }
-function watch$1(source, cb, options = EMPTY_OBJ) {
+function watch$2(source, cb, options = EMPTY_OBJ) {
   const { immediate, deep, once, scheduler, augmentJob, call } = options;
   const reactiveGetter = (source2) => {
     if (deep) return source2;
@@ -2113,7 +2075,7 @@ const useSSRContext = () => {
     return ctx;
   }
 };
-function watch(source, cb, options) {
+function watch$1(source, cb, options) {
   return doWatch(source, cb, options);
 }
 function doWatch(source, cb, options = EMPTY_OBJ) {
@@ -2163,7 +2125,7 @@ function doWatch(source, cb, options = EMPTY_OBJ) {
       }
     }
   };
-  const watchHandle = watch$1(source, cb, baseWatchOptions);
+  const watchHandle = watch$2(source, cb, baseWatchOptions);
   if (isInSSRComponentSetup) {
     if (ssrCleanup) {
       ssrCleanup.push(watchHandle);
@@ -2200,346 +2162,6 @@ function createPathGetter(ctx, path) {
 }
 const TeleportEndKey = /* @__PURE__ */ Symbol("_vte");
 const isTeleport = (type) => type.__isTeleport;
-const isTeleportDisabled = (props) => props && (props.disabled || props.disabled === "");
-const isTeleportDeferred = (props) => props && (props.defer || props.defer === "");
-const isTargetSVG = (target) => typeof SVGElement !== "undefined" && target instanceof SVGElement;
-const isTargetMathML = (target) => typeof MathMLElement === "function" && target instanceof MathMLElement;
-const resolveTarget = (props, select) => {
-  const targetSelector = props && props.to;
-  if (isString(targetSelector)) {
-    if (!select) {
-      return null;
-    } else {
-      const target = select(targetSelector);
-      return target;
-    }
-  } else {
-    return targetSelector;
-  }
-};
-const TeleportImpl = {
-  name: "Teleport",
-  __isTeleport: true,
-  process(n1, n2, container, anchor, parentComponent, parentSuspense, namespace, slotScopeIds, optimized, internals) {
-    const {
-      mc: mountChildren,
-      pc: patchChildren,
-      pbc: patchBlockChildren,
-      o: { insert, querySelector, createText, createComment }
-    } = internals;
-    const disabled = isTeleportDisabled(n2.props);
-    let { shapeFlag, children, dynamicChildren } = n2;
-    if (n1 == null) {
-      const placeholder = n2.el = createText("");
-      const mainAnchor = n2.anchor = createText("");
-      insert(placeholder, container, anchor);
-      insert(mainAnchor, container, anchor);
-      const mount = (container2, anchor2) => {
-        if (shapeFlag & 16) {
-          mountChildren(
-            children,
-            container2,
-            anchor2,
-            parentComponent,
-            parentSuspense,
-            namespace,
-            slotScopeIds,
-            optimized
-          );
-        }
-      };
-      const mountToTarget = () => {
-        const target = n2.target = resolveTarget(n2.props, querySelector);
-        const targetAnchor = prepareAnchor(target, n2, createText, insert);
-        if (target) {
-          if (namespace !== "svg" && isTargetSVG(target)) {
-            namespace = "svg";
-          } else if (namespace !== "mathml" && isTargetMathML(target)) {
-            namespace = "mathml";
-          }
-          if (parentComponent && parentComponent.isCE) {
-            (parentComponent.ce._teleportTargets || (parentComponent.ce._teleportTargets = /* @__PURE__ */ new Set())).add(target);
-          }
-          if (!disabled) {
-            mount(target, targetAnchor);
-            updateCssVars(n2, false);
-          }
-        }
-      };
-      if (disabled) {
-        mount(container, mainAnchor);
-        updateCssVars(n2, true);
-      }
-      if (isTeleportDeferred(n2.props)) {
-        n2.el.__isMounted = false;
-        queuePostRenderEffect(() => {
-          mountToTarget();
-          delete n2.el.__isMounted;
-        }, parentSuspense);
-      } else {
-        mountToTarget();
-      }
-    } else {
-      if (isTeleportDeferred(n2.props) && n1.el.__isMounted === false) {
-        queuePostRenderEffect(() => {
-          TeleportImpl.process(
-            n1,
-            n2,
-            container,
-            anchor,
-            parentComponent,
-            parentSuspense,
-            namespace,
-            slotScopeIds,
-            optimized,
-            internals
-          );
-        }, parentSuspense);
-        return;
-      }
-      n2.el = n1.el;
-      n2.targetStart = n1.targetStart;
-      const mainAnchor = n2.anchor = n1.anchor;
-      const target = n2.target = n1.target;
-      const targetAnchor = n2.targetAnchor = n1.targetAnchor;
-      const wasDisabled = isTeleportDisabled(n1.props);
-      const currentContainer = wasDisabled ? container : target;
-      const currentAnchor = wasDisabled ? mainAnchor : targetAnchor;
-      if (namespace === "svg" || isTargetSVG(target)) {
-        namespace = "svg";
-      } else if (namespace === "mathml" || isTargetMathML(target)) {
-        namespace = "mathml";
-      }
-      if (dynamicChildren) {
-        patchBlockChildren(
-          n1.dynamicChildren,
-          dynamicChildren,
-          currentContainer,
-          parentComponent,
-          parentSuspense,
-          namespace,
-          slotScopeIds
-        );
-        traverseStaticChildren(n1, n2, true);
-      } else if (!optimized) {
-        patchChildren(
-          n1,
-          n2,
-          currentContainer,
-          currentAnchor,
-          parentComponent,
-          parentSuspense,
-          namespace,
-          slotScopeIds,
-          false
-        );
-      }
-      if (disabled) {
-        if (!wasDisabled) {
-          moveTeleport(
-            n2,
-            container,
-            mainAnchor,
-            internals,
-            1
-          );
-        } else {
-          if (n2.props && n1.props && n2.props.to !== n1.props.to) {
-            n2.props.to = n1.props.to;
-          }
-        }
-      } else {
-        if ((n2.props && n2.props.to) !== (n1.props && n1.props.to)) {
-          const nextTarget = n2.target = resolveTarget(
-            n2.props,
-            querySelector
-          );
-          if (nextTarget) {
-            moveTeleport(
-              n2,
-              nextTarget,
-              null,
-              internals,
-              0
-            );
-          }
-        } else if (wasDisabled) {
-          moveTeleport(
-            n2,
-            target,
-            targetAnchor,
-            internals,
-            1
-          );
-        }
-      }
-      updateCssVars(n2, disabled);
-    }
-  },
-  remove(vnode, parentComponent, parentSuspense, { um: unmount, o: { remove: hostRemove } }, doRemove) {
-    const {
-      shapeFlag,
-      children,
-      anchor,
-      targetStart,
-      targetAnchor,
-      target,
-      props
-    } = vnode;
-    if (target) {
-      hostRemove(targetStart);
-      hostRemove(targetAnchor);
-    }
-    doRemove && hostRemove(anchor);
-    if (shapeFlag & 16) {
-      const shouldRemove = doRemove || !isTeleportDisabled(props);
-      for (let i = 0; i < children.length; i++) {
-        const child = children[i];
-        unmount(
-          child,
-          parentComponent,
-          parentSuspense,
-          shouldRemove,
-          !!child.dynamicChildren
-        );
-      }
-    }
-  },
-  move: moveTeleport,
-  hydrate: hydrateTeleport
-};
-function moveTeleport(vnode, container, parentAnchor, { o: { insert }, m: move }, moveType = 2) {
-  if (moveType === 0) {
-    insert(vnode.targetAnchor, container, parentAnchor);
-  }
-  const { el, anchor, shapeFlag, children, props } = vnode;
-  const isReorder = moveType === 2;
-  if (isReorder) {
-    insert(el, container, parentAnchor);
-  }
-  if (!isReorder || isTeleportDisabled(props)) {
-    if (shapeFlag & 16) {
-      for (let i = 0; i < children.length; i++) {
-        move(
-          children[i],
-          container,
-          parentAnchor,
-          2
-        );
-      }
-    }
-  }
-  if (isReorder) {
-    insert(anchor, container, parentAnchor);
-  }
-}
-function hydrateTeleport(node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized, {
-  o: { nextSibling, parentNode, querySelector, insert, createText }
-}, hydrateChildren) {
-  function hydrateAnchor(target2, targetNode) {
-    let targetAnchor = targetNode;
-    while (targetAnchor) {
-      if (targetAnchor && targetAnchor.nodeType === 8) {
-        if (targetAnchor.data === "teleport start anchor") {
-          vnode.targetStart = targetAnchor;
-        } else if (targetAnchor.data === "teleport anchor") {
-          vnode.targetAnchor = targetAnchor;
-          target2._lpa = vnode.targetAnchor && nextSibling(vnode.targetAnchor);
-          break;
-        }
-      }
-      targetAnchor = nextSibling(targetAnchor);
-    }
-  }
-  function hydrateDisabledTeleport(node2, vnode2) {
-    vnode2.anchor = hydrateChildren(
-      nextSibling(node2),
-      vnode2,
-      parentNode(node2),
-      parentComponent,
-      parentSuspense,
-      slotScopeIds,
-      optimized
-    );
-  }
-  const target = vnode.target = resolveTarget(
-    vnode.props,
-    querySelector
-  );
-  const disabled = isTeleportDisabled(vnode.props);
-  if (target) {
-    const targetNode = target._lpa || target.firstChild;
-    if (vnode.shapeFlag & 16) {
-      if (disabled) {
-        hydrateDisabledTeleport(node, vnode);
-        hydrateAnchor(target, targetNode);
-        if (!vnode.targetAnchor) {
-          prepareAnchor(
-            target,
-            vnode,
-            createText,
-            insert,
-            // if target is the same as the main view, insert anchors before current node
-            // to avoid hydrating mismatch
-            parentNode(node) === target ? node : null
-          );
-        }
-      } else {
-        vnode.anchor = nextSibling(node);
-        hydrateAnchor(target, targetNode);
-        if (!vnode.targetAnchor) {
-          prepareAnchor(target, vnode, createText, insert);
-        }
-        hydrateChildren(
-          targetNode && nextSibling(targetNode),
-          vnode,
-          target,
-          parentComponent,
-          parentSuspense,
-          slotScopeIds,
-          optimized
-        );
-      }
-    }
-    updateCssVars(vnode, disabled);
-  } else if (disabled) {
-    if (vnode.shapeFlag & 16) {
-      hydrateDisabledTeleport(node, vnode);
-      vnode.targetStart = node;
-      vnode.targetAnchor = nextSibling(node);
-    }
-  }
-  return vnode.anchor && nextSibling(vnode.anchor);
-}
-const Teleport = TeleportImpl;
-function updateCssVars(vnode, isDisabled) {
-  const ctx = vnode.ctx;
-  if (ctx && ctx.ut) {
-    let node, anchor;
-    if (isDisabled) {
-      node = vnode.el;
-      anchor = vnode.anchor;
-    } else {
-      node = vnode.targetStart;
-      anchor = vnode.targetAnchor;
-    }
-    while (node && node !== anchor) {
-      if (node.nodeType === 1) node.setAttribute("data-v-owner", ctx.uid);
-      node = node.nextSibling;
-    }
-    ctx.ut();
-  }
-}
-function prepareAnchor(target, vnode, createText, insert, anchor = null) {
-  const targetStart = vnode.targetStart = createText("");
-  const targetAnchor = vnode.targetAnchor = createText("");
-  targetStart[TeleportEndKey] = targetAnchor;
-  if (target) {
-    insert(targetStart, target, anchor);
-    insert(targetAnchor, target, anchor);
-  }
-  return targetAnchor;
-}
 const leaveCbKey = /* @__PURE__ */ Symbol("_leaveCb");
 function setTransitionHooks(vnode, hooks) {
   if (vnode.shapeFlag & 6 && vnode.component) {
@@ -3077,12 +2699,12 @@ function createWatcher(raw, ctx, publicThis, key) {
     const handler = ctx[raw];
     if (isFunction(handler)) {
       {
-        watch(getter, handler);
+        watch$1(getter, handler);
       }
     }
   } else if (isFunction(raw)) {
     {
-      watch(getter, raw.bind(publicThis));
+      watch$1(getter, raw.bind(publicThis));
     }
   } else if (isObject(raw)) {
     if (isArray(raw)) {
@@ -3090,7 +2712,7 @@ function createWatcher(raw, ctx, publicThis, key) {
     } else {
       const handler = isFunction(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
       if (isFunction(handler)) {
-        watch(getter, handler, raw);
+        watch$1(getter, handler, raw);
       }
     }
   } else ;
@@ -6410,193 +6032,115 @@ function normalizeContainer(container) {
   }
   return container;
 }
-function createContextMenu() {
-  const state = /* @__PURE__ */ reactive({
-    open: false,
-    x: 0,
-    y: 0,
-    items: [],
-    payload: null,
-    active: -1
-  });
-  const menuEl = /* @__PURE__ */ ref(null);
-  function firstEnabledIndex(items) {
-    return items.findIndex((it) => !it.disabled);
+class State {
+  constructor() {
+    this.open = false;
+    this.target = null;
+    this.x = 0;
+    this.y = 0;
+    this.items = [];
   }
-  function clampToViewport() {
-    const el = menuEl.value;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const pad = 8;
-    const maxX = window.innerWidth - rect.width - pad;
-    const maxY = window.innerHeight - rect.height - pad;
-    state.x = Math.max(pad, Math.min(state.x, maxX));
-    state.y = Math.max(pad, Math.min(state.y, maxY));
-  }
-  async function open(evt, items, payload = null) {
-    evt?.preventDefault?.();
-    state.items = Array.isArray(items) ? items : [];
-    state.payload = payload;
-    state.open = true;
-    state.x = evt?.clientX ?? 0;
-    state.y = evt?.clientY ?? 0;
-    state.active = firstEnabledIndex(state.items);
-    await nextTick();
-    clampToViewport();
-    menuEl.value?.focus?.();
-  }
-  function close() {
-    state.open = false;
-    state.items = [];
-    state.payload = null;
-    state.active = -1;
-  }
-  function clickItem(item) {
-    if (!item || item.disabled) return;
-    try {
-      item.onClick?.(state.payload);
-    } finally {
-      close();
-    }
-  }
-  function moveActive(dir) {
-    if (!state.items.length) return;
-    let i = state.active;
-    for (let step = 0; step < state.items.length; step++) {
-      i = (i + dir + state.items.length) % state.items.length;
-      if (!state.items[i].disabled) {
-        state.active = i;
+}
+class ContextMenu {
+  constructor(instantiate2, bind2) {
+    this.name = "ContextMenu";
+    this.onPointerDown = (eve) => {
+      this.close();
+    };
+    this.onKeyDown = (eve) => {
+      if (!this.state.open) {
         return;
       }
+      switch (eve.key) {
+        case "Escape":
+          eve.preventDefault();
+          this.close();
+          break;
+      }
+    };
+    this.onOpenMenu = (eve) => {
+      eve.preventDefault();
+      this.open(eve.target, eve.clientX, eve.clientY);
+    };
+    this.instantiate = instantiate2;
+    this.bind = bind2;
+    this.state = /* @__PURE__ */ reactive(new State());
+    this.component = { setup: () => this.setup() };
+  }
+  setup() {
+    onMounted(() => {
+      window.addEventListener("pointerdown", this.onPointerDown);
+      window.addEventListener("keydown", this.onKeyDown);
+    });
+    onBeforeUnmount(() => {
+      window.removeEventListener("pointerdown", this.onPointerDown);
+      window.removeEventListener("keydown", this.onKeyDown);
+    });
+    watch$1(
+      [() => this.state.open, () => this.state.target],
+      ([open, target]) => {
+        if (open && target) {
+          this.state.items = this.instantiate(target);
+        } else {
+          this.state.items = [];
+        }
+      }
+    );
+    return () => {
+      if (!this.state.open) {
+        return null;
+      }
+      if (!this.state.target) {
+        return null;
+      }
+      return h("div", {
+        class: "context-menu",
+        style: {
+          position: "fixed",
+          left: `${this.state.x}px`,
+          top: `${this.state.y}px`
+        },
+        onPointerdown: (eve) => eve.stopPropagation()
+      }, "Mein Kontextmenü");
+    };
+  }
+  registerMenu(node) {
+    node.addEventListener("contextmenu", this.onOpenMenu);
+  }
+  unregisterMenu(node) {
+    node.removeEventListener("contextmenu", this.onOpenMenu);
+  }
+  open(target, x, y) {
+    if (this.state.open) {
+      this.close();
     }
+    this.state.open = true;
+    this.state.target = target;
+    this.state.x = x;
+    this.state.y = y;
   }
-  function onKeydown(e) {
-    if (!state.open) return;
-    if (e.key === "Escape") {
-      e.preventDefault();
-      close();
-    } else if (e.key === "ArrowDown") {
-      e.preventDefault();
-      moveActive(1);
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      moveActive(-1);
-    } else if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      clickItem(state.items[state.active]);
-    }
+  close() {
+    this.state.open = false;
   }
-  function onGlobalPointerDown(e) {
-    if (!state.open) return;
-    const el = menuEl.value;
-    if (el && !el.contains(e.target)) close();
-  }
-  function onGlobalScrollOrResize() {
-    if (state.open) clampToViewport();
-  }
-  const ContextMenu = {
-    name: "ContextMenu",
-    setup() {
-      onMounted(() => {
-        window.addEventListener("pointerdown", onGlobalPointerDown, true);
-        window.addEventListener("keydown", onKeydown, true);
-        window.addEventListener("resize", onGlobalScrollOrResize, { passive: true });
-        window.addEventListener("scroll", onGlobalScrollOrResize, { passive: true, capture: true });
-      });
-      onBeforeUnmount(() => {
-        window.removeEventListener("pointerdown", onGlobalPointerDown, true);
-        window.removeEventListener("keydown", onKeydown, true);
-        window.removeEventListener("resize", onGlobalScrollOrResize);
-        window.removeEventListener("scroll", onGlobalScrollOrResize, true);
-      });
-      return () => state.open ? h(
-        Teleport,
-        { to: "body" },
-        h(
-          "div",
-          {
-            ref: menuEl,
-            tabindex: -1,
-            role: "menu",
-            style: {
-              position: "fixed",
-              left: `${state.x}px`,
-              top: `${state.y}px`,
-              zIndex: 999999,
-              minWidth: "220px",
-              padding: "6px",
-              borderRadius: "10px",
-              background: "rgba(24, 24, 28, 0.98)",
-              color: "white",
-              border: "1px solid rgba(255,255,255,0.08)",
-              boxShadow: "0 12px 36px rgba(0,0,0,0.45)",
-              outline: "none",
-              font: "14px/1.3 system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
-            }
-          },
-          state.items.map(
-            (item, idx) => h(
-              "button",
-              {
-                type: "button",
-                role: "menuitem",
-                disabled: !!item.disabled,
-                onPointerenter: () => {
-                  if (!item.disabled) state.active = idx;
-                },
-                onClick: () => clickItem(item),
-                style: {
-                  width: "100%",
-                  display: "grid",
-                  gridTemplateColumns: "20px 1fr auto",
-                  gap: "10px",
-                  alignItems: "center",
-                  padding: "8px 10px",
-                  borderRadius: "8px",
-                  border: "0",
-                  background: idx === state.active ? "rgba(255,255,255,0.12)" : "transparent",
-                  color: item.disabled ? "rgba(255,255,255,0.35)" : "white",
-                  cursor: item.disabled ? "not-allowed" : "pointer",
-                  textAlign: "left"
-                }
-              },
-              [
-                typeof item.icon === "function" ? item.icon() : h("span", { style: { opacity: 0.9 } }, item.icon ?? ""),
-                h("span", null, item.label),
-                h(
-                  "span",
-                  { style: { opacity: 0.55, fontSize: "12px" } },
-                  item.shortcut ?? ""
-                )
-              ]
-            )
-          )
-        )
-      ) : null;
-    }
-  };
-  return { state, open, close, ContextMenu };
+}
+function instantiate(node) {
+  return [
+    { type: "toggle", id: "identified", label: "Ist identifiziert" }
+  ];
+}
+function bind(node) {
+  return [
+    { label: "Öffnen", icon: "📂", shortcut: "Enter", onClick: () => console.log("open") },
+    { label: "Umbenennen", icon: "✏️", onClick: () => console.log("rename") },
+    { label: "Löschen", icon: "🗑️", shortcut: "Del", onClick: () => console.log("delete") },
+    { label: "Deaktiviert", icon: "🚫", disabled: true }
+  ];
 }
 function bootstrap() {
-  const cm = createContextMenu();
-  const component = cm.ContextMenu;
+  const cm = new ContextMenu(instantiate, bind);
   const root = document.createElementNS(NS.HTML, "div");
   document.documentElement.appendChild(root);
-  createApp(component).mount(root);
-  document.querySelectorAll("amber-embed[mode~='picker']").forEach((node) => {
-    node.addEventListener("contextmenu", (e) => {
-      cm.open(
-        e,
-        [
-          { label: "Öffnen", icon: "📂", shortcut: "Enter", onClick: () => console.log("open") },
-          { label: "Umbenennen", icon: "✏️", onClick: () => console.log("rename") },
-          { label: "Löschen", icon: "🗑️", shortcut: "Del", onClick: () => console.log("delete") },
-          { label: "Deaktiviert", icon: "🚫", disabled: true }
-        ],
-        { id: 123 }
-        // payload (optional)
-      );
-    });
-  });
+  createApp(cm.component).mount(root);
+  document.querySelectorAll("amber-embed[mode~='picker']").forEach((node) => cm.registerMenu(node));
 }
 Bootstrap.run(bootstrap);
