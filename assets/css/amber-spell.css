@@ -1,6 +1,7 @@
 .amber-spell {
 	width: 32ch;
 	background-color: #666655;
+	padding: 0.5ch;
 }
 
 .amber-spell__data {
