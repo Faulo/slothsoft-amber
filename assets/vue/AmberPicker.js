@@ -1,4 +1,5 @@
 import Bootstrap from "/slothsoft@farah/js/Bootstrap";
+import AmberAPI from "/slothsoft@amber/js/AmberAPI";
 import { NS } from "/slothsoft@farah/js/XMLNamespaces";
 // @__NO_SIDE_EFFECTS__
 function makeMap(str) {
@@ -1867,7 +1868,7 @@ let activePostFlushCbs = null;
 let postFlushIndex = 0;
 const resolvedPromise = /* @__PURE__ */ Promise.resolve();
 let currentFlushPromise = null;
-function nextTick(fn) {
+function nextTick$1(fn) {
   const p2 = currentFlushPromise || resolvedPromise;
   return fn ? p2.then(this ? fn.bind(this) : fn) : p2;
 }
@@ -2409,7 +2410,7 @@ const publicPropertiesMap = (
     $forceUpdate: (i) => i.f || (i.f = () => {
       queueJob(i.update);
     }),
-    $nextTick: (i) => i.n || (i.n = nextTick.bind(i.proxy)),
+    $nextTick: (i) => i.n || (i.n = nextTick$1.bind(i.proxy)),
     $watch: (i) => instanceWatch.bind(i)
   })
 );
@@ -6062,6 +6063,7 @@ const itemRenderers = {
           "input",
           {
             type: "checkbox",
+            class: "context-menu__input context-menu__input--toggle",
             checked: item.get(),
             onChange: (eve) => {
               const input = eve.currentTarget;
@@ -6083,6 +6085,7 @@ const itemRenderers = {
         h(
           "select",
           {
+            class: "context-menu__input context-menu__input--select",
             value: item.get(),
             onChange: (eve) => {
               const input = eve.currentTarget;
@@ -6090,6 +6093,32 @@ const itemRenderers = {
             }
           },
           item.items.map((v) => h("option", { value: v }, v))
+        )
+      ]
+    );
+  },
+  "map": (item) => {
+    return h(
+      "label",
+      { class: "context-menu__item context-menu__item--map" },
+      [
+        h(
+          "select",
+          {
+            class: "context-menu__input context-menu__input--map",
+            value: item.get(),
+            onChange: (eve) => {
+              const input = eve.currentTarget;
+              item.set(parseInt(input.value));
+            }
+          },
+          item.groups.map(
+            (g) => h(
+              "optgroup",
+              { label: g.label },
+              g.options.map((o) => h("option", { value: o.value }, o.label))
+            )
+          )
         )
       ]
     );
@@ -6158,12 +6187,12 @@ class ContextMenu {
   unregisterMenu(node) {
     node.removeEventListener("contextmenu", this.onOpenMenu);
   }
-  open(target, x, y) {
+  async open(target, x, y) {
     if (this.state.open) {
       this.close();
     }
+    this.state.items = await this.instantiate(target);
     this.state.open = true;
-    this.state.items = this.instantiate(target);
     this.state.x = x;
     this.state.y = y;
   }
@@ -6213,20 +6242,76 @@ function instantiateNumber(node, label) {
     items: RANGE_0_99_PLUS_255
   };
 }
-function instantiate(node) {
-  return [
-    instantiateTitle("Gegenstand"),
-    instantiateSeparator(),
-    instantiateNumber(node.querySelector("amber-item-amount"), "Anzahl:"),
-    instantiateToggle(node.querySelector("amber-identified"), "Ist identifiziert:"),
-    instantiateToggle(node.querySelector("amber-broken"), "Ist zerbrochen:"),
-    instantiateNumber(node.querySelector("amber-item-charge"), "Mag. Ladungen:")
-  ];
+function instantiateItem(node, groups) {
+  const input = node.querySelector("input");
+  return {
+    type: "map",
+    get: () => parseInt(input.value),
+    set: (value) => {
+      const data = String(value);
+      node.setAttribute("value", data);
+      input.value = data;
+    },
+    groups
+  };
+}
+async function instantiate(node) {
+  const type = node.getAttribute("type");
+  switch (type) {
+    case "portrait":
+      const portraitGroups = await AmberAPI.getAmberdataDocument("lib.portraits").then(buildPortraitGroups);
+      return [
+        instantiateTitle("Portrait"),
+        instantiateSeparator(),
+        instantiateItem(node.querySelector("amber-portrait-id"), portraitGroups)
+      ];
+    case "item":
+      const itemGroups = await AmberAPI.getAmberdataDocument("lib.items").then(buildItemGroups);
+      return [
+        instantiateTitle("Gegenstand"),
+        instantiateSeparator(),
+        instantiateItem(node.querySelector("amber-item-id"), itemGroups),
+        instantiateSeparator(),
+        instantiateNumber(node.querySelector("amber-item-amount"), "Anzahl:"),
+        instantiateToggle(node.querySelector("amber-identified"), "Ist identifiziert:"),
+        instantiateToggle(node.querySelector("amber-broken"), "Ist zerbrochen:"),
+        instantiateNumber(node.querySelector("amber-item-charge"), "Mag. Ladungen:")
+      ];
+    default:
+      throw new Error(`Unknown type "${type}"`);
+  }
+}
+function buildPortraitGroups(doc2) {
+  const cats = Array.from(doc2.getElementsByTagNameNS(NS.AMBER_AMBERDATA, "portrait-category"));
+  const groups = cats.map((cat) => {
+    const label = cat.getAttribute("name");
+    const items = Array.from(cat.getElementsByTagNameNS(NS.AMBER_AMBERDATA, "portrait"));
+    const options = items.map((it) => ({
+      value: parseInt(it.getAttribute("id")),
+      label: `Portrait #${it.getAttribute("id")}`
+    }));
+    return { label, options };
+  });
+  return groups;
+}
+function buildItemGroups(doc2) {
+  const cats = Array.from(doc2.getElementsByTagNameNS(NS.AMBER_AMBERDATA, "item-category"));
+  const groups = cats.map((cat) => {
+    const label = cat.getAttribute("name");
+    const items = Array.from(cat.getElementsByTagNameNS(NS.AMBER_AMBERDATA, "item"));
+    const options = items.map((it) => ({
+      value: parseInt(it.getAttribute("id")),
+      label: it.getAttribute("name")
+    }));
+    return { label, options };
+  });
+  groups.unshift({ label: "", options: [{ value: 0, label: "-" }] });
+  return groups;
 }
 function bootstrap() {
   const cm = new ContextMenu(instantiate);
   const root = document.createElementNS(NS.HTML, "div");
-  root.setAttribute("class", "amber-picker amber-text");
+  root.setAttribute("class", "amber-picker amber-text amber-text--silver");
   document.documentElement.appendChild(root);
   createApp(cm.component).mount(root);
   document.querySelectorAll("amber-embed[mode~='picker']").forEach((node) => cm.registerMenu(node));

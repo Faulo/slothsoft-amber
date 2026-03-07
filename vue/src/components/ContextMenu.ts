@@ -1,6 +1,6 @@
 "use strict";
 
-import { reactive, onMounted, onBeforeUnmount, h, Reactive, VNode } from "vue";
+import { reactive, onMounted, onBeforeUnmount, h, Reactive, watch, VNode } from "vue";
 
 export type TitleItem = {
     type: "title";
@@ -22,8 +22,16 @@ export type SelectItem = {
 export type SeparatorItem = {
     type: "separator"
 };
+export type MapItem = {
+    type: "map";
+    get: () => number;
+    set: (value: number) => void;
+    groups: MapGroup[];
+};
+export type MapOption = { value: number; label: string };
+export type MapGroup = { label: string; options: MapOption[] };
 
-export type MenuItem = TitleItem | ToggleItem | SelectItem | SeparatorItem;
+export type MenuItem = TitleItem | ToggleItem | SelectItem | SeparatorItem | MapItem;
 
 const itemRenderers = {
     title: (item: TitleItem): VNode => {
@@ -55,6 +63,7 @@ const itemRenderers = {
                     "input",
                     {
                         type: "checkbox",
+                        class: "context-menu__input context-menu__input--toggle",
                         checked: item.get(),
                         onChange: (eve: Event) => {
                             const input = eve.currentTarget as HTMLInputElement;
@@ -76,6 +85,7 @@ const itemRenderers = {
                 h(
                     "select",
                     {
+                        class: "context-menu__input context-menu__input--select",
                         value: item.get(),
                         onChange: (eve: Event) => {
                             const input = eve.currentTarget as HTMLSelectElement;
@@ -83,6 +93,32 @@ const itemRenderers = {
                         },
                     },
                     item.items.map((v) => h("option", { value: v }, v))
+                ),
+            ]
+        );
+    },
+    "map": (item: MapItem): VNode => {
+        return h(
+            "label",
+            { class: "context-menu__item context-menu__item--map" },
+            [
+                h(
+                    "select",
+                    {
+                        class: "context-menu__input context-menu__input--map",
+                        value: item.get(),
+                        onChange: (eve: Event) => {
+                            const input = eve.currentTarget as HTMLSelectElement;
+                            item.set(parseInt(input.value));
+                        },
+                    },
+                    item.groups.map((g) =>
+                        h(
+                            "optgroup",
+                            { label: g.label },
+                            g.options.map((o) => h("option", { value: o.value }, o.label))
+                        )
+                    )
                 ),
             ]
         );
@@ -134,7 +170,7 @@ export default class ContextMenu {
                     top: `${this.state.y}px`
                 },
                 onPointerdown: (eve: PointerEvent) => eve.stopPropagation(),
-            }, this.state.items.map(item => itemRenderers[item.type](item)));
+            }, this.state.items.map(item => itemRenderers[item.type](item as any)));
         };
     }
 
@@ -168,13 +204,13 @@ export default class ContextMenu {
         this.open(eve.currentTarget as Element, eve.clientX, eve.clientY);
     }
 
-    public open(target: Element, x: number, y: number): void {
+    public async open(target: Element, x: number, y: number) {
         if (this.state.open) {
             this.close();
         }
 
+        this.state.items = await this.instantiate(target);
         this.state.open = true;
-        this.state.items = this.instantiate(target);
         this.state.x = x;
         this.state.y = y;
     }
