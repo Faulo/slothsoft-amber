@@ -141,6 +141,14 @@
 	background-position-y: -94em
 }
 
+.amber-icon--breakable::before {
+    background-position-y: -65em
+}
+
+.amber-icon--unbreakable::before {
+    background-position-y: -75em
+}
+
 .amber-icon--is-stackable::before {
 	background-position-y: -51em;
 }
