@@ -33,6 +33,7 @@
         </fragment>
         <fragment name="AmberPicker">
             <link-module ref="/vue/AmberPicker.js" />
+            <link-stylesheet ref="/css/AmberPicker" />
         </fragment>
         <fragment name="AmberEditor">
             <import ref="/includes/AmberPopup" />
@@ -59,7 +60,7 @@
     <resource-directory name="schema" type="application/x-xsd+xml" />
 
     <resource-directory name="source" type="*/*" />
-    
+
     <resource-directory name="vue" type="*/*" />
 
     <directory name="static">

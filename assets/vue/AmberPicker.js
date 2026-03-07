@@ -1517,7 +1517,7 @@ function onWatcherCleanup(cleanupFn, failSilently = false, owner = activeWatcher
     cleanups.push(cleanupFn);
   }
 }
-function watch$2(source, cb, options = EMPTY_OBJ) {
+function watch$1(source, cb, options = EMPTY_OBJ) {
   const { immediate, deep, once, scheduler, augmentJob, call } = options;
   const reactiveGetter = (source2) => {
     if (deep) return source2;
@@ -2075,7 +2075,7 @@ const useSSRContext = () => {
     return ctx;
   }
 };
-function watch$1(source, cb, options) {
+function watch(source, cb, options) {
   return doWatch(source, cb, options);
 }
 function doWatch(source, cb, options = EMPTY_OBJ) {
@@ -2125,7 +2125,7 @@ function doWatch(source, cb, options = EMPTY_OBJ) {
       }
     }
   };
-  const watchHandle = watch$2(source, cb, baseWatchOptions);
+  const watchHandle = watch$1(source, cb, baseWatchOptions);
   if (isInSSRComponentSetup) {
     if (ssrCleanup) {
       ssrCleanup.push(watchHandle);
@@ -2699,12 +2699,12 @@ function createWatcher(raw, ctx, publicThis, key) {
     const handler = ctx[raw];
     if (isFunction(handler)) {
       {
-        watch$1(getter, handler);
+        watch(getter, handler);
       }
     }
   } else if (isFunction(raw)) {
     {
-      watch$1(getter, raw.bind(publicThis));
+      watch(getter, raw.bind(publicThis));
     }
   } else if (isObject(raw)) {
     if (isArray(raw)) {
@@ -2712,7 +2712,7 @@ function createWatcher(raw, ctx, publicThis, key) {
     } else {
       const handler = isFunction(raw.handler) ? raw.handler.bind(publicThis) : ctx[raw.handler];
       if (isFunction(handler)) {
-        watch$1(getter, handler, raw);
+        watch(getter, handler, raw);
       }
     }
   } else ;
@@ -6032,17 +6032,79 @@ function normalizeContainer(container) {
   }
   return container;
 }
+const itemRenderers = {
+  title: (item) => {
+    return h(
+      "h1",
+      {
+        class: "context-menu__item context-menu__item--title"
+      },
+      item.label
+    );
+  },
+  separator: (_) => {
+    return h(
+      "hr",
+      {
+        class: "context-menu__item context-menu__item--separator"
+      }
+    );
+  },
+  toggle: (item) => {
+    return h(
+      "label",
+      {
+        class: "context-menu__item context-menu__item--toggle"
+      },
+      [
+        item.label,
+        h(
+          "input",
+          {
+            type: "checkbox",
+            checked: item.get(),
+            onChange: (eve) => {
+              const input = eve.currentTarget;
+              item.set(input.checked);
+            }
+          }
+        )
+      ]
+    );
+  },
+  select: (item) => {
+    return h(
+      "label",
+      {
+        class: "context-menu__item context-menu__item--select"
+      },
+      [
+        item.label,
+        h(
+          "select",
+          {
+            value: item.get(),
+            onChange: (eve) => {
+              const input = eve.currentTarget;
+              item.set(input.value);
+            }
+          },
+          item.items.map((v) => h("option", { value: v }, v))
+        )
+      ]
+    );
+  }
+};
 class State {
   constructor() {
     this.open = false;
-    this.target = null;
+    this.items = [];
     this.x = 0;
     this.y = 0;
-    this.items = [];
   }
 }
 class ContextMenu {
-  constructor(instantiate2, bind2) {
+  constructor(instantiate2) {
     this.name = "ContextMenu";
     this.onPointerDown = (eve) => {
       this.close();
@@ -6060,10 +6122,9 @@ class ContextMenu {
     };
     this.onOpenMenu = (eve) => {
       eve.preventDefault();
-      this.open(eve.target, eve.clientX, eve.clientY);
+      this.open(eve.currentTarget, eve.clientX, eve.clientY);
     };
     this.instantiate = instantiate2;
-    this.bind = bind2;
     this.state = /* @__PURE__ */ reactive(new State());
     this.component = { setup: () => this.setup() };
   }
@@ -6076,21 +6137,8 @@ class ContextMenu {
       window.removeEventListener("pointerdown", this.onPointerDown);
       window.removeEventListener("keydown", this.onKeyDown);
     });
-    watch$1(
-      [() => this.state.open, () => this.state.target],
-      ([open, target]) => {
-        if (open && target) {
-          this.state.items = this.instantiate(target);
-        } else {
-          this.state.items = [];
-        }
-      }
-    );
     return () => {
       if (!this.state.open) {
-        return null;
-      }
-      if (!this.state.target) {
         return null;
       }
       return h("div", {
@@ -6101,7 +6149,7 @@ class ContextMenu {
           top: `${this.state.y}px`
         },
         onPointerdown: (eve) => eve.stopPropagation()
-      }, "Mein Kontextmenü");
+      }, this.state.items.map((item) => itemRenderers[item.type](item)));
     };
   }
   registerMenu(node) {
@@ -6115,30 +6163,70 @@ class ContextMenu {
       this.close();
     }
     this.state.open = true;
-    this.state.target = target;
+    this.state.items = this.instantiate(target);
     this.state.x = x;
     this.state.y = y;
   }
   close() {
     this.state.open = false;
+    this.state.items = [];
   }
+}
+const RANGE_0_99_PLUS_255 = [
+  ...Array.from({ length: 100 }, (_, i) => String(i)),
+  "255"
+];
+function instantiateTitle(label) {
+  return {
+    type: "title",
+    label
+  };
+}
+function instantiateSeparator() {
+  return {
+    type: "separator"
+  };
+}
+function instantiateToggle(node, label) {
+  const input = node.querySelector("input");
+  return {
+    type: "toggle",
+    label,
+    get: () => input.value === "1",
+    set: (value) => {
+      const data = value ? "1" : "";
+      node.setAttribute("value", data);
+      input.value = data;
+    }
+  };
+}
+function instantiateNumber(node, label) {
+  const input = node.querySelector("input");
+  return {
+    type: "select",
+    label,
+    get: () => input.value,
+    set: (value) => {
+      node.setAttribute("value", value);
+      input.value = value;
+    },
+    items: RANGE_0_99_PLUS_255
+  };
 }
 function instantiate(node) {
   return [
-    { type: "toggle", id: "identified", label: "Ist identifiziert" }
-  ];
-}
-function bind(node) {
-  return [
-    { label: "Öffnen", icon: "📂", shortcut: "Enter", onClick: () => console.log("open") },
-    { label: "Umbenennen", icon: "✏️", onClick: () => console.log("rename") },
-    { label: "Löschen", icon: "🗑️", shortcut: "Del", onClick: () => console.log("delete") },
-    { label: "Deaktiviert", icon: "🚫", disabled: true }
+    instantiateTitle("Gegenstand"),
+    instantiateSeparator(),
+    instantiateNumber(node.querySelector("amber-item-amount"), "Anzahl:"),
+    instantiateToggle(node.querySelector("amber-identified"), "Ist identifiziert:"),
+    instantiateToggle(node.querySelector("amber-broken"), "Ist zerbrochen:"),
+    instantiateNumber(node.querySelector("amber-item-charge"), "Mag. Ladungen:")
   ];
 }
 function bootstrap() {
-  const cm = new ContextMenu(instantiate, bind);
+  const cm = new ContextMenu(instantiate);
   const root = document.createElementNS(NS.HTML, "div");
+  root.setAttribute("class", "amber-picker amber-text");
   document.documentElement.appendChild(root);
   createApp(cm.component).mount(root);
   document.querySelectorAll("amber-embed[mode~='picker']").forEach((node) => cm.registerMenu(node));

@@ -1,31 +1,110 @@
 "use strict";
 
-import { reactive, ref, nextTick, onMounted, onBeforeUnmount, h, Teleport, Reactive, watch } from "vue";
+import { reactive, onMounted, onBeforeUnmount, h, Reactive, VNode } from "vue";
 
-type MenuItem =
-    | { type: "action"; id: string; label: string }
-    | { type: "toggle"; id: string; label: string }
-    | { type: "separator" };
+export type TitleItem = {
+    type: "title";
+    label: string
+};
+export type ToggleItem = {
+    type: "toggle";
+    label: string;
+    get: () => boolean;
+    set: (value: boolean) => void;
+};
+export type SelectItem = {
+    type: "select";
+    label: string;
+    get: () => string;
+    set: (value: string) => void;
+    items: string[];
+};
+export type SeparatorItem = {
+    type: "separator"
+};
+
+export type MenuItem = TitleItem | ToggleItem | SelectItem | SeparatorItem;
+
+const itemRenderers = {
+    title: (item: TitleItem): VNode => {
+        return h(
+            "h1",
+            {
+                class: "context-menu__item context-menu__item--title"
+            },
+            item.label
+        );
+    },
+    separator: (_: SeparatorItem): VNode => {
+        return h(
+            "hr",
+            {
+                class: "context-menu__item context-menu__item--separator"
+            },
+        );
+    },
+    toggle: (item: ToggleItem): VNode => {
+        return h(
+            "label",
+            {
+                class: "context-menu__item context-menu__item--toggle"
+            },
+            [
+                item.label,
+                h(
+                    "input",
+                    {
+                        type: "checkbox",
+                        checked: item.get(),
+                        onChange: (eve: Event) => {
+                            const input = eve.currentTarget as HTMLInputElement;
+                            item.set(input.checked);
+                        }
+                    }
+                )
+            ]
+        );
+    },
+    select: (item: SelectItem): VNode => {
+        return h(
+            "label",
+            {
+                class: "context-menu__item context-menu__item--select"
+            },
+            [
+                item.label,
+                h(
+                    "select",
+                    {
+                        value: item.get(),
+                        onChange: (eve: Event) => {
+                            const input = eve.currentTarget as HTMLSelectElement;
+                            item.set(input.value);
+                        },
+                    },
+                    item.items.map((v) => h("option", { value: v }, v))
+                ),
+            ]
+        );
+    },
+};
 
 class State {
     open: boolean = false;
-    target: Element | null = null;
+    items: MenuItem[] = [];
     x: number = 0;
     y: number = 0;
-    items: MenuItem[] = [];
 }
 
 export default class ContextMenu {
     public readonly name = "ContextMenu";
     private instantiate: Function;
-    private bind: Function;
     private state: Reactive<State>;
 
     public readonly component: Object;
 
-    constructor(instantiate: Function, bind: Function) {
+    constructor(instantiate: Function) {
         this.instantiate = instantiate;
-        this.bind = bind;
         this.state = reactive(new State());
 
         this.component = { setup: () => this.setup() };
@@ -42,23 +121,8 @@ export default class ContextMenu {
             window.removeEventListener("keydown", this.onKeyDown);
         });
 
-        watch(
-            [() => this.state.open, () => this.state.target],
-            ([open, target]) => {
-                if (open && target) {
-                    this.state.items = this.instantiate(target);
-                } else {
-                    this.state.items = [];
-                }
-            }
-        );
-
         return () => {
             if (!this.state.open) {
-                return null;
-            }
-
-            if (!this.state.target) {
                 return null;
             }
 
@@ -70,7 +134,7 @@ export default class ContextMenu {
                     top: `${this.state.y}px`
                 },
                 onPointerdown: (eve: PointerEvent) => eve.stopPropagation(),
-            }, "Mein Kontextmenü");
+            }, this.state.items.map(item => itemRenderers[item.type](item)));
         };
     }
 
@@ -101,7 +165,7 @@ export default class ContextMenu {
 
     private readonly onOpenMenu = (eve: MouseEvent) => {
         eve.preventDefault();
-        this.open(eve.target as Element, eve.clientX, eve.clientY);
+        this.open(eve.currentTarget as Element, eve.clientX, eve.clientY);
     }
 
     public open(target: Element, x: number, y: number): void {
@@ -110,12 +174,13 @@ export default class ContextMenu {
         }
 
         this.state.open = true;
-        this.state.target = target;
+        this.state.items = this.instantiate(target);
         this.state.x = x;
         this.state.y = y;
     }
 
     public close(): void {
         this.state.open = false;
+        this.state.items = [];
     }
 }

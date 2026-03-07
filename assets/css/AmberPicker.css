@@ -1,0 +1,31 @@
+.context-menu {
+	box-sizing: border-box;
+	border-color: #aaaa99 #222222 #222222 #aaaa99;
+	border-width: 0.125em;
+	border-style: solid;
+	background-color: #444433;
+	padding: 2px 4px;
+}
+
+.context-menu__item {
+	display: block;
+	text-align: right;
+}
+
+.context-menu select {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	padding: 0;
+	background: none;
+	text-align: right;
+}
+
+.context-menu__item--title {
+	font-size: inherit;
+	text-align: center;
+	font-weight: normal;
+	margin: 0;
+}
