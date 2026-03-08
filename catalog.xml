@@ -122,6 +122,7 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.spells" uri="assets/templates/ambermoon/savegame/lib.spells.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/null" uri="assets/templates/ambermoon/savegame/null.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/globals/amber-list" uri="assets/templates/ambermoon/viewer/globals/amber-list.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/globals/spellbook" uri="assets/templates/ambermoon/viewer/globals/spellbook.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.classes" uri="assets/templates/ambermoon/viewer/lib.classes.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.items" uri="assets/templates/ambermoon/viewer/lib.items.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.monsters" uri="assets/templates/ambermoon/viewer/lib.monsters.xsl"/>
