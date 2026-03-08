@@ -41,7 +41,7 @@
 				<xsl:with-param name="dialog" select="/.." />
 			</xsl:call-template>
 
-			<saa:race>
+			<saa:race-instance>
 				<xsl:apply-templates select=".//*[@name = 'race']" mode="attr">
 					<xsl:with-param name="name" select="'name'" />
 				</xsl:apply-templates>
@@ -51,7 +51,7 @@
 
 				<xsl:variable name="age" select=".//*[@name = 'age']/*" />
 				<saa:age current="{$age[@name='current']/@value}" maximum="{$age[@name='current']/@value}" />
-			</saa:race>
+			</saa:race-instance>
 			<saa:class-instance>
 				<xsl:apply-templates select=".//*[@name = 'name']" mode="attr">
 					<xsl:with-param name="name" select="'name'" />
