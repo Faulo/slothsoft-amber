@@ -109,9 +109,10 @@
 			<integer position="22" name="subsubtype" />
 			<select position="23" name="spell-type" dictionary-ref="spell-types" />
 			<integer position="24" name="spell-id" />
-			<integer position="25" name="charges-default" />
-			<integer position="27" name="max-charges-by-shop" />
-			<integer position="28" name="max-charges-by-spell" />
+            <integer position="25" name="charges-default" />
+            <integer position="26" name="recharges-default" />
+			<integer position="27" name="recharges-max" />
+			<integer position="28" name="charges-max" />
 			<integer position="29" name="price-per-charge" />
 			<integer position="30" name="magic-armor" />
 			<integer position="31" name="magic-weapon" />

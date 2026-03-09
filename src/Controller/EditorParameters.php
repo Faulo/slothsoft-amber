@@ -100,6 +100,12 @@ final class EditorParameters {
         return $result;
     }
     
+    public function getStaticAmberdataGlobalUrls(): iterable {
+        yield FarahUrl::createFromReference("/templates/$this->game/amberdata/globals/dictionary", $this->getAmberUrl());
+        yield FarahUrl::createFromReference("/templates/$this->game/amberdata/globals/extract", $this->getAmberUrl());
+        yield FarahUrl::createFromReference("/templates/$this->game/amberdata/globals/static", $this->getAmberUrl());
+    }
+    
     private ?FarahUrl $convertUrl = null;
     
     public function getStaticConvertUrl(): FarahUrl {

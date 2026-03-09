@@ -321,12 +321,40 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4">
+                                <td colspan="3">
                                     <xsl:if test="@spell-id &gt; 0">
-                                        <xsl:value-of select="concat(@spell-name, ' (', @charges-default, ')')" />
+                                        <xsl:choose>
+                                            <xsl:when test="@spell-name = ''">
+                                                <xsl:text>?</xsl:text>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:value-of select="@spell-name" />
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:if>
                                     <xsl:if test="@is-cursed">
                                         <div class="amber-item__cursed amber-text amber-text--red">verflucht!</div>
+                                    </xsl:if>
+                                </td>
+                                <td>
+                                    <xsl:if test="@spell-id &gt; 0">
+                                        <xsl:choose>
+                                            <xsl:when test="@charges-default = 255">
+                                                <xsl:attribute name="class">amber-text amber-text--right amber-text--yellow</xsl:attribute>
+                                                <xsl:attribute name="data-hover-text">unbegrenzt benutzbar</xsl:attribute>
+                                                <xsl:text>**</xsl:text>
+                                            </xsl:when>
+                                            <xsl:when test="@charges-max = 0">
+                                                <xsl:attribute name="class">amber-text amber-text--right amber-text--red</xsl:attribute>
+                                                <xsl:attribute name="data-hover-text">nicht wiederaufladbar</xsl:attribute>
+                                                <xsl:value-of select="@charges-default" />
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <xsl:attribute name="class">amber-text amber-text--right</xsl:attribute>
+                                                <xsl:attribute name="data-hover-text"><xsl:value-of select="concat('maximal ', @charges-max, ' Ladungen')" /></xsl:attribute>
+                                                <xsl:value-of select="@charges-default" />
+                                            </xsl:otherwise>
+                                        </xsl:choose>
                                     </xsl:if>
                                 </td>
                             </tr>

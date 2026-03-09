@@ -43,8 +43,16 @@ final class AmberdataBuilder implements ExecutableBuilderStrategyInterface {
             return new TransformationDOMWriter($writer, $template);
         };
         
+        $dependentFiles = [];
+        $dependentFiles[] = __FILE__;
+        $dependentFiles[] = (string) $datasetUrl;
+        $dependentFiles[] = (string) $templateUrl;
+        foreach ($parameters->getStaticAmberdataGlobalUrls() as $globalUrl) {
+            $dependentFiles[] = (string) $globalUrl;
+        }
+        
         $writer = new DOMWriterFromDOMWriterDelegate($domDelegate);
-        $writer = new DOMWriterFileCacheWithDependencies($writer, $context->createCacheFile("$infosetId.xml", $args), __FILE__, (string) $datasetUrl, (string) $templateUrl);
+        $writer = new DOMWriterFileCacheWithDependencies($writer, $context->createCacheFile("$infosetId.xml", $args), ...$dependentFiles);
         $resultBuilder = new FileWriterResultBuilder($writer, "$infosetId.xml");
         return new ExecutableStrategies($resultBuilder);
     }

@@ -68,6 +68,7 @@
             <xsl:apply-templates select="$root//*[@name = 'item-id']" mode="attr" />
             <xsl:apply-templates select="$root//*[@name = 'item-amount']" mode="attr" />
             <xsl:apply-templates select="$root//*[@name = 'item-charge']" mode="attr" />
+            <xsl:apply-templates select="$root//*[@name = 'item-recharges']" mode="attr" />
 
             <xsl:for-each select=".//*[@name = 'item-status']/*[@value != '']">
                 <xsl:attribute name="is-{saa:getName()}" />

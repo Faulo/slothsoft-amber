@@ -458,7 +458,7 @@
             <amber-item-charge value="{saa:item-instance/@item-charge}" />
         </amber-embed>
         <xsl:if test="@name">
-            <span class="name">
+            <span class="item-slot__name">
                 <xsl:value-of select="@name" />
             </span>
         </xsl:if>
