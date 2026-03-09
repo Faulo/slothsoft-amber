@@ -27,7 +27,7 @@
     <sfd:text xml:id="skill.ATT">Attacke</sfd:text>
     <sfd:text xml:id="skill.PAR">Parade</sfd:text>
     <sfd:text xml:id="skill.SCH">Schwimmen</sfd:text>
-    <sfd:text xml:id="skill.KRI">Kritischer Treffer</sfd:text>
+    <sfd:text xml:id="skill.KRI">Kritische Treffer</sfd:text>
     <sfd:text xml:id="skill.F-F">Fallen finden</sfd:text>
     <sfd:text xml:id="skill.F-E">Fallen entschärfen</sfd:text>
     <sfd:text xml:id="skill.S-Ö">Schlösser knacken</sfd:text>
@@ -59,8 +59,10 @@
     <sfd:text xml:id="form-name.ailments">Zustandsveränderungen</sfd:text>
     <sfd:text xml:id="form-name.languages">Sprachen</sfd:text>
     <sfd:text xml:id="form-name.spellbooks">Zauberschulen</sfd:text>
-    <sfd:text xml:id="form-name.attack">Schaden:</sfd:text>
-    <sfd:text xml:id="form-name.defense">Schutz:</sfd:text>
+    <sfd:text xml:id="form-name.combat-attack">Basis-Schaden:</sfd:text>
+    <sfd:text xml:id="form-name.attack">Schaden via Ausrüstung:</sfd:text>
+    <sfd:text xml:id="form-name.combat-defense">Basis-Schutz:</sfd:text>
+    <sfd:text xml:id="form-name.defense">Schutz via Ausrüstung:</sfd:text>
     <sfd:text xml:id="form-name.gold">Gold:</sfd:text>
     <sfd:text xml:id="form-name.weight">Gewicht:</sfd:text>
     <sfd:text xml:id="form-name.food">Rationen:</sfd:text>

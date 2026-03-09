@@ -129,7 +129,7 @@ class AmberEditorPage {
         }
 
         const attributes = ["Stärke", "Intelligenz", "Geschicklichkeit", "Schnelligkeit", "Konstitution", "Karisma", "Glück", "Anti-Magie"];
-        const specials = ["Anti-Magie", "Kritische Treffer", "Fallen Finden", "Fallen Entschärfen", "Schlösser Knacken", "Suchen"];
+        const specials = ["Anti-Magie", "Kritische Treffer", "Fallen finden", "Fallen entschärfen", "Schlösser knacken", "Suchen"];
         const zeros = ["Schwimmen"];
 
         for (const key in mappings) {
@@ -497,11 +497,11 @@ class AmberCharacter {
             "Parade": 75,
             "Schwimmen": 95,
             "Kritische Treffer": 0,
-            "Fallen Finden": 25,
-            "Fallen Entschärfen": 25,
-            "Schlösser Knacken": 25,
+            "Fallen finden": 25,
+            "Fallen entschärfen": 25,
+            "Schlösser knacken": 25,
             "Suchen": 25,
-            "Spruchrollen Lesen": 50,
+            "Spruchrollen lesen": 50,
             "Magie benutzen": 50,
             "MeisterDerMagie": false,
         },
@@ -516,11 +516,11 @@ class AmberCharacter {
             "Parade": 95,
             "Schwimmen": 95,
             "Kritische Treffer": 0,
-            "Fallen Finden": 0,
-            "Fallen Entschärfen": 0,
-            "Schlösser Knacken": 0,
+            "Fallen finden": 0,
+            "Fallen entschärfen": 0,
+            "Schlösser knacken": 0,
             "Suchen": 10,
-            "Spruchrollen Lesen": 0,
+            "Spruchrollen lesen": 0,
             "Magie benutzen": 0,
             "MeisterDerMagie": false,
         },
@@ -535,11 +535,11 @@ class AmberCharacter {
             "Parade": 65,
             "Schwimmen": 95,
             "Kritische Treffer": 0,
-            "Fallen Finden": 0,
-            "Fallen Entschärfen": 0,
-            "Schlösser Knacken": 0,
+            "Fallen finden": 0,
+            "Fallen entschärfen": 0,
+            "Schlösser knacken": 0,
             "Suchen": 30,
-            "Spruchrollen Lesen": 50,
+            "Spruchrollen lesen": 50,
             "Magie benutzen": 50,
             "MeisterDerMagie": false,
         },
@@ -554,11 +554,11 @@ class AmberCharacter {
             "Parade": 50,
             "Schwimmen": 95,
             "Kritische Treffer": 5,
-            "Fallen Finden": 95,
-            "Fallen Entschärfen": 95,
-            "Schlösser Knacken": 95,
+            "Fallen finden": 95,
+            "Fallen entschärfen": 95,
+            "Schlösser knacken": 95,
             "Suchen": 75,
-            "Spruchrollen Lesen": 0,
+            "Spruchrollen lesen": 0,
             "Magie benutzen": 0,
             "MeisterDerMagie": false,
         },
@@ -573,11 +573,11 @@ class AmberCharacter {
             "Parade": 60,
             "Schwimmen": 95,
             "Kritische Treffer": 5,
-            "Fallen Finden": 40,
-            "Fallen Entschärfen": 40,
-            "Schlösser Knacken": 15,
+            "Fallen finden": 40,
+            "Fallen entschärfen": 40,
+            "Schlösser knacken": 15,
             "Suchen": 95,
-            "Spruchrollen Lesen": 50,
+            "Spruchrollen lesen": 50,
             "Magie benutzen": 50,
             "MeisterDerMagie": false,
         },
@@ -592,11 +592,11 @@ class AmberCharacter {
             "Parade": 40,
             "Schwimmen": 95,
             "Kritische Treffer": 0,
-            "Fallen Finden": 0,
-            "Fallen Entschärfen": 0,
-            "Schlösser Knacken": 0,
+            "Fallen finden": 0,
+            "Fallen entschärfen": 0,
+            "Schlösser knacken": 0,
             "Suchen": 0,
-            "Spruchrollen Lesen": 95,
+            "Spruchrollen lesen": 95,
             "Magie benutzen": 95,
             "MeisterDerMagie": true,
         },
@@ -611,11 +611,11 @@ class AmberCharacter {
             "Parade": 40,
             "Schwimmen": 95,
             "Kritische Treffer": 0,
-            "Fallen Finden": 0,
-            "Fallen Entschärfen": 0,
-            "Schlösser Knacken": 0,
+            "Fallen finden": 0,
+            "Fallen entschärfen": 0,
+            "Schlösser knacken": 0,
             "Suchen": 0,
-            "Spruchrollen Lesen": 95,
+            "Spruchrollen lesen": 95,
             "Magie benutzen": 95,
             "MeisterDerMagie": true,
         },
@@ -630,11 +630,11 @@ class AmberCharacter {
             "Parade": 40,
             "Schwimmen": 95,
             "Kritische Treffer": 0,
-            "Fallen Finden": 0,
-            "Fallen Entschärfen": 0,
-            "Schlösser Knacken": 0,
+            "Fallen finden": 0,
+            "Fallen entschärfen": 0,
+            "Schlösser knacken": 0,
             "Suchen": 0,
-            "Spruchrollen Lesen": 95,
+            "Spruchrollen lesen": 95,
             "Magie benutzen": 95,
             "MeisterDerMagie": true,
         },
@@ -649,11 +649,11 @@ class AmberCharacter {
             "Parade": 35,
             "Schwimmen": 95,
             "Kritische Treffer": 0,
-            "Fallen Finden": 0,
-            "Fallen Entschärfen": 0,
-            "Schlösser Knacken": 0,
+            "Fallen finden": 0,
+            "Fallen entschärfen": 0,
+            "Schlösser knacken": 0,
             "Suchen": 0,
-            "Spruchrollen Lesen": 99,
+            "Spruchrollen lesen": 99,
             "Magie benutzen": 99,
             "MeisterDerMagie": false,
         },
@@ -710,11 +710,11 @@ class AmberCharacter {
         this.skills["Parade"] = skills[1];
         this.skills["Schwimmen"] = skills[2];
         this.skills["Kritische Treffer"] = skills[3];
-        this.skills["Fallen Finden"] = skills[4];
-        this.skills["Fallen Entschärfen"] = skills[5];
-        this.skills["Schlösser Knacken"] = skills[6];
+        this.skills["Fallen finden"] = skills[4];
+        this.skills["Fallen entschärfen"] = skills[5];
+        this.skills["Schlösser knacken"] = skills[6];
         this.skills["Suchen"] = skills[7];
-        this.skills["Spruchrollen Lesen"] = skills[8];
+        this.skills["Spruchrollen lesen"] = skills[8];
         this.skills["Magie benutzen"] = skills[9];
 
         this.equippedItems.push(...characterNode.querySelectorAll("*[data-name='equipment'] amber-embed"));
