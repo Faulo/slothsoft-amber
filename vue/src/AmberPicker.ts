@@ -98,6 +98,7 @@ async function instantiate(node: Element): Promise<MenuItem[]> {
                 instantiateToggle(node.querySelector("amber-identified"), "Ist identifiziert:"),
                 instantiateToggle(node.querySelector("amber-broken"), "Ist zerbrochen:"),
                 instantiateNumber(node.querySelector("amber-item-charge"), "Mag. Ladungen:"),
+                instantiateNumber(node.querySelector("amber-item-recharges"), "Bisherige Aufladungen:"),
             ];
         default:
             throw new Error(`Unknown type "${type}"`);

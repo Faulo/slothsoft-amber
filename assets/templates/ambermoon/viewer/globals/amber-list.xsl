@@ -456,6 +456,7 @@
                 <amber-broken />
             </xsl:if>
             <amber-item-charge value="{saa:item-instance/@item-charge}" />
+            <amber-item-recharges value="{saa:item-instance/@item-recharges}" />
         </amber-embed>
         <xsl:if test="@name">
             <span class="item-slot__name">

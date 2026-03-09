@@ -665,6 +665,7 @@
                 <xsl:with-param name="name" select="'broken'" />
             </xsl:apply-templates>
             <xsl:apply-templates select=".//*[@name = 'item-charge']" mode="form-picker" />
+            <xsl:apply-templates select=".//*[@name = 'item-recharges']" mode="form-picker" />
         </amber-embed>
     </xsl:template>
     <xsl:template match="*" mode="tile-picker">

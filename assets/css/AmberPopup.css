@@ -111,11 +111,11 @@ amber-broken[value=""]::after {
 
 amber-identified::after {
 	position: absolute;
-	top: 24px;
-	right: 2px;
+	top: 2px;
+	left: 2px;
 	font-size: 0.5em;
 	line-height: 1em;
-	content: "👁";
+	content: "🔎";
 	pointer-events: none;
 }
 
@@ -132,7 +132,6 @@ amber-item-charge::after {
 	line-height: 1em;
 	content: attr(value);
 	pointer-events: none;
-	content: attr(value);
 	right: 2px;
 }
 
@@ -143,6 +142,23 @@ amber-item-charge[value=""]::after, amber-item-charge[value="0"]::after
 
 amber-item-charge[value="255"]::after {
 	content: "**";
+}
+
+amber-item-recharges::after {
+	position: absolute;
+	top: 24px;
+	right: 2px;
+	color: #cc4433;
+	font-size: 0.5em;
+	line-height: 1em;
+	content: attr(value);
+	pointer-events: none;
+	right: 2px;
+}
+
+amber-item-recharges[value=""]::after, amber-item-recharges[value="0"]::after
+	{
+	display: none;
 }
 
 /* portraits */

@@ -1868,7 +1868,7 @@ let activePostFlushCbs = null;
 let postFlushIndex = 0;
 const resolvedPromise = /* @__PURE__ */ Promise.resolve();
 let currentFlushPromise = null;
-function nextTick$1(fn) {
+function nextTick(fn) {
   const p2 = currentFlushPromise || resolvedPromise;
   return fn ? p2.then(this ? fn.bind(this) : fn) : p2;
 }
@@ -2410,7 +2410,7 @@ const publicPropertiesMap = (
     $forceUpdate: (i) => i.f || (i.f = () => {
       queueJob(i.update);
     }),
-    $nextTick: (i) => i.n || (i.n = nextTick$1.bind(i.proxy)),
+    $nextTick: (i) => i.n || (i.n = nextTick.bind(i.proxy)),
     $watch: (i) => instanceWatch.bind(i)
   })
 );
@@ -6275,7 +6275,8 @@ async function instantiate(node) {
         instantiateNumber(node.querySelector("amber-item-amount"), "Anzahl:"),
         instantiateToggle(node.querySelector("amber-identified"), "Ist identifiziert:"),
         instantiateToggle(node.querySelector("amber-broken"), "Ist zerbrochen:"),
-        instantiateNumber(node.querySelector("amber-item-charge"), "Mag. Ladungen:")
+        instantiateNumber(node.querySelector("amber-item-charge"), "Mag. Ladungen:"),
+        instantiateNumber(node.querySelector("amber-item-recharges"), "Bisherige Aufladungen:")
       ];
     default:
       throw new Error(`Unknown type "${type}"`);
