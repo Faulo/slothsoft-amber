@@ -22,6 +22,7 @@
         <fragment name="AmberPopup">
             <link-stylesheet ref="//farah/font-face-generator?assets=//slothsoft@amber/fonts" />
             <link-stylesheet ref="/css/amber-character" />
+            <link-stylesheet ref="/css/amber-loot" />
             <link-stylesheet ref="/css/amber-item" />
             <link-stylesheet ref="/css/amber-misc" />
             <link-stylesheet ref="/css/amber-portrait" />

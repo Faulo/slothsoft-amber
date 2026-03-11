@@ -27,17 +27,20 @@
     <xsl:template name="extract-merchant">
         <xsl:param name="root" select="." />
         <xsl:param name="id" select="@file-name" />
-        <saa:merchant id="{$id}" name="{key('dictionary-option', 'shops')[@key = number($id)]/@val}">
-            <xsl:for-each select="$root//*[@name = 'inventory']/*/*">
-                <xsl:call-template name="extract-slot" />
-            </xsl:for-each>
-        </saa:merchant>
+        <xsl:variable name="name" select="key('dictionary-option', 'shops')[@key = number($id)]/@val" />
+        <xsl:if test="$name != '-'">
+            <saa:merchant id="{$id}" name="{substring-after($name, ', ')}" place="{substring-before($name, ', ')}">
+                <xsl:for-each select="$root//*[@name = 'inventory']/*/*">
+                    <xsl:call-template name="extract-slot" />
+                </xsl:for-each>
+            </saa:merchant>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template name="extract-chest">
         <xsl:param name="root" select="." />
         <xsl:param name="id" select="@file-name" />
-        <saa:chest id="{$id}">
+        <saa:chest id="{$id}" name="Truhe #{$id}">
             <xsl:apply-templates select="$root//*[@name = 'gold']" mode="attr" />
             <xsl:apply-templates select="$root//*[@name = 'food']" mode="attr" />
             <xsl:for-each select="$root//*[@name = 'inventory']/*/*">

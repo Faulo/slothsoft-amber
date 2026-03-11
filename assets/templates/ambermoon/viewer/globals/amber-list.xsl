@@ -445,6 +445,58 @@
         </ul>
     </xsl:template>
 
+    <xsl:template match="saa:merchant | saa:chest">
+        <div class="amber-loot amber-text">
+            <xsl:if test="@place">
+                <div class="amber-loot__place amber-text amber-text--gray">
+                    <xsl:value-of select="@place" />
+                </div>
+            </xsl:if>
+            <h2 class="amber-loot__name amber-text amber-text--yellow">
+                <span>
+                    <xsl:value-of select="@name" />
+                </span>
+            </h2>
+            <div class="amber-loot__body">
+                <div class="amber-loot__inventory">
+                    <h3 class="amber-text amber-text--green amber-text--caption">Inventar</h3>
+                    <ul>
+                        <xsl:for-each select="saa:slot">
+                            <li>
+                                <xsl:apply-templates select="." mode="itemlist-inline" />
+                            </li>
+                        </xsl:for-each>
+                    </ul>
+                </div>
+                <xsl:if test="@gold">
+                    <div class="amber-loot__inventory">
+                        <table>
+                            <caption class="amber-text amber-text--green amber-text--caption">Wertvolles</caption>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="amber-icon amber-icon--gold" data-hover-text="Gold">:</span>
+                                    </td>
+                                    <td>
+                                        <xsl:value-of select="@gold" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="amber-icon amber-icon--food" data-hover-text="Rationen">:</span>
+                                    </td>
+                                    <td>
+                                        <xsl:value-of select="@food" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </xsl:if>
+            </div>
+        </div>
+    </xsl:template>
+
     <xsl:template match="saa:slot" mode="itemlist-inline">
         <amber-embed infoset="lib.items" type="item" id="{saa:item-instance/@item-id}" mode="popup">
             <amber-item-id value="{saa:item-instance/@item-id}" />
