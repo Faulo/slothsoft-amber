@@ -15,7 +15,6 @@ use Throwable;
 final class AmigaExecutableDeplodeTest extends TestCase {
     
     protected function setUp(): void {
-        parent::setUp();
         TestUtils::changeWorkingDirectoryToComposerRoot();
     }
     

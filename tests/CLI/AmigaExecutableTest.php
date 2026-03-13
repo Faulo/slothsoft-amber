@@ -20,17 +20,17 @@ use Throwable;
  */
 final class AmigaExecutableTest extends TestCase {
     
-    private const AM2_CPU_IMPLODED = 'test-files/Amberfiles/AM2_CPU.imploded';
+    public const AM2_CPU_IMPLODED = 'test-files/Amberfiles/AM2_CPU.imploded';
     
     public const AM2_CPU_DATA_IMPLODED = 'test-files/Amberfiles/AM2_CPU_DATA.imploded';
     
-    private const AM2_CPU_DEPLODED = 'test-files/Amberfiles/AM2_CPU.deploded';
+    public const AM2_CPU_DEPLODED = 'test-files/Amberfiles/AM2_CPU.deploded';
     
     public const AM2_CPU_DATA_DEPLODED = 'test-files/Amberfiles/AM2_CPU_DATA.deploded';
     
-    private const AM2_BLIT_IMPLODED = 'test-files/Amberfiles/AM2_BLIT.imploded';
+    public const AM2_BLIT_IMPLODED = 'test-files/Amberfiles/AM2_BLIT.imploded';
     
-    private const AM2_BLIT_DEPLODED = 'test-files/Amberfiles/AM2_BLIT.deploded';
+    public const AM2_BLIT_DEPLODED = 'test-files/Amberfiles/AM2_BLIT.deploded';
     
     private static AmigaExecutableDeplodeInfo $cpuInfo;
     

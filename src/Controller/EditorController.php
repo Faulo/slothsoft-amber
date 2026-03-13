@@ -6,6 +6,7 @@ use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
+use Slothsoft\Amber\SavegameImplementations\AmberExecutableBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberExecutableExtractor;
 use Slothsoft\Farah\FarahUrl\FarahUrl;
 use Slothsoft\Farah\Module\Module;
@@ -23,7 +24,7 @@ class EditorController {
         $cacheDirectory = $parameters->getServerCacheDirectory();
         $infosetFile = $parameters->getStaticInfosetFile();
         $archiveExtractors = $this->createArchiveExtractors();
-        $archiveBuilders = $this->createArchiveBuilders();
+        $archiveBuilders = $this->createArchiveBuilders($sourceDirectory);
         
         return new EditorConfig($sourceDirectory, $userDirectory, $cacheDirectory, $infosetFile, $archiveExtractors, $archiveBuilders);
     }
@@ -65,7 +66,7 @@ class EditorController {
         return $ret;
     }
     
-    private function createArchiveBuilders(): array {
+    private function createArchiveBuilders(SplFileInfo $sourceDirectory): array {
         $ret = [];
         
         $amberBuilder = new AmberArchiveBuilder();
@@ -74,7 +75,8 @@ class EditorController {
         $copyBuilder = new CopyArchiveBuilder();
         $ret[AmbTool::TYPE_JH] = $copyBuilder;
         $ret[AmbTool::TYPE_RAW] = $copyBuilder;
-        $ret[AmbTool::TYPE_AM2] = $copyBuilder;
+        
+        $ret[AmbTool::TYPE_AM2] = new AmberExecutableBuilder($sourceDirectory);
         
         return $ret;
     }
