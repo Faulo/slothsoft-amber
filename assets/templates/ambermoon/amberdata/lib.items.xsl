@@ -11,7 +11,7 @@
     </xsl:template>
 
     <xsl:template match="sse:savegame">
-        <xsl:variable name="items" select="sse:archive[@type='AM2'][1]//*[@name = 'items']/*" />
+        <xsl:variable name="items" select="sse:archive[@type='AM2'][2]//*[@name = 'items']/*" />
         <xsl:variable name="texts" select="sse:archive[@name='Object_texts.amb']" />
 
         <xsl:if test="count($items)">
@@ -82,29 +82,29 @@
             <xsl:if test=".//*[@name = 'skill-value']/@value &gt; 0">
                 <xsl:apply-templates select=".//*[@name = 'skill-type']" mode="attr" />
             </xsl:if>
-            <xsl:if test=".//*[@name = 'neative-skill-value-1']/@value &gt; 0">
-                <xsl:apply-templates select=".//*[@name = 'neative-skill-type-1']" mode="attr" />
+            <xsl:if test=".//*[@name = 'negative-skill-value-1']/@value &gt; 0">
+                <xsl:apply-templates select=".//*[@name = 'negative-skill-type-1']" mode="attr" />
             </xsl:if>
-            <xsl:if test=".//*[@name = 'neative-skill-value-2']/@value &gt; 0">
-                <xsl:apply-templates select=".//*[@name = 'neative-skill-type-2']" mode="attr" />
+            <xsl:if test=".//*[@name = 'negative-skill-value-2']/@value &gt; 0">
+                <xsl:apply-templates select=".//*[@name = 'negative-skill-type-2']" mode="attr" />
             </xsl:if>
 
             <xsl:if test="$spell-id &gt; 0">
                 <xsl:attribute name="spell-type">
-					<xsl:value-of select="key('string-dictionary', 'spell-types')[position() = $spell-type + 1]/@value" />
-				</xsl:attribute>
+                    <xsl:value-of select="key('string-dictionary', 'spell-types')[position() = $spell-type + 1]/@value" />
+                </xsl:attribute>
                 <xsl:attribute name="spell-name">
-					<xsl:value-of select="key('string-dictionary', $spell-dictionary)[position() = $spell-id]/@value" />
-				</xsl:attribute>
+                    <xsl:value-of select="key('string-dictionary', $spell-dictionary)[position() = $spell-id]/@value" />
+                </xsl:attribute>
             </xsl:if>
             <xsl:attribute name="gender">
-				<xsl:choose>
+                <xsl:choose>
                     <xsl:when test="$genders[1][@value=1] and $genders[2][@value=1]">beide</xsl:when>
                     <xsl:when test="$genders[1][@value=1]">männlich</xsl:when>
                     <xsl:when test="$genders[2][@value=1]">weiblich</xsl:when>
                     <xsl:otherwise>niemand</xsl:otherwise>
-				</xsl:choose>
-			</xsl:attribute>
+                </xsl:choose>
+            </xsl:attribute>
             <xsl:for-each select=".//*[@name = 'properties']/*[@value != '']">
                 <xsl:attribute name="is-{saa:getName()}" />
             </xsl:for-each>

@@ -70,13 +70,13 @@
 .amber-item__restrictions>dt:nth-of-type(3) {
 	grid-column: 2;
 	grid-row: 3;
-    text-align: right;
+	text-align: right;
 }
 
 .amber-item__restrictions>dd:nth-of-type(3) {
 	grid-column: 2;
 	grid-row: 4;
-    text-align: right;
+	text-align: right;
 }
 
 .amber-item__restrictions dd {
@@ -103,6 +103,7 @@
 .amber-item__magic .amber-item__value {
 	width: 3ch;
 	padding-right: 1ch;
+	text-align: right;
 }
 
 .amber-item__magic .amber-item__value:last-child {

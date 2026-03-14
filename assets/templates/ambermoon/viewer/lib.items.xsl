@@ -277,47 +277,61 @@
                             </tr>
                         </tbody>
                         <tbody>
-                            <tr>
-                                <td colspan="4" class="amber-text amber-text--orange">
-                                    <xsl:if test="@skill-value &gt; 0 or @neative-skill-type-1 != '-' or @neative-skill-type-2!= '-'">
-                                        Fähigkeit
-                                    </xsl:if>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
+                            <xsl:choose>
+                                <xsl:when test="@skill-value &gt; 0 or @negative-skill-type-1 != '-' or @negative-skill-type-2!= '-'">
+                                    <tr>
+                                        <td colspan="4" class="amber-text amber-text--orange">
+                                            <xsl:text>Fähigkeit</xsl:text>
+                                        </td>
+                                    </tr>
                                     <xsl:if test="@skill-value &gt; 0">
-                                        <xsl:value-of select="@skill-type" />
+                                        <tr>
+                                            <td colspan="3">
+                                                <xsl:if test="@skill-value &gt; 0">
+                                                    <xsl:value-of select="translate(@skill-type, ' ', '&#160;')" />
+                                                </xsl:if>
+                                            </td>
+                                            <td class="amber-item__value">
+                                                <xsl:choose>
+                                                    <xsl:when test="@is-cursed">
+                                                        <xsl:text>-</xsl:text>
+                                                    </xsl:when>
+                                                    <xsl:otherwise>
+                                                        <xsl:text>+</xsl:text>
+                                                    </xsl:otherwise>
+                                                </xsl:choose>
+                                                <xsl:value-of select="@skill-value" />
+                                            </td>
+                                        </tr>
                                     </xsl:if>
-                                    <xsl:if test="@neative-skill-type-1 != '-'">
-                                        <xsl:value-of select="@neative-skill-type-1" />
-                                    </xsl:if>
-                                    <xsl:if test="@neative-skill-type-2 != '-'">
-                                        <xsl:value-of select="@neative-skill-type-2" />
-                                    </xsl:if>
-                                </td>
-                                <td class="amber-item__value">
-                                    <xsl:if test="@skill-value &gt; 0">
-                                        <xsl:choose>
-                                            <xsl:when test="@is-cursed">
+                                    <xsl:if test="@negative-skill-type-1 != '-'">
+                                        <tr>
+                                            <td colspan="3">
+                                                <xsl:value-of select="translate(@negative-skill-type-1, ' ', '&#160;')" />
+                                            </td>
+                                            <td class="amber-item__value">
                                                 <xsl:text>-</xsl:text>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:text>+</xsl:text>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                        <xsl:value-of select="@skill-value" />
+                                                <xsl:value-of select="@negative-skill-value-1" />
+                                            </td>
+                                        </tr>
                                     </xsl:if>
-                                    <xsl:if test="@neative-skill-type-1 != '-'">
-                                        <xsl:text>-</xsl:text>
-                                        <xsl:value-of select="@neative-skill-value-1" />
+                                    <xsl:if test="@negative-skill-type-2 != '-'">
+                                        <tr>
+                                            <td colspan="3">
+                                                <xsl:value-of select="translate(@negative-skill-type-2, ' ', '&#160;')" />
+                                            </td>
+                                            <td class="amber-item__value">
+                                                <xsl:text>-</xsl:text>
+                                                <xsl:value-of select="@negative-skill-value-2" />
+                                            </td>
+                                        </tr>
                                     </xsl:if>
-                                    <xsl:if test="@neative-skill-type-2 != '-'">
-                                        <xsl:text>-</xsl:text>
-                                        <xsl:value-of select="@neative-skill-value-2" />
-                                    </xsl:if>
-                                </td>
-                            </tr>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <tr />
+                                    <tr />
+                                </xsl:otherwise>
+                            </xsl:choose>
                         </tbody>
                         <tbody>
                             <tr>
@@ -335,7 +349,7 @@
                                                 <xsl:text>?</xsl:text>
                                             </xsl:when>
                                             <xsl:otherwise>
-                                                <xsl:value-of select="@spell-name" />
+                                                <xsl:value-of select="translate(@spell-name, ' ', '&#160;')" />
                                             </xsl:otherwise>
                                         </xsl:choose>
                                     </xsl:if>
