@@ -11,7 +11,7 @@
     </xsl:template>
 
     <xsl:template match="saa:item">
-        <!--<item xmlns="" id="361" image="9" name="MAGIERSTIEFEL" type="Schuhe" hands="0" fingers="0" damage="0" armor="6" weight="850" gender="beide" class="Magier Mystik. Alchem. Heiler"/> -->
+        <!-- <item xmlns="" id="361" image="9" name="MAGIERSTIEFEL" type="Schuhe" hands="0" fingers="0" damage="0" armor="6" weight="850" gender="beide" class="Magier Mystik. Alchem. Heiler"/> -->
         <article data-item-id="{@id}" class="amber-item amber-text">
             <div>
                 <div>
@@ -34,7 +34,9 @@
                 <table>
                     <tbody class="amber-item__worth">
                         <tr>
-                            <td>Gewicht:</td>
+                            <td>
+                                <xsl:text>Gewicht:</xsl:text>
+                            </td>
                             <td>
                                 <div class="amber-item__value">
                                     <xsl:value-of select="concat(@weight, ' gr')" />
@@ -42,7 +44,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Wert:</td>
+                            <td>
+                                <xsl:text>Wert:</xsl:text>
+                            </td>
                             <td>
                                 <div class="amber-item__value">
                                     <xsl:value-of select="concat(@price, ' gp')" />
@@ -52,7 +56,9 @@
                     </tbody>
                     <tbody class="amber-item__stats">
                         <tr>
-                            <td>Hände:</td>
+                            <td>
+                                <xsl:text>Hände:</xsl:text>
+                            </td>
                             <td>
                                 <div class="amber-item__value">
                                     <xsl:value-of select="@hands" />
@@ -60,7 +66,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Finger:</td>
+                            <td>
+                                <xsl:text>Finger:</xsl:text>
+                            </td>
                             <td>
                                 <div class="amber-item__value">
                                     <xsl:value-of select="@fingers" />
@@ -68,7 +76,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Schaden:</td>
+                            <td>
+                                <xsl:text>Schaden:</xsl:text>
+                            </td>
                             <td>
                                 <div class="amber-item__value">
                                     <xsl:if test="@damage &gt; 0">
@@ -79,7 +89,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Schutz:</td>
+                            <td>
+                                <xsl:text>Schutz:</xsl:text>
+                            </td>
                             <td>
                                 <div class="amber-item__value">
                                     <xsl:if test="@armor &gt; 0">
@@ -118,7 +130,9 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <dl class="amber-item__restrictions">
-                        <dt class="amber-text amber-text--gray">------ Klassen ------</dt>
+                        <dt class="amber-text amber-text--gray">
+                            <xsl:text>------ Klassen ------</xsl:text>
+                        </dt>
                         <dd class="amber-item__classes">
                             <ul>
                                 <xsl:for-each select="saa:class-reference/@name">
@@ -128,8 +142,12 @@
                                 </xsl:for-each>
                             </ul>
                         </dd>
-                        <dt class="amber-text amber-text--gray">Geschlecht</dt>
-                        <dt class="amber-item__properties amber-text amber-text--gray">Merkmale</dt>
+                        <dt class="amber-text amber-text--gray">
+                            <xsl:text>Geschlecht</xsl:text>
+                        </dt>
+                        <dt class="amber-item__properties amber-text amber-text--gray">
+                            <xsl:text>Merkmale</xsl:text>
+                        </dt>
                         <dd>
                             <xsl:value-of select="@gender" />
                         </dd>
@@ -187,7 +205,9 @@
                     <table class="amber-item__magic">
                         <tbody>
                             <tr>
-                                <td title="Lebenspunkte Maximum">LP-Max: </td>
+                                <td title="Lebenspunkte Maximum">
+                                    <xsl:text>LP-Max:</xsl:text>
+                                </td>
                                 <td class="amber-item__value">
                                     <xsl:if test="@lp-max &gt; 0">
                                         <xsl:choose>
@@ -201,7 +221,9 @@
                                     </xsl:if>
                                     <xsl:value-of select="@lp-max" />
                                 </td>
-                                <td title="Spruchpunkte Maximum">SP-Max: </td>
+                                <td title="Spruchpunkte Maximum">
+                                    <xsl:text>SP-Max:</xsl:text>
+                                </td>
                                 <td class="amber-item__value">
                                     <xsl:if test="@sp-max &gt; 0">
                                         <xsl:choose>
@@ -217,7 +239,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td title="Magischer Rüstschutz, Angriff">M-B-W: </td>
+                                <td title="Magischer Rüstschutz, Angriff">
+                                    <xsl:text>M-B-W:</xsl:text>
+                                </td>
                                 <td class="amber-item__value">
                                     <xsl:if test="@magic-weapon &gt; 0">
                                         <xsl:choose>
@@ -231,7 +255,9 @@
                                     </xsl:if>
                                     <xsl:value-of select="@magic-weapon" />
                                 </td>
-                                <td title="Magischer Rüstschutz, Verteidigung">M-B-R: </td>
+                                <td title="Magischer Rüstschutz, Verteidigung">
+                                    <xsl:text>M-B-R:</xsl:text>
+                                </td>
                                 <td class="amber-item__value">
                                     <xsl:if test="@magic-armor &gt; 0">
                                         <xsl:choose>
@@ -251,7 +277,7 @@
                             <tr>
                                 <td colspan="4" class="amber-text amber-text--orange">
                                     <xsl:if test="@attribute-value &gt; 0">
-                                        Attribut
+                                        <xsl:text>Attribut</xsl:text>
                                     </xsl:if>
                                 </td>
                             </tr>
