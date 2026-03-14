@@ -206,9 +206,15 @@
                         <tbody>
                             <tr>
                                 <td title="Lebenspunkte Maximum">
+                                    <xsl:if test="@lp-max = 0">
+                                        <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
+                                    </xsl:if>
                                     <xsl:text>LP-Max:</xsl:text>
                                 </td>
                                 <td class="amber-item__value">
+                                    <xsl:if test="@lp-max = 0">
+                                        <xsl:attribute name="class">amber-item__value amber-text amber-text--disabled</xsl:attribute>
+                                    </xsl:if>
                                     <xsl:if test="@lp-max &gt; 0">
                                         <xsl:choose>
                                             <xsl:when test="@is-cursed">
@@ -221,10 +227,17 @@
                                     </xsl:if>
                                     <xsl:value-of select="@lp-max" />
                                 </td>
+                                <td data-ch="1" />
                                 <td title="Spruchpunkte Maximum">
+                                    <xsl:if test="@sp-max = 0">
+                                        <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
+                                    </xsl:if>
                                     <xsl:text>SP-Max:</xsl:text>
                                 </td>
                                 <td class="amber-item__value">
+                                    <xsl:if test="@sp-max = 0">
+                                        <xsl:attribute name="class">amber-item__value amber-text amber-text--disabled</xsl:attribute>
+                                    </xsl:if>
                                     <xsl:if test="@sp-max &gt; 0">
                                         <xsl:choose>
                                             <xsl:when test="@is-cursed">
@@ -240,9 +253,15 @@
                             </tr>
                             <tr>
                                 <td title="Magischer Rüstschutz, Angriff">
+                                    <xsl:if test="@magic-weapon = 0">
+                                        <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
+                                    </xsl:if>
                                     <xsl:text>M-B-W:</xsl:text>
                                 </td>
                                 <td class="amber-item__value">
+                                    <xsl:if test="@magic-weapon = 0">
+                                        <xsl:attribute name="class">amber-item__value amber-text amber-text--disabled</xsl:attribute>
+                                    </xsl:if>
                                     <xsl:if test="@magic-weapon &gt; 0">
                                         <xsl:choose>
                                             <xsl:when test="@is-cursed">
@@ -255,10 +274,17 @@
                                     </xsl:if>
                                     <xsl:value-of select="@magic-weapon" />
                                 </td>
+                                <td data-ch="1" />
                                 <td title="Magischer Rüstschutz, Verteidigung">
+                                    <xsl:if test="@magic-armor = 0">
+                                        <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
+                                    </xsl:if>
                                     <xsl:text>M-B-R:</xsl:text>
                                 </td>
                                 <td class="amber-item__value">
+                                    <xsl:if test="@magic-armor = 0">
+                                        <xsl:attribute name="class">amber-item__value amber-text amber-text--disabled</xsl:attribute>
+                                    </xsl:if>
                                     <xsl:if test="@magic-armor &gt; 0">
                                         <xsl:choose>
                                             <xsl:when test="@is-cursed">
@@ -275,14 +301,14 @@
                         </tbody>
                         <tbody>
                             <tr>
-                                <td colspan="4" class="amber-text amber-text--orange">
+                                <td colspan="5" class="amber-text amber-text--orange">
                                     <xsl:if test="@attribute-value &gt; 0">
                                         <xsl:text>Attribut</xsl:text>
                                     </xsl:if>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="4">
                                     <xsl:if test="@attribute-value &gt; 0">
                                         <xsl:value-of select="@attribute-type" />
                                     </xsl:if>
@@ -306,13 +332,13 @@
                             <xsl:choose>
                                 <xsl:when test="@skill-value &gt; 0 or @negative-skill-type-1 != '-' or @negative-skill-type-2!= '-'">
                                     <tr>
-                                        <td colspan="4" class="amber-text amber-text--orange">
+                                        <td colspan="5" class="amber-text amber-text--orange">
                                             <xsl:text>Fähigkeit</xsl:text>
                                         </td>
                                     </tr>
                                     <xsl:if test="@skill-value &gt; 0">
                                         <tr>
-                                            <td colspan="3">
+                                            <td colspan="4">
                                                 <xsl:if test="@skill-value &gt; 0">
                                                     <xsl:value-of select="translate(@skill-type, ' ', '&#160;')" />
                                                 </xsl:if>
@@ -332,7 +358,7 @@
                                     </xsl:if>
                                     <xsl:if test="@negative-skill-type-1 != '-'">
                                         <tr>
-                                            <td colspan="3">
+                                            <td colspan="4">
                                                 <xsl:value-of select="translate(@negative-skill-type-1, ' ', '&#160;')" />
                                             </td>
                                             <td class="amber-item__value">
@@ -343,7 +369,7 @@
                                     </xsl:if>
                                     <xsl:if test="@negative-skill-type-2 != '-'">
                                         <tr>
-                                            <td colspan="3">
+                                            <td colspan="4">
                                                 <xsl:value-of select="translate(@negative-skill-type-2, ' ', '&#160;')" />
                                             </td>
                                             <td class="amber-item__value">
@@ -361,14 +387,14 @@
                         </tbody>
                         <tbody>
                             <tr>
-                                <td colspan="4" class="amber-text amber-text--orange">
+                                <td colspan="5" class="amber-text amber-text--orange">
                                     <xsl:if test="@spell-id &gt; 0">
                                         <xsl:value-of select="@spell-type" />
                                     </xsl:if>
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3">
+                                <td colspan="4">
                                     <xsl:if test="@spell-id &gt; 0">
                                         <xsl:choose>
                                             <xsl:when test="@spell-name = ''">
