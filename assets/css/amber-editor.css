@@ -51,6 +51,7 @@
 
 .amber-editor__input:disabled {
 	opacity: 0.8;
+	pointer-events: none;
 }
 
 .amber-editor__input--tabs {
