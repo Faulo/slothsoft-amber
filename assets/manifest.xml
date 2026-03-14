@@ -56,8 +56,6 @@
 
     <resource-directory name="js" type="application/javascript" />
 
-    <resource-directory name="release" type="*/*" />
-
     <resource-directory name="schema" type="application/x-xsd+xml" />
 
     <resource-directory name="source" type="*/*" />
