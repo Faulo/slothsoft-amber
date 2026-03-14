@@ -8,7 +8,33 @@ class AmberAPI {
         "viewer": "/slothsoft@amber/api/viewer",
     };
 
+    #args = ["repository", "game", "version"];
+
+    #getUrl(type, infosetId) {
+        let url = AmberAPI.#urls[type] + "?infosetId=" + infosetId;
+
+        for (const key of this.#args) {
+            const node = document.querySelector(`input[name="${key}"]`);
+            if (node) {
+                const value = node.value;
+                url += `&${key}=${value}`;
+            }
+        }
+
+        return url;
+    }
+
     #documents = {};
+
+    #getDocument(type, infosetId) {
+        const url = this.#getUrl(type, infosetId);
+
+        if (this.#documents[url]) {
+            return Promise.resolve(this.#documents[url]);
+        }
+
+        return DOM.loadDocumentAsync(url).then(d => this.#documents[url] = d);
+    }
 
     getAmberdataItems(itemIds) {
         return this.getAmberdataDocument("lib.items")
@@ -34,13 +60,7 @@ class AmberAPI {
     }
 
     getAmberdataDocument(infosetId) {
-        const url = AmberAPI.#urls.amberdata + "?infosetId=" + infosetId;
-
-        if (this.#documents[url]) {
-            return Promise.resolve(this.#documents[url]);
-        }
-
-        return DOM.loadDocumentAsync(url).then(d => this.#documents[url] = d);
+        return this.#getDocument("amberdata", infosetId);
     }
 
     getViewElement(infosetId, type, id) {
@@ -57,13 +77,7 @@ class AmberAPI {
     }
 
     getViewDocument(infosetId) {
-        const url = AmberAPI.#urls.viewer + "?infosetId=" + infosetId;
-
-        if (this.#documents[url]) {
-            return Promise.resolve(this.#documents[url]);
-        }
-
-        return DOM.loadDocumentAsync(url).then(d => this.#documents[url] = d);
+        return this.#getDocument("viewer", infosetId);
     }
 }
 
