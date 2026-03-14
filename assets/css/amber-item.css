@@ -33,9 +33,13 @@
 
 .amber-item__worth::before, .amber-item__stats::before,
 	.amber-item__magic tbody+tbody::before {
-	height: 0.4em;
+	height: 0.6em;
 	display: table-row;
 	content: " ";
+}
+
+.amber-item__magic tbody+tbody::before {
+	height: auto;
 }
 
 .amber-item__worth .amber-item__value {
