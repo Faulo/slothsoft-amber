@@ -338,11 +338,11 @@ class AmberEditorPage {
                 if (parseInt(itemNode.getAttribute("skill-value"))) {
                     data[itemNode.getAttribute("skill-type")] += parseInt(itemNode.getAttribute("skill-value"));
                 }
-                if (parseInt(itemNode.getAttribute("negative-skill-type-1"))) {
-                    data[itemNode.getAttribute("negative-skill-type-1") - 1] -= parseInt(itemNode.getAttribute("negative-skill-value-1"));
+                if (itemNode.hasAttribute("negative-skill-type-1")) {
+                    data[itemNode.getAttribute("negative-skill-type-1")] -= parseInt(itemNode.getAttribute("negative-skill-value-1"));
                 }
-                if (parseInt(itemNode.getAttribute("negative-skill-type-2"))) {
-                    data[itemNode.getAttribute("negative-skill-type-2") - 1] -= parseInt(itemNode.getAttribute("negative-skill-value-2"));
+                if (itemNode.hasAttribute("negative-skill-type-2")) {
+                    data[itemNode.getAttribute("negative-skill-type-2")] -= parseInt(itemNode.getAttribute("negative-skill-value-2"));
                 }
             }
         );
