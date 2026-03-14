@@ -279,7 +279,7 @@
                         <tbody>
                             <tr>
                                 <td colspan="4" class="amber-text amber-text--orange">
-                                    <xsl:if test="@skill-value &gt; 0 or @hidden-skill-type != '-'">
+                                    <xsl:if test="@skill-value &gt; 0 or @neative-skill-type-1 != '-' or @neative-skill-type-2!= '-'">
                                         Fähigkeit
                                     </xsl:if>
                                 </td>
@@ -289,8 +289,11 @@
                                     <xsl:if test="@skill-value &gt; 0">
                                         <xsl:value-of select="@skill-type" />
                                     </xsl:if>
-                                    <xsl:if test="@hidden-skill-type != '-'">
-                                        <xsl:value-of select="@hidden-skill-type" />
+                                    <xsl:if test="@neative-skill-type-1 != '-'">
+                                        <xsl:value-of select="@neative-skill-type-1" />
+                                    </xsl:if>
+                                    <xsl:if test="@neative-skill-type-2 != '-'">
+                                        <xsl:value-of select="@neative-skill-type-2" />
                                     </xsl:if>
                                 </td>
                                 <td class="amber-item__value">
@@ -305,9 +308,13 @@
                                         </xsl:choose>
                                         <xsl:value-of select="@skill-value" />
                                     </xsl:if>
-                                    <xsl:if test="@hidden-skill-type != '-'">
+                                    <xsl:if test="@neative-skill-type-1 != '-'">
                                         <xsl:text>-</xsl:text>
-                                        <xsl:value-of select="@hidden-skill-value" />
+                                        <xsl:value-of select="@neative-skill-value-1" />
+                                    </xsl:if>
+                                    <xsl:if test="@neative-skill-type-2 != '-'">
+                                        <xsl:text>-</xsl:text>
+                                        <xsl:value-of select="@neative-skill-value-2" />
                                     </xsl:if>
                                 </td>
                             </tr>

@@ -93,21 +93,21 @@ class AmberEditorPage {
     }
     #applyMemberCount(count) {
         const selectNodes = this.#fieldsetNode.querySelectorAll("select");
-        for (let i = 0; i < selectNodes.length; i++) {
+        for (let i = 0;i < selectNodes.length;i++) {
             const characterIndex = i + 1;
             const selectNode = selectNodes[i];
             selectNode.selectedIndex = characterIndex <= count ? characterIndex : 0;
         }
 
         const checkboxNodes = this.#fieldsetNode.querySelectorAll("input[type='checkbox']");
-        for (let i = 0; i < checkboxNodes.length; i++) {
+        for (let i = 0;i < checkboxNodes.length;i++) {
             const characterIndex = i + 1;
             const checkboxNode = checkboxNodes[i];
             checkboxNode.checked = characterIndex <= count;
         }
 
         const characterNodes = this.#fieldsetNode.parentNode.querySelectorAll(".amber-editor__party>*");
-        for (let i = 0; i < characterNodes.length; i++) {
+        for (let i = 0;i < characterNodes.length;i++) {
             const characterIndex = i + 1;
             const characterNode = characterNodes[i];
             characterNode.disabled = characterIndex > count;
@@ -183,7 +183,7 @@ class AmberEditorPage {
 
     #roll(amount, type, modifier) {
         let result = amount + modifier;
-        for (let i = 0; i < amount; i++) {
+        for (let i = 0;i < amount;i++) {
             result += Math.floor(Math.random() * type);
         }
 
@@ -254,7 +254,7 @@ class AmberEditorPage {
             }
 
             // Zauberschule
-            for (let i = 0; i < this.#character.spellbooks.length; i++) {
+            for (let i = 0;i < this.#character.spellbooks.length;i++) {
                 this.#character.spellbooks[i].checked = i === klasse.Zauberschule - 1;
             }
 
@@ -338,8 +338,11 @@ class AmberEditorPage {
                 if (parseInt(itemNode.getAttribute("skill-value"))) {
                     data[itemNode.getAttribute("skill-type")] += parseInt(itemNode.getAttribute("skill-value"));
                 }
-                if (parseInt(itemNode.getAttribute("hidden-skill-type"))) {
-                    data[itemNode.getAttribute("hidden-skill-type") - 1] -= parseInt(itemNode.getAttribute("hidden-skill-value"));
+                if (parseInt(itemNode.getAttribute("negative-skill-type-1"))) {
+                    data[itemNode.getAttribute("negative-skill-type-1") - 1] -= parseInt(itemNode.getAttribute("negative-skill-value-1"));
+                }
+                if (parseInt(itemNode.getAttribute("negative-skill-type-2"))) {
+                    data[itemNode.getAttribute("negative-skill-type-2") - 1] -= parseInt(itemNode.getAttribute("negative-skill-value-2"));
                 }
             }
         );

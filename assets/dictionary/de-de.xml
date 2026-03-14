@@ -81,7 +81,41 @@
     <sfd:text xml:id="form-name.spell-modifiers">Daten:</sfd:text>
     <sfd:text xml:id="form-name.spell-effect">Effekt:</sfd:text>
 
+    <sfd:text xml:id="form-name.type">Art:</sfd:text>
+    <sfd:text xml:id="form-name.image-id">Bild ID:</sfd:text>
+    <sfd:text xml:id="form-name.price">Preis:</sfd:text>
+    <sfd:text xml:id="form-name.classes">Kompatible Klassen</sfd:text>
+    <sfd:text xml:id="form-name.default-status">Zustand (Standard)</sfd:text>
+    <sfd:text xml:id="form-name.slot">Slot:</sfd:text>
+    <sfd:text xml:id="form-name.hands">Benötigte Hände:</sfd:text>
+    <sfd:text xml:id="form-name.fingers">Benötigte Finger:</sfd:text>
+    <sfd:text xml:id="form-name.ranged-type">Fernkampfwaffenart:</sfd:text>
+    <sfd:text xml:id="form-name.ammunition-type">Munitionsart:</sfd:text>
+    <sfd:text xml:id="form-name.damage">Schaden:</sfd:text>
+    <sfd:text xml:id="form-name.armor">Schutz:</sfd:text>
+    <sfd:text xml:id="form-name.magic-weapon">M-B-W:</sfd:text>
+    <sfd:text xml:id="form-name.magic-armor">M-B-R:</sfd:text>
+    <sfd:text xml:id="form-name.hp-max">Bonus zu LP:</sfd:text>
+    <sfd:text xml:id="form-name.sp-max">Bonus zu SP:</sfd:text>
 
+    <sfd:text xml:id="form-name.attribute-type">Bonus zu Attribut:</sfd:text>
+    <sfd:text xml:id="form-name.attribute-value">Attributsbonus:</sfd:text>
+    <sfd:text xml:id="form-name.skill-type">Bonus zu Fähigkeit:</sfd:text>
+    <sfd:text xml:id="form-name.skill-value">Fähigkeitenbonus:</sfd:text>
+    <sfd:text xml:id="form-name.negative-skill-type-1">Malus zu Fähigkeit I:</sfd:text>
+    <sfd:text xml:id="form-name.negative-skill-value-1">Fähigkeitenmalus I:</sfd:text>
+    <sfd:text xml:id="form-name.negative-skill-type-2">Malus zu Fähigkeit II:</sfd:text>
+    <sfd:text xml:id="form-name.negative-skill-value-2">Fähigkeitenmalus II:</sfd:text>
+
+    <sfd:text xml:id="form-name.spell-type">Verzauberungsart:</sfd:text>
+    <sfd:text xml:id="form-name.spell-id">Zauberspruch ID:</sfd:text>
+    <sfd:text xml:id="form-name.charges-default">Ladungen (Startwert):</sfd:text>
+    <sfd:text xml:id="form-name.charges-max">Ladungen (Maximum):</sfd:text>
+    <sfd:text xml:id="form-name.price-per-charge">Kosten pro Ladung:</sfd:text>
+    <sfd:text xml:id="form-name.recharges-default">Wiederaufladungen (Startwert):</sfd:text>
+    <sfd:text xml:id="form-name.recharges-max">Wiederaufladungen (Maximum):</sfd:text>
+
+    <sfd:text xml:id="form-name.properties">Merkmale</sfd:text>
 
     <sfd:text xml:id="form-name.01-08">Bits 00-07</sfd:text>
     <sfd:text xml:id="form-name.09-16">Bits 08-15</sfd:text>

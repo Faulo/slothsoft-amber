@@ -86,8 +86,12 @@
                                                                     <xsl:apply-templates select=".//*[@name = 'skill-value']" mode="item">
                                                                         <xsl:with-param name="size" select="3" />
                                                                     </xsl:apply-templates>
-                                                                    <xsl:apply-templates select=".//*[@name = 'hidden-skill-type']" mode="item" />
-                                                                    <xsl:apply-templates select=".//*[@name = 'hidden-skill-value']" mode="item">
+                                                                    <xsl:apply-templates select=".//*[@name = 'negative-skill-type-1']" mode="item" />
+                                                                    <xsl:apply-templates select=".//*[@name = 'negative-skill-value-1']" mode="item">
+                                                                        <xsl:with-param name="size" select="3" />
+                                                                    </xsl:apply-templates>
+                                                                    <xsl:apply-templates select=".//*[@name = 'negative-skill-type-2']" mode="item" />
+                                                                    <xsl:apply-templates select=".//*[@name = 'negative-skill-value-2']" mode="item">
                                                                         <xsl:with-param name="size" select="3" />
                                                                     </xsl:apply-templates>
                                                                 </xsl:with-param>
