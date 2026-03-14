@@ -97,7 +97,7 @@
 }
 
 .amber-item__magic {
-	width: 22ch;
+	width: 23ch;
 }
 
 .amber-item__magic tbody:first-child {
@@ -106,7 +106,6 @@
 
 .amber-item__magic .amber-item__value {
 	width: 3ch;
-	padding-right: 1ch;
 	text-align: right;
 }
 
