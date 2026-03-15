@@ -8,6 +8,13 @@
 
     <xsl:template match="sfm:fragment-info">
         <div>
+            <xsl:if test="sfm:param">
+                <form method="GET" action="">
+                    <xsl:for-each select="sfm:param">
+                        <input type="hidden" name="{@name}" value="{@value}" />
+                    </xsl:for-each>
+                </form>
+            </xsl:if>
             <xsl:apply-templates select="sfm:document-info[1]/saa:amberdata" />
         </div>
     </xsl:template>
