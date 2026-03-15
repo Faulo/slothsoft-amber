@@ -61,7 +61,7 @@ class AmberEditorPage {
                 case "roll-character":
                     this.#applyRace();
                     this.#applyClass();
-                    this.#applyLevel();
+                    await this.#applyLevel();
                     this.#rollStats();
                     break;
                 case "roll-stats":
@@ -74,7 +74,7 @@ class AmberEditorPage {
                     this.#applyClass();
                     break;
                 case "apply-level":
-                    this.#applyLevel();
+                    await this.#applyLevel();
                     break;
                 case "apply-portrait":
                     this.#applyPortrait(buttonNode.value);
@@ -262,7 +262,7 @@ class AmberEditorPage {
         }
     }
 
-    #applyLevel() {
+    async #applyLevel() {
         this.#character ??= new AmberCharacter(this.#fieldsetNode);
 
         const classId = this.#character.inputs["class"].value;
@@ -279,6 +279,38 @@ class AmberEditorPage {
             mappings["spell-points--maximum"] = klasse.Spruchpunkte * level;
             mappings["spelllearn-points"] = klasse.Spruchlesepunkte * level;
             mappings["attacks-per-round"] = klasse.AttackenProRundeProLevel == 0 ? 1 : Math.max(1, Math.floor(level / klasse.AttackenProRundeProLevel));
+
+            const spells = {};
+            const spellbookNodes = this.#fieldsetNode.querySelectorAll("*[data-name='spells'] *[data-type='bit-field']");
+            let hasSpells = false;
+            for (let spellbookId = 0;spellbookId < spellbookNodes.length;spellbookId++) {
+                const spellbookNode = spellbookNodes[spellbookId];
+                spells[spellbookId] = [];
+
+                const spellNodes = spellbookNode.querySelectorAll("input[type='checkbox']");
+                for (let spellId = 0;spellId < spellNodes.length;spellId++) {
+                    const spellNode = spellNodes[spellId];
+
+                    if (spellNode.checked) {
+                        spells[spellbookId].push(spellId);
+                        hasSpells = true;
+                    }
+                }
+            }
+
+            if (hasSpells) {
+                let slp = 0;
+                const spellsDocument = await AmberAPI.getAmberdataDocument("lib.spells");
+                for (const spellbookId in spells) {
+                    for (const spellId of spells[spellbookId]) {
+                        const spellNode = spellsDocument.querySelector(`spellbook[id="${spellbookId}"] spell[id="${spellId}"]`);
+                        if (spellNode) {
+                            slp += parseInt(spellNode.getAttribute("slp"));
+                        }
+                    }
+                }
+                mappings["spelllearn-points"] -= slp;
+            }
 
             for (const key in mappings) {
                 this.#character.inputs[key].value = mappings[key];
