@@ -58,14 +58,14 @@
             <option key="128" val="friend and spot" />
         </dictionary>
         <dictionary dictionary-id="spell-places">
-            <option key="0" val="outside" />
-            <option key="1" val="in buildings" />
-            <option key="2" val="in dungeons" />
-            <option key="3" val="while resting" />
-            <option key="4" val="in combat" />
-            <option key="5" val="lyramion" />
-            <option key="6" val="forest moon" />
-            <option key="7" val="desert moon" />
+            <option key="0" val="In der Oberwelt" />
+            <option key="1" val="In 2D Leveln" />
+            <option key="2" val="In 3D Leveln" />
+            <option key="3" val="Während der Rast" />
+            <option key="4" val="Während des Kampfes" />
+            <option key="5" val="Auf Lyramion" />
+            <option key="6" val="Auf Kire's Mond" />
+            <option key="7" val="Auf Morag" />
         </dictionary>
         <dictionary dictionary-id="spell-modifiers">
             <option key="0" val="0" />

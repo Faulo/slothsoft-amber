@@ -1,15 +1,23 @@
 .amber-spell {
-	width: 32ch;
 	background-color: #666655;
 	padding: 0.5ch;
 }
 
 .amber-spell__data {
-	display: flex;
-	align-items: start;
-	justify-content: space-between;
+	margin-top: 1em;
 }
 
-.amber-spell__data .amber-table {
+.amber-spell__list {
+	display: flex;
+	gap: 2ch;
+}
+
+.amber-spell ul {
+	list-style: none;
 	margin: 0;
+	padding: 0;
+}
+
+.amber-spell .amber-text--caption {
+	text-align: center;
 }
