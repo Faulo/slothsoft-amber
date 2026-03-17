@@ -11,6 +11,7 @@
     <xsl:variable name="NPCs" select=".//sse:archive[@name='NPC_char.amb']" />
     <xsl:variable name="Monsters" select=".//sse:archive[@name='Monster_char_data.amb']" />
     <xsl:variable name="MonsterGroups" select=".//sse:archive[@name='Monster_groups.amb']" />
+    <xsl:variable name="PlaceData" select=".//sse:archive[@name='Place_data']" />
 
     <xsl:template match="/*">
         <amberdata version="0.1">
@@ -583,96 +584,33 @@
             <option key="12" val="Fluch" />
         </dictionary>
 
-        <dictionary dictionary-id="shops">
-            <option key="3" val="Spannenberg, Warenhändler von Spannenberg" />
-            <option key="2" val="Spannenberg, Bibliothek der Heiler" />
-            <option key="4" val="Spannenberg, Bibliothek der Mystik" />
-            <option key="1" val="Spannenberg, Laden der Diebesgilde" />
-            <option key="5" val="Alchemistenturm, Bibliothek der Alchemie" />
-            <option key="6" val="Alchemistenturm, Laden der Alchemie" />
-            <option key="10" val="Burnville, Warenhändler von Burnville" />
-            <option key="11" val="Burnville, Nalven's Bibliothek" />
-            <option key="7" val="Burnville, Bibliothek der Heiler" />
-            <option key="8" val="Burnville, Bibliothek des Milzor" />
-            <option key="9" val="Burnville, Theresa's Schmuckladen" />
-            <option key="12" val="Newlake, Warenhandel von Newlake" />
-            <option key="13" val="Illien, Lendrai's Magische Waffen" />
-            <option key="15" val="Illien, Aiolu's Tränke Aller Art" />
-            <option key="14" val="Illien, Spruchrollen Bibliothek" />
-            <option key="17" val="Gnommine, Brom's Warenhaus" />
-            <option key="16" val="Snakesign, Warenhändler von Snakesign" />
-            <option key="31" val="Dor Kiredon, Ferrin's Schmiede" />
-            <option key="32" val="Dor Grestin, Randor's Lädchen" />
-            <option key="18" val="S'Angrila, Warenhändler von S'Angrila" />
-            <option key="33" val="-" />
-        </dictionary>
+        <xsl:apply-templates select="$PlaceData//sse:instruction[@name = 'names']" mode="dictionary">
+            <xsl:with-param name="name" select="'places'" />
+        </xsl:apply-templates>
 
-        <dictionary dictionary-id="places">
-            <option key="0" val="-" />
-            <option key="1" val="GÄSTEZIMMER VON SPANNENBERG" />
-            <option key="2" val="SPANNENBERG DIEBES GILDE" />
-            <option key="3" val="SPANNENBERG DIEBES GILDE" />
-            <option key="4" val="SPANNENBERG DIEBES GILDE" />
-            <option key="5" val="HEILER VON SPANNENBERG" />
-            <option key="6" val="HEILER VON SPANNENBERG" />
-            <option key="7" val="BIBLIOTHEK DER HEILER" />
-            <option key="8" val="SCHLAFSAAL DER HEILER" />
-            <option key="9" val="MEISTER KARL'S ATTACKE TRAIN." />
-            <option key="10" val="MEISTER ROLF'S PARADE TRAIN." />
-            <option key="11" val="TOLIMARS PFERDE" />
-            <option key="12" val="WARENHÄNDLER VON SPANNENBERG" />
-            <option key="13" val="YNNEP LEBENSMITTEL" />
-            <option key="14" val="SAGE VON SPANNENBERG" />
-            <option key="15" val="TORLES WERFT" />
-            <option key="16" val="LADEN DER DIEBESGILDE" />
-            <option key="17" val="NAGIER'S K-TREFFER TRAINING" />
-            <option key="18" val="BIBLIOTHEK DER MYSTIK" />
-            <option key="19" val="BIBLIOTHEK DER ALCHEMIE" />
-            <option key="20" val="LADEN DER ALCHEMIE" />
-            <option key="21" val="BIBLIOTHEK DER HEILER" />
-            <option key="22" val="HEILER VON BURNVILLE" />
-            <option key="23" val="BIBLIOTHEK DES MILZOR" />
-            <option key="24" val="THERESA'S SCHMUCKLADEN" />
-            <option key="25" val="REZEPTION DES KAKTUS" />
-            <option key="26" val="SULP LEBENSMITTEL" />
-            <option key="27" val="WARENHÄNDLER VON BURNVILLE" />
-            <option key="28" val="NALVEN'S SPRUCH TRAINING" />
-            <option key="29" val="NALVEN'S LESE TRAINING" />
-            <option key="30" val="NALVEN'S BIBLIOTHEK" />
-            <option key="31" val="SCHWIMMSCHULE VON BURNVILLE" />
-            <option key="32" val="SCHMIEDE VON BURNVILLE" />
-            <option key="33" val="LEBAB'S VERZAUBERUNGEN" />
-            <option key="34" val="GASTHAUS 'GEMSTONE'" />
-            <option key="35" val="FERRIN'S SCHMIEDE" />
-            <option key="36" val="DER HEILER ASRUB" />
-            <option key="37" val="DIE SCHÄTZE DES WALDES" />
-            <option key="38" val="DAS NEST" />
-            <option key="39" val="DRELB'S SUCH TRAINING" />
-            <option key="40" val="BROM'S WARENHAUS" />
-            <option key="41" val="REZEPTION - ZUM SCHACHT" />
-            <option key="42" val="LENDRAIS MAGISCHE WAFFEN" />
-            <option key="43" val="MANA - LEBENSMITTEL" />
-            <option key="44" val="SPRUCHROLLEN BIBLIOTHEK" />
-            <option key="45" val="AIOLU'S TRÄNKE ALLER ART" />
-            <option key="46" val="HEILER VON ILLIEN" />
-            <option key="47" val="REZEPTION DES ADLER'S" />
-            <option key="48" val="SAGE VON SNAKESIGN" />
-            <option key="49" val="SCHMIEDE VON SNAKESIGN" />
-            <option key="50" val="RATIONEN BEI SCHLANGENFRASS" />
-            <option key="51" val="WARENHÄNDLER VON SNAKESIGN" />
-            <option key="52" val="HEILER DER SANSRIE" />
-            <option key="53" val="REZEPTION DER GÖTTIN" />
-            <option key="54" val="SCHMIEDE VON NEWLAKE" />
-            <option key="55" val="HAUS DER HEILER" />
-            <option key="56" val="SIERPINIM - LEBENSMITTEL" />
-            <option key="57" val="WARENHANDEL VON NEWLAKE" />
-            <option key="58" val="REZEPTION DES KRATER'S" />
-            <option key="59" val="FERRIN'S SCHMIEDE:REPARATUREN" />
-            <option key="60" val="FERRIN'S SCHMIEDE:REPARATUREN" />
-            <option key="61" val="RANDOR'S LÄDCHEN" />
-            <option key="62" val="LEBENSMITTEL IN S'ANGRILA" />
-            <option key="63" val="WARENHÄNDLER VON S'ANGRILA" />
-            <option key="64" val="SCHMIEDE VON S'ANGRILA" />
+        <dictionary dictionary-id="shops">
+            <xsl:variable name="names" select="$PlaceData//sse:instruction[@name = 'names']/*/@value" />
+
+            <option key="3" val="{$names[12]}" title="Spannenberg, Warenhändler von Spannenberg" />
+            <option key="2" val="{$names[7]}" title="Spannenberg, Bibliothek der Heiler" />
+            <option key="4" val="{$names[18]}" title="Spannenberg, Bibliothek der Mystik" />
+            <option key="1" val="{$names[16]}" title="Spannenberg, Laden der Diebesgilde" />
+            <option key="5" val="{$names[19]}" title="Alchemistenturm, Bibliothek der Alchemie" />
+            <option key="6" val="{$names[20]}" title="Alchemistenturm, Laden der Alchemie" />
+            <option key="11" val="{$names[30]}" title="Burnville, Nalven's Bibliothek" />
+            <option key="10" val="{$names[27]}" title="Burnville, Warenhändler von Burnville" />
+            <option key="7" val="{$names[21]}" title="Burnville, Bibliothek der Heiler" />
+            <option key="9" val="{$names[24]}" title="Burnville, Theresa's Schmuckladen" />
+            <option key="8" val="{$names[23]}" title="Burnville, Bibliothek des Milzor" />
+            <option key="12" val="{$names[57]}" title="Newlake, Warenhandel von Newlake" />
+            <option key="13" val="{$names[42]}" title="Illien, Lendrai's Magische Waffen" />
+            <option key="15" val="{$names[45]}" title="Illien, Aiolu's Tränke Aller Art" />
+            <option key="14" val="{$names[44]}" title="Illien, Spruchrollen Bibliothek" />
+            <option key="17" val="{$names[40]}" title="Gnommine, Brom's Warenhaus" />
+            <option key="16" val="{$names[51]}" title="Snakesign, Warenhändler von Snakesign" />
+            <option key="31" val="{$names[35]}" title="Dor Kiredon, Ferrin's Schmiede" />
+            <option key="32" val="{$names[61]}" title="Dor Grestin, Randor's Lädchen" />
+            <option key="18" val="{$names[63]}" title="S'Angrila, Warenhändler von S'Angrila" />
         </dictionary>
     </xsl:template>
 

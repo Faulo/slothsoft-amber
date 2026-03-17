@@ -27,9 +27,9 @@
     <xsl:template name="extract-merchant">
         <xsl:param name="root" select="." />
         <xsl:param name="id" select="@file-name" />
-        <xsl:variable name="name" select="key('dictionary-option', 'shops')[@key = number($id)]/@val" />
+        <xsl:variable name="name" select="key('dictionary-option', 'shops')[@key = number($id)]" />
         <xsl:if test="$name != '-'">
-            <saa:merchant id="{$id}" name="{substring-after($name, ', ')}" place="{substring-before($name, ', ')}">
+            <saa:merchant id="{$id}" name="{normalize-space($name/@val)}" place="{substring-before($name/@title, ', ')}">
                 <xsl:for-each select="$root//*[@name = 'inventory']/*/*">
                     <xsl:call-template name="extract-slot" />
                 </xsl:for-each>
