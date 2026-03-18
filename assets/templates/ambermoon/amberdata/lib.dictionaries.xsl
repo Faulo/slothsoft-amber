@@ -205,6 +205,13 @@
             <option key="1" val="3D" />
             <option key="2" val="2D" />
         </dictionary>
+        <dictionary dictionary-id="map-properties">
+            <option key="0" val="indoor" />
+            <option key="1" val="outdoor" />
+            <option key="2" val="dungeon" />
+            <option key="3" val="automapper" />
+            <option key="4" val="can-rest" />
+        </dictionary>
     </xsl:template>
 
     <xsl:template name="dictionary.maps.world">

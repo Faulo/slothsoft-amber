@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<savegame version="0.4" xmlns="http://schema.slothsoft.net/savegame/editor" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="farah://slothsoft@amber/templates/ambermoon/savegame/globals/maps" />
+
+    <archive path="Amberfiles/2Map_data.amb" type="AMBR">
+        <for-each-file range-start="257" range-end="299">
+            <use-global ref="map-header" />
+            <use-global ref="map-tiles" />
+        </for-each-file>
+        <for-each-file range-start="336" range-end="512">
+            <use-global ref="map-header" />
+            <use-global ref="map-tiles" />
+        </for-each-file>
+    </archive>
+
+    <archive path="Amberfiles/3Map_data.amb" type="AMBR">
+        <for-each-file range-start="336" range-end="512">
+            <use-global ref="map-header" />
+            <use-global ref="map-tiles" />
+        </for-each-file>
+    </archive>
+</savegame>
