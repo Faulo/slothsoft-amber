@@ -10,6 +10,13 @@
         <xsl:call-template name="amber-category" />
     </xsl:template>
 
+    <xsl:template name="disable-text">
+        <xsl:param name="value" select="0" />
+        <xsl:if test="$value = 0">
+            <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template match="saa:item">
         <!-- <item xmlns="" id="361" image="9" name="MAGIERSTIEFEL" type="Schuhe" hands="0" fingers="0" damage="0" armor="6" weight="850" gender="beide" class="Magier Mystik. Alchem. Heiler"/> -->
         <article data-item-id="{@id}" class="amber-item amber-text">
@@ -56,6 +63,9 @@
                     </tbody>
                     <tbody class="amber-item__stats">
                         <tr>
+                            <xsl:call-template name="disable-text">
+                                <xsl:with-param name="value" select="@hands" />
+                            </xsl:call-template>
                             <td>
                                 <xsl:text>Hände:</xsl:text>
                             </td>
@@ -66,6 +76,9 @@
                             </td>
                         </tr>
                         <tr>
+                            <xsl:call-template name="disable-text">
+                                <xsl:with-param name="value" select="@fingers" />
+                            </xsl:call-template>
                             <td>
                                 <xsl:text>Finger:</xsl:text>
                             </td>
@@ -76,6 +89,9 @@
                             </td>
                         </tr>
                         <tr>
+                            <xsl:call-template name="disable-text">
+                                <xsl:with-param name="value" select="@damage" />
+                            </xsl:call-template>
                             <td>
                                 <xsl:text>Schaden:</xsl:text>
                             </td>
@@ -89,6 +105,9 @@
                             </td>
                         </tr>
                         <tr>
+                            <xsl:call-template name="disable-text">
+                                <xsl:with-param name="value" select="@armor" />
+                            </xsl:call-template>
                             <td>
                                 <xsl:text>Schutz:</xsl:text>
                             </td>
@@ -206,96 +225,104 @@
                         <tbody>
                             <tr>
                                 <td title="Lebenspunkte Maximum">
-                                    <xsl:if test="@lp-max = 0">
-                                        <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
-                                    </xsl:if>
+                                    <xsl:call-template name="disable-text">
+                                        <xsl:with-param name="value" select="@lp-max" />
+                                    </xsl:call-template>
                                     <xsl:text>LP-Max:</xsl:text>
                                 </td>
                                 <td class="amber-item__value">
-                                    <xsl:if test="@lp-max = 0">
-                                        <xsl:attribute name="class">amber-item__value amber-text amber-text--disabled</xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:if test="@lp-max &gt; 0">
-                                        <xsl:choose>
-                                            <xsl:when test="@is-cursed">
-                                                <xsl:text>-</xsl:text>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:text>+</xsl:text>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:if>
-                                    <xsl:value-of select="@lp-max" />
+                                    <span>
+                                        <xsl:call-template name="disable-text">
+                                            <xsl:with-param name="value" select="@lp-max" />
+                                        </xsl:call-template>
+                                        <xsl:if test="@lp-max &gt; 0">
+                                            <xsl:choose>
+                                                <xsl:when test="@is-cursed">
+                                                    <xsl:text>-</xsl:text>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:text>+</xsl:text>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:if>
+                                        <xsl:value-of select="@lp-max" />
+                                    </span>
                                 </td>
                                 <td data-ch="1" />
                                 <td title="Spruchpunkte Maximum">
-                                    <xsl:if test="@sp-max = 0">
-                                        <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
-                                    </xsl:if>
+                                    <xsl:call-template name="disable-text">
+                                        <xsl:with-param name="value" select="@sp-max" />
+                                    </xsl:call-template>
                                     <xsl:text>SP-Max:</xsl:text>
                                 </td>
                                 <td class="amber-item__value">
-                                    <xsl:if test="@sp-max = 0">
-                                        <xsl:attribute name="class">amber-item__value amber-text amber-text--disabled</xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:if test="@sp-max &gt; 0">
-                                        <xsl:choose>
-                                            <xsl:when test="@is-cursed">
-                                                <xsl:text>-</xsl:text>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:text>+</xsl:text>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:if>
-                                    <xsl:value-of select="@sp-max" />
+                                    <span>
+                                        <xsl:call-template name="disable-text">
+                                            <xsl:with-param name="value" select="@sp-max" />
+                                        </xsl:call-template>
+                                        <xsl:if test="@sp-max &gt; 0">
+                                            <xsl:choose>
+                                                <xsl:when test="@is-cursed">
+                                                    <xsl:text>-</xsl:text>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:text>+</xsl:text>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:if>
+                                        <xsl:value-of select="@sp-max" />
+                                    </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td title="Magischer Rüstschutz, Angriff">
-                                    <xsl:if test="@magic-weapon = 0">
-                                        <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
-                                    </xsl:if>
+                                    <xsl:call-template name="disable-text">
+                                        <xsl:with-param name="value" select="@magic-weapon" />
+                                    </xsl:call-template>
                                     <xsl:text>M-B-W:</xsl:text>
                                 </td>
                                 <td class="amber-item__value">
-                                    <xsl:if test="@magic-weapon = 0">
-                                        <xsl:attribute name="class">amber-item__value amber-text amber-text--disabled</xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:if test="@magic-weapon &gt; 0">
-                                        <xsl:choose>
-                                            <xsl:when test="@is-cursed">
-                                                <xsl:text>-</xsl:text>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:text>+</xsl:text>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:if>
-                                    <xsl:value-of select="@magic-weapon" />
+                                    <span>
+                                        <xsl:call-template name="disable-text">
+                                            <xsl:with-param name="value" select="@magic-weapon" />
+                                        </xsl:call-template>
+                                        <xsl:if test="@magic-weapon &gt; 0">
+                                            <xsl:choose>
+                                                <xsl:when test="@is-cursed">
+                                                    <xsl:text>-</xsl:text>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:text>+</xsl:text>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:if>
+                                        <xsl:value-of select="@magic-weapon" />
+                                    </span>
                                 </td>
                                 <td data-ch="1" />
                                 <td title="Magischer Rüstschutz, Verteidigung">
-                                    <xsl:if test="@magic-armor = 0">
-                                        <xsl:attribute name="class">amber-text amber-text--disabled</xsl:attribute>
-                                    </xsl:if>
+                                    <xsl:call-template name="disable-text">
+                                        <xsl:with-param name="value" select="@magic-armor" />
+                                    </xsl:call-template>
                                     <xsl:text>M-B-R:</xsl:text>
                                 </td>
                                 <td class="amber-item__value">
-                                    <xsl:if test="@magic-armor = 0">
-                                        <xsl:attribute name="class">amber-item__value amber-text amber-text--disabled</xsl:attribute>
-                                    </xsl:if>
-                                    <xsl:if test="@magic-armor &gt; 0">
-                                        <xsl:choose>
-                                            <xsl:when test="@is-cursed">
-                                                <xsl:text>-</xsl:text>
-                                            </xsl:when>
-                                            <xsl:otherwise>
-                                                <xsl:text>+</xsl:text>
-                                            </xsl:otherwise>
-                                        </xsl:choose>
-                                    </xsl:if>
-                                    <xsl:value-of select="@magic-armor" />
+                                    <span>
+                                        <xsl:call-template name="disable-text">
+                                            <xsl:with-param name="value" select="@magic-armor" />
+                                        </xsl:call-template>
+                                        <xsl:if test="@magic-armor &gt; 0">
+                                            <xsl:choose>
+                                                <xsl:when test="@is-cursed">
+                                                    <xsl:text>-</xsl:text>
+                                                </xsl:when>
+                                                <xsl:otherwise>
+                                                    <xsl:text>+</xsl:text>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </xsl:if>
+                                        <xsl:value-of select="@magic-armor" />
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
