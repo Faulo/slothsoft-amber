@@ -9,6 +9,7 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.classes" uri="assets/templates/ambermoon/amberdata/lib.classes.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.dictionaries" uri="assets/templates/ambermoon/amberdata/lib.dictionaries.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.items" uri="assets/templates/ambermoon/amberdata/lib.items.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.loot" uri="assets/templates/ambermoon/amberdata/lib.loot.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.monsters" uri="assets/templates/ambermoon/amberdata/lib.monsters.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.new" uri="assets/templates/ambermoon/amberdata/lib.new.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/amberdata/lib.npcs" uri="assets/templates/ambermoon/amberdata/lib.npcs.xsl"/>
@@ -111,7 +112,12 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.dictionaries" uri="assets/templates/ambermoon/savegame/lib.dictionaries.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.extra" uri="assets/templates/ambermoon/savegame/lib.extra.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.items" uri="assets/templates/ambermoon/savegame/lib.items.xml"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.loot" uri="assets/templates/ambermoon/savegame/lib.loot.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.maps" uri="assets/templates/ambermoon/savegame/lib.maps.xml"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.maps-kire" uri="assets/templates/ambermoon/savegame/lib.maps-kire.xml"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.maps-lyramion" uri="assets/templates/ambermoon/savegame/lib.maps-lyramion.xml"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.maps-misc" uri="assets/templates/ambermoon/savegame/lib.maps-misc.xml"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.maps-morag" uri="assets/templates/ambermoon/savegame/lib.maps-morag.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.monsters" uri="assets/templates/ambermoon/savegame/lib.monsters.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.new" uri="assets/templates/ambermoon/savegame/lib.new.xml"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/savegame/lib.npcs" uri="assets/templates/ambermoon/savegame/lib.npcs.xml"/>
@@ -125,6 +131,7 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/globals/spellbook" uri="assets/templates/ambermoon/viewer/globals/spellbook.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.classes" uri="assets/templates/ambermoon/viewer/lib.classes.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.items" uri="assets/templates/ambermoon/viewer/lib.items.xsl"/>
+  <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.loot" uri="assets/templates/ambermoon/viewer/lib.loot.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.monsters" uri="assets/templates/ambermoon/viewer/lib.monsters.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.npcs" uri="assets/templates/ambermoon/viewer/lib.npcs.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.pcs" uri="assets/templates/ambermoon/viewer/lib.pcs.xsl"/>
@@ -132,5 +139,22 @@
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/lib.spells" uri="assets/templates/ambermoon/viewer/lib.spells.xsl"/>
   <uri name="farah://slothsoft@amber/templates/ambermoon/viewer/null" uri="assets/templates/ambermoon/viewer/null.xsl"/>
   <uri name="http://schema.slothsoft.net/amber/amberdata" uri="assets/schema/amberdata/0.1.xsd"/>
+  <uri name="http://schema.slothsoft.net/farah/dictionary" uri="vendor/slothsoft/farah/assets/schema/dictionary/1.0.xsd"/>
+  <uri name="http://schema.slothsoft.net/farah/module" uri="vendor/slothsoft/farah/assets/schema/module/1.1.xsd"/>
+  <uri name="http://schema.slothsoft.net/farah/sitemap" uri="vendor/slothsoft/farah/assets/schema/sitemap/1.1.xsd"/>
+  <uri name="http://schema.slothsoft.net/savegame/editor" uri="vendor/slothsoft/savegame/assets/schema/editor/0.4.xsd"/>
+  <uri name="http://symfony.com/schema/dic/services" uri="vendor/symfony/dependency-injection/Loader/schema/dic/services/services-1.0.xsd"/>
+  <uri name="http://www.w3.org/XML/1998/namespace" uri="vendor/slothsoft/farah/assets/schema/xml/1.0.xsd"/>
+  <uri name="https://phar.io/xml/manifest/1.0" uri="vendor/phar-io/manifest/manifest.xsd"/>
   <system systemId="farah://slothsoft@amber/schema/amberdata/0.1" uri="assets/schema/amberdata/0.1.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/dictionary/0.1" uri="vendor/slothsoft/farah/assets/schema/dictionary/0.1.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/dictionary/1.0" uri="vendor/slothsoft/farah/assets/schema/dictionary/1.0.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/module/1.0" uri="vendor/slothsoft/farah/assets/schema/module/1.0.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/module/1.1" uri="vendor/slothsoft/farah/assets/schema/module/1.1.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/sitemap/1.0" uri="vendor/slothsoft/farah/assets/schema/sitemap/1.0.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/sitemap/1.1" uri="vendor/slothsoft/farah/assets/schema/sitemap/1.1.xsd"/>
+  <system systemId="farah://slothsoft@farah/schema/xml/1.0" uri="vendor/slothsoft/farah/assets/schema/xml/1.0.xsd"/>
+  <system systemId="farah://slothsoft@savegame/schema/editor/0.2" uri="vendor/slothsoft/savegame/assets/schema/editor/0.2.xsd"/>
+  <system systemId="farah://slothsoft@savegame/schema/editor/0.3" uri="vendor/slothsoft/savegame/assets/schema/editor/0.3.xsd"/>
+  <system systemId="farah://slothsoft@savegame/schema/editor/0.4" uri="vendor/slothsoft/savegame/assets/schema/editor/0.4.xsd"/>
 </catalog>
