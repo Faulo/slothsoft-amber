@@ -1,10 +1,11 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\CLI;
 
 use PHPUnit\Framework\TestCase;
-use Slothsoft\FarahTesting\TestUtils;
 use Slothsoft\FarahTesting\Constraints\FileEqualsFile;
+use Slothsoft\FarahTesting\TestUtils;
 use Throwable;
 
 /**

@@ -1,10 +1,11 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\API;
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Constraint\GreaterThan;
 use PHPUnit\Framework\Constraint\IsEqual;
+use PHPUnit\Framework\TestCase;
 use Slothsoft\Amber\Assets\StylesheetBuilder;
 use Slothsoft\Farah\FarahUrl\FarahUrl;
 use Slothsoft\Farah\FarahUrl\FarahUrlStreamIdentifier;
@@ -31,7 +32,7 @@ final class StylesheetBuilderTest extends TestCase {
         
         $sut = new StylesheetBuilder();
         
-        for ($i = 0; $i < $iterations; $i ++) {
+        for ($i = 0; $i < $iterations; $i++) {
             $actual = $sut->buildExecutableStrategies($asset, $args)->resultBuilder->buildResultStrategies($executable, FarahUrlStreamIdentifier::createEmpty())->streamBuilder->buildStreamWriter($result)->toStream();
             
             $this->assertThat((string) $actual, new IsEqual($expected));

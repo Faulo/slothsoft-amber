@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\CLI;
 
 use PHPUnit\Framework\TestCase;
@@ -23,7 +24,7 @@ class AmbToolTest extends TestCase {
         }
         $this->assertTrue(AmbTool::isSupported());
     }
-
+    
     /**
      *
      * @dataProvider archiveProvider

@@ -1,9 +1,10 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\SavegameImplementations;
 
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Constraint\IsEqual;
+use PHPUnit\Framework\TestCase;
 use Slothsoft\Amber\CLI\AmigaExecutable;
 use Slothsoft\Amber\CLI\AmigaExecutableTest;
 use Slothsoft\Amber\CLI\Hunk;
@@ -54,14 +55,14 @@ final class AmberExecutableBuilderTest extends TestCase {
             switch ($hunk->type) {
                 case Hunk::TYPE_CODE:
                     $file = new FileStub();
-                    $file->fileName = 'CODE-' . $codeIndex ++;
+                    $file->fileName = 'CODE-' . $codeIndex++;
                     $file->content = $hunk->data;
                     $file->archivePath = $path;
                     $files[] = $file;
                     break;
                 case Hunk::TYPE_DATA:
                     $file = new FileStub();
-                    $file->fileName = 'DATA-' . $dataIndex ++;
+                    $file->fileName = 'DATA-' . $dataIndex++;
                     $file->content = $hunk->data;
                     $file->archivePath = $path;
                     $files[] = $file;
