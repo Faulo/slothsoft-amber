@@ -7,3 +7,7 @@ Amber Module
 [![license badge](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 A Farah module for processing game files from the amber engine (i.e., Ambermoon and Amberstar).
+
+The bundled AMBtool and AMgfx command-line programs run natively on Windows x64,
+Linux x64, and Linux ARM64. The module selects the matching executables. See the [Amberworld attribution notice](assets/cli/NOTICE.md)
+and the [source and build notes](lib/amberworld/README.md).

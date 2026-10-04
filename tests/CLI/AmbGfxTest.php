@@ -4,8 +4,6 @@ namespace Slothsoft\Amber\CLI;
 
 use PHPUnit\Framework\TestCase;
 use Slothsoft\Core\IO\FileInfoFactory;
-use Slothsoft\Farah\FarahUrl\FarahUrl;
-use Slothsoft\Farah\Module\Module;
 
 /**
  * AmbGfxTest
@@ -18,6 +16,13 @@ class AmbGfxTest extends TestCase {
         $this->assertTrue(class_exists(AmbGfx::class), "Failed to load class 'Slothsoft\Amber\CLI\AmbGfx'!");
     }
     
+    public function testNativeExecutableAvailable(): void {
+        if (NativeExecutable::getPath('amgfx') === null) {
+            $this->markTestSkipped('No amgfx target for this platform.');
+        }
+        $this->assertTrue(AmbGfx::isSupported());
+    }
+
     /**
      *
      * @dataProvider gfxProvider
@@ -73,6 +78,6 @@ class AmbGfxTest extends TestCase {
     }
     
     private static function getPath(): string {
-        return (string) Module::resolveToAsset(FarahUrl::createFromReference('farah://slothsoft@amber/cli/amgfx'))->getFileInfo();
+        return NativeExecutable::getPath('amgfx');
     }
 }

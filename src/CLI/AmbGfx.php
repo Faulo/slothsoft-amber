@@ -6,11 +6,12 @@ use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
 use RuntimeException;
 use SplFileInfo;
+use Symfony\Component\Process\Process;
 
 final class AmbGfx {
     
     public static function isSupported(): bool {
-        return PHP_OS_FAMILY === 'Windows' or FileSystem::commandExists('wine');
+        return NativeExecutable::isSupported('amgfx');
     }
     
     private string $ambgfxPath;
@@ -32,7 +33,7 @@ final class AmbGfx {
             $command[] = $value;
         }
         
-        $process = WindowsProcess::create($command);
+        $process = strcasecmp(pathinfo($this->ambgfxPath, PATHINFO_EXTENSION), 'exe') === 0 ? WindowsProcess::create($command) : new Process($command);
         $process->run();
         
         if ($process->getExitCode() !== 0) {
@@ -60,4 +61,3 @@ final class AmbGfx {
         $this->exec($inFile->getRealPath(), $options);
     }
 }
-

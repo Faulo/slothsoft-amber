@@ -1,0 +1,21 @@
+ _______          __ http://amberworld.sourceforge.net __    __
+|   _   |--------.  |--.-----.----.--.--.--.-----.----.  |--|  |
+|       |        |  _  |  -__|   _|  |  |  |  _  |   _|  |  _  |
+|___|___|__|__|__|_____|_____|__| |________|_____|__| |__|_____|
+         AMBERWORLD - THE AMBERMOON OPEN SOURCE PROJECT
+
+ The Amberworld project is an attempt to create an interpreter
+ for the role-playing Amiga classic Ambermoon and games with a
+    similar engine like Amberstar, Dragonflight and Albion.
+
+   The idea behind Amberworld was greatly influenced by the
+    successful ScummVM and Sarien projects, both hosted on
+        Sourceforge, the ultimate Open Source network!
+
+Dragonflight, Amberstar and Ambermoon were created by Thalion,
+ once a great software company from Germany and developers of
+several successful Amiga and Atari titles. All their games are
+ legally available for free from many "Abandonware" sites and
+the "Thalion Webshrine". Albion was created by Blue Byte, soon
+ after Thalion quit business. It is still available from eBay
+          but only runs on stone-aged MSDOS systems.

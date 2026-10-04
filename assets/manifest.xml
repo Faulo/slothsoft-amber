@@ -46,7 +46,7 @@
         </fragment>
     </fragment>
 
-    <resource-directory name="cli" type="application/vnd.microsoft.portable-executable" />
+    <resource-directory name="cli" type="*/*" />
 
     <resource-directory name="css" type="text/css" />
 

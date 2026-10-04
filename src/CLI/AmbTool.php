@@ -7,11 +7,12 @@ use DomainException;
 use InvalidArgumentException;
 use RuntimeException;
 use SplFileInfo;
+use Symfony\Component\Process\Process;
 
 final class AmbTool {
     
     public static function isSupported(): bool {
-        return PHP_OS_FAMILY === 'Windows' or FileSystem::commandExists('wine');
+        return NativeExecutable::isSupported('ambtool');
     }
     
     public const TYPE_RAW = 'Raw';
@@ -31,10 +32,11 @@ final class AmbTool {
     }
     
     private function exec(string ...$args): string {
-        $process = WindowsProcess::create([
+        $command = [
             $this->ambtoolPath,
             ...$args
-        ]);
+        ];
+        $process = strcasecmp(pathinfo($this->ambtoolPath, PATHINFO_EXTENSION), 'exe') === 0 ? WindowsProcess::create($command) : new Process($command);
         
         $process->run();
         
@@ -92,4 +94,3 @@ final class AmbTool {
         }
     }
 }
-

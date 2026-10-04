@@ -4,12 +4,11 @@ namespace Slothsoft\Amber\Controller;
 
 use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\CLI\AmbTool;
+use Slothsoft\Amber\CLI\NativeExecutable;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberArchiveExtractor;
 use Slothsoft\Amber\SavegameImplementations\AmberExecutableBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberExecutableExtractor;
-use Slothsoft\Farah\FarahUrl\FarahUrl;
-use Slothsoft\Farah\Module\Module;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\EditorConfig;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
@@ -33,21 +32,12 @@ class EditorController {
         return new Editor($config);
     }
     
-    private function getAmberAssetUrl(string $url): FarahUrl {
-        return FarahUrl::createFromReference($url, FarahUrl::createFromReference('farah://slothsoft@amber'));
-    }
-    
-    private function getAmberAssetPath(string $url): SplFileInfo {
-        $url = $this->getAmberAssetUrl($url);
-        return Module::resolveToAsset($url)->getFileInfo();
-    }
-    
     public function createAmbTool(): AmbTool {
-        return new AmbTool((string) $this->getAmberAssetPath('/cli/ambtool'));
+        return new AmbTool(NativeExecutable::requirePath('ambtool'));
     }
     
     public function createAmbGfx(): AmbGfx {
-        return new AmbGfx((string) $this->getAmberAssetPath('/cli/amgfx'));
+        return new AmbGfx(NativeExecutable::requirePath('amgfx'));
     }
     
     private function createArchiveExtractors(): array {
@@ -232,4 +222,3 @@ class EditorController {
         ]
     ];
 }
-

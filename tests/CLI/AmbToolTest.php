@@ -5,8 +5,6 @@ namespace Slothsoft\Amber\CLI;
 use PHPUnit\Framework\TestCase;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
-use Slothsoft\Farah\FarahUrl\FarahUrl;
-use Slothsoft\Farah\Module\Module;
 
 /**
  * AmbToolTest
@@ -19,6 +17,13 @@ class AmbToolTest extends TestCase {
         $this->assertTrue(class_exists(AmbTool::class), "Failed to load class 'Slothsoft\Amber\CLI\AmbTool'!");
     }
     
+    public function testNativeExecutableAvailable(): void {
+        if (NativeExecutable::getPath('ambtool') === null) {
+            $this->markTestSkipped('No ambtool target for this platform.');
+        }
+        $this->assertTrue(AmbTool::isSupported());
+    }
+
     /**
      *
      * @dataProvider archiveProvider
@@ -65,6 +70,6 @@ class AmbToolTest extends TestCase {
     }
     
     private static function getPath(): string {
-        return (string) Module::resolveToAsset(FarahUrl::createFromReference('farah://slothsoft@amber/cli/ambtool'))->getFileInfo();
+        return NativeExecutable::getPath('ambtool');
     }
 }
