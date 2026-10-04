@@ -24,8 +24,6 @@ jobs:
                     extensions: ${{ matrix.extensions }}
                     tools: composer:v2
                     coverage: none
-                env:
-                    fail-fast: true
 
             -   name: Cache Composer dependencies
                 uses: actions/cache@v6
@@ -41,7 +39,13 @@ jobs:
                     COMPOSER_AUTH: "{}"
 
             -   name: Run PHPUnit
+                if: runner.os != 'Windows'
                 run: vendor/bin/phpunit --log-junit phpunit-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}.results.xml
+
+            -   name: Run PHPUnit on Windows
+                if: runner.os == 'Windows'
+                timeout-minutes: 5
+                run: php vendor/bin/phpunit --debug --log-junit phpunit-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}.results.xml
 
             -   name: Upload Test Results
                 if: always()
