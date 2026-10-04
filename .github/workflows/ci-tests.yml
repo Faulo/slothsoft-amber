@@ -3,6 +3,36 @@ name: CI Tests
 on: [ push ]
 
 jobs:
+    windows-startup-diagnostic:
+        name: Diagnose Windows PHPUnit startup
+        runs-on: windows-2025
+        steps:
+            -   uses: actions/checkout@v7
+            -   uses: shivammathur/setup-php@v2
+                with:
+                    php-version: "8.2"
+                    extensions: "ctype, curl, dom, gd, iconv, imagick, json, libxml, mbstring, pcre, phar, sockets, tokenizer, xml, xmlwriter, xsl, zip, zlib"
+                    tools: composer:v2
+                    coverage: none
+                env:
+                    fail-fast: true
+            -   name: Install dependencies
+                run: composer update --prefer-stable --no-interaction --no-progress
+                env:
+                    COMPOSER_ROOT_VERSION: "dev-main"
+                    COMPOSER_AUTH: "{}"
+            -   name: Check PHP startup
+                run: php -v
+            -   name: Check PHPUnit startup
+                timeout-minutes: 1
+                run: php vendor/bin/phpunit --version
+            -   name: Discover PHPUnit tests
+                timeout-minutes: 2
+                run: php vendor/bin/phpunit --list-tests > phpunit-tests.txt
+            -   name: Run CLI tests
+                timeout-minutes: 2
+                run: php vendor/bin/phpunit tests/CLI --debug
+
     run-tests:
         name: PHP ${{ matrix.php }} (${{ matrix.composer }}) on ${{ matrix.os }}
         runs-on: ${{ matrix.os }}
