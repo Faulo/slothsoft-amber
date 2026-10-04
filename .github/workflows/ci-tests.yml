@@ -4,11 +4,12 @@ on: [ push ]
 
 jobs:
     run-tests:
-        name: PHP ${{ matrix.php }} (${{ matrix.composer }})
-        runs-on: ubuntu-latest
+        name: PHP ${{ matrix.php }} (${{ matrix.composer }}) on ${{ matrix.os }}
+        runs-on: ${{ matrix.os }}
         strategy:
             fail-fast: false
             matrix:
+                os: [ "ubuntu-24.04", "ubuntu-24.04-arm", "windows-2025" ]
                 composer: [ "lowest", "stable" ]
                 php: [ "8.2", "8.3", "8.4", "8.5" ]
                 extensions: [ "ctype curl dom gd iconv imagick json libxml mbstring pcre phar sockets tokenizer xml xmlwriter xsl zip zlib" ]
@@ -28,7 +29,7 @@ jobs:
                 uses: actions/cache@v6
                 with:
                     path: /tmp/composer-cache
-                    key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ matrix.composer }}-${{ hashFiles('composer.json') }}
+                    key: ${{ matrix.os }}-php-${{ matrix.php }}-composer-${{ matrix.composer }}-${{ hashFiles('composer.json') }}
 
             -   name: Install dependencies
                 run: composer update --prefer-${{ matrix.composer }} --no-interaction --no-progress
@@ -38,14 +39,14 @@ jobs:
                     COMPOSER_AUTH: "{}"
 
             -   name: Run PHPUnit
-                run: vendor/bin/phpunit --log-junit phpunit-${{ matrix.php }}-${{ matrix.composer }}.results.xml
+                run: vendor/bin/phpunit --log-junit phpunit-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}.results.xml
 
             -   name: Upload Test Results
                 if: always()
                 uses: actions/upload-artifact@v7
                 with:
-                    name: results-${{ matrix.php }}-${{ matrix.composer }}
-                    path: phpunit-${{ matrix.php }}-${{ matrix.composer }}.results.xml
+                    name: results-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}
+                    path: phpunit-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}.results.xml
     
     publish-results:
         name: Publish Results
