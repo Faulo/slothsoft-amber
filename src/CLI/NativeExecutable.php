@@ -53,4 +53,49 @@ final class NativeExecutable {
         }
         return self::getPath($name);
     }
+    
+    public static function execute(string $name, array $command): string {
+        $stdout = tmpfile();
+        $stderr = tmpfile();
+        if ($stdout === false or $stderr === false) {
+            self::closeStream($stdout);
+            self::closeStream($stderr);
+            throw new RuntimeException("Could not create $name output streams.");
+        }
+        
+        $process = @proc_open($command, [
+            0 => ['pipe', 'r'],
+            1 => $stdout,
+            2 => $stderr
+        ], $pipes);
+        if (! is_resource($process)) {
+            fclose($stdout);
+            fclose($stderr);
+            throw new RuntimeException("Could not start $name.");
+        }
+        fclose($pipes[0]);
+        
+        $exitCode = proc_close($process);
+        rewind($stdout);
+        rewind($stderr);
+        $output = stream_get_contents($stdout);
+        $errorOutput = stream_get_contents($stderr);
+        fclose($stdout);
+        fclose($stderr);
+        
+        if ($exitCode !== 0) {
+            throw new RuntimeException("$name failed with exit code $exitCode!" . PHP_EOL . '> ' . self::formatCommand($command) . PHP_EOL . $errorOutput . PHP_EOL . $output);
+        }
+        return $output;
+    }
+    
+    private static function closeStream($stream): void {
+        if (is_resource($stream)) {
+            fclose($stream);
+        }
+    }
+    
+    private static function formatCommand(array $command): string {
+        return implode(' ', array_map('escapeshellarg', $command));
+    }
 }

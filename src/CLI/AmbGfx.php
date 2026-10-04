@@ -4,9 +4,7 @@ namespace Slothsoft\Amber\CLI;
 
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
-use RuntimeException;
 use SplFileInfo;
-use Symfony\Component\Process\Process;
 
 final class AmbGfx {
     
@@ -33,12 +31,7 @@ final class AmbGfx {
             $command[] = $value;
         }
         
-        $process = strcasecmp(pathinfo($this->ambgfxPath, PATHINFO_EXTENSION), 'exe') === 0 ? WindowsProcess::create($command) : new Process($command);
-        $process->run();
-        
-        if ($process->getExitCode() !== 0) {
-            throw new RuntimeException("amgfx failed!" . PHP_EOL . '> ' . $process->getCommandLine() . PHP_EOL . $process->getErrorOutput() . PHP_EOL . $process->getOutput());
-        }
+        NativeExecutable::execute('amgfx', $command);
     }
     
     public function extractTga(SplFileInfo $inFile, SplFileInfo $outFile, int $width = 32, int $bitplanes = 5, int $offset = 0, int $size = 0, int $palette = 49, int $firstColor = 0): void {

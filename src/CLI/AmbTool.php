@@ -5,9 +5,7 @@ namespace Slothsoft\Amber\CLI;
 use Slothsoft\Core\FileSystem;
 use DomainException;
 use InvalidArgumentException;
-use RuntimeException;
 use SplFileInfo;
-use Symfony\Component\Process\Process;
 
 final class AmbTool {
     
@@ -36,15 +34,7 @@ final class AmbTool {
             $this->ambtoolPath,
             ...$args
         ];
-        $process = strcasecmp(pathinfo($this->ambtoolPath, PATHINFO_EXTENSION), 'exe') === 0 ? WindowsProcess::create($command) : new Process($command);
-        
-        $process->run();
-        
-        if ($process->getExitCode() !== 0) {
-            throw new RuntimeException("ambtool failed!" . PHP_EOL . '> ' . $process->getCommandLine() . PHP_EOL . $process->getErrorOutput() . PHP_EOL . $process->getOutput());
-        }
-        
-        return $process->getOutput();
+        return NativeExecutable::execute('ambtool', $command);
     }
     
     public function inspectArchive(SplFileInfo $archivePath): string {
