@@ -45,14 +45,18 @@ jobs:
             -   name: Run PHPUnit on Windows
                 if: runner.os == 'Windows'
                 timeout-minutes: 5
-                run: php vendor/bin/phpunit --debug --log-junit phpunit-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}.results.xml
+                run: |
+                    php vendor/bin/phpunit --debug --log-junit phpunit-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}.results.xml 2>&1 | Tee-Object -FilePath phpunit-windows.log
+                    exit $LASTEXITCODE
 
             -   name: Upload Test Results
                 if: always()
                 uses: actions/upload-artifact@v7
                 with:
                     name: results-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}
-                    path: phpunit-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}.results.xml
+                    path: |
+                        phpunit-${{ matrix.os }}-${{ matrix.php }}-${{ matrix.composer }}.results.xml
+                        phpunit-windows.log
     
     publish-results:
         name: Publish Results
