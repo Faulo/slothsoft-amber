@@ -4,8 +4,12 @@ on: [ push ]
 
 jobs:
     windows-startup-diagnostic:
-        name: Diagnose Windows PHPUnit startup
+        name: Discover Windows ${{ matrix.path }}
         runs-on: windows-2025
+        strategy:
+            fail-fast: false
+            matrix:
+                path: [ "tests/API", "tests/Assets", "tests/CLI", "tests/Controller", "tests/ParameterFilters", "tests/SavegameImplementations", "tests/AmberUtilsTest.php", "tests/AmberUserTest.php" ]
         steps:
             -   uses: actions/checkout@v7
             -   uses: shivammathur/setup-php@v2
@@ -21,17 +25,9 @@ jobs:
                 env:
                     COMPOSER_ROOT_VERSION: "dev-main"
                     COMPOSER_AUTH: "{}"
-            -   name: Check PHP startup
-                run: php -v
-            -   name: Check PHPUnit startup
-                timeout-minutes: 1
-                run: php vendor/bin/phpunit --version
             -   name: Discover PHPUnit tests
                 timeout-minutes: 2
-                run: php vendor/bin/phpunit --list-tests > phpunit-tests.txt
-            -   name: Run CLI tests
-                timeout-minutes: 2
-                run: php vendor/bin/phpunit tests/CLI --debug
+                run: php vendor/bin/phpunit --list-tests ${{ matrix.path }} > phpunit-tests.txt
 
     run-tests:
         name: PHP ${{ matrix.php }} (${{ matrix.composer }}) on ${{ matrix.os }}
@@ -54,6 +50,8 @@ jobs:
                     extensions: ${{ matrix.extensions }}
                     tools: composer:v2
                     coverage: none
+                env:
+                    fail-fast: true
 
             -   name: Cache Composer dependencies
                 uses: actions/cache@v6
