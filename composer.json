@@ -15,7 +15,8 @@
         "slothsoft/farah": "^1.28.2",
         "slothsoft/savegame": "^1.3.12",
         "ext-imagick": "*",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "ext-dom": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.6.34",
