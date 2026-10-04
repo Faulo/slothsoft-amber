@@ -1,0 +1,60 @@
+name: Amberworld library tests
+
+on: [push]
+
+jobs:
+  linux:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, ubuntu-24.04-arm]
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Configure source build
+        run: cmake -S lib/amberworld -B build/lib-amberworld -G Ninja
+      - name: Build source and tests
+        run: cmake --build build/lib-amberworld
+      - name: Run library tests
+        run: ctest --test-dir build/lib-amberworld --output-on-failure --output-junit lib-tests.xml
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lib-tests-${{ matrix.os }}
+          path: build/lib-amberworld/lib-tests.xml
+          if-no-files-found: ignore
+
+  windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2025]
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-ninja
+      - name: Configure source build
+        shell: msys2 {0}
+        run: cmake -S lib/amberworld -B build/lib-amberworld -G Ninja
+      - name: Build source and tests
+        shell: msys2 {0}
+        run: cmake --build build/lib-amberworld
+      - name: Run library tests
+        shell: msys2 {0}
+        run: ctest --test-dir build/lib-amberworld --output-on-failure --output-junit lib-tests.xml
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lib-tests-${{ matrix.os }}
+          path: build/lib-amberworld/lib-tests.xml
+          if-no-files-found: ignore
