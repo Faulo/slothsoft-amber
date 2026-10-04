@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Amber\CLI\AmigaExecutable;
@@ -27,13 +28,13 @@ final class AmberExecutableExtractor implements ArchiveExtractorInterface {
         foreach ($executable->getRealHunks() as $hunk) {
             switch ($hunk->type) {
                 case Hunk::TYPE_CODE:
-                    $file = $directory . DIRECTORY_SEPARATOR . 'CODE-' . $codeIndex ++;
+                    $file = $directory . DIRECTORY_SEPARATOR . 'CODE-' . $codeIndex++;
                     if (! file_put_contents($file, $hunk->data)) {
                         return false;
                     }
                     break;
                 case Hunk::TYPE_DATA:
-                    $file = $directory . DIRECTORY_SEPARATOR . 'DATA-' . $dataIndex ++;
+                    $file = $directory . DIRECTORY_SEPARATOR . 'DATA-' . $dataIndex++;
                     if (! file_put_contents($file, $hunk->data)) {
                         return false;
                     }

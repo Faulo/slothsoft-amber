@@ -1,10 +1,11 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\CLI;
 
-use Slothsoft\Core\FileSystem;
 use DomainException;
 use InvalidArgumentException;
+use Slothsoft\Core\FileSystem;
 use SplFileInfo;
 
 final class AmbTool {

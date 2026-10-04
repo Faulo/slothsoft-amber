@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\CLI;
 
 final class BitReader {
@@ -21,7 +22,7 @@ final class BitReader {
             $result = $this->reverseInput->readInteger(1);
         }
         
-        for ($i = 0; $i < $count; $i ++) {
+        for ($i = 0; $i < $count; $i++) {
             $bit = $this->bitBuffer >> 7;
             $this->bitBuffer = ($this->bitBuffer << 1) % 256;
             
@@ -32,7 +33,7 @@ final class BitReader {
                 $this->bitBuffer = ($this->bitBuffer << 1) % 256;
                 
                 if ($temp !== 0) {
-                    $this->bitBuffer ++;
+                    $this->bitBuffer++;
                 }
             }
             

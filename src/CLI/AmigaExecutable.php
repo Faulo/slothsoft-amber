@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\CLI;
 
 use Ds\Map;
@@ -65,13 +66,13 @@ final class AmigaExecutable {
         }
         
         if ($this->readInt(self::SIZEOF_UINT) !== $this->totalHunkCount - 1) {
-            throw new UnexpectedValueException($this->totalHunkCount - 1);
+            throw new UnexpectedValueException('totalHunkCount:' . ($this->totalHunkCount - 1));
         }
         
         $this->hunks = [];
         
         $realHunks = [];
-        for ($i = 0; $i < $this->realHunkCount; $i ++) {
+        for ($i = 0; $i < $this->realHunkCount; $i++) {
             $header = $this->readInt(self::SIZEOF_UINT);
             $hunk = new Hunk();
             $hunk->size = $header & 0x3FFFFFFF;
@@ -83,13 +84,13 @@ final class AmigaExecutable {
             $realHunks[] = $hunk;
         }
         
-        for ($i = 0, $j = 0; $i < $this->totalHunkCount; $i ++) {
+        for ($i = 0, $j = 0; $i < $this->totalHunkCount; $i++) {
             $type = $this->readInt(self::SIZEOF_UINT) & 0x1fffffff;
             switch ($type) {
                 case Hunk::TYPE_CODE:
                 case Hunk::TYPE_DATA:
                     /** @var Hunk $hunk */
-                    $hunk = $realHunks[$j ++];
+                    $hunk = $realHunks[$j++];
                     $hunk->type = $type;
                     $hunk->numEntries = $this->readInt(self::SIZEOF_UINT);
                     $hunk->data = $this->readString($hunk->numEntries * 4);
@@ -97,7 +98,7 @@ final class AmigaExecutable {
                     break;
                 case Hunk::TYPE_BSS:
                     /** @var Hunk $hunk */
-                    $hunk = $realHunks[$j ++];
+                    $hunk = $realHunks[$j++];
                     $hunk->type = $type;
                     $hunk->numEntries = $this->readInt(self::SIZEOF_UINT);
                     $this->hunks[] = $hunk;
@@ -109,7 +110,7 @@ final class AmigaExecutable {
                     while (($offsetCount = $this->readInt(self::SIZEOF_UINT)) !== 0) {
                         $hunkNumber = $this->readInt(self::SIZEOF_UINT);
                         $list = [];
-                        for ($o = 0; $o < $offsetCount; $o ++) {
+                        for ($o = 0; $o < $offsetCount; $o++) {
                             $list[] = $this->readInt(self::SIZEOF_UINT);
                         }
                         $entries->put($hunkNumber, $list);
@@ -118,11 +119,11 @@ final class AmigaExecutable {
                     $size = $this->in->getPosition() - $start;
                     
                     $this->hunks[] = Hunk::createReloc32($size, $entries);
-                    $this->totalHunkCount ++;
+                    $this->totalHunkCount++;
                     break;
                 case Hunk::TYPE_END:
                     $this->hunks[] = Hunk::createEnd();
-                    $this->totalHunkCount ++;
+                    $this->totalHunkCount++;
                     break;
                 default:
                     throw new UnexpectedValueException("Dunno what to do with hunk type '$type'");
@@ -241,7 +242,6 @@ final class AmigaExecutable {
         $this->loadDeplodeInfo();
         
         if ($loadDeplodedData) {
-            
             $temp = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
             
             $tempAccess = new ResourceDataAccess($temp);
@@ -254,7 +254,7 @@ final class AmigaExecutable {
                 $this->realHunkCount = 0;
                 foreach ($this->hunks as $hunk) {
                     if ($hunk->isReal()) {
-                        $this->realHunkCount ++;
+                        $this->realHunkCount++;
                     }
                 }
             }
@@ -307,11 +307,11 @@ final class AmigaExecutable {
         
         $this->deplodeInfo = new AmigaExecutableDeplodeInfo();
         
-        for ($i = 0; $i < 8; $i ++) {
+        for ($i = 0; $i < 8; $i++) {
             $this->deplodeInfo->matchBase[] = $lastCodeHunk->getDataInteger(0x188 + $i * 2, 2);
         }
         
-        for ($i = 0; $i < 12; $i ++) {
+        for ($i = 0; $i < 12; $i++) {
             $this->deplodeInfo->matchExtra[] = $lastCodeHunk->getDataInteger(0x188 + 16 + $i);
         }
         
@@ -516,7 +516,7 @@ final class AmigaExecutable {
                         throw new UnexpectedValueException("Invalid hunk data size '$hunkSize', expected '{$deplodedHunkSizes[$hunkSizeIndex]}'.");
                     }
                     $hunks[] = Hunk::createCode($deplodedMemFlags[$hunkSizeIndex], $hunkSize, $deploded->readString($deplodedHunkSizes[$hunkSizeIndex]));
-                    $hunkSizeIndex ++;
+                    $hunkSizeIndex++;
                     break;
                 case 1:
                     $start = $deploded->getPosition();
@@ -528,7 +528,7 @@ final class AmigaExecutable {
                         $currentOffset = 0;
                         $hunkNumber = $deploded->readInteger(self::SIZEOF_UINT);
                         $list = [];
-                        for ($o = 0; $o < $offsetCount; $o ++) {
+                        for ($o = 0; $o < $offsetCount; $o++) {
                             $currentOffset += $deploded->readInteger(self::SIZEOF_UINT);
                             $list[] = $currentOffset;
                         }
@@ -568,7 +568,7 @@ final class AmigaExecutable {
                         $hunks[] = Hunk::createBSS($deplodedMemFlags[$hunkSizeIndex], $deplodedHunkSizes[$hunkSizeIndex] / 4);
                     }
                     
-                    $hunkSizeIndex ++;
+                    $hunkSizeIndex++;
                     break;
                 default:
                     throw new UnexpectedValueException("Invalid hunk flag '$flags'.");

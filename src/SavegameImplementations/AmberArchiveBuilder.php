@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
@@ -21,7 +22,7 @@ final class AmberArchiveBuilder implements ArchiveBuilderInterface {
             $header[$id] = pack('N', strlen($val));
             $body[$id] = $val;
         }
-        for ($id = 1; $id < $maxId; $id ++) {
+        for ($id = 1; $id < $maxId; $id++) {
             if (! isset($header[$id])) {
                 $header[$id] = pack('N', 0);
                 $body[$id] = '';

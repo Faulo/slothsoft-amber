@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber;
 
 final class AmberUser {
@@ -8,8 +9,8 @@ final class AmberUser {
     
     /**
      *
-     * @todo put this somewhere else maybe
      * @return string
+     * @todo put this somewhere else maybe
      */
     public static function getNewIdIfDefault(string $previous): string {
         static $instance;

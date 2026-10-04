@@ -1,14 +1,15 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\SavegameImplementations;
 
+use DomainException;
+use LogicException;
 use Slothsoft\Amber\CLI\AmbTool;
 use Slothsoft\Core\FileSystem;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveExtractorInterface;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
-use DomainException;
-use LogicException;
 use SplFileInfo;
 
 final class AmberArchiveExtractor implements ArchiveExtractorInterface {

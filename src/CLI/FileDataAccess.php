@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\CLI;
 
 use Slothsoft\Savegame\Converter;
@@ -28,7 +29,7 @@ final class FileDataAccess implements DataAccessInterface {
     public function readString(int $size, bool $peek = false): string {
         $result = $this->file->fread($size);
         if ($peek) {
-            $this->file->fseek(- $size, SEEK_CUR);
+            $this->file->fseek(-$size, SEEK_CUR);
         }
         return $result;
     }
@@ -36,7 +37,7 @@ final class FileDataAccess implements DataAccessInterface {
     public function readInteger(int $size, bool $peek = false): int {
         $result = $this->converter->decodeInteger($this->readString($size), $size);
         if ($peek) {
-            $this->file->fseek(- $size, SEEK_CUR);
+            $this->file->fseek(-$size, SEEK_CUR);
         }
         return $result;
     }

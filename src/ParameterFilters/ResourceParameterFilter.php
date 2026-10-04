@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\ParameterFilters;
 
 use Slothsoft\Core\IO\Sanitizer\FileNameSanitizer;
@@ -13,9 +14,9 @@ class ResourceParameterFilter extends InfosetParameterFilter {
     
     protected function createValueSanitizers(): array {
         return [
-            self::PARAM_ARCHIVE_ID => new StringSanitizer(''),
-            self::PARAM_FILE_ID => new FileNameSanitizer('')
-        ] + parent::createValueSanitizers();
+                self::PARAM_ARCHIVE_ID => new StringSanitizer(''),
+                self::PARAM_FILE_ID => new FileNameSanitizer('')
+            ] + parent::createValueSanitizers();
     }
 }
 

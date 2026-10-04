@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\ParameterFilters;
 
 use Slothsoft\Core\IO\Sanitizer\ArraySanitizer;
@@ -25,12 +26,12 @@ final class EditorParameterFilter extends InfosetParameterFilter {
     
     protected function createValueSanitizers(): array {
         return [
-            self::PARAM_ARCHIVE_ID => new StringSanitizer(''),
-            self::PARAM_EDITOR_ACTION => new StringSanitizer(self::PARAM_EDITOR_ACTION_VIEW),
-            self::PARAM_EDITOR_UPLOAD => new ArraySanitizer(),
-            self::PARAM_EDITOR_DOWNLOAD => new StringSanitizer(''),
-            self::PARAM_EDITOR_DATA => new ArraySanitizer()
-        ] + parent::createValueSanitizers();
+                self::PARAM_ARCHIVE_ID => new StringSanitizer(''),
+                self::PARAM_EDITOR_ACTION => new StringSanitizer(self::PARAM_EDITOR_ACTION_VIEW),
+                self::PARAM_EDITOR_UPLOAD => new ArraySanitizer(),
+                self::PARAM_EDITOR_DOWNLOAD => new StringSanitizer(''),
+                self::PARAM_EDITOR_DATA => new ArraySanitizer()
+            ] + parent::createValueSanitizers();
     }
 }
 

@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\ParameterFilters;
 
 use Slothsoft\Core\IO\Sanitizer\FileNameSanitizer;
@@ -13,10 +14,10 @@ final class GfxParameterFilter extends ResourceParameterFilter {
     
     protected function createValueSanitizers(): array {
         return [
-            self::PARAM_INFOSET_ID => new FileNameSanitizer('gfx'),
-            self::PARAM_GFX_ID => new IntegerSanitizer(- 1),
-            self::PARAM_PALETTE_ID => new IntegerSanitizer(49)
-        ] + parent::createValueSanitizers();
+                self::PARAM_INFOSET_ID => new FileNameSanitizer('gfx'),
+                self::PARAM_GFX_ID => new IntegerSanitizer(-1),
+                self::PARAM_PALETTE_ID => new IntegerSanitizer(49)
+            ] + parent::createValueSanitizers();
     }
 }
 

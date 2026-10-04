@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\Controller;
 
 use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;

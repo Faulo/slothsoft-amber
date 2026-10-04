@@ -1,7 +1,12 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\Assets;
 
+use DOMDocument;
+use DOMElement;
+use Imagick;
+use ImagickException;
 use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\Controller\EditorController;
 use Slothsoft\Amber\Controller\EditorParameters;
@@ -21,15 +26,9 @@ use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\Node\ArchiveNode;
 use Slothsoft\Savegame\Node\FileContainer;
 use Slothsoft\Savegame\Node\ImageValue;
-use DOMDocument;
-use DOMElement;
-use Imagick;
-use ImagickException;
 use SplFileInfo;
 
 final class GfxBuilder implements ExecutableBuilderStrategyInterface {
-    
-    private AssetInterface $asset;
     
     private FarahUrlArguments $args;
     
@@ -55,7 +54,6 @@ final class GfxBuilder implements ExecutableBuilderStrategyInterface {
         
         $config = $controller->createEditorConfig($parameters);
         
-        $this->asset = $context;
         $this->args = $args;
         $this->editor = $controller->createEditor($config);
         
@@ -158,7 +156,7 @@ final class GfxBuilder implements ExecutableBuilderStrategyInterface {
         $this->fileWidth = 0;
         $this->fileHeight = 0;
         
-        if ($gfxId === - 1) {
+        if ($gfxId === -1) {
             foreach ($fileNode->getImageNodes() as $imageNode) {
                 $imageFiles[] = $this->createImage($imageNode, $paletteId);
                 $this->fileWidth = max($this->fileWidth, $this->imageWidth);
@@ -200,7 +198,7 @@ final class GfxBuilder implements ExecutableBuilderStrategyInterface {
         $this->imageWidth = $imageNode->getWidth();
         $this->imageHeight = $imageNode->getHeight();
         
-        if ($paletteId === - 1) {
+        if ($paletteId === -1) {
             foreach (range(0, 49) as $tmpPaletteId) {
                 [
                     $file,

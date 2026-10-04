@@ -1,12 +1,13 @@
 <?php
 declare(strict_types = 1);
+
 namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Amber\CLI\AmigaExecutable;
 use Slothsoft\Amber\CLI\Hunk;
 use Slothsoft\Core\IO\FileInfoFactory;
-use Slothsoft\Savegame\Node\FileContainer;
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
+use Slothsoft\Savegame\Node\FileContainer;
 use SplFileInfo;
 
 final class AmberExecutableBuilder implements ArchiveBuilderInterface {
@@ -51,10 +52,10 @@ final class AmberExecutableBuilder implements ArchiveBuilderInterface {
                 $hunkName = null;
                 switch ($hunk->type) {
                     case Hunk::TYPE_CODE:
-                        $hunkName = 'CODE-' . $codeIndex ++;
+                        $hunkName = 'CODE-' . $codeIndex++;
                         break;
                     case Hunk::TYPE_DATA:
-                        $hunkName = 'DATA-' . $dataIndex ++;
+                        $hunkName = 'DATA-' . $dataIndex++;
                         break;
                 }
                 
