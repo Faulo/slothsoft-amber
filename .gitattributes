@@ -35,6 +35,3 @@ composer.phar export-ignore
 /enter-cmd.bat export-ignore
 /unused export-ignore
 /vue export-ignore
-
-# Rebuilt Amberworld source is kept in Git; Composer dist ships the binaries.
-/lib/** export-ignore
