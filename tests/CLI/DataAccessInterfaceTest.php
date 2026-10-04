@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
-namespace Slothsoft\Amber\CLI;
 
+namespace Slothsoft\Amber\CLI;
 use PHPUnit\Framework\TestCase;
 
 /**
