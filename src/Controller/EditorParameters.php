@@ -80,7 +80,7 @@ final class EditorParameters {
     private ?FarahUrlArguments $editorArgs = null;
     
     private function getEditorArgs(): FarahUrlArguments {
-        return $this->editorArgs;
+        return $this->editorArgs ?? $this->getAmberArgs();
     }
     
     public function withEditorArgs(string $archivePath, string $action, string $download, array $save): self {

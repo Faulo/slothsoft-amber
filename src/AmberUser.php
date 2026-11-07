@@ -13,9 +13,12 @@ final class AmberUser {
      * @todo put this somewhere else maybe
      */
     public static function getNewIdIfDefault(string $previous): string {
+        if ($previous !== self::DEFAULT_ID) {
+            return $previous;
+        }
         static $instance;
         if ($instance === null) {
-            $instance = $previous === self::DEFAULT_ID ? uniqid() : $previous;
+            $instance = uniqid();
         }
         return $instance;
     }
