@@ -27,19 +27,19 @@ final class FileDataAccess implements DataAccessInterface {
     }
     
     public function readString(int $size, bool $peek = false): string {
+        if ($size === 0) {
+            return '';
+        }
+        $position = $this->getPosition();
         $result = $this->file->fread($size);
         if ($peek) {
-            $this->file->fseek(-$size, SEEK_CUR);
+            $this->setPosition($position);
         }
         return $result;
     }
     
     public function readInteger(int $size, bool $peek = false): int {
-        $result = $this->converter->decodeInteger($this->readString($size), $size);
-        if ($peek) {
-            $this->file->fseek(-$size, SEEK_CUR);
-        }
-        return $result;
+        return $this->converter->decodeInteger($this->readString($size, $peek), $size);
     }
     
     public function writeString(string $value): void {

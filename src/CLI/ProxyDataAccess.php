@@ -27,44 +27,36 @@ final class ProxyDataAccess implements DataAccessInterface {
     }
     
     public function readString(int $size, bool $peek = false): string {
-        if (! $peek and $this->inReverse) {
-            $this->position -= $size;
-        }
-        
+        $readPosition = $this->inReverse ? $this->position - $size : $this->position;
         $storedPosition = $this->data->getPosition();
         
-        if ($storedPosition === $this->position) {
+        try {
+            $this->data->setPosition($readPosition);
             $result = $this->data->readString($size, true);
-        } else {
-            $this->data->setPosition($this->position);
-            $result = $this->data->readString($size);
+        } finally {
             $this->data->setPosition($storedPosition);
         }
         
-        if (! $peek and ! $this->inReverse) {
-            $this->position += $size;
+        if (! $peek) {
+            $this->position = $this->inReverse ? $readPosition : $this->position + $size;
         }
         
         return $result;
     }
     
     public function readInteger(int $size, bool $peek = false): int {
-        if (! $peek and $this->inReverse) {
-            $this->position -= $size;
-        }
-        
+        $readPosition = $this->inReverse ? $this->position - $size : $this->position;
         $storedPosition = $this->data->getPosition();
         
-        if ($storedPosition === $this->position) {
+        try {
+            $this->data->setPosition($readPosition);
             $result = $this->data->readInteger($size, true);
-        } else {
-            $this->data->setPosition($this->position);
-            $result = $this->data->readInteger($size);
+        } finally {
             $this->data->setPosition($storedPosition);
         }
         
-        if (! $peek and ! $this->inReverse) {
-            $this->position += $size;
+        if (! $peek) {
+            $this->position = $this->inReverse ? $readPosition : $this->position + $size;
         }
         
         return $result;

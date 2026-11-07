@@ -39,12 +39,18 @@ final class StringDataAccess implements DataAccessInterface {
     }
     
     public function writeString(string $value): void {
-        $this->data .= $value;
+        if ($value === '') {
+            return;
+        }
+        if ($this->position === strlen($this->data)) {
+            $this->data .= $value;
+        } else {
+            $this->data = substr_replace(str_pad($this->data, $this->position, "\0"), $value, $this->position, strlen($value));
+        }
         $this->position += strlen($value);
     }
     
     public function writeInteger(int $value, int $size): void {
-        $this->data .= $this->converter->encodeInteger($value, $size);
-        $this->position += $size;
+        $this->writeString($this->converter->encodeInteger($value, $size));
     }
 }
