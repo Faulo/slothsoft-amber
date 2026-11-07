@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-11-07
+
+### Fixed
+
+- Resolve executable files through their owning archive, including nested file nodes; require Savegame 1.4.0.
+- Prevent executable rebuilds from retaining edits made by an earlier build on the same builder.
+- Preserve explicit user IDs when multiple users are processed in one PHP process.
+- Allow editor-data URLs to be created before editor-specific arguments are supplied.
+- Correct reverse peeking, preserve stream positions after short peeks, and support empty file and resource reads.
+- Make string-backed writes honor the current position and pad gaps with zero bytes, matching file and resource access.
+- Exclude older PHP 8.3 polyfills that emit nullable-parameter deprecations on PHP 8.4 and 8.5.
+
+### Changed
+
+- Add PHPStan validation and clean up unused implementation details and ineffective test assertions.
+
 ## [1.2.0] - 2026-10-05
 
 ### Added
@@ -242,7 +258,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release of the Farah module with Ambermoon archive, graphics, infoset, editor, and savegame processing.
 
-[unreleased]: https://github.com/Faulo/slothsoft-amber/compare/1.2.0...HEAD
+[unreleased]: https://github.com/Faulo/slothsoft-amber/compare/1.2.1...HEAD
+[1.2.1]: https://github.com/Faulo/slothsoft-amber/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/Faulo/slothsoft-amber/compare/1.1.21...1.2.0
 [1.1.21]: https://github.com/Faulo/slothsoft-amber/compare/1.1.20...1.1.21
 [1.1.20]: https://github.com/Faulo/slothsoft-amber/compare/1.1.19...1.1.20
