@@ -137,7 +137,7 @@ final class AmigaExecutableTest extends TestCase {
         $sut = new AmigaExecutable();
         $sut->load($inFile);
         
-        $this->assertTrue(true);
+        $this->assertGreaterThan(0, $sut->getRealHunkCount());
     }
     
     /**
@@ -150,7 +150,7 @@ final class AmigaExecutableTest extends TestCase {
         $sut = new AmigaExecutable();
         $sut->load($outFile);
         
-        $this->assertTrue(true);
+        $this->assertGreaterThan(0, $sut->getRealHunkCount());
     }
     
     /**
@@ -370,6 +370,7 @@ final class AmigaExecutableTest extends TestCase {
     public static function closeFileWriter(string $path, string $mode, DataAccessInterface $access): void {
         switch ($mode) {
             case 'string':
+                self::assertInstanceOf(StringDataAccess::class, $access);
                 file_put_contents($path, $access->data);
                 return;
             case 'file':

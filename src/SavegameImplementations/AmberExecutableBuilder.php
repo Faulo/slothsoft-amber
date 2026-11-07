@@ -40,7 +40,7 @@ final class AmberExecutableBuilder implements ArchiveBuilderInterface {
         /** @var FileContainer $child */
         foreach ($buildChildren as $child) {
             if ($executable === null) {
-                $path = $child->getParentNode()->getArchivePath();
+                $path = $child->getOwnerArchive()->getArchivePath();
                 $executable = $this->loadExecutable($path);
             }
             

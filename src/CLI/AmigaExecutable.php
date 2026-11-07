@@ -19,11 +19,7 @@ final class AmigaExecutable {
     
     private const SIZEOF_BYTE = 1;
     
-    private const SIZEOF_WORD = 2;
-    
     private const SIZEOF_UINT = 4;
-    
-    private const SIZEOF_DWORD = 4;
     
     private ?DataAccessInterface $in;
     
@@ -156,10 +152,12 @@ final class AmigaExecutable {
         return $this->hunks[0]->type !== Hunk::TYPE_CODE or $this->hunks[0]->getDataString(self::MAGIC_OFFSET, self::MAGIC_LENGTH) !== self::MAGIC_WORD;
     }
     
+    /** @phpstan-impure */
     private function readString(int $size): string {
         return $this->in->readString($size);
     }
     
+    /** @phpstan-impure */
     private function readInt(int $size): int {
         return $this->in->readInteger($size);
     }
@@ -489,9 +487,6 @@ final class AmigaExecutable {
         };
         
         $hunks = [];
-        
-        /** @var Hunk $hunk */
-        $hunk = null;
         
         $hunkSizeIndex = 0;
         

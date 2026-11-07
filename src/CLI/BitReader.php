@@ -14,6 +14,7 @@ final class BitReader {
         $this->bitBuffer = $initialBitBuffer;
     }
     
+    /** @phpstan-impure */
     public function read(int $count): int {
         $result = 0;
         

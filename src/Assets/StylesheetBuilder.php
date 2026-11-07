@@ -38,7 +38,7 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
         
         $dataUrl = $parameters->getProcessAmberdataUrl();
         
-        $writer = new ChunkWriterFromChunksDelegate(function () use ($dataUrl, $parameters, $game, $version, $user): Generator {
+        $writer = new ChunkWriterFromChunksDelegate(function () use ($dataUrl, $parameters): Generator {
             $controller = new EditorController();
             $parameters = $parameters->withInfoset('gfx');
             $config = $controller->createEditorConfig($parameters);

@@ -66,7 +66,7 @@ final class DatasetBuilder implements ExecutableBuilderStrategyInterface {
     }
     
     private function processInfoset(EditorConfig $config, string $infosetId): ResultBuilderStrategyInterface {
-        $chunkDelegate = function () use ($config, $infosetId): ChunkWriterInterface {
+        $chunkDelegate = function () use ($config): ChunkWriterInterface {
             $editor = new Editor($config);
             $savegameNode = $editor->loadSavegame(true, true);
             return $this->createXmlBuilder((string) $config->cacheDirectory, $savegameNode);
@@ -76,7 +76,7 @@ final class DatasetBuilder implements ExecutableBuilderStrategyInterface {
     }
     
     private function processArchive(EditorConfig $config, string $infosetId, string $archiveId): ResultBuilderStrategyInterface {
-        $chunkDelegate = function () use ($config, $infosetId, $archiveId): ChunkWriterInterface {
+        $chunkDelegate = function () use ($config, $archiveId): ChunkWriterInterface {
             $editor = new Editor($config);
             $archiveNode = $editor->loadArchive($archiveId, true);
             return $this->createXmlBuilder((string) $config->cacheDirectory, $archiveNode);
@@ -86,7 +86,7 @@ final class DatasetBuilder implements ExecutableBuilderStrategyInterface {
     }
     
     private function processFile(EditorConfig $config, string $infosetId, string $archiveId, string $fileId): ResultBuilderStrategyInterface {
-        $chunkDelegate = function () use ($config, $infosetId, $archiveId, $fileId): ChunkWriterInterface {
+        $chunkDelegate = function () use ($config, $archiveId, $fileId): ChunkWriterInterface {
             $editor = new Editor($config);
             $fileNode = $editor->loadFile($archiveId, $fileId);
             return $this->createXmlBuilder((string) $config->cacheDirectory, $fileNode);

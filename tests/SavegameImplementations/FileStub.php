@@ -19,11 +19,15 @@ final class FileStub {
         return $this->fileName;
     }
     
-    public function getArchivePath(): string {
-        return $this->archivePath;
-    }
-    
     public function getParentNode(): self {
         return $this;
+    }
+    
+    public function getOwnerArchive(): self {
+        return $this;
+    }
+    
+    public function getArchivePath(): string {
+        return $this->archivePath;
     }
 }
