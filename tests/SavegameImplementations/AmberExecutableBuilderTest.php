@@ -43,6 +43,24 @@ final class AmberExecutableBuilderTest extends TestCase {
      * @param string $archive
      */
     public function test_buildArchive(string $path, string $archive): void {
+        $files = $this->createFiles($path, $archive);
+        $sut = new AmberExecutableBuilder(FileInfoFactory::createFromPath('assets/source/ambermoon/Thalion-v1.05-DE'));
+        $actual = $sut->buildArchive($files);
+        
+        $this->assertThat($actual, new IsEqual(file_get_contents($archive)));
+    }
+    
+    /** @dataProvider getArchives */
+    public function testRepeatedBuildsDoNotRetainPreviousEdits(string $path, string $archive): void {
+        $files = $this->createFiles($path, $archive);
+        $modified = clone $files[0];
+        $modified->content[0] = chr(ord($modified->content[0]) ^ 0xff);
+        $sut = new AmberExecutableBuilder(FileInfoFactory::createFromPath('assets/source/ambermoon/Thalion-v1.05-DE'));
+        self::assertNotSame(file_get_contents($archive), $sut->buildArchive([$modified]));
+        self::assertSame(file_get_contents($archive), $sut->buildArchive(array_slice($files, 1)));
+    }
+    
+    private function createFiles(string $path, string $archive): array {
         $executable = new AmigaExecutable();
         $executable->load(FileInfoFactory::createFromPath($archive));
         
@@ -70,9 +88,6 @@ final class AmberExecutableBuilderTest extends TestCase {
             }
         }
         
-        $sut = new AmberExecutableBuilder(FileInfoFactory::createFromPath('assets/source/ambermoon/Thalion-v1.05-DE'));
-        $actual = $sut->buildArchive($files);
-        
-        $this->assertThat($actual, new IsEqual(file_get_contents($archive)));
+        return $files;
     }
 }

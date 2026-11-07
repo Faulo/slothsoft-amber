@@ -14,23 +14,18 @@ final class AmberExecutableBuilder implements ArchiveBuilderInterface {
     
     private SplFileInfo $sourceDirectory;
     
-    private array $executables = [];
-    
     public function __construct(SplFileInfo $sourceDirectory) {
         $this->sourceDirectory = $sourceDirectory;
     }
     
     private function loadExecutable(string $archivePath): AmigaExecutable {
-        if (! isset($this->executables[$archivePath])) {
-            $executable = new AmigaExecutable();
-            $executable->load(FileInfoFactory::createFromPath($this->sourceDirectory . DIRECTORY_SEPARATOR . $archivePath));
-            if ($executable->requiresDeploding()) {
-                $executable->deplode();
-            }
-            $this->executables[$archivePath] = $executable;
+        $executable = new AmigaExecutable();
+        $executable->load(FileInfoFactory::createFromPath($this->sourceDirectory . DIRECTORY_SEPARATOR . $archivePath));
+        if ($executable->requiresDeploding()) {
+            $executable->deplode();
         }
         
-        return $this->executables[$archivePath];
+        return $executable;
     }
     
     public function buildArchive(iterable $buildChildren): string {
