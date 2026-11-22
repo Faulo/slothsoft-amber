@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.3] - 2026-11-22
+
+### Fixed
+
+- Reissue the 1.2.2 fixes and DOM lookup improvements after Packagist mapped that version to the 1.2.1 commit.
+
 ## [1.2.2] - 2026-11-22
 
 ### Fixed
@@ -270,7 +276,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release of the Farah module with Ambermoon archive, graphics, infoset, editor, and savegame processing.
 
-[unreleased]: https://github.com/Faulo/slothsoft-amber/compare/1.2.2...HEAD
+[unreleased]: https://github.com/Faulo/slothsoft-amber/compare/1.2.3...HEAD
+[1.2.3]: https://github.com/Faulo/slothsoft-amber/compare/1.2.2...1.2.3
 [1.2.2]: https://github.com/Faulo/slothsoft-amber/compare/1.2.1...1.2.2
 [1.2.1]: https://github.com/Faulo/slothsoft-amber/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/Faulo/slothsoft-amber/compare/1.1.21...1.2.0
