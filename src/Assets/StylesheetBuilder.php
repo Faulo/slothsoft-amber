@@ -3,7 +3,11 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\Assets;
 
+use DOMElement;
+use DOMNodeList;
+use DOMXPath;
 use Generator;
+use LogicException;
 use Slothsoft\Amber\AmberUtils;
 use Slothsoft\Amber\CLI\AmbGfx;
 use Slothsoft\Amber\Controller\EditorController;
@@ -44,7 +48,14 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
             
             $dataDocument = Module::resolveToDOMWriter($dataUrl)->toDocument();
             
-            $gfxNodeList = $dataDocument->getElementsByTagNameNS(DOMHelper::NS_AMBER_AMBERDATA, 'gfx');
+            // PHP 8.2 rescans the tree for each entry in a live tag-name list.
+            $xpath = new DOMXPath($dataDocument);
+            $xpath->registerNamespace('saa', DOMHelper::NS_AMBER_AMBERDATA);
+            /** @var DOMNodeList<DOMElement>|false $gfxNodeList */
+            $gfxNodeList = $xpath->query('//saa:gfx');
+            if ($gfxNodeList === false) {
+                throw new LogicException('Could not query Amberdata graphics.');
+            }
             
             $imageData = [];
             $imageCoords = [];

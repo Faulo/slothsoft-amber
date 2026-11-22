@@ -6,17 +6,20 @@
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/editor" />
     <xsl:import href="farah://slothsoft@amber/templates/ambermoon/editor/globals/picker" />
 
+    <xsl:key name="editor-item-by-type" match="*[@name = 'items']/*" use=".//*[@name = 'type']/@value" />
+
     <xsl:template match="sse:archive[@type='AM2']" mode="form-content">
         <xsl:for-each select="sse:file">
             <xsl:for-each select=".//*[@name = 'items']">
                 <xsl:variable name="categories" select="key('dictionary-option', 'item-types')" />
-                <xsl:variable name="items" select="*" />
+                <xsl:variable name="item-group" select="." />
                 <xsl:call-template name="savegame.tabs">
                     <xsl:with-param name="label" select="'Aktive Item-Kategorie:'" />
                     <xsl:with-param name="options" select="$categories/@val" />
                     <xsl:with-param name="list">
                         <xsl:for-each select="$categories">
-                            <xsl:variable name="list" select="$items[.//*[@name = 'type']/@value = current()/@key]" />
+                            <!-- The key spans the document, so limit matches to this item group. -->
+                            <xsl:variable name="list" select="key('editor-item-by-type', @key)[count(.. | $item-group) = 1]" />
                             <li>
                                 <xsl:call-template name="savegame.tabs">
                                     <xsl:with-param name="label" select="'Aktives Item:'" />

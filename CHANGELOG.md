@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use native PHP types where possible and validate collection element types with PHPStan.
+- Use XPath for stylesheet graphics and index items by category to speed up rendering.
 
 ## [1.2.1] - 2026-11-07
 
