@@ -24,7 +24,6 @@ final class AmberExecutableExtractor implements ArchiveExtractorInterface {
         
         $codeIndex = 1;
         $dataIndex = 1;
-        /** @var Hunk $hunk */
         foreach ($executable->getRealHunks() as $hunk) {
             switch ($hunk->type) {
                 case Hunk::TYPE_CODE:

@@ -29,7 +29,7 @@ class AmbGfxTest extends TestCase {
      * @dataProvider gfxProvider
      * @test
      */
-    public function testExtract(string $inFile, string $expectedFile, int $width, int $bitplanes, int $offset, int $size, int $palette) {
+    public function testExtract(string $inFile, string $expectedFile, int $width, int $bitplanes, int $offset, int $size, int $palette): void {
         $actualFile = FileInfoFactory::createTempFile();
         
         $sut = self::init();
@@ -38,6 +38,7 @@ class AmbGfxTest extends TestCase {
         $this->assertFileEquals($expectedFile, (string) $actualFile);
     }
     
+    /** @return array<string, array{string, string, int, int, int, int, int}> */
     public static function gfxProvider(): array {
         return AmbGfx::isSupported() ? [
             '2Icon_gfx.amb/003/1' => [
@@ -73,12 +74,8 @@ class AmbGfxTest extends TestCase {
     private static function init(): AmbGfx {
         static $sut = null;
         if ($sut === null) {
-            $sut = new AmbGfx(self::getPath());
+            $sut = new AmbGfx(NativeExecutable::requirePath('amgfx'));
         }
         return $sut;
-    }
-    
-    private static function getPath(): string {
-        return NativeExecutable::getPath('amgfx');
     }
 }

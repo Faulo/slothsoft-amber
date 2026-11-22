@@ -30,7 +30,7 @@ class AmbToolTest extends TestCase {
      * @dataProvider archiveProvider
      * @test
      */
-    public function testInspect(string $inFile, string $expectedType, string $expectedDirectory) {
+    public function testInspect(string $inFile, string $expectedType, string $expectedDirectory): void {
         $sut = self::init();
         
         $actualType = $sut->inspectArchive(FileInfoFactory::createFromPath($inFile));
@@ -43,7 +43,7 @@ class AmbToolTest extends TestCase {
      * @dataProvider archiveProvider
      * @test
      */
-    public function testExtract(string $inFile, string $expectedType, string $expectedDirectory) {
+    public function testExtract(string $inFile, string $expectedType, string $expectedDirectory): void {
         $sut = self::init();
         
         $actualDirectory = temp_dir(__CLASS__);
@@ -52,6 +52,7 @@ class AmbToolTest extends TestCase {
         $this->assertEquals(FileSystem::scanDir($expectedDirectory), FileSystem::scanDir($actualDirectory));
     }
     
+    /** @return array<string, array{string, string, string}> */
     public static function archiveProvider(): array {
         return AmbTool::isSupported() ? [
             '2Icon_gfx.amb' => [
@@ -65,12 +66,8 @@ class AmbToolTest extends TestCase {
     private static function init(): AmbTool {
         static $sut = null;
         if ($sut === null) {
-            $sut = new AmbTool(self::getPath());
+            $sut = new AmbTool(NativeExecutable::requirePath('ambtool'));
         }
         return $sut;
-    }
-    
-    private static function getPath(): string {
-        return NativeExecutable::getPath('ambtool');
     }
 }

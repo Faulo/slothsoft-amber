@@ -238,6 +238,10 @@ final class GfxBuilder implements ExecutableBuilderStrategyInterface {
         return $destFile;
     }
     
+    /**
+     * @return array{SplFileInfo, Imagick}
+     * @throws ImagickException
+     */
     private function extractSingleImage(ImageValue $image, int $paletteId): array {
         $controller = new EditorController();
         $ambGfx = $controller->createAmbGfx();
@@ -260,7 +264,7 @@ final class GfxBuilder implements ExecutableBuilderStrategyInterface {
         
         try {
             $sprite = new Imagick((string) $pngFile);
-        } catch (ImagickException $e) {
+        } catch (ImagickException) {
             if (! $hasExtracted) {
                 $ambGfx->extractTga($gfxFile, $tgaFile, $image->getWidth(), $image->getBitplanes(), $image->getContentOffset(), $image->getContentSize(), $paletteId);
             }

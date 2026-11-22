@@ -33,7 +33,7 @@ final class AmbTool {
     private function exec(string ...$args): string {
         $command = [
             $this->ambtoolPath,
-            ...$args
+            ...array_values($args)
         ];
         return NativeExecutable::execute('ambtool', $command);
     }

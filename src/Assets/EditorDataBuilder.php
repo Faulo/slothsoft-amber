@@ -16,7 +16,6 @@ use Slothsoft\Farah\Module\Executable\ExecutableStrategies;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\ChunkWriterResultBuilder;
 use Slothsoft\Farah\Module\Executable\ResultBuilderStrategy\FileWriterResultBuilder;
 use Slothsoft\Savegame\Build\XmlBuilder;
-use Slothsoft\Savegame\Node\ArchiveNode;
 
 final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
     
@@ -68,7 +67,6 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
             case '_':
                 $writer->setCacheDirectory($cacheDirectory . DIRECTORY_SEPARATOR . '_');
                 $editor->loadSavegame(true, true);
-                /** @var ArchiveNode $archive */
                 foreach ($savegame->getArchiveNodes() as $archive) {
                     $archivePath = $archive->getArchivePath();
                     $archives[$archivePath] = $archive;
@@ -80,7 +78,6 @@ final class EditorDataBuilder implements ExecutableBuilderStrategyInterface {
                 break;
         }
         
-        /** @var ArchiveNode $archive */
         foreach ($archives as $archivePath => $archive) {
             $isDownload = $download === $archivePath;
             

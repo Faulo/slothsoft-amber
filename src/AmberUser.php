@@ -7,11 +7,7 @@ final class AmberUser {
     
     public const DEFAULT_ID = 'default-user';
     
-    /**
-     *
-     * @return string
-     * @todo put this somewhere else maybe
-     */
+    /** @todo put this somewhere else maybe */
     public static function getNewIdIfDefault(string $previous): string {
         if ($previous !== self::DEFAULT_ID) {
             return $previous;

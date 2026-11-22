@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace Slothsoft\Amber\SavegameImplementations;
 
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
-use Slothsoft\Savegame\Node\FileContainer;
 
 final class AmberArchiveBuilder implements ArchiveBuilderInterface {
     
@@ -12,7 +11,6 @@ final class AmberArchiveBuilder implements ArchiveBuilderInterface {
         $header = [];
         $body = [];
         $maxId = 0;
-        /** @var FileContainer $child */
         foreach ($buildChildren as $child) {
             $id = (int) $child->getFileName();
             if ($id > $maxId) {

@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\API;
 
+use Generator;
 use PHPUnit\Framework\Constraint\GreaterThan;
 use PHPUnit\Framework\Constraint\IsEqual;
 use PHPUnit\Framework\TestCase;
@@ -21,6 +22,7 @@ final class StylesheetBuilderTest extends TestCase {
         $url = FarahUrl::createFromReference($ref);
         
         $expected = file_get_contents($ref);
+        self::assertIsString($expected);
         
         $this->assertThat(count(explode(PHP_EOL, $expected)), new GreaterThan(3));
         
@@ -39,7 +41,8 @@ final class StylesheetBuilderTest extends TestCase {
         }
     }
     
-    public function performanceProvider(): iterable {
+    /** @return Generator<string, array{string, int}> */
+    public function performanceProvider(): Generator {
         yield 'benchmark document' => [
             'farah://slothsoft@amber/api/stylesheet?infosetId=lib.items',
             100

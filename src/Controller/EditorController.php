@@ -12,6 +12,8 @@ use Slothsoft\Amber\SavegameImplementations\AmberExecutableBuilder;
 use Slothsoft\Amber\SavegameImplementations\AmberExecutableExtractor;
 use Slothsoft\Savegame\Editor;
 use Slothsoft\Savegame\EditorConfig;
+use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
+use Slothsoft\Savegame\Node\ArchiveParser\ArchiveExtractorInterface;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveBuilder;
 use Slothsoft\Savegame\Node\ArchiveParser\CopyArchiveExtractor;
 use SplFileInfo;
@@ -41,6 +43,7 @@ class EditorController {
         return new AmbGfx(NativeExecutable::requirePath('amgfx'));
     }
     
+    /** @return array<string, ArchiveExtractorInterface> */
     private function createArchiveExtractors(): array {
         $ret = [];
         
@@ -57,6 +60,7 @@ class EditorController {
         return $ret;
     }
     
+    /** @return array<string, ArchiveBuilderInterface> */
     private function createArchiveBuilders(SplFileInfo $sourceDirectory): array {
         $ret = [];
         

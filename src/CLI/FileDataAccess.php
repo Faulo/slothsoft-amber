@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\CLI;
 
+use RuntimeException;
 use Slothsoft\Savegame\Converter;
 use SplFileInfo;
 use SplFileObject;
@@ -19,7 +20,11 @@ final class FileDataAccess implements DataAccessInterface {
     }
     
     public function getPosition(): int {
-        return $this->file->ftell();
+        $position = $this->file->ftell();
+        if ($position === false) {
+            throw new RuntimeException('Could not determine file position.');
+        }
+        return $position;
     }
     
     public function setPosition(int $position): void {
@@ -34,6 +39,9 @@ final class FileDataAccess implements DataAccessInterface {
         $result = $this->file->fread($size);
         if ($peek) {
             $this->setPosition($position);
+        }
+        if ($result === false) {
+            throw new RuntimeException('Could not read from file.');
         }
         return $result;
     }

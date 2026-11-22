@@ -3,18 +3,20 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\CLI;
 
+use RuntimeException;
 use Slothsoft\Core\StreamWrapper\StreamWrapperInterface;
 
 final class HunkDataAccess extends ResourceDataAccess {
     
-    private $resource;
-    
     public function __construct(Hunk $hunk) {
-        $this->resource = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
-        fwrite($this->resource, $hunk->data);
-        rewind($this->resource);
+        $resource = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
+        if ($resource === false) {
+            throw new RuntimeException('Could not open a temporary stream for hunk data.');
+        }
         
-        parent::__construct($this->resource);
+        fwrite($resource, $hunk->data);
+        rewind($resource);
+        parent::__construct($resource);
     }
     
     public function __destruct() {

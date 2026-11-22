@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\Controller;
 
+use Generator;
 use Slothsoft\Amber\ParameterFilters\EditorParameterFilter;
 use Slothsoft\Amber\ParameterFilters\GfxParameterFilter;
 use Slothsoft\Core\ServerEnvironment;
@@ -83,6 +84,7 @@ final class EditorParameters {
         return $this->editorArgs ?? $this->getAmberArgs();
     }
     
+    /** @param array<array-key, mixed> $save */
     public function withEditorArgs(string $archivePath, string $action, string $download, array $save): self {
         $result = new self($this->repository, $this->game, $this->version, $this->user, $this->infoset);
         $result->editorArgs = FarahUrlArguments::createFromValueList([
@@ -101,7 +103,8 @@ final class EditorParameters {
         return $result;
     }
     
-    public function getStaticAmberdataGlobalUrls(): iterable {
+    /** @return Generator<int, FarahUrl> */
+    public function getStaticAmberdataGlobalUrls(): Generator {
         yield FarahUrl::createFromReference("/templates/$this->game/amberdata/globals/dictionary", $this->getAmberUrl());
         yield FarahUrl::createFromReference("/templates/$this->game/amberdata/globals/extract", $this->getAmberUrl());
         yield FarahUrl::createFromReference("/templates/$this->game/amberdata/globals/static", $this->getAmberUrl());
@@ -129,7 +132,8 @@ final class EditorParameters {
         return $this->editorTemplateUrl ??= FarahUrl::createFromReference("/templates/$this->game/editor/$this->infoset", $this->getAmberUrl());
     }
     
-    public function getStaticEditorGlobalUrls(): iterable {
+    /** @return Generator<int, FarahUrl> */
+    public function getStaticEditorGlobalUrls(): Generator {
         yield FarahUrl::createFromReference("/templates/$this->game/editor/globals/editor", $this->getAmberUrl());
     }
     
@@ -145,7 +149,8 @@ final class EditorParameters {
         return $this->viewerTemplateUrl ??= FarahUrl::createFromReference("/templates/$this->game/viewer/$this->infoset", $this->getAmberUrl());
     }
     
-    public function getStaticViewerGlobalUrls(): iterable {
+    /** @return Generator<int, FarahUrl> */
+    public function getStaticViewerGlobalUrls(): Generator {
         yield FarahUrl::createFromReference("/templates/$this->game/viewer/globals/amber-list", $this->getAmberUrl());
     }
     
@@ -181,7 +186,8 @@ final class EditorParameters {
             ->withQueryArguments($this->getAmberArgs());
     }
     
-    public function getProcessStylesheetUrls(): iterable {
+    /** @return Generator<int, FarahUrl> */
+    public function getProcessStylesheetUrls(): Generator {
         $url = $this->getAmberUrl()
             ->withPath("/api/stylesheet")
             ->withQueryArguments($this->getAmberArgs());

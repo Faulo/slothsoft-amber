@@ -3,8 +3,6 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\Assets;
 
-use DOMElement;
-use DOMXPath;
 use Generator;
 use Slothsoft\Amber\AmberUtils;
 use Slothsoft\Amber\CLI\AmbGfx;
@@ -46,13 +44,10 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
             
             $dataDocument = Module::resolveToDOMWriter($dataUrl)->toDocument();
             
-            $xpath = new DOMXPath($dataDocument);
-            $xpath->registerNamespace('saa', DOMHelper::NS_AMBER_AMBERDATA);
-            $gfxNodeList = $xpath->evaluate('//saa:gfx');
+            $gfxNodeList = $dataDocument->getElementsByTagNameNS(DOMHelper::NS_AMBER_AMBERDATA, 'gfx');
             
             $imageData = [];
             $imageCoords = [];
-            /** @var DOMElement $gfxNode */
             foreach ($gfxNodeList as $gfxNode) {
                 $archiveId = $gfxNode->getAttribute('archive');
                 if (! isset($imageData[$archiveId])) {
@@ -74,7 +69,6 @@ final class StylesheetBuilder implements ExecutableBuilderStrategyInterface {
                 }
             }
             
-            /** @var DOMElement $gfxNode */
             foreach ($gfxNodeList as $gfxNode) {
                 $archiveId = $gfxNode->getAttribute('archive');
                 $fileId = sprintf('%03d', $gfxNode->getAttribute('file'));

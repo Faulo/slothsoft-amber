@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\CLI;
 
+use Generator;
 use InvalidArgumentException;
 use PHPUnit\Framework\Constraint\Count;
 use PHPUnit\Framework\Constraint\IsEqual;
@@ -68,7 +69,7 @@ final class AmigaExecutableTest extends TestCase {
         return self::$cpuInfo;
     }
     
-    private static array $cpuHunkSizes = [
+    private const CPU_HUNK_SIZES = [
         183136,
         84728,
         5492,
@@ -77,7 +78,7 @@ final class AmigaExecutableTest extends TestCase {
         59360
     ];
     
-    private static array $cpuMemFlags = [
+    private const CPU_MEM_FLAGS = [
         0,
         1073741824,
         0,
@@ -108,7 +109,8 @@ final class AmigaExecutableTest extends TestCase {
         $this->assertThat($sut->requiresDeploding(), new IsEqual($requiresDeploding));
     }
     
-    public function requiresDeplodingProvider(): iterable {
+    /** @return Generator<string, array{string, bool}> */
+    public function requiresDeplodingProvider(): Generator {
         yield 'AM2_CPU imploded' => [
             self::AM2_CPU_IMPLODED,
             true
@@ -220,7 +222,7 @@ final class AmigaExecutableTest extends TestCase {
         } catch (Throwable $e) {
         }
         
-        $this->assertThat($sut->deplodedHunkSizes, new IsEqual(self::$cpuHunkSizes));
+        $this->assertThat($sut->deplodedHunkSizes, new IsEqual(self::CPU_HUNK_SIZES));
     }
     
     /**
@@ -240,7 +242,7 @@ final class AmigaExecutableTest extends TestCase {
         } catch (Throwable $e) {
         }
         
-        $this->assertThat($sut->deplodedMemFlags, new IsEqual(self::$cpuMemFlags));
+        $this->assertThat($sut->deplodedMemFlags, new IsEqual(self::CPU_MEM_FLAGS));
     }
     
     /**
@@ -287,7 +289,9 @@ final class AmigaExecutableTest extends TestCase {
         $inAccess = self::createFileReader($in, $accessMode);
         
         try {
-            $actual = AmigaExecutable::createDeplodedHunks($inAccess, filesize($in), self::$cpuHunkSizes, self::$cpuMemFlags);
+            $size = filesize($in);
+            self::assertIsInt($size);
+            $actual = AmigaExecutable::createDeplodedHunks($inAccess, $size, self::CPU_HUNK_SIZES, self::CPU_MEM_FLAGS);
             
             $this->assertThat($actual, new Count(13));
         } catch (Throwable $e) {
@@ -320,51 +324,40 @@ final class AmigaExecutableTest extends TestCase {
     }
     
     public static function createFileReader(string $path, string $mode): DataAccessInterface {
-        switch ($mode) {
-            case 'string':
-                return new StringDataAccess(file_get_contents($path));
-            case 'file':
-                $file = FileInfoFactory::createFromPath($path);
-                return new FileDataAccess($file, StreamWrapperInterface::MODE_OPEN_READONLY);
-            case 'tmpfile':
-                $resource = tmpfile();
-                fwrite($resource, file_get_contents($path));
-                rewind($resource);
-                return new ResourceDataAccess($resource);
-            case 'temp':
-                $resource = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
-                fwrite($resource, file_get_contents($path));
-                rewind($resource);
-                return new ResourceDataAccess($resource);
-            case 'memory':
-                $resource = fopen('php://memory', StreamWrapperInterface::MODE_CREATE_READWRITE);
-                fwrite($resource, file_get_contents($path));
-                rewind($resource);
-                return new ResourceDataAccess($resource);
-            default:
-                throw new InvalidArgumentException($mode);
+        if ($mode === 'file') {
+            $file = FileInfoFactory::createFromPath($path);
+            return new FileDataAccess($file, StreamWrapperInterface::MODE_OPEN_READONLY);
         }
+        
+        $contents = file_get_contents($path);
+        self::assertIsString($contents);
+        if ($mode === 'string') {
+            return new StringDataAccess($contents);
+        }
+        
+        $access = self::openFileWriter($path, $mode);
+        $access->writeString($contents);
+        $access->setPosition(0);
+        return $access;
     }
     
     public static function openFileWriter(string $path, string $mode): DataAccessInterface {
-        switch ($mode) {
-            case 'string':
-                return new StringDataAccess('');
-            case 'file':
-                $file = FileInfoFactory::createFromPath($path);
-                return new FileDataAccess($file, StreamWrapperInterface::MODE_CREATE_READWRITE);
-            case 'tmpfile':
-                $resource = tmpfile();
-                return new ResourceDataAccess($resource);
-            case 'temp':
-                $resource = fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE);
-                return new ResourceDataAccess($resource);
-            case 'memory':
-                $resource = fopen('php://memory', StreamWrapperInterface::MODE_CREATE_READWRITE);
-                return new ResourceDataAccess($resource);
-            default:
-                throw new InvalidArgumentException($mode);
+        if ($mode === 'string') {
+            return new StringDataAccess('');
         }
+        if ($mode === 'file') {
+            $file = FileInfoFactory::createFromPath($path);
+            return new FileDataAccess($file, StreamWrapperInterface::MODE_CREATE_READWRITE);
+        }
+        
+        $resource = match ($mode) {
+            'tmpfile' => tmpfile(),
+            'temp' => fopen('php://temp', StreamWrapperInterface::MODE_CREATE_READWRITE),
+            'memory' => fopen('php://memory', StreamWrapperInterface::MODE_CREATE_READWRITE),
+            default => throw new InvalidArgumentException($mode)
+        };
+        self::assertIsResource($resource);
+        return new ResourceDataAccess($resource);
     }
     
     public static function closeFileWriter(string $path, string $mode, DataAccessInterface $access): void {
@@ -386,7 +379,8 @@ final class AmigaExecutableTest extends TestCase {
         }
     }
     
-    public function accessModeProvider(): iterable {
+    /** @return Generator<string, array{string}> */
+    public function accessModeProvider(): Generator {
         yield 'string' => [
             'string'
         ];
@@ -425,7 +419,8 @@ final class AmigaExecutableTest extends TestCase {
         $this->assertThat($actualFile, new FileEqualsFile($out));
     }
     
-    public function fileProvider(): iterable {
+    /** @return Generator<string, array{string, string, int}> */
+    public function fileProvider(): Generator {
         yield 'AM2_CPU' => [
             self::AM2_CPU_IMPLODED,
             self::AM2_CPU_DEPLODED,

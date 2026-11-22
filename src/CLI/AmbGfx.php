@@ -21,6 +21,7 @@ final class AmbGfx {
         $this->ambgfxPath = $ambgfxPath;
     }
     
+    /** @param array<string, mixed> $args */
     private function exec(string $file, array $args): void {
         $command = [];
         
@@ -29,7 +30,7 @@ final class AmbGfx {
         
         foreach ($args as $key => $value) {
             $command[] = "-$key";
-            $command[] = $value;
+            $command[] = (string) $value;
         }
         
         NativeExecutable::execute('amgfx', $command);

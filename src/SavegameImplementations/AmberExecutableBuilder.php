@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\SavegameImplementations;
 
+use RuntimeException;
 use Slothsoft\Amber\CLI\AmigaExecutable;
 use Slothsoft\Amber\CLI\Hunk;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Savegame\Node\ArchiveParser\ArchiveBuilderInterface;
-use Slothsoft\Savegame\Node\FileContainer;
 use SplFileInfo;
 
 final class AmberExecutableBuilder implements ArchiveBuilderInterface {
@@ -29,10 +29,8 @@ final class AmberExecutableBuilder implements ArchiveBuilderInterface {
     }
     
     public function buildArchive(iterable $buildChildren): string {
-        /** @var ?AmigaExecutable $executable */
         $executable = null;
         
-        /** @var FileContainer $child */
         foreach ($buildChildren as $child) {
             if ($executable === null) {
                 $path = $child->getOwnerArchive()->getArchivePath();
@@ -42,7 +40,6 @@ final class AmberExecutableBuilder implements ArchiveBuilderInterface {
             $fileName = $child->getFileName();
             $codeIndex = 1;
             $dataIndex = 1;
-            /** @var Hunk $hunk */
             foreach ($executable->getRealHunks() as $hunk) {
                 $hunkName = null;
                 switch ($hunk->type) {
@@ -68,7 +65,11 @@ final class AmberExecutableBuilder implements ArchiveBuilderInterface {
         $file = FileInfoFactory::createTempFile();
         $executable->save($file);
         
-        return file_get_contents((string) $file);
+        $contents = file_get_contents((string) $file);
+        if ($contents === false) {
+            throw new RuntimeException("Could not read the rebuilt executable '$file'.");
+        }
+        return $contents;
     }
 }
 

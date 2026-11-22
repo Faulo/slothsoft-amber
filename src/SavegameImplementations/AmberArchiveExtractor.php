@@ -38,7 +38,12 @@ final class AmberArchiveExtractor implements ArchiveExtractorInterface {
                     throw new LogicException("JH archive '$archivePath' must contain exactly 1 file");
                 }
                 
-                return $this->extractArchive($fileList[0], $targetDirectory);
+                $extractedFile = $fileList[0];
+                if (! $extractedFile instanceof SplFileInfo) {
+                    throw new LogicException("Could not get file info for the contents of JH archive '$archivePath'.");
+                }
+                
+                return $this->extractArchive($extractedFile, $targetDirectory);
             case AmbTool::TYPE_AMBR:
                 $this->ambtool->extractArchive($archivePath, $targetDirectory);
                 return true;

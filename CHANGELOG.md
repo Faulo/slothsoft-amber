@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Pass native tool arguments as a list of strings and report failures to read tool output.
+- Report file and stream errors explicitly when reading or rebuilding Amiga executables.
+
+### Changed
+
+- Use native PHP types where possible and validate collection element types with PHPStan.
+
 ## [1.2.1] - 2026-11-07
 
 ### Fixed

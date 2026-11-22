@@ -3,12 +3,14 @@ declare(strict_types = 1);
 
 namespace Slothsoft\Amber\CLI;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Slothsoft\Core\IO\FileInfoFactory;
 use Slothsoft\Core\StreamWrapper\StreamWrapperInterface;
 
 final class DataAccessBehaviorTest extends TestCase {
-    public function backendProvider(): iterable {
+    /** @return Generator<string, array{string}> */
+    public function backendProvider(): Generator {
         yield 'string' => ['string'];
         yield 'resource' => ['resource'];
         yield 'file' => ['file'];

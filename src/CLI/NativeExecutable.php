@@ -45,23 +45,32 @@ final class NativeExecutable {
     
     public static function isSupported(string $name): bool {
         $path = self::getPath($name);
-        return $path !== null and is_file($path) and (PHP_OS_FAMILY === 'Windows' or is_executable($path));
+        return $path !== null && self::isRunnable($path);
     }
     
     public static function requirePath(string $name): string {
-        if (! self::isSupported($name)) {
+        $path = self::getPath($name);
+        if ($path === null || ! self::isRunnable($path)) {
             throw new RuntimeException("No supported $name executable is available for " . PHP_OS_FAMILY . ' ' . php_uname('m'));
         }
-        return self::getPath($name);
+        return $path;
     }
     
+    private static function isRunnable(string $path): bool {
+        return is_file($path) && (PHP_OS_FAMILY === 'Windows' || is_executable($path));
+    }
+    
+    /** @param non-empty-list<string> $command */
     public static function execute(string $name, array $command): string {
         $stdout = tmpfile();
+        if ($stdout === false) {
+            throw new RuntimeException("Could not create the $name output stream.");
+        }
+        
         $stderr = tmpfile();
-        if ($stdout === false or $stderr === false) {
-            self::closeStream($stdout);
-            self::closeStream($stderr);
-            throw new RuntimeException("Could not create $name output streams.");
+        if ($stderr === false) {
+            fclose($stdout);
+            throw new RuntimeException("Could not create the $name error stream.");
         }
         
         $process = @proc_open($command, [
@@ -84,18 +93,17 @@ final class NativeExecutable {
         fclose($stdout);
         fclose($stderr);
         
+        if ($output === false || $errorOutput === false) {
+            throw new RuntimeException("Could not read $name output streams.");
+        }
+        
         if ($exitCode !== 0) {
             throw new RuntimeException("$name failed with exit code $exitCode!" . PHP_EOL . '> ' . self::formatCommand($command) . PHP_EOL . $errorOutput . PHP_EOL . $output);
         }
         return $output;
     }
     
-    private static function closeStream($stream): void {
-        if (is_resource($stream)) {
-            fclose($stream);
-        }
-    }
-    
+    /** @param non-empty-list<string> $command */
     private static function formatCommand(array $command): string {
         return implode(' ', array_map('escapeshellarg', $command));
     }

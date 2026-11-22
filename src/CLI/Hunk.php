@@ -52,6 +52,7 @@ final class Hunk {
         return $hunk;
     }
     
+    /** @param Map<int, list<int>> $entries */
     public static function createReloc32(int $size, Map $entries, int $memoryFlags = 0): Hunk {
         $hunk = new Hunk();
         $hunk->type = self::TYPE_RELOC32;
@@ -90,11 +91,12 @@ final class Hunk {
     
     public int $size;
     
-    public ?string $data;
+    public string $data;
     
     public int $numEntries;
     
-    public ?Map $entries;
+    /** @var Map<int, list<int>> */
+    public Map $entries;
     
     public function isReal(): bool {
         switch ($this->type) {
